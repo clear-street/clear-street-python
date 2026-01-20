@@ -1,0 +1,774 @@
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+from __future__ import annotations
+
+from typing import Union, Iterable, Optional
+
+import httpx
+
+from ....._types import Body, Omit, Query, Headers, NotGiven, Base64FileInput, omit, not_given
+from ....._utils import maybe_transform, async_maybe_transform
+from ....._compat import cached_property
+from ....._resource import SyncAPIResource, AsyncAPIResource
+from ....._response import (
+    to_raw_response_wrapper,
+    to_streamed_response_wrapper,
+    async_to_raw_response_wrapper,
+    async_to_streamed_response_wrapper,
+)
+from ....._base_client import make_request_options
+from .....types.active import SecurityType, SecurityIDSource
+from .....types.active.v1.accounts import (
+    Side,
+    OrderType,
+    OrderStatus,
+    TimeInForce,
+    order_get_orders_params,
+    order_replace_order_params,
+    order_submit_orders_params,
+    order_cancel_all_orders_params,
+)
+from .....types.active.security_type import SecurityType
+from .....types.active.v1.accounts.side import Side
+from .....types.active.security_id_source import SecurityIDSource
+from .....types.active.v1.accounts.order_type import OrderType
+from .....types.active.v1.accounts.order_status import OrderStatus
+from .....types.active.v1.accounts.time_in_force import TimeInForce
+from .....types.active.v1.accounts.order_get_orders_response import OrderGetOrdersResponse
+from .....types.active.v1.accounts.order_cancel_order_response import OrderCancelOrderResponse
+from .....types.active.v1.accounts.order_replace_order_response import OrderReplaceOrderResponse
+from .....types.active.v1.accounts.order_submit_orders_response import OrderSubmitOrdersResponse
+from .....types.active.v1.accounts.order_get_order_by_id_response import OrderGetOrderByIDResponse
+from .....types.active.v1.accounts.order_cancel_all_orders_response import OrderCancelAllOrdersResponse
+
+__all__ = ["OrdersResource", "AsyncOrdersResource"]
+
+
+class OrdersResource(SyncAPIResource):
+    @cached_property
+    def with_raw_response(self) -> OrdersResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/stainless-sdks/clear-street-python#accessing-raw-response-data-eg-headers
+        """
+        return OrdersResourceWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> OrdersResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/stainless-sdks/clear-street-python#with_streaming_response
+        """
+        return OrdersResourceWithStreamingResponse(self)
+
+    def cancel_all_orders(
+        self,
+        account_id: int,
+        *,
+        security_id: str | Omit = omit,
+        security_id_source: SecurityIDSource | Omit = omit,
+        security_type: SecurityType | Omit = omit,
+        side: Side | Omit = omit,
+        type: OrderType | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> OrderCancelAllOrdersResponse:
+        """All filter parameters can be used independently or combined.
+
+        The only constraint
+        is that `security_id` and `security_id_source` must be provided together if
+        either is specified.
+
+        Args:
+          security_id: Filter by security identifier (e.g., CUSIP, ISIN). Must be provided with
+              security_id_source.
+
+          security_id_source: Type of security identifier. Must be provided with security_id.
+
+          security_type: Filter by security type (e.g., COMMON_STOCK, OPTION)
+
+          side: Filter by order side (BUY or SELL)
+
+          type: Filter by order type (e.g., MARKET, LIMIT)
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._delete(
+            f"/active/v1/accounts/{account_id}/orders",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "security_id": security_id,
+                        "security_id_source": security_id_source,
+                        "security_type": security_type,
+                        "side": side,
+                        "type": type,
+                    },
+                    order_cancel_all_orders_params.OrderCancelAllOrdersParams,
+                ),
+            ),
+            cast_to=OrderCancelAllOrdersResponse,
+        )
+
+    def cancel_order(
+        self,
+        order_id: str,
+        *,
+        account_id: int,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> OrderCancelOrderResponse:
+        """
+        Cancel a specific order
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not order_id:
+            raise ValueError(f"Expected a non-empty value for `order_id` but received {order_id!r}")
+        return self._delete(
+            f"/active/v1/accounts/{account_id}/orders/{order_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=OrderCancelOrderResponse,
+        )
+
+    def get_order_by_id(
+        self,
+        order_id: str,
+        *,
+        account_id: int,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> OrderGetOrderByIDResponse:
+        """
+        Get order by ID
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not order_id:
+            raise ValueError(f"Expected a non-empty value for `order_id` but received {order_id!r}")
+        return self._get(
+            f"/active/v1/accounts/{account_id}/orders/{order_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=OrderGetOrderByIDResponse,
+        )
+
+    def get_orders(
+        self,
+        account_id: int,
+        *,
+        from_: str,
+        to: str,
+        page_size: int | Omit = omit,
+        page_token: Union[str, Base64FileInput] | Omit = omit,
+        security_id: str | Omit = omit,
+        security_id_source: SecurityIDSource | Omit = omit,
+        security_type: SecurityType | Omit = omit,
+        status: OrderStatus | Omit = omit,
+        symbol: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> OrderGetOrdersResponse:
+        """
+        List orders for an account with optional filtering
+
+        Args:
+          from_: The start date and time for the query range, inclusive (ISO 8601 format)
+
+          to: The end date and time for the query range, inclusive (ISO 8601 format)
+
+          page_size: The number of items to return per page (only used when page_token is not
+              provided)
+
+          page_token: Token for retrieving the next page of results. Contains encoded pagination state
+              (limit + offset). When provided, page_size is ignored.
+
+          security_id: Filter by security ID
+
+          security_id_source: Source for the security ID filter
+
+          security_type: Security type filter (e.g., COMMON_STOCK, PREFERRED_STOCK)
+
+          status: Filter by order status
+
+          symbol: Filter by symbol
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            f"/active/v1/accounts/{account_id}/orders",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "from_": from_,
+                        "to": to,
+                        "page_size": page_size,
+                        "page_token": page_token,
+                        "security_id": security_id,
+                        "security_id_source": security_id_source,
+                        "security_type": security_type,
+                        "status": status,
+                        "symbol": symbol,
+                    },
+                    order_get_orders_params.OrderGetOrdersParams,
+                ),
+            ),
+            cast_to=OrderGetOrdersResponse,
+        )
+
+    def replace_order(
+        self,
+        order_id: str,
+        *,
+        account_id: int,
+        limit_price: Optional[str] | Omit = omit,
+        quantity: Optional[str] | Omit = omit,
+        stop_price: Optional[str] | Omit = omit,
+        time_in_force: TimeInForce | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> OrderReplaceOrderResponse:
+        """
+        Replace an order with new parameters
+
+        Args:
+          limit_price: New limit price for the order
+
+          quantity: New quantity for the order
+
+          stop_price: New stop price for the order
+
+          time_in_force: New time in force for the order
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not order_id:
+            raise ValueError(f"Expected a non-empty value for `order_id` but received {order_id!r}")
+        return self._patch(
+            f"/active/v1/accounts/{account_id}/orders/{order_id}",
+            body=maybe_transform(
+                {
+                    "limit_price": limit_price,
+                    "quantity": quantity,
+                    "stop_price": stop_price,
+                    "time_in_force": time_in_force,
+                },
+                order_replace_order_params.OrderReplaceOrderParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=OrderReplaceOrderResponse,
+        )
+
+    def submit_orders(
+        self,
+        account_id: int,
+        *,
+        body: Iterable[order_submit_orders_params.Body],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> OrderSubmitOrdersResponse:
+        """
+        Submit new orders
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            f"/active/v1/accounts/{account_id}/orders",
+            body=maybe_transform(body, Iterable[order_submit_orders_params.Body]),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=OrderSubmitOrdersResponse,
+        )
+
+
+class AsyncOrdersResource(AsyncAPIResource):
+    @cached_property
+    def with_raw_response(self) -> AsyncOrdersResourceWithRawResponse:
+        """
+        This property can be used as a prefix for any HTTP method call to return
+        the raw response object instead of the parsed content.
+
+        For more information, see https://www.github.com/stainless-sdks/clear-street-python#accessing-raw-response-data-eg-headers
+        """
+        return AsyncOrdersResourceWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncOrdersResourceWithStreamingResponse:
+        """
+        An alternative to `.with_raw_response` that doesn't eagerly read the response body.
+
+        For more information, see https://www.github.com/stainless-sdks/clear-street-python#with_streaming_response
+        """
+        return AsyncOrdersResourceWithStreamingResponse(self)
+
+    async def cancel_all_orders(
+        self,
+        account_id: int,
+        *,
+        security_id: str | Omit = omit,
+        security_id_source: SecurityIDSource | Omit = omit,
+        security_type: SecurityType | Omit = omit,
+        side: Side | Omit = omit,
+        type: OrderType | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> OrderCancelAllOrdersResponse:
+        """All filter parameters can be used independently or combined.
+
+        The only constraint
+        is that `security_id` and `security_id_source` must be provided together if
+        either is specified.
+
+        Args:
+          security_id: Filter by security identifier (e.g., CUSIP, ISIN). Must be provided with
+              security_id_source.
+
+          security_id_source: Type of security identifier. Must be provided with security_id.
+
+          security_type: Filter by security type (e.g., COMMON_STOCK, OPTION)
+
+          side: Filter by order side (BUY or SELL)
+
+          type: Filter by order type (e.g., MARKET, LIMIT)
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._delete(
+            f"/active/v1/accounts/{account_id}/orders",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "security_id": security_id,
+                        "security_id_source": security_id_source,
+                        "security_type": security_type,
+                        "side": side,
+                        "type": type,
+                    },
+                    order_cancel_all_orders_params.OrderCancelAllOrdersParams,
+                ),
+            ),
+            cast_to=OrderCancelAllOrdersResponse,
+        )
+
+    async def cancel_order(
+        self,
+        order_id: str,
+        *,
+        account_id: int,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> OrderCancelOrderResponse:
+        """
+        Cancel a specific order
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not order_id:
+            raise ValueError(f"Expected a non-empty value for `order_id` but received {order_id!r}")
+        return await self._delete(
+            f"/active/v1/accounts/{account_id}/orders/{order_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=OrderCancelOrderResponse,
+        )
+
+    async def get_order_by_id(
+        self,
+        order_id: str,
+        *,
+        account_id: int,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> OrderGetOrderByIDResponse:
+        """
+        Get order by ID
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not order_id:
+            raise ValueError(f"Expected a non-empty value for `order_id` but received {order_id!r}")
+        return await self._get(
+            f"/active/v1/accounts/{account_id}/orders/{order_id}",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=OrderGetOrderByIDResponse,
+        )
+
+    async def get_orders(
+        self,
+        account_id: int,
+        *,
+        from_: str,
+        to: str,
+        page_size: int | Omit = omit,
+        page_token: Union[str, Base64FileInput] | Omit = omit,
+        security_id: str | Omit = omit,
+        security_id_source: SecurityIDSource | Omit = omit,
+        security_type: SecurityType | Omit = omit,
+        status: OrderStatus | Omit = omit,
+        symbol: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> OrderGetOrdersResponse:
+        """
+        List orders for an account with optional filtering
+
+        Args:
+          from_: The start date and time for the query range, inclusive (ISO 8601 format)
+
+          to: The end date and time for the query range, inclusive (ISO 8601 format)
+
+          page_size: The number of items to return per page (only used when page_token is not
+              provided)
+
+          page_token: Token for retrieving the next page of results. Contains encoded pagination state
+              (limit + offset). When provided, page_size is ignored.
+
+          security_id: Filter by security ID
+
+          security_id_source: Source for the security ID filter
+
+          security_type: Security type filter (e.g., COMMON_STOCK, PREFERRED_STOCK)
+
+          status: Filter by order status
+
+          symbol: Filter by symbol
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            f"/active/v1/accounts/{account_id}/orders",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "from_": from_,
+                        "to": to,
+                        "page_size": page_size,
+                        "page_token": page_token,
+                        "security_id": security_id,
+                        "security_id_source": security_id_source,
+                        "security_type": security_type,
+                        "status": status,
+                        "symbol": symbol,
+                    },
+                    order_get_orders_params.OrderGetOrdersParams,
+                ),
+            ),
+            cast_to=OrderGetOrdersResponse,
+        )
+
+    async def replace_order(
+        self,
+        order_id: str,
+        *,
+        account_id: int,
+        limit_price: Optional[str] | Omit = omit,
+        quantity: Optional[str] | Omit = omit,
+        stop_price: Optional[str] | Omit = omit,
+        time_in_force: TimeInForce | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> OrderReplaceOrderResponse:
+        """
+        Replace an order with new parameters
+
+        Args:
+          limit_price: New limit price for the order
+
+          quantity: New quantity for the order
+
+          stop_price: New stop price for the order
+
+          time_in_force: New time in force for the order
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not order_id:
+            raise ValueError(f"Expected a non-empty value for `order_id` but received {order_id!r}")
+        return await self._patch(
+            f"/active/v1/accounts/{account_id}/orders/{order_id}",
+            body=await async_maybe_transform(
+                {
+                    "limit_price": limit_price,
+                    "quantity": quantity,
+                    "stop_price": stop_price,
+                    "time_in_force": time_in_force,
+                },
+                order_replace_order_params.OrderReplaceOrderParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=OrderReplaceOrderResponse,
+        )
+
+    async def submit_orders(
+        self,
+        account_id: int,
+        *,
+        body: Iterable[order_submit_orders_params.Body],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> OrderSubmitOrdersResponse:
+        """
+        Submit new orders
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            f"/active/v1/accounts/{account_id}/orders",
+            body=await async_maybe_transform(body, Iterable[order_submit_orders_params.Body]),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=OrderSubmitOrdersResponse,
+        )
+
+
+class OrdersResourceWithRawResponse:
+    def __init__(self, orders: OrdersResource) -> None:
+        self._orders = orders
+
+        self.cancel_all_orders = to_raw_response_wrapper(
+            orders.cancel_all_orders,
+        )
+        self.cancel_order = to_raw_response_wrapper(
+            orders.cancel_order,
+        )
+        self.get_order_by_id = to_raw_response_wrapper(
+            orders.get_order_by_id,
+        )
+        self.get_orders = to_raw_response_wrapper(
+            orders.get_orders,
+        )
+        self.replace_order = to_raw_response_wrapper(
+            orders.replace_order,
+        )
+        self.submit_orders = to_raw_response_wrapper(
+            orders.submit_orders,
+        )
+
+
+class AsyncOrdersResourceWithRawResponse:
+    def __init__(self, orders: AsyncOrdersResource) -> None:
+        self._orders = orders
+
+        self.cancel_all_orders = async_to_raw_response_wrapper(
+            orders.cancel_all_orders,
+        )
+        self.cancel_order = async_to_raw_response_wrapper(
+            orders.cancel_order,
+        )
+        self.get_order_by_id = async_to_raw_response_wrapper(
+            orders.get_order_by_id,
+        )
+        self.get_orders = async_to_raw_response_wrapper(
+            orders.get_orders,
+        )
+        self.replace_order = async_to_raw_response_wrapper(
+            orders.replace_order,
+        )
+        self.submit_orders = async_to_raw_response_wrapper(
+            orders.submit_orders,
+        )
+
+
+class OrdersResourceWithStreamingResponse:
+    def __init__(self, orders: OrdersResource) -> None:
+        self._orders = orders
+
+        self.cancel_all_orders = to_streamed_response_wrapper(
+            orders.cancel_all_orders,
+        )
+        self.cancel_order = to_streamed_response_wrapper(
+            orders.cancel_order,
+        )
+        self.get_order_by_id = to_streamed_response_wrapper(
+            orders.get_order_by_id,
+        )
+        self.get_orders = to_streamed_response_wrapper(
+            orders.get_orders,
+        )
+        self.replace_order = to_streamed_response_wrapper(
+            orders.replace_order,
+        )
+        self.submit_orders = to_streamed_response_wrapper(
+            orders.submit_orders,
+        )
+
+
+class AsyncOrdersResourceWithStreamingResponse:
+    def __init__(self, orders: AsyncOrdersResource) -> None:
+        self._orders = orders
+
+        self.cancel_all_orders = async_to_streamed_response_wrapper(
+            orders.cancel_all_orders,
+        )
+        self.cancel_order = async_to_streamed_response_wrapper(
+            orders.cancel_order,
+        )
+        self.get_order_by_id = async_to_streamed_response_wrapper(
+            orders.get_order_by_id,
+        )
+        self.get_orders = async_to_streamed_response_wrapper(
+            orders.get_orders,
+        )
+        self.replace_order = async_to_streamed_response_wrapper(
+            orders.replace_order,
+        )
+        self.submit_orders = async_to_streamed_response_wrapper(
+            orders.submit_orders,
+        )
