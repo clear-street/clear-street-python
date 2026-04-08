@@ -17,6 +17,9 @@ class Account(BaseModel):
     id: int
     """The unique identifier for the account"""
 
+    account_holder_entity_id: int
+    """The account holder entity identifier"""
+
     full_name: str
     """The full legal name of the account"""
 

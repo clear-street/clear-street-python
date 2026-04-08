@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Union, Iterable, Optional
 from datetime import datetime
-from typing_extensions import Literal, Required, Annotated, TypedDict
+from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from .side import Side
 from ....._utils import PropertyInfo
@@ -13,19 +13,82 @@ from .time_in_force import TimeInForce
 from ...security_type import SecurityType
 from ...security_id_source import SecurityIDSource
 from .order_strategy_param import OrderStrategyParam
+from .trailing_offset_type import TrailingOffsetType
 
-__all__ = ["OrderSubmitOrdersParams", "Body"]
+__all__ = [
+    "OrderSubmitOrdersParams",
+    "Body",
+    "BodyNewOrderMultilegRequest",
+    "BodyNewOrderMultilegRequestLeg",
+    "BodyNewOrderMultilegRequestLegSecurity",
+    "BodyNewOrderMultilegRequestLegSecuritySecurityIDPair",
+    "BodyNewOrderRequest",
+]
 
 
 class OrderSubmitOrdersParams(TypedDict, total=False):
     body: Required[Iterable[Body]]
 
 
-class Body(TypedDict, total=False):
-    """Request to submit a new order (PlaceOrderRequest from spec)"""
+class BodyNewOrderMultilegRequestLegSecuritySecurityIDPair(TypedDict, total=False):
+    id: Required[str]
 
-    order_id: Required[str]
-    """Client-provided unique ID (idempotency). Required to be unique per account."""
+    source: Required[SecurityIDSource]
+    """Security identifier source"""
+
+
+BodyNewOrderMultilegRequestLegSecurity: TypeAlias = Union[str, BodyNewOrderMultilegRequestLegSecuritySecurityIDPair]
+
+
+class BodyNewOrderMultilegRequestLeg(TypedDict, total=False):
+    """A single leg in a multileg strategy request."""
+
+    ratio: Required[str]
+    """Ratio for the leg."""
+
+    security: Required[BodyNewOrderMultilegRequestLegSecurity]
+    """Security identifier for the leg."""
+
+    security_type: Required[SecurityType]
+    """Security type for the leg."""
+
+    side: Required[Side]
+    """Leg side."""
+
+    id: Optional[str]
+    """Optional leg reference identifier."""
+
+    position_effect: Optional[Literal["OPEN", "CLOSE"]]
+    """Optional leg position effect."""
+
+
+class BodyNewOrderMultilegRequest(TypedDict, total=False):
+    """Multileg strategy order request"""
+
+    legs: Required[Iterable[BodyNewOrderMultilegRequestLeg]]
+    """Legs that compose the strategy."""
+
+    order_type: Required[OrderType]
+    """Type of order (currently MARKET or LIMIT for multileg strategy submission)"""
+
+    time_in_force: Required[TimeInForce]
+    """Time in force"""
+
+    id: Optional[str]
+    """Optional client-provided unique ID (idempotency).
+
+    Required to be unique per account.
+    """
+
+    limit_price: Optional[str]
+    """Strategy price, required for LIMIT orders."""
+
+    quantity: str
+    """Optional strategy-level quantity. Multiplies leg quantities. Defaults to 1."""
+
+
+class BodyNewOrderRequest(TypedDict, total=False):
+    """Single-leg order request"""
 
     order_type: Required[OrderType]
     """Type of order"""
@@ -46,6 +109,12 @@ class Body(TypedDict, total=False):
     time_in_force: Required[TimeInForce]
     """Time in force"""
 
+    id: Optional[str]
+    """Optional client-provided unique ID (idempotency).
+
+    Required to be unique per account.
+    """
+
     expire_at: Annotated[Union[str, datetime, None], PropertyInfo(format="iso8601")]
     """The timestamp when the order should expire (UTC).
 
@@ -57,6 +126,9 @@ class Body(TypedDict, total=False):
 
     Some brokers disallow options outside RTH.
     """
+
+    limit_offset: Optional[str]
+    """Limit offset for trailing stop-limit orders (signed)"""
 
     limit_price: Optional[str]
     """Limit price (required for LIMIT and STOP_LIMIT orders)"""
@@ -91,8 +163,11 @@ class Body(TypedDict, total=False):
     equities, OPRA for options).
     """
 
-    venue: str
-    """Execution venue to route the order to.
+    trailing_offset_amt: Optional[str]
+    """Trailing offset amount (required for trailing orders)"""
 
-    If not specified, the system will choose the best venue.
-    """
+    trailing_offset_amt_type: Optional[TrailingOffsetType]
+    """Trailing offset type (PRICE or PERCENT_BPS)"""
+
+
+Body: TypeAlias = Union[BodyNewOrderMultilegRequest, BodyNewOrderRequest]

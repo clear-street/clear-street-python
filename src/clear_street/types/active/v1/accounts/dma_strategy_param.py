@@ -4,13 +4,11 @@ from __future__ import annotations
 
 from typing_extensions import Required, TypedDict
 
-from .destination import Destination
-
 __all__ = ["DmaStrategyParam"]
 
 
 class DmaStrategyParam(TypedDict, total=False):
     """Direct Market Access strategy"""
 
-    destination: Required[Destination]
+    destination: Required[str]
     """Destination exchange (MIC code)"""

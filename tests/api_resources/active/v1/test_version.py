@@ -17,13 +17,13 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestVersion:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_version(self, client: ClearStreet) -> None:
         version = client.active.v1.version.get_version()
         assert_matches_type(VersionGetVersionResponse, version, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_version(self, client: ClearStreet) -> None:
         response = client.active.v1.version.with_raw_response.get_version()
@@ -33,7 +33,7 @@ class TestVersion:
         version = response.parse()
         assert_matches_type(VersionGetVersionResponse, version, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_version(self, client: ClearStreet) -> None:
         with client.active.v1.version.with_streaming_response.get_version() as response:
@@ -45,13 +45,13 @@ class TestVersion:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update_version(self, client: ClearStreet) -> None:
         version = client.active.v1.version.update_version()
         assert_matches_type(VersionUpdateVersionResponse, version, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_update_version(self, client: ClearStreet) -> None:
         response = client.active.v1.version.with_raw_response.update_version()
@@ -61,7 +61,7 @@ class TestVersion:
         version = response.parse()
         assert_matches_type(VersionUpdateVersionResponse, version, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_update_version(self, client: ClearStreet) -> None:
         with client.active.v1.version.with_streaming_response.update_version() as response:
@@ -79,13 +79,13 @@ class TestAsyncVersion:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_version(self, async_client: AsyncClearStreet) -> None:
         version = await async_client.active.v1.version.get_version()
         assert_matches_type(VersionGetVersionResponse, version, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_version(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.active.v1.version.with_raw_response.get_version()
@@ -95,7 +95,7 @@ class TestAsyncVersion:
         version = await response.parse()
         assert_matches_type(VersionGetVersionResponse, version, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_version(self, async_client: AsyncClearStreet) -> None:
         async with async_client.active.v1.version.with_streaming_response.get_version() as response:
@@ -107,13 +107,13 @@ class TestAsyncVersion:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update_version(self, async_client: AsyncClearStreet) -> None:
         version = await async_client.active.v1.version.update_version()
         assert_matches_type(VersionUpdateVersionResponse, version, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_update_version(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.active.v1.version.with_raw_response.update_version()
@@ -123,7 +123,7 @@ class TestAsyncVersion:
         version = await response.parse()
         assert_matches_type(VersionUpdateVersionResponse, version, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_update_version(self, async_client: AsyncClearStreet) -> None:
         async with async_client.active.v1.version.with_streaming_response.update_version() as response:

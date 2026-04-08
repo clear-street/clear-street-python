@@ -3,11 +3,10 @@
 from __future__ import annotations
 
 from typing import Union
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import Literal, Annotated, TypedDict
 
-from ...._types import Base64FileInput
+from ...._types import SequenceNotStr, Base64FileInput
 from ...._utils import PropertyInfo
-from ..security_type import SecurityType
 
 __all__ = ["InstrumentGetInstrumentsParams"]
 
@@ -19,8 +18,8 @@ class InstrumentGetInstrumentsParams(TypedDict, total=False):
     id_filter: str
     """Filter IDs to those containing this substring.
 
-    For options, this is required and is used to filter exclusively to the
-    underlying symbol.
+    For options, and when security_type is omitted and no
+    security_id/security_id_source filters are provided, this is required.
     """
 
     is_liquidation_only: bool
@@ -33,7 +32,7 @@ class InstrumentGetInstrumentsParams(TypedDict, total=False):
     """Filter by restricted status"""
 
     is_short_prohibited: bool
-    """filter by short prohibited status"""
+    """Filter by short prohibited status"""
 
     is_threshold_security: bool
     """Filter by threshold security status"""
@@ -51,5 +50,27 @@ class InstrumentGetInstrumentsParams(TypedDict, total=False):
     ignored.
     """
 
-    security_type: SecurityType
-    """Filter by security type, required and defaults to `COMMON_STOCK`"""
+    security_id: SequenceNotStr[str]
+    """Filter by security ID(s). Accepts single value or indexed array.
+
+    Examples:
+
+    - Single: `security_id=037833100`
+    - Multiple: `security_id[0]=037833100&security_id[1]=594918104`
+    """
+
+    security_id_source: SequenceNotStr[str]
+    """Source(s) for the security ID filter.
+
+    Must match the count and order of security_id.
+
+    Examples:
+
+    - Single: `security_id_source=CUSIP`
+    - Multiple: `security_id_source[0]=CUSIP&security_id_source[1]=FIGI`
+    """
+
+    security_type: Literal[
+        "COMMON_STOCK", "PREFERRED_STOCK", "CORPORATE_BOND", "OPTION", "FUTURE", "WARRANT", "CASH", "OTHER"
+    ]
+    """Filter by security type. If omitted, returns all types."""

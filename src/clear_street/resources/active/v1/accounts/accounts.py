@@ -31,7 +31,7 @@ from .positions import (
     AsyncPositionsResourceWithStreamingResponse,
 )
 from ....._types import Body, Omit, Query, Headers, NotGiven, Base64FileInput, omit, not_given
-from ....._utils import maybe_transform, async_maybe_transform
+from ....._utils import path_template, maybe_transform, async_maybe_transform
 from ....._compat import cached_property
 from ....._resource import SyncAPIResource, AsyncAPIResource
 from ....._response import (
@@ -49,6 +49,14 @@ from .locates.locates import (
     AsyncLocatesResourceWithStreamingResponse,
 )
 from ....._base_client import make_request_options
+from .portfolio_history import (
+    PortfolioHistoryResource,
+    AsyncPortfolioHistoryResource,
+    PortfolioHistoryResourceWithRawResponse,
+    AsyncPortfolioHistoryResourceWithRawResponse,
+    PortfolioHistoryResourceWithStreamingResponse,
+    AsyncPortfolioHistoryResourceWithStreamingResponse,
+)
 from .....types.active.v1 import account_get_accounts_params, account_patch_account_by_id_params
 from .....types.active.v1.risk_settings_param import RiskSettingsParam
 from .....types.active.v1.account_get_accounts_response import AccountGetAccountsResponse
@@ -59,20 +67,31 @@ __all__ = ["AccountsResource", "AsyncAccountsResource"]
 
 
 class AccountsResource(SyncAPIResource):
+    """Manage trading accounts and view balances."""
+
     @cached_property
     def balances(self) -> BalancesResource:
+        """Manage trading accounts and view balances."""
         return BalancesResource(self._client)
 
     @cached_property
     def locates(self) -> LocatesResource:
+        """Manage locate requests for short selling."""
         return LocatesResource(self._client)
 
     @cached_property
     def orders(self) -> OrdersResource:
+        """Place, monitor, and manage trading orders."""
         return OrdersResource(self._client)
 
     @cached_property
+    def portfolio_history(self) -> PortfolioHistoryResource:
+        """Manage trading accounts and view balances."""
+        return PortfolioHistoryResource(self._client)
+
+    @cached_property
     def positions(self) -> PositionsResource:
+        """View account positions."""
         return PositionsResource(self._client)
 
     @cached_property
@@ -118,7 +137,7 @@ class AccountsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
-            f"/active/v1/accounts/{account_id}",
+            path_template("/active/v1/accounts/{account_id}", account_id=account_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -200,7 +219,7 @@ class AccountsResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._patch(
-            f"/active/v1/accounts/{account_id}",
+            path_template("/active/v1/accounts/{account_id}", account_id=account_id),
             body=maybe_transform({"risk": risk}, account_patch_account_by_id_params.AccountPatchAccountByIDParams),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -210,20 +229,31 @@ class AccountsResource(SyncAPIResource):
 
 
 class AsyncAccountsResource(AsyncAPIResource):
+    """Manage trading accounts and view balances."""
+
     @cached_property
     def balances(self) -> AsyncBalancesResource:
+        """Manage trading accounts and view balances."""
         return AsyncBalancesResource(self._client)
 
     @cached_property
     def locates(self) -> AsyncLocatesResource:
+        """Manage locate requests for short selling."""
         return AsyncLocatesResource(self._client)
 
     @cached_property
     def orders(self) -> AsyncOrdersResource:
+        """Place, monitor, and manage trading orders."""
         return AsyncOrdersResource(self._client)
 
     @cached_property
+    def portfolio_history(self) -> AsyncPortfolioHistoryResource:
+        """Manage trading accounts and view balances."""
+        return AsyncPortfolioHistoryResource(self._client)
+
+    @cached_property
     def positions(self) -> AsyncPositionsResource:
+        """View account positions."""
         return AsyncPositionsResource(self._client)
 
     @cached_property
@@ -269,7 +299,7 @@ class AsyncAccountsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
-            f"/active/v1/accounts/{account_id}",
+            path_template("/active/v1/accounts/{account_id}", account_id=account_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -351,7 +381,7 @@ class AsyncAccountsResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._patch(
-            f"/active/v1/accounts/{account_id}",
+            path_template("/active/v1/accounts/{account_id}", account_id=account_id),
             body=await async_maybe_transform(
                 {"risk": risk}, account_patch_account_by_id_params.AccountPatchAccountByIDParams
             ),
@@ -378,18 +408,27 @@ class AccountsResourceWithRawResponse:
 
     @cached_property
     def balances(self) -> BalancesResourceWithRawResponse:
+        """Manage trading accounts and view balances."""
         return BalancesResourceWithRawResponse(self._accounts.balances)
 
     @cached_property
     def locates(self) -> LocatesResourceWithRawResponse:
+        """Manage locate requests for short selling."""
         return LocatesResourceWithRawResponse(self._accounts.locates)
 
     @cached_property
     def orders(self) -> OrdersResourceWithRawResponse:
+        """Place, monitor, and manage trading orders."""
         return OrdersResourceWithRawResponse(self._accounts.orders)
 
     @cached_property
+    def portfolio_history(self) -> PortfolioHistoryResourceWithRawResponse:
+        """Manage trading accounts and view balances."""
+        return PortfolioHistoryResourceWithRawResponse(self._accounts.portfolio_history)
+
+    @cached_property
     def positions(self) -> PositionsResourceWithRawResponse:
+        """View account positions."""
         return PositionsResourceWithRawResponse(self._accounts.positions)
 
 
@@ -409,18 +448,27 @@ class AsyncAccountsResourceWithRawResponse:
 
     @cached_property
     def balances(self) -> AsyncBalancesResourceWithRawResponse:
+        """Manage trading accounts and view balances."""
         return AsyncBalancesResourceWithRawResponse(self._accounts.balances)
 
     @cached_property
     def locates(self) -> AsyncLocatesResourceWithRawResponse:
+        """Manage locate requests for short selling."""
         return AsyncLocatesResourceWithRawResponse(self._accounts.locates)
 
     @cached_property
     def orders(self) -> AsyncOrdersResourceWithRawResponse:
+        """Place, monitor, and manage trading orders."""
         return AsyncOrdersResourceWithRawResponse(self._accounts.orders)
 
     @cached_property
+    def portfolio_history(self) -> AsyncPortfolioHistoryResourceWithRawResponse:
+        """Manage trading accounts and view balances."""
+        return AsyncPortfolioHistoryResourceWithRawResponse(self._accounts.portfolio_history)
+
+    @cached_property
     def positions(self) -> AsyncPositionsResourceWithRawResponse:
+        """View account positions."""
         return AsyncPositionsResourceWithRawResponse(self._accounts.positions)
 
 
@@ -440,18 +488,27 @@ class AccountsResourceWithStreamingResponse:
 
     @cached_property
     def balances(self) -> BalancesResourceWithStreamingResponse:
+        """Manage trading accounts and view balances."""
         return BalancesResourceWithStreamingResponse(self._accounts.balances)
 
     @cached_property
     def locates(self) -> LocatesResourceWithStreamingResponse:
+        """Manage locate requests for short selling."""
         return LocatesResourceWithStreamingResponse(self._accounts.locates)
 
     @cached_property
     def orders(self) -> OrdersResourceWithStreamingResponse:
+        """Place, monitor, and manage trading orders."""
         return OrdersResourceWithStreamingResponse(self._accounts.orders)
 
     @cached_property
+    def portfolio_history(self) -> PortfolioHistoryResourceWithStreamingResponse:
+        """Manage trading accounts and view balances."""
+        return PortfolioHistoryResourceWithStreamingResponse(self._accounts.portfolio_history)
+
+    @cached_property
     def positions(self) -> PositionsResourceWithStreamingResponse:
+        """View account positions."""
         return PositionsResourceWithStreamingResponse(self._accounts.positions)
 
 
@@ -471,16 +528,25 @@ class AsyncAccountsResourceWithStreamingResponse:
 
     @cached_property
     def balances(self) -> AsyncBalancesResourceWithStreamingResponse:
+        """Manage trading accounts and view balances."""
         return AsyncBalancesResourceWithStreamingResponse(self._accounts.balances)
 
     @cached_property
     def locates(self) -> AsyncLocatesResourceWithStreamingResponse:
+        """Manage locate requests for short selling."""
         return AsyncLocatesResourceWithStreamingResponse(self._accounts.locates)
 
     @cached_property
     def orders(self) -> AsyncOrdersResourceWithStreamingResponse:
+        """Place, monitor, and manage trading orders."""
         return AsyncOrdersResourceWithStreamingResponse(self._accounts.orders)
 
     @cached_property
+    def portfolio_history(self) -> AsyncPortfolioHistoryResourceWithStreamingResponse:
+        """Manage trading accounts and view balances."""
+        return AsyncPortfolioHistoryResourceWithStreamingResponse(self._accounts.portfolio_history)
+
+    @cached_property
     def positions(self) -> AsyncPositionsResourceWithStreamingResponse:
+        """View account positions."""
         return AsyncPositionsResourceWithStreamingResponse(self._accounts.positions)

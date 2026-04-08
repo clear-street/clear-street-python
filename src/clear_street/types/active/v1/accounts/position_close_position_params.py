@@ -2,11 +2,9 @@
 
 from __future__ import annotations
 
-from typing import Union
-from typing_extensions import Required, Annotated, TypedDict
+from typing import Optional
+from typing_extensions import Required, TypedDict
 
-from ....._types import Base64FileInput
-from ....._utils import PropertyInfo
 from ...security_id_source import SecurityIDSource
 
 __all__ = ["PositionClosePositionParams"]
@@ -18,15 +16,4 @@ class PositionClosePositionParams(TypedDict, total=False):
     security_id_source: Required[SecurityIDSource]
     """Security identifier source"""
 
-    page_size: int
-    """
-    The number of items to return per page (only used when page_token is not
-    provided)
-    """
-
-    page_token: Annotated[Union[str, Base64FileInput], PropertyInfo(format="base64")]
-    """Token for retrieving the next page of results.
-
-    Contains encoded pagination state (limit + offset). When provided, page_size is
-    ignored.
-    """
+    cancel_orders: Optional[bool]

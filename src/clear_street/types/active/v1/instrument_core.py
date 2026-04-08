@@ -1,19 +1,19 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import List, Optional
+from datetime import date
 
 from ...._models import BaseModel
 from ..security_type import SecurityType
 from ..security_id_source import SecurityIDSource
+from .instrument_security_id import InstrumentSecurityID
 
 __all__ = ["InstrumentCore"]
 
 
 class InstrumentCore(BaseModel):
-    """
-    Represents a tradable financial instrument, as a more concise item listing
-    only key fields.
-    """
+    id: str
+    """Unique instrument identifier"""
 
     country_of_issue: str
     """The ISO country code of the instrument's issue"""
@@ -40,10 +40,19 @@ class InstrumentCore(BaseModel):
     """Indicates if the instrument is on the Regulation SHO Threshold Security List"""
 
     security_id: str
-    """A unique Clear Street identifier for the instrument"""
+    """Deprecated. Use `security_ids`.
+
+    A primary security identifier for this instrument.
+    """
 
     security_id_source: SecurityIDSource
-    """The source system for the security identifier"""
+    """Deprecated. Use `security_ids`.
+
+    The source for `security_id`.
+    """
+
+    security_ids: List[InstrumentSecurityID]
+    """All known security identifiers for this instrument"""
 
     symbol: str
     """The trading symbol for the instrument"""
@@ -51,8 +60,20 @@ class InstrumentCore(BaseModel):
     venue: str
     """The MIC code of the primary listing venue"""
 
+    expiry: Optional[date] = None
+    """The expiration date for options instruments"""
+
+    long_margin_rate: Optional[str] = None
+    """The percent of a long position's value you must post as margin"""
+
     name: Optional[str] = None
     """The full name of the instrument or its issuer"""
 
     security_type: Optional[SecurityType] = None
     """The type of security (e.g., Common Stock, ETF)"""
+
+    short_margin_rate: Optional[str] = None
+    """The percent of a short position's value you must post as margin"""
+
+    strike_price: Optional[str] = None
+    """The strike price for options instruments"""

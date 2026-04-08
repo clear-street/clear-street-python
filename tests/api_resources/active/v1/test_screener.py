@@ -17,13 +17,13 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestScreener:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_screener(self, client: ClearStreet) -> None:
         screener = client.active.v1.screener.get_screener()
         assert_matches_type(ScreenerGetScreenerResponse, screener, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_screener_with_all_params(self, client: ClearStreet) -> None:
         screener = client.active.v1.screener.get_screener(
@@ -36,7 +36,7 @@ class TestScreener:
         )
         assert_matches_type(ScreenerGetScreenerResponse, screener, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_screener(self, client: ClearStreet) -> None:
         response = client.active.v1.screener.with_raw_response.get_screener()
@@ -46,7 +46,7 @@ class TestScreener:
         screener = response.parse()
         assert_matches_type(ScreenerGetScreenerResponse, screener, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_screener(self, client: ClearStreet) -> None:
         with client.active.v1.screener.with_streaming_response.get_screener() as response:
@@ -64,13 +64,13 @@ class TestAsyncScreener:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_screener(self, async_client: AsyncClearStreet) -> None:
         screener = await async_client.active.v1.screener.get_screener()
         assert_matches_type(ScreenerGetScreenerResponse, screener, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_screener_with_all_params(self, async_client: AsyncClearStreet) -> None:
         screener = await async_client.active.v1.screener.get_screener(
@@ -83,7 +83,7 @@ class TestAsyncScreener:
         )
         assert_matches_type(ScreenerGetScreenerResponse, screener, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_screener(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.active.v1.screener.with_raw_response.get_screener()
@@ -93,7 +93,7 @@ class TestAsyncScreener:
         screener = await response.parse()
         assert_matches_type(ScreenerGetScreenerResponse, screener, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_screener(self, async_client: AsyncClearStreet) -> None:
         async with async_client.active.v1.screener.with_streaming_response.get_screener() as response:

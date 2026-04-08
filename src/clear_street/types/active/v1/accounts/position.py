@@ -1,10 +1,11 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import Optional
-from typing_extensions import Literal
 
 from ....._models import BaseModel
+from .position_type import PositionType
 from ...security_type import SecurityType
+from ...security_id_source import SecurityIDSource
 
 __all__ = ["Position"]
 
@@ -24,7 +25,7 @@ class Position(BaseModel):
     market_value: str
     """The current market value of the position"""
 
-    position_type: Literal["LONG", "SHORT", "LONG_CALL", "SHORT_CALL", "LONG_PUT", "SHORT_PUT"]
+    position_type: PositionType
     """The type of position"""
 
     quantity: str
@@ -36,14 +37,11 @@ class Position(BaseModel):
     identifies one or more financial instruments.
     """
 
-    security_id_source: str
+    security_id_source: SecurityIDSource
     """The source of the security identifier"""
 
     symbol: str
     """The trading symbol for the instrument"""
-
-    venue: str
-    """The MIC code of the primary listing venue"""
 
     avg_price: Optional[str] = None
     """The average price paid per share or contract for this position"""
@@ -57,6 +55,12 @@ class Position(BaseModel):
     daily_unrealized_pnl: Optional[str] = None
     """The unrealized profit or loss for this position relative to the previous close"""
 
+    daily_unrealized_pnl_pct: Optional[str] = None
+    """
+    The unrealized profit/loss for the position for the current day, expressed as a
+    percentage of the baseline value (range: 0-100).
+    """
+
     market_price: Optional[str] = None
     """The current market price of the instrument"""
 
@@ -64,4 +68,10 @@ class Position(BaseModel):
     """
     The total unrealized profit or loss for this position based on current market
     value
+    """
+
+    unrealized_pnl_pct: Optional[str] = None
+    """
+    The unrealized profit/loss for the position, expressed as a percentage of the
+    position's cost basis (range: 0-100).
     """

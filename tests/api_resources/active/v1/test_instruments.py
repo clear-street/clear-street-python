@@ -20,7 +20,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestInstruments:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_instrument_by_id(self, client: ClearStreet) -> None:
         instrument = client.active.v1.instruments.get_instrument_by_id(
@@ -29,7 +29,17 @@ class TestInstruments:
         )
         assert_matches_type(InstrumentGetInstrumentByIDResponse, instrument, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_get_instrument_by_id_with_all_params(self, client: ClearStreet) -> None:
+        instrument = client.active.v1.instruments.get_instrument_by_id(
+            security_id="security_id",
+            security_id_source="CMS",
+            include_options_expiry_dates=True,
+        )
+        assert_matches_type(InstrumentGetInstrumentByIDResponse, instrument, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_instrument_by_id(self, client: ClearStreet) -> None:
         response = client.active.v1.instruments.with_raw_response.get_instrument_by_id(
@@ -42,7 +52,7 @@ class TestInstruments:
         instrument = response.parse()
         assert_matches_type(InstrumentGetInstrumentByIDResponse, instrument, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_instrument_by_id(self, client: ClearStreet) -> None:
         with client.active.v1.instruments.with_streaming_response.get_instrument_by_id(
@@ -57,7 +67,7 @@ class TestInstruments:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_get_instrument_by_id(self, client: ClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `security_id` but received ''"):
@@ -66,13 +76,13 @@ class TestInstruments:
                 security_id_source="CMS",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_instruments(self, client: ClearStreet) -> None:
         instrument = client.active.v1.instruments.get_instruments()
         assert_matches_type(InstrumentGetInstrumentsResponse, instrument, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_instruments_with_all_params(self, client: ClearStreet) -> None:
         instrument = client.active.v1.instruments.get_instruments(
@@ -85,11 +95,13 @@ class TestInstruments:
             is_threshold_security=True,
             page_size=1,
             page_token="U3RhaW5sZXNzIHJvY2tz",
+            security_id=["string"],
+            security_id_source=["string"],
             security_type="COMMON_STOCK",
         )
         assert_matches_type(InstrumentGetInstrumentsResponse, instrument, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_instruments(self, client: ClearStreet) -> None:
         response = client.active.v1.instruments.with_raw_response.get_instruments()
@@ -99,7 +111,7 @@ class TestInstruments:
         instrument = response.parse()
         assert_matches_type(InstrumentGetInstrumentsResponse, instrument, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_instruments(self, client: ClearStreet) -> None:
         with client.active.v1.instruments.with_streaming_response.get_instruments() as response:
@@ -117,7 +129,7 @@ class TestAsyncInstruments:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_instrument_by_id(self, async_client: AsyncClearStreet) -> None:
         instrument = await async_client.active.v1.instruments.get_instrument_by_id(
@@ -126,7 +138,17 @@ class TestAsyncInstruments:
         )
         assert_matches_type(InstrumentGetInstrumentByIDResponse, instrument, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_get_instrument_by_id_with_all_params(self, async_client: AsyncClearStreet) -> None:
+        instrument = await async_client.active.v1.instruments.get_instrument_by_id(
+            security_id="security_id",
+            security_id_source="CMS",
+            include_options_expiry_dates=True,
+        )
+        assert_matches_type(InstrumentGetInstrumentByIDResponse, instrument, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_instrument_by_id(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.active.v1.instruments.with_raw_response.get_instrument_by_id(
@@ -139,7 +161,7 @@ class TestAsyncInstruments:
         instrument = await response.parse()
         assert_matches_type(InstrumentGetInstrumentByIDResponse, instrument, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_instrument_by_id(self, async_client: AsyncClearStreet) -> None:
         async with async_client.active.v1.instruments.with_streaming_response.get_instrument_by_id(
@@ -154,7 +176,7 @@ class TestAsyncInstruments:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_get_instrument_by_id(self, async_client: AsyncClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `security_id` but received ''"):
@@ -163,13 +185,13 @@ class TestAsyncInstruments:
                 security_id_source="CMS",
             )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_instruments(self, async_client: AsyncClearStreet) -> None:
         instrument = await async_client.active.v1.instruments.get_instruments()
         assert_matches_type(InstrumentGetInstrumentsResponse, instrument, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_instruments_with_all_params(self, async_client: AsyncClearStreet) -> None:
         instrument = await async_client.active.v1.instruments.get_instruments(
@@ -182,11 +204,13 @@ class TestAsyncInstruments:
             is_threshold_security=True,
             page_size=1,
             page_token="U3RhaW5sZXNzIHJvY2tz",
+            security_id=["string"],
+            security_id_source=["string"],
             security_type="COMMON_STOCK",
         )
         assert_matches_type(InstrumentGetInstrumentsResponse, instrument, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_instruments(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.active.v1.instruments.with_raw_response.get_instruments()
@@ -196,7 +220,7 @@ class TestAsyncInstruments:
         instrument = await response.parse()
         assert_matches_type(InstrumentGetInstrumentsResponse, instrument, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_instruments(self, async_client: AsyncClearStreet) -> None:
         async with async_client.active.v1.instruments.with_streaming_response.get_instruments() as response:

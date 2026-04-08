@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 
+from typing import Union
+from datetime import date
+
 import httpx
 
-from ....._types import Body, Query, Headers, NotGiven, not_given
+from ....._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ....._utils import maybe_transform, async_maybe_transform
 from ....._compat import cached_property
 from ....._resource import SyncAPIResource, AsyncAPIResource
@@ -22,6 +25,8 @@ __all__ = ["DividendsResource", "AsyncDividendsResource"]
 
 
 class DividendsResource(SyncAPIResource):
+    """Access financial calendars for events like earnings, dividends, and splits."""
+
     @cached_property
     def with_raw_response(self) -> DividendsResourceWithRawResponse:
         """
@@ -44,8 +49,8 @@ class DividendsResource(SyncAPIResource):
     def get_dividends_calendar(
         self,
         *,
-        from_date: str,
-        to_date: str,
+        from_: Union[str, date] | Omit = omit,
+        to: Union[str, date] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -57,9 +62,9 @@ class DividendsResource(SyncAPIResource):
         Retrieves upcoming dividend payments.
 
         Args:
-          from_date: The start date for the query range, inclusive (YYYY-MM-DD)
+          from_: The start date for the query range, inclusive (YYYY-MM-DD)
 
-          to_date: The end date for the query range, inclusive (YYYY-MM-DD)
+          to: The end date for the query range, inclusive (YYYY-MM-DD)
 
           extra_headers: Send extra headers
 
@@ -78,8 +83,8 @@ class DividendsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "from_date": from_date,
-                        "to_date": to_date,
+                        "from_": from_,
+                        "to": to,
                     },
                     dividend_get_dividends_calendar_params.DividendGetDividendsCalendarParams,
                 ),
@@ -89,6 +94,8 @@ class DividendsResource(SyncAPIResource):
 
 
 class AsyncDividendsResource(AsyncAPIResource):
+    """Access financial calendars for events like earnings, dividends, and splits."""
+
     @cached_property
     def with_raw_response(self) -> AsyncDividendsResourceWithRawResponse:
         """
@@ -111,8 +118,8 @@ class AsyncDividendsResource(AsyncAPIResource):
     async def get_dividends_calendar(
         self,
         *,
-        from_date: str,
-        to_date: str,
+        from_: Union[str, date] | Omit = omit,
+        to: Union[str, date] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -124,9 +131,9 @@ class AsyncDividendsResource(AsyncAPIResource):
         Retrieves upcoming dividend payments.
 
         Args:
-          from_date: The start date for the query range, inclusive (YYYY-MM-DD)
+          from_: The start date for the query range, inclusive (YYYY-MM-DD)
 
-          to_date: The end date for the query range, inclusive (YYYY-MM-DD)
+          to: The end date for the query range, inclusive (YYYY-MM-DD)
 
           extra_headers: Send extra headers
 
@@ -145,8 +152,8 @@ class AsyncDividendsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "from_date": from_date,
-                        "to_date": to_date,
+                        "from_": from_,
+                        "to": to,
                     },
                     dividend_get_dividends_calendar_params.DividendGetDividendsCalendarParams,
                 ),

@@ -15,7 +15,7 @@ from .inventory import (
     AsyncInventoryResourceWithStreamingResponse,
 )
 from ......_types import Body, Omit, Query, Headers, NotGiven, Base64FileInput, omit, not_given
-from ......_utils import maybe_transform, async_maybe_transform
+from ......_utils import path_template, maybe_transform, async_maybe_transform
 from ......_compat import cached_property
 from ......_resource import SyncAPIResource, AsyncAPIResource
 from ......_response import (
@@ -40,8 +40,11 @@ __all__ = ["LocatesResource", "AsyncLocatesResource"]
 
 
 class LocatesResource(SyncAPIResource):
+    """Manage locate requests for short selling."""
+
     @cached_property
     def inventory(self) -> InventoryResource:
+        """Manage locate requests for short selling."""
         return InventoryResource(self._client)
 
     @cached_property
@@ -88,7 +91,7 @@ class LocatesResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            f"/active/v1/accounts/{account_id}/locates",
+            path_template("/active/v1/accounts/{account_id}/locates", account_id=account_id),
             body=maybe_transform(body, Iterable[locate_create_locate_request_params.Body]),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -134,7 +137,7 @@ class LocatesResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
-            f"/active/v1/accounts/{account_id}/locates",
+            path_template("/active/v1/accounts/{account_id}/locates", account_id=account_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -180,7 +183,7 @@ class LocatesResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._patch(
-            f"/active/v1/accounts/{account_id}/locates",
+            path_template("/active/v1/accounts/{account_id}/locates", account_id=account_id),
             body=maybe_transform(
                 {"accept": accept}, locate_update_locate_request_params.LocateUpdateLocateRequestParams
             ),
@@ -192,8 +195,11 @@ class LocatesResource(SyncAPIResource):
 
 
 class AsyncLocatesResource(AsyncAPIResource):
+    """Manage locate requests for short selling."""
+
     @cached_property
     def inventory(self) -> AsyncInventoryResource:
+        """Manage locate requests for short selling."""
         return AsyncInventoryResource(self._client)
 
     @cached_property
@@ -240,7 +246,7 @@ class AsyncLocatesResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            f"/active/v1/accounts/{account_id}/locates",
+            path_template("/active/v1/accounts/{account_id}/locates", account_id=account_id),
             body=await async_maybe_transform(body, Iterable[locate_create_locate_request_params.Body]),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -286,7 +292,7 @@ class AsyncLocatesResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
-            f"/active/v1/accounts/{account_id}/locates",
+            path_template("/active/v1/accounts/{account_id}/locates", account_id=account_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -332,7 +338,7 @@ class AsyncLocatesResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._patch(
-            f"/active/v1/accounts/{account_id}/locates",
+            path_template("/active/v1/accounts/{account_id}/locates", account_id=account_id),
             body=await async_maybe_transform(
                 {"accept": accept}, locate_update_locate_request_params.LocateUpdateLocateRequestParams
             ),
@@ -359,6 +365,7 @@ class LocatesResourceWithRawResponse:
 
     @cached_property
     def inventory(self) -> InventoryResourceWithRawResponse:
+        """Manage locate requests for short selling."""
         return InventoryResourceWithRawResponse(self._locates.inventory)
 
 
@@ -378,6 +385,7 @@ class AsyncLocatesResourceWithRawResponse:
 
     @cached_property
     def inventory(self) -> AsyncInventoryResourceWithRawResponse:
+        """Manage locate requests for short selling."""
         return AsyncInventoryResourceWithRawResponse(self._locates.inventory)
 
 
@@ -397,6 +405,7 @@ class LocatesResourceWithStreamingResponse:
 
     @cached_property
     def inventory(self) -> InventoryResourceWithStreamingResponse:
+        """Manage locate requests for short selling."""
         return InventoryResourceWithStreamingResponse(self._locates.inventory)
 
 
@@ -416,4 +425,5 @@ class AsyncLocatesResourceWithStreamingResponse:
 
     @cached_property
     def inventory(self) -> AsyncInventoryResourceWithStreamingResponse:
+        """Manage locate requests for short selling."""
         return AsyncInventoryResourceWithStreamingResponse(self._locates.inventory)

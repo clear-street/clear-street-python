@@ -19,7 +19,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestInventory:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_locate_inventory(self, client: ClearStreet) -> None:
         inventory = client.active.v1.accounts.locates.inventory.get_locate_inventory(
@@ -28,7 +28,7 @@ class TestInventory:
         )
         assert_matches_type(InventoryGetLocateInventoryResponse, inventory, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_locate_inventory(self, client: ClearStreet) -> None:
         response = client.active.v1.accounts.locates.inventory.with_raw_response.get_locate_inventory(
@@ -41,7 +41,7 @@ class TestInventory:
         inventory = response.parse()
         assert_matches_type(InventoryGetLocateInventoryResponse, inventory, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_locate_inventory(self, client: ClearStreet) -> None:
         with client.active.v1.accounts.locates.inventory.with_streaming_response.get_locate_inventory(
@@ -62,7 +62,7 @@ class TestAsyncInventory:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_locate_inventory(self, async_client: AsyncClearStreet) -> None:
         inventory = await async_client.active.v1.accounts.locates.inventory.get_locate_inventory(
@@ -71,7 +71,7 @@ class TestAsyncInventory:
         )
         assert_matches_type(InventoryGetLocateInventoryResponse, inventory, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_locate_inventory(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.active.v1.accounts.locates.inventory.with_raw_response.get_locate_inventory(
@@ -84,7 +84,7 @@ class TestAsyncInventory:
         inventory = await response.parse()
         assert_matches_type(InventoryGetLocateInventoryResponse, inventory, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_locate_inventory(self, async_client: AsyncClearStreet) -> None:
         async with async_client.active.v1.accounts.locates.inventory.with_streaming_response.get_locate_inventory(

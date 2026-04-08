@@ -4,4 +4,4 @@ from typing_extensions import Literal, TypeAlias
 
 __all__ = ["OrderType"]
 
-OrderType: TypeAlias = Literal["MARKET", "LIMIT", "STOP", "STOP_LIMIT", "OTHER"]
+OrderType: TypeAlias = Literal["MARKET", "LIMIT", "STOP", "STOP_LIMIT", "TRAILING_STOP", "TRAILING_STOP_LIMIT", "OTHER"]

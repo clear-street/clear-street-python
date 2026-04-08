@@ -3,23 +3,18 @@
 from __future__ import annotations
 
 from typing import Union
-from typing_extensions import Required, Annotated, TypedDict
+from datetime import datetime
+from typing_extensions import Literal, Annotated, TypedDict
 
-from ....._types import Base64FileInput
+from ....._types import SequenceNotStr, Base64FileInput
 from ....._utils import PropertyInfo
-from .order_status import OrderStatus
-from ...security_type import SecurityType
-from ...security_id_source import SecurityIDSource
 
 __all__ = ["OrderGetOrdersParams"]
 
 
 class OrderGetOrdersParams(TypedDict, total=False):
-    from_: Required[Annotated[str, PropertyInfo(alias="from")]]
+    from_: Annotated[Union[str, datetime], PropertyInfo(alias="from", format="iso8601")]
     """The start date and time for the query range, inclusive (ISO 8601 format)"""
-
-    to: Required[str]
-    """The end date and time for the query range, inclusive (ISO 8601 format)"""
 
     page_size: int
     """
@@ -34,17 +29,52 @@ class OrderGetOrdersParams(TypedDict, total=False):
     ignored.
     """
 
-    security_id: str
-    """Filter by security ID"""
+    security_id: SequenceNotStr[str]
+    """Filter by security ID(s). Accepts single value or indexed array.
 
-    security_id_source: SecurityIDSource
-    """Source for the security ID filter"""
+    Examples:
 
-    security_type: SecurityType
+    - Single: `security_id=037833100`
+    - Multiple: `security_id[0]=037833100&security_id[1]=594918104`
+    """
+
+    security_id_source: SequenceNotStr[str]
+    """Source(s) for the security ID filter.
+
+    Must match the count and order of security_id.
+
+    Examples:
+
+    - Single: `security_id_source=CUSIP`
+    - Multiple: `security_id_source[0]=CUSIP&security_id_source[1]=FIGI`
+    """
+
+    security_type: Literal[
+        "COMMON_STOCK", "PREFERRED_STOCK", "CORPORATE_BOND", "OPTION", "FUTURE", "WARRANT", "CASH", "OTHER"
+    ]
     """Security type filter (e.g., COMMON_STOCK, PREFERRED_STOCK)"""
 
-    status: OrderStatus
+    status: Literal[
+        "PENDING_NEW",
+        "NEW",
+        "PARTIALLY_FILLED",
+        "FILLED",
+        "CANCELED",
+        "REJECTED",
+        "EXPIRED",
+        "PENDING_CANCEL",
+        "PENDING_REPLACE",
+        "REPLACED",
+        "DONE_FOR_DAY",
+        "STOPPED",
+        "SUSPENDED",
+        "CALCULATED",
+        "OTHER",
+    ]
     """Filter by order status"""
 
     symbol: str
     """Filter by symbol"""
+
+    to: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
+    """The end date and time for the query range, inclusive (ISO 8601 format)"""

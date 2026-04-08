@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import List, Optional
 from datetime import date
 
 from .instrument_core import InstrumentCore
@@ -57,11 +57,14 @@ class Instrument(InstrumentCore):
     side
     """
 
-    long_margin_rate: Optional[str] = None
-    """The percent of a long position's value you must post as margin"""
-
     market_cap: Optional[str] = None
     """The total market capitalization"""
+
+    options_expiry_dates: Optional[List[date]] = None
+    """
+    Available options expiration dates for this instrument. Present only when
+    `include_options_expiry_dates=true` in the request.
+    """
 
     previous_close: Optional[str] = None
     """The closing price from the previous trading day"""
@@ -80,6 +83,3 @@ class Instrument(InstrumentCore):
     A cap on how much of your equity you can allocate to a single symbol on the
     short side
     """
-
-    short_margin_rate: Optional[str] = None
-    """The percent of a short position's value you must post as margin"""

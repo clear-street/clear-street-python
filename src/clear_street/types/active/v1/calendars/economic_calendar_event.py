@@ -2,9 +2,9 @@
 
 from typing import Optional
 from datetime import datetime
-from typing_extensions import Literal
 
 from ....._models import BaseModel
+from .economic_event_impact import EconomicEventImpact
 
 __all__ = ["EconomicCalendarEvent"]
 
@@ -24,7 +24,7 @@ class EconomicCalendarEvent(BaseModel):
     event_timestamp: datetime
     """The date and time of the event in UTC"""
 
-    impact: Literal["LOW", "MEDIUM", "HIGH"]
+    impact: EconomicEventImpact
     """The expected market impact of the event"""
 
     actual_value: Optional[str] = None

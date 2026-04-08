@@ -13,8 +13,8 @@ class EventGetInstrumentEventsParams(TypedDict, total=False):
     security_id_source: Required[SecurityIDSource]
     """Security identifier source"""
 
-    from_date: Required[str]
-    """The start date for the query range, inclusive (YYYY-MM-DD)"""
+    from_date: str
+    """The start date for the query range, inclusive (YYYY-MM-DD)."""
 
-    to_date: Required[str]
-    """The end date for the query range, inclusive (YYYY-MM-DD)"""
+    to_date: str
+    """The end date for the query range, inclusive (YYYY-MM-DD)."""

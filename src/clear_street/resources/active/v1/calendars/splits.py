@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 
+from typing import Union
+from datetime import date
+
 import httpx
 
-from ....._types import Body, Query, Headers, NotGiven, not_given
+from ....._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ....._utils import maybe_transform, async_maybe_transform
 from ....._compat import cached_property
 from ....._resource import SyncAPIResource, AsyncAPIResource
@@ -22,6 +25,8 @@ __all__ = ["SplitsResource", "AsyncSplitsResource"]
 
 
 class SplitsResource(SyncAPIResource):
+    """Access financial calendars for events like earnings, dividends, and splits."""
+
     @cached_property
     def with_raw_response(self) -> SplitsResourceWithRawResponse:
         """
@@ -44,8 +49,8 @@ class SplitsResource(SyncAPIResource):
     def get_splits_calendar(
         self,
         *,
-        from_date: str,
-        to_date: str,
+        from_: Union[str, date] | Omit = omit,
+        to: Union[str, date] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -57,9 +62,9 @@ class SplitsResource(SyncAPIResource):
         Retrieves upcoming stock splits.
 
         Args:
-          from_date: The start date for the query range, inclusive (YYYY-MM-DD)
+          from_: The start date for the query range, inclusive (YYYY-MM-DD)
 
-          to_date: The end date for the query range, inclusive (YYYY-MM-DD)
+          to: The end date for the query range, inclusive (YYYY-MM-DD)
 
           extra_headers: Send extra headers
 
@@ -78,8 +83,8 @@ class SplitsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "from_date": from_date,
-                        "to_date": to_date,
+                        "from_": from_,
+                        "to": to,
                     },
                     split_get_splits_calendar_params.SplitGetSplitsCalendarParams,
                 ),
@@ -89,6 +94,8 @@ class SplitsResource(SyncAPIResource):
 
 
 class AsyncSplitsResource(AsyncAPIResource):
+    """Access financial calendars for events like earnings, dividends, and splits."""
+
     @cached_property
     def with_raw_response(self) -> AsyncSplitsResourceWithRawResponse:
         """
@@ -111,8 +118,8 @@ class AsyncSplitsResource(AsyncAPIResource):
     async def get_splits_calendar(
         self,
         *,
-        from_date: str,
-        to_date: str,
+        from_: Union[str, date] | Omit = omit,
+        to: Union[str, date] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -124,9 +131,9 @@ class AsyncSplitsResource(AsyncAPIResource):
         Retrieves upcoming stock splits.
 
         Args:
-          from_date: The start date for the query range, inclusive (YYYY-MM-DD)
+          from_: The start date for the query range, inclusive (YYYY-MM-DD)
 
-          to_date: The end date for the query range, inclusive (YYYY-MM-DD)
+          to: The end date for the query range, inclusive (YYYY-MM-DD)
 
           extra_headers: Send extra headers
 
@@ -145,8 +152,8 @@ class AsyncSplitsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "from_date": from_date,
-                        "to_date": to_date,
+                        "from_": from_,
+                        "to": to,
                     },
                     split_get_splits_calendar_params.SplitGetSplitsCalendarParams,
                 ),

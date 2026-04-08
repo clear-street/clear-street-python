@@ -1,13 +1,5 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from .news import (
-    NewsResource,
-    AsyncNewsResource,
-    NewsResourceWithRawResponse,
-    AsyncNewsResourceWithRawResponse,
-    NewsResourceWithStreamingResponse,
-    AsyncNewsResourceWithStreamingResponse,
-)
 from .events import (
     EventsResource,
     AsyncEventsResource,
@@ -23,6 +15,14 @@ from .venues import (
     AsyncVenuesResourceWithRawResponse,
     VenuesResourceWithStreamingResponse,
     AsyncVenuesResourceWithStreamingResponse,
+)
+from .options import (
+    OptionsResource,
+    AsyncOptionsResource,
+    OptionsResourceWithRawResponse,
+    AsyncOptionsResourceWithRawResponse,
+    OptionsResourceWithStreamingResponse,
+    AsyncOptionsResourceWithStreamingResponse,
 )
 from .reporting import (
     ReportingResource,
@@ -62,12 +62,12 @@ __all__ = [
     "AsyncEventsResourceWithRawResponse",
     "EventsResourceWithStreamingResponse",
     "AsyncEventsResourceWithStreamingResponse",
-    "NewsResource",
-    "AsyncNewsResource",
-    "NewsResourceWithRawResponse",
-    "AsyncNewsResourceWithRawResponse",
-    "NewsResourceWithStreamingResponse",
-    "AsyncNewsResourceWithStreamingResponse",
+    "OptionsResource",
+    "AsyncOptionsResource",
+    "OptionsResourceWithRawResponse",
+    "AsyncOptionsResourceWithRawResponse",
+    "OptionsResourceWithStreamingResponse",
+    "AsyncOptionsResourceWithStreamingResponse",
     "ReportingResource",
     "AsyncReportingResource",
     "ReportingResourceWithRawResponse",

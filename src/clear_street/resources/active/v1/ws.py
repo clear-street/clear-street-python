@@ -19,6 +19,8 @@ __all__ = ["WsResource", "AsyncWsResource"]
 
 
 class WsResource(SyncAPIResource):
+    """Active Websocket."""
+
     @cached_property
     def with_raw_response(self) -> WsResourceWithRawResponse:
         """
@@ -60,6 +62,8 @@ class WsResource(SyncAPIResource):
 
 
 class AsyncWsResource(AsyncAPIResource):
+    """Active Websocket."""
+
     @cached_property
     def with_raw_response(self) -> AsyncWsResourceWithRawResponse:
         """

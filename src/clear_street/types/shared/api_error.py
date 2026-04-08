@@ -13,7 +13,7 @@ class APIError(BaseModel):
     code: int
     """The error code is used to identify the nature of the error.
 
-    It corresponds to a gRPC status code.
+    It corresponds to an HTTP status code.
     """
 
     message: str

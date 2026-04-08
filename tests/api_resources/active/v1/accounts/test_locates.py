@@ -21,7 +21,7 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestLocates:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_locate_request(self, client: ClearStreet) -> None:
         locate = client.active.v1.accounts.locates.create_locate_request(
@@ -35,7 +35,7 @@ class TestLocates:
         )
         assert_matches_type(LocateCreateLocateRequestResponse, locate, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create_locate_request(self, client: ClearStreet) -> None:
         response = client.active.v1.accounts.locates.with_raw_response.create_locate_request(
@@ -53,7 +53,7 @@ class TestLocates:
         locate = response.parse()
         assert_matches_type(LocateCreateLocateRequestResponse, locate, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create_locate_request(self, client: ClearStreet) -> None:
         with client.active.v1.accounts.locates.with_streaming_response.create_locate_request(
@@ -73,7 +73,7 @@ class TestLocates:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_locate_requests(self, client: ClearStreet) -> None:
         locate = client.active.v1.accounts.locates.get_locate_requests(
@@ -81,7 +81,7 @@ class TestLocates:
         )
         assert_matches_type(LocateGetLocateRequestsResponse, locate, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_locate_requests_with_all_params(self, client: ClearStreet) -> None:
         locate = client.active.v1.accounts.locates.get_locate_requests(
@@ -93,7 +93,7 @@ class TestLocates:
         )
         assert_matches_type(LocateGetLocateRequestsResponse, locate, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_locate_requests(self, client: ClearStreet) -> None:
         response = client.active.v1.accounts.locates.with_raw_response.get_locate_requests(
@@ -105,7 +105,7 @@ class TestLocates:
         locate = response.parse()
         assert_matches_type(LocateGetLocateRequestsResponse, locate, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_locate_requests(self, client: ClearStreet) -> None:
         with client.active.v1.accounts.locates.with_streaming_response.get_locate_requests(
@@ -119,7 +119,7 @@ class TestLocates:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_update_locate_request(self, client: ClearStreet) -> None:
         locate = client.active.v1.accounts.locates.update_locate_request(
@@ -128,7 +128,7 @@ class TestLocates:
         )
         assert_matches_type(LocateUpdateLocateRequestResponse, locate, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_update_locate_request(self, client: ClearStreet) -> None:
         response = client.active.v1.accounts.locates.with_raw_response.update_locate_request(
@@ -141,7 +141,7 @@ class TestLocates:
         locate = response.parse()
         assert_matches_type(LocateUpdateLocateRequestResponse, locate, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_update_locate_request(self, client: ClearStreet) -> None:
         with client.active.v1.accounts.locates.with_streaming_response.update_locate_request(
@@ -162,7 +162,7 @@ class TestAsyncLocates:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_locate_request(self, async_client: AsyncClearStreet) -> None:
         locate = await async_client.active.v1.accounts.locates.create_locate_request(
@@ -176,7 +176,7 @@ class TestAsyncLocates:
         )
         assert_matches_type(LocateCreateLocateRequestResponse, locate, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create_locate_request(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.active.v1.accounts.locates.with_raw_response.create_locate_request(
@@ -194,7 +194,7 @@ class TestAsyncLocates:
         locate = await response.parse()
         assert_matches_type(LocateCreateLocateRequestResponse, locate, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create_locate_request(self, async_client: AsyncClearStreet) -> None:
         async with async_client.active.v1.accounts.locates.with_streaming_response.create_locate_request(
@@ -214,7 +214,7 @@ class TestAsyncLocates:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_locate_requests(self, async_client: AsyncClearStreet) -> None:
         locate = await async_client.active.v1.accounts.locates.get_locate_requests(
@@ -222,7 +222,7 @@ class TestAsyncLocates:
         )
         assert_matches_type(LocateGetLocateRequestsResponse, locate, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_locate_requests_with_all_params(self, async_client: AsyncClearStreet) -> None:
         locate = await async_client.active.v1.accounts.locates.get_locate_requests(
@@ -234,7 +234,7 @@ class TestAsyncLocates:
         )
         assert_matches_type(LocateGetLocateRequestsResponse, locate, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_locate_requests(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.active.v1.accounts.locates.with_raw_response.get_locate_requests(
@@ -246,7 +246,7 @@ class TestAsyncLocates:
         locate = await response.parse()
         assert_matches_type(LocateGetLocateRequestsResponse, locate, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_locate_requests(self, async_client: AsyncClearStreet) -> None:
         async with async_client.active.v1.accounts.locates.with_streaming_response.get_locate_requests(
@@ -260,7 +260,7 @@ class TestAsyncLocates:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_update_locate_request(self, async_client: AsyncClearStreet) -> None:
         locate = await async_client.active.v1.accounts.locates.update_locate_request(
@@ -269,7 +269,7 @@ class TestAsyncLocates:
         )
         assert_matches_type(LocateUpdateLocateRequestResponse, locate, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_update_locate_request(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.active.v1.accounts.locates.with_raw_response.update_locate_request(
@@ -282,7 +282,7 @@ class TestAsyncLocates:
         locate = await response.parse()
         assert_matches_type(LocateUpdateLocateRequestResponse, locate, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_update_locate_request(self, async_client: AsyncClearStreet) -> None:
         async with async_client.active.v1.accounts.locates.with_streaming_response.update_locate_request(

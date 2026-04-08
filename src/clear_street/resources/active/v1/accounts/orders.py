@@ -3,11 +3,23 @@
 from __future__ import annotations
 
 from typing import Union, Iterable, Optional
+from datetime import datetime
+from typing_extensions import Literal
 
 import httpx
 
-from ....._types import Body, Omit, Query, Headers, NotGiven, Base64FileInput, omit, not_given
-from ....._utils import maybe_transform, async_maybe_transform
+from ....._types import (
+    Body,
+    Omit,
+    Query,
+    Headers,
+    NotGiven,
+    SequenceNotStr,
+    Base64FileInput,
+    omit,
+    not_given,
+)
+from ....._utils import path_template, maybe_transform, async_maybe_transform
 from ....._compat import cached_property
 from ....._resource import SyncAPIResource, AsyncAPIResource
 from ....._response import (
@@ -17,22 +29,13 @@ from ....._response import (
     async_to_streamed_response_wrapper,
 )
 from ....._base_client import make_request_options
-from .....types.active import SecurityType, SecurityIDSource
 from .....types.active.v1.accounts import (
-    Side,
-    OrderType,
-    OrderStatus,
     TimeInForce,
     order_get_orders_params,
     order_replace_order_params,
     order_submit_orders_params,
     order_cancel_all_orders_params,
 )
-from .....types.active.security_type import SecurityType
-from .....types.active.v1.accounts.side import Side
-from .....types.active.security_id_source import SecurityIDSource
-from .....types.active.v1.accounts.order_type import OrderType
-from .....types.active.v1.accounts.order_status import OrderStatus
 from .....types.active.v1.accounts.time_in_force import TimeInForce
 from .....types.active.v1.accounts.order_get_orders_response import OrderGetOrdersResponse
 from .....types.active.v1.accounts.order_cancel_order_response import OrderCancelOrderResponse
@@ -45,6 +48,8 @@ __all__ = ["OrdersResource", "AsyncOrdersResource"]
 
 
 class OrdersResource(SyncAPIResource):
+    """Place, monitor, and manage trading orders."""
+
     @cached_property
     def with_raw_response(self) -> OrdersResourceWithRawResponse:
         """
@@ -68,11 +73,15 @@ class OrdersResource(SyncAPIResource):
         self,
         account_id: int,
         *,
-        security_id: str | Omit = omit,
-        security_id_source: SecurityIDSource | Omit = omit,
-        security_type: SecurityType | Omit = omit,
-        side: Side | Omit = omit,
-        type: OrderType | Omit = omit,
+        security_id: SequenceNotStr[str] | Omit = omit,
+        security_id_source: SequenceNotStr[str] | Omit = omit,
+        security_type: Literal[
+            "COMMON_STOCK", "PREFERRED_STOCK", "CORPORATE_BOND", "OPTION", "FUTURE", "WARRANT", "CASH", "OTHER"
+        ]
+        | Omit = omit,
+        side: Literal["BUY", "SELL", "SELL_SHORT", "OTHER"] | Omit = omit,
+        type: Literal["MARKET", "LIMIT", "STOP", "STOP_LIMIT", "TRAILING_STOP", "TRAILING_STOP_LIMIT", "OTHER"]
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -87,10 +96,20 @@ class OrdersResource(SyncAPIResource):
         either is specified.
 
         Args:
-          security_id: Filter by security identifier (e.g., CUSIP, ISIN). Must be provided with
-              security_id_source.
+          security_id: Filter by security ID(s). Accepts single value or indexed array.
 
-          security_id_source: Type of security identifier. Must be provided with security_id.
+              Examples:
+
+              - Single: `security_id=037833100`
+              - Multiple: `security_id[0]=037833100&security_id[1]=594918104`
+
+          security_id_source: Source(s) for the security ID filter. Must match the count and order of
+              security_id.
+
+              Examples:
+
+              - Single: `security_id_source=CUSIP`
+              - Multiple: `security_id_source[0]=CUSIP&security_id_source[1]=FIGI`
 
           security_type: Filter by security type (e.g., COMMON_STOCK, OPTION)
 
@@ -107,7 +126,7 @@ class OrdersResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._delete(
-            f"/active/v1/accounts/{account_id}/orders",
+            path_template("/active/v1/accounts/{account_id}/orders", account_id=account_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -154,7 +173,9 @@ class OrdersResource(SyncAPIResource):
         if not order_id:
             raise ValueError(f"Expected a non-empty value for `order_id` but received {order_id!r}")
         return self._delete(
-            f"/active/v1/accounts/{account_id}/orders/{order_id}",
+            path_template(
+                "/active/v1/accounts/{account_id}/orders/{order_id}", account_id=account_id, order_id=order_id
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -188,7 +209,9 @@ class OrdersResource(SyncAPIResource):
         if not order_id:
             raise ValueError(f"Expected a non-empty value for `order_id` but received {order_id!r}")
         return self._get(
-            f"/active/v1/accounts/{account_id}/orders/{order_id}",
+            path_template(
+                "/active/v1/accounts/{account_id}/orders/{order_id}", account_id=account_id, order_id=order_id
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -199,15 +222,35 @@ class OrdersResource(SyncAPIResource):
         self,
         account_id: int,
         *,
-        from_: str,
-        to: str,
+        from_: Union[str, datetime] | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
-        security_id: str | Omit = omit,
-        security_id_source: SecurityIDSource | Omit = omit,
-        security_type: SecurityType | Omit = omit,
-        status: OrderStatus | Omit = omit,
+        security_id: SequenceNotStr[str] | Omit = omit,
+        security_id_source: SequenceNotStr[str] | Omit = omit,
+        security_type: Literal[
+            "COMMON_STOCK", "PREFERRED_STOCK", "CORPORATE_BOND", "OPTION", "FUTURE", "WARRANT", "CASH", "OTHER"
+        ]
+        | Omit = omit,
+        status: Literal[
+            "PENDING_NEW",
+            "NEW",
+            "PARTIALLY_FILLED",
+            "FILLED",
+            "CANCELED",
+            "REJECTED",
+            "EXPIRED",
+            "PENDING_CANCEL",
+            "PENDING_REPLACE",
+            "REPLACED",
+            "DONE_FOR_DAY",
+            "STOPPED",
+            "SUSPENDED",
+            "CALCULATED",
+            "OTHER",
+        ]
+        | Omit = omit,
         symbol: str | Omit = omit,
+        to: Union[str, datetime] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -221,23 +264,34 @@ class OrdersResource(SyncAPIResource):
         Args:
           from_: The start date and time for the query range, inclusive (ISO 8601 format)
 
-          to: The end date and time for the query range, inclusive (ISO 8601 format)
-
           page_size: The number of items to return per page (only used when page_token is not
               provided)
 
           page_token: Token for retrieving the next page of results. Contains encoded pagination state
               (limit + offset). When provided, page_size is ignored.
 
-          security_id: Filter by security ID
+          security_id: Filter by security ID(s). Accepts single value or indexed array.
 
-          security_id_source: Source for the security ID filter
+              Examples:
+
+              - Single: `security_id=037833100`
+              - Multiple: `security_id[0]=037833100&security_id[1]=594918104`
+
+          security_id_source: Source(s) for the security ID filter. Must match the count and order of
+              security_id.
+
+              Examples:
+
+              - Single: `security_id_source=CUSIP`
+              - Multiple: `security_id_source[0]=CUSIP&security_id_source[1]=FIGI`
 
           security_type: Security type filter (e.g., COMMON_STOCK, PREFERRED_STOCK)
 
           status: Filter by order status
 
           symbol: Filter by symbol
+
+          to: The end date and time for the query range, inclusive (ISO 8601 format)
 
           extra_headers: Send extra headers
 
@@ -248,7 +302,7 @@ class OrdersResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
-            f"/active/v1/accounts/{account_id}/orders",
+            path_template("/active/v1/accounts/{account_id}/orders", account_id=account_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -257,7 +311,6 @@ class OrdersResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "from_": from_,
-                        "to": to,
                         "page_size": page_size,
                         "page_token": page_token,
                         "security_id": security_id,
@@ -265,6 +318,7 @@ class OrdersResource(SyncAPIResource):
                         "security_type": security_type,
                         "status": status,
                         "symbol": symbol,
+                        "to": to,
                     },
                     order_get_orders_params.OrderGetOrdersParams,
                 ),
@@ -311,7 +365,9 @@ class OrdersResource(SyncAPIResource):
         if not order_id:
             raise ValueError(f"Expected a non-empty value for `order_id` but received {order_id!r}")
         return self._patch(
-            f"/active/v1/accounts/{account_id}/orders/{order_id}",
+            path_template(
+                "/active/v1/accounts/{account_id}/orders/{order_id}", account_id=account_id, order_id=order_id
+            ),
             body=maybe_transform(
                 {
                     "limit_price": limit_price,
@@ -352,7 +408,7 @@ class OrdersResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._post(
-            f"/active/v1/accounts/{account_id}/orders",
+            path_template("/active/v1/accounts/{account_id}/orders", account_id=account_id),
             body=maybe_transform(body, Iterable[order_submit_orders_params.Body]),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
@@ -362,6 +418,8 @@ class OrdersResource(SyncAPIResource):
 
 
 class AsyncOrdersResource(AsyncAPIResource):
+    """Place, monitor, and manage trading orders."""
+
     @cached_property
     def with_raw_response(self) -> AsyncOrdersResourceWithRawResponse:
         """
@@ -385,11 +443,15 @@ class AsyncOrdersResource(AsyncAPIResource):
         self,
         account_id: int,
         *,
-        security_id: str | Omit = omit,
-        security_id_source: SecurityIDSource | Omit = omit,
-        security_type: SecurityType | Omit = omit,
-        side: Side | Omit = omit,
-        type: OrderType | Omit = omit,
+        security_id: SequenceNotStr[str] | Omit = omit,
+        security_id_source: SequenceNotStr[str] | Omit = omit,
+        security_type: Literal[
+            "COMMON_STOCK", "PREFERRED_STOCK", "CORPORATE_BOND", "OPTION", "FUTURE", "WARRANT", "CASH", "OTHER"
+        ]
+        | Omit = omit,
+        side: Literal["BUY", "SELL", "SELL_SHORT", "OTHER"] | Omit = omit,
+        type: Literal["MARKET", "LIMIT", "STOP", "STOP_LIMIT", "TRAILING_STOP", "TRAILING_STOP_LIMIT", "OTHER"]
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -404,10 +466,20 @@ class AsyncOrdersResource(AsyncAPIResource):
         either is specified.
 
         Args:
-          security_id: Filter by security identifier (e.g., CUSIP, ISIN). Must be provided with
-              security_id_source.
+          security_id: Filter by security ID(s). Accepts single value or indexed array.
 
-          security_id_source: Type of security identifier. Must be provided with security_id.
+              Examples:
+
+              - Single: `security_id=037833100`
+              - Multiple: `security_id[0]=037833100&security_id[1]=594918104`
+
+          security_id_source: Source(s) for the security ID filter. Must match the count and order of
+              security_id.
+
+              Examples:
+
+              - Single: `security_id_source=CUSIP`
+              - Multiple: `security_id_source[0]=CUSIP&security_id_source[1]=FIGI`
 
           security_type: Filter by security type (e.g., COMMON_STOCK, OPTION)
 
@@ -424,7 +496,7 @@ class AsyncOrdersResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._delete(
-            f"/active/v1/accounts/{account_id}/orders",
+            path_template("/active/v1/accounts/{account_id}/orders", account_id=account_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -471,7 +543,9 @@ class AsyncOrdersResource(AsyncAPIResource):
         if not order_id:
             raise ValueError(f"Expected a non-empty value for `order_id` but received {order_id!r}")
         return await self._delete(
-            f"/active/v1/accounts/{account_id}/orders/{order_id}",
+            path_template(
+                "/active/v1/accounts/{account_id}/orders/{order_id}", account_id=account_id, order_id=order_id
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -505,7 +579,9 @@ class AsyncOrdersResource(AsyncAPIResource):
         if not order_id:
             raise ValueError(f"Expected a non-empty value for `order_id` but received {order_id!r}")
         return await self._get(
-            f"/active/v1/accounts/{account_id}/orders/{order_id}",
+            path_template(
+                "/active/v1/accounts/{account_id}/orders/{order_id}", account_id=account_id, order_id=order_id
+            ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -516,15 +592,35 @@ class AsyncOrdersResource(AsyncAPIResource):
         self,
         account_id: int,
         *,
-        from_: str,
-        to: str,
+        from_: Union[str, datetime] | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
-        security_id: str | Omit = omit,
-        security_id_source: SecurityIDSource | Omit = omit,
-        security_type: SecurityType | Omit = omit,
-        status: OrderStatus | Omit = omit,
+        security_id: SequenceNotStr[str] | Omit = omit,
+        security_id_source: SequenceNotStr[str] | Omit = omit,
+        security_type: Literal[
+            "COMMON_STOCK", "PREFERRED_STOCK", "CORPORATE_BOND", "OPTION", "FUTURE", "WARRANT", "CASH", "OTHER"
+        ]
+        | Omit = omit,
+        status: Literal[
+            "PENDING_NEW",
+            "NEW",
+            "PARTIALLY_FILLED",
+            "FILLED",
+            "CANCELED",
+            "REJECTED",
+            "EXPIRED",
+            "PENDING_CANCEL",
+            "PENDING_REPLACE",
+            "REPLACED",
+            "DONE_FOR_DAY",
+            "STOPPED",
+            "SUSPENDED",
+            "CALCULATED",
+            "OTHER",
+        ]
+        | Omit = omit,
         symbol: str | Omit = omit,
+        to: Union[str, datetime] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -538,23 +634,34 @@ class AsyncOrdersResource(AsyncAPIResource):
         Args:
           from_: The start date and time for the query range, inclusive (ISO 8601 format)
 
-          to: The end date and time for the query range, inclusive (ISO 8601 format)
-
           page_size: The number of items to return per page (only used when page_token is not
               provided)
 
           page_token: Token for retrieving the next page of results. Contains encoded pagination state
               (limit + offset). When provided, page_size is ignored.
 
-          security_id: Filter by security ID
+          security_id: Filter by security ID(s). Accepts single value or indexed array.
 
-          security_id_source: Source for the security ID filter
+              Examples:
+
+              - Single: `security_id=037833100`
+              - Multiple: `security_id[0]=037833100&security_id[1]=594918104`
+
+          security_id_source: Source(s) for the security ID filter. Must match the count and order of
+              security_id.
+
+              Examples:
+
+              - Single: `security_id_source=CUSIP`
+              - Multiple: `security_id_source[0]=CUSIP&security_id_source[1]=FIGI`
 
           security_type: Security type filter (e.g., COMMON_STOCK, PREFERRED_STOCK)
 
           status: Filter by order status
 
           symbol: Filter by symbol
+
+          to: The end date and time for the query range, inclusive (ISO 8601 format)
 
           extra_headers: Send extra headers
 
@@ -565,7 +672,7 @@ class AsyncOrdersResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
-            f"/active/v1/accounts/{account_id}/orders",
+            path_template("/active/v1/accounts/{account_id}/orders", account_id=account_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -574,7 +681,6 @@ class AsyncOrdersResource(AsyncAPIResource):
                 query=await async_maybe_transform(
                     {
                         "from_": from_,
-                        "to": to,
                         "page_size": page_size,
                         "page_token": page_token,
                         "security_id": security_id,
@@ -582,6 +688,7 @@ class AsyncOrdersResource(AsyncAPIResource):
                         "security_type": security_type,
                         "status": status,
                         "symbol": symbol,
+                        "to": to,
                     },
                     order_get_orders_params.OrderGetOrdersParams,
                 ),
@@ -628,7 +735,9 @@ class AsyncOrdersResource(AsyncAPIResource):
         if not order_id:
             raise ValueError(f"Expected a non-empty value for `order_id` but received {order_id!r}")
         return await self._patch(
-            f"/active/v1/accounts/{account_id}/orders/{order_id}",
+            path_template(
+                "/active/v1/accounts/{account_id}/orders/{order_id}", account_id=account_id, order_id=order_id
+            ),
             body=await async_maybe_transform(
                 {
                     "limit_price": limit_price,
@@ -669,7 +778,7 @@ class AsyncOrdersResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._post(
-            f"/active/v1/accounts/{account_id}/orders",
+            path_template("/active/v1/accounts/{account_id}/orders", account_id=account_id),
             body=await async_maybe_transform(body, Iterable[order_submit_orders_params.Body]),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout

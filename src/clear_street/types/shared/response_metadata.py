@@ -23,6 +23,9 @@ class ResponseMetadata(BaseModel):
     page_number: Optional[int] = None
     """Pagination. Included if this was a GET (list) response"""
 
+    previous_page_token: Optional[str] = None
+    """Base64URL-encoded pagination token containing limit and offset"""
+
     total_items: Optional[int] = None
     """Total number of items available (not just in this page)."""
 

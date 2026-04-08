@@ -2,10 +2,13 @@
 
 from __future__ import annotations
 
+from typing import Union
+from datetime import date
+
 import httpx
 
-from ....._types import Body, Query, Headers, NotGiven, not_given
-from ....._utils import maybe_transform, async_maybe_transform
+from ....._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from ....._utils import path_template, maybe_transform, async_maybe_transform
 from ....._compat import cached_property
 from ....._resource import SyncAPIResource, AsyncAPIResource
 from ....._response import (
@@ -26,6 +29,8 @@ __all__ = ["AnalystReportingResource", "AsyncAnalystReportingResource"]
 
 
 class AnalystReportingResource(SyncAPIResource):
+    """Retrieve details and lists of tradable instruments."""
+
     @cached_property
     def with_raw_response(self) -> AnalystReportingResourceWithRawResponse:
         """
@@ -50,8 +55,8 @@ class AnalystReportingResource(SyncAPIResource):
         security_id: str,
         *,
         security_id_source: SecurityIDSource,
-        from_date: str,
-        to_date: str,
+        from_: Union[str, date] | Omit = omit,
+        to: Union[str, date] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -65,9 +70,9 @@ class AnalystReportingResource(SyncAPIResource):
         Args:
           security_id_source: Security identifier source
 
-          from_date: The start date for the query range, inclusive (YYYY-MM-DD)
+          from_: The start date for the query range, inclusive (YYYY-MM-DD)
 
-          to_date: The end date for the query range, inclusive (YYYY-MM-DD)
+          to: The end date for the query range, inclusive (YYYY-MM-DD)
 
           extra_headers: Send extra headers
 
@@ -82,7 +87,11 @@ class AnalystReportingResource(SyncAPIResource):
         if not security_id:
             raise ValueError(f"Expected a non-empty value for `security_id` but received {security_id!r}")
         return self._get(
-            f"/active/v1/instruments/{security_id_source}/{security_id}/analyst-reporting",
+            path_template(
+                "/active/v1/instruments/{security_id_source}/{security_id}/analyst-reporting",
+                security_id_source=security_id_source,
+                security_id=security_id,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -90,8 +99,8 @@ class AnalystReportingResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "from_date": from_date,
-                        "to_date": to_date,
+                        "from_": from_,
+                        "to": to,
                     },
                     analyst_reporting_get_instrument_analyst_consensus_params.AnalystReportingGetInstrumentAnalystConsensusParams,
                 ),
@@ -101,6 +110,8 @@ class AnalystReportingResource(SyncAPIResource):
 
 
 class AsyncAnalystReportingResource(AsyncAPIResource):
+    """Retrieve details and lists of tradable instruments."""
+
     @cached_property
     def with_raw_response(self) -> AsyncAnalystReportingResourceWithRawResponse:
         """
@@ -125,8 +136,8 @@ class AsyncAnalystReportingResource(AsyncAPIResource):
         security_id: str,
         *,
         security_id_source: SecurityIDSource,
-        from_date: str,
-        to_date: str,
+        from_: Union[str, date] | Omit = omit,
+        to: Union[str, date] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -140,9 +151,9 @@ class AsyncAnalystReportingResource(AsyncAPIResource):
         Args:
           security_id_source: Security identifier source
 
-          from_date: The start date for the query range, inclusive (YYYY-MM-DD)
+          from_: The start date for the query range, inclusive (YYYY-MM-DD)
 
-          to_date: The end date for the query range, inclusive (YYYY-MM-DD)
+          to: The end date for the query range, inclusive (YYYY-MM-DD)
 
           extra_headers: Send extra headers
 
@@ -157,7 +168,11 @@ class AsyncAnalystReportingResource(AsyncAPIResource):
         if not security_id:
             raise ValueError(f"Expected a non-empty value for `security_id` but received {security_id!r}")
         return await self._get(
-            f"/active/v1/instruments/{security_id_source}/{security_id}/analyst-reporting",
+            path_template(
+                "/active/v1/instruments/{security_id_source}/{security_id}/analyst-reporting",
+                security_id_source=security_id_source,
+                security_id=security_id,
+            ),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -165,8 +180,8 @@ class AsyncAnalystReportingResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "from_date": from_date,
-                        "to_date": to_date,
+                        "from_": from_,
+                        "to": to,
                     },
                     analyst_reporting_get_instrument_analyst_consensus_params.AnalystReportingGetInstrumentAnalystConsensusParams,
                 ),

@@ -2,6 +2,7 @@
 
 from typing import Optional
 
+from ...api_decimal64 import APIDecimal64
 from .base_strategy_params import BaseStrategyParams
 
 __all__ = ["DarkStrategy"]
@@ -10,5 +11,5 @@ __all__ = ["DarkStrategy"]
 class DarkStrategy(BaseStrategyParams):
     """Dark Pool strategy"""
 
-    max_percent: Optional[int] = None
+    max_percent: Optional[APIDecimal64] = None
     """Maximum percentage of market volume to participate in (0-100)"""
