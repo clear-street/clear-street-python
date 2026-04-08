@@ -15,13 +15,13 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestWs:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_websocket_handler(self, client: ClearStreet) -> None:
         w = client.active.v1.ws.websocket_handler()
         assert w is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_websocket_handler(self, client: ClearStreet) -> None:
         response = client.active.v1.ws.with_raw_response.websocket_handler()
@@ -31,7 +31,7 @@ class TestWs:
         w = response.parse()
         assert w is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_websocket_handler(self, client: ClearStreet) -> None:
         with client.active.v1.ws.with_streaming_response.websocket_handler() as response:
@@ -49,13 +49,13 @@ class TestAsyncWs:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_websocket_handler(self, async_client: AsyncClearStreet) -> None:
         w = await async_client.active.v1.ws.websocket_handler()
         assert w is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_websocket_handler(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.active.v1.ws.with_raw_response.websocket_handler()
@@ -65,7 +65,7 @@ class TestAsyncWs:
         w = await response.parse()
         assert w is None
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_websocket_handler(self, async_client: AsyncClearStreet) -> None:
         async with async_client.active.v1.ws.with_streaming_response.websocket_handler() as response:

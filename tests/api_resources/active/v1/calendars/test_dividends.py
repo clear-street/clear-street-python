@@ -9,6 +9,7 @@ import pytest
 
 from tests.utils import assert_matches_type
 from clear_street import ClearStreet, AsyncClearStreet
+from clear_street._utils import parse_date
 from clear_street.types.active.v1.calendars import (
     DividendGetDividendsCalendarResponse,
 )
@@ -19,35 +20,35 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestDividends:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_dividends_calendar(self, client: ClearStreet) -> None:
+        dividend = client.active.v1.calendars.dividends.get_dividends_calendar()
+        assert_matches_type(DividendGetDividendsCalendarResponse, dividend, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_get_dividends_calendar_with_all_params(self, client: ClearStreet) -> None:
         dividend = client.active.v1.calendars.dividends.get_dividends_calendar(
-            from_date="from_date",
-            to_date="to_date",
+            from_=parse_date("2019-12-27"),
+            to=parse_date("2019-12-27"),
         )
         assert_matches_type(DividendGetDividendsCalendarResponse, dividend, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_dividends_calendar(self, client: ClearStreet) -> None:
-        response = client.active.v1.calendars.dividends.with_raw_response.get_dividends_calendar(
-            from_date="from_date",
-            to_date="to_date",
-        )
+        response = client.active.v1.calendars.dividends.with_raw_response.get_dividends_calendar()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         dividend = response.parse()
         assert_matches_type(DividendGetDividendsCalendarResponse, dividend, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_dividends_calendar(self, client: ClearStreet) -> None:
-        with client.active.v1.calendars.dividends.with_streaming_response.get_dividends_calendar(
-            from_date="from_date",
-            to_date="to_date",
-        ) as response:
+        with client.active.v1.calendars.dividends.with_streaming_response.get_dividends_calendar() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -62,34 +63,36 @@ class TestAsyncDividends:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_dividends_calendar(self, async_client: AsyncClearStreet) -> None:
+        dividend = await async_client.active.v1.calendars.dividends.get_dividends_calendar()
+        assert_matches_type(DividendGetDividendsCalendarResponse, dividend, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_get_dividends_calendar_with_all_params(self, async_client: AsyncClearStreet) -> None:
         dividend = await async_client.active.v1.calendars.dividends.get_dividends_calendar(
-            from_date="from_date",
-            to_date="to_date",
+            from_=parse_date("2019-12-27"),
+            to=parse_date("2019-12-27"),
         )
         assert_matches_type(DividendGetDividendsCalendarResponse, dividend, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_dividends_calendar(self, async_client: AsyncClearStreet) -> None:
-        response = await async_client.active.v1.calendars.dividends.with_raw_response.get_dividends_calendar(
-            from_date="from_date",
-            to_date="to_date",
-        )
+        response = await async_client.active.v1.calendars.dividends.with_raw_response.get_dividends_calendar()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         dividend = await response.parse()
         assert_matches_type(DividendGetDividendsCalendarResponse, dividend, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_dividends_calendar(self, async_client: AsyncClearStreet) -> None:
-        async with async_client.active.v1.calendars.dividends.with_streaming_response.get_dividends_calendar(
-            from_date="from_date",
-            to_date="to_date",
+        async with (
+            async_client.active.v1.calendars.dividends.with_streaming_response.get_dividends_calendar()
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"

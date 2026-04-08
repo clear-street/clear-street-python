@@ -2,11 +2,11 @@
 
 import datetime
 from typing import Optional
-from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
 
 from ....._models import BaseModel
+from .dividend_frequency import DividendFrequency
 
 __all__ = ["DividendCalendarEvent"]
 
@@ -29,7 +29,7 @@ class DividendCalendarEvent(BaseModel):
     declaration_date: Optional[datetime.date] = None
     """The date the dividend was declared"""
 
-    frequency: Optional[Literal["ANNUALLY", "SEMI_ANNUALLY", "QUARTERLY", "MONTHLY", "OTHER"]] = None
+    frequency: Optional[DividendFrequency] = None
     """The frequency of the dividend payment"""
 
     payment_date: Optional[datetime.date] = None

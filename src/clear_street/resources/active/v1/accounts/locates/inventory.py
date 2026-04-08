@@ -5,7 +5,7 @@ from __future__ import annotations
 import httpx
 
 from ......_types import Body, Query, Headers, NotGiven, not_given
-from ......_utils import maybe_transform, async_maybe_transform
+from ......_utils import path_template, maybe_transform, async_maybe_transform
 from ......_compat import cached_property
 from ......_resource import SyncAPIResource, AsyncAPIResource
 from ......_response import (
@@ -24,6 +24,8 @@ __all__ = ["InventoryResource", "AsyncInventoryResource"]
 
 
 class InventoryResource(SyncAPIResource):
+    """Manage locate requests for short selling."""
+
     @cached_property
     def with_raw_response(self) -> InventoryResourceWithRawResponse:
         """
@@ -70,7 +72,7 @@ class InventoryResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
-            f"/active/v1/accounts/{account_id}/locates/inventory",
+            path_template("/active/v1/accounts/{account_id}/locates/inventory", account_id=account_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -85,6 +87,8 @@ class InventoryResource(SyncAPIResource):
 
 
 class AsyncInventoryResource(AsyncAPIResource):
+    """Manage locate requests for short selling."""
+
     @cached_property
     def with_raw_response(self) -> AsyncInventoryResourceWithRawResponse:
         """
@@ -131,7 +135,7 @@ class AsyncInventoryResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
-            f"/active/v1/accounts/{account_id}/locates/inventory",
+            path_template("/active/v1/accounts/{account_id}/locates/inventory", account_id=account_id),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,

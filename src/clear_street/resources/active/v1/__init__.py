@@ -16,6 +16,30 @@ from .ws import (
     WsResourceWithStreamingResponse,
     AsyncWsResourceWithStreamingResponse,
 )
+from .iris import (
+    IrisResource,
+    AsyncIrisResource,
+    IrisResourceWithRawResponse,
+    AsyncIrisResourceWithRawResponse,
+    IrisResourceWithStreamingResponse,
+    AsyncIrisResourceWithStreamingResponse,
+)
+from .news import (
+    NewsResource,
+    AsyncNewsResource,
+    NewsResourceWithRawResponse,
+    AsyncNewsResourceWithRawResponse,
+    NewsResourceWithStreamingResponse,
+    AsyncNewsResourceWithStreamingResponse,
+)
+from .omni_ai import (
+    OmniAIResource,
+    AsyncOmniAIResource,
+    OmniAIResourceWithRawResponse,
+    AsyncOmniAIResourceWithRawResponse,
+    OmniAIResourceWithStreamingResponse,
+    AsyncOmniAIResourceWithStreamingResponse,
+)
 from .version import (
     VersionResource,
     AsyncVersionResource,
@@ -32,6 +56,14 @@ from .accounts import (
     AccountsResourceWithStreamingResponse,
     AsyncAccountsResourceWithStreamingResponse,
 )
+from .api_keys import (
+    APIKeysResource,
+    AsyncAPIKeysResource,
+    APIKeysResourceWithRawResponse,
+    AsyncAPIKeysResourceWithRawResponse,
+    APIKeysResourceWithStreamingResponse,
+    AsyncAPIKeysResourceWithStreamingResponse,
+)
 from .screener import (
     ScreenerResource,
     AsyncScreenerResource,
@@ -39,14 +71,6 @@ from .screener import (
     AsyncScreenerResourceWithRawResponse,
     ScreenerResourceWithStreamingResponse,
     AsyncScreenerResourceWithStreamingResponse,
-)
-from .assistant import (
-    AssistantResource,
-    AsyncAssistantResource,
-    AssistantResourceWithRawResponse,
-    AsyncAssistantResourceWithRawResponse,
-    AssistantResourceWithStreamingResponse,
-    AsyncAssistantResourceWithStreamingResponse,
 )
 from .calendars import (
     CalendarsResource,
@@ -56,6 +80,14 @@ from .calendars import (
     CalendarsResourceWithStreamingResponse,
     AsyncCalendarsResourceWithStreamingResponse,
 )
+from .watchlists import (
+    WatchlistsResource,
+    AsyncWatchlistsResource,
+    WatchlistsResourceWithRawResponse,
+    AsyncWatchlistsResourceWithRawResponse,
+    WatchlistsResourceWithStreamingResponse,
+    AsyncWatchlistsResourceWithStreamingResponse,
+)
 from .instruments import (
     InstrumentsResource,
     AsyncInstrumentsResource,
@@ -63,6 +95,22 @@ from .instruments import (
     AsyncInstrumentsResourceWithRawResponse,
     InstrumentsResourceWithStreamingResponse,
     AsyncInstrumentsResourceWithStreamingResponse,
+)
+from .market_data import (
+    MarketDataResource,
+    AsyncMarketDataResource,
+    MarketDataResourceWithRawResponse,
+    AsyncMarketDataResourceWithRawResponse,
+    MarketDataResourceWithStreamingResponse,
+    AsyncMarketDataResourceWithStreamingResponse,
+)
+from .saved_screeners import (
+    SavedScreenersResource,
+    AsyncSavedScreenersResource,
+    SavedScreenersResourceWithRawResponse,
+    AsyncSavedScreenersResourceWithRawResponse,
+    SavedScreenersResourceWithStreamingResponse,
+    AsyncSavedScreenersResourceWithStreamingResponse,
 )
 
 __all__ = [
@@ -72,12 +120,12 @@ __all__ = [
     "AsyncAccountsResourceWithRawResponse",
     "AccountsResourceWithStreamingResponse",
     "AsyncAccountsResourceWithStreamingResponse",
-    "AssistantResource",
-    "AsyncAssistantResource",
-    "AssistantResourceWithRawResponse",
-    "AsyncAssistantResourceWithRawResponse",
-    "AssistantResourceWithStreamingResponse",
-    "AsyncAssistantResourceWithStreamingResponse",
+    "APIKeysResource",
+    "AsyncAPIKeysResource",
+    "APIKeysResourceWithRawResponse",
+    "AsyncAPIKeysResourceWithRawResponse",
+    "APIKeysResourceWithStreamingResponse",
+    "AsyncAPIKeysResourceWithStreamingResponse",
     "CalendarsResource",
     "AsyncCalendarsResource",
     "CalendarsResourceWithRawResponse",
@@ -90,6 +138,36 @@ __all__ = [
     "AsyncInstrumentsResourceWithRawResponse",
     "InstrumentsResourceWithStreamingResponse",
     "AsyncInstrumentsResourceWithStreamingResponse",
+    "IrisResource",
+    "AsyncIrisResource",
+    "IrisResourceWithRawResponse",
+    "AsyncIrisResourceWithRawResponse",
+    "IrisResourceWithStreamingResponse",
+    "AsyncIrisResourceWithStreamingResponse",
+    "MarketDataResource",
+    "AsyncMarketDataResource",
+    "MarketDataResourceWithRawResponse",
+    "AsyncMarketDataResourceWithRawResponse",
+    "MarketDataResourceWithStreamingResponse",
+    "AsyncMarketDataResourceWithStreamingResponse",
+    "NewsResource",
+    "AsyncNewsResource",
+    "NewsResourceWithRawResponse",
+    "AsyncNewsResourceWithRawResponse",
+    "NewsResourceWithStreamingResponse",
+    "AsyncNewsResourceWithStreamingResponse",
+    "OmniAIResource",
+    "AsyncOmniAIResource",
+    "OmniAIResourceWithRawResponse",
+    "AsyncOmniAIResourceWithRawResponse",
+    "OmniAIResourceWithStreamingResponse",
+    "AsyncOmniAIResourceWithStreamingResponse",
+    "SavedScreenersResource",
+    "AsyncSavedScreenersResource",
+    "SavedScreenersResourceWithRawResponse",
+    "AsyncSavedScreenersResourceWithRawResponse",
+    "SavedScreenersResourceWithStreamingResponse",
+    "AsyncSavedScreenersResourceWithStreamingResponse",
     "ScreenerResource",
     "AsyncScreenerResource",
     "ScreenerResourceWithRawResponse",
@@ -102,6 +180,12 @@ __all__ = [
     "AsyncVersionResourceWithRawResponse",
     "VersionResourceWithStreamingResponse",
     "AsyncVersionResourceWithStreamingResponse",
+    "WatchlistsResource",
+    "AsyncWatchlistsResource",
+    "WatchlistsResourceWithRawResponse",
+    "AsyncWatchlistsResourceWithRawResponse",
+    "WatchlistsResourceWithStreamingResponse",
+    "AsyncWatchlistsResourceWithStreamingResponse",
     "WsResource",
     "AsyncWsResource",
     "WsResourceWithRawResponse",

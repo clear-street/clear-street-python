@@ -20,6 +20,8 @@ __all__ = ["VenuesResource", "AsyncVenuesResource"]
 
 
 class VenuesResource(SyncAPIResource):
+    """Retrieve details and lists of tradable instruments."""
+
     @cached_property
     def with_raw_response(self) -> VenuesResourceWithRawResponse:
         """
@@ -60,6 +62,8 @@ class VenuesResource(SyncAPIResource):
 
 
 class AsyncVenuesResource(AsyncAPIResource):
+    """Retrieve details and lists of tradable instruments."""
+
     @cached_property
     def with_raw_response(self) -> AsyncVenuesResourceWithRawResponse:
         """

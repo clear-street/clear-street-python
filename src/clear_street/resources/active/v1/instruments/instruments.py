@@ -2,18 +2,11 @@
 
 from __future__ import annotations
 
-from typing import Union
+from typing import Union, Optional
+from typing_extensions import Literal
 
 import httpx
 
-from .news import (
-    NewsResource,
-    AsyncNewsResource,
-    NewsResourceWithRawResponse,
-    AsyncNewsResourceWithRawResponse,
-    NewsResourceWithStreamingResponse,
-    AsyncNewsResourceWithStreamingResponse,
-)
 from .events import (
     EventsResource,
     AsyncEventsResource,
@@ -38,8 +31,18 @@ from .reporting import (
     ReportingResourceWithStreamingResponse,
     AsyncReportingResourceWithStreamingResponse,
 )
-from ....._types import Body, Omit, Query, Headers, NotGiven, Base64FileInput, omit, not_given
-from ....._utils import maybe_transform, async_maybe_transform
+from ....._types import (
+    Body,
+    Omit,
+    Query,
+    Headers,
+    NotGiven,
+    SequenceNotStr,
+    Base64FileInput,
+    omit,
+    not_given,
+)
+from ....._utils import path_template, maybe_transform, async_maybe_transform
 from ....._compat import cached_property
 from ....._resource import SyncAPIResource, AsyncAPIResource
 from ....._response import (
@@ -48,8 +51,16 @@ from ....._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from .options.options import (
+    OptionsResource,
+    AsyncOptionsResource,
+    OptionsResourceWithRawResponse,
+    AsyncOptionsResourceWithRawResponse,
+    OptionsResourceWithStreamingResponse,
+    AsyncOptionsResourceWithStreamingResponse,
+)
 from ....._base_client import make_request_options
-from .....types.active import SecurityType, SecurityIDSource
+from .....types.active import SecurityIDSource
 from .analyst_reporting import (
     AnalystReportingResource,
     AsyncAnalystReportingResource,
@@ -58,8 +69,7 @@ from .analyst_reporting import (
     AnalystReportingResourceWithStreamingResponse,
     AsyncAnalystReportingResourceWithStreamingResponse,
 )
-from .....types.active.v1 import instrument_get_instruments_params
-from .....types.active.security_type import SecurityType
+from .....types.active.v1 import instrument_get_instruments_params, instrument_get_instrument_by_id_params
 from .....types.active.security_id_source import SecurityIDSource
 from .....types.active.v1.instrument_get_instruments_response import InstrumentGetInstrumentsResponse
 from .....types.active.v1.instrument_get_instrument_by_id_response import InstrumentGetInstrumentByIDResponse
@@ -68,24 +78,30 @@ __all__ = ["InstrumentsResource", "AsyncInstrumentsResource"]
 
 
 class InstrumentsResource(SyncAPIResource):
+    """Retrieve details and lists of tradable instruments."""
+
     @cached_property
     def analyst_reporting(self) -> AnalystReportingResource:
+        """Retrieve details and lists of tradable instruments."""
         return AnalystReportingResource(self._client)
 
     @cached_property
     def events(self) -> EventsResource:
+        """Retrieve details and lists of tradable instruments."""
         return EventsResource(self._client)
 
     @cached_property
-    def news(self) -> NewsResource:
-        return NewsResource(self._client)
+    def options(self) -> OptionsResource:
+        return OptionsResource(self._client)
 
     @cached_property
     def reporting(self) -> ReportingResource:
+        """Retrieve details and lists of tradable instruments."""
         return ReportingResource(self._client)
 
     @cached_property
     def venues(self) -> VenuesResource:
+        """Retrieve details and lists of tradable instruments."""
         return VenuesResource(self._client)
 
     @cached_property
@@ -112,6 +128,7 @@ class InstrumentsResource(SyncAPIResource):
         security_id: str,
         *,
         security_id_source: SecurityIDSource,
+        include_options_expiry_dates: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -124,6 +141,8 @@ class InstrumentsResource(SyncAPIResource):
 
         Args:
           security_id_source: Security identifier source
+
+          include_options_expiry_dates: When true, include unique options expiry dates for this instrument
 
           extra_headers: Send extra headers
 
@@ -138,9 +157,20 @@ class InstrumentsResource(SyncAPIResource):
         if not security_id:
             raise ValueError(f"Expected a non-empty value for `security_id` but received {security_id!r}")
         return self._get(
-            f"/active/v1/instruments/{security_id_source}/{security_id}",
+            path_template(
+                "/active/v1/instruments/{security_id_source}/{security_id}",
+                security_id_source=security_id_source,
+                security_id=security_id,
+            ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {"include_options_expiry_dates": include_options_expiry_dates},
+                    instrument_get_instrument_by_id_params.InstrumentGetInstrumentByIDParams,
+                ),
             ),
             cast_to=InstrumentGetInstrumentByIDResponse,
         )
@@ -157,7 +187,12 @@ class InstrumentsResource(SyncAPIResource):
         is_threshold_security: bool | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
-        security_type: SecurityType | Omit = omit,
+        security_id: SequenceNotStr[str] | Omit = omit,
+        security_id_source: SequenceNotStr[str] | Omit = omit,
+        security_type: Literal[
+            "COMMON_STOCK", "PREFERRED_STOCK", "CORPORATE_BOND", "OPTION", "FUTURE", "WARRANT", "CASH", "OTHER"
+        ]
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -171,8 +206,9 @@ class InstrumentsResource(SyncAPIResource):
         Args:
           easy_to_borrow: Filter by easy to borrow status
 
-          id_filter: Filter IDs to those containing this substring. For options, this is required and
-              is used to filter exclusively to the underlying symbol.
+          id_filter: Filter IDs to those containing this substring. For options, and when
+              security_type is omitted and no security_id/security_id_source filters are
+              provided, this is required.
 
           is_liquidation_only: Filter by liquidation only status
 
@@ -180,7 +216,7 @@ class InstrumentsResource(SyncAPIResource):
 
           is_restricted: Filter by restricted status
 
-          is_short_prohibited: filter by short prohibited status
+          is_short_prohibited: Filter by short prohibited status
 
           is_threshold_security: Filter by threshold security status
 
@@ -190,7 +226,22 @@ class InstrumentsResource(SyncAPIResource):
           page_token: Token for retrieving the next page of results. Contains encoded pagination state
               (limit + offset). When provided, page_size is ignored.
 
-          security_type: Filter by security type, required and defaults to `COMMON_STOCK`
+          security_id: Filter by security ID(s). Accepts single value or indexed array.
+
+              Examples:
+
+              - Single: `security_id=037833100`
+              - Multiple: `security_id[0]=037833100&security_id[1]=594918104`
+
+          security_id_source: Source(s) for the security ID filter. Must match the count and order of
+              security_id.
+
+              Examples:
+
+              - Single: `security_id_source=CUSIP`
+              - Multiple: `security_id_source[0]=CUSIP&security_id_source[1]=FIGI`
+
+          security_type: Filter by security type. If omitted, returns all types.
 
           extra_headers: Send extra headers
 
@@ -218,6 +269,8 @@ class InstrumentsResource(SyncAPIResource):
                         "is_threshold_security": is_threshold_security,
                         "page_size": page_size,
                         "page_token": page_token,
+                        "security_id": security_id,
+                        "security_id_source": security_id_source,
                         "security_type": security_type,
                     },
                     instrument_get_instruments_params.InstrumentGetInstrumentsParams,
@@ -228,24 +281,30 @@ class InstrumentsResource(SyncAPIResource):
 
 
 class AsyncInstrumentsResource(AsyncAPIResource):
+    """Retrieve details and lists of tradable instruments."""
+
     @cached_property
     def analyst_reporting(self) -> AsyncAnalystReportingResource:
+        """Retrieve details and lists of tradable instruments."""
         return AsyncAnalystReportingResource(self._client)
 
     @cached_property
     def events(self) -> AsyncEventsResource:
+        """Retrieve details and lists of tradable instruments."""
         return AsyncEventsResource(self._client)
 
     @cached_property
-    def news(self) -> AsyncNewsResource:
-        return AsyncNewsResource(self._client)
+    def options(self) -> AsyncOptionsResource:
+        return AsyncOptionsResource(self._client)
 
     @cached_property
     def reporting(self) -> AsyncReportingResource:
+        """Retrieve details and lists of tradable instruments."""
         return AsyncReportingResource(self._client)
 
     @cached_property
     def venues(self) -> AsyncVenuesResource:
+        """Retrieve details and lists of tradable instruments."""
         return AsyncVenuesResource(self._client)
 
     @cached_property
@@ -272,6 +331,7 @@ class AsyncInstrumentsResource(AsyncAPIResource):
         security_id: str,
         *,
         security_id_source: SecurityIDSource,
+        include_options_expiry_dates: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -284,6 +344,8 @@ class AsyncInstrumentsResource(AsyncAPIResource):
 
         Args:
           security_id_source: Security identifier source
+
+          include_options_expiry_dates: When true, include unique options expiry dates for this instrument
 
           extra_headers: Send extra headers
 
@@ -298,9 +360,20 @@ class AsyncInstrumentsResource(AsyncAPIResource):
         if not security_id:
             raise ValueError(f"Expected a non-empty value for `security_id` but received {security_id!r}")
         return await self._get(
-            f"/active/v1/instruments/{security_id_source}/{security_id}",
+            path_template(
+                "/active/v1/instruments/{security_id_source}/{security_id}",
+                security_id_source=security_id_source,
+                security_id=security_id,
+            ),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"include_options_expiry_dates": include_options_expiry_dates},
+                    instrument_get_instrument_by_id_params.InstrumentGetInstrumentByIDParams,
+                ),
             ),
             cast_to=InstrumentGetInstrumentByIDResponse,
         )
@@ -317,7 +390,12 @@ class AsyncInstrumentsResource(AsyncAPIResource):
         is_threshold_security: bool | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
-        security_type: SecurityType | Omit = omit,
+        security_id: SequenceNotStr[str] | Omit = omit,
+        security_id_source: SequenceNotStr[str] | Omit = omit,
+        security_type: Literal[
+            "COMMON_STOCK", "PREFERRED_STOCK", "CORPORATE_BOND", "OPTION", "FUTURE", "WARRANT", "CASH", "OTHER"
+        ]
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -331,8 +409,9 @@ class AsyncInstrumentsResource(AsyncAPIResource):
         Args:
           easy_to_borrow: Filter by easy to borrow status
 
-          id_filter: Filter IDs to those containing this substring. For options, this is required and
-              is used to filter exclusively to the underlying symbol.
+          id_filter: Filter IDs to those containing this substring. For options, and when
+              security_type is omitted and no security_id/security_id_source filters are
+              provided, this is required.
 
           is_liquidation_only: Filter by liquidation only status
 
@@ -340,7 +419,7 @@ class AsyncInstrumentsResource(AsyncAPIResource):
 
           is_restricted: Filter by restricted status
 
-          is_short_prohibited: filter by short prohibited status
+          is_short_prohibited: Filter by short prohibited status
 
           is_threshold_security: Filter by threshold security status
 
@@ -350,7 +429,22 @@ class AsyncInstrumentsResource(AsyncAPIResource):
           page_token: Token for retrieving the next page of results. Contains encoded pagination state
               (limit + offset). When provided, page_size is ignored.
 
-          security_type: Filter by security type, required and defaults to `COMMON_STOCK`
+          security_id: Filter by security ID(s). Accepts single value or indexed array.
+
+              Examples:
+
+              - Single: `security_id=037833100`
+              - Multiple: `security_id[0]=037833100&security_id[1]=594918104`
+
+          security_id_source: Source(s) for the security ID filter. Must match the count and order of
+              security_id.
+
+              Examples:
+
+              - Single: `security_id_source=CUSIP`
+              - Multiple: `security_id_source[0]=CUSIP&security_id_source[1]=FIGI`
+
+          security_type: Filter by security type. If omitted, returns all types.
 
           extra_headers: Send extra headers
 
@@ -378,6 +472,8 @@ class AsyncInstrumentsResource(AsyncAPIResource):
                         "is_threshold_security": is_threshold_security,
                         "page_size": page_size,
                         "page_token": page_token,
+                        "security_id": security_id,
+                        "security_id_source": security_id_source,
                         "security_type": security_type,
                     },
                     instrument_get_instruments_params.InstrumentGetInstrumentsParams,
@@ -400,22 +496,26 @@ class InstrumentsResourceWithRawResponse:
 
     @cached_property
     def analyst_reporting(self) -> AnalystReportingResourceWithRawResponse:
+        """Retrieve details and lists of tradable instruments."""
         return AnalystReportingResourceWithRawResponse(self._instruments.analyst_reporting)
 
     @cached_property
     def events(self) -> EventsResourceWithRawResponse:
+        """Retrieve details and lists of tradable instruments."""
         return EventsResourceWithRawResponse(self._instruments.events)
 
     @cached_property
-    def news(self) -> NewsResourceWithRawResponse:
-        return NewsResourceWithRawResponse(self._instruments.news)
+    def options(self) -> OptionsResourceWithRawResponse:
+        return OptionsResourceWithRawResponse(self._instruments.options)
 
     @cached_property
     def reporting(self) -> ReportingResourceWithRawResponse:
+        """Retrieve details and lists of tradable instruments."""
         return ReportingResourceWithRawResponse(self._instruments.reporting)
 
     @cached_property
     def venues(self) -> VenuesResourceWithRawResponse:
+        """Retrieve details and lists of tradable instruments."""
         return VenuesResourceWithRawResponse(self._instruments.venues)
 
 
@@ -432,22 +532,26 @@ class AsyncInstrumentsResourceWithRawResponse:
 
     @cached_property
     def analyst_reporting(self) -> AsyncAnalystReportingResourceWithRawResponse:
+        """Retrieve details and lists of tradable instruments."""
         return AsyncAnalystReportingResourceWithRawResponse(self._instruments.analyst_reporting)
 
     @cached_property
     def events(self) -> AsyncEventsResourceWithRawResponse:
+        """Retrieve details and lists of tradable instruments."""
         return AsyncEventsResourceWithRawResponse(self._instruments.events)
 
     @cached_property
-    def news(self) -> AsyncNewsResourceWithRawResponse:
-        return AsyncNewsResourceWithRawResponse(self._instruments.news)
+    def options(self) -> AsyncOptionsResourceWithRawResponse:
+        return AsyncOptionsResourceWithRawResponse(self._instruments.options)
 
     @cached_property
     def reporting(self) -> AsyncReportingResourceWithRawResponse:
+        """Retrieve details and lists of tradable instruments."""
         return AsyncReportingResourceWithRawResponse(self._instruments.reporting)
 
     @cached_property
     def venues(self) -> AsyncVenuesResourceWithRawResponse:
+        """Retrieve details and lists of tradable instruments."""
         return AsyncVenuesResourceWithRawResponse(self._instruments.venues)
 
 
@@ -464,22 +568,26 @@ class InstrumentsResourceWithStreamingResponse:
 
     @cached_property
     def analyst_reporting(self) -> AnalystReportingResourceWithStreamingResponse:
+        """Retrieve details and lists of tradable instruments."""
         return AnalystReportingResourceWithStreamingResponse(self._instruments.analyst_reporting)
 
     @cached_property
     def events(self) -> EventsResourceWithStreamingResponse:
+        """Retrieve details and lists of tradable instruments."""
         return EventsResourceWithStreamingResponse(self._instruments.events)
 
     @cached_property
-    def news(self) -> NewsResourceWithStreamingResponse:
-        return NewsResourceWithStreamingResponse(self._instruments.news)
+    def options(self) -> OptionsResourceWithStreamingResponse:
+        return OptionsResourceWithStreamingResponse(self._instruments.options)
 
     @cached_property
     def reporting(self) -> ReportingResourceWithStreamingResponse:
+        """Retrieve details and lists of tradable instruments."""
         return ReportingResourceWithStreamingResponse(self._instruments.reporting)
 
     @cached_property
     def venues(self) -> VenuesResourceWithStreamingResponse:
+        """Retrieve details and lists of tradable instruments."""
         return VenuesResourceWithStreamingResponse(self._instruments.venues)
 
 
@@ -496,20 +604,24 @@ class AsyncInstrumentsResourceWithStreamingResponse:
 
     @cached_property
     def analyst_reporting(self) -> AsyncAnalystReportingResourceWithStreamingResponse:
+        """Retrieve details and lists of tradable instruments."""
         return AsyncAnalystReportingResourceWithStreamingResponse(self._instruments.analyst_reporting)
 
     @cached_property
     def events(self) -> AsyncEventsResourceWithStreamingResponse:
+        """Retrieve details and lists of tradable instruments."""
         return AsyncEventsResourceWithStreamingResponse(self._instruments.events)
 
     @cached_property
-    def news(self) -> AsyncNewsResourceWithStreamingResponse:
-        return AsyncNewsResourceWithStreamingResponse(self._instruments.news)
+    def options(self) -> AsyncOptionsResourceWithStreamingResponse:
+        return AsyncOptionsResourceWithStreamingResponse(self._instruments.options)
 
     @cached_property
     def reporting(self) -> AsyncReportingResourceWithStreamingResponse:
+        """Retrieve details and lists of tradable instruments."""
         return AsyncReportingResourceWithStreamingResponse(self._instruments.reporting)
 
     @cached_property
     def venues(self) -> AsyncVenuesResourceWithStreamingResponse:
+        """Retrieve details and lists of tradable instruments."""
         return AsyncVenuesResourceWithStreamingResponse(self._instruments.venues)

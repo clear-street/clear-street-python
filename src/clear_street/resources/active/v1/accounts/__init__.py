@@ -40,6 +40,14 @@ from .positions import (
     PositionsResourceWithStreamingResponse,
     AsyncPositionsResourceWithStreamingResponse,
 )
+from .portfolio_history import (
+    PortfolioHistoryResource,
+    AsyncPortfolioHistoryResource,
+    PortfolioHistoryResourceWithRawResponse,
+    AsyncPortfolioHistoryResourceWithRawResponse,
+    PortfolioHistoryResourceWithStreamingResponse,
+    AsyncPortfolioHistoryResourceWithStreamingResponse,
+)
 
 __all__ = [
     "BalancesResource",
@@ -60,6 +68,12 @@ __all__ = [
     "AsyncOrdersResourceWithRawResponse",
     "OrdersResourceWithStreamingResponse",
     "AsyncOrdersResourceWithStreamingResponse",
+    "PortfolioHistoryResource",
+    "AsyncPortfolioHistoryResource",
+    "PortfolioHistoryResourceWithRawResponse",
+    "AsyncPortfolioHistoryResourceWithRawResponse",
+    "PortfolioHistoryResourceWithStreamingResponse",
+    "AsyncPortfolioHistoryResourceWithStreamingResponse",
     "PositionsResource",
     "AsyncPositionsResource",
     "PositionsResourceWithRawResponse",

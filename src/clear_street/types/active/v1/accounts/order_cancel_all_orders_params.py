@@ -2,31 +2,41 @@
 
 from __future__ import annotations
 
-from typing_extensions import TypedDict
+from typing_extensions import Literal, TypedDict
 
-from .side import Side
-from .order_type import OrderType
-from ...security_type import SecurityType
-from ...security_id_source import SecurityIDSource
+from ....._types import SequenceNotStr
 
 __all__ = ["OrderCancelAllOrdersParams"]
 
 
 class OrderCancelAllOrdersParams(TypedDict, total=False):
-    security_id: str
-    """Filter by security identifier (e.g., CUSIP, ISIN).
+    security_id: SequenceNotStr[str]
+    """Filter by security ID(s). Accepts single value or indexed array.
 
-    Must be provided with security_id_source.
+    Examples:
+
+    - Single: `security_id=037833100`
+    - Multiple: `security_id[0]=037833100&security_id[1]=594918104`
     """
 
-    security_id_source: SecurityIDSource
-    """Type of security identifier. Must be provided with security_id."""
+    security_id_source: SequenceNotStr[str]
+    """Source(s) for the security ID filter.
 
-    security_type: SecurityType
+    Must match the count and order of security_id.
+
+    Examples:
+
+    - Single: `security_id_source=CUSIP`
+    - Multiple: `security_id_source[0]=CUSIP&security_id_source[1]=FIGI`
+    """
+
+    security_type: Literal[
+        "COMMON_STOCK", "PREFERRED_STOCK", "CORPORATE_BOND", "OPTION", "FUTURE", "WARRANT", "CASH", "OTHER"
+    ]
     """Filter by security type (e.g., COMMON_STOCK, OPTION)"""
 
-    side: Side
+    side: Literal["BUY", "SELL", "SELL_SHORT", "OTHER"]
     """Filter by order side (BUY or SELL)"""
 
-    type: OrderType
+    type: Literal["MARKET", "LIMIT", "STOP", "STOP_LIMIT", "TRAILING_STOP", "TRAILING_STOP_LIMIT", "OTHER"]
     """Filter by order type (e.g., MARKET, LIMIT)"""

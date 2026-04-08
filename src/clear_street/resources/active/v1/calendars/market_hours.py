@@ -15,7 +15,8 @@ from ....._response import (
     async_to_streamed_response_wrapper,
 )
 from ....._base_client import make_request_options
-from .....types.active.v1.calendars import market_hour_get_market_hours_calendar_params
+from .....types.active.v1.calendars import MarketType, market_hour_get_market_hours_calendar_params
+from .....types.active.v1.calendars.market_type import MarketType
 from .....types.active.v1.calendars.market_hour_get_market_hours_calendar_response import (
     MarketHourGetMarketHoursCalendarResponse,
 )
@@ -24,6 +25,8 @@ __all__ = ["MarketHoursResource", "AsyncMarketHoursResource"]
 
 
 class MarketHoursResource(SyncAPIResource):
+    """Access financial calendars for events like earnings, dividends, and splits."""
+
     @cached_property
     def with_raw_response(self) -> MarketHoursResourceWithRawResponse:
         """
@@ -47,7 +50,7 @@ class MarketHoursResource(SyncAPIResource):
         self,
         *,
         date: str,
-        venue: str | Omit = omit,
+        market: MarketType | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -56,12 +59,14 @@ class MarketHoursResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MarketHourGetMarketHoursCalendarResponse:
         """
-        Retrieves trading hours and market holidays.
+        Retrieves comprehensive trading hours including pre-market, regular, and
+        after-hours sessions. Returns market status, session times, and next session
+        schedules.
 
         Args:
-          date: The date to query market hours for (YYYY-MM-DD)
+          date: The date to query market hours for (YYYY-MM-DD). Defaults to today.
 
-          venue: The MIC code of the venue
+          market: Market type to query (us_equities, us_options). If omitted, returns all markets.
 
           extra_headers: Send extra headers
 
@@ -81,7 +86,7 @@ class MarketHoursResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "date": date,
-                        "venue": venue,
+                        "market": market,
                     },
                     market_hour_get_market_hours_calendar_params.MarketHourGetMarketHoursCalendarParams,
                 ),
@@ -91,6 +96,8 @@ class MarketHoursResource(SyncAPIResource):
 
 
 class AsyncMarketHoursResource(AsyncAPIResource):
+    """Access financial calendars for events like earnings, dividends, and splits."""
+
     @cached_property
     def with_raw_response(self) -> AsyncMarketHoursResourceWithRawResponse:
         """
@@ -114,7 +121,7 @@ class AsyncMarketHoursResource(AsyncAPIResource):
         self,
         *,
         date: str,
-        venue: str | Omit = omit,
+        market: MarketType | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -123,12 +130,14 @@ class AsyncMarketHoursResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MarketHourGetMarketHoursCalendarResponse:
         """
-        Retrieves trading hours and market holidays.
+        Retrieves comprehensive trading hours including pre-market, regular, and
+        after-hours sessions. Returns market status, session times, and next session
+        schedules.
 
         Args:
-          date: The date to query market hours for (YYYY-MM-DD)
+          date: The date to query market hours for (YYYY-MM-DD). Defaults to today.
 
-          venue: The MIC code of the venue
+          market: Market type to query (us_equities, us_options). If omitted, returns all markets.
 
           extra_headers: Send extra headers
 
@@ -148,7 +157,7 @@ class AsyncMarketHoursResource(AsyncAPIResource):
                 query=await async_maybe_transform(
                     {
                         "date": date,
-                        "venue": venue,
+                        "market": market,
                     },
                     market_hour_get_market_hours_calendar_params.MarketHourGetMarketHoursCalendarParams,
                 ),

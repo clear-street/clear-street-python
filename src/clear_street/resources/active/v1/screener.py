@@ -35,6 +35,8 @@ __all__ = ["ScreenerResource", "AsyncScreenerResource"]
 
 
 class ScreenerResource(SyncAPIResource):
+    """Retrieve details and lists of tradable instruments."""
+
     @cached_property
     def with_raw_response(self) -> ScreenerResourceWithRawResponse:
         """
@@ -120,6 +122,8 @@ class ScreenerResource(SyncAPIResource):
 
 
 class AsyncScreenerResource(AsyncAPIResource):
+    """Retrieve details and lists of tradable instruments."""
+
     @cached_property
     def with_raw_response(self) -> AsyncScreenerResourceWithRawResponse:
         """

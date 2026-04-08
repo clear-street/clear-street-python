@@ -1,36 +1,13 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import List
-from typing_extensions import Literal
 
 from ....._models import BaseModel
+from .gtd_accepts import GtdAccepts
+from .display_type import DisplayType
+from .venue_session import VenueSession
 
-__all__ = ["Venue", "GtdAccepts", "Session"]
-
-
-class GtdAccepts(BaseModel):
-    """
-    Indicates whether GOOD_TILL_DATE orders accept date-only or timestamp specifications
-    """
-
-    date: bool
-    """Whether the venue accepts date-only expiration (YYYY-MM-DD)"""
-
-    timestamp: bool
-    """Whether the venue accepts precise timestamp expiration"""
-
-
-class Session(BaseModel):
-    """A trading session within a venue's trading day"""
-
-    end_local: str
-    """Session end time in venue's local timezone (HH:MM format, 24-hour)"""
-
-    name: str
-    """The name of the trading session"""
-
-    start_local: str
-    """Session start time in venue's local timezone (HH:MM format, 24-hour)"""
+__all__ = ["Venue"]
 
 
 class Venue(BaseModel):
@@ -39,7 +16,7 @@ class Venue(BaseModel):
     country: str
     """The ISO country code where the venue operates"""
 
-    display_type: Literal["LIT", "DARK", "PERIODIC_AUCTION", "RFQ"]
+    display_type: DisplayType
     """The display characteristics of the venue"""
 
     gtd_accepts: GtdAccepts
@@ -57,7 +34,7 @@ class Venue(BaseModel):
     name: str
     """The display name of the venue"""
 
-    sessions: List[Session]
+    sessions: List[VenueSession]
     """Trading sessions available at this venue"""
 
     supported_order_types: List[str]

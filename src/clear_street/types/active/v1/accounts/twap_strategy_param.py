@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing import Optional
 
+from ...api_decimal64 import APIDecimal64
 from .base_strategy_params_param import BaseStrategyParamsParam
 
 __all__ = ["TwapStrategyParam"]
@@ -12,8 +13,8 @@ __all__ = ["TwapStrategyParam"]
 class TwapStrategyParam(BaseStrategyParamsParam, total=False):
     """Time Weighted Average Price strategy"""
 
-    max_percent: Optional[int]
+    max_percent: Optional[APIDecimal64]
     """Maximum percentage of market volume to participate in (0-50)"""
 
-    min_percent: Optional[int]
+    min_percent: Optional[APIDecimal64]
     """Minimum percentage of market volume to participate in (0-100)"""

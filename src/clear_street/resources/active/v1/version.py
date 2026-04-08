@@ -21,6 +21,8 @@ __all__ = ["VersionResource", "AsyncVersionResource"]
 
 
 class VersionResource(SyncAPIResource):
+    """Endpoints for API service metadata."""
+
     @cached_property
     def with_raw_response(self) -> VersionResourceWithRawResponse:
         """
@@ -80,6 +82,8 @@ class VersionResource(SyncAPIResource):
 
 
 class AsyncVersionResource(AsyncAPIResource):
+    """Endpoints for API service metadata."""
+
     @cached_property
     def with_raw_response(self) -> AsyncVersionResourceWithRawResponse:
         """

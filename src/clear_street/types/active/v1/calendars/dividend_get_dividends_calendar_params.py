@@ -2,14 +2,18 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, TypedDict
+from typing import Union
+from datetime import date
+from typing_extensions import Annotated, TypedDict
+
+from ....._utils import PropertyInfo
 
 __all__ = ["DividendGetDividendsCalendarParams"]
 
 
 class DividendGetDividendsCalendarParams(TypedDict, total=False):
-    from_date: Required[str]
+    from_: Annotated[Union[str, date], PropertyInfo(alias="from", format="iso8601")]
     """The start date for the query range, inclusive (YYYY-MM-DD)"""
 
-    to_date: Required[str]
+    to: Annotated[Union[str, date], PropertyInfo(format="iso8601")]
     """The end date for the query range, inclusive (YYYY-MM-DD)"""

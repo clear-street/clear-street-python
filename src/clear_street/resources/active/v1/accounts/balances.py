@@ -4,7 +4,8 @@ from __future__ import annotations
 
 import httpx
 
-from ....._types import Body, Query, Headers, NotGiven, not_given
+from ....._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from ....._utils import path_template, maybe_transform, async_maybe_transform
 from ....._compat import cached_property
 from ....._resource import SyncAPIResource, AsyncAPIResource
 from ....._response import (
@@ -14,12 +15,15 @@ from ....._response import (
     async_to_streamed_response_wrapper,
 )
 from ....._base_client import make_request_options
+from .....types.active.v1.accounts import balance_get_account_balances_params
 from .....types.active.v1.accounts.balance_get_account_balances_response import BalanceGetAccountBalancesResponse
 
 __all__ = ["BalancesResource", "AsyncBalancesResource"]
 
 
 class BalancesResource(SyncAPIResource):
+    """Manage trading accounts and view balances."""
+
     @cached_property
     def with_raw_response(self) -> BalancesResourceWithRawResponse:
         """
@@ -43,6 +47,7 @@ class BalancesResource(SyncAPIResource):
         self,
         account_id: int,
         *,
+        top_margin_contributors_limit: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -54,6 +59,8 @@ class BalancesResource(SyncAPIResource):
         Fetch account balance information
 
         Args:
+          top_margin_contributors_limit: Limit the number of top margin contributors returned by the engine.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -63,15 +70,24 @@ class BalancesResource(SyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return self._get(
-            f"/active/v1/accounts/{account_id}/balances",
+            path_template("/active/v1/accounts/{account_id}/balances", account_id=account_id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {"top_margin_contributors_limit": top_margin_contributors_limit},
+                    balance_get_account_balances_params.BalanceGetAccountBalancesParams,
+                ),
             ),
             cast_to=BalanceGetAccountBalancesResponse,
         )
 
 
 class AsyncBalancesResource(AsyncAPIResource):
+    """Manage trading accounts and view balances."""
+
     @cached_property
     def with_raw_response(self) -> AsyncBalancesResourceWithRawResponse:
         """
@@ -95,6 +111,7 @@ class AsyncBalancesResource(AsyncAPIResource):
         self,
         account_id: int,
         *,
+        top_margin_contributors_limit: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -106,6 +123,8 @@ class AsyncBalancesResource(AsyncAPIResource):
         Fetch account balance information
 
         Args:
+          top_margin_contributors_limit: Limit the number of top margin contributors returned by the engine.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -115,9 +134,16 @@ class AsyncBalancesResource(AsyncAPIResource):
           timeout: Override the client-level default timeout for this request, in seconds
         """
         return await self._get(
-            f"/active/v1/accounts/{account_id}/balances",
+            path_template("/active/v1/accounts/{account_id}/balances", account_id=account_id),
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"top_margin_contributors_limit": top_margin_contributors_limit},
+                    balance_get_account_balances_params.BalanceGetAccountBalancesParams,
+                ),
             ),
             cast_to=BalanceGetAccountBalancesResponse,
         )

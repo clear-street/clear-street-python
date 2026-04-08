@@ -17,13 +17,13 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestVenues:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_venues(self, client: ClearStreet) -> None:
         venue = client.active.v1.instruments.venues.get_venues()
         assert_matches_type(VenueGetVenuesResponse, venue, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_venues(self, client: ClearStreet) -> None:
         response = client.active.v1.instruments.venues.with_raw_response.get_venues()
@@ -33,7 +33,7 @@ class TestVenues:
         venue = response.parse()
         assert_matches_type(VenueGetVenuesResponse, venue, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_venues(self, client: ClearStreet) -> None:
         with client.active.v1.instruments.venues.with_streaming_response.get_venues() as response:
@@ -51,13 +51,13 @@ class TestAsyncVenues:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_venues(self, async_client: AsyncClearStreet) -> None:
         venue = await async_client.active.v1.instruments.venues.get_venues()
         assert_matches_type(VenueGetVenuesResponse, venue, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_venues(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.active.v1.instruments.venues.with_raw_response.get_venues()
@@ -67,7 +67,7 @@ class TestAsyncVenues:
         venue = await response.parse()
         assert_matches_type(VenueGetVenuesResponse, venue, path=["response"])
 
-    @pytest.mark.skip(reason="Prism tests are disabled")
+    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_venues(self, async_client: AsyncClearStreet) -> None:
         async with async_client.active.v1.instruments.venues.with_streaming_response.get_venues() as response:
