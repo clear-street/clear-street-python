@@ -6,15 +6,15 @@ from typing_extensions import Literal, TypeAlias
 from .ap_strategy import ApStrategy
 from .dma_strategy import DmaStrategy
 from .pov_strategy import PovStrategy
-from .sor_strategy import SorStrategy
 from .dark_strategy import DarkStrategy
 from .twap_strategy import TwapStrategy
 from .vwap_strategy import VwapStrategy
+from .base_strategy_params import BaseStrategyParams
 
 __all__ = ["OrderStrategy", "Sor", "Vwap", "Twap", "Ap", "Pov", "Dark", "Dma"]
 
 
-class Sor(SorStrategy):
+class Sor(BaseStrategyParams):
     """Smart Order Router (default) - routes to best available venue"""
 
     type: Literal["SOR"]
