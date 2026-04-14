@@ -14,7 +14,6 @@ from .dma_strategy import DmaStrategy as DmaStrategy
 from .locate_order import LocateOrder as LocateOrder
 from .order_status import OrderStatus as OrderStatus
 from .pov_strategy import PovStrategy as PovStrategy
-from .sor_strategy import SorStrategy as SorStrategy
 from .dark_strategy import DarkStrategy as DarkStrategy
 from .position_list import PositionList as PositionList
 from .position_type import PositionType as PositionType
@@ -28,7 +27,6 @@ from .ap_strategy_param import ApStrategyParam as ApStrategyParam
 from .locate_order_list import LocateOrderList as LocateOrderList
 from .dma_strategy_param import DmaStrategyParam as DmaStrategyParam
 from .pov_strategy_param import PovStrategyParam as PovStrategyParam
-from .sor_strategy_param import SorStrategyParam as SorStrategyParam
 from .dark_strategy_param import DarkStrategyParam as DarkStrategyParam
 from .locate_order_status import LocateOrderStatus as LocateOrderStatus
 from .twap_strategy_param import TwapStrategyParam as TwapStrategyParam

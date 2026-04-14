@@ -8,15 +8,15 @@ from typing_extensions import Literal, Required, TypeAlias
 from .ap_strategy_param import ApStrategyParam
 from .dma_strategy_param import DmaStrategyParam
 from .pov_strategy_param import PovStrategyParam
-from .sor_strategy_param import SorStrategyParam
 from .dark_strategy_param import DarkStrategyParam
 from .twap_strategy_param import TwapStrategyParam
 from .vwap_strategy_param import VwapStrategyParam
+from .base_strategy_params_param import BaseStrategyParamsParam
 
 __all__ = ["OrderStrategyParam", "Sor", "Vwap", "Twap", "Ap", "Pov", "Dark", "Dma"]
 
 
-class Sor(SorStrategyParam, total=False):
+class Sor(BaseStrategyParamsParam, total=False):
     """Smart Order Router (default) - routes to best available venue"""
 
     type: Required[Literal["SOR"]]
