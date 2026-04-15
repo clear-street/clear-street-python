@@ -18,6 +18,14 @@ from .news import (
     NewsResourceWithStreamingResponse,
     AsyncNewsResourceWithStreamingResponse,
 )
+from .clock import (
+    ClockResource,
+    AsyncClockResource,
+    ClockResourceWithRawResponse,
+    AsyncClockResourceWithRawResponse,
+    ClockResourceWithStreamingResponse,
+    AsyncClockResourceWithStreamingResponse,
+)
 from .version import (
     VersionResource,
     AsyncVersionResource,
@@ -128,6 +136,11 @@ class V1Resource(SyncAPIResource):
         return CalendarsResource(self._client)
 
     @cached_property
+    def clock(self) -> ClockResource:
+        """Access financial calendars for events like earnings, dividends, and splits."""
+        return ClockResource(self._client)
+
+    @cached_property
     def instruments(self) -> InstrumentsResource:
         """Retrieve details and lists of tradable instruments."""
         return InstrumentsResource(self._client)
@@ -208,6 +221,11 @@ class AsyncV1Resource(AsyncAPIResource):
     @cached_property
     def calendars(self) -> AsyncCalendarsResource:
         return AsyncCalendarsResource(self._client)
+
+    @cached_property
+    def clock(self) -> AsyncClockResource:
+        """Access financial calendars for events like earnings, dividends, and splits."""
+        return AsyncClockResource(self._client)
 
     @cached_property
     def instruments(self) -> AsyncInstrumentsResource:
@@ -295,6 +313,11 @@ class V1ResourceWithRawResponse:
         return CalendarsResourceWithRawResponse(self._v1.calendars)
 
     @cached_property
+    def clock(self) -> ClockResourceWithRawResponse:
+        """Access financial calendars for events like earnings, dividends, and splits."""
+        return ClockResourceWithRawResponse(self._v1.clock)
+
+    @cached_property
     def instruments(self) -> InstrumentsResourceWithRawResponse:
         """Retrieve details and lists of tradable instruments."""
         return InstrumentsResourceWithRawResponse(self._v1.instruments)
@@ -359,6 +382,11 @@ class AsyncV1ResourceWithRawResponse:
     @cached_property
     def calendars(self) -> AsyncCalendarsResourceWithRawResponse:
         return AsyncCalendarsResourceWithRawResponse(self._v1.calendars)
+
+    @cached_property
+    def clock(self) -> AsyncClockResourceWithRawResponse:
+        """Access financial calendars for events like earnings, dividends, and splits."""
+        return AsyncClockResourceWithRawResponse(self._v1.clock)
 
     @cached_property
     def instruments(self) -> AsyncInstrumentsResourceWithRawResponse:
@@ -427,6 +455,11 @@ class V1ResourceWithStreamingResponse:
         return CalendarsResourceWithStreamingResponse(self._v1.calendars)
 
     @cached_property
+    def clock(self) -> ClockResourceWithStreamingResponse:
+        """Access financial calendars for events like earnings, dividends, and splits."""
+        return ClockResourceWithStreamingResponse(self._v1.clock)
+
+    @cached_property
     def instruments(self) -> InstrumentsResourceWithStreamingResponse:
         """Retrieve details and lists of tradable instruments."""
         return InstrumentsResourceWithStreamingResponse(self._v1.instruments)
@@ -491,6 +524,11 @@ class AsyncV1ResourceWithStreamingResponse:
     @cached_property
     def calendars(self) -> AsyncCalendarsResourceWithStreamingResponse:
         return AsyncCalendarsResourceWithStreamingResponse(self._v1.calendars)
+
+    @cached_property
+    def clock(self) -> AsyncClockResourceWithStreamingResponse:
+        """Access financial calendars for events like earnings, dividends, and splits."""
+        return AsyncClockResourceWithStreamingResponse(self._v1.clock)
 
     @cached_property
     def instruments(self) -> AsyncInstrumentsResourceWithStreamingResponse:

@@ -32,6 +32,14 @@ from .news import (
     NewsResourceWithStreamingResponse,
     AsyncNewsResourceWithStreamingResponse,
 )
+from .clock import (
+    ClockResource,
+    AsyncClockResource,
+    ClockResourceWithRawResponse,
+    AsyncClockResourceWithRawResponse,
+    ClockResourceWithStreamingResponse,
+    AsyncClockResourceWithStreamingResponse,
+)
 from .omni_ai import (
     OmniAIResource,
     AsyncOmniAIResource,
@@ -132,6 +140,12 @@ __all__ = [
     "AsyncCalendarsResourceWithRawResponse",
     "CalendarsResourceWithStreamingResponse",
     "AsyncCalendarsResourceWithStreamingResponse",
+    "ClockResource",
+    "AsyncClockResource",
+    "ClockResourceWithRawResponse",
+    "AsyncClockResourceWithRawResponse",
+    "ClockResourceWithStreamingResponse",
+    "AsyncClockResourceWithStreamingResponse",
     "InstrumentsResource",
     "AsyncInstrumentsResource",
     "InstrumentsResourceWithRawResponse",

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union, Iterable, Optional
+from typing import List, Union, Iterable, Optional
 from datetime import datetime
 from typing_extensions import Literal
 
@@ -231,22 +231,24 @@ class OrdersResource(SyncAPIResource):
             "COMMON_STOCK", "PREFERRED_STOCK", "CORPORATE_BOND", "OPTION", "FUTURE", "WARRANT", "CASH", "OTHER"
         ]
         | Omit = omit,
-        status: Literal[
-            "PENDING_NEW",
-            "NEW",
-            "PARTIALLY_FILLED",
-            "FILLED",
-            "CANCELED",
-            "REJECTED",
-            "EXPIRED",
-            "PENDING_CANCEL",
-            "PENDING_REPLACE",
-            "REPLACED",
-            "DONE_FOR_DAY",
-            "STOPPED",
-            "SUSPENDED",
-            "CALCULATED",
-            "OTHER",
+        status: List[
+            Literal[
+                "PENDING_NEW",
+                "NEW",
+                "PARTIALLY_FILLED",
+                "FILLED",
+                "CANCELED",
+                "REJECTED",
+                "EXPIRED",
+                "PENDING_CANCEL",
+                "PENDING_REPLACE",
+                "REPLACED",
+                "DONE_FOR_DAY",
+                "STOPPED",
+                "SUSPENDED",
+                "CALCULATED",
+                "OTHER",
+            ]
         ]
         | Omit = omit,
         symbol: str | Omit = omit,
@@ -263,9 +265,6 @@ class OrdersResource(SyncAPIResource):
 
         Args:
           from_: The start date and time for the query range, inclusive (ISO 8601 format)
-
-          page_size: The number of items to return per page (only used when page_token is not
-              provided)
 
           page_token: Token for retrieving the next page of results. Contains encoded pagination state
               (limit + offset). When provided, page_size is ignored.
@@ -287,7 +286,7 @@ class OrdersResource(SyncAPIResource):
 
           security_type: Security type filter (e.g., COMMON_STOCK, PREFERRED_STOCK)
 
-          status: Filter by order status
+          status: Comma-separated order statuses to filter by
 
           symbol: Filter by symbol
 
@@ -601,22 +600,24 @@ class AsyncOrdersResource(AsyncAPIResource):
             "COMMON_STOCK", "PREFERRED_STOCK", "CORPORATE_BOND", "OPTION", "FUTURE", "WARRANT", "CASH", "OTHER"
         ]
         | Omit = omit,
-        status: Literal[
-            "PENDING_NEW",
-            "NEW",
-            "PARTIALLY_FILLED",
-            "FILLED",
-            "CANCELED",
-            "REJECTED",
-            "EXPIRED",
-            "PENDING_CANCEL",
-            "PENDING_REPLACE",
-            "REPLACED",
-            "DONE_FOR_DAY",
-            "STOPPED",
-            "SUSPENDED",
-            "CALCULATED",
-            "OTHER",
+        status: List[
+            Literal[
+                "PENDING_NEW",
+                "NEW",
+                "PARTIALLY_FILLED",
+                "FILLED",
+                "CANCELED",
+                "REJECTED",
+                "EXPIRED",
+                "PENDING_CANCEL",
+                "PENDING_REPLACE",
+                "REPLACED",
+                "DONE_FOR_DAY",
+                "STOPPED",
+                "SUSPENDED",
+                "CALCULATED",
+                "OTHER",
+            ]
         ]
         | Omit = omit,
         symbol: str | Omit = omit,
@@ -633,9 +634,6 @@ class AsyncOrdersResource(AsyncAPIResource):
 
         Args:
           from_: The start date and time for the query range, inclusive (ISO 8601 format)
-
-          page_size: The number of items to return per page (only used when page_token is not
-              provided)
 
           page_token: Token for retrieving the next page of results. Contains encoded pagination state
               (limit + offset). When provided, page_size is ignored.
@@ -657,7 +655,7 @@ class AsyncOrdersResource(AsyncAPIResource):
 
           security_type: Security type filter (e.g., COMMON_STOCK, PREFERRED_STOCK)
 
-          status: Filter by order status
+          status: Comma-separated order statuses to filter by
 
           symbol: Filter by symbol
 

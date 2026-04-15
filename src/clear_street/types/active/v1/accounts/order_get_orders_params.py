@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union
+from typing import List, Union
 from datetime import datetime
 from typing_extensions import Literal, Annotated, TypedDict
 
@@ -17,10 +17,6 @@ class OrderGetOrdersParams(TypedDict, total=False):
     """The start date and time for the query range, inclusive (ISO 8601 format)"""
 
     page_size: int
-    """
-    The number of items to return per page (only used when page_token is not
-    provided)
-    """
 
     page_token: Annotated[Union[str, Base64FileInput], PropertyInfo(format="base64")]
     """Token for retrieving the next page of results.
@@ -54,24 +50,26 @@ class OrderGetOrdersParams(TypedDict, total=False):
     ]
     """Security type filter (e.g., COMMON_STOCK, PREFERRED_STOCK)"""
 
-    status: Literal[
-        "PENDING_NEW",
-        "NEW",
-        "PARTIALLY_FILLED",
-        "FILLED",
-        "CANCELED",
-        "REJECTED",
-        "EXPIRED",
-        "PENDING_CANCEL",
-        "PENDING_REPLACE",
-        "REPLACED",
-        "DONE_FOR_DAY",
-        "STOPPED",
-        "SUSPENDED",
-        "CALCULATED",
-        "OTHER",
+    status: List[
+        Literal[
+            "PENDING_NEW",
+            "NEW",
+            "PARTIALLY_FILLED",
+            "FILLED",
+            "CANCELED",
+            "REJECTED",
+            "EXPIRED",
+            "PENDING_CANCEL",
+            "PENDING_REPLACE",
+            "REPLACED",
+            "DONE_FOR_DAY",
+            "STOPPED",
+            "SUSPENDED",
+            "CALCULATED",
+            "OTHER",
+        ]
     ]
-    """Filter by order status"""
+    """Comma-separated order statuses to filter by"""
 
     symbol: str
     """Filter by symbol"""

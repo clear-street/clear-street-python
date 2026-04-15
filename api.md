@@ -321,6 +321,18 @@ Methods:
 
 - <code title="get /active/v1/calendars/summary">client.active.v1.calendars.summary.<a href="./src/clear_street/resources/active/v1/calendars/summary.py">get_calendar_summary</a>(\*\*<a href="src/clear_street/types/active/v1/calendars/summary_get_calendar_summary_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/calendars/summary_get_calendar_summary_response.py">SummaryGetCalendarSummaryResponse</a></code>
 
+### Clock
+
+Types:
+
+```python
+from clear_street.types.active.v1 import ClockDetail, ClockGetClockResponse
+```
+
+Methods:
+
+- <code title="get /active/v1/clock">client.active.v1.clock.<a href="./src/clear_street/resources/active/v1/clock.py">get_clock</a>() -> <a href="./src/clear_street/types/active/v1/clock_get_clock_response.py">ClockGetClockResponse</a></code>
+
 ### Instruments
 
 Types:
