@@ -1,5 +1,5 @@
 [project]
-name = "clear_street"
+name = "clear-street"
 version = "0.0.1"
 description = "The official Python library for the clear-street API"
 dynamic = ["readme"]
