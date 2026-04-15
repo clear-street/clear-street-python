@@ -94,9 +94,6 @@ class NewsResource(SyncAPIResource):
 
           news_type: Filter by news type.
 
-          page_size: The number of items to return per page (only used when page_token is not
-              provided)
-
           page_token: Token for retrieving the next page of results. Contains encoded pagination state
               (limit + offset). When provided, page_size is ignored.
 
@@ -214,9 +211,6 @@ class AsyncNewsResource(AsyncAPIResource):
           instrument_ids: Comma-delimited OEMS instrument UUIDs to filter by.
 
           news_type: Filter by news type.
-
-          page_size: The number of items to return per page (only used when page_token is not
-              provided)
 
           page_token: Token for retrieving the next page of results. Contains encoded pagination state
               (limit + offset). When provided, page_size is ignored.

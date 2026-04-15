@@ -38,10 +38,6 @@ class InstrumentGetInstrumentsParams(TypedDict, total=False):
     """Filter by threshold security status"""
 
     page_size: int
-    """
-    The number of items to return per page (only used when page_token is not
-    provided)
-    """
 
     page_token: Annotated[Union[str, Base64FileInput], PropertyInfo(format="base64")]
     """Token for retrieving the next page of results.

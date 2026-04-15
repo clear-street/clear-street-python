@@ -20,6 +20,7 @@ from .chart_point import ChartPoint as ChartPoint
 from .account_kind import AccountKind as AccountKind
 from .account_list import AccountList as AccountList
 from .chart_series import ChartSeries as ChartSeries
+from .clock_detail import ClockDetail as ClockDetail
 from .content_part import ContentPart as ContentPart
 from .listing_type import ListingType as ListingType
 from .message_role import MessageRole as MessageRole
@@ -80,6 +81,7 @@ from .api_key_create_response import APIKeyCreateResponse as APIKeyCreateRespons
 from .api_key_list_entry_list import APIKeyListEntryList as APIKeyListEntryList
 from .api_key_revoke_response import APIKeyRevokeResponse as APIKeyRevokeResponse
 from .open_chat_window_action import OpenChatWindowAction as OpenChatWindowAction
+from .clock_get_clock_response import ClockGetClockResponse as ClockGetClockResponse
 from .create_feedback_response import CreateFeedbackResponse as CreateFeedbackResponse
 from .account_get_accounts_params import AccountGetAccountsParams as AccountGetAccountsParams
 from .api_key_revoke_all_response import APIKeyRevokeAllResponse as APIKeyRevokeAllResponse
