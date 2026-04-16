@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, Union
+from typing import Dict, Union, Iterable, Optional
 from typing_extensions import Literal
 
 import httpx
@@ -28,8 +28,10 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.active.v1 import screener_get_screener_params
+from ....types.active.v1 import screener_get_screener_params, screener_search_screener_params
+from ....types.active.v1.field_ref_param import FieldRefParam
 from ....types.active.v1.screener_get_screener_response import ScreenerGetScreenerResponse
+from ....types.active.v1.screener_search_screener_response import ScreenerSearchScreenerResponse
 
 __all__ = ["ScreenerResource", "AsyncScreenerResource"]
 
@@ -118,6 +120,80 @@ class ScreenerResource(SyncAPIResource):
             cast_to=ScreenerGetScreenerResponse,
         )
 
+    def search_screener(
+        self,
+        *,
+        field_filter: Optional[Iterable[FieldRefParam]] | Omit = omit,
+        filters: Optional[Iterable[screener_search_screener_params.Filter]] | Omit = omit,
+        page_size: Optional[int] | Omit = omit,
+        page_token: Optional[str] | Omit = omit,
+        sort_by: Optional[FieldRefParam] | Omit = omit,
+        sort_case_sensitive: Optional[bool] | Omit = omit,
+        sort_direction: Literal["ASC", "DESC"] | Omit = omit,
+        sorts: Optional[Iterable[screener_search_screener_params.Sort]] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ScreenerSearchScreenerResponse:
+        """Returns a columnar response where each row is an array of column objects.
+
+        Each
+        column contains a human-readable name, a field reference, an optional type hint
+        (e.g. `CURR_USD`, `PERCENT`), and the value.
+
+        Use `field_filter` to select which columns appear in each row. When omitted, the
+        default field set is returned.
+
+        Args:
+          field_filter: Subset of fields to include in the response.
+
+          filters: Filter conditions to apply.
+
+          page_size: Maximum number of results per page.
+
+          page_token: Opaque token for cursor-based pagination.
+
+          sort_by: Field to sort results by.
+
+          sort_case_sensitive: Whether string sorts should be case-sensitive (default: false).
+
+          sort_direction: Sort direction (defaults to DESC).
+
+          sorts: Multi-field sort specifications. When present, takes precedence over
+              sort_by/sort_direction.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/active/v1/screener",
+            body=maybe_transform(
+                {
+                    "field_filter": field_filter,
+                    "filters": filters,
+                    "page_size": page_size,
+                    "page_token": page_token,
+                    "sort_by": sort_by,
+                    "sort_case_sensitive": sort_case_sensitive,
+                    "sort_direction": sort_direction,
+                    "sorts": sorts,
+                },
+                screener_search_screener_params.ScreenerSearchScreenerParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ScreenerSearchScreenerResponse,
+        )
+
 
 class AsyncScreenerResource(AsyncAPIResource):
     """Retrieve details and lists of tradable instruments."""
@@ -203,6 +279,80 @@ class AsyncScreenerResource(AsyncAPIResource):
             cast_to=ScreenerGetScreenerResponse,
         )
 
+    async def search_screener(
+        self,
+        *,
+        field_filter: Optional[Iterable[FieldRefParam]] | Omit = omit,
+        filters: Optional[Iterable[screener_search_screener_params.Filter]] | Omit = omit,
+        page_size: Optional[int] | Omit = omit,
+        page_token: Optional[str] | Omit = omit,
+        sort_by: Optional[FieldRefParam] | Omit = omit,
+        sort_case_sensitive: Optional[bool] | Omit = omit,
+        sort_direction: Literal["ASC", "DESC"] | Omit = omit,
+        sorts: Optional[Iterable[screener_search_screener_params.Sort]] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ScreenerSearchScreenerResponse:
+        """Returns a columnar response where each row is an array of column objects.
+
+        Each
+        column contains a human-readable name, a field reference, an optional type hint
+        (e.g. `CURR_USD`, `PERCENT`), and the value.
+
+        Use `field_filter` to select which columns appear in each row. When omitted, the
+        default field set is returned.
+
+        Args:
+          field_filter: Subset of fields to include in the response.
+
+          filters: Filter conditions to apply.
+
+          page_size: Maximum number of results per page.
+
+          page_token: Opaque token for cursor-based pagination.
+
+          sort_by: Field to sort results by.
+
+          sort_case_sensitive: Whether string sorts should be case-sensitive (default: false).
+
+          sort_direction: Sort direction (defaults to DESC).
+
+          sorts: Multi-field sort specifications. When present, takes precedence over
+              sort_by/sort_direction.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/active/v1/screener",
+            body=await async_maybe_transform(
+                {
+                    "field_filter": field_filter,
+                    "filters": filters,
+                    "page_size": page_size,
+                    "page_token": page_token,
+                    "sort_by": sort_by,
+                    "sort_case_sensitive": sort_case_sensitive,
+                    "sort_direction": sort_direction,
+                    "sorts": sorts,
+                },
+                screener_search_screener_params.ScreenerSearchScreenerParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ScreenerSearchScreenerResponse,
+        )
+
 
 class ScreenerResourceWithRawResponse:
     def __init__(self, screener: ScreenerResource) -> None:
@@ -210,6 +360,9 @@ class ScreenerResourceWithRawResponse:
 
         self.get_screener = to_raw_response_wrapper(
             screener.get_screener,
+        )
+        self.search_screener = to_raw_response_wrapper(
+            screener.search_screener,
         )
 
 
@@ -220,6 +373,9 @@ class AsyncScreenerResourceWithRawResponse:
         self.get_screener = async_to_raw_response_wrapper(
             screener.get_screener,
         )
+        self.search_screener = async_to_raw_response_wrapper(
+            screener.search_screener,
+        )
 
 
 class ScreenerResourceWithStreamingResponse:
@@ -229,6 +385,9 @@ class ScreenerResourceWithStreamingResponse:
         self.get_screener = to_streamed_response_wrapper(
             screener.get_screener,
         )
+        self.search_screener = to_streamed_response_wrapper(
+            screener.search_screener,
+        )
 
 
 class AsyncScreenerResourceWithStreamingResponse:
@@ -237,4 +396,7 @@ class AsyncScreenerResourceWithStreamingResponse:
 
         self.get_screener = async_to_streamed_response_wrapper(
             screener.get_screener,
+        )
+        self.search_screener = async_to_streamed_response_wrapper(
+            screener.search_screener,
         )

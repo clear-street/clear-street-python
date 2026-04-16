@@ -676,16 +676,25 @@ Types:
 
 ```python
 from clear_street.types.active.v1 import (
+    FieldLookback,
+    FieldPeriod,
+    FieldRef,
+    FieldType,
+    ScreenerColumn,
     ScreenerFilter,
     ScreenerItem,
     ScreenerItemList,
+    ScreenerRow,
+    ScreenerRowList,
     ScreenerGetScreenerResponse,
+    ScreenerSearchScreenerResponse,
 )
 ```
 
 Methods:
 
 - <code title="get /active/v1/screener">client.active.v1.screener.<a href="./src/clear_street/resources/active/v1/screener.py">get_screener</a>(\*\*<a href="src/clear_street/types/active/v1/screener_get_screener_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/screener_get_screener_response.py">ScreenerGetScreenerResponse</a></code>
+- <code title="post /active/v1/screener">client.active.v1.screener.<a href="./src/clear_street/resources/active/v1/screener.py">search_screener</a>(\*\*<a href="src/clear_street/types/active/v1/screener_search_screener_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/screener_search_screener_response.py">ScreenerSearchScreenerResponse</a></code>
 
 ### Version
 

@@ -13,12 +13,6 @@ __all__ = ["ScreenerItem"]
 class ScreenerItem(BaseModel):
     """An instrument returned by the screener"""
 
-    buy_ratings: int
-    """The count of buy analyst ratings"""
-
-    hold_ratings: int
-    """The count of hold analyst ratings"""
-
     price: str
     """The latest price for the instrument"""
 
@@ -27,15 +21,6 @@ class ScreenerItem(BaseModel):
 
     security_id_source: SecurityIDSource
     """The source of the security identifier"""
-
-    sell_ratings: int
-    """The count of sell analyst ratings"""
-
-    strong_buy_ratings: int
-    """The count of strong buy analyst ratings"""
-
-    strong_sell_ratings: int
-    """The count of strong sell analyst ratings"""
 
     symbol: str
     """The trading symbol for the instrument"""
@@ -46,20 +31,26 @@ class ScreenerItem(BaseModel):
     consensus_price_target: Optional[str] = None
     """The consensus analyst price target"""
 
-    consensus_price_target_high: Optional[str] = None
-    """The highest analyst price target"""
-
-    consensus_price_target_low: Optional[str] = None
-    """The lowest analyst price target"""
-
     consensus_rating: Optional[AnalystRating] = None
     """The consensus analyst rating"""
 
     country_of_issue: Optional[str] = None
     """The ISO country code of the instrument's issue"""
 
+    debt_to_equity_ttm: Optional[str] = None
+    """The TTM debt-to-equity ratio"""
+
     description: Optional[str] = None
     """A detailed description of the instrument or company"""
+
+    dividend_yield_ttm: Optional[str] = None
+    """The TTM dividend yield percent"""
+
+    earnings_per_share_ttm: Optional[str] = None
+    """The TTM earnings per share"""
+
+    exchange: Optional[str] = None
+    """The MIC code of the primary listing exchange"""
 
     fifty_two_week_high: Optional[str] = None
     """The highest price over the last 52 weeks"""
@@ -121,6 +112,9 @@ class ScreenerItem(BaseModel):
     prev_day_close: Optional[str] = None
     """The previous day's closing price"""
 
+    price_to_earnings_ttm: Optional[str] = None
+    """The TTM price-to-earnings ratio"""
+
     sector: Optional[str] = None
     """The business sector of the instrument's issuer"""
 
@@ -144,21 +138,6 @@ class ScreenerItem(BaseModel):
 
     three_months_ago_open: Optional[str] = None
     """The opening price approximately three months ago"""
-
-    ttm_debt_to_equity: Optional[str] = None
-    """The TTM debt-to-equity ratio"""
-
-    ttm_dividend_yield: Optional[str] = None
-    """The TTM dividend yield percent"""
-
-    ttm_earnings_per_share: Optional[str] = None
-    """The TTM earnings per share"""
-
-    ttm_price_to_earnings: Optional[str] = None
-    """The TTM price-to-earnings ratio"""
-
-    venue: Optional[str] = None
-    """The MIC code of the primary listing venue"""
 
     volume: Optional[str] = None
     """The latest trading volume for the instrument"""
