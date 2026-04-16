@@ -81,10 +81,8 @@ class ScreenerResource(SyncAPIResource):
           filter: Dynamic filters with dot notation (e.g., filter[price.gte]=50,
               filter[symbol.bw]=A)
 
-          page_size: Number of items to return per page (default: 100, max: 10000)
-
-          page_token: Token for retrieving the next page of results. Contains encoded pagination
-              state.
+          page_token: Token for retrieving the next page of results. Contains encoded pagination state
+              (limit + offset). When provided, page_size is ignored.
 
           sort_by: Field to sort by
 
@@ -168,10 +166,8 @@ class AsyncScreenerResource(AsyncAPIResource):
           filter: Dynamic filters with dot notation (e.g., filter[price.gte]=50,
               filter[symbol.bw]=A)
 
-          page_size: Number of items to return per page (default: 100, max: 10000)
-
-          page_token: Token for retrieving the next page of results. Contains encoded pagination
-              state.
+          page_token: Token for retrieving the next page of results. Contains encoded pagination state
+              (limit + offset). When provided, page_size is ignored.
 
           sort_by: Field to sort by
 
