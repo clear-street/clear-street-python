@@ -8,10 +8,10 @@ from typing_extensions import Literal, TypedDict
 from ...._types import SequenceNotStr
 from .saved_screener_filter_param import SavedScreenerFilterParam
 
-__all__ = ["SavedScreenerUpdateScreenerParams"]
+__all__ = ["SavedScreenerReplaceScreenerParams"]
 
 
-class SavedScreenerUpdateScreenerParams(TypedDict, total=False):
+class SavedScreenerReplaceScreenerParams(TypedDict, total=False):
     field_filter: Optional[SequenceNotStr[str]]
     """List of field names to include when running this screener"""
 

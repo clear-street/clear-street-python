@@ -119,8 +119,8 @@ from clear_street.types.active.v1.accounts import (
     TwapStrategy,
     Urgency,
     VwapStrategy,
-    OrderCancelAllOrdersResponse,
-    OrderCancelOrderResponse,
+    OrderCancelAllOpenOrdersResponse,
+    OrderCancelOpenOrderResponse,
     OrderGetOrderByIDResponse,
     OrderGetOrdersResponse,
     OrderReplaceOrderResponse,
@@ -130,8 +130,8 @@ from clear_street.types.active.v1.accounts import (
 
 Methods:
 
-- <code title="delete /active/v1/accounts/{account_id}/orders">client.active.v1.accounts.orders.<a href="./src/clear_street/resources/active/v1/accounts/orders.py">cancel_all_orders</a>(account_id, \*\*<a href="src/clear_street/types/active/v1/accounts/order_cancel_all_orders_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/accounts/order_cancel_all_orders_response.py">OrderCancelAllOrdersResponse</a></code>
-- <code title="delete /active/v1/accounts/{account_id}/orders/{order_id}">client.active.v1.accounts.orders.<a href="./src/clear_street/resources/active/v1/accounts/orders.py">cancel_order</a>(order_id, \*, account_id) -> <a href="./src/clear_street/types/active/v1/accounts/order_cancel_order_response.py">OrderCancelOrderResponse</a></code>
+- <code title="delete /active/v1/accounts/{account_id}/orders">client.active.v1.accounts.orders.<a href="./src/clear_street/resources/active/v1/accounts/orders.py">cancel_all_open_orders</a>(account_id, \*\*<a href="src/clear_street/types/active/v1/accounts/order_cancel_all_open_orders_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/accounts/order_cancel_all_open_orders_response.py">OrderCancelAllOpenOrdersResponse</a></code>
+- <code title="delete /active/v1/accounts/{account_id}/orders/{order_id}">client.active.v1.accounts.orders.<a href="./src/clear_street/resources/active/v1/accounts/orders.py">cancel_open_order</a>(order_id, \*, account_id) -> <a href="./src/clear_street/types/active/v1/accounts/order_cancel_open_order_response.py">OrderCancelOpenOrderResponse</a></code>
 - <code title="get /active/v1/accounts/{account_id}/orders/{order_id}">client.active.v1.accounts.orders.<a href="./src/clear_street/resources/active/v1/accounts/orders.py">get_order_by_id</a>(order_id, \*, account_id) -> <a href="./src/clear_street/types/active/v1/accounts/order_get_order_by_id_response.py">OrderGetOrderByIDResponse</a></code>
 - <code title="get /active/v1/accounts/{account_id}/orders">client.active.v1.accounts.orders.<a href="./src/clear_street/resources/active/v1/accounts/orders.py">get_orders</a>(account_id, \*\*<a href="src/clear_street/types/active/v1/accounts/order_get_orders_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/accounts/order_get_orders_response.py">OrderGetOrdersResponse</a></code>
 - <code title="patch /active/v1/accounts/{account_id}/orders/{order_id}">client.active.v1.accounts.orders.<a href="./src/clear_street/resources/active/v1/accounts/orders.py">replace_order</a>(order_id, \*, account_id, \*\*<a href="src/clear_street/types/active/v1/accounts/order_replace_order_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/accounts/order_replace_order_response.py">OrderReplaceOrderResponse</a></code>
@@ -657,8 +657,8 @@ from clear_street.types.active.v1 import (
     ScreenerEntryList,
     SavedScreenerCreateScreenerResponse,
     SavedScreenerGetScreenerByIDResponse,
-    SavedScreenerListScreenersResponse,
-    SavedScreenerUpdateScreenerResponse,
+    SavedScreenerGetScreenersResponse,
+    SavedScreenerReplaceScreenerResponse,
 )
 ```
 
@@ -667,8 +667,8 @@ Methods:
 - <code title="post /active/v1/saved-screeners">client.active.v1.saved_screeners.<a href="./src/clear_street/resources/active/v1/saved_screeners.py">create_screener</a>(\*\*<a href="src/clear_street/types/active/v1/saved_screener_create_screener_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/saved_screener_create_screener_response.py">SavedScreenerCreateScreenerResponse</a></code>
 - <code title="delete /active/v1/saved-screeners/{screener_id}">client.active.v1.saved_screeners.<a href="./src/clear_street/resources/active/v1/saved_screeners.py">delete_screener</a>(screener_id) -> None</code>
 - <code title="get /active/v1/saved-screeners/{screener_id}">client.active.v1.saved_screeners.<a href="./src/clear_street/resources/active/v1/saved_screeners.py">get_screener_by_id</a>(screener_id) -> <a href="./src/clear_street/types/active/v1/saved_screener_get_screener_by_id_response.py">SavedScreenerGetScreenerByIDResponse</a></code>
-- <code title="get /active/v1/saved-screeners">client.active.v1.saved_screeners.<a href="./src/clear_street/resources/active/v1/saved_screeners.py">list_screeners</a>() -> <a href="./src/clear_street/types/active/v1/saved_screener_list_screeners_response.py">SavedScreenerListScreenersResponse</a></code>
-- <code title="put /active/v1/saved-screeners/{screener_id}">client.active.v1.saved_screeners.<a href="./src/clear_street/resources/active/v1/saved_screeners.py">update_screener</a>(screener_id, \*\*<a href="src/clear_street/types/active/v1/saved_screener_update_screener_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/saved_screener_update_screener_response.py">SavedScreenerUpdateScreenerResponse</a></code>
+- <code title="get /active/v1/saved-screeners">client.active.v1.saved_screeners.<a href="./src/clear_street/resources/active/v1/saved_screeners.py">get_screeners</a>() -> <a href="./src/clear_street/types/active/v1/saved_screener_get_screeners_response.py">SavedScreenerGetScreenersResponse</a></code>
+- <code title="put /active/v1/saved-screeners/{screener_id}">client.active.v1.saved_screeners.<a href="./src/clear_street/resources/active/v1/saved_screeners.py">replace_screener</a>(screener_id, \*\*<a href="src/clear_street/types/active/v1/saved_screener_replace_screener_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/saved_screener_replace_screener_response.py">SavedScreenerReplaceScreenerResponse</a></code>
 
 ### Screener
 

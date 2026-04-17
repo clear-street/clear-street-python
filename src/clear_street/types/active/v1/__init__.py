@@ -114,14 +114,14 @@ from .account_patch_account_by_id_response import AccountPatchAccountByIDRespons
 from .saved_screener_create_screener_params import (
     SavedScreenerCreateScreenerParams as SavedScreenerCreateScreenerParams,
 )
-from .saved_screener_update_screener_params import (
-    SavedScreenerUpdateScreenerParams as SavedScreenerUpdateScreenerParams,
+from .saved_screener_get_screeners_response import (
+    SavedScreenerGetScreenersResponse as SavedScreenerGetScreenersResponse,
 )
 from .instrument_get_instrument_by_id_params import (
     InstrumentGetInstrumentByIDParams as InstrumentGetInstrumentByIDParams,
 )
-from .saved_screener_list_screeners_response import (
-    SavedScreenerListScreenersResponse as SavedScreenerListScreenersResponse,
+from .saved_screener_replace_screener_params import (
+    SavedScreenerReplaceScreenerParams as SavedScreenerReplaceScreenerParams,
 )
 from .watchlist_get_watchlist_by_id_response import (
     WatchlistGetWatchlistByIDResponse as WatchlistGetWatchlistByIDResponse,
@@ -129,11 +129,11 @@ from .watchlist_get_watchlist_by_id_response import (
 from .saved_screener_create_screener_response import (
     SavedScreenerCreateScreenerResponse as SavedScreenerCreateScreenerResponse,
 )
-from .saved_screener_update_screener_response import (
-    SavedScreenerUpdateScreenerResponse as SavedScreenerUpdateScreenerResponse,
-)
 from .instrument_get_instrument_by_id_response import (
     InstrumentGetInstrumentByIDResponse as InstrumentGetInstrumentByIDResponse,
+)
+from .saved_screener_replace_screener_response import (
+    SavedScreenerReplaceScreenerResponse as SavedScreenerReplaceScreenerResponse,
 )
 from .saved_screener_get_screener_by_id_response import (
     SavedScreenerGetScreenerByIDResponse as SavedScreenerGetScreenerByIDResponse,

@@ -3,8 +3,8 @@
 from .screener_entry_list import ScreenerEntryList
 from ...shared.base_response import BaseResponse
 
-__all__ = ["SavedScreenerListScreenersResponse"]
+__all__ = ["SavedScreenerGetScreenersResponse"]
 
 
-class SavedScreenerListScreenersResponse(BaseResponse):
+class SavedScreenerGetScreenersResponse(BaseResponse):
     data: ScreenerEntryList

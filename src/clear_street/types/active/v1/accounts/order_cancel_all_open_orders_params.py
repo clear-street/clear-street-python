@@ -6,10 +6,10 @@ from typing_extensions import Literal, TypedDict
 
 from ....._types import SequenceNotStr
 
-__all__ = ["OrderCancelAllOrdersParams"]
+__all__ = ["OrderCancelAllOpenOrdersParams"]
 
 
-class OrderCancelAllOrdersParams(TypedDict, total=False):
+class OrderCancelAllOpenOrdersParams(TypedDict, total=False):
     security_id: SequenceNotStr[str]
     """Filter by security ID(s). Accepts single value or indexed array.
 
