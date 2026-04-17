@@ -50,14 +50,6 @@ from .screener import (
     ScreenerResourceWithStreamingResponse,
     AsyncScreenerResourceWithStreamingResponse,
 )
-from .iris.iris import (
-    IrisResource,
-    AsyncIrisResource,
-    IrisResourceWithRawResponse,
-    AsyncIrisResourceWithRawResponse,
-    IrisResourceWithStreamingResponse,
-    AsyncIrisResourceWithStreamingResponse,
-)
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
 from .omni_ai.omni_ai import (
@@ -146,10 +138,6 @@ class V1Resource(SyncAPIResource):
         return InstrumentsResource(self._client)
 
     @cached_property
-    def iris(self) -> IrisResource:
-        return IrisResource(self._client)
-
-    @cached_property
     def market_data(self) -> MarketDataResource:
         return MarketDataResource(self._client)
 
@@ -231,10 +219,6 @@ class AsyncV1Resource(AsyncAPIResource):
     def instruments(self) -> AsyncInstrumentsResource:
         """Retrieve details and lists of tradable instruments."""
         return AsyncInstrumentsResource(self._client)
-
-    @cached_property
-    def iris(self) -> AsyncIrisResource:
-        return AsyncIrisResource(self._client)
 
     @cached_property
     def market_data(self) -> AsyncMarketDataResource:
@@ -323,10 +307,6 @@ class V1ResourceWithRawResponse:
         return InstrumentsResourceWithRawResponse(self._v1.instruments)
 
     @cached_property
-    def iris(self) -> IrisResourceWithRawResponse:
-        return IrisResourceWithRawResponse(self._v1.iris)
-
-    @cached_property
     def market_data(self) -> MarketDataResourceWithRawResponse:
         return MarketDataResourceWithRawResponse(self._v1.market_data)
 
@@ -392,10 +372,6 @@ class AsyncV1ResourceWithRawResponse:
     def instruments(self) -> AsyncInstrumentsResourceWithRawResponse:
         """Retrieve details and lists of tradable instruments."""
         return AsyncInstrumentsResourceWithRawResponse(self._v1.instruments)
-
-    @cached_property
-    def iris(self) -> AsyncIrisResourceWithRawResponse:
-        return AsyncIrisResourceWithRawResponse(self._v1.iris)
 
     @cached_property
     def market_data(self) -> AsyncMarketDataResourceWithRawResponse:
@@ -465,10 +441,6 @@ class V1ResourceWithStreamingResponse:
         return InstrumentsResourceWithStreamingResponse(self._v1.instruments)
 
     @cached_property
-    def iris(self) -> IrisResourceWithStreamingResponse:
-        return IrisResourceWithStreamingResponse(self._v1.iris)
-
-    @cached_property
     def market_data(self) -> MarketDataResourceWithStreamingResponse:
         return MarketDataResourceWithStreamingResponse(self._v1.market_data)
 
@@ -534,10 +506,6 @@ class AsyncV1ResourceWithStreamingResponse:
     def instruments(self) -> AsyncInstrumentsResourceWithStreamingResponse:
         """Retrieve details and lists of tradable instruments."""
         return AsyncInstrumentsResourceWithStreamingResponse(self._v1.instruments)
-
-    @cached_property
-    def iris(self) -> AsyncIrisResourceWithStreamingResponse:
-        return AsyncIrisResourceWithStreamingResponse(self._v1.iris)
 
     @cached_property
     def market_data(self) -> AsyncMarketDataResourceWithStreamingResponse:

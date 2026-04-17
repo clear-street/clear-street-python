@@ -2,21 +2,13 @@
 
 from __future__ import annotations
 
-from .runs import (
-    RunsResource,
-    AsyncRunsResource,
-    RunsResourceWithRawResponse,
-    AsyncRunsResourceWithRawResponse,
-    RunsResourceWithStreamingResponse,
-    AsyncRunsResourceWithStreamingResponse,
-)
-from .feedback import (
-    FeedbackResource,
-    AsyncFeedbackResource,
-    FeedbackResourceWithRawResponse,
-    AsyncFeedbackResourceWithRawResponse,
-    FeedbackResourceWithStreamingResponse,
-    AsyncFeedbackResourceWithStreamingResponse,
+from .responses import (
+    ResponsesResource,
+    AsyncResponsesResource,
+    ResponsesResourceWithRawResponse,
+    AsyncResponsesResourceWithRawResponse,
+    ResponsesResourceWithStreamingResponse,
+    AsyncResponsesResourceWithStreamingResponse,
 )
 from ....._compat import cached_property
 from ....._resource import SyncAPIResource, AsyncAPIResource
@@ -28,24 +20,41 @@ from .threads.threads import (
     ThreadsResourceWithStreamingResponse,
     AsyncThreadsResourceWithStreamingResponse,
 )
+from .messages.messages import (
+    MessagesResource,
+    AsyncMessagesResource,
+    MessagesResourceWithRawResponse,
+    AsyncMessagesResourceWithRawResponse,
+    MessagesResourceWithStreamingResponse,
+    AsyncMessagesResourceWithStreamingResponse,
+)
 
 __all__ = ["OmniAIResource", "AsyncOmniAIResource"]
 
 
 class OmniAIResource(SyncAPIResource):
     @cached_property
-    def feedback(self) -> FeedbackResource:
-        """AI assistant for conversational trading interactions."""
-        return FeedbackResource(self._client)
+    def messages(self) -> MessagesResource:
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        """
+        return MessagesResource(self._client)
 
     @cached_property
-    def runs(self) -> RunsResource:
-        """AI assistant for conversational trading interactions."""
-        return RunsResource(self._client)
+    def responses(self) -> ResponsesResource:
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        """
+        return ResponsesResource(self._client)
 
     @cached_property
     def threads(self) -> ThreadsResource:
-        """AI assistant for conversational trading interactions."""
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        """
         return ThreadsResource(self._client)
 
     @cached_property
@@ -70,18 +79,27 @@ class OmniAIResource(SyncAPIResource):
 
 class AsyncOmniAIResource(AsyncAPIResource):
     @cached_property
-    def feedback(self) -> AsyncFeedbackResource:
-        """AI assistant for conversational trading interactions."""
-        return AsyncFeedbackResource(self._client)
+    def messages(self) -> AsyncMessagesResource:
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        """
+        return AsyncMessagesResource(self._client)
 
     @cached_property
-    def runs(self) -> AsyncRunsResource:
-        """AI assistant for conversational trading interactions."""
-        return AsyncRunsResource(self._client)
+    def responses(self) -> AsyncResponsesResource:
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        """
+        return AsyncResponsesResource(self._client)
 
     @cached_property
     def threads(self) -> AsyncThreadsResource:
-        """AI assistant for conversational trading interactions."""
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        """
         return AsyncThreadsResource(self._client)
 
     @cached_property
@@ -109,18 +127,27 @@ class OmniAIResourceWithRawResponse:
         self._omni_ai = omni_ai
 
     @cached_property
-    def feedback(self) -> FeedbackResourceWithRawResponse:
-        """AI assistant for conversational trading interactions."""
-        return FeedbackResourceWithRawResponse(self._omni_ai.feedback)
+    def messages(self) -> MessagesResourceWithRawResponse:
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        """
+        return MessagesResourceWithRawResponse(self._omni_ai.messages)
 
     @cached_property
-    def runs(self) -> RunsResourceWithRawResponse:
-        """AI assistant for conversational trading interactions."""
-        return RunsResourceWithRawResponse(self._omni_ai.runs)
+    def responses(self) -> ResponsesResourceWithRawResponse:
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        """
+        return ResponsesResourceWithRawResponse(self._omni_ai.responses)
 
     @cached_property
     def threads(self) -> ThreadsResourceWithRawResponse:
-        """AI assistant for conversational trading interactions."""
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        """
         return ThreadsResourceWithRawResponse(self._omni_ai.threads)
 
 
@@ -129,18 +156,27 @@ class AsyncOmniAIResourceWithRawResponse:
         self._omni_ai = omni_ai
 
     @cached_property
-    def feedback(self) -> AsyncFeedbackResourceWithRawResponse:
-        """AI assistant for conversational trading interactions."""
-        return AsyncFeedbackResourceWithRawResponse(self._omni_ai.feedback)
+    def messages(self) -> AsyncMessagesResourceWithRawResponse:
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        """
+        return AsyncMessagesResourceWithRawResponse(self._omni_ai.messages)
 
     @cached_property
-    def runs(self) -> AsyncRunsResourceWithRawResponse:
-        """AI assistant for conversational trading interactions."""
-        return AsyncRunsResourceWithRawResponse(self._omni_ai.runs)
+    def responses(self) -> AsyncResponsesResourceWithRawResponse:
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        """
+        return AsyncResponsesResourceWithRawResponse(self._omni_ai.responses)
 
     @cached_property
     def threads(self) -> AsyncThreadsResourceWithRawResponse:
-        """AI assistant for conversational trading interactions."""
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        """
         return AsyncThreadsResourceWithRawResponse(self._omni_ai.threads)
 
 
@@ -149,18 +185,27 @@ class OmniAIResourceWithStreamingResponse:
         self._omni_ai = omni_ai
 
     @cached_property
-    def feedback(self) -> FeedbackResourceWithStreamingResponse:
-        """AI assistant for conversational trading interactions."""
-        return FeedbackResourceWithStreamingResponse(self._omni_ai.feedback)
+    def messages(self) -> MessagesResourceWithStreamingResponse:
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        """
+        return MessagesResourceWithStreamingResponse(self._omni_ai.messages)
 
     @cached_property
-    def runs(self) -> RunsResourceWithStreamingResponse:
-        """AI assistant for conversational trading interactions."""
-        return RunsResourceWithStreamingResponse(self._omni_ai.runs)
+    def responses(self) -> ResponsesResourceWithStreamingResponse:
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        """
+        return ResponsesResourceWithStreamingResponse(self._omni_ai.responses)
 
     @cached_property
     def threads(self) -> ThreadsResourceWithStreamingResponse:
-        """AI assistant for conversational trading interactions."""
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        """
         return ThreadsResourceWithStreamingResponse(self._omni_ai.threads)
 
 
@@ -169,16 +214,25 @@ class AsyncOmniAIResourceWithStreamingResponse:
         self._omni_ai = omni_ai
 
     @cached_property
-    def feedback(self) -> AsyncFeedbackResourceWithStreamingResponse:
-        """AI assistant for conversational trading interactions."""
-        return AsyncFeedbackResourceWithStreamingResponse(self._omni_ai.feedback)
+    def messages(self) -> AsyncMessagesResourceWithStreamingResponse:
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        """
+        return AsyncMessagesResourceWithStreamingResponse(self._omni_ai.messages)
 
     @cached_property
-    def runs(self) -> AsyncRunsResourceWithStreamingResponse:
-        """AI assistant for conversational trading interactions."""
-        return AsyncRunsResourceWithStreamingResponse(self._omni_ai.runs)
+    def responses(self) -> AsyncResponsesResourceWithStreamingResponse:
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        """
+        return AsyncResponsesResourceWithStreamingResponse(self._omni_ai.responses)
 
     @cached_property
     def threads(self) -> AsyncThreadsResourceWithStreamingResponse:
-        """AI assistant for conversational trading interactions."""
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        """
         return AsyncThreadsResourceWithStreamingResponse(self._omni_ai.threads)
