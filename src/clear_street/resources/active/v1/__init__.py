@@ -16,14 +16,6 @@ from .ws import (
     WsResourceWithStreamingResponse,
     AsyncWsResourceWithStreamingResponse,
 )
-from .iris import (
-    IrisResource,
-    AsyncIrisResource,
-    IrisResourceWithRawResponse,
-    AsyncIrisResourceWithRawResponse,
-    IrisResourceWithStreamingResponse,
-    AsyncIrisResourceWithStreamingResponse,
-)
 from .news import (
     NewsResource,
     AsyncNewsResource,
@@ -152,12 +144,6 @@ __all__ = [
     "AsyncInstrumentsResourceWithRawResponse",
     "InstrumentsResourceWithStreamingResponse",
     "AsyncInstrumentsResourceWithStreamingResponse",
-    "IrisResource",
-    "AsyncIrisResource",
-    "IrisResourceWithRawResponse",
-    "AsyncIrisResourceWithRawResponse",
-    "IrisResourceWithStreamingResponse",
-    "AsyncIrisResourceWithStreamingResponse",
     "MarketDataResource",
     "AsyncMarketDataResource",
     "MarketDataResourceWithRawResponse",
