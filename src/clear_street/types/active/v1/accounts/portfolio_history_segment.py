@@ -27,9 +27,6 @@ class PortfolioHistorySegment(BaseModel):
     bought_notional: Optional[str] = None
     """Amount bought MTM"""
 
-    bought_quantity: Optional[str] = None
-    """Quantity bought MTM"""
-
     day_pnl: Optional[str] = None
     """
     Sum of the profit and loss from intraday trading activities for the trading day.
@@ -46,6 +43,3 @@ class PortfolioHistorySegment(BaseModel):
 
     sold_notional: Optional[str] = None
     """Amount sold MTM"""
-
-    sold_quantity: Optional[str] = None
-    """Quantity sold MTM"""
