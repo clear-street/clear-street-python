@@ -1,11 +1,10 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from ..thread import Thread
+from ..get_thread_response import GetThreadResponse
 from ....shared.base_response import BaseResponse
 
 __all__ = ["ThreadGetThreadResponse"]
 
 
 class ThreadGetThreadResponse(BaseResponse):
-    data: Thread
-    """Thread metadata returned by list/get thread endpoints."""
+    data: GetThreadResponse
