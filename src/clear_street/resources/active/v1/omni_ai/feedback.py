@@ -62,6 +62,8 @@ class FeedbackResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FeedbackCreateFeedbackResponse:
         """
+        Create feedback on a message.
+
         Submit user feedback (thumbs up/down, rating, comment) for an assistant message.
 
         Args:
@@ -144,6 +146,8 @@ class AsyncFeedbackResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> FeedbackCreateFeedbackResponse:
         """
+        Create feedback on a message.
+
         Submit user feedback (thumbs up/down, rating, comment) for an assistant message.
 
         Args:

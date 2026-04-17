@@ -75,6 +75,8 @@ class ScreenerResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ScreenerGetScreenerResponse:
         """
+        Screen instruments.
+
         Searches for instruments matching specified criteria.
 
         Args:
@@ -138,9 +140,10 @@ class ScreenerResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ScreenerSearchScreenerResponse:
-        """Returns a columnar response where each row is an array of column objects.
+        """
+        Search instruments using structured filters.
 
-        Each
+        Returns a columnar response where each row is an array of column objects. Each
         column contains a human-readable name, a field reference, an optional type hint
         (e.g. `CURR_USD`, `PERCENT`), and the value.
 
@@ -234,6 +237,8 @@ class AsyncScreenerResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ScreenerGetScreenerResponse:
         """
+        Screen instruments.
+
         Searches for instruments matching specified criteria.
 
         Args:
@@ -297,9 +302,10 @@ class AsyncScreenerResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ScreenerSearchScreenerResponse:
-        """Returns a columnar response where each row is an array of column objects.
+        """
+        Search instruments using structured filters.
 
-        Each
+        Returns a columnar response where each row is an array of column objects. Each
         column contains a human-readable name, a field reference, an optional type hint
         (e.g. `CURR_USD`, `PERCENT`), and the value.
 

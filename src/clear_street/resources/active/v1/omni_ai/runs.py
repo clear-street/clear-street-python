@@ -109,6 +109,8 @@ class RunsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RunGetRunResponse:
         """
+        Get run status and events.
+
         Poll for the current status of a run and any new events since the last poll.
 
         Args:
@@ -162,7 +164,9 @@ class RunsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RunStartRunResponse:
-        """Begins an agentic conversation run.
+        """Start a new assistant run.
+
+        Begins an agentic conversation run.
 
         If thread_id is provided, continues an
         existing conversation; otherwise creates a new thread.
@@ -288,6 +292,8 @@ class AsyncRunsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RunGetRunResponse:
         """
+        Get run status and events.
+
         Poll for the current status of a run and any new events since the last poll.
 
         Args:
@@ -341,7 +347,9 @@ class AsyncRunsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> RunStartRunResponse:
-        """Begins an agentic conversation run.
+        """Start a new assistant run.
+
+        Begins an agentic conversation run.
 
         If thread_id is provided, continues an
         existing conversation; otherwise creates a new thread.
