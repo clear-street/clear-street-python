@@ -3,10 +3,10 @@
 from .order import Order
 from ....shared.base_response import BaseResponse
 
-__all__ = ["OrderCancelOrderResponse"]
+__all__ = ["OrderCancelOpenOrderResponse"]
 
 
-class OrderCancelOrderResponse(BaseResponse):
+class OrderCancelOpenOrderResponse(BaseResponse):
     data: Order
     """A trading order with its current state and execution details.
 

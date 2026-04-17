@@ -34,15 +34,15 @@ from .....types.active.v1.accounts import (
     order_get_orders_params,
     order_replace_order_params,
     order_submit_orders_params,
-    order_cancel_all_orders_params,
+    order_cancel_all_open_orders_params,
 )
 from .....types.active.v1.accounts.time_in_force import TimeInForce
 from .....types.active.v1.accounts.order_get_orders_response import OrderGetOrdersResponse
-from .....types.active.v1.accounts.order_cancel_order_response import OrderCancelOrderResponse
 from .....types.active.v1.accounts.order_replace_order_response import OrderReplaceOrderResponse
 from .....types.active.v1.accounts.order_submit_orders_response import OrderSubmitOrdersResponse
 from .....types.active.v1.accounts.order_get_order_by_id_response import OrderGetOrderByIDResponse
-from .....types.active.v1.accounts.order_cancel_all_orders_response import OrderCancelAllOrdersResponse
+from .....types.active.v1.accounts.order_cancel_open_order_response import OrderCancelOpenOrderResponse
+from .....types.active.v1.accounts.order_cancel_all_open_orders_response import OrderCancelAllOpenOrdersResponse
 
 __all__ = ["OrdersResource", "AsyncOrdersResource"]
 
@@ -69,7 +69,7 @@ class OrdersResource(SyncAPIResource):
         """
         return OrdersResourceWithStreamingResponse(self)
 
-    def cancel_all_orders(
+    def cancel_all_open_orders(
         self,
         account_id: int,
         *,
@@ -88,7 +88,7 @@ class OrdersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> OrderCancelAllOrdersResponse:
+    ) -> OrderCancelAllOpenOrdersResponse:
         """
         Cancel all orders for an account
 
@@ -141,13 +141,13 @@ class OrdersResource(SyncAPIResource):
                         "side": side,
                         "type": type,
                     },
-                    order_cancel_all_orders_params.OrderCancelAllOrdersParams,
+                    order_cancel_all_open_orders_params.OrderCancelAllOpenOrdersParams,
                 ),
             ),
-            cast_to=OrderCancelAllOrdersResponse,
+            cast_to=OrderCancelAllOpenOrdersResponse,
         )
 
-    def cancel_order(
+    def cancel_open_order(
         self,
         order_id: str,
         *,
@@ -158,7 +158,7 @@ class OrdersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> OrderCancelOrderResponse:
+    ) -> OrderCancelOpenOrderResponse:
         """
         Cancel a specific order
 
@@ -180,7 +180,7 @@ class OrdersResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=OrderCancelOrderResponse,
+            cast_to=OrderCancelOpenOrderResponse,
         )
 
     def get_order_by_id(
@@ -439,7 +439,7 @@ class AsyncOrdersResource(AsyncAPIResource):
         """
         return AsyncOrdersResourceWithStreamingResponse(self)
 
-    async def cancel_all_orders(
+    async def cancel_all_open_orders(
         self,
         account_id: int,
         *,
@@ -458,7 +458,7 @@ class AsyncOrdersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> OrderCancelAllOrdersResponse:
+    ) -> OrderCancelAllOpenOrdersResponse:
         """
         Cancel all orders for an account
 
@@ -511,13 +511,13 @@ class AsyncOrdersResource(AsyncAPIResource):
                         "side": side,
                         "type": type,
                     },
-                    order_cancel_all_orders_params.OrderCancelAllOrdersParams,
+                    order_cancel_all_open_orders_params.OrderCancelAllOpenOrdersParams,
                 ),
             ),
-            cast_to=OrderCancelAllOrdersResponse,
+            cast_to=OrderCancelAllOpenOrdersResponse,
         )
 
-    async def cancel_order(
+    async def cancel_open_order(
         self,
         order_id: str,
         *,
@@ -528,7 +528,7 @@ class AsyncOrdersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> OrderCancelOrderResponse:
+    ) -> OrderCancelOpenOrderResponse:
         """
         Cancel a specific order
 
@@ -550,7 +550,7 @@ class AsyncOrdersResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=OrderCancelOrderResponse,
+            cast_to=OrderCancelOpenOrderResponse,
         )
 
     async def get_order_by_id(
@@ -791,11 +791,11 @@ class OrdersResourceWithRawResponse:
     def __init__(self, orders: OrdersResource) -> None:
         self._orders = orders
 
-        self.cancel_all_orders = to_raw_response_wrapper(
-            orders.cancel_all_orders,
+        self.cancel_all_open_orders = to_raw_response_wrapper(
+            orders.cancel_all_open_orders,
         )
-        self.cancel_order = to_raw_response_wrapper(
-            orders.cancel_order,
+        self.cancel_open_order = to_raw_response_wrapper(
+            orders.cancel_open_order,
         )
         self.get_order_by_id = to_raw_response_wrapper(
             orders.get_order_by_id,
@@ -815,11 +815,11 @@ class AsyncOrdersResourceWithRawResponse:
     def __init__(self, orders: AsyncOrdersResource) -> None:
         self._orders = orders
 
-        self.cancel_all_orders = async_to_raw_response_wrapper(
-            orders.cancel_all_orders,
+        self.cancel_all_open_orders = async_to_raw_response_wrapper(
+            orders.cancel_all_open_orders,
         )
-        self.cancel_order = async_to_raw_response_wrapper(
-            orders.cancel_order,
+        self.cancel_open_order = async_to_raw_response_wrapper(
+            orders.cancel_open_order,
         )
         self.get_order_by_id = async_to_raw_response_wrapper(
             orders.get_order_by_id,
@@ -839,11 +839,11 @@ class OrdersResourceWithStreamingResponse:
     def __init__(self, orders: OrdersResource) -> None:
         self._orders = orders
 
-        self.cancel_all_orders = to_streamed_response_wrapper(
-            orders.cancel_all_orders,
+        self.cancel_all_open_orders = to_streamed_response_wrapper(
+            orders.cancel_all_open_orders,
         )
-        self.cancel_order = to_streamed_response_wrapper(
-            orders.cancel_order,
+        self.cancel_open_order = to_streamed_response_wrapper(
+            orders.cancel_open_order,
         )
         self.get_order_by_id = to_streamed_response_wrapper(
             orders.get_order_by_id,
@@ -863,11 +863,11 @@ class AsyncOrdersResourceWithStreamingResponse:
     def __init__(self, orders: AsyncOrdersResource) -> None:
         self._orders = orders
 
-        self.cancel_all_orders = async_to_streamed_response_wrapper(
-            orders.cancel_all_orders,
+        self.cancel_all_open_orders = async_to_streamed_response_wrapper(
+            orders.cancel_all_open_orders,
         )
-        self.cancel_order = async_to_streamed_response_wrapper(
-            orders.cancel_order,
+        self.cancel_open_order = async_to_streamed_response_wrapper(
+            orders.cancel_open_order,
         )
         self.get_order_by_id = async_to_streamed_response_wrapper(
             orders.get_order_by_id,

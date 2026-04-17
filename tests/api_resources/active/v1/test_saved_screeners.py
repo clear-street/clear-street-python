@@ -10,10 +10,10 @@ import pytest
 from tests.utils import assert_matches_type
 from clear_street import ClearStreet, AsyncClearStreet
 from clear_street.types.active.v1 import (
-    SavedScreenerListScreenersResponse,
+    SavedScreenerGetScreenersResponse,
     SavedScreenerCreateScreenerResponse,
-    SavedScreenerUpdateScreenerResponse,
     SavedScreenerGetScreenerByIDResponse,
+    SavedScreenerReplaceScreenerResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -154,44 +154,44 @@ class TestSavedScreeners:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_list_screeners(self, client: ClearStreet) -> None:
-        saved_screener = client.active.v1.saved_screeners.list_screeners()
-        assert_matches_type(SavedScreenerListScreenersResponse, saved_screener, path=["response"])
+    def test_method_get_screeners(self, client: ClearStreet) -> None:
+        saved_screener = client.active.v1.saved_screeners.get_screeners()
+        assert_matches_type(SavedScreenerGetScreenersResponse, saved_screener, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_list_screeners(self, client: ClearStreet) -> None:
-        response = client.active.v1.saved_screeners.with_raw_response.list_screeners()
+    def test_raw_response_get_screeners(self, client: ClearStreet) -> None:
+        response = client.active.v1.saved_screeners.with_raw_response.get_screeners()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         saved_screener = response.parse()
-        assert_matches_type(SavedScreenerListScreenersResponse, saved_screener, path=["response"])
+        assert_matches_type(SavedScreenerGetScreenersResponse, saved_screener, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_list_screeners(self, client: ClearStreet) -> None:
-        with client.active.v1.saved_screeners.with_streaming_response.list_screeners() as response:
+    def test_streaming_response_get_screeners(self, client: ClearStreet) -> None:
+        with client.active.v1.saved_screeners.with_streaming_response.get_screeners() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             saved_screener = response.parse()
-            assert_matches_type(SavedScreenerListScreenersResponse, saved_screener, path=["response"])
+            assert_matches_type(SavedScreenerGetScreenersResponse, saved_screener, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_update_screener(self, client: ClearStreet) -> None:
-        saved_screener = client.active.v1.saved_screeners.update_screener(
+    def test_method_replace_screener(self, client: ClearStreet) -> None:
+        saved_screener = client.active.v1.saved_screeners.replace_screener(
             screener_id="550e8400-e29b-41d4-a716-446655440000",
         )
-        assert_matches_type(SavedScreenerUpdateScreenerResponse, saved_screener, path=["response"])
+        assert_matches_type(SavedScreenerReplaceScreenerResponse, saved_screener, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_update_screener_with_all_params(self, client: ClearStreet) -> None:
-        saved_screener = client.active.v1.saved_screeners.update_screener(
+    def test_method_replace_screener_with_all_params(self, client: ClearStreet) -> None:
+        saved_screener = client.active.v1.saved_screeners.replace_screener(
             screener_id="550e8400-e29b-41d4-a716-446655440000",
             field_filter=["string"],
             filters=[
@@ -205,39 +205,39 @@ class TestSavedScreeners:
             sort_by="sort_by",
             sort_direction="ASC",
         )
-        assert_matches_type(SavedScreenerUpdateScreenerResponse, saved_screener, path=["response"])
+        assert_matches_type(SavedScreenerReplaceScreenerResponse, saved_screener, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_update_screener(self, client: ClearStreet) -> None:
-        response = client.active.v1.saved_screeners.with_raw_response.update_screener(
+    def test_raw_response_replace_screener(self, client: ClearStreet) -> None:
+        response = client.active.v1.saved_screeners.with_raw_response.replace_screener(
             screener_id="550e8400-e29b-41d4-a716-446655440000",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         saved_screener = response.parse()
-        assert_matches_type(SavedScreenerUpdateScreenerResponse, saved_screener, path=["response"])
+        assert_matches_type(SavedScreenerReplaceScreenerResponse, saved_screener, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_update_screener(self, client: ClearStreet) -> None:
-        with client.active.v1.saved_screeners.with_streaming_response.update_screener(
+    def test_streaming_response_replace_screener(self, client: ClearStreet) -> None:
+        with client.active.v1.saved_screeners.with_streaming_response.replace_screener(
             screener_id="550e8400-e29b-41d4-a716-446655440000",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             saved_screener = response.parse()
-            assert_matches_type(SavedScreenerUpdateScreenerResponse, saved_screener, path=["response"])
+            assert_matches_type(SavedScreenerReplaceScreenerResponse, saved_screener, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_update_screener(self, client: ClearStreet) -> None:
+    def test_path_params_replace_screener(self, client: ClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `screener_id` but received ''"):
-            client.active.v1.saved_screeners.with_raw_response.update_screener(
+            client.active.v1.saved_screeners.with_raw_response.replace_screener(
                 screener_id="",
             )
 
@@ -379,44 +379,44 @@ class TestAsyncSavedScreeners:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_list_screeners(self, async_client: AsyncClearStreet) -> None:
-        saved_screener = await async_client.active.v1.saved_screeners.list_screeners()
-        assert_matches_type(SavedScreenerListScreenersResponse, saved_screener, path=["response"])
+    async def test_method_get_screeners(self, async_client: AsyncClearStreet) -> None:
+        saved_screener = await async_client.active.v1.saved_screeners.get_screeners()
+        assert_matches_type(SavedScreenerGetScreenersResponse, saved_screener, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_list_screeners(self, async_client: AsyncClearStreet) -> None:
-        response = await async_client.active.v1.saved_screeners.with_raw_response.list_screeners()
+    async def test_raw_response_get_screeners(self, async_client: AsyncClearStreet) -> None:
+        response = await async_client.active.v1.saved_screeners.with_raw_response.get_screeners()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         saved_screener = await response.parse()
-        assert_matches_type(SavedScreenerListScreenersResponse, saved_screener, path=["response"])
+        assert_matches_type(SavedScreenerGetScreenersResponse, saved_screener, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_list_screeners(self, async_client: AsyncClearStreet) -> None:
-        async with async_client.active.v1.saved_screeners.with_streaming_response.list_screeners() as response:
+    async def test_streaming_response_get_screeners(self, async_client: AsyncClearStreet) -> None:
+        async with async_client.active.v1.saved_screeners.with_streaming_response.get_screeners() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             saved_screener = await response.parse()
-            assert_matches_type(SavedScreenerListScreenersResponse, saved_screener, path=["response"])
+            assert_matches_type(SavedScreenerGetScreenersResponse, saved_screener, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_update_screener(self, async_client: AsyncClearStreet) -> None:
-        saved_screener = await async_client.active.v1.saved_screeners.update_screener(
+    async def test_method_replace_screener(self, async_client: AsyncClearStreet) -> None:
+        saved_screener = await async_client.active.v1.saved_screeners.replace_screener(
             screener_id="550e8400-e29b-41d4-a716-446655440000",
         )
-        assert_matches_type(SavedScreenerUpdateScreenerResponse, saved_screener, path=["response"])
+        assert_matches_type(SavedScreenerReplaceScreenerResponse, saved_screener, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_update_screener_with_all_params(self, async_client: AsyncClearStreet) -> None:
-        saved_screener = await async_client.active.v1.saved_screeners.update_screener(
+    async def test_method_replace_screener_with_all_params(self, async_client: AsyncClearStreet) -> None:
+        saved_screener = await async_client.active.v1.saved_screeners.replace_screener(
             screener_id="550e8400-e29b-41d4-a716-446655440000",
             field_filter=["string"],
             filters=[
@@ -430,38 +430,38 @@ class TestAsyncSavedScreeners:
             sort_by="sort_by",
             sort_direction="ASC",
         )
-        assert_matches_type(SavedScreenerUpdateScreenerResponse, saved_screener, path=["response"])
+        assert_matches_type(SavedScreenerReplaceScreenerResponse, saved_screener, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_update_screener(self, async_client: AsyncClearStreet) -> None:
-        response = await async_client.active.v1.saved_screeners.with_raw_response.update_screener(
+    async def test_raw_response_replace_screener(self, async_client: AsyncClearStreet) -> None:
+        response = await async_client.active.v1.saved_screeners.with_raw_response.replace_screener(
             screener_id="550e8400-e29b-41d4-a716-446655440000",
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         saved_screener = await response.parse()
-        assert_matches_type(SavedScreenerUpdateScreenerResponse, saved_screener, path=["response"])
+        assert_matches_type(SavedScreenerReplaceScreenerResponse, saved_screener, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_update_screener(self, async_client: AsyncClearStreet) -> None:
-        async with async_client.active.v1.saved_screeners.with_streaming_response.update_screener(
+    async def test_streaming_response_replace_screener(self, async_client: AsyncClearStreet) -> None:
+        async with async_client.active.v1.saved_screeners.with_streaming_response.replace_screener(
             screener_id="550e8400-e29b-41d4-a716-446655440000",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             saved_screener = await response.parse()
-            assert_matches_type(SavedScreenerUpdateScreenerResponse, saved_screener, path=["response"])
+            assert_matches_type(SavedScreenerReplaceScreenerResponse, saved_screener, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_update_screener(self, async_client: AsyncClearStreet) -> None:
+    async def test_path_params_replace_screener(self, async_client: AsyncClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `screener_id` but received ''"):
-            await async_client.active.v1.saved_screeners.with_raw_response.update_screener(
+            await async_client.active.v1.saved_screeners.with_raw_response.replace_screener(
                 screener_id="",
             )

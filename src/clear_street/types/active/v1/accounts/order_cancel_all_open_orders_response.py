@@ -3,8 +3,8 @@
 from .order_list import OrderList
 from ....shared.base_response import BaseResponse
 
-__all__ = ["OrderCancelAllOrdersResponse"]
+__all__ = ["OrderCancelAllOpenOrdersResponse"]
 
 
-class OrderCancelAllOrdersResponse(BaseResponse):
+class OrderCancelAllOpenOrdersResponse(BaseResponse):
     data: OrderList

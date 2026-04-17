@@ -3,9 +3,9 @@
 from .screener_entry import ScreenerEntry
 from ...shared.base_response import BaseResponse
 
-__all__ = ["SavedScreenerUpdateScreenerResponse"]
+__all__ = ["SavedScreenerReplaceScreenerResponse"]
 
 
-class SavedScreenerUpdateScreenerResponse(BaseResponse):
+class SavedScreenerReplaceScreenerResponse(BaseResponse):
     data: ScreenerEntry
     """A saved screener configuration entry"""

@@ -81,7 +81,7 @@ class PositionsResource(SyncAPIResource):
         """
         Delete a position within an account for an instrument.
 
-        Retrieves all positions for the specified trading account.
+        Retrieves orders generated to close the position.
 
         Args:
           security_id_source: Security identifier source
@@ -273,7 +273,7 @@ class AsyncPositionsResource(AsyncAPIResource):
         """
         Delete a position within an account for an instrument.
 
-        Retrieves all positions for the specified trading account.
+        Retrieves orders generated to close the position.
 
         Args:
           security_id_source: Security identifier source
