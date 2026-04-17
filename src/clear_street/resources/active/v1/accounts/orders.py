@@ -89,9 +89,10 @@ class OrdersResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrderCancelAllOrdersResponse:
-        """All filter parameters can be used independently or combined.
+        """
+        Cancel all orders for an account
 
-        The only constraint
+        All filter parameters can be used independently or combined. The only constraint
         is that `security_id` and `security_id_source` must be provided together if
         either is specified.
 
@@ -195,7 +196,7 @@ class OrdersResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrderGetOrderByIDResponse:
         """
-        Get order by ID
+        Get Order By ID
 
         Args:
           extra_headers: Send extra headers
@@ -458,9 +459,10 @@ class AsyncOrdersResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrderCancelAllOrdersResponse:
-        """All filter parameters can be used independently or combined.
+        """
+        Cancel all orders for an account
 
-        The only constraint
+        All filter parameters can be used independently or combined. The only constraint
         is that `security_id` and `security_id_source` must be provided together if
         either is specified.
 
@@ -564,7 +566,7 @@ class AsyncOrdersResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrderGetOrderByIDResponse:
         """
-        Get order by ID
+        Get Order By ID
 
         Args:
           extra_headers: Send extra headers

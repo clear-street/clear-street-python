@@ -111,6 +111,8 @@ class ThreadsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ThreadListThreadsResponse:
         """
+        List conversation threads.
+
         Retrieves threads for the authenticated user.
 
         Args:
@@ -231,6 +233,8 @@ class AsyncThreadsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ThreadListThreadsResponse:
         """
+        List conversation threads.
+
         Retrieves threads for the authenticated user.
 
         Args:

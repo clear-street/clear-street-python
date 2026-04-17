@@ -70,7 +70,7 @@ class WatchlistsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WatchlistCreateWatchlistResponse:
         """
-        Create a new watchlist
+        Create Watchlist
 
         Args:
           name: The desired watchlist name.
@@ -218,7 +218,7 @@ class AsyncWatchlistsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WatchlistCreateWatchlistResponse:
         """
-        Create a new watchlist
+        Create Watchlist
 
         Args:
           name: The desired watchlist name.

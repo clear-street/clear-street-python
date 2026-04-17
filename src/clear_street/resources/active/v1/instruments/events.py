@@ -68,6 +68,8 @@ class EventsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> EventGetAllInstrumentEventsResponse:
         """
+        List instrument events across all securities.
+
         Retrieves all instrument events grouped by date.
 
         Args:
@@ -232,6 +234,8 @@ class AsyncEventsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> EventGetAllInstrumentEventsResponse:
         """
+        List instrument events across all securities.
+
         Retrieves all instrument events grouped by date.
 
         Args:

@@ -79,6 +79,8 @@ class PositionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PositionClosePositionResponse:
         """
+        Delete a position within an account for an instrument.
+
         Retrieves all positions for the specified trading account.
 
         Args:
@@ -125,6 +127,8 @@ class PositionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PositionClosePositionsResponse:
         """
+        Delete all positions within an account.
+
         Closes all positions for the specified trading account.
 
         Args:
@@ -267,6 +271,8 @@ class AsyncPositionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PositionClosePositionResponse:
         """
+        Delete a position within an account for an instrument.
+
         Retrieves all positions for the specified trading account.
 
         Args:
@@ -313,6 +319,8 @@ class AsyncPositionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PositionClosePositionsResponse:
         """
+        Delete all positions within an account.
+
         Closes all positions for the specified trading account.
 
         Args:

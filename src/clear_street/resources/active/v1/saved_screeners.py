@@ -66,6 +66,8 @@ class SavedScreenersResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SavedScreenerCreateScreenerResponse:
         """
+        Create a saved screener configuration.
+
         Persists a screener configuration for the authenticated user.
 
         Args:
@@ -117,6 +119,8 @@ class SavedScreenersResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
+        Delete a saved screener configuration.
+
         Deletes the screener configuration for the authenticated user.
 
         Args:
@@ -151,6 +155,8 @@ class SavedScreenersResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SavedScreenerGetScreenerByIDResponse:
         """
+        Get a saved screener configuration by ID.
+
         Returns a single screener configuration for the authenticated user.
 
         Args:
@@ -182,7 +188,11 @@ class SavedScreenersResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SavedScreenerListScreenersResponse:
-        """Returns all screener configurations for the authenticated user."""
+        """
+        List saved screener configurations.
+
+        Returns all screener configurations for the authenticated user.
+        """
         return self._get(
             "/active/v1/saved-screeners",
             options=make_request_options(
@@ -207,9 +217,10 @@ class SavedScreenersResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SavedScreenerUpdateScreenerResponse:
-        """Replaces the screener configuration for the authenticated user.
+        """
+        Update a saved screener configuration.
 
-        If `name` is
+        Replaces the screener configuration for the authenticated user. If `name` is
         null, the existing name is preserved.
 
         Args:
@@ -290,6 +301,8 @@ class AsyncSavedScreenersResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SavedScreenerCreateScreenerResponse:
         """
+        Create a saved screener configuration.
+
         Persists a screener configuration for the authenticated user.
 
         Args:
@@ -341,6 +354,8 @@ class AsyncSavedScreenersResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
+        Delete a saved screener configuration.
+
         Deletes the screener configuration for the authenticated user.
 
         Args:
@@ -375,6 +390,8 @@ class AsyncSavedScreenersResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SavedScreenerGetScreenerByIDResponse:
         """
+        Get a saved screener configuration by ID.
+
         Returns a single screener configuration for the authenticated user.
 
         Args:
@@ -406,7 +423,11 @@ class AsyncSavedScreenersResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SavedScreenerListScreenersResponse:
-        """Returns all screener configurations for the authenticated user."""
+        """
+        List saved screener configurations.
+
+        Returns all screener configurations for the authenticated user.
+        """
         return await self._get(
             "/active/v1/saved-screeners",
             options=make_request_options(
@@ -431,9 +452,10 @@ class AsyncSavedScreenersResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SavedScreenerUpdateScreenerResponse:
-        """Replaces the screener configuration for the authenticated user.
+        """
+        Update a saved screener configuration.
 
-        If `name` is
+        Replaces the screener configuration for the authenticated user. If `name` is
         null, the existing name is preserved.
 
         Args:

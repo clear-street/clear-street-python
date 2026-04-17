@@ -71,6 +71,8 @@ class ContractsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ContractGetOptionContractsResponse:
         """
+        List options contracts.
+
         Returns options contracts for a given underlier with options-specific metadata.
         Exactly one underlier identifier must be provided.
 
@@ -166,6 +168,8 @@ class AsyncContractsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ContractGetOptionContractsResponse:
         """
+        List options contracts.
+
         Returns options contracts for a given underlier with options-specific metadata.
         Exactly one underlier identifier must be provided.
 
