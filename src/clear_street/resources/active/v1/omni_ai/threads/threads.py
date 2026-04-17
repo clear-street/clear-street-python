@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+from typing import List, Union, Optional
+from typing_extensions import Literal
+
 import httpx
 
 from .messages import (
@@ -12,7 +15,15 @@ from .messages import (
     MessagesResourceWithStreamingResponse,
     AsyncMessagesResourceWithStreamingResponse,
 )
-from ......_types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from .response import (
+    ResponseResource,
+    AsyncResponseResource,
+    ResponseResourceWithRawResponse,
+    AsyncResponseResourceWithRawResponse,
+    ResponseResourceWithStreamingResponse,
+    AsyncResponseResourceWithStreamingResponse,
+)
+from ......_types import Body, Omit, Query, Headers, NotGiven, Base64FileInput, omit, not_given
 from ......_utils import path_template, maybe_transform, async_maybe_transform
 from ......_compat import cached_property
 from ......_resource import SyncAPIResource, AsyncAPIResource
@@ -23,20 +34,39 @@ from ......_response import (
     async_to_streamed_response_wrapper,
 )
 from ......_base_client import make_request_options
-from ......types.active.v1.omni_ai import thread_get_thread_params, thread_list_threads_params
+from ......types.active.v1.omni_ai import (
+    thread_get_thread_params,
+    thread_list_threads_params,
+    thread_create_thread_params,
+)
 from ......types.active.v1.omni_ai.thread_get_thread_response import ThreadGetThreadResponse
 from ......types.active.v1.omni_ai.thread_list_threads_response import ThreadListThreadsResponse
+from ......types.active.v1.omni_ai.thread_create_thread_response import ThreadCreateThreadResponse
 
 __all__ = ["ThreadsResource", "AsyncThreadsResource"]
 
 
 class ThreadsResource(SyncAPIResource):
-    """AI assistant for conversational trading interactions."""
+    """Thread-centric AI assistant for conversational trading.
+
+    Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+    """
 
     @cached_property
     def messages(self) -> MessagesResource:
-        """AI assistant for conversational trading interactions."""
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        """
         return MessagesResource(self._client)
+
+    @cached_property
+    def response(self) -> ResponseResource:
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        """
+        return ResponseResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> ThreadsResourceWithRawResponse:
@@ -57,11 +87,72 @@ class ThreadsResource(SyncAPIResource):
         """
         return ThreadsResourceWithStreamingResponse(self)
 
+    def create_thread(
+        self,
+        *,
+        account_id: int,
+        type: Literal["instant", "deep_insights"],
+        capabilities: List[Literal["PREFILL_ORDER", "OPEN_CHART", "OPEN_SCREENER"]] | Omit = omit,
+        target: Optional[thread_create_thread_params.Target] | Omit = omit,
+        text: Optional[str] | Omit = omit,
+        thesis: Optional[str] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ThreadCreateThreadResponse:
+        """
+        Create a new conversation thread.
+
+        Atomically creates a new thread and submits the first user turn. The response
+        contains a `response_id` that should be polled via
+        `GET /omni-ai/responses/{response_id}` for assistant output.
+
+        Two creation modes are supported:
+
+        - **instant** — provide `text` with a natural-language prompt.
+        - **deep_insights** — provide a `target` ticker and optional `thesis` for
+          long-form research.
+
+        Args:
+          type: Thread creation mode.
+
+          target: Deep-insights target payload.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/active/v1/omni-ai/threads",
+            body=maybe_transform(
+                {
+                    "account_id": account_id,
+                    "type": type,
+                    "capabilities": capabilities,
+                    "target": target,
+                    "text": text,
+                    "thesis": thesis,
+                },
+                thread_create_thread_params.ThreadCreateThreadParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ThreadCreateThreadResponse,
+        )
+
     def get_thread(
         self,
         thread_id: str,
         *,
-        account_id: str,
+        account_id: int,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -69,8 +160,13 @@ class ThreadsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ThreadGetThreadResponse:
-        """
-        Get a specific thread.
+        """Get a specific thread.
+
+        Returns metadata (title, timestamps) for a single thread.
+
+        Does not include
+        messages — use `GET /omni-ai/threads/{thread_id}/messages` for conversation
+        history.
 
         Args:
           account_id: Account ID for the request
@@ -100,9 +196,9 @@ class ThreadsResource(SyncAPIResource):
     def list_threads(
         self,
         *,
-        account_id: str,
+        account_id: int,
         page_size: int | Omit = omit,
-        page_token: str | Omit = omit,
+        page_token: Union[str, Base64FileInput] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -113,14 +209,15 @@ class ThreadsResource(SyncAPIResource):
         """
         List conversation threads.
 
-        Retrieves threads for the authenticated user.
+        Returns thread metadata ordered by most recently created first. Use `page_size`
+        and `page_token` for pagination. Thread objects contain only metadata (title,
+        timestamps) — use the messages endpoint for conversation history.
 
         Args:
           account_id: Account ID for the request
 
-          page_size: Maximum threads to return
-
-          page_token: Page token for pagination
+          page_token: Token for retrieving the next page of results. Contains encoded pagination state
+              (limit + offset). When provided, page_size is ignored.
 
           extra_headers: Send extra headers
 
@@ -151,12 +248,26 @@ class ThreadsResource(SyncAPIResource):
 
 
 class AsyncThreadsResource(AsyncAPIResource):
-    """AI assistant for conversational trading interactions."""
+    """Thread-centric AI assistant for conversational trading.
+
+    Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+    """
 
     @cached_property
     def messages(self) -> AsyncMessagesResource:
-        """AI assistant for conversational trading interactions."""
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        """
         return AsyncMessagesResource(self._client)
+
+    @cached_property
+    def response(self) -> AsyncResponseResource:
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        """
+        return AsyncResponseResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncThreadsResourceWithRawResponse:
@@ -177,11 +288,72 @@ class AsyncThreadsResource(AsyncAPIResource):
         """
         return AsyncThreadsResourceWithStreamingResponse(self)
 
+    async def create_thread(
+        self,
+        *,
+        account_id: int,
+        type: Literal["instant", "deep_insights"],
+        capabilities: List[Literal["PREFILL_ORDER", "OPEN_CHART", "OPEN_SCREENER"]] | Omit = omit,
+        target: Optional[thread_create_thread_params.Target] | Omit = omit,
+        text: Optional[str] | Omit = omit,
+        thesis: Optional[str] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ThreadCreateThreadResponse:
+        """
+        Create a new conversation thread.
+
+        Atomically creates a new thread and submits the first user turn. The response
+        contains a `response_id` that should be polled via
+        `GET /omni-ai/responses/{response_id}` for assistant output.
+
+        Two creation modes are supported:
+
+        - **instant** — provide `text` with a natural-language prompt.
+        - **deep_insights** — provide a `target` ticker and optional `thesis` for
+          long-form research.
+
+        Args:
+          type: Thread creation mode.
+
+          target: Deep-insights target payload.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/active/v1/omni-ai/threads",
+            body=await async_maybe_transform(
+                {
+                    "account_id": account_id,
+                    "type": type,
+                    "capabilities": capabilities,
+                    "target": target,
+                    "text": text,
+                    "thesis": thesis,
+                },
+                thread_create_thread_params.ThreadCreateThreadParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ThreadCreateThreadResponse,
+        )
+
     async def get_thread(
         self,
         thread_id: str,
         *,
-        account_id: str,
+        account_id: int,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -189,8 +361,13 @@ class AsyncThreadsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ThreadGetThreadResponse:
-        """
-        Get a specific thread.
+        """Get a specific thread.
+
+        Returns metadata (title, timestamps) for a single thread.
+
+        Does not include
+        messages — use `GET /omni-ai/threads/{thread_id}/messages` for conversation
+        history.
 
         Args:
           account_id: Account ID for the request
@@ -222,9 +399,9 @@ class AsyncThreadsResource(AsyncAPIResource):
     async def list_threads(
         self,
         *,
-        account_id: str,
+        account_id: int,
         page_size: int | Omit = omit,
-        page_token: str | Omit = omit,
+        page_token: Union[str, Base64FileInput] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -235,14 +412,15 @@ class AsyncThreadsResource(AsyncAPIResource):
         """
         List conversation threads.
 
-        Retrieves threads for the authenticated user.
+        Returns thread metadata ordered by most recently created first. Use `page_size`
+        and `page_token` for pagination. Thread objects contain only metadata (title,
+        timestamps) — use the messages endpoint for conversation history.
 
         Args:
           account_id: Account ID for the request
 
-          page_size: Maximum threads to return
-
-          page_token: Page token for pagination
+          page_token: Token for retrieving the next page of results. Contains encoded pagination state
+              (limit + offset). When provided, page_size is ignored.
 
           extra_headers: Send extra headers
 
@@ -276,6 +454,9 @@ class ThreadsResourceWithRawResponse:
     def __init__(self, threads: ThreadsResource) -> None:
         self._threads = threads
 
+        self.create_thread = to_raw_response_wrapper(
+            threads.create_thread,
+        )
         self.get_thread = to_raw_response_wrapper(
             threads.get_thread,
         )
@@ -285,14 +466,28 @@ class ThreadsResourceWithRawResponse:
 
     @cached_property
     def messages(self) -> MessagesResourceWithRawResponse:
-        """AI assistant for conversational trading interactions."""
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        """
         return MessagesResourceWithRawResponse(self._threads.messages)
+
+    @cached_property
+    def response(self) -> ResponseResourceWithRawResponse:
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        """
+        return ResponseResourceWithRawResponse(self._threads.response)
 
 
 class AsyncThreadsResourceWithRawResponse:
     def __init__(self, threads: AsyncThreadsResource) -> None:
         self._threads = threads
 
+        self.create_thread = async_to_raw_response_wrapper(
+            threads.create_thread,
+        )
         self.get_thread = async_to_raw_response_wrapper(
             threads.get_thread,
         )
@@ -302,14 +497,28 @@ class AsyncThreadsResourceWithRawResponse:
 
     @cached_property
     def messages(self) -> AsyncMessagesResourceWithRawResponse:
-        """AI assistant for conversational trading interactions."""
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        """
         return AsyncMessagesResourceWithRawResponse(self._threads.messages)
+
+    @cached_property
+    def response(self) -> AsyncResponseResourceWithRawResponse:
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        """
+        return AsyncResponseResourceWithRawResponse(self._threads.response)
 
 
 class ThreadsResourceWithStreamingResponse:
     def __init__(self, threads: ThreadsResource) -> None:
         self._threads = threads
 
+        self.create_thread = to_streamed_response_wrapper(
+            threads.create_thread,
+        )
         self.get_thread = to_streamed_response_wrapper(
             threads.get_thread,
         )
@@ -319,14 +528,28 @@ class ThreadsResourceWithStreamingResponse:
 
     @cached_property
     def messages(self) -> MessagesResourceWithStreamingResponse:
-        """AI assistant for conversational trading interactions."""
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        """
         return MessagesResourceWithStreamingResponse(self._threads.messages)
+
+    @cached_property
+    def response(self) -> ResponseResourceWithStreamingResponse:
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        """
+        return ResponseResourceWithStreamingResponse(self._threads.response)
 
 
 class AsyncThreadsResourceWithStreamingResponse:
     def __init__(self, threads: AsyncThreadsResource) -> None:
         self._threads = threads
 
+        self.create_thread = async_to_streamed_response_wrapper(
+            threads.create_thread,
+        )
         self.get_thread = async_to_streamed_response_wrapper(
             threads.get_thread,
         )
@@ -336,5 +559,16 @@ class AsyncThreadsResourceWithStreamingResponse:
 
     @cached_property
     def messages(self) -> AsyncMessagesResourceWithStreamingResponse:
-        """AI assistant for conversational trading interactions."""
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        """
         return AsyncMessagesResourceWithStreamingResponse(self._threads.messages)
+
+    @cached_property
+    def response(self) -> AsyncResponseResourceWithStreamingResponse:
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        """
+        return AsyncResponseResourceWithStreamingResponse(self._threads.response)

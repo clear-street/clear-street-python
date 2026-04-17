@@ -3,31 +3,33 @@
 from typing import Optional
 
 from ...._models import BaseModel
+from .error_status import ErrorStatus
 from .message_role import MessageRole
 from .message_content import MessageContent
+from .message_outcome import MessageOutcome
 
 __all__ = ["Message"]
 
 
 class Message(BaseModel):
-    content_text: str
-    """Denormalized text content for search/display"""
+    """Final immutable message."""
+
+    id: str
+
+    content: MessageContent
+    """Finalized immutable message content container. Never includes thinking parts."""
 
     created_at: str
 
+    outcome: MessageOutcome
+    """Immutable terminal outcome for a finalized assistant message."""
+
     role: MessageRole
+    """Finalized message role in the public contract."""
 
     seq: int
 
-    id: Optional[str] = None
+    thread_id: str
 
-    author_user_id: Optional[str] = None
-
-    content: Optional[MessageContent] = None
-    """Parsed content parts (text, thinking, and structured actions)"""
-
-    metadata: Optional[object] = None
-
-    run_id: Optional[str] = None
-
-    thread_id: Optional[str] = None
+    error: Optional[ErrorStatus] = None
+    """Shared sanitized error payload."""

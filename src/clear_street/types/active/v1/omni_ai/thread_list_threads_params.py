@@ -2,17 +2,24 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, TypedDict
+from typing import Union
+from typing_extensions import Required, Annotated, TypedDict
+
+from ....._types import Base64FileInput
+from ....._utils import PropertyInfo
 
 __all__ = ["ThreadListThreadsParams"]
 
 
 class ThreadListThreadsParams(TypedDict, total=False):
-    account_id: Required[str]
+    account_id: Required[int]
     """Account ID for the request"""
 
     page_size: int
-    """Maximum threads to return"""
 
-    page_token: str
-    """Page token for pagination"""
+    page_token: Annotated[Union[str, Base64FileInput], PropertyInfo(format="base64")]
+    """Token for retrieving the next page of results.
+
+    Contains encoded pagination state (limit + offset). When provided, page_size is
+    ignored.
+    """
