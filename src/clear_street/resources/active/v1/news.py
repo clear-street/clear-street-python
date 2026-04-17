@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union
+from typing import List, Union
 from typing_extensions import Literal
 
 import httpx
@@ -67,6 +67,22 @@ class NewsResource(SyncAPIResource):
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         search_query: str | Omit = omit,
+        sectors: List[
+            Literal[
+                "BASIC_MATERIALS",
+                "COMMUNICATION_SERVICES",
+                "CONSUMER_CYCLICAL",
+                "CONSUMER_DEFENSIVE",
+                "ENERGY",
+                "FINANCIAL_SERVICES",
+                "HEALTHCARE",
+                "INDUSTRIALS",
+                "REAL_ESTATE",
+                "TECHNOLOGY",
+                "UTILITIES",
+            ]
+        ]
+        | Omit = omit,
         security_id: SequenceNotStr[str] | Omit = omit,
         security_id_source: SequenceNotStr[str] | Omit = omit,
         to: str | Omit = omit,
@@ -98,6 +114,8 @@ class NewsResource(SyncAPIResource):
               (limit + offset). When provided, page_size is ignored.
 
           search_query: Free-text query matched against title/text and associated security IDs.
+
+          sectors: Comma-separated sector values to filter by.
 
           security_id: Filter by security ID(s). Accepts single value or indexed array.
 
@@ -141,6 +159,7 @@ class NewsResource(SyncAPIResource):
                         "page_size": page_size,
                         "page_token": page_token,
                         "search_query": search_query,
+                        "sectors": sectors,
                         "security_id": security_id,
                         "security_id_source": security_id_source,
                         "to": to,
@@ -185,6 +204,22 @@ class AsyncNewsResource(AsyncAPIResource):
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         search_query: str | Omit = omit,
+        sectors: List[
+            Literal[
+                "BASIC_MATERIALS",
+                "COMMUNICATION_SERVICES",
+                "CONSUMER_CYCLICAL",
+                "CONSUMER_DEFENSIVE",
+                "ENERGY",
+                "FINANCIAL_SERVICES",
+                "HEALTHCARE",
+                "INDUSTRIALS",
+                "REAL_ESTATE",
+                "TECHNOLOGY",
+                "UTILITIES",
+            ]
+        ]
+        | Omit = omit,
         security_id: SequenceNotStr[str] | Omit = omit,
         security_id_source: SequenceNotStr[str] | Omit = omit,
         to: str | Omit = omit,
@@ -216,6 +251,8 @@ class AsyncNewsResource(AsyncAPIResource):
               (limit + offset). When provided, page_size is ignored.
 
           search_query: Free-text query matched against title/text and associated security IDs.
+
+          sectors: Comma-separated sector values to filter by.
 
           security_id: Filter by security ID(s). Accepts single value or indexed array.
 
@@ -259,6 +296,7 @@ class AsyncNewsResource(AsyncAPIResource):
                         "page_size": page_size,
                         "page_token": page_token,
                         "search_query": search_query,
+                        "sectors": sectors,
                         "security_id": security_id,
                         "security_id_source": security_id_source,
                         "to": to,
