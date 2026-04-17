@@ -3,12 +3,12 @@
 from typing import List
 
 from ...._models import BaseModel
-from .content_part import ContentPart
+from .message_content_part import MessageContentPart
 
 __all__ = ["MessageContent"]
 
 
 class MessageContent(BaseModel):
-    """Message content containing text and structured action parts."""
+    """Finalized immutable message content container. Never includes thinking parts."""
 
-    parts: List[ContentPart]
+    parts: List[MessageContentPart]
