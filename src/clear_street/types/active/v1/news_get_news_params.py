@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union
+from typing import List, Union
 from typing_extensions import Literal, Annotated, TypedDict
 
 from ...._types import SequenceNotStr, Base64FileInput
@@ -44,6 +44,23 @@ class NewsGetNewsParams(TypedDict, total=False):
 
     search_query: str
     """Free-text query matched against title/text and associated security IDs."""
+
+    sectors: List[
+        Literal[
+            "BASIC_MATERIALS",
+            "COMMUNICATION_SERVICES",
+            "CONSUMER_CYCLICAL",
+            "CONSUMER_DEFENSIVE",
+            "ENERGY",
+            "FINANCIAL_SERVICES",
+            "HEALTHCARE",
+            "INDUSTRIALS",
+            "REAL_ESTATE",
+            "TECHNOLOGY",
+            "UTILITIES",
+        ]
+    ]
+    """Comma-separated sector values to filter by."""
 
     security_id: SequenceNotStr[str]
     """Filter by security ID(s). Accepts single value or indexed array.

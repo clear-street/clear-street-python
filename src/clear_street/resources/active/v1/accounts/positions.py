@@ -51,7 +51,7 @@ class PositionsResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/clear-street-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/clear-street/clear-street-python#accessing-raw-response-data-eg-headers
         """
         return PositionsResourceWithRawResponse(self)
 
@@ -60,7 +60,7 @@ class PositionsResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/clear-street-python#with_streaming_response
+        For more information, see https://www.github.com/clear-street/clear-street-python#with_streaming_response
         """
         return PositionsResourceWithStreamingResponse(self)
 
@@ -79,7 +79,9 @@ class PositionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PositionClosePositionResponse:
         """
-        Retrieves all positions for the specified trading account.
+        Delete a position within an account for an instrument.
+
+        Retrieves orders generated to close the position.
 
         Args:
           security_id_source: Security identifier source
@@ -125,6 +127,8 @@ class PositionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PositionClosePositionsResponse:
         """
+        Delete all positions within an account.
+
         Closes all positions for the specified trading account.
 
         Args:
@@ -239,7 +243,7 @@ class AsyncPositionsResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/clear-street-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/clear-street/clear-street-python#accessing-raw-response-data-eg-headers
         """
         return AsyncPositionsResourceWithRawResponse(self)
 
@@ -248,7 +252,7 @@ class AsyncPositionsResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/clear-street-python#with_streaming_response
+        For more information, see https://www.github.com/clear-street/clear-street-python#with_streaming_response
         """
         return AsyncPositionsResourceWithStreamingResponse(self)
 
@@ -267,7 +271,9 @@ class AsyncPositionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PositionClosePositionResponse:
         """
-        Retrieves all positions for the specified trading account.
+        Delete a position within an account for an instrument.
+
+        Retrieves orders generated to close the position.
 
         Args:
           security_id_source: Security identifier source
@@ -313,6 +319,8 @@ class AsyncPositionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PositionClosePositionsResponse:
         """
+        Delete all positions within an account.
+
         Closes all positions for the specified trading account.
 
         Args:

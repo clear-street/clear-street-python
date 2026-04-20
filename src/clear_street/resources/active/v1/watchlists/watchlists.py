@@ -45,7 +45,7 @@ class WatchlistsResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/clear-street-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/clear-street/clear-street-python#accessing-raw-response-data-eg-headers
         """
         return WatchlistsResourceWithRawResponse(self)
 
@@ -54,7 +54,7 @@ class WatchlistsResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/clear-street-python#with_streaming_response
+        For more information, see https://www.github.com/clear-street/clear-street-python#with_streaming_response
         """
         return WatchlistsResourceWithStreamingResponse(self)
 
@@ -70,7 +70,7 @@ class WatchlistsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WatchlistCreateWatchlistResponse:
         """
-        Create a new watchlist
+        Create Watchlist
 
         Args:
           name: The desired watchlist name.
@@ -193,7 +193,7 @@ class AsyncWatchlistsResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/clear-street-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/clear-street/clear-street-python#accessing-raw-response-data-eg-headers
         """
         return AsyncWatchlistsResourceWithRawResponse(self)
 
@@ -202,7 +202,7 @@ class AsyncWatchlistsResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/clear-street-python#with_streaming_response
+        For more information, see https://www.github.com/clear-street/clear-street-python#with_streaming_response
         """
         return AsyncWatchlistsResourceWithStreamingResponse(self)
 
@@ -218,7 +218,7 @@ class AsyncWatchlistsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WatchlistCreateWatchlistResponse:
         """
-        Create a new watchlist
+        Create Watchlist
 
         Args:
           name: The desired watchlist name.

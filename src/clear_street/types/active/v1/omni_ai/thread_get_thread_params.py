@@ -8,5 +8,5 @@ __all__ = ["ThreadGetThreadParams"]
 
 
 class ThreadGetThreadParams(TypedDict, total=False):
-    account_id: Required[str]
+    account_id: Required[int]
     """Account ID for the request"""

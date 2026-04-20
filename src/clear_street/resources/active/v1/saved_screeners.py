@@ -18,11 +18,11 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.active.v1 import saved_screener_create_screener_params, saved_screener_update_screener_params
+from ....types.active.v1 import saved_screener_create_screener_params, saved_screener_replace_screener_params
 from ....types.active.v1.saved_screener_filter_param import SavedScreenerFilterParam
-from ....types.active.v1.saved_screener_list_screeners_response import SavedScreenerListScreenersResponse
+from ....types.active.v1.saved_screener_get_screeners_response import SavedScreenerGetScreenersResponse
 from ....types.active.v1.saved_screener_create_screener_response import SavedScreenerCreateScreenerResponse
-from ....types.active.v1.saved_screener_update_screener_response import SavedScreenerUpdateScreenerResponse
+from ....types.active.v1.saved_screener_replace_screener_response import SavedScreenerReplaceScreenerResponse
 from ....types.active.v1.saved_screener_get_screener_by_id_response import SavedScreenerGetScreenerByIDResponse
 
 __all__ = ["SavedScreenersResource", "AsyncSavedScreenersResource"]
@@ -37,7 +37,7 @@ class SavedScreenersResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/clear-street-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/clear-street/clear-street-python#accessing-raw-response-data-eg-headers
         """
         return SavedScreenersResourceWithRawResponse(self)
 
@@ -46,7 +46,7 @@ class SavedScreenersResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/clear-street-python#with_streaming_response
+        For more information, see https://www.github.com/clear-street/clear-street-python#with_streaming_response
         """
         return SavedScreenersResourceWithStreamingResponse(self)
 
@@ -66,6 +66,8 @@ class SavedScreenersResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SavedScreenerCreateScreenerResponse:
         """
+        Create a saved screener configuration.
+
         Persists a screener configuration for the authenticated user.
 
         Args:
@@ -117,6 +119,8 @@ class SavedScreenersResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
+        Delete a saved screener configuration.
+
         Deletes the screener configuration for the authenticated user.
 
         Args:
@@ -151,6 +155,8 @@ class SavedScreenersResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SavedScreenerGetScreenerByIDResponse:
         """
+        Get a saved screener configuration by ID.
+
         Returns a single screener configuration for the authenticated user.
 
         Args:
@@ -172,7 +178,7 @@ class SavedScreenersResource(SyncAPIResource):
             cast_to=SavedScreenerGetScreenerByIDResponse,
         )
 
-    def list_screeners(
+    def get_screeners(
         self,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -181,17 +187,21 @@ class SavedScreenersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SavedScreenerListScreenersResponse:
-        """Returns all screener configurations for the authenticated user."""
+    ) -> SavedScreenerGetScreenersResponse:
+        """
+        List saved screener configurations.
+
+        Returns all screener configurations for the authenticated user.
+        """
         return self._get(
             "/active/v1/saved-screeners",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SavedScreenerListScreenersResponse,
+            cast_to=SavedScreenerGetScreenersResponse,
         )
 
-    def update_screener(
+    def replace_screener(
         self,
         screener_id: str,
         *,
@@ -206,10 +216,11 @@ class SavedScreenersResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SavedScreenerUpdateScreenerResponse:
-        """Replaces the screener configuration for the authenticated user.
+    ) -> SavedScreenerReplaceScreenerResponse:
+        """
+        Update a saved screener configuration.
 
-        If `name` is
+        Replaces the screener configuration for the authenticated user. If `name` is
         null, the existing name is preserved.
 
         Args:
@@ -243,12 +254,12 @@ class SavedScreenersResource(SyncAPIResource):
                     "sort_by": sort_by,
                     "sort_direction": sort_direction,
                 },
-                saved_screener_update_screener_params.SavedScreenerUpdateScreenerParams,
+                saved_screener_replace_screener_params.SavedScreenerReplaceScreenerParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SavedScreenerUpdateScreenerResponse,
+            cast_to=SavedScreenerReplaceScreenerResponse,
         )
 
 
@@ -261,7 +272,7 @@ class AsyncSavedScreenersResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/clear-street-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/clear-street/clear-street-python#accessing-raw-response-data-eg-headers
         """
         return AsyncSavedScreenersResourceWithRawResponse(self)
 
@@ -270,7 +281,7 @@ class AsyncSavedScreenersResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/clear-street-python#with_streaming_response
+        For more information, see https://www.github.com/clear-street/clear-street-python#with_streaming_response
         """
         return AsyncSavedScreenersResourceWithStreamingResponse(self)
 
@@ -290,6 +301,8 @@ class AsyncSavedScreenersResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SavedScreenerCreateScreenerResponse:
         """
+        Create a saved screener configuration.
+
         Persists a screener configuration for the authenticated user.
 
         Args:
@@ -341,6 +354,8 @@ class AsyncSavedScreenersResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
+        Delete a saved screener configuration.
+
         Deletes the screener configuration for the authenticated user.
 
         Args:
@@ -375,6 +390,8 @@ class AsyncSavedScreenersResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> SavedScreenerGetScreenerByIDResponse:
         """
+        Get a saved screener configuration by ID.
+
         Returns a single screener configuration for the authenticated user.
 
         Args:
@@ -396,7 +413,7 @@ class AsyncSavedScreenersResource(AsyncAPIResource):
             cast_to=SavedScreenerGetScreenerByIDResponse,
         )
 
-    async def list_screeners(
+    async def get_screeners(
         self,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -405,17 +422,21 @@ class AsyncSavedScreenersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SavedScreenerListScreenersResponse:
-        """Returns all screener configurations for the authenticated user."""
+    ) -> SavedScreenerGetScreenersResponse:
+        """
+        List saved screener configurations.
+
+        Returns all screener configurations for the authenticated user.
+        """
         return await self._get(
             "/active/v1/saved-screeners",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SavedScreenerListScreenersResponse,
+            cast_to=SavedScreenerGetScreenersResponse,
         )
 
-    async def update_screener(
+    async def replace_screener(
         self,
         screener_id: str,
         *,
@@ -430,10 +451,11 @@ class AsyncSavedScreenersResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> SavedScreenerUpdateScreenerResponse:
-        """Replaces the screener configuration for the authenticated user.
+    ) -> SavedScreenerReplaceScreenerResponse:
+        """
+        Update a saved screener configuration.
 
-        If `name` is
+        Replaces the screener configuration for the authenticated user. If `name` is
         null, the existing name is preserved.
 
         Args:
@@ -467,12 +489,12 @@ class AsyncSavedScreenersResource(AsyncAPIResource):
                     "sort_by": sort_by,
                     "sort_direction": sort_direction,
                 },
-                saved_screener_update_screener_params.SavedScreenerUpdateScreenerParams,
+                saved_screener_replace_screener_params.SavedScreenerReplaceScreenerParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=SavedScreenerUpdateScreenerResponse,
+            cast_to=SavedScreenerReplaceScreenerResponse,
         )
 
 
@@ -489,11 +511,11 @@ class SavedScreenersResourceWithRawResponse:
         self.get_screener_by_id = to_raw_response_wrapper(
             saved_screeners.get_screener_by_id,
         )
-        self.list_screeners = to_raw_response_wrapper(
-            saved_screeners.list_screeners,
+        self.get_screeners = to_raw_response_wrapper(
+            saved_screeners.get_screeners,
         )
-        self.update_screener = to_raw_response_wrapper(
-            saved_screeners.update_screener,
+        self.replace_screener = to_raw_response_wrapper(
+            saved_screeners.replace_screener,
         )
 
 
@@ -510,11 +532,11 @@ class AsyncSavedScreenersResourceWithRawResponse:
         self.get_screener_by_id = async_to_raw_response_wrapper(
             saved_screeners.get_screener_by_id,
         )
-        self.list_screeners = async_to_raw_response_wrapper(
-            saved_screeners.list_screeners,
+        self.get_screeners = async_to_raw_response_wrapper(
+            saved_screeners.get_screeners,
         )
-        self.update_screener = async_to_raw_response_wrapper(
-            saved_screeners.update_screener,
+        self.replace_screener = async_to_raw_response_wrapper(
+            saved_screeners.replace_screener,
         )
 
 
@@ -531,11 +553,11 @@ class SavedScreenersResourceWithStreamingResponse:
         self.get_screener_by_id = to_streamed_response_wrapper(
             saved_screeners.get_screener_by_id,
         )
-        self.list_screeners = to_streamed_response_wrapper(
-            saved_screeners.list_screeners,
+        self.get_screeners = to_streamed_response_wrapper(
+            saved_screeners.get_screeners,
         )
-        self.update_screener = to_streamed_response_wrapper(
-            saved_screeners.update_screener,
+        self.replace_screener = to_streamed_response_wrapper(
+            saved_screeners.replace_screener,
         )
 
 
@@ -552,9 +574,9 @@ class AsyncSavedScreenersResourceWithStreamingResponse:
         self.get_screener_by_id = async_to_streamed_response_wrapper(
             saved_screeners.get_screener_by_id,
         )
-        self.list_screeners = async_to_streamed_response_wrapper(
-            saved_screeners.list_screeners,
+        self.get_screeners = async_to_streamed_response_wrapper(
+            saved_screeners.get_screeners,
         )
-        self.update_screener = async_to_streamed_response_wrapper(
-            saved_screeners.update_screener,
+        self.replace_screener = async_to_streamed_response_wrapper(
+            saved_screeners.replace_screener,
         )

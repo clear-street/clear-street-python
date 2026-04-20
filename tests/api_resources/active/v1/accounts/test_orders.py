@@ -12,11 +12,11 @@ from clear_street import ClearStreet, AsyncClearStreet
 from clear_street._utils import parse_datetime
 from clear_street.types.active.v1.accounts import (
     OrderGetOrdersResponse,
-    OrderCancelOrderResponse,
     OrderGetOrderByIDResponse,
     OrderReplaceOrderResponse,
     OrderSubmitOrdersResponse,
-    OrderCancelAllOrdersResponse,
+    OrderCancelOpenOrderResponse,
+    OrderCancelAllOpenOrdersResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -27,16 +27,16 @@ class TestOrders:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_cancel_all_orders(self, client: ClearStreet) -> None:
-        order = client.active.v1.accounts.orders.cancel_all_orders(
+    def test_method_cancel_all_open_orders(self, client: ClearStreet) -> None:
+        order = client.active.v1.accounts.orders.cancel_all_open_orders(
             account_id=0,
         )
-        assert_matches_type(OrderCancelAllOrdersResponse, order, path=["response"])
+        assert_matches_type(OrderCancelAllOpenOrdersResponse, order, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_cancel_all_orders_with_all_params(self, client: ClearStreet) -> None:
-        order = client.active.v1.accounts.orders.cancel_all_orders(
+    def test_method_cancel_all_open_orders_with_all_params(self, client: ClearStreet) -> None:
+        order = client.active.v1.accounts.orders.cancel_all_open_orders(
             account_id=0,
             security_id=["string"],
             security_id_source=["string"],
@@ -44,47 +44,47 @@ class TestOrders:
             side="BUY",
             type="MARKET",
         )
-        assert_matches_type(OrderCancelAllOrdersResponse, order, path=["response"])
+        assert_matches_type(OrderCancelAllOpenOrdersResponse, order, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_cancel_all_orders(self, client: ClearStreet) -> None:
-        response = client.active.v1.accounts.orders.with_raw_response.cancel_all_orders(
+    def test_raw_response_cancel_all_open_orders(self, client: ClearStreet) -> None:
+        response = client.active.v1.accounts.orders.with_raw_response.cancel_all_open_orders(
             account_id=0,
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         order = response.parse()
-        assert_matches_type(OrderCancelAllOrdersResponse, order, path=["response"])
+        assert_matches_type(OrderCancelAllOpenOrdersResponse, order, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_cancel_all_orders(self, client: ClearStreet) -> None:
-        with client.active.v1.accounts.orders.with_streaming_response.cancel_all_orders(
+    def test_streaming_response_cancel_all_open_orders(self, client: ClearStreet) -> None:
+        with client.active.v1.accounts.orders.with_streaming_response.cancel_all_open_orders(
             account_id=0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             order = response.parse()
-            assert_matches_type(OrderCancelAllOrdersResponse, order, path=["response"])
+            assert_matches_type(OrderCancelAllOpenOrdersResponse, order, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_cancel_order(self, client: ClearStreet) -> None:
-        order = client.active.v1.accounts.orders.cancel_order(
+    def test_method_cancel_open_order(self, client: ClearStreet) -> None:
+        order = client.active.v1.accounts.orders.cancel_open_order(
             order_id="order_id",
             account_id=0,
         )
-        assert_matches_type(OrderCancelOrderResponse, order, path=["response"])
+        assert_matches_type(OrderCancelOpenOrderResponse, order, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_cancel_order(self, client: ClearStreet) -> None:
-        response = client.active.v1.accounts.orders.with_raw_response.cancel_order(
+    def test_raw_response_cancel_open_order(self, client: ClearStreet) -> None:
+        response = client.active.v1.accounts.orders.with_raw_response.cancel_open_order(
             order_id="order_id",
             account_id=0,
         )
@@ -92,12 +92,12 @@ class TestOrders:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         order = response.parse()
-        assert_matches_type(OrderCancelOrderResponse, order, path=["response"])
+        assert_matches_type(OrderCancelOpenOrderResponse, order, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_cancel_order(self, client: ClearStreet) -> None:
-        with client.active.v1.accounts.orders.with_streaming_response.cancel_order(
+    def test_streaming_response_cancel_open_order(self, client: ClearStreet) -> None:
+        with client.active.v1.accounts.orders.with_streaming_response.cancel_open_order(
             order_id="order_id",
             account_id=0,
         ) as response:
@@ -105,15 +105,15 @@ class TestOrders:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             order = response.parse()
-            assert_matches_type(OrderCancelOrderResponse, order, path=["response"])
+            assert_matches_type(OrderCancelOpenOrderResponse, order, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_cancel_order(self, client: ClearStreet) -> None:
+    def test_path_params_cancel_open_order(self, client: ClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `order_id` but received ''"):
-            client.active.v1.accounts.orders.with_raw_response.cancel_order(
+            client.active.v1.accounts.orders.with_raw_response.cancel_open_order(
                 order_id="",
                 account_id=0,
             )
@@ -394,16 +394,16 @@ class TestAsyncOrders:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_cancel_all_orders(self, async_client: AsyncClearStreet) -> None:
-        order = await async_client.active.v1.accounts.orders.cancel_all_orders(
+    async def test_method_cancel_all_open_orders(self, async_client: AsyncClearStreet) -> None:
+        order = await async_client.active.v1.accounts.orders.cancel_all_open_orders(
             account_id=0,
         )
-        assert_matches_type(OrderCancelAllOrdersResponse, order, path=["response"])
+        assert_matches_type(OrderCancelAllOpenOrdersResponse, order, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_cancel_all_orders_with_all_params(self, async_client: AsyncClearStreet) -> None:
-        order = await async_client.active.v1.accounts.orders.cancel_all_orders(
+    async def test_method_cancel_all_open_orders_with_all_params(self, async_client: AsyncClearStreet) -> None:
+        order = await async_client.active.v1.accounts.orders.cancel_all_open_orders(
             account_id=0,
             security_id=["string"],
             security_id_source=["string"],
@@ -411,47 +411,47 @@ class TestAsyncOrders:
             side="BUY",
             type="MARKET",
         )
-        assert_matches_type(OrderCancelAllOrdersResponse, order, path=["response"])
+        assert_matches_type(OrderCancelAllOpenOrdersResponse, order, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_cancel_all_orders(self, async_client: AsyncClearStreet) -> None:
-        response = await async_client.active.v1.accounts.orders.with_raw_response.cancel_all_orders(
+    async def test_raw_response_cancel_all_open_orders(self, async_client: AsyncClearStreet) -> None:
+        response = await async_client.active.v1.accounts.orders.with_raw_response.cancel_all_open_orders(
             account_id=0,
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         order = await response.parse()
-        assert_matches_type(OrderCancelAllOrdersResponse, order, path=["response"])
+        assert_matches_type(OrderCancelAllOpenOrdersResponse, order, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_cancel_all_orders(self, async_client: AsyncClearStreet) -> None:
-        async with async_client.active.v1.accounts.orders.with_streaming_response.cancel_all_orders(
+    async def test_streaming_response_cancel_all_open_orders(self, async_client: AsyncClearStreet) -> None:
+        async with async_client.active.v1.accounts.orders.with_streaming_response.cancel_all_open_orders(
             account_id=0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             order = await response.parse()
-            assert_matches_type(OrderCancelAllOrdersResponse, order, path=["response"])
+            assert_matches_type(OrderCancelAllOpenOrdersResponse, order, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_cancel_order(self, async_client: AsyncClearStreet) -> None:
-        order = await async_client.active.v1.accounts.orders.cancel_order(
+    async def test_method_cancel_open_order(self, async_client: AsyncClearStreet) -> None:
+        order = await async_client.active.v1.accounts.orders.cancel_open_order(
             order_id="order_id",
             account_id=0,
         )
-        assert_matches_type(OrderCancelOrderResponse, order, path=["response"])
+        assert_matches_type(OrderCancelOpenOrderResponse, order, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_cancel_order(self, async_client: AsyncClearStreet) -> None:
-        response = await async_client.active.v1.accounts.orders.with_raw_response.cancel_order(
+    async def test_raw_response_cancel_open_order(self, async_client: AsyncClearStreet) -> None:
+        response = await async_client.active.v1.accounts.orders.with_raw_response.cancel_open_order(
             order_id="order_id",
             account_id=0,
         )
@@ -459,12 +459,12 @@ class TestAsyncOrders:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         order = await response.parse()
-        assert_matches_type(OrderCancelOrderResponse, order, path=["response"])
+        assert_matches_type(OrderCancelOpenOrderResponse, order, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_cancel_order(self, async_client: AsyncClearStreet) -> None:
-        async with async_client.active.v1.accounts.orders.with_streaming_response.cancel_order(
+    async def test_streaming_response_cancel_open_order(self, async_client: AsyncClearStreet) -> None:
+        async with async_client.active.v1.accounts.orders.with_streaming_response.cancel_open_order(
             order_id="order_id",
             account_id=0,
         ) as response:
@@ -472,15 +472,15 @@ class TestAsyncOrders:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             order = await response.parse()
-            assert_matches_type(OrderCancelOrderResponse, order, path=["response"])
+            assert_matches_type(OrderCancelOpenOrderResponse, order, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_cancel_order(self, async_client: AsyncClearStreet) -> None:
+    async def test_path_params_cancel_open_order(self, async_client: AsyncClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `order_id` but received ''"):
-            await async_client.active.v1.accounts.orders.with_raw_response.cancel_order(
+            await async_client.active.v1.accounts.orders.with_raw_response.cancel_open_order(
                 order_id="",
                 account_id=0,
             )
