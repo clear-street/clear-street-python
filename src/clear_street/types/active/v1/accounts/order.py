@@ -24,10 +24,13 @@ class Order(BaseModel):
     """
 
     id: str
-    """Client-provided unique identifier for this order"""
+    """Engine-assigned unique identifier for this order (UUID)."""
 
     account_id: int
     """Account placing the order"""
+
+    client_order_id: str
+    """Client-provided identifier echoed back (FIX tag 11)."""
 
     created_at: datetime
     """Timestamp when order was created (UTC)"""
