@@ -15,22 +15,6 @@ from .events import (
     EventsResourceWithStreamingResponse,
     AsyncEventsResourceWithStreamingResponse,
 )
-from .venues import (
-    VenuesResource,
-    AsyncVenuesResource,
-    VenuesResourceWithRawResponse,
-    AsyncVenuesResourceWithRawResponse,
-    VenuesResourceWithStreamingResponse,
-    AsyncVenuesResourceWithStreamingResponse,
-)
-from .reporting import (
-    ReportingResource,
-    AsyncReportingResource,
-    ReportingResourceWithRawResponse,
-    AsyncReportingResourceWithRawResponse,
-    ReportingResourceWithStreamingResponse,
-    AsyncReportingResourceWithStreamingResponse,
-)
 from ....._types import (
     Body,
     Omit,
@@ -93,16 +77,6 @@ class InstrumentsResource(SyncAPIResource):
     @cached_property
     def options(self) -> OptionsResource:
         return OptionsResource(self._client)
-
-    @cached_property
-    def reporting(self) -> ReportingResource:
-        """Retrieve details and lists of tradable instruments."""
-        return ReportingResource(self._client)
-
-    @cached_property
-    def venues(self) -> VenuesResource:
-        """Retrieve details and lists of tradable instruments."""
-        return VenuesResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> InstrumentsResourceWithRawResponse:
@@ -293,16 +267,6 @@ class AsyncInstrumentsResource(AsyncAPIResource):
     @cached_property
     def options(self) -> AsyncOptionsResource:
         return AsyncOptionsResource(self._client)
-
-    @cached_property
-    def reporting(self) -> AsyncReportingResource:
-        """Retrieve details and lists of tradable instruments."""
-        return AsyncReportingResource(self._client)
-
-    @cached_property
-    def venues(self) -> AsyncVenuesResource:
-        """Retrieve details and lists of tradable instruments."""
-        return AsyncVenuesResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncInstrumentsResourceWithRawResponse:
@@ -502,16 +466,6 @@ class InstrumentsResourceWithRawResponse:
     def options(self) -> OptionsResourceWithRawResponse:
         return OptionsResourceWithRawResponse(self._instruments.options)
 
-    @cached_property
-    def reporting(self) -> ReportingResourceWithRawResponse:
-        """Retrieve details and lists of tradable instruments."""
-        return ReportingResourceWithRawResponse(self._instruments.reporting)
-
-    @cached_property
-    def venues(self) -> VenuesResourceWithRawResponse:
-        """Retrieve details and lists of tradable instruments."""
-        return VenuesResourceWithRawResponse(self._instruments.venues)
-
 
 class AsyncInstrumentsResourceWithRawResponse:
     def __init__(self, instruments: AsyncInstrumentsResource) -> None:
@@ -537,16 +491,6 @@ class AsyncInstrumentsResourceWithRawResponse:
     @cached_property
     def options(self) -> AsyncOptionsResourceWithRawResponse:
         return AsyncOptionsResourceWithRawResponse(self._instruments.options)
-
-    @cached_property
-    def reporting(self) -> AsyncReportingResourceWithRawResponse:
-        """Retrieve details and lists of tradable instruments."""
-        return AsyncReportingResourceWithRawResponse(self._instruments.reporting)
-
-    @cached_property
-    def venues(self) -> AsyncVenuesResourceWithRawResponse:
-        """Retrieve details and lists of tradable instruments."""
-        return AsyncVenuesResourceWithRawResponse(self._instruments.venues)
 
 
 class InstrumentsResourceWithStreamingResponse:
@@ -574,16 +518,6 @@ class InstrumentsResourceWithStreamingResponse:
     def options(self) -> OptionsResourceWithStreamingResponse:
         return OptionsResourceWithStreamingResponse(self._instruments.options)
 
-    @cached_property
-    def reporting(self) -> ReportingResourceWithStreamingResponse:
-        """Retrieve details and lists of tradable instruments."""
-        return ReportingResourceWithStreamingResponse(self._instruments.reporting)
-
-    @cached_property
-    def venues(self) -> VenuesResourceWithStreamingResponse:
-        """Retrieve details and lists of tradable instruments."""
-        return VenuesResourceWithStreamingResponse(self._instruments.venues)
-
 
 class AsyncInstrumentsResourceWithStreamingResponse:
     def __init__(self, instruments: AsyncInstrumentsResource) -> None:
@@ -609,13 +543,3 @@ class AsyncInstrumentsResourceWithStreamingResponse:
     @cached_property
     def options(self) -> AsyncOptionsResourceWithStreamingResponse:
         return AsyncOptionsResourceWithStreamingResponse(self._instruments.options)
-
-    @cached_property
-    def reporting(self) -> AsyncReportingResourceWithStreamingResponse:
-        """Retrieve details and lists of tradable instruments."""
-        return AsyncReportingResourceWithStreamingResponse(self._instruments.reporting)
-
-    @cached_property
-    def venues(self) -> AsyncVenuesResourceWithStreamingResponse:
-        """Retrieve details and lists of tradable instruments."""
-        return AsyncVenuesResourceWithStreamingResponse(self._instruments.venues)
