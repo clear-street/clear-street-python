@@ -8,6 +8,14 @@ from .orders import (
     OrdersResourceWithStreamingResponse,
     AsyncOrdersResourceWithStreamingResponse,
 )
+from .locates import (
+    LocatesResource,
+    AsyncLocatesResource,
+    LocatesResourceWithRawResponse,
+    AsyncLocatesResourceWithRawResponse,
+    LocatesResourceWithStreamingResponse,
+    AsyncLocatesResourceWithStreamingResponse,
+)
 from .accounts import (
     AccountsResource,
     AsyncAccountsResource,
@@ -48,6 +56,12 @@ __all__ = [
     "AsyncBalancesResourceWithRawResponse",
     "BalancesResourceWithStreamingResponse",
     "AsyncBalancesResourceWithStreamingResponse",
+    "LocatesResource",
+    "AsyncLocatesResource",
+    "LocatesResourceWithRawResponse",
+    "AsyncLocatesResourceWithRawResponse",
+    "LocatesResourceWithStreamingResponse",
+    "AsyncLocatesResourceWithStreamingResponse",
     "OrdersResource",
     "AsyncOrdersResource",
     "OrdersResourceWithRawResponse",

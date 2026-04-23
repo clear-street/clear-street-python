@@ -40,6 +40,14 @@ from ....._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
+from .locates.locates import (
+    LocatesResource,
+    AsyncLocatesResource,
+    LocatesResourceWithRawResponse,
+    AsyncLocatesResourceWithRawResponse,
+    LocatesResourceWithStreamingResponse,
+    AsyncLocatesResourceWithStreamingResponse,
+)
 from ....._base_client import make_request_options
 from .portfolio_history import (
     PortfolioHistoryResource,
@@ -65,6 +73,11 @@ class AccountsResource(SyncAPIResource):
     def balances(self) -> BalancesResource:
         """Manage trading accounts and view balances."""
         return BalancesResource(self._client)
+
+    @cached_property
+    def locates(self) -> LocatesResource:
+        """Manage locate requests for short selling."""
+        return LocatesResource(self._client)
 
     @cached_property
     def orders(self) -> OrdersResource:
@@ -219,6 +232,11 @@ class AsyncAccountsResource(AsyncAPIResource):
     def balances(self) -> AsyncBalancesResource:
         """Manage trading accounts and view balances."""
         return AsyncBalancesResource(self._client)
+
+    @cached_property
+    def locates(self) -> AsyncLocatesResource:
+        """Manage locate requests for short selling."""
+        return AsyncLocatesResource(self._client)
 
     @cached_property
     def orders(self) -> AsyncOrdersResource:
@@ -388,6 +406,11 @@ class AccountsResourceWithRawResponse:
         return BalancesResourceWithRawResponse(self._accounts.balances)
 
     @cached_property
+    def locates(self) -> LocatesResourceWithRawResponse:
+        """Manage locate requests for short selling."""
+        return LocatesResourceWithRawResponse(self._accounts.locates)
+
+    @cached_property
     def orders(self) -> OrdersResourceWithRawResponse:
         """Place, monitor, and manage trading orders."""
         return OrdersResourceWithRawResponse(self._accounts.orders)
@@ -421,6 +444,11 @@ class AsyncAccountsResourceWithRawResponse:
     def balances(self) -> AsyncBalancesResourceWithRawResponse:
         """Manage trading accounts and view balances."""
         return AsyncBalancesResourceWithRawResponse(self._accounts.balances)
+
+    @cached_property
+    def locates(self) -> AsyncLocatesResourceWithRawResponse:
+        """Manage locate requests for short selling."""
+        return AsyncLocatesResourceWithRawResponse(self._accounts.locates)
 
     @cached_property
     def orders(self) -> AsyncOrdersResourceWithRawResponse:
@@ -458,6 +486,11 @@ class AccountsResourceWithStreamingResponse:
         return BalancesResourceWithStreamingResponse(self._accounts.balances)
 
     @cached_property
+    def locates(self) -> LocatesResourceWithStreamingResponse:
+        """Manage locate requests for short selling."""
+        return LocatesResourceWithStreamingResponse(self._accounts.locates)
+
+    @cached_property
     def orders(self) -> OrdersResourceWithStreamingResponse:
         """Place, monitor, and manage trading orders."""
         return OrdersResourceWithStreamingResponse(self._accounts.orders)
@@ -491,6 +524,11 @@ class AsyncAccountsResourceWithStreamingResponse:
     def balances(self) -> AsyncBalancesResourceWithStreamingResponse:
         """Manage trading accounts and view balances."""
         return AsyncBalancesResourceWithStreamingResponse(self._accounts.balances)
+
+    @cached_property
+    def locates(self) -> AsyncLocatesResourceWithStreamingResponse:
+        """Manage locate requests for short selling."""
+        return AsyncLocatesResourceWithStreamingResponse(self._accounts.locates)
 
     @cached_property
     def orders(self) -> AsyncOrdersResourceWithStreamingResponse:
