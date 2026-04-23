@@ -13,4 +13,4 @@ class MessageCreateMessageParams(TypedDict, total=False):
 
     text: Required[str]
 
-    capabilities: List[Literal["PREFILL_ORDER", "OPEN_CHART", "OPEN_SCREENER"]]
+    capabilities: List[Literal["PREFILL_ORDER", "OPEN_CHART", "OPEN_SCREENER", "OPEN_ENTITLEMENT_CONSENT"]]

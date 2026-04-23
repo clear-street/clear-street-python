@@ -11,6 +11,14 @@ from .responses import (
     AsyncResponsesResourceWithStreamingResponse,
 )
 from ....._compat import cached_property
+from .entitlements import (
+    EntitlementsResource,
+    AsyncEntitlementsResource,
+    EntitlementsResourceWithRawResponse,
+    AsyncEntitlementsResourceWithRawResponse,
+    EntitlementsResourceWithStreamingResponse,
+    AsyncEntitlementsResourceWithStreamingResponse,
+)
 from ....._resource import SyncAPIResource, AsyncAPIResource
 from .threads.threads import (
     ThreadsResource,
@@ -28,16 +36,40 @@ from .messages.messages import (
     MessagesResourceWithStreamingResponse,
     AsyncMessagesResourceWithStreamingResponse,
 )
+from .entitlement_agreements import (
+    EntitlementAgreementsResource,
+    AsyncEntitlementAgreementsResource,
+    EntitlementAgreementsResourceWithRawResponse,
+    AsyncEntitlementAgreementsResourceWithRawResponse,
+    EntitlementAgreementsResourceWithStreamingResponse,
+    AsyncEntitlementAgreementsResourceWithStreamingResponse,
+)
 
 __all__ = ["OmniAIResource", "AsyncOmniAIResource"]
 
 
 class OmniAIResource(SyncAPIResource):
     @cached_property
+    def entitlement_agreements(self) -> EntitlementAgreementsResource:
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
+        """
+        return EntitlementAgreementsResource(self._client)
+
+    @cached_property
+    def entitlements(self) -> EntitlementsResource:
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
+        """
+        return EntitlementsResource(self._client)
+
+    @cached_property
     def messages(self) -> MessagesResource:
         """Thread-centric AI assistant for conversational trading.
 
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return MessagesResource(self._client)
 
@@ -45,7 +77,7 @@ class OmniAIResource(SyncAPIResource):
     def responses(self) -> ResponsesResource:
         """Thread-centric AI assistant for conversational trading.
 
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return ResponsesResource(self._client)
 
@@ -53,7 +85,7 @@ class OmniAIResource(SyncAPIResource):
     def threads(self) -> ThreadsResource:
         """Thread-centric AI assistant for conversational trading.
 
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return ThreadsResource(self._client)
 
@@ -79,10 +111,26 @@ class OmniAIResource(SyncAPIResource):
 
 class AsyncOmniAIResource(AsyncAPIResource):
     @cached_property
+    def entitlement_agreements(self) -> AsyncEntitlementAgreementsResource:
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
+        """
+        return AsyncEntitlementAgreementsResource(self._client)
+
+    @cached_property
+    def entitlements(self) -> AsyncEntitlementsResource:
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
+        """
+        return AsyncEntitlementsResource(self._client)
+
+    @cached_property
     def messages(self) -> AsyncMessagesResource:
         """Thread-centric AI assistant for conversational trading.
 
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return AsyncMessagesResource(self._client)
 
@@ -90,7 +138,7 @@ class AsyncOmniAIResource(AsyncAPIResource):
     def responses(self) -> AsyncResponsesResource:
         """Thread-centric AI assistant for conversational trading.
 
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return AsyncResponsesResource(self._client)
 
@@ -98,7 +146,7 @@ class AsyncOmniAIResource(AsyncAPIResource):
     def threads(self) -> AsyncThreadsResource:
         """Thread-centric AI assistant for conversational trading.
 
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return AsyncThreadsResource(self._client)
 
@@ -127,10 +175,26 @@ class OmniAIResourceWithRawResponse:
         self._omni_ai = omni_ai
 
     @cached_property
+    def entitlement_agreements(self) -> EntitlementAgreementsResourceWithRawResponse:
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
+        """
+        return EntitlementAgreementsResourceWithRawResponse(self._omni_ai.entitlement_agreements)
+
+    @cached_property
+    def entitlements(self) -> EntitlementsResourceWithRawResponse:
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
+        """
+        return EntitlementsResourceWithRawResponse(self._omni_ai.entitlements)
+
+    @cached_property
     def messages(self) -> MessagesResourceWithRawResponse:
         """Thread-centric AI assistant for conversational trading.
 
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return MessagesResourceWithRawResponse(self._omni_ai.messages)
 
@@ -138,7 +202,7 @@ class OmniAIResourceWithRawResponse:
     def responses(self) -> ResponsesResourceWithRawResponse:
         """Thread-centric AI assistant for conversational trading.
 
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return ResponsesResourceWithRawResponse(self._omni_ai.responses)
 
@@ -146,7 +210,7 @@ class OmniAIResourceWithRawResponse:
     def threads(self) -> ThreadsResourceWithRawResponse:
         """Thread-centric AI assistant for conversational trading.
 
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return ThreadsResourceWithRawResponse(self._omni_ai.threads)
 
@@ -156,10 +220,26 @@ class AsyncOmniAIResourceWithRawResponse:
         self._omni_ai = omni_ai
 
     @cached_property
+    def entitlement_agreements(self) -> AsyncEntitlementAgreementsResourceWithRawResponse:
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
+        """
+        return AsyncEntitlementAgreementsResourceWithRawResponse(self._omni_ai.entitlement_agreements)
+
+    @cached_property
+    def entitlements(self) -> AsyncEntitlementsResourceWithRawResponse:
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
+        """
+        return AsyncEntitlementsResourceWithRawResponse(self._omni_ai.entitlements)
+
+    @cached_property
     def messages(self) -> AsyncMessagesResourceWithRawResponse:
         """Thread-centric AI assistant for conversational trading.
 
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return AsyncMessagesResourceWithRawResponse(self._omni_ai.messages)
 
@@ -167,7 +247,7 @@ class AsyncOmniAIResourceWithRawResponse:
     def responses(self) -> AsyncResponsesResourceWithRawResponse:
         """Thread-centric AI assistant for conversational trading.
 
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return AsyncResponsesResourceWithRawResponse(self._omni_ai.responses)
 
@@ -175,7 +255,7 @@ class AsyncOmniAIResourceWithRawResponse:
     def threads(self) -> AsyncThreadsResourceWithRawResponse:
         """Thread-centric AI assistant for conversational trading.
 
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return AsyncThreadsResourceWithRawResponse(self._omni_ai.threads)
 
@@ -185,10 +265,26 @@ class OmniAIResourceWithStreamingResponse:
         self._omni_ai = omni_ai
 
     @cached_property
+    def entitlement_agreements(self) -> EntitlementAgreementsResourceWithStreamingResponse:
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
+        """
+        return EntitlementAgreementsResourceWithStreamingResponse(self._omni_ai.entitlement_agreements)
+
+    @cached_property
+    def entitlements(self) -> EntitlementsResourceWithStreamingResponse:
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
+        """
+        return EntitlementsResourceWithStreamingResponse(self._omni_ai.entitlements)
+
+    @cached_property
     def messages(self) -> MessagesResourceWithStreamingResponse:
         """Thread-centric AI assistant for conversational trading.
 
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return MessagesResourceWithStreamingResponse(self._omni_ai.messages)
 
@@ -196,7 +292,7 @@ class OmniAIResourceWithStreamingResponse:
     def responses(self) -> ResponsesResourceWithStreamingResponse:
         """Thread-centric AI assistant for conversational trading.
 
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return ResponsesResourceWithStreamingResponse(self._omni_ai.responses)
 
@@ -204,7 +300,7 @@ class OmniAIResourceWithStreamingResponse:
     def threads(self) -> ThreadsResourceWithStreamingResponse:
         """Thread-centric AI assistant for conversational trading.
 
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return ThreadsResourceWithStreamingResponse(self._omni_ai.threads)
 
@@ -214,10 +310,26 @@ class AsyncOmniAIResourceWithStreamingResponse:
         self._omni_ai = omni_ai
 
     @cached_property
+    def entitlement_agreements(self) -> AsyncEntitlementAgreementsResourceWithStreamingResponse:
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
+        """
+        return AsyncEntitlementAgreementsResourceWithStreamingResponse(self._omni_ai.entitlement_agreements)
+
+    @cached_property
+    def entitlements(self) -> AsyncEntitlementsResourceWithStreamingResponse:
+        """Thread-centric AI assistant for conversational trading.
+
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
+        """
+        return AsyncEntitlementsResourceWithStreamingResponse(self._omni_ai.entitlements)
+
+    @cached_property
     def messages(self) -> AsyncMessagesResourceWithStreamingResponse:
         """Thread-centric AI assistant for conversational trading.
 
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return AsyncMessagesResourceWithStreamingResponse(self._omni_ai.messages)
 
@@ -225,7 +337,7 @@ class AsyncOmniAIResourceWithStreamingResponse:
     def responses(self) -> AsyncResponsesResourceWithStreamingResponse:
         """Thread-centric AI assistant for conversational trading.
 
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return AsyncResponsesResourceWithStreamingResponse(self._omni_ai.responses)
 
@@ -233,6 +345,6 @@ class AsyncOmniAIResourceWithStreamingResponse:
     def threads(self) -> AsyncThreadsResourceWithStreamingResponse:
         """Thread-centric AI assistant for conversational trading.
 
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return AsyncThreadsResourceWithStreamingResponse(self._omni_ai.threads)

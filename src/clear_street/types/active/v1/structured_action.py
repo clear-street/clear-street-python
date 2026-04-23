@@ -6,8 +6,9 @@ from typing_extensions import Literal, TypeAlias
 from .open_chart_action import OpenChartAction
 from .open_screener_action import OpenScreenerAction
 from .prefill_order_action import PrefillOrderAction
+from .open_entitlement_consent_action import OpenEntitlementConsentAction
 
-__all__ = ["StructuredAction", "PrefillOrder", "OpenChart", "OpenScreener"]
+__all__ = ["StructuredAction", "PrefillOrder", "OpenChart", "OpenScreener", "OpenEntitlementConsent"]
 
 
 class PrefillOrder(PrefillOrderAction):
@@ -28,4 +29,10 @@ class OpenScreener(OpenScreenerAction):
     action_type: Literal["open_screener"]
 
 
-StructuredAction: TypeAlias = Union[PrefillOrder, OpenChart, OpenScreener]
+class OpenEntitlementConsent(OpenEntitlementConsentAction):
+    """Open entitlement consent flow"""
+
+    action_type: Literal["open_entitlement_consent"]
+
+
+StructuredAction: TypeAlias = Union[PrefillOrder, OpenChart, OpenScreener, OpenEntitlementConsent]

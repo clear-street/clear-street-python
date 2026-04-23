@@ -492,7 +492,11 @@ Types:
 
 ```python
 from clear_street.types.active.v1 import (
+    ActionButton,
     CancelResponsePayload,
+    ChartPayload,
+    ChartPoint,
+    ChartSeries,
     ContentPartChartPayload,
     ContentPartCustomPayload,
     ContentPartStructuredActionPayload,
@@ -502,6 +506,7 @@ from clear_street.types.active.v1 import (
     CreateFeedbackResponse,
     CreateMessageResponse,
     CreateThreadResponse,
+    DataChart,
     ErrorStatus,
     Message,
     MessageContent,
@@ -510,19 +515,61 @@ from clear_street.types.active.v1 import (
     MessageOutcome,
     MessageRole,
     OpenChartAction,
+    OpenEntitlementConsentAction,
     OpenScreenerAction,
     OrderPayload,
     OrderStrategyType,
     PrefillOrderAction,
+    PromptButtonAction,
     Response,
     ResponseContent,
     ResponseContentPart,
     ResponseStatus,
     StructuredAction,
+    StructuredActionButtonAction,
+    SuggestedActionsPayload,
+    SymbolChart,
     Thread,
     ThreadList,
 )
 ```
+
+#### EntitlementAgreements
+
+Types:
+
+```python
+from clear_street.types.active.v1.omni_ai import (
+    EntitlementAgreementResource,
+    EntitlementAgreementResourceList,
+    EntitlementAgreementListEntitlementAgreementsResponse,
+)
+```
+
+Methods:
+
+- <code title="get /active/v1/omni-ai/entitlement-agreements">client.active.v1.omni_ai.entitlement_agreements.<a href="./src/clear_street/resources/active/v1/omni_ai/entitlement_agreements.py">list_entitlement_agreements</a>() -> <a href="./src/clear_street/types/active/v1/omni_ai/entitlement_agreement_list_entitlement_agreements_response.py">EntitlementAgreementListEntitlementAgreementsResponse</a></code>
+
+#### Entitlements
+
+Types:
+
+```python
+from clear_street.types.active.v1.omni_ai import (
+    DeleteEntitlementResponse,
+    EntitlementResource,
+    EntitlementResourceList,
+    EntitlementCreateEntitlementsResponse,
+    EntitlementDeleteEntitlementResponse,
+    EntitlementListEntitlementsResponse,
+)
+```
+
+Methods:
+
+- <code title="post /active/v1/omni-ai/entitlements">client.active.v1.omni_ai.entitlements.<a href="./src/clear_street/resources/active/v1/omni_ai/entitlements.py">create_entitlements</a>(\*\*<a href="src/clear_street/types/active/v1/omni_ai/entitlement_create_entitlements_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/omni_ai/entitlement_create_entitlements_response.py">EntitlementCreateEntitlementsResponse</a></code>
+- <code title="delete /active/v1/omni-ai/entitlements/{entitlement_id}">client.active.v1.omni_ai.entitlements.<a href="./src/clear_street/resources/active/v1/omni_ai/entitlements.py">delete_entitlement</a>(entitlement_id) -> <a href="./src/clear_street/types/active/v1/omni_ai/entitlement_delete_entitlement_response.py">EntitlementDeleteEntitlementResponse</a></code>
+- <code title="get /active/v1/omni-ai/entitlements">client.active.v1.omni_ai.entitlements.<a href="./src/clear_street/resources/active/v1/omni_ai/entitlements.py">list_entitlements</a>(\*\*<a href="src/clear_street/types/active/v1/omni_ai/entitlement_list_entitlements_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/omni_ai/entitlement_list_entitlements_response.py">EntitlementListEntitlementsResponse</a></code>
 
 #### Messages
 

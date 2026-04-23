@@ -49,14 +49,14 @@ __all__ = ["ThreadsResource", "AsyncThreadsResource"]
 class ThreadsResource(SyncAPIResource):
     """Thread-centric AI assistant for conversational trading.
 
-    Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+    Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
     """
 
     @cached_property
     def messages(self) -> MessagesResource:
         """Thread-centric AI assistant for conversational trading.
 
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return MessagesResource(self._client)
 
@@ -64,7 +64,7 @@ class ThreadsResource(SyncAPIResource):
     def response(self) -> ResponseResource:
         """Thread-centric AI assistant for conversational trading.
 
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return ResponseResource(self._client)
 
@@ -92,7 +92,8 @@ class ThreadsResource(SyncAPIResource):
         *,
         account_id: int,
         type: Literal["instant", "deep_insights"],
-        capabilities: List[Literal["PREFILL_ORDER", "OPEN_CHART", "OPEN_SCREENER"]] | Omit = omit,
+        capabilities: List[Literal["PREFILL_ORDER", "OPEN_CHART", "OPEN_SCREENER", "OPEN_ENTITLEMENT_CONSENT"]]
+        | Omit = omit,
         target: Optional[thread_create_thread_params.Target] | Omit = omit,
         text: Optional[str] | Omit = omit,
         thesis: Optional[str] | Omit = omit,
@@ -250,14 +251,14 @@ class ThreadsResource(SyncAPIResource):
 class AsyncThreadsResource(AsyncAPIResource):
     """Thread-centric AI assistant for conversational trading.
 
-    Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+    Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
     """
 
     @cached_property
     def messages(self) -> AsyncMessagesResource:
         """Thread-centric AI assistant for conversational trading.
 
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return AsyncMessagesResource(self._client)
 
@@ -265,7 +266,7 @@ class AsyncThreadsResource(AsyncAPIResource):
     def response(self) -> AsyncResponseResource:
         """Thread-centric AI assistant for conversational trading.
 
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return AsyncResponseResource(self._client)
 
@@ -293,7 +294,8 @@ class AsyncThreadsResource(AsyncAPIResource):
         *,
         account_id: int,
         type: Literal["instant", "deep_insights"],
-        capabilities: List[Literal["PREFILL_ORDER", "OPEN_CHART", "OPEN_SCREENER"]] | Omit = omit,
+        capabilities: List[Literal["PREFILL_ORDER", "OPEN_CHART", "OPEN_SCREENER", "OPEN_ENTITLEMENT_CONSENT"]]
+        | Omit = omit,
         target: Optional[thread_create_thread_params.Target] | Omit = omit,
         text: Optional[str] | Omit = omit,
         thesis: Optional[str] | Omit = omit,
@@ -468,7 +470,7 @@ class ThreadsResourceWithRawResponse:
     def messages(self) -> MessagesResourceWithRawResponse:
         """Thread-centric AI assistant for conversational trading.
 
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return MessagesResourceWithRawResponse(self._threads.messages)
 
@@ -476,7 +478,7 @@ class ThreadsResourceWithRawResponse:
     def response(self) -> ResponseResourceWithRawResponse:
         """Thread-centric AI assistant for conversational trading.
 
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return ResponseResourceWithRawResponse(self._threads.response)
 
@@ -499,7 +501,7 @@ class AsyncThreadsResourceWithRawResponse:
     def messages(self) -> AsyncMessagesResourceWithRawResponse:
         """Thread-centric AI assistant for conversational trading.
 
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return AsyncMessagesResourceWithRawResponse(self._threads.messages)
 
@@ -507,7 +509,7 @@ class AsyncThreadsResourceWithRawResponse:
     def response(self) -> AsyncResponseResourceWithRawResponse:
         """Thread-centric AI assistant for conversational trading.
 
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return AsyncResponseResourceWithRawResponse(self._threads.response)
 
@@ -530,7 +532,7 @@ class ThreadsResourceWithStreamingResponse:
     def messages(self) -> MessagesResourceWithStreamingResponse:
         """Thread-centric AI assistant for conversational trading.
 
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return MessagesResourceWithStreamingResponse(self._threads.messages)
 
@@ -538,7 +540,7 @@ class ThreadsResourceWithStreamingResponse:
     def response(self) -> ResponseResourceWithStreamingResponse:
         """Thread-centric AI assistant for conversational trading.
 
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return ResponseResourceWithStreamingResponse(self._threads.response)
 
@@ -561,7 +563,7 @@ class AsyncThreadsResourceWithStreamingResponse:
     def messages(self) -> AsyncMessagesResourceWithStreamingResponse:
         """Thread-centric AI assistant for conversational trading.
 
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return AsyncMessagesResourceWithStreamingResponse(self._threads.messages)
 
@@ -569,6 +571,6 @@ class AsyncThreadsResourceWithStreamingResponse:
     def response(self) -> AsyncResponseResourceWithStreamingResponse:
         """Thread-centric AI assistant for conversational trading.
 
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return AsyncResponseResourceWithStreamingResponse(self._threads.response)

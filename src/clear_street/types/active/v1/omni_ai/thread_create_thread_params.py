@@ -14,7 +14,7 @@ class ThreadCreateThreadParams(TypedDict, total=False):
     type: Required[Literal["instant", "deep_insights"]]
     """Thread creation mode."""
 
-    capabilities: List[Literal["PREFILL_ORDER", "OPEN_CHART", "OPEN_SCREENER"]]
+    capabilities: List[Literal["PREFILL_ORDER", "OPEN_CHART", "OPEN_SCREENER", "OPEN_ENTITLEMENT_CONSENT"]]
 
     target: Optional[Target]
     """Deep-insights target payload."""
