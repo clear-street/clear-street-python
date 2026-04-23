@@ -8,14 +8,6 @@ from .events import (
     EventsResourceWithStreamingResponse,
     AsyncEventsResourceWithStreamingResponse,
 )
-from .venues import (
-    VenuesResource,
-    AsyncVenuesResource,
-    VenuesResourceWithRawResponse,
-    AsyncVenuesResourceWithRawResponse,
-    VenuesResourceWithStreamingResponse,
-    AsyncVenuesResourceWithStreamingResponse,
-)
 from .options import (
     OptionsResource,
     AsyncOptionsResource,
@@ -23,14 +15,6 @@ from .options import (
     AsyncOptionsResourceWithRawResponse,
     OptionsResourceWithStreamingResponse,
     AsyncOptionsResourceWithStreamingResponse,
-)
-from .reporting import (
-    ReportingResource,
-    AsyncReportingResource,
-    ReportingResourceWithRawResponse,
-    AsyncReportingResourceWithRawResponse,
-    ReportingResourceWithStreamingResponse,
-    AsyncReportingResourceWithStreamingResponse,
 )
 from .instruments import (
     InstrumentsResource,
@@ -68,18 +52,6 @@ __all__ = [
     "AsyncOptionsResourceWithRawResponse",
     "OptionsResourceWithStreamingResponse",
     "AsyncOptionsResourceWithStreamingResponse",
-    "ReportingResource",
-    "AsyncReportingResource",
-    "ReportingResourceWithRawResponse",
-    "AsyncReportingResourceWithRawResponse",
-    "ReportingResourceWithStreamingResponse",
-    "AsyncReportingResourceWithStreamingResponse",
-    "VenuesResource",
-    "AsyncVenuesResource",
-    "VenuesResourceWithRawResponse",
-    "AsyncVenuesResourceWithRawResponse",
-    "VenuesResourceWithStreamingResponse",
-    "AsyncVenuesResourceWithStreamingResponse",
     "InstrumentsResource",
     "AsyncInstrumentsResource",
     "InstrumentsResourceWithRawResponse",

@@ -15,7 +15,6 @@ from ...._response import (
 )
 from ...._base_client import make_request_options
 from ....types.active.v1.version_get_version_response import VersionGetVersionResponse
-from ....types.active.v1.version_update_version_response import VersionUpdateVersionResponse
 
 __all__ = ["VersionResource", "AsyncVersionResource"]
 
@@ -61,25 +60,6 @@ class VersionResource(SyncAPIResource):
             cast_to=VersionGetVersionResponse,
         )
 
-    def update_version(
-        self,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> VersionUpdateVersionResponse:
-        """Allows clients to set their preferred API version."""
-        return self._patch(
-            "/active/v1/version",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=VersionUpdateVersionResponse,
-        )
-
 
 class AsyncVersionResource(AsyncAPIResource):
     """Endpoints for API service metadata."""
@@ -122,25 +102,6 @@ class AsyncVersionResource(AsyncAPIResource):
             cast_to=VersionGetVersionResponse,
         )
 
-    async def update_version(
-        self,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> VersionUpdateVersionResponse:
-        """Allows clients to set their preferred API version."""
-        return await self._patch(
-            "/active/v1/version",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=VersionUpdateVersionResponse,
-        )
-
 
 class VersionResourceWithRawResponse:
     def __init__(self, version: VersionResource) -> None:
@@ -148,9 +109,6 @@ class VersionResourceWithRawResponse:
 
         self.get_version = to_raw_response_wrapper(
             version.get_version,
-        )
-        self.update_version = to_raw_response_wrapper(
-            version.update_version,
         )
 
 
@@ -161,9 +119,6 @@ class AsyncVersionResourceWithRawResponse:
         self.get_version = async_to_raw_response_wrapper(
             version.get_version,
         )
-        self.update_version = async_to_raw_response_wrapper(
-            version.update_version,
-        )
 
 
 class VersionResourceWithStreamingResponse:
@@ -173,9 +128,6 @@ class VersionResourceWithStreamingResponse:
         self.get_version = to_streamed_response_wrapper(
             version.get_version,
         )
-        self.update_version = to_streamed_response_wrapper(
-            version.update_version,
-        )
 
 
 class AsyncVersionResourceWithStreamingResponse:
@@ -184,7 +136,4 @@ class AsyncVersionResourceWithStreamingResponse:
 
         self.get_version = async_to_streamed_response_wrapper(
             version.get_version,
-        )
-        self.update_version = async_to_streamed_response_wrapper(
-            version.update_version,
         )
