@@ -28,7 +28,7 @@ __all__ = ["MessagesResource", "AsyncMessagesResource"]
 class MessagesResource(SyncAPIResource):
     """Thread-centric AI assistant for conversational trading.
 
-    Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+    Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
     """
 
     @cached_property
@@ -56,7 +56,8 @@ class MessagesResource(SyncAPIResource):
         *,
         account_id: int,
         text: str,
-        capabilities: List[Literal["PREFILL_ORDER", "OPEN_CHART", "OPEN_SCREENER"]] | Omit = omit,
+        capabilities: List[Literal["PREFILL_ORDER", "OPEN_CHART", "OPEN_SCREENER", "OPEN_ENTITLEMENT_CONSENT"]]
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -165,7 +166,7 @@ class MessagesResource(SyncAPIResource):
 class AsyncMessagesResource(AsyncAPIResource):
     """Thread-centric AI assistant for conversational trading.
 
-    Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Every endpoint requires an explicit account_id.
+    Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
     """
 
     @cached_property
@@ -193,7 +194,8 @@ class AsyncMessagesResource(AsyncAPIResource):
         *,
         account_id: int,
         text: str,
-        capabilities: List[Literal["PREFILL_ORDER", "OPEN_CHART", "OPEN_SCREENER"]] | Omit = omit,
+        capabilities: List[Literal["PREFILL_ORDER", "OPEN_CHART", "OPEN_SCREENER", "OPEN_ENTITLEMENT_CONSENT"]]
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

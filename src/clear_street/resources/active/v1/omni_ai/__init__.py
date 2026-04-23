@@ -32,8 +32,36 @@ from .responses import (
     ResponsesResourceWithStreamingResponse,
     AsyncResponsesResourceWithStreamingResponse,
 )
+from .entitlements import (
+    EntitlementsResource,
+    AsyncEntitlementsResource,
+    EntitlementsResourceWithRawResponse,
+    AsyncEntitlementsResourceWithRawResponse,
+    EntitlementsResourceWithStreamingResponse,
+    AsyncEntitlementsResourceWithStreamingResponse,
+)
+from .entitlement_agreements import (
+    EntitlementAgreementsResource,
+    AsyncEntitlementAgreementsResource,
+    EntitlementAgreementsResourceWithRawResponse,
+    AsyncEntitlementAgreementsResourceWithRawResponse,
+    EntitlementAgreementsResourceWithStreamingResponse,
+    AsyncEntitlementAgreementsResourceWithStreamingResponse,
+)
 
 __all__ = [
+    "EntitlementAgreementsResource",
+    "AsyncEntitlementAgreementsResource",
+    "EntitlementAgreementsResourceWithRawResponse",
+    "AsyncEntitlementAgreementsResourceWithRawResponse",
+    "EntitlementAgreementsResourceWithStreamingResponse",
+    "AsyncEntitlementAgreementsResourceWithStreamingResponse",
+    "EntitlementsResource",
+    "AsyncEntitlementsResource",
+    "EntitlementsResourceWithRawResponse",
+    "AsyncEntitlementsResourceWithRawResponse",
+    "EntitlementsResourceWithStreamingResponse",
+    "AsyncEntitlementsResourceWithStreamingResponse",
     "MessagesResource",
     "AsyncMessagesResource",
     "MessagesResourceWithRawResponse",
