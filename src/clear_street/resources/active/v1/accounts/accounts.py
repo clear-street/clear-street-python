@@ -59,11 +59,11 @@ __all__ = ["AccountsResource", "AsyncAccountsResource"]
 
 
 class AccountsResource(SyncAPIResource):
-    """Manage trading accounts and view balances."""
+    """Manage trading accounts, balances, and portfolio history."""
 
     @cached_property
     def balances(self) -> BalancesResource:
-        """Manage trading accounts and view balances."""
+        """Manage trading accounts, balances, and portfolio history."""
         return BalancesResource(self._client)
 
     @cached_property
@@ -73,7 +73,7 @@ class AccountsResource(SyncAPIResource):
 
     @cached_property
     def portfolio_history(self) -> PortfolioHistoryResource:
-        """Manage trading accounts and view balances."""
+        """Manage trading accounts, balances, and portfolio history."""
         return PortfolioHistoryResource(self._client)
 
     @cached_property
@@ -213,11 +213,11 @@ class AccountsResource(SyncAPIResource):
 
 
 class AsyncAccountsResource(AsyncAPIResource):
-    """Manage trading accounts and view balances."""
+    """Manage trading accounts, balances, and portfolio history."""
 
     @cached_property
     def balances(self) -> AsyncBalancesResource:
-        """Manage trading accounts and view balances."""
+        """Manage trading accounts, balances, and portfolio history."""
         return AsyncBalancesResource(self._client)
 
     @cached_property
@@ -227,7 +227,7 @@ class AsyncAccountsResource(AsyncAPIResource):
 
     @cached_property
     def portfolio_history(self) -> AsyncPortfolioHistoryResource:
-        """Manage trading accounts and view balances."""
+        """Manage trading accounts, balances, and portfolio history."""
         return AsyncPortfolioHistoryResource(self._client)
 
     @cached_property
@@ -384,7 +384,7 @@ class AccountsResourceWithRawResponse:
 
     @cached_property
     def balances(self) -> BalancesResourceWithRawResponse:
-        """Manage trading accounts and view balances."""
+        """Manage trading accounts, balances, and portfolio history."""
         return BalancesResourceWithRawResponse(self._accounts.balances)
 
     @cached_property
@@ -394,7 +394,7 @@ class AccountsResourceWithRawResponse:
 
     @cached_property
     def portfolio_history(self) -> PortfolioHistoryResourceWithRawResponse:
-        """Manage trading accounts and view balances."""
+        """Manage trading accounts, balances, and portfolio history."""
         return PortfolioHistoryResourceWithRawResponse(self._accounts.portfolio_history)
 
     @cached_property
@@ -419,7 +419,7 @@ class AsyncAccountsResourceWithRawResponse:
 
     @cached_property
     def balances(self) -> AsyncBalancesResourceWithRawResponse:
-        """Manage trading accounts and view balances."""
+        """Manage trading accounts, balances, and portfolio history."""
         return AsyncBalancesResourceWithRawResponse(self._accounts.balances)
 
     @cached_property
@@ -429,7 +429,7 @@ class AsyncAccountsResourceWithRawResponse:
 
     @cached_property
     def portfolio_history(self) -> AsyncPortfolioHistoryResourceWithRawResponse:
-        """Manage trading accounts and view balances."""
+        """Manage trading accounts, balances, and portfolio history."""
         return AsyncPortfolioHistoryResourceWithRawResponse(self._accounts.portfolio_history)
 
     @cached_property
@@ -454,7 +454,7 @@ class AccountsResourceWithStreamingResponse:
 
     @cached_property
     def balances(self) -> BalancesResourceWithStreamingResponse:
-        """Manage trading accounts and view balances."""
+        """Manage trading accounts, balances, and portfolio history."""
         return BalancesResourceWithStreamingResponse(self._accounts.balances)
 
     @cached_property
@@ -464,7 +464,7 @@ class AccountsResourceWithStreamingResponse:
 
     @cached_property
     def portfolio_history(self) -> PortfolioHistoryResourceWithStreamingResponse:
-        """Manage trading accounts and view balances."""
+        """Manage trading accounts, balances, and portfolio history."""
         return PortfolioHistoryResourceWithStreamingResponse(self._accounts.portfolio_history)
 
     @cached_property
@@ -489,7 +489,7 @@ class AsyncAccountsResourceWithStreamingResponse:
 
     @cached_property
     def balances(self) -> AsyncBalancesResourceWithStreamingResponse:
-        """Manage trading accounts and view balances."""
+        """Manage trading accounts, balances, and portfolio history."""
         return AsyncBalancesResourceWithStreamingResponse(self._accounts.balances)
 
     @cached_property
@@ -499,7 +499,7 @@ class AsyncAccountsResourceWithStreamingResponse:
 
     @cached_property
     def portfolio_history(self) -> AsyncPortfolioHistoryResourceWithStreamingResponse:
-        """Manage trading accounts and view balances."""
+        """Manage trading accounts, balances, and portfolio history."""
         return AsyncPortfolioHistoryResourceWithStreamingResponse(self._accounts.portfolio_history)
 
     @cached_property

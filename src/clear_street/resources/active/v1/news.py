@@ -35,7 +35,7 @@ __all__ = ["NewsResource", "AsyncNewsResource"]
 
 
 class NewsResource(SyncAPIResource):
-    """Retrieve details and lists of tradable instruments."""
+    """Retrieve market news and related instrument metadata."""
 
     @cached_property
     def with_raw_response(self) -> NewsResourceWithRawResponse:
@@ -172,7 +172,7 @@ class NewsResource(SyncAPIResource):
 
 
 class AsyncNewsResource(AsyncAPIResource):
-    """Retrieve details and lists of tradable instruments."""
+    """Retrieve market news and related instrument metadata."""
 
     @cached_property
     def with_raw_response(self) -> AsyncNewsResourceWithRawResponse:

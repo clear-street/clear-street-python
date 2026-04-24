@@ -115,7 +115,7 @@ __all__ = ["V1Resource", "AsyncV1Resource"]
 class V1Resource(SyncAPIResource):
     @cached_property
     def accounts(self) -> AccountsResource:
-        """Manage trading accounts and view balances."""
+        """Manage trading accounts, balances, and portfolio history."""
         return AccountsResource(self._client)
 
     @cached_property
@@ -143,7 +143,7 @@ class V1Resource(SyncAPIResource):
 
     @cached_property
     def news(self) -> NewsResource:
-        """Retrieve details and lists of tradable instruments."""
+        """Retrieve market news and related instrument metadata."""
         return NewsResource(self._client)
 
     @cached_property
@@ -152,12 +152,12 @@ class V1Resource(SyncAPIResource):
 
     @cached_property
     def saved_screeners(self) -> SavedScreenersResource:
-        """Retrieve details and lists of tradable instruments."""
+        """Search and manage saved screeners."""
         return SavedScreenersResource(self._client)
 
     @cached_property
     def screener(self) -> ScreenerResource:
-        """Retrieve details and lists of tradable instruments."""
+        """Search and manage saved screeners."""
         return ScreenerResource(self._client)
 
     @cached_property
@@ -167,7 +167,7 @@ class V1Resource(SyncAPIResource):
 
     @cached_property
     def watchlists(self) -> WatchlistsResource:
-        """Retrieve details and lists of tradable instruments."""
+        """Create and manage watchlists."""
         return WatchlistsResource(self._client)
 
     @cached_property
@@ -198,7 +198,7 @@ class V1Resource(SyncAPIResource):
 class AsyncV1Resource(AsyncAPIResource):
     @cached_property
     def accounts(self) -> AsyncAccountsResource:
-        """Manage trading accounts and view balances."""
+        """Manage trading accounts, balances, and portfolio history."""
         return AsyncAccountsResource(self._client)
 
     @cached_property
@@ -226,7 +226,7 @@ class AsyncV1Resource(AsyncAPIResource):
 
     @cached_property
     def news(self) -> AsyncNewsResource:
-        """Retrieve details and lists of tradable instruments."""
+        """Retrieve market news and related instrument metadata."""
         return AsyncNewsResource(self._client)
 
     @cached_property
@@ -235,12 +235,12 @@ class AsyncV1Resource(AsyncAPIResource):
 
     @cached_property
     def saved_screeners(self) -> AsyncSavedScreenersResource:
-        """Retrieve details and lists of tradable instruments."""
+        """Search and manage saved screeners."""
         return AsyncSavedScreenersResource(self._client)
 
     @cached_property
     def screener(self) -> AsyncScreenerResource:
-        """Retrieve details and lists of tradable instruments."""
+        """Search and manage saved screeners."""
         return AsyncScreenerResource(self._client)
 
     @cached_property
@@ -250,7 +250,7 @@ class AsyncV1Resource(AsyncAPIResource):
 
     @cached_property
     def watchlists(self) -> AsyncWatchlistsResource:
-        """Retrieve details and lists of tradable instruments."""
+        """Create and manage watchlists."""
         return AsyncWatchlistsResource(self._client)
 
     @cached_property
@@ -284,7 +284,7 @@ class V1ResourceWithRawResponse:
 
     @cached_property
     def accounts(self) -> AccountsResourceWithRawResponse:
-        """Manage trading accounts and view balances."""
+        """Manage trading accounts, balances, and portfolio history."""
         return AccountsResourceWithRawResponse(self._v1.accounts)
 
     @cached_property
@@ -312,7 +312,7 @@ class V1ResourceWithRawResponse:
 
     @cached_property
     def news(self) -> NewsResourceWithRawResponse:
-        """Retrieve details and lists of tradable instruments."""
+        """Retrieve market news and related instrument metadata."""
         return NewsResourceWithRawResponse(self._v1.news)
 
     @cached_property
@@ -321,12 +321,12 @@ class V1ResourceWithRawResponse:
 
     @cached_property
     def saved_screeners(self) -> SavedScreenersResourceWithRawResponse:
-        """Retrieve details and lists of tradable instruments."""
+        """Search and manage saved screeners."""
         return SavedScreenersResourceWithRawResponse(self._v1.saved_screeners)
 
     @cached_property
     def screener(self) -> ScreenerResourceWithRawResponse:
-        """Retrieve details and lists of tradable instruments."""
+        """Search and manage saved screeners."""
         return ScreenerResourceWithRawResponse(self._v1.screener)
 
     @cached_property
@@ -336,7 +336,7 @@ class V1ResourceWithRawResponse:
 
     @cached_property
     def watchlists(self) -> WatchlistsResourceWithRawResponse:
-        """Retrieve details and lists of tradable instruments."""
+        """Create and manage watchlists."""
         return WatchlistsResourceWithRawResponse(self._v1.watchlists)
 
     @cached_property
@@ -351,7 +351,7 @@ class AsyncV1ResourceWithRawResponse:
 
     @cached_property
     def accounts(self) -> AsyncAccountsResourceWithRawResponse:
-        """Manage trading accounts and view balances."""
+        """Manage trading accounts, balances, and portfolio history."""
         return AsyncAccountsResourceWithRawResponse(self._v1.accounts)
 
     @cached_property
@@ -379,7 +379,7 @@ class AsyncV1ResourceWithRawResponse:
 
     @cached_property
     def news(self) -> AsyncNewsResourceWithRawResponse:
-        """Retrieve details and lists of tradable instruments."""
+        """Retrieve market news and related instrument metadata."""
         return AsyncNewsResourceWithRawResponse(self._v1.news)
 
     @cached_property
@@ -388,12 +388,12 @@ class AsyncV1ResourceWithRawResponse:
 
     @cached_property
     def saved_screeners(self) -> AsyncSavedScreenersResourceWithRawResponse:
-        """Retrieve details and lists of tradable instruments."""
+        """Search and manage saved screeners."""
         return AsyncSavedScreenersResourceWithRawResponse(self._v1.saved_screeners)
 
     @cached_property
     def screener(self) -> AsyncScreenerResourceWithRawResponse:
-        """Retrieve details and lists of tradable instruments."""
+        """Search and manage saved screeners."""
         return AsyncScreenerResourceWithRawResponse(self._v1.screener)
 
     @cached_property
@@ -403,7 +403,7 @@ class AsyncV1ResourceWithRawResponse:
 
     @cached_property
     def watchlists(self) -> AsyncWatchlistsResourceWithRawResponse:
-        """Retrieve details and lists of tradable instruments."""
+        """Create and manage watchlists."""
         return AsyncWatchlistsResourceWithRawResponse(self._v1.watchlists)
 
     @cached_property
@@ -418,7 +418,7 @@ class V1ResourceWithStreamingResponse:
 
     @cached_property
     def accounts(self) -> AccountsResourceWithStreamingResponse:
-        """Manage trading accounts and view balances."""
+        """Manage trading accounts, balances, and portfolio history."""
         return AccountsResourceWithStreamingResponse(self._v1.accounts)
 
     @cached_property
@@ -446,7 +446,7 @@ class V1ResourceWithStreamingResponse:
 
     @cached_property
     def news(self) -> NewsResourceWithStreamingResponse:
-        """Retrieve details and lists of tradable instruments."""
+        """Retrieve market news and related instrument metadata."""
         return NewsResourceWithStreamingResponse(self._v1.news)
 
     @cached_property
@@ -455,12 +455,12 @@ class V1ResourceWithStreamingResponse:
 
     @cached_property
     def saved_screeners(self) -> SavedScreenersResourceWithStreamingResponse:
-        """Retrieve details and lists of tradable instruments."""
+        """Search and manage saved screeners."""
         return SavedScreenersResourceWithStreamingResponse(self._v1.saved_screeners)
 
     @cached_property
     def screener(self) -> ScreenerResourceWithStreamingResponse:
-        """Retrieve details and lists of tradable instruments."""
+        """Search and manage saved screeners."""
         return ScreenerResourceWithStreamingResponse(self._v1.screener)
 
     @cached_property
@@ -470,7 +470,7 @@ class V1ResourceWithStreamingResponse:
 
     @cached_property
     def watchlists(self) -> WatchlistsResourceWithStreamingResponse:
-        """Retrieve details and lists of tradable instruments."""
+        """Create and manage watchlists."""
         return WatchlistsResourceWithStreamingResponse(self._v1.watchlists)
 
     @cached_property
@@ -485,7 +485,7 @@ class AsyncV1ResourceWithStreamingResponse:
 
     @cached_property
     def accounts(self) -> AsyncAccountsResourceWithStreamingResponse:
-        """Manage trading accounts and view balances."""
+        """Manage trading accounts, balances, and portfolio history."""
         return AsyncAccountsResourceWithStreamingResponse(self._v1.accounts)
 
     @cached_property
@@ -513,7 +513,7 @@ class AsyncV1ResourceWithStreamingResponse:
 
     @cached_property
     def news(self) -> AsyncNewsResourceWithStreamingResponse:
-        """Retrieve details and lists of tradable instruments."""
+        """Retrieve market news and related instrument metadata."""
         return AsyncNewsResourceWithStreamingResponse(self._v1.news)
 
     @cached_property
@@ -522,12 +522,12 @@ class AsyncV1ResourceWithStreamingResponse:
 
     @cached_property
     def saved_screeners(self) -> AsyncSavedScreenersResourceWithStreamingResponse:
-        """Retrieve details and lists of tradable instruments."""
+        """Search and manage saved screeners."""
         return AsyncSavedScreenersResourceWithStreamingResponse(self._v1.saved_screeners)
 
     @cached_property
     def screener(self) -> AsyncScreenerResourceWithStreamingResponse:
-        """Retrieve details and lists of tradable instruments."""
+        """Search and manage saved screeners."""
         return AsyncScreenerResourceWithStreamingResponse(self._v1.screener)
 
     @cached_property
@@ -537,7 +537,7 @@ class AsyncV1ResourceWithStreamingResponse:
 
     @cached_property
     def watchlists(self) -> AsyncWatchlistsResourceWithStreamingResponse:
-        """Retrieve details and lists of tradable instruments."""
+        """Create and manage watchlists."""
         return AsyncWatchlistsResourceWithStreamingResponse(self._v1.watchlists)
 
     @cached_property
