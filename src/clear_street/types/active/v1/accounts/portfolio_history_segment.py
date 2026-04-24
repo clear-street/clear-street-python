@@ -39,7 +39,10 @@ class PortfolioHistorySegment(BaseModel):
     """
 
     position_pnl: Optional[str] = None
-    """Sum of the profit and loss from the previous trading day."""
+    """
+    P&L attributable to start-of-day (carried) positions from market movement during
+    this trading day.
+    """
 
     sold_notional: Optional[str] = None
     """Amount sold MTM"""

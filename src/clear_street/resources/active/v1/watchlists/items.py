@@ -26,7 +26,7 @@ __all__ = ["ItemsResource", "AsyncItemsResource"]
 
 
 class ItemsResource(SyncAPIResource):
-    """Retrieve details and lists of tradable instruments."""
+    """Create and manage watchlists."""
 
     @cached_property
     def with_raw_response(self) -> ItemsResourceWithRawResponse:
@@ -138,7 +138,7 @@ class ItemsResource(SyncAPIResource):
 
 
 class AsyncItemsResource(AsyncAPIResource):
-    """Retrieve details and lists of tradable instruments."""
+    """Create and manage watchlists."""
 
     @cached_property
     def with_raw_response(self) -> AsyncItemsResourceWithRawResponse:

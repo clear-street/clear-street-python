@@ -27,7 +27,7 @@ __all__ = ["PortfolioHistoryResource", "AsyncPortfolioHistoryResource"]
 
 
 class PortfolioHistoryResource(SyncAPIResource):
-    """Manage trading accounts and view balances."""
+    """Manage trading accounts, balances, and portfolio history."""
 
     @cached_property
     def with_raw_response(self) -> PortfolioHistoryResourceWithRawResponse:
@@ -93,7 +93,7 @@ class PortfolioHistoryResource(SyncAPIResource):
 
 
 class AsyncPortfolioHistoryResource(AsyncAPIResource):
-    """Manage trading accounts and view balances."""
+    """Manage trading accounts, balances, and portfolio history."""
 
     @cached_property
     def with_raw_response(self) -> AsyncPortfolioHistoryResourceWithRawResponse:

@@ -29,7 +29,7 @@ __all__ = ["SavedScreenersResource", "AsyncSavedScreenersResource"]
 
 
 class SavedScreenersResource(SyncAPIResource):
-    """Retrieve details and lists of tradable instruments."""
+    """Search and manage saved screeners."""
 
     @cached_property
     def with_raw_response(self) -> SavedScreenersResourceWithRawResponse:
@@ -264,7 +264,7 @@ class SavedScreenersResource(SyncAPIResource):
 
 
 class AsyncSavedScreenersResource(AsyncAPIResource):
-    """Retrieve details and lists of tradable instruments."""
+    """Search and manage saved screeners."""
 
     @cached_property
     def with_raw_response(self) -> AsyncSavedScreenersResourceWithRawResponse:

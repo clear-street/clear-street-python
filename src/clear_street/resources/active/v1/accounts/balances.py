@@ -22,7 +22,7 @@ __all__ = ["BalancesResource", "AsyncBalancesResource"]
 
 
 class BalancesResource(SyncAPIResource):
-    """Manage trading accounts and view balances."""
+    """Manage trading accounts, balances, and portfolio history."""
 
     @cached_property
     def with_raw_response(self) -> BalancesResourceWithRawResponse:
@@ -86,7 +86,7 @@ class BalancesResource(SyncAPIResource):
 
 
 class AsyncBalancesResource(AsyncAPIResource):
-    """Manage trading accounts and view balances."""
+    """Manage trading accounts, balances, and portfolio history."""
 
     @cached_property
     def with_raw_response(self) -> AsyncBalancesResourceWithRawResponse:

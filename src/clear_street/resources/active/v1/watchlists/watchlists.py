@@ -32,11 +32,11 @@ __all__ = ["WatchlistsResource", "AsyncWatchlistsResource"]
 
 
 class WatchlistsResource(SyncAPIResource):
-    """Retrieve details and lists of tradable instruments."""
+    """Create and manage watchlists."""
 
     @cached_property
     def items(self) -> ItemsResource:
-        """Retrieve details and lists of tradable instruments."""
+        """Create and manage watchlists."""
         return ItemsResource(self._client)
 
     @cached_property
@@ -180,11 +180,11 @@ class WatchlistsResource(SyncAPIResource):
 
 
 class AsyncWatchlistsResource(AsyncAPIResource):
-    """Retrieve details and lists of tradable instruments."""
+    """Create and manage watchlists."""
 
     @cached_property
     def items(self) -> AsyncItemsResource:
-        """Retrieve details and lists of tradable instruments."""
+        """Create and manage watchlists."""
         return AsyncItemsResource(self._client)
 
     @cached_property
@@ -348,7 +348,7 @@ class WatchlistsResourceWithRawResponse:
 
     @cached_property
     def items(self) -> ItemsResourceWithRawResponse:
-        """Retrieve details and lists of tradable instruments."""
+        """Create and manage watchlists."""
         return ItemsResourceWithRawResponse(self._watchlists.items)
 
 
@@ -371,7 +371,7 @@ class AsyncWatchlistsResourceWithRawResponse:
 
     @cached_property
     def items(self) -> AsyncItemsResourceWithRawResponse:
-        """Retrieve details and lists of tradable instruments."""
+        """Create and manage watchlists."""
         return AsyncItemsResourceWithRawResponse(self._watchlists.items)
 
 
@@ -394,7 +394,7 @@ class WatchlistsResourceWithStreamingResponse:
 
     @cached_property
     def items(self) -> ItemsResourceWithStreamingResponse:
-        """Retrieve details and lists of tradable instruments."""
+        """Create and manage watchlists."""
         return ItemsResourceWithStreamingResponse(self._watchlists.items)
 
 
@@ -417,5 +417,5 @@ class AsyncWatchlistsResourceWithStreamingResponse:
 
     @cached_property
     def items(self) -> AsyncItemsResourceWithStreamingResponse:
-        """Retrieve details and lists of tradable instruments."""
+        """Create and manage watchlists."""
         return AsyncItemsResourceWithStreamingResponse(self._watchlists.items)
