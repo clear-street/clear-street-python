@@ -13,6 +13,12 @@ __all__ = ["ScreenerItem"]
 class ScreenerItem(BaseModel):
     """An instrument returned by the screener"""
 
+    instrument_id: str
+    """The OEMS instrument ID (`instrument.instruments.id`).
+
+    Always present regardless of `field_filter`.
+    """
+
     price: str
     """The latest price for the instrument"""
 
