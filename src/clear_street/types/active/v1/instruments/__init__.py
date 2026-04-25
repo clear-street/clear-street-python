@@ -7,6 +7,7 @@ from .analyst_distribution import AnalystDistribution as AnalystDistribution
 from .all_events_event_type import AllEventsEventType as AllEventsEventType
 from .instrument_events_data import InstrumentEventsData as InstrumentEventsData
 from .instrument_split_event import InstrumentSplitEvent as InstrumentSplitEvent
+from .instrument_fundamentals import InstrumentFundamentals as InstrumentFundamentals
 from .instrument_dividend_event import InstrumentDividendEvent as InstrumentDividendEvent
 from .instrument_event_envelope import InstrumentEventEnvelope as InstrumentEventEnvelope
 from .instrument_event_ipo_item import InstrumentEventIpoItem as InstrumentEventIpoItem
@@ -20,6 +21,9 @@ from .event_get_all_instrument_events_params import (
 )
 from .event_get_all_instrument_events_response import (
     EventGetAllInstrumentEventsResponse as EventGetAllInstrumentEventsResponse,
+)
+from .fundamental_get_instrument_fundamentals_response import (
+    FundamentalGetInstrumentFundamentalsResponse as FundamentalGetInstrumentFundamentalsResponse,
 )
 from .analyst_reporting_get_instrument_analyst_consensus_params import (
     AnalystReportingGetInstrumentAnalystConsensusParams as AnalystReportingGetInstrumentAnalystConsensusParams,

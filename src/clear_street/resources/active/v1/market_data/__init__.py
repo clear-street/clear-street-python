@@ -16,8 +16,22 @@ from .market_data import (
     MarketDataResourceWithStreamingResponse,
     AsyncMarketDataResourceWithStreamingResponse,
 )
+from .daily_summary import (
+    DailySummaryResource,
+    AsyncDailySummaryResource,
+    DailySummaryResourceWithRawResponse,
+    AsyncDailySummaryResourceWithRawResponse,
+    DailySummaryResourceWithStreamingResponse,
+    AsyncDailySummaryResourceWithStreamingResponse,
+)
 
 __all__ = [
+    "DailySummaryResource",
+    "AsyncDailySummaryResource",
+    "DailySummaryResourceWithRawResponse",
+    "AsyncDailySummaryResourceWithRawResponse",
+    "DailySummaryResourceWithStreamingResponse",
+    "AsyncDailySummaryResourceWithStreamingResponse",
     "SnapshotResource",
     "AsyncSnapshotResource",
     "SnapshotResourceWithRawResponse",
