@@ -28,6 +28,14 @@ from ....._types import (
 )
 from ....._utils import path_template, maybe_transform, async_maybe_transform
 from ....._compat import cached_property
+from .fundamentals import (
+    FundamentalsResource,
+    AsyncFundamentalsResource,
+    FundamentalsResourceWithRawResponse,
+    AsyncFundamentalsResourceWithRawResponse,
+    FundamentalsResourceWithStreamingResponse,
+    AsyncFundamentalsResourceWithStreamingResponse,
+)
 from ....._resource import SyncAPIResource, AsyncAPIResource
 from ....._response import (
     to_raw_response_wrapper,
@@ -73,6 +81,11 @@ class InstrumentsResource(SyncAPIResource):
     def events(self) -> EventsResource:
         """Retrieve details and lists of tradable instruments."""
         return EventsResource(self._client)
+
+    @cached_property
+    def fundamentals(self) -> FundamentalsResource:
+        """Retrieve details and lists of tradable instruments."""
+        return FundamentalsResource(self._client)
 
     @cached_property
     def options(self) -> OptionsResource:
@@ -263,6 +276,11 @@ class AsyncInstrumentsResource(AsyncAPIResource):
     def events(self) -> AsyncEventsResource:
         """Retrieve details and lists of tradable instruments."""
         return AsyncEventsResource(self._client)
+
+    @cached_property
+    def fundamentals(self) -> AsyncFundamentalsResource:
+        """Retrieve details and lists of tradable instruments."""
+        return AsyncFundamentalsResource(self._client)
 
     @cached_property
     def options(self) -> AsyncOptionsResource:
@@ -463,6 +481,11 @@ class InstrumentsResourceWithRawResponse:
         return EventsResourceWithRawResponse(self._instruments.events)
 
     @cached_property
+    def fundamentals(self) -> FundamentalsResourceWithRawResponse:
+        """Retrieve details and lists of tradable instruments."""
+        return FundamentalsResourceWithRawResponse(self._instruments.fundamentals)
+
+    @cached_property
     def options(self) -> OptionsResourceWithRawResponse:
         return OptionsResourceWithRawResponse(self._instruments.options)
 
@@ -487,6 +510,11 @@ class AsyncInstrumentsResourceWithRawResponse:
     def events(self) -> AsyncEventsResourceWithRawResponse:
         """Retrieve details and lists of tradable instruments."""
         return AsyncEventsResourceWithRawResponse(self._instruments.events)
+
+    @cached_property
+    def fundamentals(self) -> AsyncFundamentalsResourceWithRawResponse:
+        """Retrieve details and lists of tradable instruments."""
+        return AsyncFundamentalsResourceWithRawResponse(self._instruments.fundamentals)
 
     @cached_property
     def options(self) -> AsyncOptionsResourceWithRawResponse:
@@ -515,6 +543,11 @@ class InstrumentsResourceWithStreamingResponse:
         return EventsResourceWithStreamingResponse(self._instruments.events)
 
     @cached_property
+    def fundamentals(self) -> FundamentalsResourceWithStreamingResponse:
+        """Retrieve details and lists of tradable instruments."""
+        return FundamentalsResourceWithStreamingResponse(self._instruments.fundamentals)
+
+    @cached_property
     def options(self) -> OptionsResourceWithStreamingResponse:
         return OptionsResourceWithStreamingResponse(self._instruments.options)
 
@@ -539,6 +572,11 @@ class AsyncInstrumentsResourceWithStreamingResponse:
     def events(self) -> AsyncEventsResourceWithStreamingResponse:
         """Retrieve details and lists of tradable instruments."""
         return AsyncEventsResourceWithStreamingResponse(self._instruments.events)
+
+    @cached_property
+    def fundamentals(self) -> AsyncFundamentalsResourceWithStreamingResponse:
+        """Retrieve details and lists of tradable instruments."""
+        return AsyncFundamentalsResourceWithStreamingResponse(self._instruments.fundamentals)
 
     @cached_property
     def options(self) -> AsyncOptionsResourceWithStreamingResponse:

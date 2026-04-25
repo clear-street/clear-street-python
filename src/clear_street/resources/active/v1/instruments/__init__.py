@@ -24,6 +24,14 @@ from .instruments import (
     InstrumentsResourceWithStreamingResponse,
     AsyncInstrumentsResourceWithStreamingResponse,
 )
+from .fundamentals import (
+    FundamentalsResource,
+    AsyncFundamentalsResource,
+    FundamentalsResourceWithRawResponse,
+    AsyncFundamentalsResourceWithRawResponse,
+    FundamentalsResourceWithStreamingResponse,
+    AsyncFundamentalsResourceWithStreamingResponse,
+)
 from .analyst_reporting import (
     AnalystReportingResource,
     AsyncAnalystReportingResource,
@@ -46,6 +54,12 @@ __all__ = [
     "AsyncEventsResourceWithRawResponse",
     "EventsResourceWithStreamingResponse",
     "AsyncEventsResourceWithStreamingResponse",
+    "FundamentalsResource",
+    "AsyncFundamentalsResource",
+    "FundamentalsResourceWithRawResponse",
+    "AsyncFundamentalsResourceWithRawResponse",
+    "FundamentalsResourceWithStreamingResponse",
+    "AsyncFundamentalsResourceWithStreamingResponse",
     "OptionsResource",
     "AsyncOptionsResource",
     "OptionsResourceWithRawResponse",

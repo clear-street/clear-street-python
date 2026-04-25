@@ -12,11 +12,24 @@ from .snapshot import (
 )
 from ....._compat import cached_property
 from ....._resource import SyncAPIResource, AsyncAPIResource
+from .daily_summary import (
+    DailySummaryResource,
+    AsyncDailySummaryResource,
+    DailySummaryResourceWithRawResponse,
+    AsyncDailySummaryResourceWithRawResponse,
+    DailySummaryResourceWithStreamingResponse,
+    AsyncDailySummaryResourceWithStreamingResponse,
+)
 
 __all__ = ["MarketDataResource", "AsyncMarketDataResource"]
 
 
 class MarketDataResource(SyncAPIResource):
+    @cached_property
+    def daily_summary(self) -> DailySummaryResource:
+        """Real-time market data snapshots."""
+        return DailySummaryResource(self._client)
+
     @cached_property
     def snapshot(self) -> SnapshotResource:
         """Real-time market data snapshots."""
@@ -43,6 +56,11 @@ class MarketDataResource(SyncAPIResource):
 
 
 class AsyncMarketDataResource(AsyncAPIResource):
+    @cached_property
+    def daily_summary(self) -> AsyncDailySummaryResource:
+        """Real-time market data snapshots."""
+        return AsyncDailySummaryResource(self._client)
+
     @cached_property
     def snapshot(self) -> AsyncSnapshotResource:
         """Real-time market data snapshots."""
@@ -73,6 +91,11 @@ class MarketDataResourceWithRawResponse:
         self._market_data = market_data
 
     @cached_property
+    def daily_summary(self) -> DailySummaryResourceWithRawResponse:
+        """Real-time market data snapshots."""
+        return DailySummaryResourceWithRawResponse(self._market_data.daily_summary)
+
+    @cached_property
     def snapshot(self) -> SnapshotResourceWithRawResponse:
         """Real-time market data snapshots."""
         return SnapshotResourceWithRawResponse(self._market_data.snapshot)
@@ -81,6 +104,11 @@ class MarketDataResourceWithRawResponse:
 class AsyncMarketDataResourceWithRawResponse:
     def __init__(self, market_data: AsyncMarketDataResource) -> None:
         self._market_data = market_data
+
+    @cached_property
+    def daily_summary(self) -> AsyncDailySummaryResourceWithRawResponse:
+        """Real-time market data snapshots."""
+        return AsyncDailySummaryResourceWithRawResponse(self._market_data.daily_summary)
 
     @cached_property
     def snapshot(self) -> AsyncSnapshotResourceWithRawResponse:
@@ -93,6 +121,11 @@ class MarketDataResourceWithStreamingResponse:
         self._market_data = market_data
 
     @cached_property
+    def daily_summary(self) -> DailySummaryResourceWithStreamingResponse:
+        """Real-time market data snapshots."""
+        return DailySummaryResourceWithStreamingResponse(self._market_data.daily_summary)
+
+    @cached_property
     def snapshot(self) -> SnapshotResourceWithStreamingResponse:
         """Real-time market data snapshots."""
         return SnapshotResourceWithStreamingResponse(self._market_data.snapshot)
@@ -101,6 +134,11 @@ class MarketDataResourceWithStreamingResponse:
 class AsyncMarketDataResourceWithStreamingResponse:
     def __init__(self, market_data: AsyncMarketDataResource) -> None:
         self._market_data = market_data
+
+    @cached_property
+    def daily_summary(self) -> AsyncDailySummaryResourceWithStreamingResponse:
+        """Real-time market data snapshots."""
+        return AsyncDailySummaryResourceWithStreamingResponse(self._market_data.daily_summary)
 
     @cached_property
     def snapshot(self) -> AsyncSnapshotResourceWithStreamingResponse:

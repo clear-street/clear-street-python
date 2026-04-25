@@ -267,6 +267,21 @@ Methods:
 - <code title="get /active/v1/instruments/events">client.active.v1.instruments.events.<a href="./src/clear_street/resources/active/v1/instruments/events.py">get_all_instrument_events</a>(\*\*<a href="src/clear_street/types/active/v1/instruments/event_get_all_instrument_events_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/instruments/event_get_all_instrument_events_response.py">EventGetAllInstrumentEventsResponse</a></code>
 - <code title="get /active/v1/instruments/{security_id_source}/{security_id}/events">client.active.v1.instruments.events.<a href="./src/clear_street/resources/active/v1/instruments/events.py">get_instrument_events</a>(security_id, \*, security_id_source, \*\*<a href="src/clear_street/types/active/v1/instruments/event_get_instrument_events_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/instruments/event_get_instrument_events_response.py">EventGetInstrumentEventsResponse</a></code>
 
+#### Fundamentals
+
+Types:
+
+```python
+from clear_street.types.active.v1.instruments import (
+    InstrumentFundamentals,
+    FundamentalGetInstrumentFundamentalsResponse,
+)
+```
+
+Methods:
+
+- <code title="get /active/v1/instruments/{id}/fundamentals">client.active.v1.instruments.fundamentals.<a href="./src/clear_street/resources/active/v1/instruments/fundamentals.py">get_instrument_fundamentals</a>(id) -> <a href="./src/clear_street/types/active/v1/instruments/fundamental_get_instrument_fundamentals_response.py">FundamentalGetInstrumentFundamentalsResponse</a></code>
+
 #### Options
 
 ##### Contracts
@@ -282,6 +297,22 @@ Methods:
 - <code title="get /active/v1/instruments/options/contracts">client.active.v1.instruments.options.contracts.<a href="./src/clear_street/resources/active/v1/instruments/options/contracts.py">get_option_contracts</a>(\*\*<a href="src/clear_street/types/active/v1/instruments/options/contract_get_option_contracts_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/instruments/options/contract_get_option_contracts_response.py">ContractGetOptionContractsResponse</a></code>
 
 ### MarketData
+
+#### DailySummary
+
+Types:
+
+```python
+from clear_street.types.active.v1.market_data import (
+    DailySummary,
+    DailySummaryList,
+    DailySummaryGetDailySummariesResponse,
+)
+```
+
+Methods:
+
+- <code title="get /active/v1/market-data/daily-summary">client.active.v1.market_data.daily_summary.<a href="./src/clear_street/resources/active/v1/market_data/daily_summary.py">get_daily_summaries</a>(\*\*<a href="src/clear_street/types/active/v1/market_data/daily_summary_get_daily_summaries_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/market_data/daily_summary_get_daily_summaries_response.py">DailySummaryGetDailySummariesResponse</a></code>
 
 #### Snapshot
 
