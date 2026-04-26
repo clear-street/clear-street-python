@@ -5,10 +5,10 @@ from __future__ import annotations
 from typing import Optional
 from typing_extensions import Required, TypedDict
 
-__all__ = ["FeedbackCreateFeedbackParams"]
+__all__ = ["MessageFeedbackParams"]
 
 
-class FeedbackCreateFeedbackParams(TypedDict, total=False):
+class MessageFeedbackParams(TypedDict, total=False):
     account_id: Required[int]
     """Account ID for the request"""
 

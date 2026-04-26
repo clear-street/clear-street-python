@@ -6,15 +6,15 @@ from typing import Union
 from datetime import date
 from typing_extensions import Annotated, TypedDict
 
-from ......_types import Base64FileInput
-from ......_utils import PropertyInfo
-from ...contract_type import ContractType
-from ....security_id_source import SecurityIDSource
+from ....._types import Base64FileInput
+from ....._utils import PropertyInfo
+from ..contract_type import ContractType
+from ...security_id_source import SecurityIDSource
 
-__all__ = ["ContractGetOptionContractsParams"]
+__all__ = ["OptionContractsParams"]
 
 
-class ContractGetOptionContractsParams(TypedDict, total=False):
+class OptionContractsParams(TypedDict, total=False):
     contract_type: ContractType
     """Filter by contract type: CALL or PUT"""
 

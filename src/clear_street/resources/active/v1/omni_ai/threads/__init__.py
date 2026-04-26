@@ -16,14 +16,6 @@ from .messages import (
     MessagesResourceWithStreamingResponse,
     AsyncMessagesResourceWithStreamingResponse,
 )
-from .response import (
-    ResponseResource,
-    AsyncResponseResource,
-    ResponseResourceWithRawResponse,
-    AsyncResponseResourceWithRawResponse,
-    ResponseResourceWithStreamingResponse,
-    AsyncResponseResourceWithStreamingResponse,
-)
 
 __all__ = [
     "MessagesResource",
@@ -32,12 +24,6 @@ __all__ = [
     "AsyncMessagesResourceWithRawResponse",
     "MessagesResourceWithStreamingResponse",
     "AsyncMessagesResourceWithStreamingResponse",
-    "ResponseResource",
-    "AsyncResponseResource",
-    "ResponseResourceWithRawResponse",
-    "AsyncResponseResourceWithRawResponse",
-    "ResponseResourceWithStreamingResponse",
-    "AsyncResponseResourceWithStreamingResponse",
     "ThreadsResource",
     "AsyncThreadsResource",
     "ThreadsResourceWithRawResponse",

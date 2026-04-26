@@ -15,14 +15,6 @@ from .messages import (
     MessagesResourceWithStreamingResponse,
     AsyncMessagesResourceWithStreamingResponse,
 )
-from .response import (
-    ResponseResource,
-    AsyncResponseResource,
-    ResponseResourceWithRawResponse,
-    AsyncResponseResourceWithRawResponse,
-    ResponseResourceWithStreamingResponse,
-    AsyncResponseResourceWithStreamingResponse,
-)
 from ......_types import Body, Omit, Query, Headers, NotGiven, Base64FileInput, omit, not_given
 from ......_utils import path_template, maybe_transform, async_maybe_transform
 from ......_compat import cached_property
@@ -35,10 +27,12 @@ from ......_response import (
 )
 from ......_base_client import make_request_options
 from ......types.active.v1.omni_ai import (
+    thread_response_params,
     thread_get_thread_params,
     thread_list_threads_params,
     thread_create_thread_params,
 )
+from ......types.active.v1.omni_ai.thread_response_response import ThreadResponseResponse
 from ......types.active.v1.omni_ai.thread_get_thread_response import ThreadGetThreadResponse
 from ......types.active.v1.omni_ai.thread_list_threads_response import ThreadListThreadsResponse
 from ......types.active.v1.omni_ai.thread_create_thread_response import ThreadCreateThreadResponse
@@ -59,14 +53,6 @@ class ThreadsResource(SyncAPIResource):
         Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return MessagesResource(self._client)
-
-    @cached_property
-    def response(self) -> ResponseResource:
-        """Thread-centric AI assistant for conversational trading.
-
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
-        """
-        return ResponseResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> ThreadsResourceWithRawResponse:
@@ -247,6 +233,53 @@ class ThreadsResource(SyncAPIResource):
             cast_to=ThreadListThreadsResponse,
         )
 
+    def response(
+        self,
+        thread_id: str,
+        *,
+        account_id: int,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ThreadResponseResponse:
+        """
+        Get the active response for a thread.
+
+        Convenience endpoint to look up the currently active response for a thread
+        without knowing the `response_id`. Useful when reloading a thread whose last
+        finalized message is a `USER` message — this indicates an assistant turn is
+        likely in progress.
+
+        Returns **404** if no active response exists (the thread is idle).
+
+        Args:
+          account_id: Account ID for the request
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not thread_id:
+            raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
+        return self._get(
+            path_template("/active/v1/omni-ai/threads/{thread_id}/response", thread_id=thread_id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform({"account_id": account_id}, thread_response_params.ThreadResponseParams),
+            ),
+            cast_to=ThreadResponseResponse,
+        )
+
 
 class AsyncThreadsResource(AsyncAPIResource):
     """Thread-centric AI assistant for conversational trading.
@@ -261,14 +294,6 @@ class AsyncThreadsResource(AsyncAPIResource):
         Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return AsyncMessagesResource(self._client)
-
-    @cached_property
-    def response(self) -> AsyncResponseResource:
-        """Thread-centric AI assistant for conversational trading.
-
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
-        """
-        return AsyncResponseResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncThreadsResourceWithRawResponse:
@@ -451,6 +476,55 @@ class AsyncThreadsResource(AsyncAPIResource):
             cast_to=ThreadListThreadsResponse,
         )
 
+    async def response(
+        self,
+        thread_id: str,
+        *,
+        account_id: int,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ThreadResponseResponse:
+        """
+        Get the active response for a thread.
+
+        Convenience endpoint to look up the currently active response for a thread
+        without knowing the `response_id`. Useful when reloading a thread whose last
+        finalized message is a `USER` message — this indicates an assistant turn is
+        likely in progress.
+
+        Returns **404** if no active response exists (the thread is idle).
+
+        Args:
+          account_id: Account ID for the request
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not thread_id:
+            raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
+        return await self._get(
+            path_template("/active/v1/omni-ai/threads/{thread_id}/response", thread_id=thread_id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"account_id": account_id}, thread_response_params.ThreadResponseParams
+                ),
+            ),
+            cast_to=ThreadResponseResponse,
+        )
+
 
 class ThreadsResourceWithRawResponse:
     def __init__(self, threads: ThreadsResource) -> None:
@@ -465,6 +539,9 @@ class ThreadsResourceWithRawResponse:
         self.list_threads = to_raw_response_wrapper(
             threads.list_threads,
         )
+        self.response = to_raw_response_wrapper(
+            threads.response,
+        )
 
     @cached_property
     def messages(self) -> MessagesResourceWithRawResponse:
@@ -473,14 +550,6 @@ class ThreadsResourceWithRawResponse:
         Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return MessagesResourceWithRawResponse(self._threads.messages)
-
-    @cached_property
-    def response(self) -> ResponseResourceWithRawResponse:
-        """Thread-centric AI assistant for conversational trading.
-
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
-        """
-        return ResponseResourceWithRawResponse(self._threads.response)
 
 
 class AsyncThreadsResourceWithRawResponse:
@@ -496,6 +565,9 @@ class AsyncThreadsResourceWithRawResponse:
         self.list_threads = async_to_raw_response_wrapper(
             threads.list_threads,
         )
+        self.response = async_to_raw_response_wrapper(
+            threads.response,
+        )
 
     @cached_property
     def messages(self) -> AsyncMessagesResourceWithRawResponse:
@@ -504,14 +576,6 @@ class AsyncThreadsResourceWithRawResponse:
         Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return AsyncMessagesResourceWithRawResponse(self._threads.messages)
-
-    @cached_property
-    def response(self) -> AsyncResponseResourceWithRawResponse:
-        """Thread-centric AI assistant for conversational trading.
-
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
-        """
-        return AsyncResponseResourceWithRawResponse(self._threads.response)
 
 
 class ThreadsResourceWithStreamingResponse:
@@ -527,6 +591,9 @@ class ThreadsResourceWithStreamingResponse:
         self.list_threads = to_streamed_response_wrapper(
             threads.list_threads,
         )
+        self.response = to_streamed_response_wrapper(
+            threads.response,
+        )
 
     @cached_property
     def messages(self) -> MessagesResourceWithStreamingResponse:
@@ -535,14 +602,6 @@ class ThreadsResourceWithStreamingResponse:
         Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return MessagesResourceWithStreamingResponse(self._threads.messages)
-
-    @cached_property
-    def response(self) -> ResponseResourceWithStreamingResponse:
-        """Thread-centric AI assistant for conversational trading.
-
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
-        """
-        return ResponseResourceWithStreamingResponse(self._threads.response)
 
 
 class AsyncThreadsResourceWithStreamingResponse:
@@ -558,6 +617,9 @@ class AsyncThreadsResourceWithStreamingResponse:
         self.list_threads = async_to_streamed_response_wrapper(
             threads.list_threads,
         )
+        self.response = async_to_streamed_response_wrapper(
+            threads.response,
+        )
 
     @cached_property
     def messages(self) -> AsyncMessagesResourceWithStreamingResponse:
@@ -566,11 +628,3 @@ class AsyncThreadsResourceWithStreamingResponse:
         Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
         """
         return AsyncMessagesResourceWithStreamingResponse(self._threads.messages)
-
-    @cached_property
-    def response(self) -> AsyncResponseResourceWithStreamingResponse:
-        """Thread-centric AI assistant for conversational trading.
-
-        Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
-        """
-        return AsyncResponseResourceWithStreamingResponse(self._threads.response)

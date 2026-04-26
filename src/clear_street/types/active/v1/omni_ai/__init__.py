@@ -3,8 +3,12 @@
 from __future__ import annotations
 
 from .entitlement_resource import EntitlementResource as EntitlementResource
+from .thread_response_params import ThreadResponseParams as ThreadResponseParams
+from .message_feedback_params import MessageFeedbackParams as MessageFeedbackParams
 from .thread_get_thread_params import ThreadGetThreadParams as ThreadGetThreadParams
+from .thread_response_response import ThreadResponseResponse as ThreadResponseResponse
 from .entitlement_resource_list import EntitlementResourceList as EntitlementResourceList
+from .message_feedback_response import MessageFeedbackResponse as MessageFeedbackResponse
 from .message_get_message_params import MessageGetMessageParams as MessageGetMessageParams
 from .thread_get_thread_response import ThreadGetThreadResponse as ThreadGetThreadResponse
 from .thread_list_threads_params import ThreadListThreadsParams as ThreadListThreadsParams

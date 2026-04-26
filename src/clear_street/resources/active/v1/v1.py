@@ -2,14 +2,8 @@
 
 from __future__ import annotations
 
-from .ws import (
-    WsResource,
-    AsyncWsResource,
-    WsResourceWithRawResponse,
-    AsyncWsResourceWithRawResponse,
-    WsResourceWithStreamingResponse,
-    AsyncWsResourceWithStreamingResponse,
-)
+import httpx
+
 from .news import (
     NewsResource,
     AsyncNewsResource,
@@ -50,8 +44,16 @@ from .screener import (
     ScreenerResourceWithStreamingResponse,
     AsyncScreenerResourceWithStreamingResponse,
 )
+from ...._types import Body, Query, Headers, NoneType, NotGiven, not_given
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
+from ...._response import (
+    to_raw_response_wrapper,
+    to_streamed_response_wrapper,
+    async_to_raw_response_wrapper,
+    async_to_streamed_response_wrapper,
+)
+from ...._base_client import make_request_options
 from .omni_ai.omni_ai import (
     OmniAIResource,
     AsyncOmniAIResource,
@@ -113,6 +115,8 @@ __all__ = ["V1Resource", "AsyncV1Resource"]
 
 
 class V1Resource(SyncAPIResource):
+    """Active Websocket."""
+
     @cached_property
     def accounts(self) -> AccountsResource:
         """Manage trading accounts, balances, and portfolio history."""
@@ -171,11 +175,6 @@ class V1Resource(SyncAPIResource):
         return WatchlistsResource(self._client)
 
     @cached_property
-    def ws(self) -> WsResource:
-        """Active Websocket."""
-        return WsResource(self._client)
-
-    @cached_property
     def with_raw_response(self) -> V1ResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
@@ -194,8 +193,30 @@ class V1Resource(SyncAPIResource):
         """
         return V1ResourceWithStreamingResponse(self)
 
+    def ws(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
+        """Upgrade the HTTP connection to a WebSocket and echo incoming messages."""
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return self._get(
+            "/active/v1/ws",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
 
 class AsyncV1Resource(AsyncAPIResource):
+    """Active Websocket."""
+
     @cached_property
     def accounts(self) -> AsyncAccountsResource:
         """Manage trading accounts, balances, and portfolio history."""
@@ -254,11 +275,6 @@ class AsyncV1Resource(AsyncAPIResource):
         return AsyncWatchlistsResource(self._client)
 
     @cached_property
-    def ws(self) -> AsyncWsResource:
-        """Active Websocket."""
-        return AsyncWsResource(self._client)
-
-    @cached_property
     def with_raw_response(self) -> AsyncV1ResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
@@ -277,10 +293,34 @@ class AsyncV1Resource(AsyncAPIResource):
         """
         return AsyncV1ResourceWithStreamingResponse(self)
 
+    async def ws(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> None:
+        """Upgrade the HTTP connection to a WebSocket and echo incoming messages."""
+        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
+        return await self._get(
+            "/active/v1/ws",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=NoneType,
+        )
+
 
 class V1ResourceWithRawResponse:
     def __init__(self, v1: V1Resource) -> None:
         self._v1 = v1
+
+        self.ws = to_raw_response_wrapper(
+            v1.ws,
+        )
 
     @cached_property
     def accounts(self) -> AccountsResourceWithRawResponse:
@@ -339,15 +379,14 @@ class V1ResourceWithRawResponse:
         """Create and manage watchlists."""
         return WatchlistsResourceWithRawResponse(self._v1.watchlists)
 
-    @cached_property
-    def ws(self) -> WsResourceWithRawResponse:
-        """Active Websocket."""
-        return WsResourceWithRawResponse(self._v1.ws)
-
 
 class AsyncV1ResourceWithRawResponse:
     def __init__(self, v1: AsyncV1Resource) -> None:
         self._v1 = v1
+
+        self.ws = async_to_raw_response_wrapper(
+            v1.ws,
+        )
 
     @cached_property
     def accounts(self) -> AsyncAccountsResourceWithRawResponse:
@@ -406,15 +445,14 @@ class AsyncV1ResourceWithRawResponse:
         """Create and manage watchlists."""
         return AsyncWatchlistsResourceWithRawResponse(self._v1.watchlists)
 
-    @cached_property
-    def ws(self) -> AsyncWsResourceWithRawResponse:
-        """Active Websocket."""
-        return AsyncWsResourceWithRawResponse(self._v1.ws)
-
 
 class V1ResourceWithStreamingResponse:
     def __init__(self, v1: V1Resource) -> None:
         self._v1 = v1
+
+        self.ws = to_streamed_response_wrapper(
+            v1.ws,
+        )
 
     @cached_property
     def accounts(self) -> AccountsResourceWithStreamingResponse:
@@ -473,15 +511,14 @@ class V1ResourceWithStreamingResponse:
         """Create and manage watchlists."""
         return WatchlistsResourceWithStreamingResponse(self._v1.watchlists)
 
-    @cached_property
-    def ws(self) -> WsResourceWithStreamingResponse:
-        """Active Websocket."""
-        return WsResourceWithStreamingResponse(self._v1.ws)
-
 
 class AsyncV1ResourceWithStreamingResponse:
     def __init__(self, v1: AsyncV1Resource) -> None:
         self._v1 = v1
+
+        self.ws = async_to_streamed_response_wrapper(
+            v1.ws,
+        )
 
     @cached_property
     def accounts(self) -> AsyncAccountsResourceWithStreamingResponse:
@@ -539,8 +576,3 @@ class AsyncV1ResourceWithStreamingResponse:
     def watchlists(self) -> AsyncWatchlistsResourceWithStreamingResponse:
         """Create and manage watchlists."""
         return AsyncWatchlistsResourceWithStreamingResponse(self._v1.watchlists)
-
-    @cached_property
-    def ws(self) -> AsyncWsResourceWithStreamingResponse:
-        """Active Websocket."""
-        return AsyncWsResourceWithStreamingResponse(self._v1.ws)

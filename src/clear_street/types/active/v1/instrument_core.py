@@ -60,6 +60,9 @@ class InstrumentCore(BaseModel):
     venue: str
     """The MIC code of the primary listing venue"""
 
+    adv: Optional[str] = None
+    """Average daily share volume from the security definition."""
+
     expiry: Optional[date] = None
     """The expiration date for options instruments"""
 
@@ -68,6 +71,17 @@ class InstrumentCore(BaseModel):
 
     name: Optional[str] = None
     """The full name of the instrument or its issuer"""
+
+    notional_adv: Optional[str] = None
+    """Notional ADV (`adv × previous_close`).
+
+    The primary liquidity signal used by `/instruments/search` ranking. Computed at
+    response time so it stays consistent with whatever `adv` and `previous_close`
+    show.
+    """
+
+    previous_close: Optional[str] = None
+    """Last close price from the security definition."""
 
     security_type: Optional[SecurityType] = None
     """The type of security (e.g., Common Stock, ETF)"""

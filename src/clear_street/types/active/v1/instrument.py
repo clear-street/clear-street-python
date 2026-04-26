@@ -66,7 +66,7 @@ class Instrument(InstrumentCore):
     `include_options_expiry_dates=true` in the request.
     """
 
-    previous_close: Optional[str] = None
+    previous_close: Optional[str] = None  # type: ignore
     """The closing price from the previous trading day"""
 
     price_to_earnings: Optional[str] = None

@@ -19,6 +19,7 @@ __all__ = ["ActiveResource", "AsyncActiveResource"]
 class ActiveResource(SyncAPIResource):
     @cached_property
     def v1(self) -> V1Resource:
+        """Active Websocket."""
         return V1Resource(self._client)
 
     @cached_property
@@ -44,6 +45,7 @@ class ActiveResource(SyncAPIResource):
 class AsyncActiveResource(AsyncAPIResource):
     @cached_property
     def v1(self) -> AsyncV1Resource:
+        """Active Websocket."""
         return AsyncV1Resource(self._client)
 
     @cached_property
@@ -72,6 +74,7 @@ class ActiveResourceWithRawResponse:
 
     @cached_property
     def v1(self) -> V1ResourceWithRawResponse:
+        """Active Websocket."""
         return V1ResourceWithRawResponse(self._active.v1)
 
 
@@ -81,6 +84,7 @@ class AsyncActiveResourceWithRawResponse:
 
     @cached_property
     def v1(self) -> AsyncV1ResourceWithRawResponse:
+        """Active Websocket."""
         return AsyncV1ResourceWithRawResponse(self._active.v1)
 
 
@@ -90,6 +94,7 @@ class ActiveResourceWithStreamingResponse:
 
     @cached_property
     def v1(self) -> V1ResourceWithStreamingResponse:
+        """Active Websocket."""
         return V1ResourceWithStreamingResponse(self._active.v1)
 
 
@@ -99,4 +104,5 @@ class AsyncActiveResourceWithStreamingResponse:
 
     @cached_property
     def v1(self) -> AsyncV1ResourceWithStreamingResponse:
+        """Active Websocket."""
         return AsyncV1ResourceWithStreamingResponse(self._active.v1)
