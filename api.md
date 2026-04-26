@@ -14,6 +14,10 @@ Types:
 from clear_street.types.active import APIDecimal64, SecurityIDSource, SecurityType
 ```
 
+Methods:
+
+- <code title="get /active/v1/ws">client.active.v1.<a href="./src/clear_street/resources/active/v1/v1.py">ws</a>() -> None</code>
+
 ### Accounts
 
 Types:
@@ -218,6 +222,7 @@ from clear_street.types.active.v1 import (
     OptionsContractList,
     InstrumentGetInstrumentByIDResponse,
     InstrumentGetInstrumentsResponse,
+    InstrumentSearchResponse,
 )
 ```
 
@@ -225,6 +230,7 @@ Methods:
 
 - <code title="get /active/v1/instruments/{security_id_source}/{security_id}">client.active.v1.instruments.<a href="./src/clear_street/resources/active/v1/instruments/instruments.py">get_instrument_by_id</a>(security_id, \*, security_id_source, \*\*<a href="src/clear_street/types/active/v1/instrument_get_instrument_by_id_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/instrument_get_instrument_by_id_response.py">InstrumentGetInstrumentByIDResponse</a></code>
 - <code title="get /active/v1/instruments">client.active.v1.instruments.<a href="./src/clear_street/resources/active/v1/instruments/instruments.py">get_instruments</a>(\*\*<a href="src/clear_street/types/active/v1/instrument_get_instruments_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/instrument_get_instruments_response.py">InstrumentGetInstrumentsResponse</a></code>
+- <code title="get /active/v1/instruments/search">client.active.v1.instruments.<a href="./src/clear_street/resources/active/v1/instruments/instruments.py">search</a>(\*\*<a href="src/clear_street/types/active/v1/instrument_search_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/instrument_search_response.py">InstrumentSearchResponse</a></code>
 
 #### AnalystReporting
 
@@ -284,17 +290,15 @@ Methods:
 
 #### Options
 
-##### Contracts
-
 Types:
 
 ```python
-from clear_street.types.active.v1.instruments.options import ContractGetOptionContractsResponse
+from clear_street.types.active.v1.instruments import OptionContractsResponse
 ```
 
 Methods:
 
-- <code title="get /active/v1/instruments/options/contracts">client.active.v1.instruments.options.contracts.<a href="./src/clear_street/resources/active/v1/instruments/options/contracts.py">get_option_contracts</a>(\*\*<a href="src/clear_street/types/active/v1/instruments/options/contract_get_option_contracts_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/instruments/options/contract_get_option_contracts_response.py">ContractGetOptionContractsResponse</a></code>
+- <code title="get /active/v1/instruments/options/contracts">client.active.v1.instruments.options.<a href="./src/clear_street/resources/active/v1/instruments/options.py">contracts</a>(\*\*<a href="src/clear_street/types/active/v1/instruments/option_contracts_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/instruments/option_contracts_response.py">OptionContractsResponse</a></code>
 
 ### MarketData
 
@@ -441,24 +445,13 @@ Methods:
 Types:
 
 ```python
-from clear_street.types.active.v1.omni_ai import MessageGetMessageResponse
+from clear_street.types.active.v1.omni_ai import MessageFeedbackResponse, MessageGetMessageResponse
 ```
 
 Methods:
 
-- <code title="get /active/v1/omni-ai/messages/{message_id}">client.active.v1.omni_ai.messages.<a href="./src/clear_street/resources/active/v1/omni_ai/messages/messages.py">get_message</a>(message_id, \*\*<a href="src/clear_street/types/active/v1/omni_ai/message_get_message_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/omni_ai/message_get_message_response.py">MessageGetMessageResponse</a></code>
-
-##### Feedback
-
-Types:
-
-```python
-from clear_street.types.active.v1.omni_ai.messages import FeedbackCreateFeedbackResponse
-```
-
-Methods:
-
-- <code title="post /active/v1/omni-ai/messages/{message_id}/feedback">client.active.v1.omni_ai.messages.feedback.<a href="./src/clear_street/resources/active/v1/omni_ai/messages/feedback.py">create_feedback</a>(message_id, \*\*<a href="src/clear_street/types/active/v1/omni_ai/messages/feedback_create_feedback_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/omni_ai/messages/feedback_create_feedback_response.py">FeedbackCreateFeedbackResponse</a></code>
+- <code title="post /active/v1/omni-ai/messages/{message_id}/feedback">client.active.v1.omni_ai.messages.<a href="./src/clear_street/resources/active/v1/omni_ai/messages.py">feedback</a>(message_id, \*\*<a href="src/clear_street/types/active/v1/omni_ai/message_feedback_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/omni_ai/message_feedback_response.py">MessageFeedbackResponse</a></code>
+- <code title="get /active/v1/omni-ai/messages/{message_id}">client.active.v1.omni_ai.messages.<a href="./src/clear_street/resources/active/v1/omni_ai/messages.py">get_message</a>(message_id, \*\*<a href="src/clear_street/types/active/v1/omni_ai/message_get_message_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/omni_ai/message_get_message_response.py">MessageGetMessageResponse</a></code>
 
 #### Responses
 
@@ -485,6 +478,7 @@ from clear_street.types.active.v1.omni_ai import (
     ThreadCreateThreadResponse,
     ThreadGetThreadResponse,
     ThreadListThreadsResponse,
+    ThreadResponseResponse,
 )
 ```
 
@@ -493,6 +487,7 @@ Methods:
 - <code title="post /active/v1/omni-ai/threads">client.active.v1.omni_ai.threads.<a href="./src/clear_street/resources/active/v1/omni_ai/threads/threads.py">create_thread</a>(\*\*<a href="src/clear_street/types/active/v1/omni_ai/thread_create_thread_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/omni_ai/thread_create_thread_response.py">ThreadCreateThreadResponse</a></code>
 - <code title="get /active/v1/omni-ai/threads/{thread_id}">client.active.v1.omni_ai.threads.<a href="./src/clear_street/resources/active/v1/omni_ai/threads/threads.py">get_thread</a>(thread_id, \*\*<a href="src/clear_street/types/active/v1/omni_ai/thread_get_thread_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/omni_ai/thread_get_thread_response.py">ThreadGetThreadResponse</a></code>
 - <code title="get /active/v1/omni-ai/threads">client.active.v1.omni_ai.threads.<a href="./src/clear_street/resources/active/v1/omni_ai/threads/threads.py">list_threads</a>(\*\*<a href="src/clear_street/types/active/v1/omni_ai/thread_list_threads_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/omni_ai/thread_list_threads_response.py">ThreadListThreadsResponse</a></code>
+- <code title="get /active/v1/omni-ai/threads/{thread_id}/response">client.active.v1.omni_ai.threads.<a href="./src/clear_street/resources/active/v1/omni_ai/threads/threads.py">response</a>(thread_id, \*\*<a href="src/clear_street/types/active/v1/omni_ai/thread_response_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/omni_ai/thread_response_response.py">ThreadResponseResponse</a></code>
 
 ##### Messages
 
@@ -509,18 +504,6 @@ Methods:
 
 - <code title="post /active/v1/omni-ai/threads/{thread_id}/messages">client.active.v1.omni_ai.threads.messages.<a href="./src/clear_street/resources/active/v1/omni_ai/threads/messages.py">create_message</a>(thread_id, \*\*<a href="src/clear_street/types/active/v1/omni_ai/threads/message_create_message_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/omni_ai/threads/message_create_message_response.py">MessageCreateMessageResponse</a></code>
 - <code title="get /active/v1/omni-ai/threads/{thread_id}/messages">client.active.v1.omni_ai.threads.messages.<a href="./src/clear_street/resources/active/v1/omni_ai/threads/messages.py">list_messages</a>(thread_id, \*\*<a href="src/clear_street/types/active/v1/omni_ai/threads/message_list_messages_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/omni_ai/threads/message_list_messages_response.py">MessageListMessagesResponse</a></code>
-
-##### Response
-
-Types:
-
-```python
-from clear_street.types.active.v1.omni_ai.threads import ResponseGetThreadResponseResponse
-```
-
-Methods:
-
-- <code title="get /active/v1/omni-ai/threads/{thread_id}/response">client.active.v1.omni_ai.threads.response.<a href="./src/clear_street/resources/active/v1/omni_ai/threads/response.py">get_thread_response</a>(thread_id, \*\*<a href="src/clear_street/types/active/v1/omni_ai/threads/response_get_thread_response_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/omni_ai/threads/response_get_thread_response_response.py">ResponseGetThreadResponseResponse</a></code>
 
 ### SavedScreeners
 
@@ -622,9 +605,3 @@ Methods:
 
 - <code title="post /active/v1/watchlists/{watchlist_id}/items">client.active.v1.watchlists.items.<a href="./src/clear_street/resources/active/v1/watchlists/items.py">add_watchlist_item</a>(watchlist_id, \*\*<a href="src/clear_street/types/active/v1/watchlists/item_add_watchlist_item_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/watchlists/item_add_watchlist_item_response.py">ItemAddWatchlistItemResponse</a></code>
 - <code title="delete /active/v1/watchlists/{watchlist_id}/items/{item_id}">client.active.v1.watchlists.items.<a href="./src/clear_street/resources/active/v1/watchlists/items.py">delete_watchlist_item</a>(item_id, \*, watchlist_id) -> None</code>
-
-### Ws
-
-Methods:
-
-- <code title="get /active/v1/ws">client.active.v1.ws.<a href="./src/clear_street/resources/active/v1/ws.py">websocket_handler</a>() -> None</code>

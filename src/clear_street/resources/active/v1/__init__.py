@@ -8,14 +8,6 @@ from .v1 import (
     V1ResourceWithStreamingResponse,
     AsyncV1ResourceWithStreamingResponse,
 )
-from .ws import (
-    WsResource,
-    AsyncWsResource,
-    WsResourceWithRawResponse,
-    AsyncWsResourceWithRawResponse,
-    WsResourceWithStreamingResponse,
-    AsyncWsResourceWithStreamingResponse,
-)
 from .news import (
     NewsResource,
     AsyncNewsResource,
@@ -186,12 +178,6 @@ __all__ = [
     "AsyncWatchlistsResourceWithRawResponse",
     "WatchlistsResourceWithStreamingResponse",
     "AsyncWatchlistsResourceWithStreamingResponse",
-    "WsResource",
-    "AsyncWsResource",
-    "WsResourceWithRawResponse",
-    "AsyncWsResourceWithRawResponse",
-    "WsResourceWithStreamingResponse",
-    "AsyncWsResourceWithStreamingResponse",
     "V1Resource",
     "AsyncV1Resource",
     "V1ResourceWithRawResponse",

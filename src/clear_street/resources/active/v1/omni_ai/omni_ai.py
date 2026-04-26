@@ -2,6 +2,14 @@
 
 from __future__ import annotations
 
+from .messages import (
+    MessagesResource,
+    AsyncMessagesResource,
+    MessagesResourceWithRawResponse,
+    AsyncMessagesResourceWithRawResponse,
+    MessagesResourceWithStreamingResponse,
+    AsyncMessagesResourceWithStreamingResponse,
+)
 from .responses import (
     ResponsesResource,
     AsyncResponsesResource,
@@ -27,14 +35,6 @@ from .threads.threads import (
     AsyncThreadsResourceWithRawResponse,
     ThreadsResourceWithStreamingResponse,
     AsyncThreadsResourceWithStreamingResponse,
-)
-from .messages.messages import (
-    MessagesResource,
-    AsyncMessagesResource,
-    MessagesResourceWithRawResponse,
-    AsyncMessagesResourceWithRawResponse,
-    MessagesResourceWithStreamingResponse,
-    AsyncMessagesResourceWithStreamingResponse,
 )
 from .entitlement_agreements import (
     EntitlementAgreementsResource,

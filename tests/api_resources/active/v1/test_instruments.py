@@ -10,6 +10,7 @@ import pytest
 from tests.utils import assert_matches_type
 from clear_street import ClearStreet, AsyncClearStreet
 from clear_street.types.active.v1 import (
+    InstrumentSearchResponse,
     InstrumentGetInstrumentsResponse,
     InstrumentGetInstrumentByIDResponse,
 )
@@ -123,6 +124,55 @@ class TestInstruments:
 
         assert cast(Any, response.is_closed) is True
 
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_search(self, client: ClearStreet) -> None:
+        instrument = client.active.v1.instruments.search(
+            q="q",
+        )
+        assert_matches_type(InstrumentSearchResponse, instrument, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_search_with_all_params(self, client: ClearStreet) -> None:
+        instrument = client.active.v1.instruments.search(
+            q="q",
+            asset_class="asset_class",
+            country="country",
+            currency="currency",
+            cursor="cursor",
+            include_inactive=True,
+            include_restricted=True,
+            limit=0,
+        )
+        assert_matches_type(InstrumentSearchResponse, instrument, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_search(self, client: ClearStreet) -> None:
+        response = client.active.v1.instruments.with_raw_response.search(
+            q="q",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        instrument = response.parse()
+        assert_matches_type(InstrumentSearchResponse, instrument, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_search(self, client: ClearStreet) -> None:
+        with client.active.v1.instruments.with_streaming_response.search(
+            q="q",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            instrument = response.parse()
+            assert_matches_type(InstrumentSearchResponse, instrument, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
 
 class TestAsyncInstruments:
     parametrize = pytest.mark.parametrize(
@@ -229,5 +279,54 @@ class TestAsyncInstruments:
 
             instrument = await response.parse()
             assert_matches_type(InstrumentGetInstrumentsResponse, instrument, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_search(self, async_client: AsyncClearStreet) -> None:
+        instrument = await async_client.active.v1.instruments.search(
+            q="q",
+        )
+        assert_matches_type(InstrumentSearchResponse, instrument, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_search_with_all_params(self, async_client: AsyncClearStreet) -> None:
+        instrument = await async_client.active.v1.instruments.search(
+            q="q",
+            asset_class="asset_class",
+            country="country",
+            currency="currency",
+            cursor="cursor",
+            include_inactive=True,
+            include_restricted=True,
+            limit=0,
+        )
+        assert_matches_type(InstrumentSearchResponse, instrument, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_search(self, async_client: AsyncClearStreet) -> None:
+        response = await async_client.active.v1.instruments.with_raw_response.search(
+            q="q",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        instrument = await response.parse()
+        assert_matches_type(InstrumentSearchResponse, instrument, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_search(self, async_client: AsyncClearStreet) -> None:
+        async with async_client.active.v1.instruments.with_streaming_response.search(
+            q="q",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            instrument = await response.parse()
+            assert_matches_type(InstrumentSearchResponse, instrument, path=["response"])
 
         assert cast(Any, response.is_closed) is True
