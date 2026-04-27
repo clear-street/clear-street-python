@@ -141,31 +141,6 @@ Methods:
 - <code title="delete /active/v1/accounts/{account_id}/positions">client.active.v1.accounts.positions.<a href="./src/clear_street/resources/active/v1/accounts/positions.py">close_positions</a>(account_id, \*\*<a href="src/clear_street/types/active/v1/accounts/position_close_positions_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/accounts/position_close_positions_response.py">PositionClosePositionsResponse</a></code>
 - <code title="get /active/v1/accounts/{account_id}/positions">client.active.v1.accounts.positions.<a href="./src/clear_street/resources/active/v1/accounts/positions.py">get_positions</a>(account_id, \*\*<a href="src/clear_street/types/active/v1/accounts/position_get_positions_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/accounts/position_get_positions_response.py">PositionGetPositionsResponse</a></code>
 
-### APIKeys
-
-Types:
-
-```python
-from clear_street.types.active.v1 import (
-    APIKey,
-    APIKeyListEntry,
-    APIKeyListEntryList,
-    Revocation,
-    RevocationList,
-    APIKeyCreateResponse,
-    APIKeyListResponse,
-    APIKeyRevokeResponse,
-    APIKeyRevokeAllResponse,
-)
-```
-
-Methods:
-
-- <code title="post /active/v1/api_keys">client.active.v1.api_keys.<a href="./src/clear_street/resources/active/v1/api_keys.py">create</a>(\*\*<a href="src/clear_street/types/active/v1/api_key_create_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/api_key_create_response.py">APIKeyCreateResponse</a></code>
-- <code title="get /active/v1/api_keys">client.active.v1.api_keys.<a href="./src/clear_street/resources/active/v1/api_keys.py">list</a>() -> <a href="./src/clear_street/types/active/v1/api_key_list_response.py">APIKeyListResponse</a></code>
-- <code title="delete /active/v1/api_keys/{id}">client.active.v1.api_keys.<a href="./src/clear_street/resources/active/v1/api_keys.py">revoke</a>(id) -> <a href="./src/clear_street/types/active/v1/api_key_revoke_response.py">APIKeyRevokeResponse</a></code>
-- <code title="delete /active/v1/api_keys">client.active.v1.api_keys.<a href="./src/clear_street/resources/active/v1/api_keys.py">revoke_all</a>() -> <a href="./src/clear_street/types/active/v1/api_key_revoke_all_response.py">APIKeyRevokeAllResponse</a></code>
-
 ### Calendars
 
 #### MarketHours
