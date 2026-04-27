@@ -6,7 +6,7 @@ from typing import Optional
 
 import httpx
 
-from ....._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
+from ....._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ....._utils import path_template, maybe_transform, async_maybe_transform
 from ....._compat import cached_property
 from ....._resource import SyncAPIResource, AsyncAPIResource
@@ -108,7 +108,7 @@ class ItemsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    ) -> object:
         """
         Delete an instrument from a watchlist
 
@@ -125,7 +125,6 @@ class ItemsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `watchlist_id` but received {watchlist_id!r}")
         if not item_id:
             raise ValueError(f"Expected a non-empty value for `item_id` but received {item_id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
             path_template(
                 "/active/v1/watchlists/{watchlist_id}/items/{item_id}", watchlist_id=watchlist_id, item_id=item_id
@@ -133,7 +132,7 @@ class ItemsResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=object,
         )
 
 
@@ -220,7 +219,7 @@ class AsyncItemsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    ) -> object:
         """
         Delete an instrument from a watchlist
 
@@ -237,7 +236,6 @@ class AsyncItemsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `watchlist_id` but received {watchlist_id!r}")
         if not item_id:
             raise ValueError(f"Expected a non-empty value for `item_id` but received {item_id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
             path_template(
                 "/active/v1/watchlists/{watchlist_id}/items/{item_id}", watchlist_id=watchlist_id, item_id=item_id
@@ -245,7 +243,7 @@ class AsyncItemsResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=object,
         )
 
 

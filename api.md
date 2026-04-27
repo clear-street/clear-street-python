@@ -586,7 +586,7 @@ from clear_street.types.active.v1 import (
 Methods:
 
 - <code title="post /active/v1/watchlists">client.active.v1.watchlists.<a href="./src/clear_street/resources/active/v1/watchlists/watchlists.py">create_watchlist</a>(\*\*<a href="src/clear_street/types/active/v1/watchlist_create_watchlist_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/watchlist_create_watchlist_response.py">WatchlistCreateWatchlistResponse</a></code>
-- <code title="delete /active/v1/watchlists/{watchlist_id}">client.active.v1.watchlists.<a href="./src/clear_street/resources/active/v1/watchlists/watchlists.py">delete_watchlist</a>(watchlist_id) -> None</code>
+- <code title="delete /active/v1/watchlists/{watchlist_id}">client.active.v1.watchlists.<a href="./src/clear_street/resources/active/v1/watchlists/watchlists.py">delete_watchlist</a>(watchlist_id) -> object</code>
 - <code title="get /active/v1/watchlists/{watchlist_id}">client.active.v1.watchlists.<a href="./src/clear_street/resources/active/v1/watchlists/watchlists.py">get_watchlist_by_id</a>(watchlist_id) -> <a href="./src/clear_street/types/active/v1/watchlist_get_watchlist_by_id_response.py">WatchlistGetWatchlistByIDResponse</a></code>
 - <code title="get /active/v1/watchlists">client.active.v1.watchlists.<a href="./src/clear_street/resources/active/v1/watchlists/watchlists.py">get_watchlists</a>() -> <a href="./src/clear_street/types/active/v1/watchlist_get_watchlists_response.py">WatchlistGetWatchlistsResponse</a></code>
 
@@ -604,4 +604,4 @@ from clear_street.types.active.v1.watchlists import (
 Methods:
 
 - <code title="post /active/v1/watchlists/{watchlist_id}/items">client.active.v1.watchlists.items.<a href="./src/clear_street/resources/active/v1/watchlists/items.py">add_watchlist_item</a>(watchlist_id, \*\*<a href="src/clear_street/types/active/v1/watchlists/item_add_watchlist_item_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/watchlists/item_add_watchlist_item_response.py">ItemAddWatchlistItemResponse</a></code>
-- <code title="delete /active/v1/watchlists/{watchlist_id}/items/{item_id}">client.active.v1.watchlists.items.<a href="./src/clear_street/resources/active/v1/watchlists/items.py">delete_watchlist_item</a>(item_id, \*, watchlist_id) -> None</code>
+- <code title="delete /active/v1/watchlists/{watchlist_id}/items/{item_id}">client.active.v1.watchlists.items.<a href="./src/clear_street/resources/active/v1/watchlists/items.py">delete_watchlist_item</a>(item_id, \*, watchlist_id) -> object</code>

@@ -12,7 +12,7 @@ from .items import (
     ItemsResourceWithStreamingResponse,
     AsyncItemsResourceWithStreamingResponse,
 )
-from ....._types import Body, Query, Headers, NoneType, NotGiven, not_given
+from ....._types import Body, Query, Headers, NotGiven, not_given
 from ....._utils import path_template, maybe_transform, async_maybe_transform
 from ....._compat import cached_property
 from ....._resource import SyncAPIResource, AsyncAPIResource
@@ -102,7 +102,7 @@ class WatchlistsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    ) -> object:
         """
         Delete a watchlist and all its items
 
@@ -117,13 +117,12 @@ class WatchlistsResource(SyncAPIResource):
         """
         if not watchlist_id:
             raise ValueError(f"Expected a non-empty value for `watchlist_id` but received {watchlist_id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
             path_template("/active/v1/watchlists/{watchlist_id}", watchlist_id=watchlist_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=object,
         )
 
     def get_watchlist_by_id(
@@ -252,7 +251,7 @@ class AsyncWatchlistsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
+    ) -> object:
         """
         Delete a watchlist and all its items
 
@@ -267,13 +266,12 @@ class AsyncWatchlistsResource(AsyncAPIResource):
         """
         if not watchlist_id:
             raise ValueError(f"Expected a non-empty value for `watchlist_id` but received {watchlist_id!r}")
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
             path_template("/active/v1/watchlists/{watchlist_id}", watchlist_id=watchlist_id),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=NoneType,
+            cast_to=object,
         )
 
     async def get_watchlist_by_id(

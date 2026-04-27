@@ -77,7 +77,7 @@ class TestItems:
             item_id="660e8400-e29b-41d4-a716-446655440001",
             watchlist_id="550e8400-e29b-41d4-a716-446655440000",
         )
-        assert item is None
+        assert_matches_type(object, item, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -90,7 +90,7 @@ class TestItems:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         item = response.parse()
-        assert item is None
+        assert_matches_type(object, item, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -103,7 +103,7 @@ class TestItems:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             item = response.parse()
-            assert item is None
+            assert_matches_type(object, item, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -188,7 +188,7 @@ class TestAsyncItems:
             item_id="660e8400-e29b-41d4-a716-446655440001",
             watchlist_id="550e8400-e29b-41d4-a716-446655440000",
         )
-        assert item is None
+        assert_matches_type(object, item, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -201,7 +201,7 @@ class TestAsyncItems:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         item = await response.parse()
-        assert item is None
+        assert_matches_type(object, item, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -214,7 +214,7 @@ class TestAsyncItems:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             item = await response.parse()
-            assert item is None
+            assert_matches_type(object, item, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

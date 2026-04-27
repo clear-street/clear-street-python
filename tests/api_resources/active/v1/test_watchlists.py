@@ -61,7 +61,7 @@ class TestWatchlists:
         watchlist = client.active.v1.watchlists.delete_watchlist(
             "550e8400-e29b-41d4-a716-446655440000",
         )
-        assert watchlist is None
+        assert_matches_type(object, watchlist, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -73,7 +73,7 @@ class TestWatchlists:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         watchlist = response.parse()
-        assert watchlist is None
+        assert_matches_type(object, watchlist, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -85,7 +85,7 @@ class TestWatchlists:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             watchlist = response.parse()
-            assert watchlist is None
+            assert_matches_type(object, watchlist, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -213,7 +213,7 @@ class TestAsyncWatchlists:
         watchlist = await async_client.active.v1.watchlists.delete_watchlist(
             "550e8400-e29b-41d4-a716-446655440000",
         )
-        assert watchlist is None
+        assert_matches_type(object, watchlist, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -225,7 +225,7 @@ class TestAsyncWatchlists:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         watchlist = await response.parse()
-        assert watchlist is None
+        assert_matches_type(object, watchlist, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -237,7 +237,7 @@ class TestAsyncWatchlists:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             watchlist = await response.parse()
-            assert watchlist is None
+            assert_matches_type(object, watchlist, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
