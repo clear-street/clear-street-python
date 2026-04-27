@@ -60,6 +60,7 @@ from .open_chart_action import OpenChartAction as OpenChartAction
 from .screener_row_list import ScreenerRowList as ScreenerRowList
 from .structured_action import StructuredAction as StructuredAction
 from .api_key_list_entry import APIKeyListEntry as APIKeyListEntry
+from .fiscal_period_type import FiscalPeriodType as FiscalPeriodType
 from .screener_item_list import ScreenerItemList as ScreenerItemList
 from .instrument_earnings import InstrumentEarnings as InstrumentEarnings
 from .order_strategy_type import OrderStrategyType as OrderStrategyType

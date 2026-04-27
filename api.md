@@ -211,6 +211,7 @@ from clear_street.types.active.v1 import (
     AnalystRating,
     ContractType,
     ExerciseStyle,
+    FiscalPeriodType,
     Instrument,
     InstrumentCore,
     InstrumentCoreList,
@@ -248,6 +249,38 @@ from clear_street.types.active.v1.instruments import (
 Methods:
 
 - <code title="get /active/v1/instruments/{security_id_source}/{security_id}/analyst-reporting">client.active.v1.instruments.analyst_reporting.<a href="./src/clear_street/resources/active/v1/instruments/analyst_reporting.py">get_instrument_analyst_consensus</a>(security_id, \*, security_id_source, \*\*<a href="src/clear_street/types/active/v1/instruments/analyst_reporting_get_instrument_analyst_consensus_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/instruments/analyst_reporting_get_instrument_analyst_consensus_response.py">AnalystReportingGetInstrumentAnalystConsensusResponse</a></code>
+
+#### BalanceSheets
+
+Types:
+
+```python
+from clear_street.types.active.v1.instruments import (
+    InstrumentBalanceSheetStatement,
+    InstrumentBalanceSheetStatementList,
+    BalanceSheetGetInstrumentBalanceSheetStatementsResponse,
+)
+```
+
+Methods:
+
+- <code title="get /active/v1/instruments/{security_id_source}/{security_id}/balance-sheets">client.active.v1.instruments.balance_sheets.<a href="./src/clear_street/resources/active/v1/instruments/balance_sheets.py">get_instrument_balance_sheet_statements</a>(security_id, \*, security_id_source, \*\*<a href="src/clear_street/types/active/v1/instruments/balance_sheet_get_instrument_balance_sheet_statements_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/instruments/balance_sheet_get_instrument_balance_sheet_statements_response.py">BalanceSheetGetInstrumentBalanceSheetStatementsResponse</a></code>
+
+#### CashFlowStatements
+
+Types:
+
+```python
+from clear_street.types.active.v1.instruments import (
+    InstrumentCashFlowStatement,
+    InstrumentCashFlowStatementList,
+    CashFlowStatementGetInstrumentCashFlowStatementsResponse,
+)
+```
+
+Methods:
+
+- <code title="get /active/v1/instruments/{security_id_source}/{security_id}/cash-flow-statements">client.active.v1.instruments.cash_flow_statements.<a href="./src/clear_street/resources/active/v1/instruments/cash_flow_statements.py">get_instrument_cash_flow_statements</a>(security_id, \*, security_id_source, \*\*<a href="src/clear_street/types/active/v1/instruments/cash_flow_statement_get_instrument_cash_flow_statements_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/instruments/cash_flow_statement_get_instrument_cash_flow_statements_response.py">CashFlowStatementGetInstrumentCashFlowStatementsResponse</a></code>
 
 #### Events
 
@@ -287,6 +320,22 @@ from clear_street.types.active.v1.instruments import (
 Methods:
 
 - <code title="get /active/v1/instruments/{id}/fundamentals">client.active.v1.instruments.fundamentals.<a href="./src/clear_street/resources/active/v1/instruments/fundamentals.py">get_instrument_fundamentals</a>(id) -> <a href="./src/clear_street/types/active/v1/instruments/fundamental_get_instrument_fundamentals_response.py">FundamentalGetInstrumentFundamentalsResponse</a></code>
+
+#### IncomeStatements
+
+Types:
+
+```python
+from clear_street.types.active.v1.instruments import (
+    InstrumentIncomeStatement,
+    InstrumentIncomeStatementList,
+    IncomeStatementGetInstrumentIncomeStatementsResponse,
+)
+```
+
+Methods:
+
+- <code title="get /active/v1/instruments/{security_id_source}/{security_id}/income-statements">client.active.v1.instruments.income_statements.<a href="./src/clear_street/resources/active/v1/instruments/income_statements.py">get_instrument_income_statements</a>(security_id, \*, security_id_source, \*\*<a href="src/clear_street/types/active/v1/instruments/income_statement_get_instrument_income_statements_params.py">params</a>) -> <a href="./src/clear_street/types/active/v1/instruments/income_statement_get_instrument_income_statements_response.py">IncomeStatementGetInstrumentIncomeStatementsResponse</a></code>
 
 #### Options
 
