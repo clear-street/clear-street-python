@@ -173,6 +173,10 @@ class InstrumentsResource(SyncAPIResource):
         *,
         easy_to_borrow: bool | Omit = omit,
         id_filter: str | Omit = omit,
+        instrument_type: Literal[
+            "COMMON_STOCK", "PREFERRED_STOCK", "CORPORATE_BOND", "OPTION", "FUTURE", "WARRANT", "CASH", "OTHER"
+        ]
+        | Omit = omit,
         is_liquidation_only: bool | Omit = omit,
         is_marginable: bool | Omit = omit,
         is_restricted: bool | Omit = omit,
@@ -182,10 +186,6 @@ class InstrumentsResource(SyncAPIResource):
         page_token: Union[str, Base64FileInput] | Omit = omit,
         security_id: SequenceNotStr[str] | Omit = omit,
         security_id_source: SequenceNotStr[str] | Omit = omit,
-        security_type: Literal[
-            "COMMON_STOCK", "PREFERRED_STOCK", "CORPORATE_BOND", "OPTION", "FUTURE", "WARRANT", "CASH", "OTHER"
-        ]
-        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -200,8 +200,10 @@ class InstrumentsResource(SyncAPIResource):
           easy_to_borrow: Filter by easy to borrow status
 
           id_filter: Filter IDs to those containing this substring. For options, and when
-              security_type is omitted and no security_id/security_id_source filters are
+              instrument_type is omitted and no security_id/security_id_source filters are
               provided, this is required.
+
+          instrument_type: Filter by instrument type. If omitted, returns all types.
 
           is_liquidation_only: Filter by liquidation only status
 
@@ -231,8 +233,6 @@ class InstrumentsResource(SyncAPIResource):
               - Single: `security_id_source=CUSIP`
               - Multiple: `security_id_source[0]=CUSIP&security_id_source[1]=FIGI`
 
-          security_type: Filter by security type. If omitted, returns all types.
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -252,6 +252,7 @@ class InstrumentsResource(SyncAPIResource):
                     {
                         "easy_to_borrow": easy_to_borrow,
                         "id_filter": id_filter,
+                        "instrument_type": instrument_type,
                         "is_liquidation_only": is_liquidation_only,
                         "is_marginable": is_marginable,
                         "is_restricted": is_restricted,
@@ -261,7 +262,6 @@ class InstrumentsResource(SyncAPIResource):
                         "page_token": page_token,
                         "security_id": security_id,
                         "security_id_source": security_id_source,
-                        "security_type": security_type,
                     },
                     instrument_get_instruments_params.InstrumentGetInstrumentsParams,
                 ),
@@ -451,6 +451,10 @@ class AsyncInstrumentsResource(AsyncAPIResource):
         *,
         easy_to_borrow: bool | Omit = omit,
         id_filter: str | Omit = omit,
+        instrument_type: Literal[
+            "COMMON_STOCK", "PREFERRED_STOCK", "CORPORATE_BOND", "OPTION", "FUTURE", "WARRANT", "CASH", "OTHER"
+        ]
+        | Omit = omit,
         is_liquidation_only: bool | Omit = omit,
         is_marginable: bool | Omit = omit,
         is_restricted: bool | Omit = omit,
@@ -460,10 +464,6 @@ class AsyncInstrumentsResource(AsyncAPIResource):
         page_token: Union[str, Base64FileInput] | Omit = omit,
         security_id: SequenceNotStr[str] | Omit = omit,
         security_id_source: SequenceNotStr[str] | Omit = omit,
-        security_type: Literal[
-            "COMMON_STOCK", "PREFERRED_STOCK", "CORPORATE_BOND", "OPTION", "FUTURE", "WARRANT", "CASH", "OTHER"
-        ]
-        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -478,8 +478,10 @@ class AsyncInstrumentsResource(AsyncAPIResource):
           easy_to_borrow: Filter by easy to borrow status
 
           id_filter: Filter IDs to those containing this substring. For options, and when
-              security_type is omitted and no security_id/security_id_source filters are
+              instrument_type is omitted and no security_id/security_id_source filters are
               provided, this is required.
+
+          instrument_type: Filter by instrument type. If omitted, returns all types.
 
           is_liquidation_only: Filter by liquidation only status
 
@@ -509,8 +511,6 @@ class AsyncInstrumentsResource(AsyncAPIResource):
               - Single: `security_id_source=CUSIP`
               - Multiple: `security_id_source[0]=CUSIP&security_id_source[1]=FIGI`
 
-          security_type: Filter by security type. If omitted, returns all types.
-
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -530,6 +530,7 @@ class AsyncInstrumentsResource(AsyncAPIResource):
                     {
                         "easy_to_borrow": easy_to_borrow,
                         "id_filter": id_filter,
+                        "instrument_type": instrument_type,
                         "is_liquidation_only": is_liquidation_only,
                         "is_marginable": is_marginable,
                         "is_restricted": is_restricted,
@@ -539,7 +540,6 @@ class AsyncInstrumentsResource(AsyncAPIResource):
                         "page_token": page_token,
                         "security_id": security_id,
                         "security_id_source": security_id_source,
-                        "security_type": security_type,
                     },
                     instrument_get_instruments_params.InstrumentGetInstrumentsParams,
                 ),

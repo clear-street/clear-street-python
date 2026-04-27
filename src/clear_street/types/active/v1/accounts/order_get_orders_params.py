@@ -16,6 +16,11 @@ class OrderGetOrdersParams(TypedDict, total=False):
     from_: Annotated[Union[str, datetime], PropertyInfo(alias="from", format="iso8601")]
     """The start date and time for the query range, inclusive (ISO 8601 format)"""
 
+    instrument_type: Literal[
+        "COMMON_STOCK", "PREFERRED_STOCK", "CORPORATE_BOND", "OPTION", "FUTURE", "WARRANT", "CASH", "OTHER"
+    ]
+    """Instrument type filter (e.g., COMMON_STOCK, OPTION)"""
+
     page_size: int
 
     page_token: Annotated[Union[str, Base64FileInput], PropertyInfo(format="base64")]
@@ -44,11 +49,6 @@ class OrderGetOrdersParams(TypedDict, total=False):
     - Single: `security_id_source=CUSIP`
     - Multiple: `security_id_source[0]=CUSIP&security_id_source[1]=FIGI`
     """
-
-    security_type: Literal[
-        "COMMON_STOCK", "PREFERRED_STOCK", "CORPORATE_BOND", "OPTION", "FUTURE", "WARRANT", "CASH", "OTHER"
-    ]
-    """Security type filter (e.g., COMMON_STOCK, PREFERRED_STOCK)"""
 
     status: List[
         Literal[

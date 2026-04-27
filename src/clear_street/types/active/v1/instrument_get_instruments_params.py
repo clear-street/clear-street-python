@@ -18,9 +18,14 @@ class InstrumentGetInstrumentsParams(TypedDict, total=False):
     id_filter: str
     """Filter IDs to those containing this substring.
 
-    For options, and when security_type is omitted and no
+    For options, and when instrument_type is omitted and no
     security_id/security_id_source filters are provided, this is required.
     """
+
+    instrument_type: Literal[
+        "COMMON_STOCK", "PREFERRED_STOCK", "CORPORATE_BOND", "OPTION", "FUTURE", "WARRANT", "CASH", "OTHER"
+    ]
+    """Filter by instrument type. If omitted, returns all types."""
 
     is_liquidation_only: bool
     """Filter by liquidation only status"""
@@ -65,8 +70,3 @@ class InstrumentGetInstrumentsParams(TypedDict, total=False):
     - Single: `security_id_source=CUSIP`
     - Multiple: `security_id_source[0]=CUSIP&security_id_source[1]=FIGI`
     """
-
-    security_type: Literal[
-        "COMMON_STOCK", "PREFERRED_STOCK", "CORPORATE_BOND", "OPTION", "FUTURE", "WARRANT", "CASH", "OTHER"
-    ]
-    """Filter by security type. If omitted, returns all types."""

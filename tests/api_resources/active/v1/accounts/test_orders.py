@@ -38,9 +38,9 @@ class TestOrders:
     def test_method_cancel_all_open_orders_with_all_params(self, client: ClearStreet) -> None:
         order = client.active.v1.accounts.orders.cancel_all_open_orders(
             account_id=0,
+            instrument_type="COMMON_STOCK",
             security_id=["string"],
             security_id_source=["string"],
-            security_type="COMMON_STOCK",
             side="BUY",
             type="MARKET",
         )
@@ -178,11 +178,11 @@ class TestOrders:
         order = client.active.v1.accounts.orders.get_orders(
             account_id=0,
             from_=parse_datetime("2019-12-27T18:11:19.117Z"),
+            instrument_type="COMMON_STOCK",
             page_size=1,
             page_token="U3RhaW5sZXNzIHJvY2tz",
             security_id=["string"],
             security_id_source=["string"],
-            security_type="COMMON_STOCK",
             status=["PENDING_NEW"],
             symbol="symbol",
             to=parse_datetime("2019-12-27T18:11:19.117Z"),
@@ -283,21 +283,21 @@ class TestOrders:
                 {
                     "legs": [
                         {
+                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-447a-706f-996f-097254663f02",
-                            "security_type": "OPTION",
                             "side": "BUY",
                         },
                         {
+                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-4db4-78ec-b4fd-cba8be61cf8a",
-                            "security_type": "OPTION",
                             "side": "SELL",
                         },
                         {
+                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-5264-7f20-8fd3-35df82cd6ef0",
-                            "security_type": "OPTION",
                             "side": "BUY",
                         },
                     ],
@@ -317,21 +317,21 @@ class TestOrders:
                 {
                     "legs": [
                         {
+                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-447a-706f-996f-097254663f02",
-                            "security_type": "OPTION",
                             "side": "BUY",
                         },
                         {
+                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-4db4-78ec-b4fd-cba8be61cf8a",
-                            "security_type": "OPTION",
                             "side": "SELL",
                         },
                         {
+                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-5264-7f20-8fd3-35df82cd6ef0",
-                            "security_type": "OPTION",
                             "side": "BUY",
                         },
                     ],
@@ -355,21 +355,21 @@ class TestOrders:
                 {
                     "legs": [
                         {
+                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-447a-706f-996f-097254663f02",
-                            "security_type": "OPTION",
                             "side": "BUY",
                         },
                         {
+                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-4db4-78ec-b4fd-cba8be61cf8a",
-                            "security_type": "OPTION",
                             "side": "SELL",
                         },
                         {
+                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-5264-7f20-8fd3-35df82cd6ef0",
-                            "security_type": "OPTION",
                             "side": "BUY",
                         },
                     ],
@@ -405,9 +405,9 @@ class TestAsyncOrders:
     async def test_method_cancel_all_open_orders_with_all_params(self, async_client: AsyncClearStreet) -> None:
         order = await async_client.active.v1.accounts.orders.cancel_all_open_orders(
             account_id=0,
+            instrument_type="COMMON_STOCK",
             security_id=["string"],
             security_id_source=["string"],
-            security_type="COMMON_STOCK",
             side="BUY",
             type="MARKET",
         )
@@ -545,11 +545,11 @@ class TestAsyncOrders:
         order = await async_client.active.v1.accounts.orders.get_orders(
             account_id=0,
             from_=parse_datetime("2019-12-27T18:11:19.117Z"),
+            instrument_type="COMMON_STOCK",
             page_size=1,
             page_token="U3RhaW5sZXNzIHJvY2tz",
             security_id=["string"],
             security_id_source=["string"],
-            security_type="COMMON_STOCK",
             status=["PENDING_NEW"],
             symbol="symbol",
             to=parse_datetime("2019-12-27T18:11:19.117Z"),
@@ -650,21 +650,21 @@ class TestAsyncOrders:
                 {
                     "legs": [
                         {
+                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-447a-706f-996f-097254663f02",
-                            "security_type": "OPTION",
                             "side": "BUY",
                         },
                         {
+                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-4db4-78ec-b4fd-cba8be61cf8a",
-                            "security_type": "OPTION",
                             "side": "SELL",
                         },
                         {
+                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-5264-7f20-8fd3-35df82cd6ef0",
-                            "security_type": "OPTION",
                             "side": "BUY",
                         },
                     ],
@@ -684,21 +684,21 @@ class TestAsyncOrders:
                 {
                     "legs": [
                         {
+                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-447a-706f-996f-097254663f02",
-                            "security_type": "OPTION",
                             "side": "BUY",
                         },
                         {
+                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-4db4-78ec-b4fd-cba8be61cf8a",
-                            "security_type": "OPTION",
                             "side": "SELL",
                         },
                         {
+                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-5264-7f20-8fd3-35df82cd6ef0",
-                            "security_type": "OPTION",
                             "side": "BUY",
                         },
                     ],
@@ -722,21 +722,21 @@ class TestAsyncOrders:
                 {
                     "legs": [
                         {
+                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-447a-706f-996f-097254663f02",
-                            "security_type": "OPTION",
                             "side": "BUY",
                         },
                         {
+                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-4db4-78ec-b4fd-cba8be61cf8a",
-                            "security_type": "OPTION",
                             "side": "SELL",
                         },
                         {
+                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-5264-7f20-8fd3-35df82cd6ef0",
-                            "security_type": "OPTION",
                             "side": "BUY",
                         },
                     ],

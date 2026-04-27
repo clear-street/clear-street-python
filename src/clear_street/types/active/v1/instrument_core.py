@@ -66,6 +66,9 @@ class InstrumentCore(BaseModel):
     expiry: Optional[date] = None
     """The expiration date for options instruments"""
 
+    instrument_type: Optional[SecurityType] = None
+    """The type of security (e.g., Common Stock, ETF)"""
+
     long_margin_rate: Optional[str] = None
     """The percent of a long position's value you must post as margin"""
 
@@ -82,9 +85,6 @@ class InstrumentCore(BaseModel):
 
     previous_close: Optional[str] = None
     """Last close price from the security definition."""
-
-    security_type: Optional[SecurityType] = None
-    """The type of security (e.g., Common Stock, ETF)"""
 
     short_margin_rate: Optional[str] = None
     """The percent of a short position's value you must post as margin"""

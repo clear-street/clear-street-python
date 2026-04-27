@@ -43,14 +43,14 @@ BodyNewOrderMultilegRequestLegSecurity: TypeAlias = Union[str, BodyNewOrderMulti
 class BodyNewOrderMultilegRequestLeg(TypedDict, total=False):
     """A single leg in a multileg strategy request."""
 
+    instrument_type: Required[SecurityType]
+    """Security type for the leg."""
+
     ratio: Required[str]
     """Ratio for the leg."""
 
     security: Required[BodyNewOrderMultilegRequestLegSecurity]
     """Security identifier for the leg."""
-
-    security_type: Required[SecurityType]
-    """Security type for the leg."""
 
     side: Required[Side]
     """Leg side."""
@@ -90,6 +90,9 @@ class BodyNewOrderMultilegRequest(TypedDict, total=False):
 class BodyNewOrderRequest(TypedDict, total=False):
     """Single-leg order request"""
 
+    instrument_type: Required[SecurityType]
+    """Type of security"""
+
     order_type: Required[OrderType]
     """Type of order"""
 
@@ -99,9 +102,6 @@ class BodyNewOrderRequest(TypedDict, total=False):
     For COMMON_STOCK: shares (may be fractional if supported). For OPTION
     (single-leg): contracts (must be an integer)
     """
-
-    security_type: Required[SecurityType]
-    """Type of security"""
 
     side: Required[Side]
     """Side of the order"""
@@ -134,7 +134,7 @@ class BodyNewOrderRequest(TypedDict, total=False):
     """Limit price (required for LIMIT and STOP_LIMIT orders)"""
 
     position_effect: Literal["OPEN", "CLOSE"]
-    """Required when security_type is OPTION.
+    """Required when instrument_type is OPTION.
 
     Specifies whether the order opens or closes a position.
     """
@@ -159,7 +159,7 @@ class BodyNewOrderRequest(TypedDict, total=False):
 
     For equities, use the ticker symbol (e.g., "AAPL"). For options, use the OSI
     symbol (e.g., "AAPL 250117C00190000"). If provided without security_id, the
-    system will derive security_id and source based on security_type (CMS for
+    system will derive security_id and source based on instrument_type (CMS for
     equities, OPRA for options).
     """
 

@@ -89,6 +89,7 @@ class TestInstruments:
         instrument = client.active.v1.instruments.get_instruments(
             easy_to_borrow=True,
             id_filter="id_filter",
+            instrument_type="COMMON_STOCK",
             is_liquidation_only=True,
             is_marginable=True,
             is_restricted=True,
@@ -98,7 +99,6 @@ class TestInstruments:
             page_token="U3RhaW5sZXNzIHJvY2tz",
             security_id=["string"],
             security_id_source=["string"],
-            security_type="COMMON_STOCK",
         )
         assert_matches_type(InstrumentGetInstrumentsResponse, instrument, path=["response"])
 
@@ -247,6 +247,7 @@ class TestAsyncInstruments:
         instrument = await async_client.active.v1.instruments.get_instruments(
             easy_to_borrow=True,
             id_filter="id_filter",
+            instrument_type="COMMON_STOCK",
             is_liquidation_only=True,
             is_marginable=True,
             is_restricted=True,
@@ -256,7 +257,6 @@ class TestAsyncInstruments:
             page_token="U3RhaW5sZXNzIHJvY2tz",
             security_id=["string"],
             security_id_source=["string"],
-            security_type="COMMON_STOCK",
         )
         assert_matches_type(InstrumentGetInstrumentsResponse, instrument, path=["response"])
 
