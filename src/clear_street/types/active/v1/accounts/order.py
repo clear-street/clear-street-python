@@ -38,6 +38,9 @@ class Order(BaseModel):
     filled_quantity: str
     """Cumulative filled quantity"""
 
+    instrument_type: SecurityType
+    """Type of security"""
+
     leaves_quantity: str
     """Remaining unfilled quantity"""
 
@@ -55,9 +58,6 @@ class Order(BaseModel):
 
     security_id_source: SecurityIDSource
     """The source of the security identifier"""
-
-    security_type: SecurityType
-    """Type of security"""
 
     side: Side
     """Side of the order (BUY, SELL, SELL_SHORT)"""

@@ -73,6 +73,9 @@ class ScreenerItem(BaseModel):
     industry: Optional[str] = None
     """The specific industry of the instrument's issuer"""
 
+    instrument_type: Optional[str] = None
+    """The type of instrument"""
+
     list_date: Optional[date] = None
     """The date the instrument was first listed"""
 
@@ -123,9 +126,6 @@ class ScreenerItem(BaseModel):
 
     sector: Optional[str] = None
     """The business sector of the instrument's issuer"""
-
-    security_type: Optional[str] = None
-    """The type of security"""
 
     six_month_change_pct: Optional[str] = None
     """Percent change from six months ago close to previous day close"""

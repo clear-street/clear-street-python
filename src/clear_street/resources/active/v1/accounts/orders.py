@@ -73,12 +73,12 @@ class OrdersResource(SyncAPIResource):
         self,
         account_id: int,
         *,
-        security_id: SequenceNotStr[str] | Omit = omit,
-        security_id_source: SequenceNotStr[str] | Omit = omit,
-        security_type: Literal[
+        instrument_type: Literal[
             "COMMON_STOCK", "PREFERRED_STOCK", "CORPORATE_BOND", "OPTION", "FUTURE", "WARRANT", "CASH", "OTHER"
         ]
         | Omit = omit,
+        security_id: SequenceNotStr[str] | Omit = omit,
+        security_id_source: SequenceNotStr[str] | Omit = omit,
         side: Literal["BUY", "SELL", "SELL_SHORT", "OTHER"] | Omit = omit,
         type: Literal["MARKET", "LIMIT", "STOP", "STOP_LIMIT", "TRAILING_STOP", "TRAILING_STOP_LIMIT", "OTHER"]
         | Omit = omit,
@@ -97,6 +97,8 @@ class OrdersResource(SyncAPIResource):
         either is specified.
 
         Args:
+          instrument_type: Filter by instrument type (e.g., COMMON_STOCK, OPTION)
+
           security_id: Filter by security ID(s). Accepts single value or indexed array.
 
               Examples:
@@ -111,8 +113,6 @@ class OrdersResource(SyncAPIResource):
 
               - Single: `security_id_source=CUSIP`
               - Multiple: `security_id_source[0]=CUSIP&security_id_source[1]=FIGI`
-
-          security_type: Filter by security type (e.g., COMMON_STOCK, OPTION)
 
           side: Filter by order side (BUY or SELL)
 
@@ -135,9 +135,9 @@ class OrdersResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "instrument_type": instrument_type,
                         "security_id": security_id,
                         "security_id_source": security_id_source,
-                        "security_type": security_type,
                         "side": side,
                         "type": type,
                     },
@@ -224,14 +224,14 @@ class OrdersResource(SyncAPIResource):
         account_id: int,
         *,
         from_: Union[str, datetime] | Omit = omit,
+        instrument_type: Literal[
+            "COMMON_STOCK", "PREFERRED_STOCK", "CORPORATE_BOND", "OPTION", "FUTURE", "WARRANT", "CASH", "OTHER"
+        ]
+        | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         security_id: SequenceNotStr[str] | Omit = omit,
         security_id_source: SequenceNotStr[str] | Omit = omit,
-        security_type: Literal[
-            "COMMON_STOCK", "PREFERRED_STOCK", "CORPORATE_BOND", "OPTION", "FUTURE", "WARRANT", "CASH", "OTHER"
-        ]
-        | Omit = omit,
         status: List[
             Literal[
                 "PENDING_NEW",
@@ -267,6 +267,8 @@ class OrdersResource(SyncAPIResource):
         Args:
           from_: The start date and time for the query range, inclusive (ISO 8601 format)
 
+          instrument_type: Instrument type filter (e.g., COMMON_STOCK, OPTION)
+
           page_token: Token for retrieving the next page of results. Contains encoded pagination state
               (limit + offset). When provided, page_size is ignored.
 
@@ -284,8 +286,6 @@ class OrdersResource(SyncAPIResource):
 
               - Single: `security_id_source=CUSIP`
               - Multiple: `security_id_source[0]=CUSIP&security_id_source[1]=FIGI`
-
-          security_type: Security type filter (e.g., COMMON_STOCK, PREFERRED_STOCK)
 
           status: Comma-separated order statuses to filter by
 
@@ -311,11 +311,11 @@ class OrdersResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "from_": from_,
+                        "instrument_type": instrument_type,
                         "page_size": page_size,
                         "page_token": page_token,
                         "security_id": security_id,
                         "security_id_source": security_id_source,
-                        "security_type": security_type,
                         "status": status,
                         "symbol": symbol,
                         "to": to,
@@ -443,12 +443,12 @@ class AsyncOrdersResource(AsyncAPIResource):
         self,
         account_id: int,
         *,
-        security_id: SequenceNotStr[str] | Omit = omit,
-        security_id_source: SequenceNotStr[str] | Omit = omit,
-        security_type: Literal[
+        instrument_type: Literal[
             "COMMON_STOCK", "PREFERRED_STOCK", "CORPORATE_BOND", "OPTION", "FUTURE", "WARRANT", "CASH", "OTHER"
         ]
         | Omit = omit,
+        security_id: SequenceNotStr[str] | Omit = omit,
+        security_id_source: SequenceNotStr[str] | Omit = omit,
         side: Literal["BUY", "SELL", "SELL_SHORT", "OTHER"] | Omit = omit,
         type: Literal["MARKET", "LIMIT", "STOP", "STOP_LIMIT", "TRAILING_STOP", "TRAILING_STOP_LIMIT", "OTHER"]
         | Omit = omit,
@@ -467,6 +467,8 @@ class AsyncOrdersResource(AsyncAPIResource):
         either is specified.
 
         Args:
+          instrument_type: Filter by instrument type (e.g., COMMON_STOCK, OPTION)
+
           security_id: Filter by security ID(s). Accepts single value or indexed array.
 
               Examples:
@@ -481,8 +483,6 @@ class AsyncOrdersResource(AsyncAPIResource):
 
               - Single: `security_id_source=CUSIP`
               - Multiple: `security_id_source[0]=CUSIP&security_id_source[1]=FIGI`
-
-          security_type: Filter by security type (e.g., COMMON_STOCK, OPTION)
 
           side: Filter by order side (BUY or SELL)
 
@@ -505,9 +505,9 @@ class AsyncOrdersResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
+                        "instrument_type": instrument_type,
                         "security_id": security_id,
                         "security_id_source": security_id_source,
-                        "security_type": security_type,
                         "side": side,
                         "type": type,
                     },
@@ -594,14 +594,14 @@ class AsyncOrdersResource(AsyncAPIResource):
         account_id: int,
         *,
         from_: Union[str, datetime] | Omit = omit,
+        instrument_type: Literal[
+            "COMMON_STOCK", "PREFERRED_STOCK", "CORPORATE_BOND", "OPTION", "FUTURE", "WARRANT", "CASH", "OTHER"
+        ]
+        | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         security_id: SequenceNotStr[str] | Omit = omit,
         security_id_source: SequenceNotStr[str] | Omit = omit,
-        security_type: Literal[
-            "COMMON_STOCK", "PREFERRED_STOCK", "CORPORATE_BOND", "OPTION", "FUTURE", "WARRANT", "CASH", "OTHER"
-        ]
-        | Omit = omit,
         status: List[
             Literal[
                 "PENDING_NEW",
@@ -637,6 +637,8 @@ class AsyncOrdersResource(AsyncAPIResource):
         Args:
           from_: The start date and time for the query range, inclusive (ISO 8601 format)
 
+          instrument_type: Instrument type filter (e.g., COMMON_STOCK, OPTION)
+
           page_token: Token for retrieving the next page of results. Contains encoded pagination state
               (limit + offset). When provided, page_size is ignored.
 
@@ -654,8 +656,6 @@ class AsyncOrdersResource(AsyncAPIResource):
 
               - Single: `security_id_source=CUSIP`
               - Multiple: `security_id_source[0]=CUSIP&security_id_source[1]=FIGI`
-
-          security_type: Security type filter (e.g., COMMON_STOCK, PREFERRED_STOCK)
 
           status: Comma-separated order statuses to filter by
 
@@ -681,11 +681,11 @@ class AsyncOrdersResource(AsyncAPIResource):
                 query=await async_maybe_transform(
                     {
                         "from_": from_,
+                        "instrument_type": instrument_type,
                         "page_size": page_size,
                         "page_token": page_token,
                         "security_id": security_id,
                         "security_id_source": security_id_source,
-                        "security_type": security_type,
                         "status": status,
                         "symbol": symbol,
                         "to": to,

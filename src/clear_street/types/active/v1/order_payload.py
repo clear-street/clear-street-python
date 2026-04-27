@@ -19,14 +19,14 @@ class OrderPayload(BaseModel):
     containing the fields needed to prefill an order ticket or submit via API.
     """
 
+    instrument_type: SecurityType
+    """Type of security"""
+
     order_type: OrderType
     """Order type"""
 
     quantity: str
     """Quantity (shares for stocks, contracts for options)"""
-
-    security_type: SecurityType
-    """Type of security"""
 
     side: Side
     """Order side"""

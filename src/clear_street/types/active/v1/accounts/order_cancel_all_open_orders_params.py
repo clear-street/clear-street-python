@@ -10,6 +10,11 @@ __all__ = ["OrderCancelAllOpenOrdersParams"]
 
 
 class OrderCancelAllOpenOrdersParams(TypedDict, total=False):
+    instrument_type: Literal[
+        "COMMON_STOCK", "PREFERRED_STOCK", "CORPORATE_BOND", "OPTION", "FUTURE", "WARRANT", "CASH", "OTHER"
+    ]
+    """Filter by instrument type (e.g., COMMON_STOCK, OPTION)"""
+
     security_id: SequenceNotStr[str]
     """Filter by security ID(s). Accepts single value or indexed array.
 
@@ -29,11 +34,6 @@ class OrderCancelAllOpenOrdersParams(TypedDict, total=False):
     - Single: `security_id_source=CUSIP`
     - Multiple: `security_id_source[0]=CUSIP&security_id_source[1]=FIGI`
     """
-
-    security_type: Literal[
-        "COMMON_STOCK", "PREFERRED_STOCK", "CORPORATE_BOND", "OPTION", "FUTURE", "WARRANT", "CASH", "OTHER"
-    ]
-    """Filter by security type (e.g., COMMON_STOCK, OPTION)"""
 
     side: Literal["BUY", "SELL", "SELL_SHORT", "OTHER"]
     """Filter by order side (BUY or SELL)"""
