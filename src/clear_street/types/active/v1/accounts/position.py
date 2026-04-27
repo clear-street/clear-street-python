@@ -64,6 +64,9 @@ class Position(BaseModel):
     market_price: Optional[str] = None
     """The current market price of the instrument"""
 
+    underlier_instrument_id: Optional[str] = None
+    """OEMS instrument identifier of the underlying instrument, if resolvable"""
+
     unrealized_pnl: Optional[str] = None
     """
     The total unrealized profit or loss for this position based on current market
