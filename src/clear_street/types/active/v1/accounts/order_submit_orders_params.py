@@ -17,30 +17,30 @@ from .trailing_offset_type import TrailingOffsetType
 
 __all__ = [
     "OrderSubmitOrdersParams",
-    "Order",
-    "OrderNewOrderMultilegRequest",
-    "OrderNewOrderMultilegRequestLeg",
-    "OrderNewOrderMultilegRequestLegSecurity",
-    "OrderNewOrderMultilegRequestLegSecuritySecurityIDPair",
-    "OrderNewOrderRequest",
+    "Body",
+    "BodyNewOrderMultilegRequest",
+    "BodyNewOrderMultilegRequestLeg",
+    "BodyNewOrderMultilegRequestLegSecurity",
+    "BodyNewOrderMultilegRequestLegSecuritySecurityIDPair",
+    "BodyNewOrderRequest",
 ]
 
 
 class OrderSubmitOrdersParams(TypedDict, total=False):
-    orders: Required[Iterable[Order]]
+    body: Required[Iterable[Body]]
 
 
-class OrderNewOrderMultilegRequestLegSecuritySecurityIDPair(TypedDict, total=False):
+class BodyNewOrderMultilegRequestLegSecuritySecurityIDPair(TypedDict, total=False):
     id: Required[str]
 
     source: Required[SecurityIDSource]
     """Security identifier source"""
 
 
-OrderNewOrderMultilegRequestLegSecurity: TypeAlias = Union[str, OrderNewOrderMultilegRequestLegSecuritySecurityIDPair]
+BodyNewOrderMultilegRequestLegSecurity: TypeAlias = Union[str, BodyNewOrderMultilegRequestLegSecuritySecurityIDPair]
 
 
-class OrderNewOrderMultilegRequestLeg(TypedDict, total=False):
+class BodyNewOrderMultilegRequestLeg(TypedDict, total=False):
     """A single leg in a multileg strategy request."""
 
     instrument_type: Required[SecurityType]
@@ -49,7 +49,7 @@ class OrderNewOrderMultilegRequestLeg(TypedDict, total=False):
     ratio: Required[str]
     """Ratio for the leg."""
 
-    security: Required[OrderNewOrderMultilegRequestLegSecurity]
+    security: Required[BodyNewOrderMultilegRequestLegSecurity]
     """Security identifier for the leg."""
 
     side: Required[Side]
@@ -62,10 +62,10 @@ class OrderNewOrderMultilegRequestLeg(TypedDict, total=False):
     """Optional leg position effect."""
 
 
-class OrderNewOrderMultilegRequest(TypedDict, total=False):
+class BodyNewOrderMultilegRequest(TypedDict, total=False):
     """Multileg strategy order request"""
 
-    legs: Required[Iterable[OrderNewOrderMultilegRequestLeg]]
+    legs: Required[Iterable[BodyNewOrderMultilegRequestLeg]]
     """Legs that compose the strategy."""
 
     order_type: Required[OrderType]
@@ -87,7 +87,7 @@ class OrderNewOrderMultilegRequest(TypedDict, total=False):
     """Optional strategy-level quantity. Multiplies leg quantities. Defaults to 1."""
 
 
-class OrderNewOrderRequest(TypedDict, total=False):
+class BodyNewOrderRequest(TypedDict, total=False):
     """Single-leg order request"""
 
     instrument_type: Required[SecurityType]
@@ -170,4 +170,4 @@ class OrderNewOrderRequest(TypedDict, total=False):
     """Trailing offset type (PRICE or PERCENT_BPS)"""
 
 
-Order: TypeAlias = Union[OrderNewOrderMultilegRequest, OrderNewOrderRequest]
+Body: TypeAlias = Union[BodyNewOrderMultilegRequest, BodyNewOrderRequest]

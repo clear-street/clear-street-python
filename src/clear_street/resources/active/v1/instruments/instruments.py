@@ -51,14 +51,6 @@ from ....._response import (
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from .balance_sheets import (
-    BalanceSheetsResource,
-    AsyncBalanceSheetsResource,
-    BalanceSheetsResourceWithRawResponse,
-    AsyncBalanceSheetsResourceWithRawResponse,
-    BalanceSheetsResourceWithStreamingResponse,
-    AsyncBalanceSheetsResourceWithStreamingResponse,
-)
 from ....._base_client import make_request_options
 from .....types.active import SecurityIDSource
 from .analyst_reporting import (
@@ -69,26 +61,10 @@ from .analyst_reporting import (
     AnalystReportingResourceWithStreamingResponse,
     AsyncAnalystReportingResourceWithStreamingResponse,
 )
-from .income_statements import (
-    IncomeStatementsResource,
-    AsyncIncomeStatementsResource,
-    IncomeStatementsResourceWithRawResponse,
-    AsyncIncomeStatementsResourceWithRawResponse,
-    IncomeStatementsResourceWithStreamingResponse,
-    AsyncIncomeStatementsResourceWithStreamingResponse,
-)
 from .....types.active.v1 import (
     instrument_search_params,
     instrument_get_instruments_params,
     instrument_get_instrument_by_id_params,
-)
-from .cash_flow_statements import (
-    CashFlowStatementsResource,
-    AsyncCashFlowStatementsResource,
-    CashFlowStatementsResourceWithRawResponse,
-    AsyncCashFlowStatementsResourceWithRawResponse,
-    CashFlowStatementsResourceWithStreamingResponse,
-    AsyncCashFlowStatementsResourceWithStreamingResponse,
 )
 from .....types.active.security_id_source import SecurityIDSource
 from .....types.active.v1.instrument_search_response import InstrumentSearchResponse
@@ -107,16 +83,6 @@ class InstrumentsResource(SyncAPIResource):
         return AnalystReportingResource(self._client)
 
     @cached_property
-    def balance_sheets(self) -> BalanceSheetsResource:
-        """Retrieve details and lists of tradable instruments."""
-        return BalanceSheetsResource(self._client)
-
-    @cached_property
-    def cash_flow_statements(self) -> CashFlowStatementsResource:
-        """Retrieve details and lists of tradable instruments."""
-        return CashFlowStatementsResource(self._client)
-
-    @cached_property
     def events(self) -> EventsResource:
         """Retrieve details and lists of tradable instruments."""
         return EventsResource(self._client)
@@ -125,11 +91,6 @@ class InstrumentsResource(SyncAPIResource):
     def fundamentals(self) -> FundamentalsResource:
         """Retrieve details and lists of tradable instruments."""
         return FundamentalsResource(self._client)
-
-    @cached_property
-    def income_statements(self) -> IncomeStatementsResource:
-        """Retrieve details and lists of tradable instruments."""
-        return IncomeStatementsResource(self._client)
 
     @cached_property
     def options(self) -> OptionsResource:
@@ -400,16 +361,6 @@ class AsyncInstrumentsResource(AsyncAPIResource):
         return AsyncAnalystReportingResource(self._client)
 
     @cached_property
-    def balance_sheets(self) -> AsyncBalanceSheetsResource:
-        """Retrieve details and lists of tradable instruments."""
-        return AsyncBalanceSheetsResource(self._client)
-
-    @cached_property
-    def cash_flow_statements(self) -> AsyncCashFlowStatementsResource:
-        """Retrieve details and lists of tradable instruments."""
-        return AsyncCashFlowStatementsResource(self._client)
-
-    @cached_property
     def events(self) -> AsyncEventsResource:
         """Retrieve details and lists of tradable instruments."""
         return AsyncEventsResource(self._client)
@@ -418,11 +369,6 @@ class AsyncInstrumentsResource(AsyncAPIResource):
     def fundamentals(self) -> AsyncFundamentalsResource:
         """Retrieve details and lists of tradable instruments."""
         return AsyncFundamentalsResource(self._client)
-
-    @cached_property
-    def income_statements(self) -> AsyncIncomeStatementsResource:
-        """Retrieve details and lists of tradable instruments."""
-        return AsyncIncomeStatementsResource(self._client)
 
     @cached_property
     def options(self) -> AsyncOptionsResource:
@@ -704,16 +650,6 @@ class InstrumentsResourceWithRawResponse:
         return AnalystReportingResourceWithRawResponse(self._instruments.analyst_reporting)
 
     @cached_property
-    def balance_sheets(self) -> BalanceSheetsResourceWithRawResponse:
-        """Retrieve details and lists of tradable instruments."""
-        return BalanceSheetsResourceWithRawResponse(self._instruments.balance_sheets)
-
-    @cached_property
-    def cash_flow_statements(self) -> CashFlowStatementsResourceWithRawResponse:
-        """Retrieve details and lists of tradable instruments."""
-        return CashFlowStatementsResourceWithRawResponse(self._instruments.cash_flow_statements)
-
-    @cached_property
     def events(self) -> EventsResourceWithRawResponse:
         """Retrieve details and lists of tradable instruments."""
         return EventsResourceWithRawResponse(self._instruments.events)
@@ -722,11 +658,6 @@ class InstrumentsResourceWithRawResponse:
     def fundamentals(self) -> FundamentalsResourceWithRawResponse:
         """Retrieve details and lists of tradable instruments."""
         return FundamentalsResourceWithRawResponse(self._instruments.fundamentals)
-
-    @cached_property
-    def income_statements(self) -> IncomeStatementsResourceWithRawResponse:
-        """Retrieve details and lists of tradable instruments."""
-        return IncomeStatementsResourceWithRawResponse(self._instruments.income_statements)
 
     @cached_property
     def options(self) -> OptionsResourceWithRawResponse:
@@ -754,16 +685,6 @@ class AsyncInstrumentsResourceWithRawResponse:
         return AsyncAnalystReportingResourceWithRawResponse(self._instruments.analyst_reporting)
 
     @cached_property
-    def balance_sheets(self) -> AsyncBalanceSheetsResourceWithRawResponse:
-        """Retrieve details and lists of tradable instruments."""
-        return AsyncBalanceSheetsResourceWithRawResponse(self._instruments.balance_sheets)
-
-    @cached_property
-    def cash_flow_statements(self) -> AsyncCashFlowStatementsResourceWithRawResponse:
-        """Retrieve details and lists of tradable instruments."""
-        return AsyncCashFlowStatementsResourceWithRawResponse(self._instruments.cash_flow_statements)
-
-    @cached_property
     def events(self) -> AsyncEventsResourceWithRawResponse:
         """Retrieve details and lists of tradable instruments."""
         return AsyncEventsResourceWithRawResponse(self._instruments.events)
@@ -772,11 +693,6 @@ class AsyncInstrumentsResourceWithRawResponse:
     def fundamentals(self) -> AsyncFundamentalsResourceWithRawResponse:
         """Retrieve details and lists of tradable instruments."""
         return AsyncFundamentalsResourceWithRawResponse(self._instruments.fundamentals)
-
-    @cached_property
-    def income_statements(self) -> AsyncIncomeStatementsResourceWithRawResponse:
-        """Retrieve details and lists of tradable instruments."""
-        return AsyncIncomeStatementsResourceWithRawResponse(self._instruments.income_statements)
 
     @cached_property
     def options(self) -> AsyncOptionsResourceWithRawResponse:
@@ -804,16 +720,6 @@ class InstrumentsResourceWithStreamingResponse:
         return AnalystReportingResourceWithStreamingResponse(self._instruments.analyst_reporting)
 
     @cached_property
-    def balance_sheets(self) -> BalanceSheetsResourceWithStreamingResponse:
-        """Retrieve details and lists of tradable instruments."""
-        return BalanceSheetsResourceWithStreamingResponse(self._instruments.balance_sheets)
-
-    @cached_property
-    def cash_flow_statements(self) -> CashFlowStatementsResourceWithStreamingResponse:
-        """Retrieve details and lists of tradable instruments."""
-        return CashFlowStatementsResourceWithStreamingResponse(self._instruments.cash_flow_statements)
-
-    @cached_property
     def events(self) -> EventsResourceWithStreamingResponse:
         """Retrieve details and lists of tradable instruments."""
         return EventsResourceWithStreamingResponse(self._instruments.events)
@@ -822,11 +728,6 @@ class InstrumentsResourceWithStreamingResponse:
     def fundamentals(self) -> FundamentalsResourceWithStreamingResponse:
         """Retrieve details and lists of tradable instruments."""
         return FundamentalsResourceWithStreamingResponse(self._instruments.fundamentals)
-
-    @cached_property
-    def income_statements(self) -> IncomeStatementsResourceWithStreamingResponse:
-        """Retrieve details and lists of tradable instruments."""
-        return IncomeStatementsResourceWithStreamingResponse(self._instruments.income_statements)
 
     @cached_property
     def options(self) -> OptionsResourceWithStreamingResponse:
@@ -854,16 +755,6 @@ class AsyncInstrumentsResourceWithStreamingResponse:
         return AsyncAnalystReportingResourceWithStreamingResponse(self._instruments.analyst_reporting)
 
     @cached_property
-    def balance_sheets(self) -> AsyncBalanceSheetsResourceWithStreamingResponse:
-        """Retrieve details and lists of tradable instruments."""
-        return AsyncBalanceSheetsResourceWithStreamingResponse(self._instruments.balance_sheets)
-
-    @cached_property
-    def cash_flow_statements(self) -> AsyncCashFlowStatementsResourceWithStreamingResponse:
-        """Retrieve details and lists of tradable instruments."""
-        return AsyncCashFlowStatementsResourceWithStreamingResponse(self._instruments.cash_flow_statements)
-
-    @cached_property
     def events(self) -> AsyncEventsResourceWithStreamingResponse:
         """Retrieve details and lists of tradable instruments."""
         return AsyncEventsResourceWithStreamingResponse(self._instruments.events)
@@ -872,11 +763,6 @@ class AsyncInstrumentsResourceWithStreamingResponse:
     def fundamentals(self) -> AsyncFundamentalsResourceWithStreamingResponse:
         """Retrieve details and lists of tradable instruments."""
         return AsyncFundamentalsResourceWithStreamingResponse(self._instruments.fundamentals)
-
-    @cached_property
-    def income_statements(self) -> AsyncIncomeStatementsResourceWithStreamingResponse:
-        """Retrieve details and lists of tradable instruments."""
-        return AsyncIncomeStatementsResourceWithStreamingResponse(self._instruments.income_statements)
 
     @cached_property
     def options(self) -> AsyncOptionsResourceWithStreamingResponse:

@@ -279,7 +279,7 @@ class TestOrders:
     def test_method_submit_orders(self, client: ClearStreet) -> None:
         order = client.active.v1.accounts.orders.submit_orders(
             account_id=0,
-            orders=[
+            body=[
                 {
                     "legs": [
                         {
@@ -313,7 +313,7 @@ class TestOrders:
     def test_raw_response_submit_orders(self, client: ClearStreet) -> None:
         response = client.active.v1.accounts.orders.with_raw_response.submit_orders(
             account_id=0,
-            orders=[
+            body=[
                 {
                     "legs": [
                         {
@@ -351,7 +351,7 @@ class TestOrders:
     def test_streaming_response_submit_orders(self, client: ClearStreet) -> None:
         with client.active.v1.accounts.orders.with_streaming_response.submit_orders(
             account_id=0,
-            orders=[
+            body=[
                 {
                     "legs": [
                         {
@@ -646,7 +646,7 @@ class TestAsyncOrders:
     async def test_method_submit_orders(self, async_client: AsyncClearStreet) -> None:
         order = await async_client.active.v1.accounts.orders.submit_orders(
             account_id=0,
-            orders=[
+            body=[
                 {
                     "legs": [
                         {
@@ -680,7 +680,7 @@ class TestAsyncOrders:
     async def test_raw_response_submit_orders(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.active.v1.accounts.orders.with_raw_response.submit_orders(
             account_id=0,
-            orders=[
+            body=[
                 {
                     "legs": [
                         {
@@ -718,7 +718,7 @@ class TestAsyncOrders:
     async def test_streaming_response_submit_orders(self, async_client: AsyncClearStreet) -> None:
         async with async_client.active.v1.accounts.orders.with_streaming_response.submit_orders(
             account_id=0,
-            orders=[
+            body=[
                 {
                     "legs": [
                         {

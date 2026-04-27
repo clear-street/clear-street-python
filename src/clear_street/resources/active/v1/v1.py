@@ -28,6 +28,14 @@ from .version import (
     VersionResourceWithStreamingResponse,
     AsyncVersionResourceWithStreamingResponse,
 )
+from .api_keys import (
+    APIKeysResource,
+    AsyncAPIKeysResource,
+    APIKeysResourceWithRawResponse,
+    AsyncAPIKeysResourceWithRawResponse,
+    APIKeysResourceWithStreamingResponse,
+    AsyncAPIKeysResourceWithStreamingResponse,
+)
 from .screener import (
     ScreenerResource,
     AsyncScreenerResource,
@@ -113,6 +121,11 @@ class V1Resource(SyncAPIResource):
     def accounts(self) -> AccountsResource:
         """Manage trading accounts, balances, and portfolio history."""
         return AccountsResource(self._client)
+
+    @cached_property
+    def api_keys(self) -> APIKeysResource:
+        """Manage API keys for authentication."""
+        return APIKeysResource(self._client)
 
     @cached_property
     def calendars(self) -> CalendarsResource:
@@ -208,6 +221,11 @@ class AsyncV1Resource(AsyncAPIResource):
     def accounts(self) -> AsyncAccountsResource:
         """Manage trading accounts, balances, and portfolio history."""
         return AsyncAccountsResource(self._client)
+
+    @cached_property
+    def api_keys(self) -> AsyncAPIKeysResource:
+        """Manage API keys for authentication."""
+        return AsyncAPIKeysResource(self._client)
 
     @cached_property
     def calendars(self) -> AsyncCalendarsResource:
@@ -310,6 +328,11 @@ class V1ResourceWithRawResponse:
         return AccountsResourceWithRawResponse(self._v1.accounts)
 
     @cached_property
+    def api_keys(self) -> APIKeysResourceWithRawResponse:
+        """Manage API keys for authentication."""
+        return APIKeysResourceWithRawResponse(self._v1.api_keys)
+
+    @cached_property
     def calendars(self) -> CalendarsResourceWithRawResponse:
         return CalendarsResourceWithRawResponse(self._v1.calendars)
 
@@ -369,6 +392,11 @@ class AsyncV1ResourceWithRawResponse:
     def accounts(self) -> AsyncAccountsResourceWithRawResponse:
         """Manage trading accounts, balances, and portfolio history."""
         return AsyncAccountsResourceWithRawResponse(self._v1.accounts)
+
+    @cached_property
+    def api_keys(self) -> AsyncAPIKeysResourceWithRawResponse:
+        """Manage API keys for authentication."""
+        return AsyncAPIKeysResourceWithRawResponse(self._v1.api_keys)
 
     @cached_property
     def calendars(self) -> AsyncCalendarsResourceWithRawResponse:
@@ -432,6 +460,11 @@ class V1ResourceWithStreamingResponse:
         return AccountsResourceWithStreamingResponse(self._v1.accounts)
 
     @cached_property
+    def api_keys(self) -> APIKeysResourceWithStreamingResponse:
+        """Manage API keys for authentication."""
+        return APIKeysResourceWithStreamingResponse(self._v1.api_keys)
+
+    @cached_property
     def calendars(self) -> CalendarsResourceWithStreamingResponse:
         return CalendarsResourceWithStreamingResponse(self._v1.calendars)
 
@@ -491,6 +524,11 @@ class AsyncV1ResourceWithStreamingResponse:
     def accounts(self) -> AsyncAccountsResourceWithStreamingResponse:
         """Manage trading accounts, balances, and portfolio history."""
         return AsyncAccountsResourceWithStreamingResponse(self._v1.accounts)
+
+    @cached_property
+    def api_keys(self) -> AsyncAPIKeysResourceWithStreamingResponse:
+        """Manage API keys for authentication."""
+        return AsyncAPIKeysResourceWithStreamingResponse(self._v1.api_keys)
 
     @cached_property
     def calendars(self) -> AsyncCalendarsResourceWithStreamingResponse:
