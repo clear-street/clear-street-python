@@ -60,7 +60,7 @@ class SnapshotResource(SyncAPIResource):
         Get market data snapshots for one or more securities.
 
         Args:
-          ids: Comma-separated OEMS instrument UUIDs
+          ids: Comma-separated OEMS instrument UUIDs.
 
           security_id: Filter by security ID(s). Accepts single value or indexed array.
 
@@ -144,7 +144,7 @@ class AsyncSnapshotResource(AsyncAPIResource):
         Get market data snapshots for one or more securities.
 
         Args:
-          ids: Comma-separated OEMS instrument UUIDs
+          ids: Comma-separated OEMS instrument UUIDs.
 
           security_id: Filter by security ID(s). Accepts single value or indexed array.
 
