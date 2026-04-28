@@ -11,7 +11,7 @@ __all__ = ["SnapshotGetSnapshotsParams"]
 
 class SnapshotGetSnapshotsParams(TypedDict, total=False):
     ids: str
-    """Comma-separated OEMS instrument UUIDs"""
+    """Comma-separated OEMS instrument UUIDs."""
 
     security_id: SequenceNotStr[str]
     """Filter by security ID(s). Accepts single value or indexed array.
