@@ -1,8 +1,9 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import Union
-from typing_extensions import Literal, TypeAlias
+from typing_extensions import TypeAlias
 
+from ...._models import BaseModel
 from .open_chart_action import OpenChartAction
 from .open_screener_action import OpenScreenerAction
 from .prefill_order_action import PrefillOrderAction
@@ -11,28 +12,32 @@ from .open_entitlement_consent_action import OpenEntitlementConsentAction
 __all__ = ["StructuredAction", "PrefillOrder", "OpenChart", "OpenScreener", "OpenEntitlementConsent"]
 
 
-class PrefillOrder(PrefillOrderAction):
+class PrefillOrder(BaseModel):
     """Prefill an order ticket for user confirmation"""
 
-    action_type: Literal["prefill_order"]
+    prefill_order: PrefillOrderAction
+    """Prefill an order ticket for user confirmation"""
 
 
-class OpenChart(OpenChartAction):
+class OpenChart(BaseModel):
     """Open a chart for a symbol"""
 
-    action_type: Literal["open_chart"]
+    open_chart: OpenChartAction
+    """Open a chart for a symbol"""
 
 
-class OpenScreener(OpenScreenerAction):
+class OpenScreener(BaseModel):
     """Open a stock screener with filters"""
 
-    action_type: Literal["open_screener"]
+    open_screener: OpenScreenerAction
+    """Open a stock screener with filters"""
 
 
-class OpenEntitlementConsent(OpenEntitlementConsentAction):
+class OpenEntitlementConsent(BaseModel):
     """Open entitlement consent flow"""
 
-    action_type: Literal["open_entitlement_consent"]
+    open_entitlement_consent: OpenEntitlementConsentAction
+    """Open entitlement consent flow"""
 
 
 StructuredAction: TypeAlias = Union[PrefillOrder, OpenChart, OpenScreener, OpenEntitlementConsent]
