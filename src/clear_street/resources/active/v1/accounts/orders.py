@@ -387,7 +387,7 @@ class OrdersResource(SyncAPIResource):
         self,
         account_id: int,
         *,
-        body: Iterable[order_submit_orders_params.Body],
+        orders: Iterable[order_submit_orders_params.Order],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -409,7 +409,7 @@ class OrdersResource(SyncAPIResource):
         """
         return self._post(
             path_template("/active/v1/accounts/{account_id}/orders", account_id=account_id),
-            body=maybe_transform(body, Iterable[order_submit_orders_params.Body]),
+            body=maybe_transform(orders, Iterable[order_submit_orders_params.Order]),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -757,7 +757,7 @@ class AsyncOrdersResource(AsyncAPIResource):
         self,
         account_id: int,
         *,
-        body: Iterable[order_submit_orders_params.Body],
+        orders: Iterable[order_submit_orders_params.Order],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -779,7 +779,7 @@ class AsyncOrdersResource(AsyncAPIResource):
         """
         return await self._post(
             path_template("/active/v1/accounts/{account_id}/orders", account_id=account_id),
-            body=await async_maybe_transform(body, Iterable[order_submit_orders_params.Body]),
+            body=await async_maybe_transform(orders, Iterable[order_submit_orders_params.Order]),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
