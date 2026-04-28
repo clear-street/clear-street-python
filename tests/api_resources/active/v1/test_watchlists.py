@@ -147,6 +147,15 @@ class TestWatchlists:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    def test_method_get_watchlists_with_all_params(self, client: ClearStreet) -> None:
+        watchlist = client.active.v1.watchlists.get_watchlists(
+            page_size=1,
+            page_token="U3RhaW5sZXNzIHJvY2tz",
+        )
+        assert_matches_type(WatchlistGetWatchlistsResponse, watchlist, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     def test_raw_response_get_watchlists(self, client: ClearStreet) -> None:
         response = client.active.v1.watchlists.with_raw_response.get_watchlists()
 
@@ -295,6 +304,15 @@ class TestAsyncWatchlists:
     @parametrize
     async def test_method_get_watchlists(self, async_client: AsyncClearStreet) -> None:
         watchlist = await async_client.active.v1.watchlists.get_watchlists()
+        assert_matches_type(WatchlistGetWatchlistsResponse, watchlist, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_get_watchlists_with_all_params(self, async_client: AsyncClearStreet) -> None:
+        watchlist = await async_client.active.v1.watchlists.get_watchlists(
+            page_size=1,
+            page_token="U3RhaW5sZXNzIHJvY2tz",
+        )
         assert_matches_type(WatchlistGetWatchlistsResponse, watchlist, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")

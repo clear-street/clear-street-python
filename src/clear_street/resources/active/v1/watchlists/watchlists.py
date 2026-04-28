@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Union
+
 import httpx
 
 from .items import (
@@ -12,7 +14,7 @@ from .items import (
     ItemsResourceWithStreamingResponse,
     AsyncItemsResourceWithStreamingResponse,
 )
-from ....._types import Body, Query, Headers, NotGiven, not_given
+from ....._types import Body, Omit, Query, Headers, NotGiven, Base64FileInput, omit, not_given
 from ....._utils import path_template, maybe_transform, async_maybe_transform
 from ....._compat import cached_property
 from ....._resource import SyncAPIResource, AsyncAPIResource
@@ -23,7 +25,7 @@ from ....._response import (
     async_to_streamed_response_wrapper,
 )
 from ....._base_client import make_request_options
-from .....types.active.v1 import watchlist_create_watchlist_params
+from .....types.active.v1 import watchlist_get_watchlists_params, watchlist_create_watchlist_params
 from .....types.active.v1.watchlist_get_watchlists_response import WatchlistGetWatchlistsResponse
 from .....types.active.v1.watchlist_create_watchlist_response import WatchlistCreateWatchlistResponse
 from .....types.active.v1.watchlist_get_watchlist_by_id_response import WatchlistGetWatchlistByIDResponse
@@ -161,6 +163,8 @@ class WatchlistsResource(SyncAPIResource):
     def get_watchlists(
         self,
         *,
+        page_size: int | Omit = omit,
+        page_token: Union[str, Base64FileInput] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -168,11 +172,35 @@ class WatchlistsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WatchlistGetWatchlistsResponse:
-        """List watchlists for the authenticated user"""
+        """
+        List watchlists for the authenticated user
+
+        Args:
+          page_token: Token for retrieving the next page of results. Contains encoded pagination state
+              (limit + offset). When provided, page_size is ignored.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return self._get(
             "/active/v1/watchlists",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "page_size": page_size,
+                        "page_token": page_token,
+                    },
+                    watchlist_get_watchlists_params.WatchlistGetWatchlistsParams,
+                ),
             ),
             cast_to=WatchlistGetWatchlistsResponse,
         )
@@ -310,6 +338,8 @@ class AsyncWatchlistsResource(AsyncAPIResource):
     async def get_watchlists(
         self,
         *,
+        page_size: int | Omit = omit,
+        page_token: Union[str, Base64FileInput] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -317,11 +347,35 @@ class AsyncWatchlistsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> WatchlistGetWatchlistsResponse:
-        """List watchlists for the authenticated user"""
+        """
+        List watchlists for the authenticated user
+
+        Args:
+          page_token: Token for retrieving the next page of results. Contains encoded pagination state
+              (limit + offset). When provided, page_size is ignored.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
         return await self._get(
             "/active/v1/watchlists",
             options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "page_size": page_size,
+                        "page_token": page_token,
+                    },
+                    watchlist_get_watchlists_params.WatchlistGetWatchlistsParams,
+                ),
             ),
             cast_to=WatchlistGetWatchlistsResponse,
         )
