@@ -40,6 +40,9 @@ class OrderPayload(BaseModel):
     limit_price: Optional[str] = None
     """Limit price (required for LIMIT and STOP_LIMIT orders)"""
 
+    order_id: Optional[str] = None
+    """Existing order identifier. Required for cancel actions."""
+
     stop_price: Optional[str] = None
     """Stop price (required for STOP and STOP_LIMIT orders)"""
 

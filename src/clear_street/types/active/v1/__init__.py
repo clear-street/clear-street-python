@@ -82,6 +82,7 @@ from .clock_get_clock_response import ClockGetClockResponse as ClockGetClockResp
 from .create_feedback_response import CreateFeedbackResponse as CreateFeedbackResponse
 from .instrument_search_params import InstrumentSearchParams as InstrumentSearchParams
 from .content_part_text_payload import ContentPartTextPayload as ContentPartTextPayload
+from .prefill_order_action_type import PrefillOrderActionType as PrefillOrderActionType
 from .suggested_actions_payload import SuggestedActionsPayload as SuggestedActionsPayload
 from .content_part_chart_payload import ContentPartChartPayload as ContentPartChartPayload
 from .instrument_search_response import InstrumentSearchResponse as InstrumentSearchResponse

@@ -413,6 +413,7 @@ from clear_street.types.active.v1 import (
     OrderPayload,
     OrderStrategyType,
     PrefillOrderAction,
+    PrefillOrderActionType,
     PromptButtonAction,
     Response,
     ResponseContent,
