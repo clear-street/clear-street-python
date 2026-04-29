@@ -1,6 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import Optional
+from datetime import date
 
 from ....._models import BaseModel
 from .position_type import PositionType
@@ -48,6 +49,9 @@ class Position(BaseModel):
 
     closing_price: Optional[str] = None
     """The closing price used to value the position for the last trading day"""
+
+    closing_price_date: Optional[date] = None
+    """The market date associated with `closing_price`"""
 
     cost_basis: Optional[str] = None
     """The total cost basis for this position"""
