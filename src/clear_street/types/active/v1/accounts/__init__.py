@@ -10,6 +10,7 @@ from .order_list import OrderList as OrderList
 from .order_type import OrderType as OrderType
 from .ap_strategy import ApStrategy as ApStrategy
 from .margin_type import MarginType as MarginType
+from .queue_state import QueueState as QueueState
 from .dma_strategy import DmaStrategy as DmaStrategy
 from .order_status import OrderStatus as OrderStatus
 from .pov_strategy import PovStrategy as PovStrategy
