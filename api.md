@@ -79,6 +79,7 @@ from clear_street.types.active.v1.accounts import (
     OrderStrategy,
     OrderType,
     PovStrategy,
+    QueueState,
     Side,
     SorStrategy,
     TimeInForce,

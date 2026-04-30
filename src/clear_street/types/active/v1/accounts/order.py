@@ -6,6 +6,7 @@ from datetime import datetime
 from .side import Side
 from .order_type import OrderType
 from ....._models import BaseModel
+from .queue_state import QueueState
 from .order_status import OrderStatus
 from .time_in_force import TimeInForce
 from .order_strategy import OrderStrategy
@@ -94,6 +95,15 @@ class Order(BaseModel):
 
     limit_price: Optional[str] = None
     """Limit price (for LIMIT and STOP_LIMIT orders)"""
+
+    queue_state: Optional[QueueState] = None
+    """
+    Parent order queue state, present when the order is awaiting release or
+    released.
+    """
+
+    releases_at: Optional[datetime] = None
+    """Scheduled release time for orders awaiting release."""
 
     stop_price: Optional[str] = None
     """Stop price (for STOP and STOP_LIMIT orders)"""
