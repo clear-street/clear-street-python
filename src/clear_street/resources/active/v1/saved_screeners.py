@@ -7,7 +7,7 @@ from typing_extensions import Literal
 
 import httpx
 
-from ...._types import Body, Omit, Query, Headers, NoneType, NotGiven, SequenceNotStr, omit, not_given
+from ...._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
 from ...._utils import path_template, maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
@@ -19,7 +19,8 @@ from ...._response import (
 )
 from ...._base_client import make_request_options
 from ....types.active.v1 import saved_screener_create_screener_params, saved_screener_replace_screener_params
-from ....types.active.v1.saved_screener_filter_param import SavedScreenerFilterParam
+from ....types.active.v1.field_ref_param import FieldRefParam
+from ....types.active.v1.search_filter_param import SearchFilterParam
 from ....types.active.v1.saved_screener_get_screeners_response import SavedScreenerGetScreenersResponse
 from ....types.active.v1.saved_screener_create_screener_response import SavedScreenerCreateScreenerResponse
 from ....types.active.v1.saved_screener_replace_screener_response import SavedScreenerReplaceScreenerResponse
@@ -53,10 +54,10 @@ class SavedScreenersResource(SyncAPIResource):
     def create_screener(
         self,
         *,
-        field_filter: Optional[SequenceNotStr[str]] | Omit = omit,
-        filters: Optional[Iterable[SavedScreenerFilterParam]] | Omit = omit,
+        field_filter: Optional[Iterable[FieldRefParam]] | Omit = omit,
+        filters: Optional[Iterable[SearchFilterParam]] | Omit = omit,
         name: Optional[str] | Omit = omit,
-        sort_by: Optional[str] | Omit = omit,
+        sort_by: Optional[FieldRefParam] | Omit = omit,
         sort_direction: Optional[Literal["ASC", "DESC"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -71,13 +72,13 @@ class SavedScreenersResource(SyncAPIResource):
         Persists a screener configuration for the authenticated user.
 
         Args:
-          field_filter: List of field names to include when running this screener
+          field_filter: Structured field references to include when running this screener
 
-          filters: Filter criteria for this screener
+          filters: Structured search filter criteria
 
           name: The name for this screener configuration
 
-          sort_by: Field name to sort results by
+          sort_by: Structured field reference to sort results by
 
           sort_direction: Sort direction for results
 
@@ -205,10 +206,10 @@ class SavedScreenersResource(SyncAPIResource):
         self,
         screener_id: str,
         *,
-        field_filter: Optional[SequenceNotStr[str]] | Omit = omit,
-        filters: Optional[Iterable[SavedScreenerFilterParam]] | Omit = omit,
+        field_filter: Optional[Iterable[FieldRefParam]] | Omit = omit,
+        filters: Optional[Iterable[SearchFilterParam]] | Omit = omit,
         name: Optional[str] | Omit = omit,
-        sort_by: Optional[str] | Omit = omit,
+        sort_by: Optional[FieldRefParam] | Omit = omit,
         sort_direction: Optional[Literal["ASC", "DESC"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -224,13 +225,13 @@ class SavedScreenersResource(SyncAPIResource):
         null, the existing name is preserved.
 
         Args:
-          field_filter: List of field names to include when running this screener
+          field_filter: Structured field references to include when running this screener
 
-          filters: Filter criteria for this screener
+          filters: Structured search filter criteria
 
           name: The name for this screener configuration
 
-          sort_by: Field name to sort results by
+          sort_by: Structured field reference to sort results by
 
           sort_direction: Sort direction for results
 
@@ -288,10 +289,10 @@ class AsyncSavedScreenersResource(AsyncAPIResource):
     async def create_screener(
         self,
         *,
-        field_filter: Optional[SequenceNotStr[str]] | Omit = omit,
-        filters: Optional[Iterable[SavedScreenerFilterParam]] | Omit = omit,
+        field_filter: Optional[Iterable[FieldRefParam]] | Omit = omit,
+        filters: Optional[Iterable[SearchFilterParam]] | Omit = omit,
         name: Optional[str] | Omit = omit,
-        sort_by: Optional[str] | Omit = omit,
+        sort_by: Optional[FieldRefParam] | Omit = omit,
         sort_direction: Optional[Literal["ASC", "DESC"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -306,13 +307,13 @@ class AsyncSavedScreenersResource(AsyncAPIResource):
         Persists a screener configuration for the authenticated user.
 
         Args:
-          field_filter: List of field names to include when running this screener
+          field_filter: Structured field references to include when running this screener
 
-          filters: Filter criteria for this screener
+          filters: Structured search filter criteria
 
           name: The name for this screener configuration
 
-          sort_by: Field name to sort results by
+          sort_by: Structured field reference to sort results by
 
           sort_direction: Sort direction for results
 
@@ -440,10 +441,10 @@ class AsyncSavedScreenersResource(AsyncAPIResource):
         self,
         screener_id: str,
         *,
-        field_filter: Optional[SequenceNotStr[str]] | Omit = omit,
-        filters: Optional[Iterable[SavedScreenerFilterParam]] | Omit = omit,
+        field_filter: Optional[Iterable[FieldRefParam]] | Omit = omit,
+        filters: Optional[Iterable[SearchFilterParam]] | Omit = omit,
         name: Optional[str] | Omit = omit,
-        sort_by: Optional[str] | Omit = omit,
+        sort_by: Optional[FieldRefParam] | Omit = omit,
         sort_direction: Optional[Literal["ASC", "DESC"]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -459,13 +460,13 @@ class AsyncSavedScreenersResource(AsyncAPIResource):
         null, the existing name is preserved.
 
         Args:
-          field_filter: List of field names to include when running this screener
+          field_filter: Structured field references to include when running this screener
 
-          filters: Filter criteria for this screener
+          filters: Structured search filter criteria
 
           name: The name for this screener configuration
 
-          sort_by: Field name to sort results by
+          sort_by: Structured field reference to sort results by
 
           sort_direction: Sort direction for results
 

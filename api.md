@@ -536,7 +536,6 @@ Types:
 
 ```python
 from clear_street.types.active.v1 import (
-    SavedScreenerFilter,
     ScreenerEntry,
     ScreenerEntryList,
     SavedScreenerCreateScreenerResponse,
@@ -564,12 +563,20 @@ from clear_street.types.active.v1 import (
     FieldPeriod,
     FieldRef,
     FieldType,
+    FilterOpSpec,
+    FilterOperator,
+    FilterValue,
+    Modifier,
+    ModifierOp,
+    OperatorArg,
     ScreenerColumn,
     ScreenerFilter,
     ScreenerItem,
     ScreenerItemList,
     ScreenerRow,
     ScreenerRowList,
+    SearchFilter,
+    Variable,
     ScreenerGetScreenerResponse,
     ScreenerSearchScreenerResponse,
 )

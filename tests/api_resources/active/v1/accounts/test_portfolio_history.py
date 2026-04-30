@@ -25,8 +25,17 @@ class TestPortfolioHistory:
     def test_method_get_portfolio_history(self, client: ClearStreet) -> None:
         portfolio_history = client.active.v1.accounts.portfolio_history.get_portfolio_history(
             account_id=0,
-            end_date=parse_date("2019-12-27"),
             start_date=parse_date("2019-12-27"),
+        )
+        assert_matches_type(PortfolioHistoryGetPortfolioHistoryResponse, portfolio_history, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_get_portfolio_history_with_all_params(self, client: ClearStreet) -> None:
+        portfolio_history = client.active.v1.accounts.portfolio_history.get_portfolio_history(
+            account_id=0,
+            start_date=parse_date("2019-12-27"),
+            end_date=parse_date("2019-12-27"),
         )
         assert_matches_type(PortfolioHistoryGetPortfolioHistoryResponse, portfolio_history, path=["response"])
 
@@ -35,7 +44,6 @@ class TestPortfolioHistory:
     def test_raw_response_get_portfolio_history(self, client: ClearStreet) -> None:
         response = client.active.v1.accounts.portfolio_history.with_raw_response.get_portfolio_history(
             account_id=0,
-            end_date=parse_date("2019-12-27"),
             start_date=parse_date("2019-12-27"),
         )
 
@@ -49,7 +57,6 @@ class TestPortfolioHistory:
     def test_streaming_response_get_portfolio_history(self, client: ClearStreet) -> None:
         with client.active.v1.accounts.portfolio_history.with_streaming_response.get_portfolio_history(
             account_id=0,
-            end_date=parse_date("2019-12-27"),
             start_date=parse_date("2019-12-27"),
         ) as response:
             assert not response.is_closed
@@ -71,8 +78,17 @@ class TestAsyncPortfolioHistory:
     async def test_method_get_portfolio_history(self, async_client: AsyncClearStreet) -> None:
         portfolio_history = await async_client.active.v1.accounts.portfolio_history.get_portfolio_history(
             account_id=0,
-            end_date=parse_date("2019-12-27"),
             start_date=parse_date("2019-12-27"),
+        )
+        assert_matches_type(PortfolioHistoryGetPortfolioHistoryResponse, portfolio_history, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_get_portfolio_history_with_all_params(self, async_client: AsyncClearStreet) -> None:
+        portfolio_history = await async_client.active.v1.accounts.portfolio_history.get_portfolio_history(
+            account_id=0,
+            start_date=parse_date("2019-12-27"),
+            end_date=parse_date("2019-12-27"),
         )
         assert_matches_type(PortfolioHistoryGetPortfolioHistoryResponse, portfolio_history, path=["response"])
 
@@ -81,7 +97,6 @@ class TestAsyncPortfolioHistory:
     async def test_raw_response_get_portfolio_history(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.active.v1.accounts.portfolio_history.with_raw_response.get_portfolio_history(
             account_id=0,
-            end_date=parse_date("2019-12-27"),
             start_date=parse_date("2019-12-27"),
         )
 
@@ -95,7 +110,6 @@ class TestAsyncPortfolioHistory:
     async def test_streaming_response_get_portfolio_history(self, async_client: AsyncClearStreet) -> None:
         async with async_client.active.v1.accounts.portfolio_history.with_streaming_response.get_portfolio_history(
             account_id=0,
-            end_date=parse_date("2019-12-27"),
             start_date=parse_date("2019-12-27"),
         ) as response:
             assert not response.is_closed
