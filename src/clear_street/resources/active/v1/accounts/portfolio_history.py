@@ -7,7 +7,7 @@ from datetime import date
 
 import httpx
 
-from ....._types import Body, Query, Headers, NotGiven, not_given
+from ....._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ....._utils import path_template, maybe_transform, async_maybe_transform
 from ....._compat import cached_property
 from ....._resource import SyncAPIResource, AsyncAPIResource
@@ -52,8 +52,8 @@ class PortfolioHistoryResource(SyncAPIResource):
         self,
         account_id: int,
         *,
-        end_date: Union[str, date],
         start_date: Union[str, date],
+        end_date: Union[str, date] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -65,6 +65,8 @@ class PortfolioHistoryResource(SyncAPIResource):
         Retrieves daily portfolio history for the specified account.
 
         Args:
+          end_date: Defaults to today in America/New_York when omitted.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -82,8 +84,8 @@ class PortfolioHistoryResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
-                        "end_date": end_date,
                         "start_date": start_date,
+                        "end_date": end_date,
                     },
                     portfolio_history_get_portfolio_history_params.PortfolioHistoryGetPortfolioHistoryParams,
                 ),
@@ -118,8 +120,8 @@ class AsyncPortfolioHistoryResource(AsyncAPIResource):
         self,
         account_id: int,
         *,
-        end_date: Union[str, date],
         start_date: Union[str, date],
+        end_date: Union[str, date] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -131,6 +133,8 @@ class AsyncPortfolioHistoryResource(AsyncAPIResource):
         Retrieves daily portfolio history for the specified account.
 
         Args:
+          end_date: Defaults to today in America/New_York when omitted.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -148,8 +152,8 @@ class AsyncPortfolioHistoryResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
-                        "end_date": end_date,
                         "start_date": start_date,
+                        "end_date": end_date,
                     },
                     portfolio_history_get_portfolio_history_params.PortfolioHistoryGetPortfolioHistoryParams,
                 ),

@@ -30,6 +30,7 @@ from ...._response import (
 from ...._base_client import make_request_options
 from ....types.active.v1 import screener_get_screener_params, screener_search_screener_params
 from ....types.active.v1.field_ref_param import FieldRefParam
+from ....types.active.v1.search_filter_param import SearchFilterParam
 from ....types.active.v1.screener_get_screener_response import ScreenerGetScreenerResponse
 from ....types.active.v1.screener_search_screener_response import ScreenerSearchScreenerResponse
 
@@ -126,7 +127,7 @@ class ScreenerResource(SyncAPIResource):
         self,
         *,
         field_filter: Optional[Iterable[FieldRefParam]] | Omit = omit,
-        filters: Optional[Iterable[screener_search_screener_params.Filter]] | Omit = omit,
+        filters: Optional[Iterable[SearchFilterParam]] | Omit = omit,
         page_size: Optional[int] | Omit = omit,
         page_token: Optional[str] | Omit = omit,
         sort_by: Optional[FieldRefParam] | Omit = omit,
@@ -288,7 +289,7 @@ class AsyncScreenerResource(AsyncAPIResource):
         self,
         *,
         field_filter: Optional[Iterable[FieldRefParam]] | Omit = omit,
-        filters: Optional[Iterable[screener_search_screener_params.Filter]] | Omit = omit,
+        filters: Optional[Iterable[SearchFilterParam]] | Omit = omit,
         page_size: Optional[int] | Omit = omit,
         page_token: Optional[str] | Omit = omit,
         sort_by: Optional[FieldRefParam] | Omit = omit,

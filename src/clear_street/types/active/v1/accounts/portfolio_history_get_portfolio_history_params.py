@@ -12,6 +12,7 @@ __all__ = ["PortfolioHistoryGetPortfolioHistoryParams"]
 
 
 class PortfolioHistoryGetPortfolioHistoryParams(TypedDict, total=False):
-    end_date: Required[Annotated[Union[str, date], PropertyInfo(format="iso8601")]]
-
     start_date: Required[Annotated[Union[str, date], PropertyInfo(format="iso8601")]]
+
+    end_date: Annotated[Union[str, date], PropertyInfo(format="iso8601")]
+    """Defaults to today in America/New_York when omitted."""

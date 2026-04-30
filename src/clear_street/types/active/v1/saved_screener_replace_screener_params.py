@@ -5,24 +5,24 @@ from __future__ import annotations
 from typing import Iterable, Optional
 from typing_extensions import Literal, TypedDict
 
-from ...._types import SequenceNotStr
-from .saved_screener_filter_param import SavedScreenerFilterParam
+from .field_ref_param import FieldRefParam
+from .search_filter_param import SearchFilterParam
 
 __all__ = ["SavedScreenerReplaceScreenerParams"]
 
 
 class SavedScreenerReplaceScreenerParams(TypedDict, total=False):
-    field_filter: Optional[SequenceNotStr[str]]
-    """List of field names to include when running this screener"""
+    field_filter: Optional[Iterable[FieldRefParam]]
+    """Structured field references to include when running this screener"""
 
-    filters: Optional[Iterable[SavedScreenerFilterParam]]
-    """Filter criteria for this screener"""
+    filters: Optional[Iterable[SearchFilterParam]]
+    """Structured search filter criteria"""
 
     name: Optional[str]
     """The name for this screener configuration"""
 
-    sort_by: Optional[str]
-    """Field name to sort results by"""
+    sort_by: Optional[FieldRefParam]
+    """Structured field reference to sort results by"""
 
     sort_direction: Optional[Literal["ASC", "DESC"]]
     """Sort direction for results"""

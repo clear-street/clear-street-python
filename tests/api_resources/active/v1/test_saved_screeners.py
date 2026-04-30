@@ -32,16 +32,49 @@ class TestSavedScreeners:
     @parametrize
     def test_method_create_screener_with_all_params(self, client: ClearStreet) -> None:
         saved_screener = client.active.v1.saved_screeners.create_screener(
-            field_filter=["string"],
+            field_filter=[
+                {
+                    "name": "market_cap",
+                    "lookback": "ONE_WEEK",
+                    "period": "QUARTER",
+                    "value_type": "DECIMAL",
+                }
+            ],
             filters=[
                 {
-                    "field_name": "field_name",
-                    "operation": "operation",
-                    "value": "value",
+                    "left": {
+                        "name": "market_cap",
+                        "lookback": "ONE_WEEK",
+                        "period": "QUARTER",
+                        "value_type": "DECIMAL",
+                    },
+                    "op": {
+                        "name": "GTE",
+                        "args": ["LEFT_INCLUSIVE"],
+                    },
+                    "right": [
+                        {
+                            "value": 1000000000,
+                            "variable": {
+                                "name": "today",
+                                "lookback": "ONE_WEEK",
+                                "modifier": {
+                                    "args": [30, "DAY"],
+                                    "name": "SUB",
+                                },
+                                "period": "QUARTER",
+                            },
+                        }
+                    ],
                 }
             ],
             name="name",
-            sort_by="sort_by",
+            sort_by={
+                "name": "market_cap",
+                "lookback": "ONE_WEEK",
+                "period": "QUARTER",
+                "value_type": "DECIMAL",
+            },
             sort_direction="ASC",
         )
         assert_matches_type(SavedScreenerCreateScreenerResponse, saved_screener, path=["response"])
@@ -193,16 +226,49 @@ class TestSavedScreeners:
     def test_method_replace_screener_with_all_params(self, client: ClearStreet) -> None:
         saved_screener = client.active.v1.saved_screeners.replace_screener(
             screener_id="550e8400-e29b-41d4-a716-446655440000",
-            field_filter=["string"],
+            field_filter=[
+                {
+                    "name": "market_cap",
+                    "lookback": "ONE_WEEK",
+                    "period": "QUARTER",
+                    "value_type": "DECIMAL",
+                }
+            ],
             filters=[
                 {
-                    "field_name": "field_name",
-                    "operation": "operation",
-                    "value": "value",
+                    "left": {
+                        "name": "market_cap",
+                        "lookback": "ONE_WEEK",
+                        "period": "QUARTER",
+                        "value_type": "DECIMAL",
+                    },
+                    "op": {
+                        "name": "GTE",
+                        "args": ["LEFT_INCLUSIVE"],
+                    },
+                    "right": [
+                        {
+                            "value": 1000000000,
+                            "variable": {
+                                "name": "today",
+                                "lookback": "ONE_WEEK",
+                                "modifier": {
+                                    "args": [30, "DAY"],
+                                    "name": "SUB",
+                                },
+                                "period": "QUARTER",
+                            },
+                        }
+                    ],
                 }
             ],
             name="name",
-            sort_by="sort_by",
+            sort_by={
+                "name": "market_cap",
+                "lookback": "ONE_WEEK",
+                "period": "QUARTER",
+                "value_type": "DECIMAL",
+            },
             sort_direction="ASC",
         )
         assert_matches_type(SavedScreenerReplaceScreenerResponse, saved_screener, path=["response"])
@@ -257,16 +323,49 @@ class TestAsyncSavedScreeners:
     @parametrize
     async def test_method_create_screener_with_all_params(self, async_client: AsyncClearStreet) -> None:
         saved_screener = await async_client.active.v1.saved_screeners.create_screener(
-            field_filter=["string"],
+            field_filter=[
+                {
+                    "name": "market_cap",
+                    "lookback": "ONE_WEEK",
+                    "period": "QUARTER",
+                    "value_type": "DECIMAL",
+                }
+            ],
             filters=[
                 {
-                    "field_name": "field_name",
-                    "operation": "operation",
-                    "value": "value",
+                    "left": {
+                        "name": "market_cap",
+                        "lookback": "ONE_WEEK",
+                        "period": "QUARTER",
+                        "value_type": "DECIMAL",
+                    },
+                    "op": {
+                        "name": "GTE",
+                        "args": ["LEFT_INCLUSIVE"],
+                    },
+                    "right": [
+                        {
+                            "value": 1000000000,
+                            "variable": {
+                                "name": "today",
+                                "lookback": "ONE_WEEK",
+                                "modifier": {
+                                    "args": [30, "DAY"],
+                                    "name": "SUB",
+                                },
+                                "period": "QUARTER",
+                            },
+                        }
+                    ],
                 }
             ],
             name="name",
-            sort_by="sort_by",
+            sort_by={
+                "name": "market_cap",
+                "lookback": "ONE_WEEK",
+                "period": "QUARTER",
+                "value_type": "DECIMAL",
+            },
             sort_direction="ASC",
         )
         assert_matches_type(SavedScreenerCreateScreenerResponse, saved_screener, path=["response"])
@@ -418,16 +517,49 @@ class TestAsyncSavedScreeners:
     async def test_method_replace_screener_with_all_params(self, async_client: AsyncClearStreet) -> None:
         saved_screener = await async_client.active.v1.saved_screeners.replace_screener(
             screener_id="550e8400-e29b-41d4-a716-446655440000",
-            field_filter=["string"],
+            field_filter=[
+                {
+                    "name": "market_cap",
+                    "lookback": "ONE_WEEK",
+                    "period": "QUARTER",
+                    "value_type": "DECIMAL",
+                }
+            ],
             filters=[
                 {
-                    "field_name": "field_name",
-                    "operation": "operation",
-                    "value": "value",
+                    "left": {
+                        "name": "market_cap",
+                        "lookback": "ONE_WEEK",
+                        "period": "QUARTER",
+                        "value_type": "DECIMAL",
+                    },
+                    "op": {
+                        "name": "GTE",
+                        "args": ["LEFT_INCLUSIVE"],
+                    },
+                    "right": [
+                        {
+                            "value": 1000000000,
+                            "variable": {
+                                "name": "today",
+                                "lookback": "ONE_WEEK",
+                                "modifier": {
+                                    "args": [30, "DAY"],
+                                    "name": "SUB",
+                                },
+                                "period": "QUARTER",
+                            },
+                        }
+                    ],
                 }
             ],
             name="name",
-            sort_by="sort_by",
+            sort_by={
+                "name": "market_cap",
+                "lookback": "ONE_WEEK",
+                "period": "QUARTER",
+                "value_type": "DECIMAL",
+            },
             sort_direction="ASC",
         )
         assert_matches_type(SavedScreenerReplaceScreenerResponse, saved_screener, path=["response"])
