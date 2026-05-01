@@ -90,6 +90,9 @@ class Order(BaseModel):
     Present when time_in_force is GOOD_TILL_DATE.
     """
 
+    extended_hours: Optional[bool] = None
+    """Whether the order is eligible for extended-hours trading."""
+
     limit_offset: Optional[str] = None
     """Limit offset for trailing stop-limit orders (signed)"""
 
