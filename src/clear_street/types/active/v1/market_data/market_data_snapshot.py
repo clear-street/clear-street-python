@@ -19,12 +19,6 @@ class MarketDataSnapshot(BaseModel):
     symbol: str
     """Display symbol for the security."""
 
-    cumulative_volume: Optional[int] = None
-    """
-    Cumulative traded volume reported on the most recent trade, in shares for
-    equities or contracts for options. Absent when no trade is available.
-    """
-
     last_quote: Optional[SnapshotQuote] = None
     """Most recent quote if available."""
 
