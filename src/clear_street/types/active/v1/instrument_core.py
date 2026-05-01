@@ -39,6 +39,9 @@ class InstrumentCore(BaseModel):
     is_threshold_security: bool
     """Indicates if the instrument is on the Regulation SHO Threshold Security List"""
 
+    is_tradable: bool
+    """Indicates if the instrument is tradable"""
+
     security_id: str
     """Deprecated. Use `security_ids`.
 
