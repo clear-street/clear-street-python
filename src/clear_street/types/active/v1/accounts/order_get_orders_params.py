@@ -76,3 +76,9 @@ class OrderGetOrdersParams(TypedDict, total=False):
 
     to: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
     """The end date and time for the query range, inclusive (ISO 8601 format)"""
+
+    underlying_instrument_ids: str
+    """Comma-separated OEMS instrument UUIDs.
+
+    Matches options orders whose resolved underlier is any of the given IDs.
+    """
