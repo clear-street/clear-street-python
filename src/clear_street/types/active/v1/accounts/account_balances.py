@@ -58,6 +58,9 @@ class AccountBalances(BaseModel):
     unsettled_debits: str
     """Trade-date unsettled cash debits."""
 
+    withdrawable_cash: str
+    """The amount of cash currently available to withdraw."""
+
     margin_details: Optional[MarginDetails] = None
     """Margin-account-only details."""
 
