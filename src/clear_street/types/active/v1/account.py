@@ -29,6 +29,9 @@ class Account(BaseModel):
     open_date: date
     """The date the account was opened"""
 
+    options_level: int
+    """The options level of the account"""
+
     short_name: str
     """The short name of the account"""
 
