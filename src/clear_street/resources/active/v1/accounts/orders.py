@@ -254,6 +254,7 @@ class OrdersResource(SyncAPIResource):
         | Omit = omit,
         symbol: str | Omit = omit,
         to: Union[str, datetime] | Omit = omit,
+        underlying_instrument_ids: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -293,6 +294,9 @@ class OrdersResource(SyncAPIResource):
 
           to: The end date and time for the query range, inclusive (ISO 8601 format)
 
+          underlying_instrument_ids: Comma-separated OEMS instrument UUIDs. Matches options orders whose resolved
+              underlier is any of the given IDs.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -319,6 +323,7 @@ class OrdersResource(SyncAPIResource):
                         "status": status,
                         "symbol": symbol,
                         "to": to,
+                        "underlying_instrument_ids": underlying_instrument_ids,
                     },
                     order_get_orders_params.OrderGetOrdersParams,
                 ),
@@ -624,6 +629,7 @@ class AsyncOrdersResource(AsyncAPIResource):
         | Omit = omit,
         symbol: str | Omit = omit,
         to: Union[str, datetime] | Omit = omit,
+        underlying_instrument_ids: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -663,6 +669,9 @@ class AsyncOrdersResource(AsyncAPIResource):
 
           to: The end date and time for the query range, inclusive (ISO 8601 format)
 
+          underlying_instrument_ids: Comma-separated OEMS instrument UUIDs. Matches options orders whose resolved
+              underlier is any of the given IDs.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -689,6 +698,7 @@ class AsyncOrdersResource(AsyncAPIResource):
                         "status": status,
                         "symbol": symbol,
                         "to": to,
+                        "underlying_instrument_ids": underlying_instrument_ids,
                     },
                     order_get_orders_params.OrderGetOrdersParams,
                 ),

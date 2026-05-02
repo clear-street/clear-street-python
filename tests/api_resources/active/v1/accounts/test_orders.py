@@ -186,6 +186,7 @@ class TestOrders:
             status=["PENDING_NEW"],
             symbol="symbol",
             to=parse_datetime("2019-12-27T18:11:19.117Z"),
+            underlying_instrument_ids="underlying_instrument_ids",
         )
         assert_matches_type(OrderGetOrdersResponse, order, path=["response"])
 
@@ -553,6 +554,7 @@ class TestAsyncOrders:
             status=["PENDING_NEW"],
             symbol="symbol",
             to=parse_datetime("2019-12-27T18:11:19.117Z"),
+            underlying_instrument_ids="underlying_instrument_ids",
         )
         assert_matches_type(OrderGetOrdersResponse, order, path=["response"])
 

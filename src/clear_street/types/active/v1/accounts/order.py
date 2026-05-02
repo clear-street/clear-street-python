@@ -125,3 +125,10 @@ class Order(BaseModel):
 
     trailing_watermark_ts: Optional[datetime] = None
     """Trailing watermark timestamp for trailing orders"""
+
+    underlying_instrument_id: Optional[str] = None
+    """OEMS instrument ID of the option's underlying instrument.
+
+    Populated only for OPTIONS orders; `null` for non-options and for options whose
+    underlier cannot be resolved from the instrument cache.
+    """
