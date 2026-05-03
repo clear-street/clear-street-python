@@ -6,6 +6,12 @@ __all__ = ["MarginTopContributor"]
 
 
 class MarginTopContributor(BaseModel):
+    day_trade_buying_power_usage: str
+    """
+    Day-trade buying power consumed by fills against this underlying on the current
+    trade date. Populated only for pattern day trader accounts.
+    """
+
     initial_margin_requirement: str
     """Initial margin requirement attributable to this underlying."""
 
