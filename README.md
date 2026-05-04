@@ -36,7 +36,7 @@ client = ClearStreet(
     environment="staging",
 )
 
-response = client.active.v1.accounts.get_accounts()
+response = client.v1.accounts.get_accounts()
 ```
 
 ## Async usage
@@ -55,7 +55,7 @@ client = AsyncClearStreet(
 
 
 async def main() -> None:
-    response = await client.active.v1.accounts.get_accounts()
+    response = await client.v1.accounts.get_accounts()
 
 
 asyncio.run(main())
@@ -87,7 +87,7 @@ async def main() -> None:
         api_key="My API Key",
         http_client=DefaultAioHttpClient(),
     ) as client:
-        response = await client.active.v1.accounts.get_accounts()
+        response = await client.v1.accounts.get_accounts()
 
 
 asyncio.run(main())
@@ -111,7 +111,7 @@ from clear_street import ClearStreet
 
 client = ClearStreet()
 
-response = client.active.v1.accounts.patch_account_by_id(
+response = client.v1.accounts.patch_account_by_id(
     account_id=0,
     risk={"max_notional": "5000000.00"},
 )
@@ -134,7 +134,7 @@ from clear_street import ClearStreet
 client = ClearStreet()
 
 try:
-    client.active.v1.accounts.get_accounts()
+    client.v1.accounts.get_accounts()
 except clear_street.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
@@ -177,7 +177,7 @@ client = ClearStreet(
 )
 
 # Or, configure per-request:
-client.with_options(max_retries=5).active.v1.accounts.get_accounts()
+client.with_options(max_retries=5).v1.accounts.get_accounts()
 ```
 
 ### Timeouts
@@ -200,7 +200,7 @@ client = ClearStreet(
 )
 
 # Override per-request:
-client.with_options(timeout=5.0).active.v1.accounts.get_accounts()
+client.with_options(timeout=5.0).v1.accounts.get_accounts()
 ```
 
 On timeout, an `APITimeoutError` is thrown.
@@ -241,10 +241,10 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 from clear_street import ClearStreet
 
 client = ClearStreet()
-response = client.active.v1.accounts.with_raw_response.get_accounts()
+response = client.v1.accounts.with_raw_response.get_accounts()
 print(response.headers.get('X-My-Header'))
 
-account = response.parse()  # get the object that `active.v1.accounts.get_accounts()` would have returned
+account = response.parse()  # get the object that `v1.accounts.get_accounts()` would have returned
 print(account)
 ```
 
@@ -259,7 +259,7 @@ The above interface eagerly reads the full response body when you make the reque
 To stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.
 
 ```python
-with client.active.v1.accounts.with_streaming_response.get_accounts() as response:
+with client.v1.accounts.with_streaming_response.get_accounts() as response:
     print(response.headers.get("X-My-Header"))
 
     for line in response.iter_lines():
