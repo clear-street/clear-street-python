@@ -1,0 +1,599 @@
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+from __future__ import annotations
+
+import os
+from typing import Any, cast
+
+import pytest
+
+from tests.utils import assert_matches_type
+from clear_street import ClearStreet, AsyncClearStreet
+from clear_street.types.v1 import (
+    SavedScreenerGetScreenersResponse,
+    SavedScreenerCreateScreenerResponse,
+    SavedScreenerGetScreenerByIDResponse,
+    SavedScreenerReplaceScreenerResponse,
+)
+
+base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
+
+
+class TestSavedScreeners:
+    parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_create_screener(self, client: ClearStreet) -> None:
+        saved_screener = client.v1.saved_screeners.create_screener()
+        assert_matches_type(SavedScreenerCreateScreenerResponse, saved_screener, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_create_screener_with_all_params(self, client: ClearStreet) -> None:
+        saved_screener = client.v1.saved_screeners.create_screener(
+            field_filter=[
+                {
+                    "name": "market_cap",
+                    "lookback": "ONE_WEEK",
+                    "period": "QUARTER",
+                    "value_type": "DECIMAL",
+                }
+            ],
+            filters=[
+                {
+                    "left": {
+                        "name": "market_cap",
+                        "lookback": "ONE_WEEK",
+                        "period": "QUARTER",
+                        "value_type": "DECIMAL",
+                    },
+                    "op": {
+                        "name": "GTE",
+                        "args": ["LEFT_INCLUSIVE"],
+                    },
+                    "right": [
+                        {
+                            "value": 1000000000,
+                            "variable": {
+                                "name": "today",
+                                "lookback": "ONE_WEEK",
+                                "modifier": {
+                                    "args": [30, "DAY"],
+                                    "name": "SUB",
+                                },
+                                "period": "QUARTER",
+                            },
+                        }
+                    ],
+                }
+            ],
+            name="name",
+            sort_by={
+                "name": "market_cap",
+                "lookback": "ONE_WEEK",
+                "period": "QUARTER",
+                "value_type": "DECIMAL",
+            },
+            sort_direction="ASC",
+        )
+        assert_matches_type(SavedScreenerCreateScreenerResponse, saved_screener, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_create_screener(self, client: ClearStreet) -> None:
+        response = client.v1.saved_screeners.with_raw_response.create_screener()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        saved_screener = response.parse()
+        assert_matches_type(SavedScreenerCreateScreenerResponse, saved_screener, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_create_screener(self, client: ClearStreet) -> None:
+        with client.v1.saved_screeners.with_streaming_response.create_screener() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            saved_screener = response.parse()
+            assert_matches_type(SavedScreenerCreateScreenerResponse, saved_screener, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_delete_screener(self, client: ClearStreet) -> None:
+        saved_screener = client.v1.saved_screeners.delete_screener(
+            "550e8400-e29b-41d4-a716-446655440000",
+        )
+        assert saved_screener is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_delete_screener(self, client: ClearStreet) -> None:
+        response = client.v1.saved_screeners.with_raw_response.delete_screener(
+            "550e8400-e29b-41d4-a716-446655440000",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        saved_screener = response.parse()
+        assert saved_screener is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_delete_screener(self, client: ClearStreet) -> None:
+        with client.v1.saved_screeners.with_streaming_response.delete_screener(
+            "550e8400-e29b-41d4-a716-446655440000",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            saved_screener = response.parse()
+            assert saved_screener is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_delete_screener(self, client: ClearStreet) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `screener_id` but received ''"):
+            client.v1.saved_screeners.with_raw_response.delete_screener(
+                "",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_get_screener_by_id(self, client: ClearStreet) -> None:
+        saved_screener = client.v1.saved_screeners.get_screener_by_id(
+            "550e8400-e29b-41d4-a716-446655440000",
+        )
+        assert_matches_type(SavedScreenerGetScreenerByIDResponse, saved_screener, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_get_screener_by_id(self, client: ClearStreet) -> None:
+        response = client.v1.saved_screeners.with_raw_response.get_screener_by_id(
+            "550e8400-e29b-41d4-a716-446655440000",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        saved_screener = response.parse()
+        assert_matches_type(SavedScreenerGetScreenerByIDResponse, saved_screener, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_get_screener_by_id(self, client: ClearStreet) -> None:
+        with client.v1.saved_screeners.with_streaming_response.get_screener_by_id(
+            "550e8400-e29b-41d4-a716-446655440000",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            saved_screener = response.parse()
+            assert_matches_type(SavedScreenerGetScreenerByIDResponse, saved_screener, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_get_screener_by_id(self, client: ClearStreet) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `screener_id` but received ''"):
+            client.v1.saved_screeners.with_raw_response.get_screener_by_id(
+                "",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_get_screeners(self, client: ClearStreet) -> None:
+        saved_screener = client.v1.saved_screeners.get_screeners()
+        assert_matches_type(SavedScreenerGetScreenersResponse, saved_screener, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_get_screeners(self, client: ClearStreet) -> None:
+        response = client.v1.saved_screeners.with_raw_response.get_screeners()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        saved_screener = response.parse()
+        assert_matches_type(SavedScreenerGetScreenersResponse, saved_screener, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_get_screeners(self, client: ClearStreet) -> None:
+        with client.v1.saved_screeners.with_streaming_response.get_screeners() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            saved_screener = response.parse()
+            assert_matches_type(SavedScreenerGetScreenersResponse, saved_screener, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_replace_screener(self, client: ClearStreet) -> None:
+        saved_screener = client.v1.saved_screeners.replace_screener(
+            screener_id="550e8400-e29b-41d4-a716-446655440000",
+        )
+        assert_matches_type(SavedScreenerReplaceScreenerResponse, saved_screener, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_replace_screener_with_all_params(self, client: ClearStreet) -> None:
+        saved_screener = client.v1.saved_screeners.replace_screener(
+            screener_id="550e8400-e29b-41d4-a716-446655440000",
+            field_filter=[
+                {
+                    "name": "market_cap",
+                    "lookback": "ONE_WEEK",
+                    "period": "QUARTER",
+                    "value_type": "DECIMAL",
+                }
+            ],
+            filters=[
+                {
+                    "left": {
+                        "name": "market_cap",
+                        "lookback": "ONE_WEEK",
+                        "period": "QUARTER",
+                        "value_type": "DECIMAL",
+                    },
+                    "op": {
+                        "name": "GTE",
+                        "args": ["LEFT_INCLUSIVE"],
+                    },
+                    "right": [
+                        {
+                            "value": 1000000000,
+                            "variable": {
+                                "name": "today",
+                                "lookback": "ONE_WEEK",
+                                "modifier": {
+                                    "args": [30, "DAY"],
+                                    "name": "SUB",
+                                },
+                                "period": "QUARTER",
+                            },
+                        }
+                    ],
+                }
+            ],
+            name="name",
+            sort_by={
+                "name": "market_cap",
+                "lookback": "ONE_WEEK",
+                "period": "QUARTER",
+                "value_type": "DECIMAL",
+            },
+            sort_direction="ASC",
+        )
+        assert_matches_type(SavedScreenerReplaceScreenerResponse, saved_screener, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_replace_screener(self, client: ClearStreet) -> None:
+        response = client.v1.saved_screeners.with_raw_response.replace_screener(
+            screener_id="550e8400-e29b-41d4-a716-446655440000",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        saved_screener = response.parse()
+        assert_matches_type(SavedScreenerReplaceScreenerResponse, saved_screener, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_replace_screener(self, client: ClearStreet) -> None:
+        with client.v1.saved_screeners.with_streaming_response.replace_screener(
+            screener_id="550e8400-e29b-41d4-a716-446655440000",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            saved_screener = response.parse()
+            assert_matches_type(SavedScreenerReplaceScreenerResponse, saved_screener, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_replace_screener(self, client: ClearStreet) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `screener_id` but received ''"):
+            client.v1.saved_screeners.with_raw_response.replace_screener(
+                screener_id="",
+            )
+
+
+class TestAsyncSavedScreeners:
+    parametrize = pytest.mark.parametrize(
+        "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
+    )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_create_screener(self, async_client: AsyncClearStreet) -> None:
+        saved_screener = await async_client.v1.saved_screeners.create_screener()
+        assert_matches_type(SavedScreenerCreateScreenerResponse, saved_screener, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_create_screener_with_all_params(self, async_client: AsyncClearStreet) -> None:
+        saved_screener = await async_client.v1.saved_screeners.create_screener(
+            field_filter=[
+                {
+                    "name": "market_cap",
+                    "lookback": "ONE_WEEK",
+                    "period": "QUARTER",
+                    "value_type": "DECIMAL",
+                }
+            ],
+            filters=[
+                {
+                    "left": {
+                        "name": "market_cap",
+                        "lookback": "ONE_WEEK",
+                        "period": "QUARTER",
+                        "value_type": "DECIMAL",
+                    },
+                    "op": {
+                        "name": "GTE",
+                        "args": ["LEFT_INCLUSIVE"],
+                    },
+                    "right": [
+                        {
+                            "value": 1000000000,
+                            "variable": {
+                                "name": "today",
+                                "lookback": "ONE_WEEK",
+                                "modifier": {
+                                    "args": [30, "DAY"],
+                                    "name": "SUB",
+                                },
+                                "period": "QUARTER",
+                            },
+                        }
+                    ],
+                }
+            ],
+            name="name",
+            sort_by={
+                "name": "market_cap",
+                "lookback": "ONE_WEEK",
+                "period": "QUARTER",
+                "value_type": "DECIMAL",
+            },
+            sort_direction="ASC",
+        )
+        assert_matches_type(SavedScreenerCreateScreenerResponse, saved_screener, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_create_screener(self, async_client: AsyncClearStreet) -> None:
+        response = await async_client.v1.saved_screeners.with_raw_response.create_screener()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        saved_screener = await response.parse()
+        assert_matches_type(SavedScreenerCreateScreenerResponse, saved_screener, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_create_screener(self, async_client: AsyncClearStreet) -> None:
+        async with async_client.v1.saved_screeners.with_streaming_response.create_screener() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            saved_screener = await response.parse()
+            assert_matches_type(SavedScreenerCreateScreenerResponse, saved_screener, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_delete_screener(self, async_client: AsyncClearStreet) -> None:
+        saved_screener = await async_client.v1.saved_screeners.delete_screener(
+            "550e8400-e29b-41d4-a716-446655440000",
+        )
+        assert saved_screener is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_delete_screener(self, async_client: AsyncClearStreet) -> None:
+        response = await async_client.v1.saved_screeners.with_raw_response.delete_screener(
+            "550e8400-e29b-41d4-a716-446655440000",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        saved_screener = await response.parse()
+        assert saved_screener is None
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_delete_screener(self, async_client: AsyncClearStreet) -> None:
+        async with async_client.v1.saved_screeners.with_streaming_response.delete_screener(
+            "550e8400-e29b-41d4-a716-446655440000",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            saved_screener = await response.parse()
+            assert saved_screener is None
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_delete_screener(self, async_client: AsyncClearStreet) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `screener_id` but received ''"):
+            await async_client.v1.saved_screeners.with_raw_response.delete_screener(
+                "",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_get_screener_by_id(self, async_client: AsyncClearStreet) -> None:
+        saved_screener = await async_client.v1.saved_screeners.get_screener_by_id(
+            "550e8400-e29b-41d4-a716-446655440000",
+        )
+        assert_matches_type(SavedScreenerGetScreenerByIDResponse, saved_screener, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_get_screener_by_id(self, async_client: AsyncClearStreet) -> None:
+        response = await async_client.v1.saved_screeners.with_raw_response.get_screener_by_id(
+            "550e8400-e29b-41d4-a716-446655440000",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        saved_screener = await response.parse()
+        assert_matches_type(SavedScreenerGetScreenerByIDResponse, saved_screener, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_get_screener_by_id(self, async_client: AsyncClearStreet) -> None:
+        async with async_client.v1.saved_screeners.with_streaming_response.get_screener_by_id(
+            "550e8400-e29b-41d4-a716-446655440000",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            saved_screener = await response.parse()
+            assert_matches_type(SavedScreenerGetScreenerByIDResponse, saved_screener, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_get_screener_by_id(self, async_client: AsyncClearStreet) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `screener_id` but received ''"):
+            await async_client.v1.saved_screeners.with_raw_response.get_screener_by_id(
+                "",
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_get_screeners(self, async_client: AsyncClearStreet) -> None:
+        saved_screener = await async_client.v1.saved_screeners.get_screeners()
+        assert_matches_type(SavedScreenerGetScreenersResponse, saved_screener, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_get_screeners(self, async_client: AsyncClearStreet) -> None:
+        response = await async_client.v1.saved_screeners.with_raw_response.get_screeners()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        saved_screener = await response.parse()
+        assert_matches_type(SavedScreenerGetScreenersResponse, saved_screener, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_get_screeners(self, async_client: AsyncClearStreet) -> None:
+        async with async_client.v1.saved_screeners.with_streaming_response.get_screeners() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            saved_screener = await response.parse()
+            assert_matches_type(SavedScreenerGetScreenersResponse, saved_screener, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_replace_screener(self, async_client: AsyncClearStreet) -> None:
+        saved_screener = await async_client.v1.saved_screeners.replace_screener(
+            screener_id="550e8400-e29b-41d4-a716-446655440000",
+        )
+        assert_matches_type(SavedScreenerReplaceScreenerResponse, saved_screener, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_replace_screener_with_all_params(self, async_client: AsyncClearStreet) -> None:
+        saved_screener = await async_client.v1.saved_screeners.replace_screener(
+            screener_id="550e8400-e29b-41d4-a716-446655440000",
+            field_filter=[
+                {
+                    "name": "market_cap",
+                    "lookback": "ONE_WEEK",
+                    "period": "QUARTER",
+                    "value_type": "DECIMAL",
+                }
+            ],
+            filters=[
+                {
+                    "left": {
+                        "name": "market_cap",
+                        "lookback": "ONE_WEEK",
+                        "period": "QUARTER",
+                        "value_type": "DECIMAL",
+                    },
+                    "op": {
+                        "name": "GTE",
+                        "args": ["LEFT_INCLUSIVE"],
+                    },
+                    "right": [
+                        {
+                            "value": 1000000000,
+                            "variable": {
+                                "name": "today",
+                                "lookback": "ONE_WEEK",
+                                "modifier": {
+                                    "args": [30, "DAY"],
+                                    "name": "SUB",
+                                },
+                                "period": "QUARTER",
+                            },
+                        }
+                    ],
+                }
+            ],
+            name="name",
+            sort_by={
+                "name": "market_cap",
+                "lookback": "ONE_WEEK",
+                "period": "QUARTER",
+                "value_type": "DECIMAL",
+            },
+            sort_direction="ASC",
+        )
+        assert_matches_type(SavedScreenerReplaceScreenerResponse, saved_screener, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_replace_screener(self, async_client: AsyncClearStreet) -> None:
+        response = await async_client.v1.saved_screeners.with_raw_response.replace_screener(
+            screener_id="550e8400-e29b-41d4-a716-446655440000",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        saved_screener = await response.parse()
+        assert_matches_type(SavedScreenerReplaceScreenerResponse, saved_screener, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_replace_screener(self, async_client: AsyncClearStreet) -> None:
+        async with async_client.v1.saved_screeners.with_streaming_response.replace_screener(
+            screener_id="550e8400-e29b-41d4-a716-446655440000",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            saved_screener = await response.parse()
+            assert_matches_type(SavedScreenerReplaceScreenerResponse, saved_screener, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_replace_screener(self, async_client: AsyncClearStreet) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `screener_id` but received ''"):
+            await async_client.v1.saved_screeners.with_raw_response.replace_screener(
+                screener_id="",
+            )

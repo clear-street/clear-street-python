@@ -733,7 +733,7 @@ class TestClearStreet:
             client = ClearStreet(
                 base_url=None, api_key=api_key, _strict_response_validation=True, environment="production"
             )
-            assert str(client.base_url).startswith("https://api-active.clearstreet.io")
+            assert str(client.base_url).startswith("https://api.clearstreet.com")
 
             client.close()
 
@@ -905,20 +905,20 @@ class TestClearStreet:
     @mock.patch("clear_street._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_timeout_errors_doesnt_leak(self, respx_mock: MockRouter, client: ClearStreet) -> None:
-        respx_mock.get("/active/v1/accounts").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.get("/v1/accounts").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            client.active.v1.accounts.with_streaming_response.get_accounts().__enter__()
+            client.v1.accounts.with_streaming_response.get_accounts().__enter__()
 
         assert _get_open_connections(client) == 0
 
     @mock.patch("clear_street._base_client.BaseClient._calculate_retry_timeout", _low_retry_timeout)
     @pytest.mark.respx(base_url=base_url)
     def test_retrying_status_errors_doesnt_leak(self, respx_mock: MockRouter, client: ClearStreet) -> None:
-        respx_mock.get("/active/v1/accounts").mock(return_value=httpx.Response(500))
+        respx_mock.get("/v1/accounts").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            client.active.v1.accounts.with_streaming_response.get_accounts().__enter__()
+            client.v1.accounts.with_streaming_response.get_accounts().__enter__()
         assert _get_open_connections(client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -945,9 +945,9 @@ class TestClearStreet:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/active/v1/accounts").mock(side_effect=retry_handler)
+        respx_mock.get("/v1/accounts").mock(side_effect=retry_handler)
 
-        response = client.active.v1.accounts.with_raw_response.get_accounts()
+        response = client.v1.accounts.with_raw_response.get_accounts()
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -969,11 +969,9 @@ class TestClearStreet:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/active/v1/accounts").mock(side_effect=retry_handler)
+        respx_mock.get("/v1/accounts").mock(side_effect=retry_handler)
 
-        response = client.active.v1.accounts.with_raw_response.get_accounts(
-            extra_headers={"x-stainless-retry-count": Omit()}
-        )
+        response = client.v1.accounts.with_raw_response.get_accounts(extra_headers={"x-stainless-retry-count": Omit()})
 
         assert len(response.http_request.headers.get_list("x-stainless-retry-count")) == 0
 
@@ -994,11 +992,9 @@ class TestClearStreet:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/active/v1/accounts").mock(side_effect=retry_handler)
+        respx_mock.get("/v1/accounts").mock(side_effect=retry_handler)
 
-        response = client.active.v1.accounts.with_raw_response.get_accounts(
-            extra_headers={"x-stainless-retry-count": "42"}
-        )
+        response = client.v1.accounts.with_raw_response.get_accounts(extra_headers={"x-stainless-retry-count": "42"})
 
         assert response.http_request.headers.get("x-stainless-retry-count") == "42"
 
@@ -1686,7 +1682,7 @@ class TestAsyncClearStreet:
             client = AsyncClearStreet(
                 base_url=None, api_key=api_key, _strict_response_validation=True, environment="production"
             )
-            assert str(client.base_url).startswith("https://api-active.clearstreet.io")
+            assert str(client.base_url).startswith("https://api.clearstreet.com")
 
             await client.close()
 
@@ -1863,10 +1859,10 @@ class TestAsyncClearStreet:
     async def test_retrying_timeout_errors_doesnt_leak(
         self, respx_mock: MockRouter, async_client: AsyncClearStreet
     ) -> None:
-        respx_mock.get("/active/v1/accounts").mock(side_effect=httpx.TimeoutException("Test timeout error"))
+        respx_mock.get("/v1/accounts").mock(side_effect=httpx.TimeoutException("Test timeout error"))
 
         with pytest.raises(APITimeoutError):
-            await async_client.active.v1.accounts.with_streaming_response.get_accounts().__aenter__()
+            await async_client.v1.accounts.with_streaming_response.get_accounts().__aenter__()
 
         assert _get_open_connections(async_client) == 0
 
@@ -1875,10 +1871,10 @@ class TestAsyncClearStreet:
     async def test_retrying_status_errors_doesnt_leak(
         self, respx_mock: MockRouter, async_client: AsyncClearStreet
     ) -> None:
-        respx_mock.get("/active/v1/accounts").mock(return_value=httpx.Response(500))
+        respx_mock.get("/v1/accounts").mock(return_value=httpx.Response(500))
 
         with pytest.raises(APIStatusError):
-            await async_client.active.v1.accounts.with_streaming_response.get_accounts().__aenter__()
+            await async_client.v1.accounts.with_streaming_response.get_accounts().__aenter__()
         assert _get_open_connections(async_client) == 0
 
     @pytest.mark.parametrize("failures_before_success", [0, 2, 4])
@@ -1905,9 +1901,9 @@ class TestAsyncClearStreet:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/active/v1/accounts").mock(side_effect=retry_handler)
+        respx_mock.get("/v1/accounts").mock(side_effect=retry_handler)
 
-        response = await client.active.v1.accounts.with_raw_response.get_accounts()
+        response = await client.v1.accounts.with_raw_response.get_accounts()
 
         assert response.retries_taken == failures_before_success
         assert int(response.http_request.headers.get("x-stainless-retry-count")) == failures_before_success
@@ -1929,9 +1925,9 @@ class TestAsyncClearStreet:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/active/v1/accounts").mock(side_effect=retry_handler)
+        respx_mock.get("/v1/accounts").mock(side_effect=retry_handler)
 
-        response = await client.active.v1.accounts.with_raw_response.get_accounts(
+        response = await client.v1.accounts.with_raw_response.get_accounts(
             extra_headers={"x-stainless-retry-count": Omit()}
         )
 
@@ -1954,9 +1950,9 @@ class TestAsyncClearStreet:
                 return httpx.Response(500)
             return httpx.Response(200)
 
-        respx_mock.get("/active/v1/accounts").mock(side_effect=retry_handler)
+        respx_mock.get("/v1/accounts").mock(side_effect=retry_handler)
 
-        response = await client.active.v1.accounts.with_raw_response.get_accounts(
+        response = await client.v1.accounts.with_raw_response.get_accounts(
             extra_headers={"x-stainless-retry-count": "42"}
         )
 
