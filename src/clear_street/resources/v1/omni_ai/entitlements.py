@@ -17,8 +17,8 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.v1.omni_ai import entitlement_list_entitlements_params, entitlement_create_entitlements_params
-from ....types.v1.omni_ai.entitlement_list_entitlements_response import EntitlementListEntitlementsResponse
+from ....types.v1.omni_ai import entitlement_get_entitlements_params, entitlement_create_entitlements_params
+from ....types.v1.omni_ai.entitlement_get_entitlements_response import EntitlementGetEntitlementsResponse
 from ....types.v1.omni_ai.entitlement_delete_entitlement_response import EntitlementDeleteEntitlementResponse
 from ....types.v1.omni_ai.entitlement_create_entitlements_response import EntitlementCreateEntitlementsResponse
 
@@ -124,7 +124,7 @@ class EntitlementsResource(SyncAPIResource):
             cast_to=EntitlementDeleteEntitlementResponse,
         )
 
-    def list_entitlements(
+    def get_entitlements(
         self,
         *,
         trading_account_id: int | Omit = omit,
@@ -134,7 +134,7 @@ class EntitlementsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> EntitlementListEntitlementsResponse:
+    ) -> EntitlementGetEntitlementsResponse:
         """
         List caller's active entitlement grants.
 
@@ -156,10 +156,10 @@ class EntitlementsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {"trading_account_id": trading_account_id},
-                    entitlement_list_entitlements_params.EntitlementListEntitlementsParams,
+                    entitlement_get_entitlements_params.EntitlementGetEntitlementsParams,
                 ),
             ),
-            cast_to=EntitlementListEntitlementsResponse,
+            cast_to=EntitlementGetEntitlementsResponse,
         )
 
 
@@ -262,7 +262,7 @@ class AsyncEntitlementsResource(AsyncAPIResource):
             cast_to=EntitlementDeleteEntitlementResponse,
         )
 
-    async def list_entitlements(
+    async def get_entitlements(
         self,
         *,
         trading_account_id: int | Omit = omit,
@@ -272,7 +272,7 @@ class AsyncEntitlementsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> EntitlementListEntitlementsResponse:
+    ) -> EntitlementGetEntitlementsResponse:
         """
         List caller's active entitlement grants.
 
@@ -294,10 +294,10 @@ class AsyncEntitlementsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {"trading_account_id": trading_account_id},
-                    entitlement_list_entitlements_params.EntitlementListEntitlementsParams,
+                    entitlement_get_entitlements_params.EntitlementGetEntitlementsParams,
                 ),
             ),
-            cast_to=EntitlementListEntitlementsResponse,
+            cast_to=EntitlementGetEntitlementsResponse,
         )
 
 
@@ -311,8 +311,8 @@ class EntitlementsResourceWithRawResponse:
         self.delete_entitlement = to_raw_response_wrapper(
             entitlements.delete_entitlement,
         )
-        self.list_entitlements = to_raw_response_wrapper(
-            entitlements.list_entitlements,
+        self.get_entitlements = to_raw_response_wrapper(
+            entitlements.get_entitlements,
         )
 
 
@@ -326,8 +326,8 @@ class AsyncEntitlementsResourceWithRawResponse:
         self.delete_entitlement = async_to_raw_response_wrapper(
             entitlements.delete_entitlement,
         )
-        self.list_entitlements = async_to_raw_response_wrapper(
-            entitlements.list_entitlements,
+        self.get_entitlements = async_to_raw_response_wrapper(
+            entitlements.get_entitlements,
         )
 
 
@@ -341,8 +341,8 @@ class EntitlementsResourceWithStreamingResponse:
         self.delete_entitlement = to_streamed_response_wrapper(
             entitlements.delete_entitlement,
         )
-        self.list_entitlements = to_streamed_response_wrapper(
-            entitlements.list_entitlements,
+        self.get_entitlements = to_streamed_response_wrapper(
+            entitlements.get_entitlements,
         )
 
 
@@ -356,6 +356,6 @@ class AsyncEntitlementsResourceWithStreamingResponse:
         self.delete_entitlement = async_to_streamed_response_wrapper(
             entitlements.delete_entitlement,
         )
-        self.list_entitlements = async_to_streamed_response_wrapper(
-            entitlements.list_entitlements,
+        self.get_entitlements = async_to_streamed_response_wrapper(
+            entitlements.get_entitlements,
         )

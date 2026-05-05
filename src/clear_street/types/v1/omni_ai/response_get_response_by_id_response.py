@@ -3,9 +3,9 @@
 from ..response import Response
 from ...shared.base_response import BaseResponse
 
-__all__ = ["ThreadResponseResponse"]
+__all__ = ["ResponseGetResponseByIDResponse"]
 
 
-class ThreadResponseResponse(BaseResponse):
+class ResponseGetResponseByIDResponse(BaseResponse):
     data: Response
     """Dynamic pollable response."""

@@ -10,7 +10,7 @@ import pytest
 from tests.utils import assert_matches_type
 from clear_street import ClearStreet, AsyncClearStreet
 from clear_street.types.v1.omni_ai import (
-    EntitlementListEntitlementsResponse,
+    EntitlementGetEntitlementsResponse,
     EntitlementDeleteEntitlementResponse,
     EntitlementCreateEntitlementsResponse,
 )
@@ -105,37 +105,37 @@ class TestEntitlements:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_list_entitlements(self, client: ClearStreet) -> None:
-        entitlement = client.v1.omni_ai.entitlements.list_entitlements()
-        assert_matches_type(EntitlementListEntitlementsResponse, entitlement, path=["response"])
+    def test_method_get_entitlements(self, client: ClearStreet) -> None:
+        entitlement = client.v1.omni_ai.entitlements.get_entitlements()
+        assert_matches_type(EntitlementGetEntitlementsResponse, entitlement, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_list_entitlements_with_all_params(self, client: ClearStreet) -> None:
-        entitlement = client.v1.omni_ai.entitlements.list_entitlements(
+    def test_method_get_entitlements_with_all_params(self, client: ClearStreet) -> None:
+        entitlement = client.v1.omni_ai.entitlements.get_entitlements(
             trading_account_id=0,
         )
-        assert_matches_type(EntitlementListEntitlementsResponse, entitlement, path=["response"])
+        assert_matches_type(EntitlementGetEntitlementsResponse, entitlement, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_list_entitlements(self, client: ClearStreet) -> None:
-        response = client.v1.omni_ai.entitlements.with_raw_response.list_entitlements()
+    def test_raw_response_get_entitlements(self, client: ClearStreet) -> None:
+        response = client.v1.omni_ai.entitlements.with_raw_response.get_entitlements()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         entitlement = response.parse()
-        assert_matches_type(EntitlementListEntitlementsResponse, entitlement, path=["response"])
+        assert_matches_type(EntitlementGetEntitlementsResponse, entitlement, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_list_entitlements(self, client: ClearStreet) -> None:
-        with client.v1.omni_ai.entitlements.with_streaming_response.list_entitlements() as response:
+    def test_streaming_response_get_entitlements(self, client: ClearStreet) -> None:
+        with client.v1.omni_ai.entitlements.with_streaming_response.get_entitlements() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             entitlement = response.parse()
-            assert_matches_type(EntitlementListEntitlementsResponse, entitlement, path=["response"])
+            assert_matches_type(EntitlementGetEntitlementsResponse, entitlement, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -229,36 +229,36 @@ class TestAsyncEntitlements:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_list_entitlements(self, async_client: AsyncClearStreet) -> None:
-        entitlement = await async_client.v1.omni_ai.entitlements.list_entitlements()
-        assert_matches_type(EntitlementListEntitlementsResponse, entitlement, path=["response"])
+    async def test_method_get_entitlements(self, async_client: AsyncClearStreet) -> None:
+        entitlement = await async_client.v1.omni_ai.entitlements.get_entitlements()
+        assert_matches_type(EntitlementGetEntitlementsResponse, entitlement, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_list_entitlements_with_all_params(self, async_client: AsyncClearStreet) -> None:
-        entitlement = await async_client.v1.omni_ai.entitlements.list_entitlements(
+    async def test_method_get_entitlements_with_all_params(self, async_client: AsyncClearStreet) -> None:
+        entitlement = await async_client.v1.omni_ai.entitlements.get_entitlements(
             trading_account_id=0,
         )
-        assert_matches_type(EntitlementListEntitlementsResponse, entitlement, path=["response"])
+        assert_matches_type(EntitlementGetEntitlementsResponse, entitlement, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_list_entitlements(self, async_client: AsyncClearStreet) -> None:
-        response = await async_client.v1.omni_ai.entitlements.with_raw_response.list_entitlements()
+    async def test_raw_response_get_entitlements(self, async_client: AsyncClearStreet) -> None:
+        response = await async_client.v1.omni_ai.entitlements.with_raw_response.get_entitlements()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         entitlement = await response.parse()
-        assert_matches_type(EntitlementListEntitlementsResponse, entitlement, path=["response"])
+        assert_matches_type(EntitlementGetEntitlementsResponse, entitlement, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_list_entitlements(self, async_client: AsyncClearStreet) -> None:
-        async with async_client.v1.omni_ai.entitlements.with_streaming_response.list_entitlements() as response:
+    async def test_streaming_response_get_entitlements(self, async_client: AsyncClearStreet) -> None:
+        async with async_client.v1.omni_ai.entitlements.with_streaming_response.get_entitlements() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             entitlement = await response.parse()
-            assert_matches_type(EntitlementListEntitlementsResponse, entitlement, path=["response"])
+            assert_matches_type(EntitlementGetEntitlementsResponse, entitlement, path=["response"])
 
         assert cast(Any, response.is_closed) is True

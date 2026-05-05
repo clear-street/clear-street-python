@@ -5,13 +5,13 @@ from __future__ import annotations
 from typing import Union
 from typing_extensions import Required, Annotated, TypedDict
 
-from ...._types import Base64FileInput
-from ...._utils import PropertyInfo
+from ....._types import Base64FileInput
+from ....._utils import PropertyInfo
 
-__all__ = ["ThreadListThreadsParams"]
+__all__ = ["MessageGetMessagesParams"]
 
 
-class ThreadListThreadsParams(TypedDict, total=False):
+class MessageGetMessagesParams(TypedDict, total=False):
     account_id: Required[int]
     """Account ID for the request"""
 

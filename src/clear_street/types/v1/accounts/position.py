@@ -61,7 +61,7 @@ class Position(BaseModel):
     instrument_price: Optional[str] = None
     """The current market price of the instrument"""
 
-    underlier_instrument_id: Optional[str] = None
+    underlying_instrument_id: Optional[str] = None
     """OEMS instrument identifier of the underlying instrument, if resolvable"""
 
     unrealized_pnl: Optional[str] = None

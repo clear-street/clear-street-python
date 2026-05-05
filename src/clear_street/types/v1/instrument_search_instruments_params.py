@@ -2,12 +2,16 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, TypedDict
+from typing import Union
+from typing_extensions import Required, Annotated, TypedDict
 
-__all__ = ["InstrumentSearchParams"]
+from ..._types import Base64FileInput
+from ..._utils import PropertyInfo
+
+__all__ = ["InstrumentSearchInstrumentsParams"]
 
 
-class InstrumentSearchParams(TypedDict, total=False):
+class InstrumentSearchInstrumentsParams(TypedDict, total=False):
     q: Required[str]
     """
     Search term applied case-insensitively to ticker symbols, alt-IDs
@@ -26,18 +30,17 @@ class InstrumentSearchParams(TypedDict, total=False):
     currency: str
     """Optional ISO currency filter (e.g., USD)."""
 
-    cursor: str
-    """
-    Opaque continuation cursor for show-more paging — pass the `next_page_token`
-    from a prior response. Same wire format as `page_token` on other paginated
-    endpoints.
-    """
-
     include_inactive: bool
     """Include inactive instruments. Default false."""
 
     include_restricted: bool
     """Include restricted instruments. Default true (penalized in ranking)."""
 
-    limit: int
-    """Maximum hits to return. Bounded [1, 100]. Default 20."""
+    page_size: int
+
+    page_token: Annotated[Union[str, Base64FileInput], PropertyInfo(format="base64")]
+    """Token for retrieving the next page of results.
+
+    Contains encoded pagination state (limit + offset). When provided, page_size is
+    ignored.
+    """

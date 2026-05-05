@@ -3,8 +3,8 @@
 from ...shared.base_response import BaseResponse
 from ..create_feedback_response import CreateFeedbackResponse
 
-__all__ = ["MessageFeedbackResponse"]
+__all__ = ["MessageSubmitFeedbackResponse"]
 
 
-class MessageFeedbackResponse(BaseResponse):
+class MessageSubmitFeedbackResponse(BaseResponse):
     data: CreateFeedbackResponse

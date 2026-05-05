@@ -3,8 +3,8 @@
 from ...shared.base_response import BaseResponse
 from ..options_contract_list import OptionsContractList
 
-__all__ = ["OptionContractsResponse"]
+__all__ = ["OptionGetOptionContractsResponse"]
 
 
-class OptionContractsResponse(BaseResponse):
+class OptionGetOptionContractsResponse(BaseResponse):
     data: OptionsContractList

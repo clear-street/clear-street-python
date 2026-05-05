@@ -15,9 +15,9 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.v1.omni_ai import response_get_response_params, response_cancel_response_params
-from ....types.v1.omni_ai.response_get_response_response import ResponseGetResponseResponse
+from ....types.v1.omni_ai import response_cancel_response_params, response_get_response_by_id_params
 from ....types.v1.omni_ai.response_cancel_response_response import ResponseCancelResponseResponse
+from ....types.v1.omni_ai.response_get_response_by_id_response import ResponseGetResponseByIDResponse
 
 __all__ = ["ResponsesResource", "AsyncResponsesResource"]
 
@@ -95,7 +95,7 @@ class ResponsesResource(SyncAPIResource):
             cast_to=ResponseCancelResponseResponse,
         )
 
-    def get_response(
+    def get_response_by_id(
         self,
         response_id: str,
         *,
@@ -106,7 +106,7 @@ class ResponsesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ResponseGetResponseResponse:
+    ) -> ResponseGetResponseByIDResponse:
         """
         Poll a response for assistant output.
 
@@ -139,10 +139,10 @@ class ResponsesResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=maybe_transform(
-                    {"account_id": account_id}, response_get_response_params.ResponseGetResponseParams
+                    {"account_id": account_id}, response_get_response_by_id_params.ResponseGetResponseByIDParams
                 ),
             ),
-            cast_to=ResponseGetResponseResponse,
+            cast_to=ResponseGetResponseByIDResponse,
         )
 
 
@@ -219,7 +219,7 @@ class AsyncResponsesResource(AsyncAPIResource):
             cast_to=ResponseCancelResponseResponse,
         )
 
-    async def get_response(
+    async def get_response_by_id(
         self,
         response_id: str,
         *,
@@ -230,7 +230,7 @@ class AsyncResponsesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ResponseGetResponseResponse:
+    ) -> ResponseGetResponseByIDResponse:
         """
         Poll a response for assistant output.
 
@@ -263,10 +263,10 @@ class AsyncResponsesResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"account_id": account_id}, response_get_response_params.ResponseGetResponseParams
+                    {"account_id": account_id}, response_get_response_by_id_params.ResponseGetResponseByIDParams
                 ),
             ),
-            cast_to=ResponseGetResponseResponse,
+            cast_to=ResponseGetResponseByIDResponse,
         )
 
 
@@ -277,8 +277,8 @@ class ResponsesResourceWithRawResponse:
         self.cancel_response = to_raw_response_wrapper(
             responses.cancel_response,
         )
-        self.get_response = to_raw_response_wrapper(
-            responses.get_response,
+        self.get_response_by_id = to_raw_response_wrapper(
+            responses.get_response_by_id,
         )
 
 
@@ -289,8 +289,8 @@ class AsyncResponsesResourceWithRawResponse:
         self.cancel_response = async_to_raw_response_wrapper(
             responses.cancel_response,
         )
-        self.get_response = async_to_raw_response_wrapper(
-            responses.get_response,
+        self.get_response_by_id = async_to_raw_response_wrapper(
+            responses.get_response_by_id,
         )
 
 
@@ -301,8 +301,8 @@ class ResponsesResourceWithStreamingResponse:
         self.cancel_response = to_streamed_response_wrapper(
             responses.cancel_response,
         )
-        self.get_response = to_streamed_response_wrapper(
-            responses.get_response,
+        self.get_response_by_id = to_streamed_response_wrapper(
+            responses.get_response_by_id,
         )
 
 
@@ -313,6 +313,6 @@ class AsyncResponsesResourceWithStreamingResponse:
         self.cancel_response = async_to_streamed_response_wrapper(
             responses.cancel_response,
         )
-        self.get_response = async_to_streamed_response_wrapper(
-            responses.get_response,
+        self.get_response_by_id = async_to_streamed_response_wrapper(
+            responses.get_response_by_id,
         )

@@ -10,10 +10,10 @@ import pytest
 from tests.utils import assert_matches_type
 from clear_street import ClearStreet, AsyncClearStreet
 from clear_street.types.v1.omni_ai import (
-    ThreadResponseResponse,
-    ThreadGetThreadResponse,
-    ThreadListThreadsResponse,
+    ThreadGetThreadsResponse,
     ThreadCreateThreadResponse,
+    ThreadGetThreadByIDResponse,
+    ThreadGetThreadResponseResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -77,17 +77,17 @@ class TestThreads:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_get_thread(self, client: ClearStreet) -> None:
-        thread = client.v1.omni_ai.threads.get_thread(
+    def test_method_get_thread_by_id(self, client: ClearStreet) -> None:
+        thread = client.v1.omni_ai.threads.get_thread_by_id(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_id=0,
         )
-        assert_matches_type(ThreadGetThreadResponse, thread, path=["response"])
+        assert_matches_type(ThreadGetThreadByIDResponse, thread, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_get_thread(self, client: ClearStreet) -> None:
-        response = client.v1.omni_ai.threads.with_raw_response.get_thread(
+    def test_raw_response_get_thread_by_id(self, client: ClearStreet) -> None:
+        response = client.v1.omni_ai.threads.with_raw_response.get_thread_by_id(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_id=0,
         )
@@ -95,12 +95,12 @@ class TestThreads:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         thread = response.parse()
-        assert_matches_type(ThreadGetThreadResponse, thread, path=["response"])
+        assert_matches_type(ThreadGetThreadByIDResponse, thread, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_get_thread(self, client: ClearStreet) -> None:
-        with client.v1.omni_ai.threads.with_streaming_response.get_thread(
+    def test_streaming_response_get_thread_by_id(self, client: ClearStreet) -> None:
+        with client.v1.omni_ai.threads.with_streaming_response.get_thread_by_id(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_id=0,
         ) as response:
@@ -108,108 +108,108 @@ class TestThreads:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             thread = response.parse()
-            assert_matches_type(ThreadGetThreadResponse, thread, path=["response"])
+            assert_matches_type(ThreadGetThreadByIDResponse, thread, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_path_params_get_thread(self, client: ClearStreet) -> None:
+    def test_path_params_get_thread_by_id(self, client: ClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `thread_id` but received ''"):
-            client.v1.omni_ai.threads.with_raw_response.get_thread(
+            client.v1.omni_ai.threads.with_raw_response.get_thread_by_id(
                 thread_id="",
                 account_id=0,
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_list_threads(self, client: ClearStreet) -> None:
-        thread = client.v1.omni_ai.threads.list_threads(
+    def test_method_get_thread_response(self, client: ClearStreet) -> None:
+        thread = client.v1.omni_ai.threads.get_thread_response(
+            thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_id=0,
         )
-        assert_matches_type(ThreadListThreadsResponse, thread, path=["response"])
+        assert_matches_type(ThreadGetThreadResponseResponse, thread, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_list_threads_with_all_params(self, client: ClearStreet) -> None:
-        thread = client.v1.omni_ai.threads.list_threads(
+    def test_raw_response_get_thread_response(self, client: ClearStreet) -> None:
+        response = client.v1.omni_ai.threads.with_raw_response.get_thread_response(
+            thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id=0,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        thread = response.parse()
+        assert_matches_type(ThreadGetThreadResponseResponse, thread, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_get_thread_response(self, client: ClearStreet) -> None:
+        with client.v1.omni_ai.threads.with_streaming_response.get_thread_response(
+            thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id=0,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            thread = response.parse()
+            assert_matches_type(ThreadGetThreadResponseResponse, thread, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_path_params_get_thread_response(self, client: ClearStreet) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `thread_id` but received ''"):
+            client.v1.omni_ai.threads.with_raw_response.get_thread_response(
+                thread_id="",
+                account_id=0,
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_get_threads(self, client: ClearStreet) -> None:
+        thread = client.v1.omni_ai.threads.get_threads(
+            account_id=0,
+        )
+        assert_matches_type(ThreadGetThreadsResponse, thread, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_get_threads_with_all_params(self, client: ClearStreet) -> None:
+        thread = client.v1.omni_ai.threads.get_threads(
             account_id=0,
             page_size=1,
             page_token="U3RhaW5sZXNzIHJvY2tz",
         )
-        assert_matches_type(ThreadListThreadsResponse, thread, path=["response"])
+        assert_matches_type(ThreadGetThreadsResponse, thread, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_list_threads(self, client: ClearStreet) -> None:
-        response = client.v1.omni_ai.threads.with_raw_response.list_threads(
+    def test_raw_response_get_threads(self, client: ClearStreet) -> None:
+        response = client.v1.omni_ai.threads.with_raw_response.get_threads(
             account_id=0,
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         thread = response.parse()
-        assert_matches_type(ThreadListThreadsResponse, thread, path=["response"])
+        assert_matches_type(ThreadGetThreadsResponse, thread, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_list_threads(self, client: ClearStreet) -> None:
-        with client.v1.omni_ai.threads.with_streaming_response.list_threads(
+    def test_streaming_response_get_threads(self, client: ClearStreet) -> None:
+        with client.v1.omni_ai.threads.with_streaming_response.get_threads(
             account_id=0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             thread = response.parse()
-            assert_matches_type(ThreadListThreadsResponse, thread, path=["response"])
+            assert_matches_type(ThreadGetThreadsResponse, thread, path=["response"])
 
         assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_method_response(self, client: ClearStreet) -> None:
-        thread = client.v1.omni_ai.threads.response(
-            thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
-        )
-        assert_matches_type(ThreadResponseResponse, thread, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_raw_response_response(self, client: ClearStreet) -> None:
-        response = client.v1.omni_ai.threads.with_raw_response.response(
-            thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        thread = response.parse()
-        assert_matches_type(ThreadResponseResponse, thread, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_streaming_response_response(self, client: ClearStreet) -> None:
-        with client.v1.omni_ai.threads.with_streaming_response.response(
-            thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            thread = response.parse()
-            assert_matches_type(ThreadResponseResponse, thread, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    def test_path_params_response(self, client: ClearStreet) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `thread_id` but received ''"):
-            client.v1.omni_ai.threads.with_raw_response.response(
-                thread_id="",
-                account_id=0,
-            )
 
 
 class TestAsyncThreads:
@@ -272,17 +272,17 @@ class TestAsyncThreads:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_get_thread(self, async_client: AsyncClearStreet) -> None:
-        thread = await async_client.v1.omni_ai.threads.get_thread(
+    async def test_method_get_thread_by_id(self, async_client: AsyncClearStreet) -> None:
+        thread = await async_client.v1.omni_ai.threads.get_thread_by_id(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_id=0,
         )
-        assert_matches_type(ThreadGetThreadResponse, thread, path=["response"])
+        assert_matches_type(ThreadGetThreadByIDResponse, thread, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_get_thread(self, async_client: AsyncClearStreet) -> None:
-        response = await async_client.v1.omni_ai.threads.with_raw_response.get_thread(
+    async def test_raw_response_get_thread_by_id(self, async_client: AsyncClearStreet) -> None:
+        response = await async_client.v1.omni_ai.threads.with_raw_response.get_thread_by_id(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_id=0,
         )
@@ -290,12 +290,12 @@ class TestAsyncThreads:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         thread = await response.parse()
-        assert_matches_type(ThreadGetThreadResponse, thread, path=["response"])
+        assert_matches_type(ThreadGetThreadByIDResponse, thread, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_get_thread(self, async_client: AsyncClearStreet) -> None:
-        async with async_client.v1.omni_ai.threads.with_streaming_response.get_thread(
+    async def test_streaming_response_get_thread_by_id(self, async_client: AsyncClearStreet) -> None:
+        async with async_client.v1.omni_ai.threads.with_streaming_response.get_thread_by_id(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_id=0,
         ) as response:
@@ -303,105 +303,105 @@ class TestAsyncThreads:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             thread = await response.parse()
-            assert_matches_type(ThreadGetThreadResponse, thread, path=["response"])
+            assert_matches_type(ThreadGetThreadByIDResponse, thread, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_path_params_get_thread(self, async_client: AsyncClearStreet) -> None:
+    async def test_path_params_get_thread_by_id(self, async_client: AsyncClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `thread_id` but received ''"):
-            await async_client.v1.omni_ai.threads.with_raw_response.get_thread(
+            await async_client.v1.omni_ai.threads.with_raw_response.get_thread_by_id(
                 thread_id="",
                 account_id=0,
             )
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_list_threads(self, async_client: AsyncClearStreet) -> None:
-        thread = await async_client.v1.omni_ai.threads.list_threads(
+    async def test_method_get_thread_response(self, async_client: AsyncClearStreet) -> None:
+        thread = await async_client.v1.omni_ai.threads.get_thread_response(
+            thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
             account_id=0,
         )
-        assert_matches_type(ThreadListThreadsResponse, thread, path=["response"])
+        assert_matches_type(ThreadGetThreadResponseResponse, thread, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_list_threads_with_all_params(self, async_client: AsyncClearStreet) -> None:
-        thread = await async_client.v1.omni_ai.threads.list_threads(
+    async def test_raw_response_get_thread_response(self, async_client: AsyncClearStreet) -> None:
+        response = await async_client.v1.omni_ai.threads.with_raw_response.get_thread_response(
+            thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id=0,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        thread = await response.parse()
+        assert_matches_type(ThreadGetThreadResponseResponse, thread, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_get_thread_response(self, async_client: AsyncClearStreet) -> None:
+        async with async_client.v1.omni_ai.threads.with_streaming_response.get_thread_response(
+            thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id=0,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            thread = await response.parse()
+            assert_matches_type(ThreadGetThreadResponseResponse, thread, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_path_params_get_thread_response(self, async_client: AsyncClearStreet) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `thread_id` but received ''"):
+            await async_client.v1.omni_ai.threads.with_raw_response.get_thread_response(
+                thread_id="",
+                account_id=0,
+            )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_get_threads(self, async_client: AsyncClearStreet) -> None:
+        thread = await async_client.v1.omni_ai.threads.get_threads(
+            account_id=0,
+        )
+        assert_matches_type(ThreadGetThreadsResponse, thread, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_get_threads_with_all_params(self, async_client: AsyncClearStreet) -> None:
+        thread = await async_client.v1.omni_ai.threads.get_threads(
             account_id=0,
             page_size=1,
             page_token="U3RhaW5sZXNzIHJvY2tz",
         )
-        assert_matches_type(ThreadListThreadsResponse, thread, path=["response"])
+        assert_matches_type(ThreadGetThreadsResponse, thread, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_list_threads(self, async_client: AsyncClearStreet) -> None:
-        response = await async_client.v1.omni_ai.threads.with_raw_response.list_threads(
+    async def test_raw_response_get_threads(self, async_client: AsyncClearStreet) -> None:
+        response = await async_client.v1.omni_ai.threads.with_raw_response.get_threads(
             account_id=0,
         )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         thread = await response.parse()
-        assert_matches_type(ThreadListThreadsResponse, thread, path=["response"])
+        assert_matches_type(ThreadGetThreadsResponse, thread, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_list_threads(self, async_client: AsyncClearStreet) -> None:
-        async with async_client.v1.omni_ai.threads.with_streaming_response.list_threads(
+    async def test_streaming_response_get_threads(self, async_client: AsyncClearStreet) -> None:
+        async with async_client.v1.omni_ai.threads.with_streaming_response.get_threads(
             account_id=0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             thread = await response.parse()
-            assert_matches_type(ThreadListThreadsResponse, thread, path=["response"])
+            assert_matches_type(ThreadGetThreadsResponse, thread, path=["response"])
 
         assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_method_response(self, async_client: AsyncClearStreet) -> None:
-        thread = await async_client.v1.omni_ai.threads.response(
-            thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
-        )
-        assert_matches_type(ThreadResponseResponse, thread, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_raw_response_response(self, async_client: AsyncClearStreet) -> None:
-        response = await async_client.v1.omni_ai.threads.with_raw_response.response(
-            thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
-        )
-
-        assert response.is_closed is True
-        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-        thread = await response.parse()
-        assert_matches_type(ThreadResponseResponse, thread, path=["response"])
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_streaming_response_response(self, async_client: AsyncClearStreet) -> None:
-        async with async_client.v1.omni_ai.threads.with_streaming_response.response(
-            thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
-
-            thread = await response.parse()
-            assert_matches_type(ThreadResponseResponse, thread, path=["response"])
-
-        assert cast(Any, response.is_closed) is True
-
-    @pytest.mark.skip(reason="Mock server tests are disabled")
-    @parametrize
-    async def test_path_params_response(self, async_client: AsyncClearStreet) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `thread_id` but received ''"):
-            await async_client.v1.omni_ai.threads.with_raw_response.response(
-                thread_id="",
-                account_id=0,
-            )

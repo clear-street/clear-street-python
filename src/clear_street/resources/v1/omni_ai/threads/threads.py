@@ -27,15 +27,15 @@ from ....._response import (
 )
 from ....._base_client import make_request_options
 from .....types.v1.omni_ai import (
-    thread_response_params,
-    thread_get_thread_params,
-    thread_list_threads_params,
+    thread_get_threads_params,
     thread_create_thread_params,
+    thread_get_thread_by_id_params,
+    thread_get_thread_response_params,
 )
-from .....types.v1.omni_ai.thread_response_response import ThreadResponseResponse
-from .....types.v1.omni_ai.thread_get_thread_response import ThreadGetThreadResponse
-from .....types.v1.omni_ai.thread_list_threads_response import ThreadListThreadsResponse
+from .....types.v1.omni_ai.thread_get_threads_response import ThreadGetThreadsResponse
 from .....types.v1.omni_ai.thread_create_thread_response import ThreadCreateThreadResponse
+from .....types.v1.omni_ai.thread_get_thread_by_id_response import ThreadGetThreadByIDResponse
+from .....types.v1.omni_ai.thread_get_thread_response_response import ThreadGetThreadResponseResponse
 
 __all__ = ["ThreadsResource", "AsyncThreadsResource"]
 
@@ -135,7 +135,7 @@ class ThreadsResource(SyncAPIResource):
             cast_to=ThreadCreateThreadResponse,
         )
 
-    def get_thread(
+    def get_thread_by_id(
         self,
         thread_id: str,
         *,
@@ -146,7 +146,7 @@ class ThreadsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ThreadGetThreadResponse:
+    ) -> ThreadGetThreadByIDResponse:
         """Get a specific thread.
 
         Returns metadata (title, timestamps) for a single thread.
@@ -175,12 +175,63 @@ class ThreadsResource(SyncAPIResource):
                 extra_query=extra_query,
                 extra_body=extra_body,
                 timeout=timeout,
-                query=maybe_transform({"account_id": account_id}, thread_get_thread_params.ThreadGetThreadParams),
+                query=maybe_transform(
+                    {"account_id": account_id}, thread_get_thread_by_id_params.ThreadGetThreadByIDParams
+                ),
             ),
-            cast_to=ThreadGetThreadResponse,
+            cast_to=ThreadGetThreadByIDResponse,
         )
 
-    def list_threads(
+    def get_thread_response(
+        self,
+        thread_id: str,
+        *,
+        account_id: int,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ThreadGetThreadResponseResponse:
+        """
+        Get the active response for a thread.
+
+        Convenience endpoint to look up the currently active response for a thread
+        without knowing the `response_id`. Useful when reloading a thread whose last
+        finalized message is a `USER` message — this indicates an assistant turn is
+        likely in progress.
+
+        Returns **404** if no active response exists (the thread is idle).
+
+        Args:
+          account_id: Account ID for the request
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not thread_id:
+            raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
+        return self._get(
+            path_template("/v1/omni-ai/threads/{thread_id}/response", thread_id=thread_id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {"account_id": account_id}, thread_get_thread_response_params.ThreadGetThreadResponseParams
+                ),
+            ),
+            cast_to=ThreadGetThreadResponseResponse,
+        )
+
+    def get_threads(
         self,
         *,
         account_id: int,
@@ -192,7 +243,7 @@ class ThreadsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ThreadListThreadsResponse:
+    ) -> ThreadGetThreadsResponse:
         """
         List conversation threads.
 
@@ -227,57 +278,10 @@ class ThreadsResource(SyncAPIResource):
                         "page_size": page_size,
                         "page_token": page_token,
                     },
-                    thread_list_threads_params.ThreadListThreadsParams,
+                    thread_get_threads_params.ThreadGetThreadsParams,
                 ),
             ),
-            cast_to=ThreadListThreadsResponse,
-        )
-
-    def response(
-        self,
-        thread_id: str,
-        *,
-        account_id: int,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ThreadResponseResponse:
-        """
-        Get the active response for a thread.
-
-        Convenience endpoint to look up the currently active response for a thread
-        without knowing the `response_id`. Useful when reloading a thread whose last
-        finalized message is a `USER` message — this indicates an assistant turn is
-        likely in progress.
-
-        Returns **404** if no active response exists (the thread is idle).
-
-        Args:
-          account_id: Account ID for the request
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not thread_id:
-            raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
-        return self._get(
-            path_template("/v1/omni-ai/threads/{thread_id}/response", thread_id=thread_id),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform({"account_id": account_id}, thread_response_params.ThreadResponseParams),
-            ),
-            cast_to=ThreadResponseResponse,
+            cast_to=ThreadGetThreadsResponse,
         )
 
 
@@ -376,7 +380,7 @@ class AsyncThreadsResource(AsyncAPIResource):
             cast_to=ThreadCreateThreadResponse,
         )
 
-    async def get_thread(
+    async def get_thread_by_id(
         self,
         thread_id: str,
         *,
@@ -387,7 +391,7 @@ class AsyncThreadsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ThreadGetThreadResponse:
+    ) -> ThreadGetThreadByIDResponse:
         """Get a specific thread.
 
         Returns metadata (title, timestamps) for a single thread.
@@ -417,13 +421,62 @@ class AsyncThreadsResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"account_id": account_id}, thread_get_thread_params.ThreadGetThreadParams
+                    {"account_id": account_id}, thread_get_thread_by_id_params.ThreadGetThreadByIDParams
                 ),
             ),
-            cast_to=ThreadGetThreadResponse,
+            cast_to=ThreadGetThreadByIDResponse,
         )
 
-    async def list_threads(
+    async def get_thread_response(
+        self,
+        thread_id: str,
+        *,
+        account_id: int,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ThreadGetThreadResponseResponse:
+        """
+        Get the active response for a thread.
+
+        Convenience endpoint to look up the currently active response for a thread
+        without knowing the `response_id`. Useful when reloading a thread whose last
+        finalized message is a `USER` message — this indicates an assistant turn is
+        likely in progress.
+
+        Returns **404** if no active response exists (the thread is idle).
+
+        Args:
+          account_id: Account ID for the request
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not thread_id:
+            raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
+        return await self._get(
+            path_template("/v1/omni-ai/threads/{thread_id}/response", thread_id=thread_id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"account_id": account_id}, thread_get_thread_response_params.ThreadGetThreadResponseParams
+                ),
+            ),
+            cast_to=ThreadGetThreadResponseResponse,
+        )
+
+    async def get_threads(
         self,
         *,
         account_id: int,
@@ -435,7 +488,7 @@ class AsyncThreadsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ThreadListThreadsResponse:
+    ) -> ThreadGetThreadsResponse:
         """
         List conversation threads.
 
@@ -470,59 +523,10 @@ class AsyncThreadsResource(AsyncAPIResource):
                         "page_size": page_size,
                         "page_token": page_token,
                     },
-                    thread_list_threads_params.ThreadListThreadsParams,
+                    thread_get_threads_params.ThreadGetThreadsParams,
                 ),
             ),
-            cast_to=ThreadListThreadsResponse,
-        )
-
-    async def response(
-        self,
-        thread_id: str,
-        *,
-        account_id: int,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> ThreadResponseResponse:
-        """
-        Get the active response for a thread.
-
-        Convenience endpoint to look up the currently active response for a thread
-        without knowing the `response_id`. Useful when reloading a thread whose last
-        finalized message is a `USER` message — this indicates an assistant turn is
-        likely in progress.
-
-        Returns **404** if no active response exists (the thread is idle).
-
-        Args:
-          account_id: Account ID for the request
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not thread_id:
-            raise ValueError(f"Expected a non-empty value for `thread_id` but received {thread_id!r}")
-        return await self._get(
-            path_template("/v1/omni-ai/threads/{thread_id}/response", thread_id=thread_id),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {"account_id": account_id}, thread_response_params.ThreadResponseParams
-                ),
-            ),
-            cast_to=ThreadResponseResponse,
+            cast_to=ThreadGetThreadsResponse,
         )
 
 
@@ -533,14 +537,14 @@ class ThreadsResourceWithRawResponse:
         self.create_thread = to_raw_response_wrapper(
             threads.create_thread,
         )
-        self.get_thread = to_raw_response_wrapper(
-            threads.get_thread,
+        self.get_thread_by_id = to_raw_response_wrapper(
+            threads.get_thread_by_id,
         )
-        self.list_threads = to_raw_response_wrapper(
-            threads.list_threads,
+        self.get_thread_response = to_raw_response_wrapper(
+            threads.get_thread_response,
         )
-        self.response = to_raw_response_wrapper(
-            threads.response,
+        self.get_threads = to_raw_response_wrapper(
+            threads.get_threads,
         )
 
     @cached_property
@@ -559,14 +563,14 @@ class AsyncThreadsResourceWithRawResponse:
         self.create_thread = async_to_raw_response_wrapper(
             threads.create_thread,
         )
-        self.get_thread = async_to_raw_response_wrapper(
-            threads.get_thread,
+        self.get_thread_by_id = async_to_raw_response_wrapper(
+            threads.get_thread_by_id,
         )
-        self.list_threads = async_to_raw_response_wrapper(
-            threads.list_threads,
+        self.get_thread_response = async_to_raw_response_wrapper(
+            threads.get_thread_response,
         )
-        self.response = async_to_raw_response_wrapper(
-            threads.response,
+        self.get_threads = async_to_raw_response_wrapper(
+            threads.get_threads,
         )
 
     @cached_property
@@ -585,14 +589,14 @@ class ThreadsResourceWithStreamingResponse:
         self.create_thread = to_streamed_response_wrapper(
             threads.create_thread,
         )
-        self.get_thread = to_streamed_response_wrapper(
-            threads.get_thread,
+        self.get_thread_by_id = to_streamed_response_wrapper(
+            threads.get_thread_by_id,
         )
-        self.list_threads = to_streamed_response_wrapper(
-            threads.list_threads,
+        self.get_thread_response = to_streamed_response_wrapper(
+            threads.get_thread_response,
         )
-        self.response = to_streamed_response_wrapper(
-            threads.response,
+        self.get_threads = to_streamed_response_wrapper(
+            threads.get_threads,
         )
 
     @cached_property
@@ -611,14 +615,14 @@ class AsyncThreadsResourceWithStreamingResponse:
         self.create_thread = async_to_streamed_response_wrapper(
             threads.create_thread,
         )
-        self.get_thread = async_to_streamed_response_wrapper(
-            threads.get_thread,
+        self.get_thread_by_id = async_to_streamed_response_wrapper(
+            threads.get_thread_by_id,
         )
-        self.list_threads = async_to_streamed_response_wrapper(
-            threads.list_threads,
+        self.get_thread_response = async_to_streamed_response_wrapper(
+            threads.get_thread_response,
         )
-        self.response = async_to_streamed_response_wrapper(
-            threads.response,
+        self.get_threads = async_to_streamed_response_wrapper(
+            threads.get_threads,
         )
 
     @cached_property

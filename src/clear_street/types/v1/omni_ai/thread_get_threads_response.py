@@ -3,8 +3,8 @@
 from ..thread_list import ThreadList
 from ...shared.base_response import BaseResponse
 
-__all__ = ["ThreadListThreadsResponse"]
+__all__ = ["ThreadGetThreadsResponse"]
 
 
-class ThreadListThreadsResponse(BaseResponse):
+class ThreadGetThreadsResponse(BaseResponse):
     data: ThreadList

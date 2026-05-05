@@ -17,14 +17,14 @@ class TestV1:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_method_ws(self, client: ClearStreet) -> None:
-        v1 = client.v1.ws()
+    def test_method_websocket_handler(self, client: ClearStreet) -> None:
+        v1 = client.v1.websocket_handler()
         assert v1 is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_raw_response_ws(self, client: ClearStreet) -> None:
-        response = client.v1.with_raw_response.ws()
+    def test_raw_response_websocket_handler(self, client: ClearStreet) -> None:
+        response = client.v1.with_raw_response.websocket_handler()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -33,8 +33,8 @@ class TestV1:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    def test_streaming_response_ws(self, client: ClearStreet) -> None:
-        with client.v1.with_streaming_response.ws() as response:
+    def test_streaming_response_websocket_handler(self, client: ClearStreet) -> None:
+        with client.v1.with_streaming_response.websocket_handler() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -51,14 +51,14 @@ class TestAsyncV1:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_method_ws(self, async_client: AsyncClearStreet) -> None:
-        v1 = await async_client.v1.ws()
+    async def test_method_websocket_handler(self, async_client: AsyncClearStreet) -> None:
+        v1 = await async_client.v1.websocket_handler()
         assert v1 is None
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_raw_response_ws(self, async_client: AsyncClearStreet) -> None:
-        response = await async_client.v1.with_raw_response.ws()
+    async def test_raw_response_websocket_handler(self, async_client: AsyncClearStreet) -> None:
+        response = await async_client.v1.with_raw_response.websocket_handler()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -67,8 +67,8 @@ class TestAsyncV1:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
-    async def test_streaming_response_ws(self, async_client: AsyncClearStreet) -> None:
-        async with async_client.v1.with_streaming_response.ws() as response:
+    async def test_streaming_response_websocket_handler(self, async_client: AsyncClearStreet) -> None:
+        async with async_client.v1.with_streaming_response.websocket_handler() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 

@@ -3,8 +3,8 @@
 from ...shared.base_response import BaseResponse
 from .entitlement_agreement_resource_list import EntitlementAgreementResourceList
 
-__all__ = ["EntitlementAgreementListEntitlementAgreementsResponse"]
+__all__ = ["EntitlementAgreementGetEntitlementAgreementsResponse"]
 
 
-class EntitlementAgreementListEntitlementAgreementsResponse(BaseResponse):
+class EntitlementAgreementGetEntitlementAgreementsResponse(BaseResponse):
     data: EntitlementAgreementResourceList

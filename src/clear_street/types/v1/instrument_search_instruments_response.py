@@ -3,8 +3,8 @@
 from .instrument_core_list import InstrumentCoreList
 from ..shared.base_response import BaseResponse
 
-__all__ = ["InstrumentSearchResponse"]
+__all__ = ["InstrumentSearchInstrumentsResponse"]
 
 
-class InstrumentSearchResponse(BaseResponse):
+class InstrumentSearchInstrumentsResponse(BaseResponse):
     data: InstrumentCoreList
