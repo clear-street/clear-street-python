@@ -8,8 +8,6 @@ from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from .side import Side
 from ...._utils import PropertyInfo
-from .order_type import OrderType
-from .time_in_force import TimeInForce
 from ...security_type import SecurityType
 from .trailing_offset_type import TrailingOffsetType
 
@@ -54,10 +52,23 @@ class OrderNewOrderMultilegRequest(TypedDict, total=False):
     legs: Required[Iterable[OrderNewOrderMultilegRequestLeg]]
     """Legs that compose the strategy."""
 
-    order_type: Required[OrderType]
+    order_type: Required[Literal["MARKET", "LIMIT", "STOP", "STOP_LIMIT", "TRAILING_STOP", "TRAILING_STOP_LIMIT"]]
     """Type of order (currently MARKET or LIMIT for multileg strategy submission)"""
 
-    time_in_force: Required[TimeInForce]
+    time_in_force: Required[
+        Literal[
+            "DAY",
+            "GOOD_TILL_CANCEL",
+            "IMMEDIATE_OR_CANCEL",
+            "FILL_OR_KILL",
+            "GOOD_TILL_DATE",
+            "AT_THE_OPENING",
+            "AT_THE_CLOSE",
+            "GOOD_TILL_CROSSING",
+            "GOOD_THROUGH_CROSSING",
+            "AT_CROSSING",
+        ]
+    ]
     """Time in force"""
 
     id: Optional[str]
@@ -79,7 +90,7 @@ class OrderNewOrderRequest(TypedDict, total=False):
     instrument_type: Required[SecurityType]
     """Type of security"""
 
-    order_type: Required[OrderType]
+    order_type: Required[Literal["MARKET", "LIMIT", "STOP", "STOP_LIMIT", "TRAILING_STOP", "TRAILING_STOP_LIMIT"]]
     """Type of order"""
 
     quantity: Required[str]
@@ -92,7 +103,20 @@ class OrderNewOrderRequest(TypedDict, total=False):
     side: Required[Side]
     """Side of the order"""
 
-    time_in_force: Required[TimeInForce]
+    time_in_force: Required[
+        Literal[
+            "DAY",
+            "GOOD_TILL_CANCEL",
+            "IMMEDIATE_OR_CANCEL",
+            "FILL_OR_KILL",
+            "GOOD_TILL_DATE",
+            "AT_THE_OPENING",
+            "AT_THE_CLOSE",
+            "GOOD_TILL_CROSSING",
+            "GOOD_THROUGH_CROSSING",
+            "AT_CROSSING",
+        ]
+    ]
     """Time in force"""
 
     id: Optional[str]
