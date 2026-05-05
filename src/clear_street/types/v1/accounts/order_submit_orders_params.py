@@ -11,7 +11,6 @@ from ...._utils import PropertyInfo
 from .order_type import OrderType
 from .time_in_force import TimeInForce
 from ...security_type import SecurityType
-from .order_strategy_param import OrderStrategyParam
 from .trailing_offset_type import TrailingOffsetType
 
 __all__ = [
@@ -131,9 +130,6 @@ class OrderNewOrderRequest(TypedDict, total=False):
 
     stop_price: Optional[str]
     """Stop price (required for STOP and STOP_LIMIT orders)"""
-
-    strategy: Optional[OrderStrategyParam]
-    """Execution strategy/router. Defaults to SOR where applicable."""
 
     symbol: Optional[str]
     """Trading symbol.

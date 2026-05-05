@@ -69,7 +69,6 @@ from .filter_value_param import FilterValueParam as FilterValueParam
 from .fiscal_period_type import FiscalPeriodType as FiscalPeriodType
 from .screener_item_list import ScreenerItemList as ScreenerItemList
 from .instrument_earnings import InstrumentEarnings as InstrumentEarnings
-from .order_strategy_type import OrderStrategyType as OrderStrategyType
 from .risk_settings_param import RiskSettingsParam as RiskSettingsParam
 from .screener_entry_list import ScreenerEntryList as ScreenerEntryList
 from .search_filter_param import SearchFilterParam as SearchFilterParam
