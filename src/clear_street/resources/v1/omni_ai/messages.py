@@ -17,9 +17,9 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.v1.omni_ai import message_feedback_params, message_get_message_params
-from ....types.v1.omni_ai.message_feedback_response import MessageFeedbackResponse
-from ....types.v1.omni_ai.message_get_message_response import MessageGetMessageResponse
+from ....types.v1.omni_ai import message_submit_feedback_params, message_get_message_by_id_params
+from ....types.v1.omni_ai.message_submit_feedback_response import MessageSubmitFeedbackResponse
+from ....types.v1.omni_ai.message_get_message_by_id_response import MessageGetMessageByIDResponse
 
 __all__ = ["MessagesResource", "AsyncMessagesResource"]
 
@@ -49,7 +49,54 @@ class MessagesResource(SyncAPIResource):
         """
         return MessagesResourceWithStreamingResponse(self)
 
-    def feedback(
+    def get_message_by_id(
+        self,
+        message_id: str,
+        *,
+        account_id: int,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MessageGetMessageByIDResponse:
+        """Get a finalized message by ID.
+
+        Returns a single finalized message.
+
+        Returns **404** if the message belongs to an
+        in-progress assistant turn (use the response endpoint for live output). Once the
+        turn completes, the message becomes available here.
+
+        Args:
+          account_id: Account ID for the request
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not message_id:
+            raise ValueError(f"Expected a non-empty value for `message_id` but received {message_id!r}")
+        return self._get(
+            path_template("/v1/omni-ai/messages/{message_id}", message_id=message_id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {"account_id": account_id}, message_get_message_by_id_params.MessageGetMessageByIDParams
+                ),
+            ),
+            cast_to=MessageGetMessageByIDResponse,
+        )
+
+    def submit_feedback(
         self,
         message_id: str,
         *,
@@ -63,9 +110,9 @@ class MessagesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MessageFeedbackResponse:
+    ) -> MessageSubmitFeedbackResponse:
         """
-        Create feedback on a finalized assistant message.
+        Submit feedback on a finalized assistant message.
 
         Attaches a score and optional comment to a finalized assistant message. Feedback
         is only valid for messages with role `ASSISTANT` that have reached a terminal
@@ -99,57 +146,12 @@ class MessagesResource(SyncAPIResource):
                     "comment": comment,
                     "metadata": metadata,
                 },
-                message_feedback_params.MessageFeedbackParams,
+                message_submit_feedback_params.MessageSubmitFeedbackParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=MessageFeedbackResponse,
-        )
-
-    def get_message(
-        self,
-        message_id: str,
-        *,
-        account_id: int,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MessageGetMessageResponse:
-        """Get a finalized message by ID.
-
-        Returns a single finalized message.
-
-        Returns **404** if the message belongs to an
-        in-progress assistant turn (use the response endpoint for live output). Once the
-        turn completes, the message becomes available here.
-
-        Args:
-          account_id: Account ID for the request
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not message_id:
-            raise ValueError(f"Expected a non-empty value for `message_id` but received {message_id!r}")
-        return self._get(
-            path_template("/v1/omni-ai/messages/{message_id}", message_id=message_id),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=maybe_transform({"account_id": account_id}, message_get_message_params.MessageGetMessageParams),
-            ),
-            cast_to=MessageGetMessageResponse,
+            cast_to=MessageSubmitFeedbackResponse,
         )
 
 
@@ -178,7 +180,54 @@ class AsyncMessagesResource(AsyncAPIResource):
         """
         return AsyncMessagesResourceWithStreamingResponse(self)
 
-    async def feedback(
+    async def get_message_by_id(
+        self,
+        message_id: str,
+        *,
+        account_id: int,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> MessageGetMessageByIDResponse:
+        """Get a finalized message by ID.
+
+        Returns a single finalized message.
+
+        Returns **404** if the message belongs to an
+        in-progress assistant turn (use the response endpoint for live output). Once the
+        turn completes, the message becomes available here.
+
+        Args:
+          account_id: Account ID for the request
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not message_id:
+            raise ValueError(f"Expected a non-empty value for `message_id` but received {message_id!r}")
+        return await self._get(
+            path_template("/v1/omni-ai/messages/{message_id}", message_id=message_id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"account_id": account_id}, message_get_message_by_id_params.MessageGetMessageByIDParams
+                ),
+            ),
+            cast_to=MessageGetMessageByIDResponse,
+        )
+
+    async def submit_feedback(
         self,
         message_id: str,
         *,
@@ -192,9 +241,9 @@ class AsyncMessagesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MessageFeedbackResponse:
+    ) -> MessageSubmitFeedbackResponse:
         """
-        Create feedback on a finalized assistant message.
+        Submit feedback on a finalized assistant message.
 
         Attaches a score and optional comment to a finalized assistant message. Feedback
         is only valid for messages with role `ASSISTANT` that have reached a terminal
@@ -228,59 +277,12 @@ class AsyncMessagesResource(AsyncAPIResource):
                     "comment": comment,
                     "metadata": metadata,
                 },
-                message_feedback_params.MessageFeedbackParams,
+                message_submit_feedback_params.MessageSubmitFeedbackParams,
             ),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=MessageFeedbackResponse,
-        )
-
-    async def get_message(
-        self,
-        message_id: str,
-        *,
-        account_id: int,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MessageGetMessageResponse:
-        """Get a finalized message by ID.
-
-        Returns a single finalized message.
-
-        Returns **404** if the message belongs to an
-        in-progress assistant turn (use the response endpoint for live output). Once the
-        turn completes, the message becomes available here.
-
-        Args:
-          account_id: Account ID for the request
-
-          extra_headers: Send extra headers
-
-          extra_query: Add additional query parameters to the request
-
-          extra_body: Add additional JSON properties to the request
-
-          timeout: Override the client-level default timeout for this request, in seconds
-        """
-        if not message_id:
-            raise ValueError(f"Expected a non-empty value for `message_id` but received {message_id!r}")
-        return await self._get(
-            path_template("/v1/omni-ai/messages/{message_id}", message_id=message_id),
-            options=make_request_options(
-                extra_headers=extra_headers,
-                extra_query=extra_query,
-                extra_body=extra_body,
-                timeout=timeout,
-                query=await async_maybe_transform(
-                    {"account_id": account_id}, message_get_message_params.MessageGetMessageParams
-                ),
-            ),
-            cast_to=MessageGetMessageResponse,
+            cast_to=MessageSubmitFeedbackResponse,
         )
 
 
@@ -288,11 +290,11 @@ class MessagesResourceWithRawResponse:
     def __init__(self, messages: MessagesResource) -> None:
         self._messages = messages
 
-        self.feedback = to_raw_response_wrapper(
-            messages.feedback,
+        self.get_message_by_id = to_raw_response_wrapper(
+            messages.get_message_by_id,
         )
-        self.get_message = to_raw_response_wrapper(
-            messages.get_message,
+        self.submit_feedback = to_raw_response_wrapper(
+            messages.submit_feedback,
         )
 
 
@@ -300,11 +302,11 @@ class AsyncMessagesResourceWithRawResponse:
     def __init__(self, messages: AsyncMessagesResource) -> None:
         self._messages = messages
 
-        self.feedback = async_to_raw_response_wrapper(
-            messages.feedback,
+        self.get_message_by_id = async_to_raw_response_wrapper(
+            messages.get_message_by_id,
         )
-        self.get_message = async_to_raw_response_wrapper(
-            messages.get_message,
+        self.submit_feedback = async_to_raw_response_wrapper(
+            messages.submit_feedback,
         )
 
 
@@ -312,11 +314,11 @@ class MessagesResourceWithStreamingResponse:
     def __init__(self, messages: MessagesResource) -> None:
         self._messages = messages
 
-        self.feedback = to_streamed_response_wrapper(
-            messages.feedback,
+        self.get_message_by_id = to_streamed_response_wrapper(
+            messages.get_message_by_id,
         )
-        self.get_message = to_streamed_response_wrapper(
-            messages.get_message,
+        self.submit_feedback = to_streamed_response_wrapper(
+            messages.submit_feedback,
         )
 
 
@@ -324,9 +326,9 @@ class AsyncMessagesResourceWithStreamingResponse:
     def __init__(self, messages: AsyncMessagesResource) -> None:
         self._messages = messages
 
-        self.feedback = async_to_streamed_response_wrapper(
-            messages.feedback,
+        self.get_message_by_id = async_to_streamed_response_wrapper(
+            messages.get_message_by_id,
         )
-        self.get_message = async_to_streamed_response_wrapper(
-            messages.get_message,
+        self.submit_feedback = async_to_streamed_response_wrapper(
+            messages.submit_feedback,
         )

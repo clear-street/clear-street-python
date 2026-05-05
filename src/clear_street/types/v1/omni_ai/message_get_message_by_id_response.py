@@ -3,9 +3,9 @@
 from ..message import Message
 from ...shared.base_response import BaseResponse
 
-__all__ = ["MessageGetMessageResponse"]
+__all__ = ["MessageGetMessageByIDResponse"]
 
 
-class MessageGetMessageResponse(BaseResponse):
+class MessageGetMessageByIDResponse(BaseResponse):
     data: Message
     """Final immutable message."""

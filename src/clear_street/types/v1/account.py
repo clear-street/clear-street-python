@@ -4,9 +4,9 @@ from typing import Optional
 from datetime import date
 
 from ..._models import BaseModel
-from .account_kind import AccountKind
+from .account_type import AccountType
 from .account_status import AccountStatus
-from .account_subkind import AccountSubkind
+from .account_subtype import AccountSubtype
 
 __all__ = ["Account"]
 
@@ -23,9 +23,6 @@ class Account(BaseModel):
     full_name: str
     """The full legal name of the account"""
 
-    kind: AccountKind
-    """The type of account"""
-
     open_date: date
     """The date the account was opened"""
 
@@ -38,8 +35,11 @@ class Account(BaseModel):
     status: AccountStatus
     """The current status of the account"""
 
-    subkind: AccountSubkind
+    subtype: AccountSubtype
     """The sub-type of account"""
+
+    type: AccountType
+    """The type of account"""
 
     close_date: Optional[date] = None
     """The date the account was closed, if applicable"""

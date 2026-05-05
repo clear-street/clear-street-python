@@ -56,5 +56,5 @@ class OptionsContract(BaseModel):
     open_interest: Optional[int] = None
     """Open interest (number of outstanding contracts), if available"""
 
-    underlier_instrument_id: Optional[str] = None
+    underlying_instrument_id: Optional[str] = None
     """OEMS instrument ID of the underlying instrument, if resolvable"""

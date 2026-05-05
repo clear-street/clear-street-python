@@ -3,9 +3,9 @@
 from ..thread import Thread
 from ...shared.base_response import BaseResponse
 
-__all__ = ["ThreadGetThreadResponse"]
+__all__ = ["ThreadGetThreadByIDResponse"]
 
 
-class ThreadGetThreadResponse(BaseResponse):
+class ThreadGetThreadByIDResponse(BaseResponse):
     data: Thread
     """Thread metadata returned by list/get thread endpoints."""

@@ -19,9 +19,9 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.v1.instruments import option_contracts_params
+from ....types.v1.instruments import option_get_option_contracts_params
 from ....types.v1.contract_type import ContractType
-from ....types.v1.instruments.option_contracts_response import OptionContractsResponse
+from ....types.v1.instruments.option_get_option_contracts_response import OptionGetOptionContractsResponse
 
 __all__ = ["OptionsResource", "AsyncOptionsResource"]
 
@@ -48,7 +48,7 @@ class OptionsResource(SyncAPIResource):
         """
         return OptionsResourceWithStreamingResponse(self)
 
-    def contracts(
+    def get_option_contracts(
         self,
         *,
         contract_type: ContractType | Omit = omit,
@@ -56,14 +56,14 @@ class OptionsResource(SyncAPIResource):
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         underlier: str | Omit = omit,
-        underlier_instrument_id: str | Omit = omit,
+        underlying_instrument_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> OptionContractsResponse:
+    ) -> OptionGetOptionContractsResponse:
         """
         List options contracts.
 
@@ -80,7 +80,7 @@ class OptionsResource(SyncAPIResource):
 
           underlier: Underlier symbol (e.g., AAPL, SPX)
 
-          underlier_instrument_id: OEMS instrument UUID or symbol of the underlying equity/index
+          underlying_instrument_id: OEMS instrument UUID or symbol of the underlying equity/index
 
           extra_headers: Send extra headers
 
@@ -104,12 +104,12 @@ class OptionsResource(SyncAPIResource):
                         "page_size": page_size,
                         "page_token": page_token,
                         "underlier": underlier,
-                        "underlier_instrument_id": underlier_instrument_id,
+                        "underlying_instrument_id": underlying_instrument_id,
                     },
-                    option_contracts_params.OptionContractsParams,
+                    option_get_option_contracts_params.OptionGetOptionContractsParams,
                 ),
             ),
-            cast_to=OptionContractsResponse,
+            cast_to=OptionGetOptionContractsResponse,
         )
 
 
@@ -135,7 +135,7 @@ class AsyncOptionsResource(AsyncAPIResource):
         """
         return AsyncOptionsResourceWithStreamingResponse(self)
 
-    async def contracts(
+    async def get_option_contracts(
         self,
         *,
         contract_type: ContractType | Omit = omit,
@@ -143,14 +143,14 @@ class AsyncOptionsResource(AsyncAPIResource):
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         underlier: str | Omit = omit,
-        underlier_instrument_id: str | Omit = omit,
+        underlying_instrument_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> OptionContractsResponse:
+    ) -> OptionGetOptionContractsResponse:
         """
         List options contracts.
 
@@ -167,7 +167,7 @@ class AsyncOptionsResource(AsyncAPIResource):
 
           underlier: Underlier symbol (e.g., AAPL, SPX)
 
-          underlier_instrument_id: OEMS instrument UUID or symbol of the underlying equity/index
+          underlying_instrument_id: OEMS instrument UUID or symbol of the underlying equity/index
 
           extra_headers: Send extra headers
 
@@ -191,12 +191,12 @@ class AsyncOptionsResource(AsyncAPIResource):
                         "page_size": page_size,
                         "page_token": page_token,
                         "underlier": underlier,
-                        "underlier_instrument_id": underlier_instrument_id,
+                        "underlying_instrument_id": underlying_instrument_id,
                     },
-                    option_contracts_params.OptionContractsParams,
+                    option_get_option_contracts_params.OptionGetOptionContractsParams,
                 ),
             ),
-            cast_to=OptionContractsResponse,
+            cast_to=OptionGetOptionContractsResponse,
         )
 
 
@@ -204,8 +204,8 @@ class OptionsResourceWithRawResponse:
     def __init__(self, options: OptionsResource) -> None:
         self._options = options
 
-        self.contracts = to_raw_response_wrapper(
-            options.contracts,
+        self.get_option_contracts = to_raw_response_wrapper(
+            options.get_option_contracts,
         )
 
 
@@ -213,8 +213,8 @@ class AsyncOptionsResourceWithRawResponse:
     def __init__(self, options: AsyncOptionsResource) -> None:
         self._options = options
 
-        self.contracts = async_to_raw_response_wrapper(
-            options.contracts,
+        self.get_option_contracts = async_to_raw_response_wrapper(
+            options.get_option_contracts,
         )
 
 
@@ -222,8 +222,8 @@ class OptionsResourceWithStreamingResponse:
     def __init__(self, options: OptionsResource) -> None:
         self._options = options
 
-        self.contracts = to_streamed_response_wrapper(
-            options.contracts,
+        self.get_option_contracts = to_streamed_response_wrapper(
+            options.get_option_contracts,
         )
 
 
@@ -231,6 +231,6 @@ class AsyncOptionsResourceWithStreamingResponse:
     def __init__(self, options: AsyncOptionsResource) -> None:
         self._options = options
 
-        self.contracts = async_to_streamed_response_wrapper(
-            options.contracts,
+        self.get_option_contracts = async_to_streamed_response_wrapper(
+            options.get_option_contracts,
         )

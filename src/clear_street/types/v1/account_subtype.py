@@ -2,6 +2,6 @@
 
 from typing_extensions import Literal, TypeAlias
 
-__all__ = ["AccountSubkind"]
+__all__ = ["AccountSubtype"]
 
-AccountSubkind: TypeAlias = Literal["CASH", "MARGIN", "OTHER"]
+AccountSubtype: TypeAlias = Literal["CASH", "MARGIN", "OTHER"]

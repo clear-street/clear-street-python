@@ -3,8 +3,8 @@
 from ...message_list import MessageList
 from ....shared.base_response import BaseResponse
 
-__all__ = ["MessageListMessagesResponse"]
+__all__ = ["MessageGetMessagesResponse"]
 
 
-class MessageListMessagesResponse(BaseResponse):
+class MessageGetMessagesResponse(BaseResponse):
     data: MessageList

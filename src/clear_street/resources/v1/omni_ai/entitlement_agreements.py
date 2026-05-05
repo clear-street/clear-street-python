@@ -14,8 +14,8 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.v1.omni_ai.entitlement_agreement_list_entitlement_agreements_response import (
-    EntitlementAgreementListEntitlementAgreementsResponse,
+from ....types.v1.omni_ai.entitlement_agreement_get_entitlement_agreements_response import (
+    EntitlementAgreementGetEntitlementAgreementsResponse,
 )
 
 __all__ = ["EntitlementAgreementsResource", "AsyncEntitlementAgreementsResource"]
@@ -46,7 +46,7 @@ class EntitlementAgreementsResource(SyncAPIResource):
         """
         return EntitlementAgreementsResourceWithStreamingResponse(self)
 
-    def list_entitlement_agreements(
+    def get_entitlement_agreements(
         self,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -55,14 +55,14 @@ class EntitlementAgreementsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> EntitlementAgreementListEntitlementAgreementsResponse:
+    ) -> EntitlementAgreementGetEntitlementAgreementsResponse:
         """List current signable entitlement agreements for consent UX."""
         return self._get(
             "/v1/omni-ai/entitlement-agreements",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=EntitlementAgreementListEntitlementAgreementsResponse,
+            cast_to=EntitlementAgreementGetEntitlementAgreementsResponse,
         )
 
 
@@ -91,7 +91,7 @@ class AsyncEntitlementAgreementsResource(AsyncAPIResource):
         """
         return AsyncEntitlementAgreementsResourceWithStreamingResponse(self)
 
-    async def list_entitlement_agreements(
+    async def get_entitlement_agreements(
         self,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -100,14 +100,14 @@ class AsyncEntitlementAgreementsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> EntitlementAgreementListEntitlementAgreementsResponse:
+    ) -> EntitlementAgreementGetEntitlementAgreementsResponse:
         """List current signable entitlement agreements for consent UX."""
         return await self._get(
             "/v1/omni-ai/entitlement-agreements",
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=EntitlementAgreementListEntitlementAgreementsResponse,
+            cast_to=EntitlementAgreementGetEntitlementAgreementsResponse,
         )
 
 
@@ -115,8 +115,8 @@ class EntitlementAgreementsResourceWithRawResponse:
     def __init__(self, entitlement_agreements: EntitlementAgreementsResource) -> None:
         self._entitlement_agreements = entitlement_agreements
 
-        self.list_entitlement_agreements = to_raw_response_wrapper(
-            entitlement_agreements.list_entitlement_agreements,
+        self.get_entitlement_agreements = to_raw_response_wrapper(
+            entitlement_agreements.get_entitlement_agreements,
         )
 
 
@@ -124,8 +124,8 @@ class AsyncEntitlementAgreementsResourceWithRawResponse:
     def __init__(self, entitlement_agreements: AsyncEntitlementAgreementsResource) -> None:
         self._entitlement_agreements = entitlement_agreements
 
-        self.list_entitlement_agreements = async_to_raw_response_wrapper(
-            entitlement_agreements.list_entitlement_agreements,
+        self.get_entitlement_agreements = async_to_raw_response_wrapper(
+            entitlement_agreements.get_entitlement_agreements,
         )
 
 
@@ -133,8 +133,8 @@ class EntitlementAgreementsResourceWithStreamingResponse:
     def __init__(self, entitlement_agreements: EntitlementAgreementsResource) -> None:
         self._entitlement_agreements = entitlement_agreements
 
-        self.list_entitlement_agreements = to_streamed_response_wrapper(
-            entitlement_agreements.list_entitlement_agreements,
+        self.get_entitlement_agreements = to_streamed_response_wrapper(
+            entitlement_agreements.get_entitlement_agreements,
         )
 
 
@@ -142,6 +142,6 @@ class AsyncEntitlementAgreementsResourceWithStreamingResponse:
     def __init__(self, entitlement_agreements: AsyncEntitlementAgreementsResource) -> None:
         self._entitlement_agreements = entitlement_agreements
 
-        self.list_entitlement_agreements = async_to_streamed_response_wrapper(
-            entitlement_agreements.list_entitlement_agreements,
+        self.get_entitlement_agreements = async_to_streamed_response_wrapper(
+            entitlement_agreements.get_entitlement_agreements,
         )

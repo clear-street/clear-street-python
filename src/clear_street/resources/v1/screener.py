@@ -129,7 +129,7 @@ class ScreenerResource(SyncAPIResource):
         field_filter: Optional[Iterable[FieldRefParam]] | Omit = omit,
         filters: Optional[Iterable[SearchFilterParam]] | Omit = omit,
         page_size: Optional[int] | Omit = omit,
-        page_token: Optional[str] | Omit = omit,
+        page_token: Union[str, Base64FileInput, None] | Omit = omit,
         sort_by: Optional[FieldRefParam] | Omit = omit,
         sort_case_sensitive: Optional[bool] | Omit = omit,
         sort_direction: Literal["ASC", "DESC"] | Omit = omit,
@@ -156,9 +156,11 @@ class ScreenerResource(SyncAPIResource):
 
           filters: Filter conditions to apply.
 
-          page_size: Maximum number of results per page.
+          page_size: The number of items to return per page (only used when page_token is not
+              provided)
 
-          page_token: Opaque token for cursor-based pagination.
+          page_token: Token for retrieving the next page of results. Contains encoded pagination state
+              (limit + offset). When provided, page_size is ignored.
 
           sort_by: Field to sort results by.
 
@@ -291,7 +293,7 @@ class AsyncScreenerResource(AsyncAPIResource):
         field_filter: Optional[Iterable[FieldRefParam]] | Omit = omit,
         filters: Optional[Iterable[SearchFilterParam]] | Omit = omit,
         page_size: Optional[int] | Omit = omit,
-        page_token: Optional[str] | Omit = omit,
+        page_token: Union[str, Base64FileInput, None] | Omit = omit,
         sort_by: Optional[FieldRefParam] | Omit = omit,
         sort_case_sensitive: Optional[bool] | Omit = omit,
         sort_direction: Literal["ASC", "DESC"] | Omit = omit,
@@ -318,9 +320,11 @@ class AsyncScreenerResource(AsyncAPIResource):
 
           filters: Filter conditions to apply.
 
-          page_size: Maximum number of results per page.
+          page_size: The number of items to return per page (only used when page_token is not
+              provided)
 
-          page_token: Opaque token for cursor-based pagination.
+          page_token: Token for retrieving the next page of results. Contains encoded pagination state
+              (limit + offset). When provided, page_size is ignored.
 
           sort_by: Field to sort results by.
 

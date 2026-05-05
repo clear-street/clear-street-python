@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 
-from typing import Iterable, Optional
-from typing_extensions import Literal, Required, TypedDict
+from typing import Union, Iterable, Optional
+from typing_extensions import Literal, Required, Annotated, TypedDict
 
+from ..._types import Base64FileInput
+from ..._utils import PropertyInfo
 from .field_ref_param import FieldRefParam
 from .search_filter_param import SearchFilterParam
 
@@ -19,10 +21,17 @@ class ScreenerSearchScreenerParams(TypedDict, total=False):
     """Filter conditions to apply."""
 
     page_size: Optional[int]
-    """Maximum number of results per page."""
+    """
+    The number of items to return per page (only used when page_token is not
+    provided)
+    """
 
-    page_token: Optional[str]
-    """Opaque token for cursor-based pagination."""
+    page_token: Annotated[Union[str, Base64FileInput, None], PropertyInfo(format="base64")]
+    """Token for retrieving the next page of results.
+
+    Contains encoded pagination state (limit + offset). When provided, page_size is
+    ignored.
+    """
 
     sort_by: Optional[FieldRefParam]
     """Field to sort results by."""

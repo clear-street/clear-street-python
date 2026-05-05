@@ -14,7 +14,7 @@ from clear_street.types import SecurityType
 
 Methods:
 
-- <code title="get /v1/ws">client.v1.<a href="./src/clear_street/resources/v1/v1.py">ws</a>() -> None</code>
+- <code title="get /v1/ws">client.v1.<a href="./src/clear_street/resources/v1/v1.py">websocket_handler</a>() -> None</code>
 
 ## Accounts
 
@@ -23,11 +23,11 @@ Types:
 ```python
 from clear_street.types.v1 import (
     Account,
-    AccountKind,
     AccountList,
     AccountSettings,
     AccountStatus,
-    AccountSubkind,
+    AccountSubtype,
+    AccountType,
     RiskSettings,
     AccountGetAccountByIDResponse,
     AccountGetAccountsResponse,
@@ -185,7 +185,7 @@ from clear_street.types.v1 import (
     OptionsContractList,
     InstrumentGetInstrumentByIDResponse,
     InstrumentGetInstrumentsResponse,
-    InstrumentSearchResponse,
+    InstrumentSearchInstrumentsResponse,
 )
 ```
 
@@ -193,7 +193,7 @@ Methods:
 
 - <code title="get /v1/instruments/{instrument_id}">client.v1.instruments.<a href="./src/clear_street/resources/v1/instruments/instruments.py">get_instrument_by_id</a>(instrument_id, \*\*<a href="src/clear_street/types/v1/instrument_get_instrument_by_id_params.py">params</a>) -> <a href="./src/clear_street/types/v1/instrument_get_instrument_by_id_response.py">InstrumentGetInstrumentByIDResponse</a></code>
 - <code title="get /v1/instruments">client.v1.instruments.<a href="./src/clear_street/resources/v1/instruments/instruments.py">get_instruments</a>(\*\*<a href="src/clear_street/types/v1/instrument_get_instruments_params.py">params</a>) -> <a href="./src/clear_street/types/v1/instrument_get_instruments_response.py">InstrumentGetInstrumentsResponse</a></code>
-- <code title="get /v1/instruments/search">client.v1.instruments.<a href="./src/clear_street/resources/v1/instruments/instruments.py">search</a>(\*\*<a href="src/clear_street/types/v1/instrument_search_params.py">params</a>) -> <a href="./src/clear_street/types/v1/instrument_search_response.py">InstrumentSearchResponse</a></code>
+- <code title="get /v1/instruments/search">client.v1.instruments.<a href="./src/clear_street/resources/v1/instruments/instruments.py">search_instruments</a>(\*\*<a href="src/clear_street/types/v1/instrument_search_instruments_params.py">params</a>) -> <a href="./src/clear_street/types/v1/instrument_search_instruments_response.py">InstrumentSearchInstrumentsResponse</a></code>
 
 ### AnalystReporting
 
@@ -304,12 +304,12 @@ Methods:
 Types:
 
 ```python
-from clear_street.types.v1.instruments import OptionContractsResponse
+from clear_street.types.v1.instruments import OptionGetOptionContractsResponse
 ```
 
 Methods:
 
-- <code title="get /v1/instruments/options/contracts">client.v1.instruments.options.<a href="./src/clear_street/resources/v1/instruments/options.py">contracts</a>(\*\*<a href="src/clear_street/types/v1/instruments/option_contracts_params.py">params</a>) -> <a href="./src/clear_street/types/v1/instruments/option_contracts_response.py">OptionContractsResponse</a></code>
+- <code title="get /v1/instruments/options/contracts">client.v1.instruments.options.<a href="./src/clear_street/resources/v1/instruments/options.py">get_option_contracts</a>(\*\*<a href="src/clear_street/types/v1/instruments/option_get_option_contracts_params.py">params</a>) -> <a href="./src/clear_street/types/v1/instruments/option_get_option_contracts_response.py">OptionGetOptionContractsResponse</a></code>
 
 ## MarketData
 
@@ -422,13 +422,13 @@ Types:
 from clear_street.types.v1.omni_ai import (
     EntitlementAgreementResource,
     EntitlementAgreementResourceList,
-    EntitlementAgreementListEntitlementAgreementsResponse,
+    EntitlementAgreementGetEntitlementAgreementsResponse,
 )
 ```
 
 Methods:
 
-- <code title="get /v1/omni-ai/entitlement-agreements">client.v1.omni_ai.entitlement_agreements.<a href="./src/clear_street/resources/v1/omni_ai/entitlement_agreements.py">list_entitlement_agreements</a>() -> <a href="./src/clear_street/types/v1/omni_ai/entitlement_agreement_list_entitlement_agreements_response.py">EntitlementAgreementListEntitlementAgreementsResponse</a></code>
+- <code title="get /v1/omni-ai/entitlement-agreements">client.v1.omni_ai.entitlement_agreements.<a href="./src/clear_street/resources/v1/omni_ai/entitlement_agreements.py">get_entitlement_agreements</a>() -> <a href="./src/clear_street/types/v1/omni_ai/entitlement_agreement_get_entitlement_agreements_response.py">EntitlementAgreementGetEntitlementAgreementsResponse</a></code>
 
 ### Entitlements
 
@@ -441,7 +441,7 @@ from clear_street.types.v1.omni_ai import (
     EntitlementResourceList,
     EntitlementCreateEntitlementsResponse,
     EntitlementDeleteEntitlementResponse,
-    EntitlementListEntitlementsResponse,
+    EntitlementGetEntitlementsResponse,
 )
 ```
 
@@ -449,20 +449,23 @@ Methods:
 
 - <code title="post /v1/omni-ai/entitlements">client.v1.omni_ai.entitlements.<a href="./src/clear_street/resources/v1/omni_ai/entitlements.py">create_entitlements</a>(\*\*<a href="src/clear_street/types/v1/omni_ai/entitlement_create_entitlements_params.py">params</a>) -> <a href="./src/clear_street/types/v1/omni_ai/entitlement_create_entitlements_response.py">EntitlementCreateEntitlementsResponse</a></code>
 - <code title="delete /v1/omni-ai/entitlements/{entitlement_id}">client.v1.omni_ai.entitlements.<a href="./src/clear_street/resources/v1/omni_ai/entitlements.py">delete_entitlement</a>(entitlement_id) -> <a href="./src/clear_street/types/v1/omni_ai/entitlement_delete_entitlement_response.py">EntitlementDeleteEntitlementResponse</a></code>
-- <code title="get /v1/omni-ai/entitlements">client.v1.omni_ai.entitlements.<a href="./src/clear_street/resources/v1/omni_ai/entitlements.py">list_entitlements</a>(\*\*<a href="src/clear_street/types/v1/omni_ai/entitlement_list_entitlements_params.py">params</a>) -> <a href="./src/clear_street/types/v1/omni_ai/entitlement_list_entitlements_response.py">EntitlementListEntitlementsResponse</a></code>
+- <code title="get /v1/omni-ai/entitlements">client.v1.omni_ai.entitlements.<a href="./src/clear_street/resources/v1/omni_ai/entitlements.py">get_entitlements</a>(\*\*<a href="src/clear_street/types/v1/omni_ai/entitlement_get_entitlements_params.py">params</a>) -> <a href="./src/clear_street/types/v1/omni_ai/entitlement_get_entitlements_response.py">EntitlementGetEntitlementsResponse</a></code>
 
 ### Messages
 
 Types:
 
 ```python
-from clear_street.types.v1.omni_ai import MessageFeedbackResponse, MessageGetMessageResponse
+from clear_street.types.v1.omni_ai import (
+    MessageGetMessageByIDResponse,
+    MessageSubmitFeedbackResponse,
+)
 ```
 
 Methods:
 
-- <code title="post /v1/omni-ai/messages/{message_id}/feedback">client.v1.omni_ai.messages.<a href="./src/clear_street/resources/v1/omni_ai/messages.py">feedback</a>(message_id, \*\*<a href="src/clear_street/types/v1/omni_ai/message_feedback_params.py">params</a>) -> <a href="./src/clear_street/types/v1/omni_ai/message_feedback_response.py">MessageFeedbackResponse</a></code>
-- <code title="get /v1/omni-ai/messages/{message_id}">client.v1.omni_ai.messages.<a href="./src/clear_street/resources/v1/omni_ai/messages.py">get_message</a>(message_id, \*\*<a href="src/clear_street/types/v1/omni_ai/message_get_message_params.py">params</a>) -> <a href="./src/clear_street/types/v1/omni_ai/message_get_message_response.py">MessageGetMessageResponse</a></code>
+- <code title="get /v1/omni-ai/messages/{message_id}">client.v1.omni_ai.messages.<a href="./src/clear_street/resources/v1/omni_ai/messages.py">get_message_by_id</a>(message_id, \*\*<a href="src/clear_street/types/v1/omni_ai/message_get_message_by_id_params.py">params</a>) -> <a href="./src/clear_street/types/v1/omni_ai/message_get_message_by_id_response.py">MessageGetMessageByIDResponse</a></code>
+- <code title="post /v1/omni-ai/messages/{message_id}/feedback">client.v1.omni_ai.messages.<a href="./src/clear_street/resources/v1/omni_ai/messages.py">submit_feedback</a>(message_id, \*\*<a href="src/clear_street/types/v1/omni_ai/message_submit_feedback_params.py">params</a>) -> <a href="./src/clear_street/types/v1/omni_ai/message_submit_feedback_response.py">MessageSubmitFeedbackResponse</a></code>
 
 ### Responses
 
@@ -471,14 +474,14 @@ Types:
 ```python
 from clear_street.types.v1.omni_ai import (
     ResponseCancelResponseResponse,
-    ResponseGetResponseResponse,
+    ResponseGetResponseByIDResponse,
 )
 ```
 
 Methods:
 
 - <code title="delete /v1/omni-ai/responses/{response_id}">client.v1.omni_ai.responses.<a href="./src/clear_street/resources/v1/omni_ai/responses.py">cancel_response</a>(response_id, \*\*<a href="src/clear_street/types/v1/omni_ai/response_cancel_response_params.py">params</a>) -> <a href="./src/clear_street/types/v1/omni_ai/response_cancel_response_response.py">ResponseCancelResponseResponse</a></code>
-- <code title="get /v1/omni-ai/responses/{response_id}">client.v1.omni_ai.responses.<a href="./src/clear_street/resources/v1/omni_ai/responses.py">get_response</a>(response_id, \*\*<a href="src/clear_street/types/v1/omni_ai/response_get_response_params.py">params</a>) -> <a href="./src/clear_street/types/v1/omni_ai/response_get_response_response.py">ResponseGetResponseResponse</a></code>
+- <code title="get /v1/omni-ai/responses/{response_id}">client.v1.omni_ai.responses.<a href="./src/clear_street/resources/v1/omni_ai/responses.py">get_response_by_id</a>(response_id, \*\*<a href="src/clear_street/types/v1/omni_ai/response_get_response_by_id_params.py">params</a>) -> <a href="./src/clear_street/types/v1/omni_ai/response_get_response_by_id_response.py">ResponseGetResponseByIDResponse</a></code>
 
 ### Threads
 
@@ -487,18 +490,18 @@ Types:
 ```python
 from clear_street.types.v1.omni_ai import (
     ThreadCreateThreadResponse,
-    ThreadGetThreadResponse,
-    ThreadListThreadsResponse,
-    ThreadResponseResponse,
+    ThreadGetThreadByIDResponse,
+    ThreadGetThreadResponseResponse,
+    ThreadGetThreadsResponse,
 )
 ```
 
 Methods:
 
 - <code title="post /v1/omni-ai/threads">client.v1.omni_ai.threads.<a href="./src/clear_street/resources/v1/omni_ai/threads/threads.py">create_thread</a>(\*\*<a href="src/clear_street/types/v1/omni_ai/thread_create_thread_params.py">params</a>) -> <a href="./src/clear_street/types/v1/omni_ai/thread_create_thread_response.py">ThreadCreateThreadResponse</a></code>
-- <code title="get /v1/omni-ai/threads/{thread_id}">client.v1.omni_ai.threads.<a href="./src/clear_street/resources/v1/omni_ai/threads/threads.py">get_thread</a>(thread_id, \*\*<a href="src/clear_street/types/v1/omni_ai/thread_get_thread_params.py">params</a>) -> <a href="./src/clear_street/types/v1/omni_ai/thread_get_thread_response.py">ThreadGetThreadResponse</a></code>
-- <code title="get /v1/omni-ai/threads">client.v1.omni_ai.threads.<a href="./src/clear_street/resources/v1/omni_ai/threads/threads.py">list_threads</a>(\*\*<a href="src/clear_street/types/v1/omni_ai/thread_list_threads_params.py">params</a>) -> <a href="./src/clear_street/types/v1/omni_ai/thread_list_threads_response.py">ThreadListThreadsResponse</a></code>
-- <code title="get /v1/omni-ai/threads/{thread_id}/response">client.v1.omni_ai.threads.<a href="./src/clear_street/resources/v1/omni_ai/threads/threads.py">response</a>(thread_id, \*\*<a href="src/clear_street/types/v1/omni_ai/thread_response_params.py">params</a>) -> <a href="./src/clear_street/types/v1/omni_ai/thread_response_response.py">ThreadResponseResponse</a></code>
+- <code title="get /v1/omni-ai/threads/{thread_id}">client.v1.omni_ai.threads.<a href="./src/clear_street/resources/v1/omni_ai/threads/threads.py">get_thread_by_id</a>(thread_id, \*\*<a href="src/clear_street/types/v1/omni_ai/thread_get_thread_by_id_params.py">params</a>) -> <a href="./src/clear_street/types/v1/omni_ai/thread_get_thread_by_id_response.py">ThreadGetThreadByIDResponse</a></code>
+- <code title="get /v1/omni-ai/threads/{thread_id}/response">client.v1.omni_ai.threads.<a href="./src/clear_street/resources/v1/omni_ai/threads/threads.py">get_thread_response</a>(thread_id, \*\*<a href="src/clear_street/types/v1/omni_ai/thread_get_thread_response_params.py">params</a>) -> <a href="./src/clear_street/types/v1/omni_ai/thread_get_thread_response_response.py">ThreadGetThreadResponseResponse</a></code>
+- <code title="get /v1/omni-ai/threads">client.v1.omni_ai.threads.<a href="./src/clear_street/resources/v1/omni_ai/threads/threads.py">get_threads</a>(\*\*<a href="src/clear_street/types/v1/omni_ai/thread_get_threads_params.py">params</a>) -> <a href="./src/clear_street/types/v1/omni_ai/thread_get_threads_response.py">ThreadGetThreadsResponse</a></code>
 
 #### Messages
 
@@ -507,14 +510,14 @@ Types:
 ```python
 from clear_street.types.v1.omni_ai.threads import (
     MessageCreateMessageResponse,
-    MessageListMessagesResponse,
+    MessageGetMessagesResponse,
 )
 ```
 
 Methods:
 
 - <code title="post /v1/omni-ai/threads/{thread_id}/messages">client.v1.omni_ai.threads.messages.<a href="./src/clear_street/resources/v1/omni_ai/threads/messages.py">create_message</a>(thread_id, \*\*<a href="src/clear_street/types/v1/omni_ai/threads/message_create_message_params.py">params</a>) -> <a href="./src/clear_street/types/v1/omni_ai/threads/message_create_message_response.py">MessageCreateMessageResponse</a></code>
-- <code title="get /v1/omni-ai/threads/{thread_id}/messages">client.v1.omni_ai.threads.messages.<a href="./src/clear_street/resources/v1/omni_ai/threads/messages.py">list_messages</a>(thread_id, \*\*<a href="src/clear_street/types/v1/omni_ai/threads/message_list_messages_params.py">params</a>) -> <a href="./src/clear_street/types/v1/omni_ai/threads/message_list_messages_response.py">MessageListMessagesResponse</a></code>
+- <code title="get /v1/omni-ai/threads/{thread_id}/messages">client.v1.omni_ai.threads.messages.<a href="./src/clear_street/resources/v1/omni_ai/threads/messages.py">get_messages</a>(thread_id, \*\*<a href="src/clear_street/types/v1/omni_ai/threads/message_get_messages_params.py">params</a>) -> <a href="./src/clear_street/types/v1/omni_ai/threads/message_get_messages_response.py">MessageGetMessagesResponse</a></code>
 
 ## SavedScreeners
 

@@ -18,8 +18,8 @@ from ....._response import (
     async_to_streamed_response_wrapper,
 )
 from ....._base_client import make_request_options
-from .....types.v1.omni_ai.threads import message_list_messages_params, message_create_message_params
-from .....types.v1.omni_ai.threads.message_list_messages_response import MessageListMessagesResponse
+from .....types.v1.omni_ai.threads import message_get_messages_params, message_create_message_params
+from .....types.v1.omni_ai.threads.message_get_messages_response import MessageGetMessagesResponse
 from .....types.v1.omni_ai.threads.message_create_message_response import MessageCreateMessageResponse
 
 __all__ = ["MessagesResource", "AsyncMessagesResource"]
@@ -103,7 +103,7 @@ class MessagesResource(SyncAPIResource):
             cast_to=MessageCreateMessageResponse,
         )
 
-    def list_messages(
+    def get_messages(
         self,
         thread_id: str,
         *,
@@ -116,7 +116,7 @@ class MessagesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MessageListMessagesResponse:
+    ) -> MessageGetMessagesResponse:
         """
         List finalized messages in a thread.
 
@@ -156,10 +156,10 @@ class MessagesResource(SyncAPIResource):
                         "page_size": page_size,
                         "page_token": page_token,
                     },
-                    message_list_messages_params.MessageListMessagesParams,
+                    message_get_messages_params.MessageGetMessagesParams,
                 ),
             ),
-            cast_to=MessageListMessagesResponse,
+            cast_to=MessageGetMessagesResponse,
         )
 
 
@@ -241,7 +241,7 @@ class AsyncMessagesResource(AsyncAPIResource):
             cast_to=MessageCreateMessageResponse,
         )
 
-    async def list_messages(
+    async def get_messages(
         self,
         thread_id: str,
         *,
@@ -254,7 +254,7 @@ class AsyncMessagesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> MessageListMessagesResponse:
+    ) -> MessageGetMessagesResponse:
         """
         List finalized messages in a thread.
 
@@ -294,10 +294,10 @@ class AsyncMessagesResource(AsyncAPIResource):
                         "page_size": page_size,
                         "page_token": page_token,
                     },
-                    message_list_messages_params.MessageListMessagesParams,
+                    message_get_messages_params.MessageGetMessagesParams,
                 ),
             ),
-            cast_to=MessageListMessagesResponse,
+            cast_to=MessageGetMessagesResponse,
         )
 
 
@@ -308,8 +308,8 @@ class MessagesResourceWithRawResponse:
         self.create_message = to_raw_response_wrapper(
             messages.create_message,
         )
-        self.list_messages = to_raw_response_wrapper(
-            messages.list_messages,
+        self.get_messages = to_raw_response_wrapper(
+            messages.get_messages,
         )
 
 
@@ -320,8 +320,8 @@ class AsyncMessagesResourceWithRawResponse:
         self.create_message = async_to_raw_response_wrapper(
             messages.create_message,
         )
-        self.list_messages = async_to_raw_response_wrapper(
-            messages.list_messages,
+        self.get_messages = async_to_raw_response_wrapper(
+            messages.get_messages,
         )
 
 
@@ -332,8 +332,8 @@ class MessagesResourceWithStreamingResponse:
         self.create_message = to_streamed_response_wrapper(
             messages.create_message,
         )
-        self.list_messages = to_streamed_response_wrapper(
-            messages.list_messages,
+        self.get_messages = to_streamed_response_wrapper(
+            messages.get_messages,
         )
 
 
@@ -344,6 +344,6 @@ class AsyncMessagesResourceWithStreamingResponse:
         self.create_message = async_to_streamed_response_wrapper(
             messages.create_message,
         )
-        self.list_messages = async_to_streamed_response_wrapper(
-            messages.list_messages,
+        self.get_messages = async_to_streamed_response_wrapper(
+            messages.get_messages,
         )

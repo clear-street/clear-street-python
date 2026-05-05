@@ -37,8 +37,8 @@ from ...._types import (
 from ...._utils import path_template, maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ....types.v1 import (
-    instrument_search_params,
     instrument_get_instruments_params,
+    instrument_search_instruments_params,
     instrument_get_instrument_by_id_params,
 )
 from ...._resource import SyncAPIResource, AsyncAPIResource
@@ -89,8 +89,8 @@ from .cash_flow_statements import (
     CashFlowStatementsResourceWithStreamingResponse,
     AsyncCashFlowStatementsResourceWithStreamingResponse,
 )
-from ....types.v1.instrument_search_response import InstrumentSearchResponse
 from ....types.v1.instrument_get_instruments_response import InstrumentGetInstrumentsResponse
+from ....types.v1.instrument_search_instruments_response import InstrumentSearchInstrumentsResponse
 from ....types.v1.instrument_get_instrument_by_id_response import InstrumentGetInstrumentByIDResponse
 
 __all__ = ["InstrumentsResource", "AsyncInstrumentsResource"]
@@ -281,24 +281,24 @@ class InstrumentsResource(SyncAPIResource):
             cast_to=InstrumentGetInstrumentsResponse,
         )
 
-    def search(
+    def search_instruments(
         self,
         *,
         q: str,
         asset_class: str | Omit = omit,
         country: str | Omit = omit,
         currency: str | Omit = omit,
-        cursor: str | Omit = omit,
         include_inactive: bool | Omit = omit,
         include_restricted: bool | Omit = omit,
-        limit: int | Omit = omit,
+        page_size: int | Omit = omit,
+        page_token: Union[str, Base64FileInput] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> InstrumentSearchResponse:
+    ) -> InstrumentSearchInstrumentsResponse:
         """
         Fast in-memory typeahead search over the loaded instrument universe.
 
@@ -321,15 +321,12 @@ class InstrumentsResource(SyncAPIResource):
 
           currency: Optional ISO currency filter (e.g., USD).
 
-          cursor: Opaque continuation cursor for show-more paging — pass the `next_page_token`
-              from a prior response. Same wire format as `page_token` on other paginated
-              endpoints.
-
           include_inactive: Include inactive instruments. Default false.
 
           include_restricted: Include restricted instruments. Default true (penalized in ranking).
 
-          limit: Maximum hits to return. Bounded [1, 100]. Default 20.
+          page_token: Token for retrieving the next page of results. Contains encoded pagination state
+              (limit + offset). When provided, page_size is ignored.
 
           extra_headers: Send extra headers
 
@@ -352,15 +349,15 @@ class InstrumentsResource(SyncAPIResource):
                         "asset_class": asset_class,
                         "country": country,
                         "currency": currency,
-                        "cursor": cursor,
                         "include_inactive": include_inactive,
                         "include_restricted": include_restricted,
-                        "limit": limit,
+                        "page_size": page_size,
+                        "page_token": page_token,
                     },
-                    instrument_search_params.InstrumentSearchParams,
+                    instrument_search_instruments_params.InstrumentSearchInstrumentsParams,
                 ),
             ),
-            cast_to=InstrumentSearchResponse,
+            cast_to=InstrumentSearchInstrumentsResponse,
         )
 
 
@@ -549,24 +546,24 @@ class AsyncInstrumentsResource(AsyncAPIResource):
             cast_to=InstrumentGetInstrumentsResponse,
         )
 
-    async def search(
+    async def search_instruments(
         self,
         *,
         q: str,
         asset_class: str | Omit = omit,
         country: str | Omit = omit,
         currency: str | Omit = omit,
-        cursor: str | Omit = omit,
         include_inactive: bool | Omit = omit,
         include_restricted: bool | Omit = omit,
-        limit: int | Omit = omit,
+        page_size: int | Omit = omit,
+        page_token: Union[str, Base64FileInput] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> InstrumentSearchResponse:
+    ) -> InstrumentSearchInstrumentsResponse:
         """
         Fast in-memory typeahead search over the loaded instrument universe.
 
@@ -589,15 +586,12 @@ class AsyncInstrumentsResource(AsyncAPIResource):
 
           currency: Optional ISO currency filter (e.g., USD).
 
-          cursor: Opaque continuation cursor for show-more paging — pass the `next_page_token`
-              from a prior response. Same wire format as `page_token` on other paginated
-              endpoints.
-
           include_inactive: Include inactive instruments. Default false.
 
           include_restricted: Include restricted instruments. Default true (penalized in ranking).
 
-          limit: Maximum hits to return. Bounded [1, 100]. Default 20.
+          page_token: Token for retrieving the next page of results. Contains encoded pagination state
+              (limit + offset). When provided, page_size is ignored.
 
           extra_headers: Send extra headers
 
@@ -620,15 +614,15 @@ class AsyncInstrumentsResource(AsyncAPIResource):
                         "asset_class": asset_class,
                         "country": country,
                         "currency": currency,
-                        "cursor": cursor,
                         "include_inactive": include_inactive,
                         "include_restricted": include_restricted,
-                        "limit": limit,
+                        "page_size": page_size,
+                        "page_token": page_token,
                     },
-                    instrument_search_params.InstrumentSearchParams,
+                    instrument_search_instruments_params.InstrumentSearchInstrumentsParams,
                 ),
             ),
-            cast_to=InstrumentSearchResponse,
+            cast_to=InstrumentSearchInstrumentsResponse,
         )
 
 
@@ -642,8 +636,8 @@ class InstrumentsResourceWithRawResponse:
         self.get_instruments = to_raw_response_wrapper(
             instruments.get_instruments,
         )
-        self.search = to_raw_response_wrapper(
-            instruments.search,
+        self.search_instruments = to_raw_response_wrapper(
+            instruments.search_instruments,
         )
 
     @cached_property
@@ -692,8 +686,8 @@ class AsyncInstrumentsResourceWithRawResponse:
         self.get_instruments = async_to_raw_response_wrapper(
             instruments.get_instruments,
         )
-        self.search = async_to_raw_response_wrapper(
-            instruments.search,
+        self.search_instruments = async_to_raw_response_wrapper(
+            instruments.search_instruments,
         )
 
     @cached_property
@@ -742,8 +736,8 @@ class InstrumentsResourceWithStreamingResponse:
         self.get_instruments = to_streamed_response_wrapper(
             instruments.get_instruments,
         )
-        self.search = to_streamed_response_wrapper(
-            instruments.search,
+        self.search_instruments = to_streamed_response_wrapper(
+            instruments.search_instruments,
         )
 
     @cached_property
@@ -792,8 +786,8 @@ class AsyncInstrumentsResourceWithStreamingResponse:
         self.get_instruments = async_to_streamed_response_wrapper(
             instruments.get_instruments,
         )
-        self.search = async_to_streamed_response_wrapper(
-            instruments.search,
+        self.search_instruments = async_to_streamed_response_wrapper(
+            instruments.search_instruments,
         )
 
     @cached_property

@@ -10,10 +10,10 @@ from ...._types import Base64FileInput
 from ...._utils import PropertyInfo
 from ..contract_type import ContractType
 
-__all__ = ["OptionContractsParams"]
+__all__ = ["OptionGetOptionContractsParams"]
 
 
-class OptionContractsParams(TypedDict, total=False):
+class OptionGetOptionContractsParams(TypedDict, total=False):
     contract_type: ContractType
     """Filter by contract type: CALL or PUT"""
 
@@ -32,5 +32,5 @@ class OptionContractsParams(TypedDict, total=False):
     underlier: str
     """Underlier symbol (e.g., AAPL, SPX)"""
 
-    underlier_instrument_id: str
+    underlying_instrument_id: str
     """OEMS instrument UUID or symbol of the underlying equity/index"""

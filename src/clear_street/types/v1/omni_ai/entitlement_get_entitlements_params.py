@@ -4,8 +4,8 @@ from __future__ import annotations
 
 from typing_extensions import TypedDict
 
-__all__ = ["EntitlementListEntitlementsParams"]
+__all__ = ["EntitlementGetEntitlementsParams"]
 
 
-class EntitlementListEntitlementsParams(TypedDict, total=False):
+class EntitlementGetEntitlementsParams(TypedDict, total=False):
     trading_account_id: int

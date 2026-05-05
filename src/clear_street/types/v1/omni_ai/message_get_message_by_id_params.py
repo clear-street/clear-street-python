@@ -4,9 +4,9 @@ from __future__ import annotations
 
 from typing_extensions import Required, TypedDict
 
-__all__ = ["ThreadResponseParams"]
+__all__ = ["MessageGetMessageByIDParams"]
 
 
-class ThreadResponseParams(TypedDict, total=False):
+class MessageGetMessageByIDParams(TypedDict, total=False):
     account_id: Required[int]
     """Account ID for the request"""

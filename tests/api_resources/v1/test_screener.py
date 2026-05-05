@@ -120,7 +120,7 @@ class TestScreener:
                 }
             ],
             page_size=25,
-            page_token="page_token",
+            page_token="U3RhaW5sZXNzIHJvY2tz",
             sort_by={
                 "name": "market_cap",
                 "lookback": "ONE_WEEK",
@@ -271,7 +271,7 @@ class TestAsyncScreener:
                 }
             ],
             page_size=25,
-            page_token="page_token",
+            page_token="U3RhaW5sZXNzIHJvY2tz",
             sort_by={
                 "name": "market_cap",
                 "lookback": "ONE_WEEK",
