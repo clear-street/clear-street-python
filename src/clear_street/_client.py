@@ -20,7 +20,11 @@ from ._types import (
     RequestOptions,
     not_given,
 )
-from ._utils import is_given, get_async_library
+from ._utils import (
+    is_given,
+    is_mapping_t,
+    get_async_library,
+)
 from ._compat import cached_property
 from ._version import __version__
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
@@ -32,8 +36,8 @@ from ._base_client import (
 )
 
 if TYPE_CHECKING:
-    from .resources import active
-    from .resources.active.active import ActiveResource, AsyncActiveResource
+    from .resources import v1
+    from .resources.v1.v1 import V1Resource, AsyncV1Resource
 
 __all__ = [
     "ENVIRONMENTS",
@@ -48,7 +52,7 @@ __all__ = [
 ]
 
 ENVIRONMENTS: Dict[str, str] = {
-    "production": "https://api-active.clearstreet.io",
+    "production": "https://api.clearstreet.com",
     "staging": "https://oems-api-gw.dev-public.clst.co",
 }
 
@@ -112,6 +116,15 @@ class ClearStreet(SyncAPIClient):
             except KeyError as exc:
                 raise ValueError(f"Unknown environment: {environment}") from exc
 
+        custom_headers_env = os.environ.get("CLEAR_STREET_CUSTOM_HEADERS")
+        if custom_headers_env is not None:
+            parsed: dict[str, str] = {}
+            for line in custom_headers_env.split("\n"):
+                colon = line.find(":")
+                if colon >= 0:
+                    parsed[line[:colon].strip()] = line[colon + 1 :].strip()
+            default_headers = {**parsed, **(default_headers if is_mapping_t(default_headers) else {})}
+
         super().__init__(
             version=__version__,
             base_url=base_url,
@@ -124,10 +137,11 @@ class ClearStreet(SyncAPIClient):
         )
 
     @cached_property
-    def active(self) -> ActiveResource:
-        from .resources.active import ActiveResource
+    def v1(self) -> V1Resource:
+        """Active Websocket."""
+        from .resources.v1 import V1Resource
 
-        return ActiveResource(self)
+        return V1Resource(self)
 
     @cached_property
     def with_raw_response(self) -> ClearStreetWithRawResponse:
@@ -314,6 +328,15 @@ class AsyncClearStreet(AsyncAPIClient):
             except KeyError as exc:
                 raise ValueError(f"Unknown environment: {environment}") from exc
 
+        custom_headers_env = os.environ.get("CLEAR_STREET_CUSTOM_HEADERS")
+        if custom_headers_env is not None:
+            parsed: dict[str, str] = {}
+            for line in custom_headers_env.split("\n"):
+                colon = line.find(":")
+                if colon >= 0:
+                    parsed[line[:colon].strip()] = line[colon + 1 :].strip()
+            default_headers = {**parsed, **(default_headers if is_mapping_t(default_headers) else {})}
+
         super().__init__(
             version=__version__,
             base_url=base_url,
@@ -326,10 +349,11 @@ class AsyncClearStreet(AsyncAPIClient):
         )
 
     @cached_property
-    def active(self) -> AsyncActiveResource:
-        from .resources.active import AsyncActiveResource
+    def v1(self) -> AsyncV1Resource:
+        """Active Websocket."""
+        from .resources.v1 import AsyncV1Resource
 
-        return AsyncActiveResource(self)
+        return AsyncV1Resource(self)
 
     @cached_property
     def with_raw_response(self) -> AsyncClearStreetWithRawResponse:
@@ -464,10 +488,11 @@ class ClearStreetWithRawResponse:
         self._client = client
 
     @cached_property
-    def active(self) -> active.ActiveResourceWithRawResponse:
-        from .resources.active import ActiveResourceWithRawResponse
+    def v1(self) -> v1.V1ResourceWithRawResponse:
+        """Active Websocket."""
+        from .resources.v1 import V1ResourceWithRawResponse
 
-        return ActiveResourceWithRawResponse(self._client.active)
+        return V1ResourceWithRawResponse(self._client.v1)
 
 
 class AsyncClearStreetWithRawResponse:
@@ -477,10 +502,11 @@ class AsyncClearStreetWithRawResponse:
         self._client = client
 
     @cached_property
-    def active(self) -> active.AsyncActiveResourceWithRawResponse:
-        from .resources.active import AsyncActiveResourceWithRawResponse
+    def v1(self) -> v1.AsyncV1ResourceWithRawResponse:
+        """Active Websocket."""
+        from .resources.v1 import AsyncV1ResourceWithRawResponse
 
-        return AsyncActiveResourceWithRawResponse(self._client.active)
+        return AsyncV1ResourceWithRawResponse(self._client.v1)
 
 
 class ClearStreetWithStreamedResponse:
@@ -490,10 +516,11 @@ class ClearStreetWithStreamedResponse:
         self._client = client
 
     @cached_property
-    def active(self) -> active.ActiveResourceWithStreamingResponse:
-        from .resources.active import ActiveResourceWithStreamingResponse
+    def v1(self) -> v1.V1ResourceWithStreamingResponse:
+        """Active Websocket."""
+        from .resources.v1 import V1ResourceWithStreamingResponse
 
-        return ActiveResourceWithStreamingResponse(self._client.active)
+        return V1ResourceWithStreamingResponse(self._client.v1)
 
 
 class AsyncClearStreetWithStreamedResponse:
@@ -503,10 +530,11 @@ class AsyncClearStreetWithStreamedResponse:
         self._client = client
 
     @cached_property
-    def active(self) -> active.AsyncActiveResourceWithStreamingResponse:
-        from .resources.active import AsyncActiveResourceWithStreamingResponse
+    def v1(self) -> v1.AsyncV1ResourceWithStreamingResponse:
+        """Active Websocket."""
+        from .resources.v1 import AsyncV1ResourceWithStreamingResponse
 
-        return AsyncActiveResourceWithStreamingResponse(self._client.active)
+        return AsyncV1ResourceWithStreamingResponse(self._client.v1)
 
 
 Client = ClearStreet

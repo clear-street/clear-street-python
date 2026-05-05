@@ -1,0 +1,46 @@
+# File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+from __future__ import annotations
+
+from typing import Union
+from typing_extensions import Required, Annotated, TypedDict
+
+from ..._types import Base64FileInput
+from ..._utils import PropertyInfo
+
+__all__ = ["InstrumentSearchInstrumentsParams"]
+
+
+class InstrumentSearchInstrumentsParams(TypedDict, total=False):
+    q: Required[str]
+    """
+    Search term applied case-insensitively to ticker symbols, alt-IDs
+    (CUSIP/ISIN/OPRA-root/CMS), and company names.
+    """
+
+    asset_class: str
+    """Comma-separated asset classes (EQUITY|OPTION|WARRANT|BOND|FX|OTHER).
+
+    Defaults to EQUITY.
+    """
+
+    country: str
+    """Optional listing-country filter (e.g., US)."""
+
+    currency: str
+    """Optional ISO currency filter (e.g., USD)."""
+
+    include_inactive: bool
+    """Include inactive instruments. Default false."""
+
+    include_restricted: bool
+    """Include restricted instruments. Default true (penalized in ranking)."""
+
+    page_size: int
+
+    page_token: Annotated[Union[str, Base64FileInput], PropertyInfo(format="base64")]
+    """Token for retrieving the next page of results.
+
+    Contains encoded pagination state (limit + offset). When provided, page_size is
+    ignored.
+    """
