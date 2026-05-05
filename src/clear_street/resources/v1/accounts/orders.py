@@ -30,13 +30,11 @@ from ...._response import (
 )
 from ...._base_client import make_request_options
 from ....types.v1.accounts import (
-    TimeInForce,
     order_get_orders_params,
     order_replace_order_params,
     order_submit_orders_params,
     order_cancel_all_open_orders_params,
 )
-from ....types.v1.accounts.time_in_force import TimeInForce
 from ....types.v1.accounts.order_get_orders_response import OrderGetOrdersResponse
 from ....types.v1.accounts.order_replace_order_response import OrderReplaceOrderResponse
 from ....types.v1.accounts.order_submit_orders_response import OrderSubmitOrdersResponse
@@ -301,7 +299,19 @@ class OrdersResource(SyncAPIResource):
         limit_price: Optional[str] | Omit = omit,
         quantity: Optional[str] | Omit = omit,
         stop_price: Optional[str] | Omit = omit,
-        time_in_force: TimeInForce | Omit = omit,
+        time_in_force: Literal[
+            "DAY",
+            "GOOD_TILL_CANCEL",
+            "IMMEDIATE_OR_CANCEL",
+            "FILL_OR_KILL",
+            "GOOD_TILL_DATE",
+            "AT_THE_OPENING",
+            "AT_THE_CLOSE",
+            "GOOD_TILL_CROSSING",
+            "GOOD_THROUGH_CROSSING",
+            "AT_CROSSING",
+        ]
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -636,7 +646,19 @@ class AsyncOrdersResource(AsyncAPIResource):
         limit_price: Optional[str] | Omit = omit,
         quantity: Optional[str] | Omit = omit,
         stop_price: Optional[str] | Omit = omit,
-        time_in_force: TimeInForce | Omit = omit,
+        time_in_force: Literal[
+            "DAY",
+            "GOOD_TILL_CANCEL",
+            "IMMEDIATE_OR_CANCEL",
+            "FILL_OR_KILL",
+            "GOOD_TILL_DATE",
+            "AT_THE_OPENING",
+            "AT_THE_CLOSE",
+            "GOOD_TILL_CROSSING",
+            "GOOD_THROUGH_CROSSING",
+            "AT_CROSSING",
+        ]
+        | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
