@@ -115,7 +115,7 @@ class OrderNewOrderRequest(TypedDict, total=False):
     """
 
     instrument_id: Optional[str]
-    """OEMS instrument UUID. Either `symbol` or `instrument_id` must be provided."""
+    """OEMS instrument UUID"""
 
     limit_offset: Optional[str]
     """Limit offset for trailing stop-limit orders (signed)"""
