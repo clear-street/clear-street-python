@@ -163,10 +163,10 @@ class OrderNewOrderRequest(TypedDict, total=False):
     be provided.
     """
 
-    trailing_offset_amt: Optional[str]
+    trailing_offset: Optional[str]
     """Trailing offset amount (required for trailing orders)"""
 
-    trailing_offset_amt_type: Optional[TrailingOffsetType]
+    trailing_offset_type: Optional[TrailingOffsetType]
     """Trailing offset type (PRICE or PERCENT_BPS)"""
 
 

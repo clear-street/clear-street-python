@@ -4,4 +4,4 @@ from typing_extensions import Literal, TypeAlias
 
 __all__ = ["TrailingOffsetType"]
 
-TrailingOffsetType: TypeAlias = Literal["PRICE", "PERCENT_BPS"]
+TrailingOffsetType: TypeAlias = Literal["PRICE", "BPS"]

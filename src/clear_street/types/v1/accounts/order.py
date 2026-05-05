@@ -103,10 +103,10 @@ class Order(BaseModel):
     stop_price: Optional[str] = None
     """Stop price (for STOP and STOP_LIMIT orders)"""
 
-    trailing_offset_amt: Optional[str] = None
+    trailing_offset: Optional[str] = None
     """Trailing offset amount for trailing orders"""
 
-    trailing_offset_amt_type: Optional[TrailingOffsetType] = None
+    trailing_offset_type: Optional[TrailingOffsetType] = None
     """Trailing offset type for trailing orders"""
 
     trailing_watermark_px: Optional[str] = None
