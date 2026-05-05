@@ -4,4 +4,4 @@ from typing_extensions import Literal, TypeAlias
 
 __all__ = ["AccountKind"]
 
-AccountKind: TypeAlias = Literal["HOUSE", "PAB", "CUSTOMER", "COUNTERPARTY", "OTHER"]
+AccountKind: TypeAlias = Literal["CUSTOMER", "OTHER"]
