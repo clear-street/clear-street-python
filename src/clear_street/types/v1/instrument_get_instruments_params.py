@@ -25,10 +25,8 @@ class InstrumentGetInstrumentsParams(TypedDict, total=False):
     instrument_ids: SequenceNotStr[str]
     """Comma-separated OEMS instrument UUIDs"""
 
-    instrument_type: Literal[
-        "COMMON_STOCK", "PREFERRED_STOCK", "CORPORATE_BOND", "OPTION", "FUTURE", "WARRANT", "CASH", "OTHER"
-    ]
-    """Filter by instrument type. If omitted, returns all types."""
+    instrument_type: Literal["COMMON_STOCK", "PREFERRED_STOCK", "OPTION", "CASH", "OTHER"]
+    """Filter by instrument type. If omitted, returns all supported instrument types."""
 
     is_liquidation_only: bool
     """Filter by liquidation only status"""

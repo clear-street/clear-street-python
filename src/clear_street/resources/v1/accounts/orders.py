@@ -72,10 +72,7 @@ class OrdersResource(SyncAPIResource):
         account_id: int,
         *,
         instrument_ids: SequenceNotStr[str] | Omit = omit,
-        instrument_type: Literal[
-            "COMMON_STOCK", "PREFERRED_STOCK", "CORPORATE_BOND", "OPTION", "FUTURE", "WARRANT", "CASH", "OTHER"
-        ]
-        | Omit = omit,
+        instrument_type: Literal["COMMON_STOCK", "PREFERRED_STOCK", "OPTION", "CASH", "OTHER"] | Omit = omit,
         side: Literal["BUY", "SELL", "SELL_SHORT", "OTHER"] | Omit = omit,
         type: Literal["MARKET", "LIMIT", "STOP", "STOP_LIMIT", "TRAILING_STOP", "TRAILING_STOP_LIMIT", "OTHER"]
         | Omit = omit,
@@ -200,10 +197,7 @@ class OrdersResource(SyncAPIResource):
         *,
         from_: Union[str, datetime] | Omit = omit,
         instrument_ids: SequenceNotStr[str] | Omit = omit,
-        instrument_type: Literal[
-            "COMMON_STOCK", "PREFERRED_STOCK", "CORPORATE_BOND", "OPTION", "FUTURE", "WARRANT", "CASH", "OTHER"
-        ]
-        | Omit = omit,
+        instrument_type: Literal["COMMON_STOCK", "PREFERRED_STOCK", "OPTION", "CASH", "OTHER"] | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         status: List[
@@ -419,10 +413,7 @@ class AsyncOrdersResource(AsyncAPIResource):
         account_id: int,
         *,
         instrument_ids: SequenceNotStr[str] | Omit = omit,
-        instrument_type: Literal[
-            "COMMON_STOCK", "PREFERRED_STOCK", "CORPORATE_BOND", "OPTION", "FUTURE", "WARRANT", "CASH", "OTHER"
-        ]
-        | Omit = omit,
+        instrument_type: Literal["COMMON_STOCK", "PREFERRED_STOCK", "OPTION", "CASH", "OTHER"] | Omit = omit,
         side: Literal["BUY", "SELL", "SELL_SHORT", "OTHER"] | Omit = omit,
         type: Literal["MARKET", "LIMIT", "STOP", "STOP_LIMIT", "TRAILING_STOP", "TRAILING_STOP_LIMIT", "OTHER"]
         | Omit = omit,
@@ -547,10 +538,7 @@ class AsyncOrdersResource(AsyncAPIResource):
         *,
         from_: Union[str, datetime] | Omit = omit,
         instrument_ids: SequenceNotStr[str] | Omit = omit,
-        instrument_type: Literal[
-            "COMMON_STOCK", "PREFERRED_STOCK", "CORPORATE_BOND", "OPTION", "FUTURE", "WARRANT", "CASH", "OTHER"
-        ]
-        | Omit = omit,
+        instrument_type: Literal["COMMON_STOCK", "PREFERRED_STOCK", "OPTION", "CASH", "OTHER"] | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         status: List[

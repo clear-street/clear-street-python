@@ -204,10 +204,7 @@ class InstrumentsResource(SyncAPIResource):
         easy_to_borrow: bool | Omit = omit,
         id_filter: str | Omit = omit,
         instrument_ids: SequenceNotStr[str] | Omit = omit,
-        instrument_type: Literal[
-            "COMMON_STOCK", "PREFERRED_STOCK", "CORPORATE_BOND", "OPTION", "FUTURE", "WARRANT", "CASH", "OTHER"
-        ]
-        | Omit = omit,
+        instrument_type: Literal["COMMON_STOCK", "PREFERRED_STOCK", "OPTION", "CASH", "OTHER"] | Omit = omit,
         is_liquidation_only: bool | Omit = omit,
         is_marginable: bool | Omit = omit,
         is_restricted: bool | Omit = omit,
@@ -234,7 +231,7 @@ class InstrumentsResource(SyncAPIResource):
 
           instrument_ids: Comma-separated OEMS instrument UUIDs
 
-          instrument_type: Filter by instrument type. If omitted, returns all types.
+          instrument_type: Filter by instrument type. If omitted, returns all supported instrument types.
 
           is_liquidation_only: Filter by liquidation only status
 
@@ -475,10 +472,7 @@ class AsyncInstrumentsResource(AsyncAPIResource):
         easy_to_borrow: bool | Omit = omit,
         id_filter: str | Omit = omit,
         instrument_ids: SequenceNotStr[str] | Omit = omit,
-        instrument_type: Literal[
-            "COMMON_STOCK", "PREFERRED_STOCK", "CORPORATE_BOND", "OPTION", "FUTURE", "WARRANT", "CASH", "OTHER"
-        ]
-        | Omit = omit,
+        instrument_type: Literal["COMMON_STOCK", "PREFERRED_STOCK", "OPTION", "CASH", "OTHER"] | Omit = omit,
         is_liquidation_only: bool | Omit = omit,
         is_marginable: bool | Omit = omit,
         is_restricted: bool | Omit = omit,
@@ -505,7 +499,7 @@ class AsyncInstrumentsResource(AsyncAPIResource):
 
           instrument_ids: Comma-separated OEMS instrument UUIDs
 
-          instrument_type: Filter by instrument type. If omitted, returns all types.
+          instrument_type: Filter by instrument type. If omitted, returns all supported instrument types.
 
           is_liquidation_only: Filter by liquidation only status
 
