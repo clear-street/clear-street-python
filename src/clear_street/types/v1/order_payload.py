@@ -6,7 +6,6 @@ from ..._models import BaseModel
 from .accounts.side import Side
 from ..security_type import SecurityType
 from .accounts.order_type import OrderType
-from .order_strategy_type import OrderStrategyType
 from .accounts.time_in_force import TimeInForce
 
 __all__ = ["OrderPayload"]
@@ -45,6 +44,3 @@ class OrderPayload(BaseModel):
 
     stop_price: Optional[str] = None
     """Stop price (required for STOP and STOP_LIMIT orders)"""
-
-    strategy: Optional[OrderStrategyType] = None
-    """Execution strategy (simplified enum, not the full strategy params for now)"""

@@ -9,7 +9,7 @@ from clear_street.types import APIError, BaseResponse, ResponseMetadata
 Types:
 
 ```python
-from clear_street.types import APIDecimal64, SecurityType
+from clear_street.types import SecurityType
 ```
 
 Methods:
@@ -67,24 +67,14 @@ Types:
 
 ```python
 from clear_street.types.v1.accounts import (
-    ApStrategy,
-    BaseStrategyParams,
-    DarkStrategy,
-    DmaStrategy,
     Order,
     OrderList,
     OrderStatus,
-    OrderStrategy,
     OrderType,
-    PovStrategy,
     QueueState,
     Side,
-    SorStrategy,
     TimeInForce,
     TrailingOffsetType,
-    TwapStrategy,
-    Urgency,
-    VwapStrategy,
     OrderCancelAllOpenOrdersResponse,
     OrderCancelOpenOrderResponse,
     OrderGetOrderByIDResponse,
@@ -408,7 +398,6 @@ from clear_street.types.v1 import (
     OpenEntitlementConsentAction,
     OpenScreenerAction,
     OrderPayload,
-    OrderStrategyType,
     PrefillOrderAction,
     PrefillOrderActionType,
     PromptButtonAction,

@@ -9,7 +9,6 @@ from .order_type import OrderType
 from .queue_state import QueueState
 from .order_status import OrderStatus
 from .time_in_force import TimeInForce
-from .order_strategy import OrderStrategy
 from ...security_type import SecurityType
 from .trailing_offset_type import TrailingOffsetType
 
@@ -103,9 +102,6 @@ class Order(BaseModel):
 
     stop_price: Optional[str] = None
     """Stop price (for STOP and STOP_LIMIT orders)"""
-
-    strategy: Optional[OrderStrategy] = None
-    """Execution strategy for this order"""
 
     trailing_offset_amt: Optional[str] = None
     """Trailing offset amount for trailing orders"""
