@@ -13,9 +13,7 @@ class OrderCancelAllOpenOrdersParams(TypedDict, total=False):
     instrument_ids: SequenceNotStr[str]
     """Comma-separated OEMS instrument UUIDs"""
 
-    instrument_type: Literal[
-        "COMMON_STOCK", "PREFERRED_STOCK", "CORPORATE_BOND", "OPTION", "FUTURE", "WARRANT", "CASH", "OTHER"
-    ]
+    instrument_type: Literal["COMMON_STOCK", "PREFERRED_STOCK", "OPTION", "CASH", "OTHER"]
     """Filter by instrument type (e.g., COMMON_STOCK, OPTION)"""
 
     side: Literal["BUY", "SELL", "SELL_SHORT", "OTHER"]
