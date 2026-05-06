@@ -2,6 +2,6 @@
 
 from typing_extensions import Literal, TypeAlias
 
-__all__ = ["ExerciseAction"]
+__all__ = ["PositionInstructionType"]
 
-ExerciseAction: TypeAlias = Literal["EXERCISE", "DO_NOT_EXERCISE", "CONTRARY_EXERCISE"]
+PositionInstructionType: TypeAlias = Literal["EXERCISE", "DO_NOT_EXERCISE", "CONTRARY_EXERCISE"]

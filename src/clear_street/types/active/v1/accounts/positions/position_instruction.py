@@ -3,15 +3,14 @@
 from typing import Optional
 from datetime import datetime
 
-from ....._models import BaseModel
-from .exercise_action import ExerciseAction
-from .exercise_status import ExerciseStatus
-from ....security_id_source import SecurityIDSource
+from ......_models import BaseModel
+from .position_instruction_type import PositionInstructionType
+from .position_instruction_status import PositionInstructionStatus
 
-__all__ = ["ExerciseInstruction"]
+__all__ = ["PositionInstruction"]
 
 
-class ExerciseInstruction(BaseModel):
+class PositionInstruction(BaseModel):
     """
     The API representation of a single CSC instruction, combining the caller's
     request with the `oems-csc` lifecycle state.
@@ -20,34 +19,34 @@ class ExerciseInstruction(BaseModel):
     id: str
     """Stable server-assigned id for the instruction (the engine instruction UUID).
 
-    Used as the `{exercise_id}` path parameter on DELETE.
+    Used as the `{instruction_id}` path parameter on DELETE.
     """
 
     account_id: int
     """Account the instruction belongs to."""
 
-    action: ExerciseAction
-    """The instruction type as understood by this API."""
-
-    client_exercise_id: str
+    instruction_id: str
     """
-    Caller-supplied correlation id (echoed from the submit request, or the
+    Caller-supplied instruction id (echoed from the submit request, or the
     server-generated fallback when the caller omitted one).
     """
+
+    instruction_type: PositionInstructionType
+    """The instruction type as understood by this API."""
 
     instrument_id: str
     """OEMS instrument identifier the instruction is for."""
 
+    osi: str
+    """OSI option symbol (e.g.
+
+    `AAPL 280121C00195000`). Display-only; resolved from the instrument cache.
+    """
+
     quantity: str
     """Quantity of contracts."""
 
-    security_id: str
-    """Security identifier (display-only; resolved from the instrument cache)."""
-
-    security_id_source: SecurityIDSource
-    """Security identifier source (display-only)."""
-
-    status: ExerciseStatus
+    status: PositionInstructionStatus
     """Current lifecycle status."""
 
     symbol: str

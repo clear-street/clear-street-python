@@ -24,22 +24,6 @@ from .balances import (
 )
 from ...._types import Body, Omit, Query, Headers, NotGiven, Base64FileInput, omit, not_given
 from ...._utils import path_template, maybe_transform, async_maybe_transform
-from .exercises import (
-    ExercisesResource,
-    AsyncExercisesResource,
-    ExercisesResourceWithRawResponse,
-    AsyncExercisesResourceWithRawResponse,
-    ExercisesResourceWithStreamingResponse,
-    AsyncExercisesResourceWithStreamingResponse,
-)
-from .positions import (
-    PositionsResource,
-    AsyncPositionsResource,
-    PositionsResourceWithRawResponse,
-    AsyncPositionsResourceWithRawResponse,
-    PositionsResourceWithStreamingResponse,
-    AsyncPositionsResourceWithStreamingResponse,
-)
 from ...._compat import cached_property
 from ....types.v1 import account_get_accounts_params, account_patch_account_by_id_params
 from ...._resource import SyncAPIResource, AsyncAPIResource
@@ -58,6 +42,14 @@ from .portfolio_history import (
     PortfolioHistoryResourceWithStreamingResponse,
     AsyncPortfolioHistoryResourceWithStreamingResponse,
 )
+from .positions.positions import (
+    PositionsResource,
+    AsyncPositionsResource,
+    PositionsResourceWithRawResponse,
+    AsyncPositionsResourceWithRawResponse,
+    PositionsResourceWithStreamingResponse,
+    AsyncPositionsResourceWithStreamingResponse,
+)
 from ....types.v1.risk_settings_param import RiskSettingsParam
 from ....types.v1.account_get_accounts_response import AccountGetAccountsResponse
 from ....types.v1.account_get_account_by_id_response import AccountGetAccountByIDResponse
@@ -73,11 +65,6 @@ class AccountsResource(SyncAPIResource):
     def balances(self) -> BalancesResource:
         """Manage trading accounts, balances, and portfolio history."""
         return BalancesResource(self._client)
-
-    @cached_property
-    def exercises(self) -> ExercisesResource:
-        """Submit and monitor option exercise, DNE, CEA, and cancel instructions."""
-        return ExercisesResource(self._client)
 
     @cached_property
     def orders(self) -> OrdersResource:
@@ -232,11 +219,6 @@ class AsyncAccountsResource(AsyncAPIResource):
     def balances(self) -> AsyncBalancesResource:
         """Manage trading accounts, balances, and portfolio history."""
         return AsyncBalancesResource(self._client)
-
-    @cached_property
-    def exercises(self) -> AsyncExercisesResource:
-        """Submit and monitor option exercise, DNE, CEA, and cancel instructions."""
-        return AsyncExercisesResource(self._client)
 
     @cached_property
     def orders(self) -> AsyncOrdersResource:
@@ -406,11 +388,6 @@ class AccountsResourceWithRawResponse:
         return BalancesResourceWithRawResponse(self._accounts.balances)
 
     @cached_property
-    def exercises(self) -> ExercisesResourceWithRawResponse:
-        """Submit and monitor option exercise, DNE, CEA, and cancel instructions."""
-        return ExercisesResourceWithRawResponse(self._accounts.exercises)
-
-    @cached_property
     def orders(self) -> OrdersResourceWithRawResponse:
         """Place, monitor, and manage trading orders."""
         return OrdersResourceWithRawResponse(self._accounts.orders)
@@ -444,11 +421,6 @@ class AsyncAccountsResourceWithRawResponse:
     def balances(self) -> AsyncBalancesResourceWithRawResponse:
         """Manage trading accounts, balances, and portfolio history."""
         return AsyncBalancesResourceWithRawResponse(self._accounts.balances)
-
-    @cached_property
-    def exercises(self) -> AsyncExercisesResourceWithRawResponse:
-        """Submit and monitor option exercise, DNE, CEA, and cancel instructions."""
-        return AsyncExercisesResourceWithRawResponse(self._accounts.exercises)
 
     @cached_property
     def orders(self) -> AsyncOrdersResourceWithRawResponse:
@@ -486,11 +458,6 @@ class AccountsResourceWithStreamingResponse:
         return BalancesResourceWithStreamingResponse(self._accounts.balances)
 
     @cached_property
-    def exercises(self) -> ExercisesResourceWithStreamingResponse:
-        """Submit and monitor option exercise, DNE, CEA, and cancel instructions."""
-        return ExercisesResourceWithStreamingResponse(self._accounts.exercises)
-
-    @cached_property
     def orders(self) -> OrdersResourceWithStreamingResponse:
         """Place, monitor, and manage trading orders."""
         return OrdersResourceWithStreamingResponse(self._accounts.orders)
@@ -524,11 +491,6 @@ class AsyncAccountsResourceWithStreamingResponse:
     def balances(self) -> AsyncBalancesResourceWithStreamingResponse:
         """Manage trading accounts, balances, and portfolio history."""
         return AsyncBalancesResourceWithStreamingResponse(self._accounts.balances)
-
-    @cached_property
-    def exercises(self) -> AsyncExercisesResourceWithStreamingResponse:
-        """Submit and monitor option exercise, DNE, CEA, and cancel instructions."""
-        return AsyncExercisesResourceWithStreamingResponse(self._accounts.exercises)
 
     @cached_property
     def orders(self) -> AsyncOrdersResourceWithStreamingResponse:

@@ -10,16 +10,18 @@ from clear_street.types import APIError, BaseResponse, ResponseMetadata
 
 ### Accounts
 
-#### Exercises
+#### Positions
+
+##### Instructions
 
 Types:
 
 ```python
-from clear_street.types.active.v1.accounts import (
-    ExerciseAction,
-    ExerciseInstruction,
-    ExerciseInstructionList,
-    ExerciseStatus,
+from clear_street.types.active.v1.accounts.positions import (
+    PositionInstruction,
+    PositionInstructionList,
+    PositionInstructionStatus,
+    PositionInstructionType,
 )
 ```
 
@@ -28,7 +30,7 @@ from clear_street.types.active.v1.accounts import (
 Types:
 
 ```python
-from clear_street.types import SecurityIDSource, SecurityType
+from clear_street.types import SecurityType
 ```
 
 Methods:
@@ -79,24 +81,6 @@ from clear_street.types.v1.accounts import (
 Methods:
 
 - <code title="get /v1/accounts/{account_id}/balances">client.v1.accounts.balances.<a href="./src/clear_street/resources/v1/accounts/balances.py">get_account_balances</a>(account_id, \*\*<a href="src/clear_street/types/v1/accounts/balance_get_account_balances_params.py">params</a>) -> <a href="./src/clear_street/types/v1/accounts/balance_get_account_balances_response.py">BalanceGetAccountBalancesResponse</a></code>
-
-### Exercises
-
-Types:
-
-```python
-from clear_street.types.v1.accounts import (
-    ExerciseCancelExerciseResponse,
-    ExerciseGetExercisesResponse,
-    ExerciseSubmitExercisesResponse,
-)
-```
-
-Methods:
-
-- <code title="delete /v1/accounts/{account_id}/exercises/{exercise_id}">client.v1.accounts.exercises.<a href="./src/clear_street/resources/v1/accounts/exercises.py">cancel_exercise</a>(exercise_id, \*, account_id) -> <a href="./src/clear_street/types/v1/accounts/exercise_cancel_exercise_response.py">ExerciseCancelExerciseResponse</a></code>
-- <code title="get /v1/accounts/{account_id}/exercises">client.v1.accounts.exercises.<a href="./src/clear_street/resources/v1/accounts/exercises.py">get_exercises</a>(account_id, \*\*<a href="src/clear_street/types/v1/accounts/exercise_get_exercises_params.py">params</a>) -> <a href="./src/clear_street/types/v1/accounts/exercise_get_exercises_response.py">ExerciseGetExercisesResponse</a></code>
-- <code title="post /v1/accounts/{account_id}/exercises">client.v1.accounts.exercises.<a href="./src/clear_street/resources/v1/accounts/exercises.py">submit_exercises</a>(account_id, \*\*<a href="src/clear_street/types/v1/accounts/exercise_submit_exercises_params.py">params</a>) -> <a href="./src/clear_street/types/v1/accounts/exercise_submit_exercises_response.py">ExerciseSubmitExercisesResponse</a></code>
 
 ### Orders
 
@@ -163,9 +147,27 @@ from clear_street.types.v1.accounts import (
 
 Methods:
 
-- <code title="delete /v1/accounts/{account_id}/positions/{instrument_id}">client.v1.accounts.positions.<a href="./src/clear_street/resources/v1/accounts/positions.py">close_position</a>(instrument_id, \*, account_id, \*\*<a href="src/clear_street/types/v1/accounts/position_close_position_params.py">params</a>) -> <a href="./src/clear_street/types/v1/accounts/position_close_position_response.py">PositionClosePositionResponse</a></code>
-- <code title="delete /v1/accounts/{account_id}/positions">client.v1.accounts.positions.<a href="./src/clear_street/resources/v1/accounts/positions.py">close_positions</a>(account_id, \*\*<a href="src/clear_street/types/v1/accounts/position_close_positions_params.py">params</a>) -> <a href="./src/clear_street/types/v1/accounts/position_close_positions_response.py">PositionClosePositionsResponse</a></code>
-- <code title="get /v1/accounts/{account_id}/positions">client.v1.accounts.positions.<a href="./src/clear_street/resources/v1/accounts/positions.py">get_positions</a>(account_id, \*\*<a href="src/clear_street/types/v1/accounts/position_get_positions_params.py">params</a>) -> <a href="./src/clear_street/types/v1/accounts/position_get_positions_response.py">PositionGetPositionsResponse</a></code>
+- <code title="delete /v1/accounts/{account_id}/positions/{instrument_id}">client.v1.accounts.positions.<a href="./src/clear_street/resources/v1/accounts/positions/positions.py">close_position</a>(instrument_id, \*, account_id, \*\*<a href="src/clear_street/types/v1/accounts/position_close_position_params.py">params</a>) -> <a href="./src/clear_street/types/v1/accounts/position_close_position_response.py">PositionClosePositionResponse</a></code>
+- <code title="delete /v1/accounts/{account_id}/positions">client.v1.accounts.positions.<a href="./src/clear_street/resources/v1/accounts/positions/positions.py">close_positions</a>(account_id, \*\*<a href="src/clear_street/types/v1/accounts/position_close_positions_params.py">params</a>) -> <a href="./src/clear_street/types/v1/accounts/position_close_positions_response.py">PositionClosePositionsResponse</a></code>
+- <code title="get /v1/accounts/{account_id}/positions">client.v1.accounts.positions.<a href="./src/clear_street/resources/v1/accounts/positions/positions.py">get_positions</a>(account_id, \*\*<a href="src/clear_street/types/v1/accounts/position_get_positions_params.py">params</a>) -> <a href="./src/clear_street/types/v1/accounts/position_get_positions_response.py">PositionGetPositionsResponse</a></code>
+
+#### Instructions
+
+Types:
+
+```python
+from clear_street.types.v1.accounts.positions import (
+    InstructionCancelPositionInstructionResponse,
+    InstructionGetPositionInstructionsResponse,
+    InstructionSubmitPositionInstructionsResponse,
+)
+```
+
+Methods:
+
+- <code title="delete /v1/accounts/{account_id}/positions/instructions/{instruction_id}">client.v1.accounts.positions.instructions.<a href="./src/clear_street/resources/v1/accounts/positions/instructions.py">cancel_position_instruction</a>(instruction_id, \*, account_id) -> <a href="./src/clear_street/types/v1/accounts/positions/instruction_cancel_position_instruction_response.py">InstructionCancelPositionInstructionResponse</a></code>
+- <code title="get /v1/accounts/{account_id}/positions/instructions">client.v1.accounts.positions.instructions.<a href="./src/clear_street/resources/v1/accounts/positions/instructions.py">get_position_instructions</a>(account_id, \*\*<a href="src/clear_street/types/v1/accounts/positions/instruction_get_position_instructions_params.py">params</a>) -> <a href="./src/clear_street/types/v1/accounts/positions/instruction_get_position_instructions_response.py">InstructionGetPositionInstructionsResponse</a></code>
+- <code title="post /v1/accounts/{account_id}/positions/instructions">client.v1.accounts.positions.instructions.<a href="./src/clear_street/resources/v1/accounts/positions/instructions.py">submit_position_instructions</a>(account_id, \*\*<a href="src/clear_street/types/v1/accounts/positions/instruction_submit_position_instructions_params.py">params</a>) -> <a href="./src/clear_street/types/v1/accounts/positions/instruction_submit_position_instructions_response.py">InstructionSubmitPositionInstructionsResponse</a></code>
 
 ## Calendars
 
