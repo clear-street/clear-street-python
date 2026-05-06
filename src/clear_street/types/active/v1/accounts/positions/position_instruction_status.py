@@ -2,8 +2,8 @@
 
 from typing_extensions import Literal, TypeAlias
 
-__all__ = ["ExerciseStatus"]
+__all__ = ["PositionInstructionStatus"]
 
-ExerciseStatus: TypeAlias = Literal[
+PositionInstructionStatus: TypeAlias = Literal[
     "SENT", "ACCEPTED", "REJECTED", "ENGINE_REJECTED", "CANCEL_REQUESTED", "CANCELLED", "CANCEL_FAILED", "UNKNOWN"
 ]

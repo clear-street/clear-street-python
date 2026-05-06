@@ -4,9 +4,9 @@ from __future__ import annotations
 
 from typing_extensions import TypedDict
 
-__all__ = ["ExerciseGetExercisesParams"]
+__all__ = ["InstructionGetPositionInstructionsParams"]
 
 
-class ExerciseGetExercisesParams(TypedDict, total=False):
+class InstructionGetPositionInstructionsParams(TypedDict, total=False):
     instrument_id: str
-    """Filter by OEMS instrument id."""
+    """Filter by OEMS instrument id or symbol (CMS / OSI)."""
