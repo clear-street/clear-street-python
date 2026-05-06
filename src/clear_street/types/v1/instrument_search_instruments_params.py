@@ -14,9 +14,8 @@ __all__ = ["InstrumentSearchInstrumentsParams"]
 class InstrumentSearchInstrumentsParams(TypedDict, total=False):
     q: Required[str]
     """
-    Search term applied case-insensitively to ticker symbols, alternate identifiers
-    (CUSIP, ISIN, OPRA root, CMS), and company names for non-option instruments.
-    Option searches match symbols and alternate identifiers.
+    Search term applied case-insensitively to ticker symbols, alt-IDs
+    (CUSIP/ISIN/OPRA-root/CMS), and company names.
     """
 
     asset_class: str

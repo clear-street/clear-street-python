@@ -387,6 +387,8 @@ from clear_street.types.v1 import (
     CreateMessageResponse,
     CreateThreadResponse,
     DataChart,
+    EntitlementAgreementKey,
+    EntitlementCode,
     ErrorStatus,
     Message,
     MessageContent,
