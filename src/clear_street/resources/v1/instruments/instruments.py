@@ -81,6 +81,7 @@ from .income_statements import (
     IncomeStatementsResourceWithStreamingResponse,
     AsyncIncomeStatementsResourceWithStreamingResponse,
 )
+from ....types.v1.accounts import InstrumentIDOrSymbol
 from .cash_flow_statements import (
     CashFlowStatementsResource,
     AsyncCashFlowStatementsResource,
@@ -89,6 +90,7 @@ from .cash_flow_statements import (
     CashFlowStatementsResourceWithStreamingResponse,
     AsyncCashFlowStatementsResourceWithStreamingResponse,
 )
+from ....types.v1.accounts.instrument_id_or_symbol import InstrumentIDOrSymbol
 from ....types.v1.instrument_get_instruments_response import InstrumentGetInstrumentsResponse
 from ....types.v1.instrument_search_instruments_response import InstrumentSearchInstrumentsResponse
 from ....types.v1.instrument_get_instrument_by_id_response import InstrumentGetInstrumentByIDResponse
@@ -155,7 +157,7 @@ class InstrumentsResource(SyncAPIResource):
 
     def get_instrument_by_id(
         self,
-        instrument_id: str,
+        instrument_id: InstrumentIDOrSymbol,
         *,
         include_options_expiry_dates: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -300,19 +302,21 @@ class InstrumentsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> InstrumentSearchInstrumentsResponse:
         """
-        Fast in-memory typeahead search over the loaded instrument universe.
+        Search instruments by symbol, alternate identifier, or company name.
 
-        Supports three independent match dimensions in a single `q` parameter: ticker
-        symbol (exact > prefix > substring), alt-id exact (CUSIP / ISIN / OPRA root /
-        CMS), and company name (token + character-trigram). Results are ranked by a
-        composite score that includes ADV (log-scaled), listing status, marginable / ETB
-        flags, and OTC / restricted / liquidation-only penalties. Defaults to the
-        `EQUITY` asset class (common stock + ETFs + exchange-traded mutual funds); pass
-        `asset_class=OPTION` for option chains.
+        The `q` parameter is case-insensitive and supports ticker symbols, alternate
+        identifiers such as CUSIP, ISIN, OPRA root, and CMS identifiers, and company
+        names for non-option instruments. Results are ranked by match quality plus
+        instrument quality signals including log-scaled ADV, listing status,
+        marginability, easy-to-borrow status, and OTC, restricted, and liquidation-only
+        penalties. Defaults to the `EQUITY` asset class (common stocks, preferred
+        shares, ADRs, ETFs, and exchange-traded mutual funds). Pass `asset_class=OPTION`
+        to search option contracts by symbol or alternate identifier.
 
         Args:
-          q: Search term applied case-insensitively to ticker symbols, alt-IDs
-              (CUSIP/ISIN/OPRA-root/CMS), and company names.
+          q: Search term applied case-insensitively to ticker symbols, alternate identifiers
+              (CUSIP, ISIN, OPRA root, CMS), and company names for non-option instruments.
+              Option searches match symbols and alternate identifiers.
 
           asset_class: Comma-separated asset classes (EQUITY|OPTION|WARRANT|BOND|FX|OTHER). Defaults to
               EQUITY.
@@ -420,7 +424,7 @@ class AsyncInstrumentsResource(AsyncAPIResource):
 
     async def get_instrument_by_id(
         self,
-        instrument_id: str,
+        instrument_id: InstrumentIDOrSymbol,
         *,
         include_options_expiry_dates: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -565,19 +569,21 @@ class AsyncInstrumentsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> InstrumentSearchInstrumentsResponse:
         """
-        Fast in-memory typeahead search over the loaded instrument universe.
+        Search instruments by symbol, alternate identifier, or company name.
 
-        Supports three independent match dimensions in a single `q` parameter: ticker
-        symbol (exact > prefix > substring), alt-id exact (CUSIP / ISIN / OPRA root /
-        CMS), and company name (token + character-trigram). Results are ranked by a
-        composite score that includes ADV (log-scaled), listing status, marginable / ETB
-        flags, and OTC / restricted / liquidation-only penalties. Defaults to the
-        `EQUITY` asset class (common stock + ETFs + exchange-traded mutual funds); pass
-        `asset_class=OPTION` for option chains.
+        The `q` parameter is case-insensitive and supports ticker symbols, alternate
+        identifiers such as CUSIP, ISIN, OPRA root, and CMS identifiers, and company
+        names for non-option instruments. Results are ranked by match quality plus
+        instrument quality signals including log-scaled ADV, listing status,
+        marginability, easy-to-borrow status, and OTC, restricted, and liquidation-only
+        penalties. Defaults to the `EQUITY` asset class (common stocks, preferred
+        shares, ADRs, ETFs, and exchange-traded mutual funds). Pass `asset_class=OPTION`
+        to search option contracts by symbol or alternate identifier.
 
         Args:
-          q: Search term applied case-insensitively to ticker symbols, alt-IDs
-              (CUSIP/ISIN/OPRA-root/CMS), and company names.
+          q: Search term applied case-insensitively to ticker symbols, alternate identifiers
+              (CUSIP, ISIN, OPRA root, CMS), and company names for non-option instruments.
+              Option searches match symbols and alternate identifiers.
 
           asset_class: Comma-separated asset classes (EQUITY|OPTION|WARRANT|BOND|FX|OTHER). Defaults to
               EQUITY.

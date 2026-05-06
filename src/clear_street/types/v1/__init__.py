@@ -34,7 +34,6 @@ from .symbol_chart import SymbolChart as SymbolChart
 from .action_button import ActionButton as ActionButton
 from .chart_payload import ChartPayload as ChartPayload
 from .contract_type import ContractType as ContractType
-from .order_payload import OrderPayload as OrderPayload
 from .risk_settings import RiskSettings as RiskSettings
 from .screener_item import ScreenerItem as ScreenerItem
 from .search_filter import SearchFilter as SearchFilter
@@ -92,7 +91,6 @@ from .clock_get_clock_response import ClockGetClockResponse as ClockGetClockResp
 from .create_feedback_response import CreateFeedbackResponse as CreateFeedbackResponse
 from .content_part_text_payload import ContentPartTextPayload as ContentPartTextPayload
 from .entitlement_agreement_key import EntitlementAgreementKey as EntitlementAgreementKey
-from .prefill_order_action_type import PrefillOrderActionType as PrefillOrderActionType
 from .suggested_actions_payload import SuggestedActionsPayload as SuggestedActionsPayload
 from .content_part_chart_payload import ContentPartChartPayload as ContentPartChartPayload
 from .account_get_accounts_params import AccountGetAccountsParams as AccountGetAccountsParams
