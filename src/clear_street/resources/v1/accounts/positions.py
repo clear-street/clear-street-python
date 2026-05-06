@@ -29,12 +29,10 @@ from ...._response import (
 )
 from ...._base_client import make_request_options
 from ....types.v1.accounts import (
-    InstrumentIDOrSymbol,
     position_get_positions_params,
     position_close_position_params,
     position_close_positions_params,
 )
-from ....types.v1.accounts.instrument_id_or_symbol import InstrumentIDOrSymbol
 from ....types.v1.accounts.position_get_positions_response import PositionGetPositionsResponse
 from ....types.v1.accounts.position_close_position_response import PositionClosePositionResponse
 from ....types.v1.accounts.position_close_positions_response import PositionClosePositionsResponse
@@ -66,7 +64,7 @@ class PositionsResource(SyncAPIResource):
 
     def close_position(
         self,
-        instrument_id: InstrumentIDOrSymbol,
+        instrument_id: str,
         *,
         account_id: int,
         cancel_orders: Optional[bool] | Omit = omit,
@@ -239,7 +237,7 @@ class AsyncPositionsResource(AsyncAPIResource):
 
     async def close_position(
         self,
-        instrument_id: InstrumentIDOrSymbol,
+        instrument_id: str,
         *,
         account_id: int,
         cancel_orders: Optional[bool] | Omit = omit,

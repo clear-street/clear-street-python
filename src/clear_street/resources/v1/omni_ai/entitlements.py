@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-from typing import List, Iterable
+from typing import Iterable
 
 import httpx
 
-from ...._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from ...._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from ...._utils import path_template, maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
@@ -18,7 +18,6 @@ from ...._response import (
 )
 from ...._base_client import make_request_options
 from ....types.v1.omni_ai import entitlement_get_entitlements_params, entitlement_create_entitlements_params
-from ....types.v1.entitlement_code import EntitlementCode
 from ....types.v1.omni_ai.entitlement_get_entitlements_response import EntitlementGetEntitlementsResponse
 from ....types.v1.omni_ai.entitlement_delete_entitlement_response import EntitlementDeleteEntitlementResponse
 from ....types.v1.omni_ai.entitlement_create_entitlements_response import EntitlementCreateEntitlementsResponse
@@ -55,7 +54,7 @@ class EntitlementsResource(SyncAPIResource):
         self,
         *,
         agreement_id: str,
-        requested_entitlement_codes: List[EntitlementCode],
+        requested_entitlement_codes: SequenceNotStr[str],
         trading_account_ids: Iterable[int],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -193,7 +192,7 @@ class AsyncEntitlementsResource(AsyncAPIResource):
         self,
         *,
         agreement_id: str,
-        requested_entitlement_codes: List[EntitlementCode],
+        requested_entitlement_codes: SequenceNotStr[str],
         trading_account_ids: Iterable[int],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
