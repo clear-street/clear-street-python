@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 from typing import Optional
-from typing_extensions import Literal, Required, TypedDict
+from typing_extensions import Required, TypedDict
+
+from .request_time_in_force import RequestTimeInForce
 
 __all__ = ["OrderReplaceOrderParams"]
 
@@ -20,16 +22,5 @@ class OrderReplaceOrderParams(TypedDict, total=False):
     stop_price: Optional[str]
     """New stop price for the order"""
 
-    time_in_force: Literal[
-        "DAY",
-        "GOOD_TILL_CANCEL",
-        "IMMEDIATE_OR_CANCEL",
-        "FILL_OR_KILL",
-        "GOOD_TILL_DATE",
-        "AT_THE_OPENING",
-        "AT_THE_CLOSE",
-        "GOOD_TILL_CROSSING",
-        "GOOD_THROUGH_CROSSING",
-        "AT_CROSSING",
-    ]
+    time_in_force: RequestTimeInForce
     """New time in force for the order"""

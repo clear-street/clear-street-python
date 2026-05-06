@@ -12,8 +12,6 @@ class Thread(BaseModel):
 
     created_at: str
 
-    description: str
-
     title: str
 
     updated_at: str
