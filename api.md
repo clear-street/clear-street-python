@@ -4,12 +4,31 @@
 from clear_street.types import APIError, BaseResponse, ResponseMetadata
 ```
 
+# Active
+
+## V1
+
+### Accounts
+
+#### Exercises
+
+Types:
+
+```python
+from clear_street.types.active.v1.accounts import (
+    ExerciseAction,
+    ExerciseInstruction,
+    ExerciseInstructionList,
+    ExerciseStatus,
+)
+```
+
 # V1
 
 Types:
 
 ```python
-from clear_street.types import SecurityType
+from clear_street.types import SecurityIDSource, SecurityType
 ```
 
 Methods:
@@ -60,6 +79,24 @@ from clear_street.types.v1.accounts import (
 Methods:
 
 - <code title="get /v1/accounts/{account_id}/balances">client.v1.accounts.balances.<a href="./src/clear_street/resources/v1/accounts/balances.py">get_account_balances</a>(account_id, \*\*<a href="src/clear_street/types/v1/accounts/balance_get_account_balances_params.py">params</a>) -> <a href="./src/clear_street/types/v1/accounts/balance_get_account_balances_response.py">BalanceGetAccountBalancesResponse</a></code>
+
+### Exercises
+
+Types:
+
+```python
+from clear_street.types.v1.accounts import (
+    ExerciseCancelExerciseResponse,
+    ExerciseGetExercisesResponse,
+    ExerciseSubmitExercisesResponse,
+)
+```
+
+Methods:
+
+- <code title="delete /v1/accounts/{account_id}/exercises/{exercise_id}">client.v1.accounts.exercises.<a href="./src/clear_street/resources/v1/accounts/exercises.py">cancel_exercise</a>(exercise_id, \*, account_id) -> <a href="./src/clear_street/types/v1/accounts/exercise_cancel_exercise_response.py">ExerciseCancelExerciseResponse</a></code>
+- <code title="get /v1/accounts/{account_id}/exercises">client.v1.accounts.exercises.<a href="./src/clear_street/resources/v1/accounts/exercises.py">get_exercises</a>(account_id, \*\*<a href="src/clear_street/types/v1/accounts/exercise_get_exercises_params.py">params</a>) -> <a href="./src/clear_street/types/v1/accounts/exercise_get_exercises_response.py">ExerciseGetExercisesResponse</a></code>
+- <code title="post /v1/accounts/{account_id}/exercises">client.v1.accounts.exercises.<a href="./src/clear_street/resources/v1/accounts/exercises.py">submit_exercises</a>(account_id, \*\*<a href="src/clear_street/types/v1/accounts/exercise_submit_exercises_params.py">params</a>) -> <a href="./src/clear_street/types/v1/accounts/exercise_submit_exercises_response.py">ExerciseSubmitExercisesResponse</a></code>
 
 ### Orders
 

@@ -24,6 +24,14 @@ from .balances import (
     BalancesResourceWithStreamingResponse,
     AsyncBalancesResourceWithStreamingResponse,
 )
+from .exercises import (
+    ExercisesResource,
+    AsyncExercisesResource,
+    ExercisesResourceWithRawResponse,
+    AsyncExercisesResourceWithRawResponse,
+    ExercisesResourceWithStreamingResponse,
+    AsyncExercisesResourceWithStreamingResponse,
+)
 from .positions import (
     PositionsResource,
     AsyncPositionsResource,
@@ -48,6 +56,12 @@ __all__ = [
     "AsyncBalancesResourceWithRawResponse",
     "BalancesResourceWithStreamingResponse",
     "AsyncBalancesResourceWithStreamingResponse",
+    "ExercisesResource",
+    "AsyncExercisesResource",
+    "ExercisesResourceWithRawResponse",
+    "AsyncExercisesResourceWithRawResponse",
+    "ExercisesResourceWithStreamingResponse",
+    "AsyncExercisesResourceWithStreamingResponse",
     "OrdersResource",
     "AsyncOrdersResource",
     "OrdersResourceWithRawResponse",
