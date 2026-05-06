@@ -15,9 +15,7 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.v1.accounts import InstrumentIDOrSymbol
 from ....types.v1.watchlists import item_add_watchlist_item_params
-from ....types.v1.accounts.instrument_id_or_symbol import InstrumentIDOrSymbol
 from ....types.v1.watchlists.item_add_watchlist_item_response import ItemAddWatchlistItemResponse
 
 __all__ = ["ItemsResource", "AsyncItemsResource"]
@@ -49,7 +47,7 @@ class ItemsResource(SyncAPIResource):
         self,
         watchlist_id: str,
         *,
-        instrument_id: InstrumentIDOrSymbol,
+        instrument_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -147,7 +145,7 @@ class AsyncItemsResource(AsyncAPIResource):
         self,
         watchlist_id: str,
         *,
-        instrument_id: InstrumentIDOrSymbol,
+        instrument_id: str,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

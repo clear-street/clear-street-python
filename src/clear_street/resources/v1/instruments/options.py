@@ -19,10 +19,8 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.v1.accounts import InstrumentIDOrSymbol
 from ....types.v1.instruments import option_get_option_contracts_params
 from ....types.v1.contract_type import ContractType
-from ....types.v1.accounts.instrument_id_or_symbol import InstrumentIDOrSymbol
 from ....types.v1.instruments.option_get_option_contracts_response import OptionGetOptionContractsResponse
 
 __all__ = ["OptionsResource", "AsyncOptionsResource"]
@@ -58,7 +56,7 @@ class OptionsResource(SyncAPIResource):
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         underlier: str | Omit = omit,
-        underlying_instrument_id: InstrumentIDOrSymbol | Omit = omit,
+        underlying_instrument_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -145,7 +143,7 @@ class AsyncOptionsResource(AsyncAPIResource):
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         underlier: str | Omit = omit,
-        underlying_instrument_id: InstrumentIDOrSymbol | Omit = omit,
+        underlying_instrument_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

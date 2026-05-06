@@ -17,9 +17,7 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.v1.accounts import InstrumentIDOrSymbol
 from ....types.v1.instruments import event_get_instrument_events_params, event_get_all_instrument_events_params
-from ....types.v1.accounts.instrument_id_or_symbol import InstrumentIDOrSymbol
 from ....types.v1.instruments.all_events_event_type import AllEventsEventType
 from ....types.v1.instruments.event_get_instrument_events_response import EventGetInstrumentEventsResponse
 from ....types.v1.instruments.event_get_all_instrument_events_response import EventGetAllInstrumentEventsResponse
@@ -111,7 +109,7 @@ class EventsResource(SyncAPIResource):
 
     def get_instrument_events(
         self,
-        instrument_id: InstrumentIDOrSymbol,
+        instrument_id: str,
         *,
         from_date: str | Omit = omit,
         to_date: str | Omit = omit,
@@ -251,7 +249,7 @@ class AsyncEventsResource(AsyncAPIResource):
 
     async def get_instrument_events(
         self,
-        instrument_id: InstrumentIDOrSymbol,
+        instrument_id: str,
         *,
         from_date: str | Omit = omit,
         to_date: str | Omit = omit,

@@ -9,7 +9,6 @@ from typing_extensions import Annotated, TypedDict
 from ...._types import Base64FileInput
 from ...._utils import PropertyInfo
 from ..contract_type import ContractType
-from ..accounts.instrument_id_or_symbol import InstrumentIDOrSymbol
 
 __all__ = ["OptionGetOptionContractsParams"]
 
@@ -33,5 +32,5 @@ class OptionGetOptionContractsParams(TypedDict, total=False):
     underlier: str
     """Underlier symbol (e.g., AAPL, SPX)"""
 
-    underlying_instrument_id: InstrumentIDOrSymbol
+    underlying_instrument_id: str
     """OEMS instrument UUID or symbol of the underlying equity/index"""

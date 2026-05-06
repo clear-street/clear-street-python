@@ -17,9 +17,7 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.v1.accounts import InstrumentIDOrSymbol
 from ....types.v1.instruments import income_statement_get_instrument_income_statements_params
-from ....types.v1.accounts.instrument_id_or_symbol import InstrumentIDOrSymbol
 from ....types.v1.instruments.income_statement_get_instrument_income_statements_response import (
     IncomeStatementGetInstrumentIncomeStatementsResponse,
 )
@@ -51,7 +49,7 @@ class IncomeStatementsResource(SyncAPIResource):
 
     def get_instrument_income_statements(
         self,
-        instrument_id: InstrumentIDOrSymbol,
+        instrument_id: str,
         *,
         from_date: str | Omit = omit,
         page_size: int | Omit = omit,
@@ -138,7 +136,7 @@ class AsyncIncomeStatementsResource(AsyncAPIResource):
 
     async def get_instrument_income_statements(
         self,
-        instrument_id: InstrumentIDOrSymbol,
+        instrument_id: str,
         *,
         from_date: str | Omit = omit,
         page_size: int | Omit = omit,
