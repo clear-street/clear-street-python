@@ -2,6 +2,6 @@
 
 from typing_extensions import Literal, TypeAlias
 
-__all__ = ["PositionInstructionType"]
+__all__ = ["EntitlementCode"]
 
-PositionInstructionType: TypeAlias = Literal["EXERCISE", "DO_NOT_EXERCISE", "CONTRARY_EXERCISE"]
+EntitlementCode: TypeAlias = Literal["omni.account_data"]

@@ -4,27 +4,6 @@
 from clear_street.types import APIError, BaseResponse, ResponseMetadata
 ```
 
-# Active
-
-## V1
-
-### Accounts
-
-#### Positions
-
-##### Instructions
-
-Types:
-
-```python
-from clear_street.types.active.v1.accounts.positions import (
-    PositionInstruction,
-    PositionInstructionList,
-    PositionInstructionStatus,
-    PositionInstructionType,
-)
-```
-
 # V1
 
 Types:
@@ -88,11 +67,17 @@ Types:
 
 ```python
 from clear_street.types.v1.accounts import (
+    CancelOrderRequest,
+    InstrumentIDOrSymbol,
+    NewOrderRequest,
     Order,
     OrderList,
     OrderStatus,
     OrderType,
+    PositionEffect,
     QueueState,
+    RequestOrderType,
+    RequestTimeInForce,
     Side,
     TimeInForce,
     TrailingOffsetType,
@@ -147,27 +132,9 @@ from clear_street.types.v1.accounts import (
 
 Methods:
 
-- <code title="delete /v1/accounts/{account_id}/positions/{instrument_id}">client.v1.accounts.positions.<a href="./src/clear_street/resources/v1/accounts/positions/positions.py">close_position</a>(instrument_id, \*, account_id, \*\*<a href="src/clear_street/types/v1/accounts/position_close_position_params.py">params</a>) -> <a href="./src/clear_street/types/v1/accounts/position_close_position_response.py">PositionClosePositionResponse</a></code>
-- <code title="delete /v1/accounts/{account_id}/positions">client.v1.accounts.positions.<a href="./src/clear_street/resources/v1/accounts/positions/positions.py">close_positions</a>(account_id, \*\*<a href="src/clear_street/types/v1/accounts/position_close_positions_params.py">params</a>) -> <a href="./src/clear_street/types/v1/accounts/position_close_positions_response.py">PositionClosePositionsResponse</a></code>
-- <code title="get /v1/accounts/{account_id}/positions">client.v1.accounts.positions.<a href="./src/clear_street/resources/v1/accounts/positions/positions.py">get_positions</a>(account_id, \*\*<a href="src/clear_street/types/v1/accounts/position_get_positions_params.py">params</a>) -> <a href="./src/clear_street/types/v1/accounts/position_get_positions_response.py">PositionGetPositionsResponse</a></code>
-
-#### Instructions
-
-Types:
-
-```python
-from clear_street.types.v1.accounts.positions import (
-    InstructionCancelPositionInstructionResponse,
-    InstructionGetPositionInstructionsResponse,
-    InstructionSubmitPositionInstructionsResponse,
-)
-```
-
-Methods:
-
-- <code title="delete /v1/accounts/{account_id}/positions/instructions/{instruction_id}">client.v1.accounts.positions.instructions.<a href="./src/clear_street/resources/v1/accounts/positions/instructions.py">cancel_position_instruction</a>(instruction_id, \*, account_id) -> <a href="./src/clear_street/types/v1/accounts/positions/instruction_cancel_position_instruction_response.py">InstructionCancelPositionInstructionResponse</a></code>
-- <code title="get /v1/accounts/{account_id}/positions/instructions">client.v1.accounts.positions.instructions.<a href="./src/clear_street/resources/v1/accounts/positions/instructions.py">get_position_instructions</a>(account_id, \*\*<a href="src/clear_street/types/v1/accounts/positions/instruction_get_position_instructions_params.py">params</a>) -> <a href="./src/clear_street/types/v1/accounts/positions/instruction_get_position_instructions_response.py">InstructionGetPositionInstructionsResponse</a></code>
-- <code title="post /v1/accounts/{account_id}/positions/instructions">client.v1.accounts.positions.instructions.<a href="./src/clear_street/resources/v1/accounts/positions/instructions.py">submit_position_instructions</a>(account_id, \*\*<a href="src/clear_street/types/v1/accounts/positions/instruction_submit_position_instructions_params.py">params</a>) -> <a href="./src/clear_street/types/v1/accounts/positions/instruction_submit_position_instructions_response.py">InstructionSubmitPositionInstructionsResponse</a></code>
+- <code title="delete /v1/accounts/{account_id}/positions/{instrument_id}">client.v1.accounts.positions.<a href="./src/clear_street/resources/v1/accounts/positions.py">close_position</a>(instrument_id, \*, account_id, \*\*<a href="src/clear_street/types/v1/accounts/position_close_position_params.py">params</a>) -> <a href="./src/clear_street/types/v1/accounts/position_close_position_response.py">PositionClosePositionResponse</a></code>
+- <code title="delete /v1/accounts/{account_id}/positions">client.v1.accounts.positions.<a href="./src/clear_street/resources/v1/accounts/positions.py">close_positions</a>(account_id, \*\*<a href="src/clear_street/types/v1/accounts/position_close_positions_params.py">params</a>) -> <a href="./src/clear_street/types/v1/accounts/position_close_positions_response.py">PositionClosePositionsResponse</a></code>
+- <code title="get /v1/accounts/{account_id}/positions">client.v1.accounts.positions.<a href="./src/clear_street/resources/v1/accounts/positions.py">get_positions</a>(account_id, \*\*<a href="src/clear_street/types/v1/accounts/position_get_positions_params.py">params</a>) -> <a href="./src/clear_street/types/v1/accounts/position_get_positions_response.py">PositionGetPositionsResponse</a></code>
 
 ## Calendars
 
@@ -426,6 +393,8 @@ from clear_street.types.v1 import (
     CreateMessageResponse,
     CreateThreadResponse,
     DataChart,
+    EntitlementAgreementKey,
+    EntitlementCode,
     ErrorStatus,
     Message,
     MessageContent,
@@ -436,9 +405,9 @@ from clear_street.types.v1 import (
     OpenChartAction,
     OpenEntitlementConsentAction,
     OpenScreenerAction,
-    OrderPayload,
+    PrefillCancelOrderAction,
+    PrefillNewOrderAction,
     PrefillOrderAction,
-    PrefillOrderActionType,
     PromptButtonAction,
     Response,
     ResponseContent,

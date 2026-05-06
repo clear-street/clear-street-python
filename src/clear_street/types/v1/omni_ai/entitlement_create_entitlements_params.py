@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
-from typing import Iterable
+from typing import List, Iterable
 from typing_extensions import Required, TypedDict
 
-from ...._types import SequenceNotStr
+from ..entitlement_code import EntitlementCode
 
 __all__ = ["EntitlementCreateEntitlementsParams"]
 
@@ -13,6 +13,6 @@ __all__ = ["EntitlementCreateEntitlementsParams"]
 class EntitlementCreateEntitlementsParams(TypedDict, total=False):
     agreement_id: Required[str]
 
-    requested_entitlement_codes: Required[SequenceNotStr[str]]
+    requested_entitlement_codes: Required[List[EntitlementCode]]
 
     trading_account_ids: Required[Iterable[int]]

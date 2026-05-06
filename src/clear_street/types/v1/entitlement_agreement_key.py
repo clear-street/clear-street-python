@@ -2,6 +2,6 @@
 
 from typing_extensions import Literal, TypeAlias
 
-__all__ = ["PrefillOrderActionType"]
+__all__ = ["EntitlementAgreementKey"]
 
-PrefillOrderActionType: TypeAlias = Literal["NEW", "CANCEL"]
+EntitlementAgreementKey: TypeAlias = Literal["omni_account_data_access"]

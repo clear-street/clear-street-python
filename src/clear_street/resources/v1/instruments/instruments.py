@@ -81,6 +81,7 @@ from .income_statements import (
     IncomeStatementsResourceWithStreamingResponse,
     AsyncIncomeStatementsResourceWithStreamingResponse,
 )
+from ....types.v1.accounts import InstrumentIDOrSymbol
 from .cash_flow_statements import (
     CashFlowStatementsResource,
     AsyncCashFlowStatementsResource,
@@ -89,6 +90,7 @@ from .cash_flow_statements import (
     CashFlowStatementsResourceWithStreamingResponse,
     AsyncCashFlowStatementsResourceWithStreamingResponse,
 )
+from ....types.v1.accounts.instrument_id_or_symbol import InstrumentIDOrSymbol
 from ....types.v1.instrument_get_instruments_response import InstrumentGetInstrumentsResponse
 from ....types.v1.instrument_search_instruments_response import InstrumentSearchInstrumentsResponse
 from ....types.v1.instrument_get_instrument_by_id_response import InstrumentGetInstrumentByIDResponse
@@ -155,7 +157,7 @@ class InstrumentsResource(SyncAPIResource):
 
     def get_instrument_by_id(
         self,
-        instrument_id: str,
+        instrument_id: InstrumentIDOrSymbol,
         *,
         include_options_expiry_dates: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -422,7 +424,7 @@ class AsyncInstrumentsResource(AsyncAPIResource):
 
     async def get_instrument_by_id(
         self,
-        instrument_id: str,
+        instrument_id: InstrumentIDOrSymbol,
         *,
         include_options_expiry_dates: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.

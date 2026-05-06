@@ -17,7 +17,9 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
+from ....types.v1.accounts import InstrumentIDOrSymbol
 from ....types.v1.instruments import cash_flow_statement_get_instrument_cash_flow_statements_params
+from ....types.v1.accounts.instrument_id_or_symbol import InstrumentIDOrSymbol
 from ....types.v1.instruments.cash_flow_statement_get_instrument_cash_flow_statements_response import (
     CashFlowStatementGetInstrumentCashFlowStatementsResponse,
 )
@@ -49,7 +51,7 @@ class CashFlowStatementsResource(SyncAPIResource):
 
     def get_instrument_cash_flow_statements(
         self,
-        instrument_id: str,
+        instrument_id: InstrumentIDOrSymbol,
         *,
         from_date: str | Omit = omit,
         page_size: int | Omit = omit,
@@ -134,7 +136,7 @@ class AsyncCashFlowStatementsResource(AsyncAPIResource):
 
     async def get_instrument_cash_flow_statements(
         self,
-        instrument_id: str,
+        instrument_id: InstrumentIDOrSymbol,
         *,
         from_date: str | Omit = omit,
         page_size: int | Omit = omit,

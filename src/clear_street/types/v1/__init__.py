@@ -34,7 +34,6 @@ from .symbol_chart import SymbolChart as SymbolChart
 from .action_button import ActionButton as ActionButton
 from .chart_payload import ChartPayload as ChartPayload
 from .contract_type import ContractType as ContractType
-from .order_payload import OrderPayload as OrderPayload
 from .risk_settings import RiskSettings as RiskSettings
 from .screener_item import ScreenerItem as ScreenerItem
 from .search_filter import SearchFilter as SearchFilter
@@ -59,6 +58,7 @@ from .screener_column import ScreenerColumn as ScreenerColumn
 from .screener_filter import ScreenerFilter as ScreenerFilter
 from .watchlist_entry import WatchlistEntry as WatchlistEntry
 from .account_settings import AccountSettings as AccountSettings
+from .entitlement_code import EntitlementCode as EntitlementCode
 from .options_contract import OptionsContract as OptionsContract
 from .response_content import ResponseContent as ResponseContent
 from .watchlist_detail import WatchlistDetail as WatchlistDetail
@@ -89,12 +89,14 @@ from .cancel_response_payload import CancelResponsePayload as CancelResponsePayl
 from .create_message_response import CreateMessageResponse as CreateMessageResponse
 from .clock_get_clock_response import ClockGetClockResponse as ClockGetClockResponse
 from .create_feedback_response import CreateFeedbackResponse as CreateFeedbackResponse
+from .prefill_new_order_action import PrefillNewOrderAction as PrefillNewOrderAction
 from .content_part_text_payload import ContentPartTextPayload as ContentPartTextPayload
-from .prefill_order_action_type import PrefillOrderActionType as PrefillOrderActionType
+from .entitlement_agreement_key import EntitlementAgreementKey as EntitlementAgreementKey
 from .suggested_actions_payload import SuggestedActionsPayload as SuggestedActionsPayload
 from .content_part_chart_payload import ContentPartChartPayload as ContentPartChartPayload
 from .account_get_accounts_params import AccountGetAccountsParams as AccountGetAccountsParams
 from .content_part_custom_payload import ContentPartCustomPayload as ContentPartCustomPayload
+from .prefill_cancel_order_action import PrefillCancelOrderAction as PrefillCancelOrderAction
 from .screener_get_screener_params import ScreenerGetScreenerParams as ScreenerGetScreenerParams
 from .version_get_version_response import VersionGetVersionResponse as VersionGetVersionResponse
 from .account_get_accounts_response import AccountGetAccountsResponse as AccountGetAccountsResponse
