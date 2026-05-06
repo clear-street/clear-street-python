@@ -18,7 +18,9 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
+from ....types.v1.accounts import InstrumentIDOrSymbol
 from ....types.v1.instruments import analyst_reporting_get_instrument_analyst_consensus_params
+from ....types.v1.accounts.instrument_id_or_symbol import InstrumentIDOrSymbol
 from ....types.v1.instruments.analyst_reporting_get_instrument_analyst_consensus_response import (
     AnalystReportingGetInstrumentAnalystConsensusResponse,
 )
@@ -50,7 +52,7 @@ class AnalystReportingResource(SyncAPIResource):
 
     def get_instrument_analyst_consensus(
         self,
-        instrument_id: str,
+        instrument_id: InstrumentIDOrSymbol,
         *,
         from_: Union[str, date] | Omit = omit,
         to: Union[str, date] | Omit = omit,
@@ -124,7 +126,7 @@ class AsyncAnalystReportingResource(AsyncAPIResource):
 
     async def get_instrument_analyst_consensus(
         self,
-        instrument_id: str,
+        instrument_id: InstrumentIDOrSymbol,
         *,
         from_: Union[str, date] | Omit = omit,
         to: Union[str, date] | Omit = omit,

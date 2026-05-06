@@ -2,6 +2,6 @@
 
 from typing_extensions import Literal, TypeAlias
 
-__all__ = ["PrefillOrderActionType"]
+__all__ = ["PositionEffect"]
 
-PrefillOrderActionType: TypeAlias = Literal["NEW", "CANCEL"]
+PositionEffect: TypeAlias = Literal["OPEN", "CLOSE"]

@@ -17,7 +17,9 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
+from ....types.v1.accounts import InstrumentIDOrSymbol
 from ....types.v1.instruments import balance_sheet_get_instrument_balance_sheet_statements_params
+from ....types.v1.accounts.instrument_id_or_symbol import InstrumentIDOrSymbol
 from ....types.v1.instruments.balance_sheet_get_instrument_balance_sheet_statements_response import (
     BalanceSheetGetInstrumentBalanceSheetStatementsResponse,
 )
@@ -49,7 +51,7 @@ class BalanceSheetsResource(SyncAPIResource):
 
     def get_instrument_balance_sheet_statements(
         self,
-        instrument_id: str,
+        instrument_id: InstrumentIDOrSymbol,
         *,
         from_date: str | Omit = omit,
         page_size: int | Omit = omit,
@@ -138,7 +140,7 @@ class AsyncBalanceSheetsResource(AsyncAPIResource):
 
     async def get_instrument_balance_sheet_statements(
         self,
-        instrument_id: str,
+        instrument_id: InstrumentIDOrSymbol,
         *,
         from_date: str | Omit = omit,
         page_size: int | Omit = omit,

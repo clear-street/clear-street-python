@@ -1,24 +1,31 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List
+from typing import List, Union
+from typing_extensions import Literal, TypeAlias
 
 from ..._models import BaseModel
-from .order_payload import OrderPayload
-from .prefill_order_action_type import PrefillOrderActionType
+from .accounts.new_order_request import NewOrderRequest
+from .accounts.cancel_order_request import CancelOrderRequest
 
-__all__ = ["PrefillOrderAction"]
+__all__ = ["PrefillOrderAction", "UnionMember0", "UnionMember1"]
 
 
-class PrefillOrderAction(BaseModel):
-    """Action to prefill order details for user confirmation.
+class UnionMember0(BaseModel):
+    """Create one or more new orders."""
 
-    The user must review and authorize the order before submission to the trading API.
-    This action provides parsed order data that can be used to prefill an order ticket UI
-    or submitted directly via the orders API after user confirmation.
-    """
+    action_type: Literal["NEW"]
 
-    action_type: PrefillOrderActionType
-    """Order operation represented by this prefill action."""
+    orders: List[NewOrderRequest]
+    """Orders to prefill using the same shape accepted by the orders API."""
 
-    orders: List[OrderPayload]
-    """The orders to prefill"""
+
+class UnionMember1(BaseModel):
+    """Cancel one or more existing orders."""
+
+    action_type: Literal["CANCEL"]
+
+    orders: List[CancelOrderRequest]
+    """Orders to cancel using the same identifiers required by the cancel-order API."""
+
+
+PrefillOrderAction: TypeAlias = Union[UnionMember0, UnionMember1]
