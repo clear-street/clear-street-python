@@ -59,6 +59,7 @@ from .screener_column import ScreenerColumn as ScreenerColumn
 from .screener_filter import ScreenerFilter as ScreenerFilter
 from .watchlist_entry import WatchlistEntry as WatchlistEntry
 from .account_settings import AccountSettings as AccountSettings
+from .entitlement_code import EntitlementCode as EntitlementCode
 from .options_contract import OptionsContract as OptionsContract
 from .response_content import ResponseContent as ResponseContent
 from .watchlist_detail import WatchlistDetail as WatchlistDetail
@@ -90,6 +91,7 @@ from .create_message_response import CreateMessageResponse as CreateMessageRespo
 from .clock_get_clock_response import ClockGetClockResponse as ClockGetClockResponse
 from .create_feedback_response import CreateFeedbackResponse as CreateFeedbackResponse
 from .content_part_text_payload import ContentPartTextPayload as ContentPartTextPayload
+from .entitlement_agreement_key import EntitlementAgreementKey as EntitlementAgreementKey
 from .prefill_order_action_type import PrefillOrderActionType as PrefillOrderActionType
 from .suggested_actions_payload import SuggestedActionsPayload as SuggestedActionsPayload
 from .content_part_chart_payload import ContentPartChartPayload as ContentPartChartPayload
