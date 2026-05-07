@@ -15,18 +15,16 @@ class InstrumentGetInstrumentsParams(TypedDict, total=False):
     easy_to_borrow: bool
     """Filter by easy to borrow status"""
 
-    id_filter: str
-    """Filter IDs to those containing this substring.
-
-    For options, and when instrument_type is omitted and no instrument_ids filters
-    are provided, this is required.
-    """
-
     instrument_ids: SequenceNotStr[str]
     """Comma-separated OEMS instrument UUIDs"""
 
     instrument_type: Literal["COMMON_STOCK", "PREFERRED_STOCK", "OPTION", "CASH", "OTHER"]
-    """Filter by instrument type. If omitted, returns all supported instrument types."""
+    """Filter by instrument type.
+
+    OPTION is not supported on this endpoint; use GET /instruments/options/contracts
+    to list option contracts. If omitted, returns all supported instrument types
+    except options.
+    """
 
     is_liquidation_only: bool
     """Filter by liquidation only status"""

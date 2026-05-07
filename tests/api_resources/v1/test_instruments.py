@@ -83,7 +83,6 @@ class TestInstruments:
     def test_method_get_instruments_with_all_params(self, client: ClearStreet) -> None:
         instrument = client.v1.instruments.get_instruments(
             easy_to_borrow=True,
-            id_filter="id_filter",
             instrument_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             instrument_type="COMMON_STOCK",
             is_liquidation_only=True,
@@ -235,7 +234,6 @@ class TestAsyncInstruments:
     async def test_method_get_instruments_with_all_params(self, async_client: AsyncClearStreet) -> None:
         instrument = await async_client.v1.instruments.get_instruments(
             easy_to_borrow=True,
-            id_filter="id_filter",
             instrument_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             instrument_type="COMMON_STOCK",
             is_liquidation_only=True,
