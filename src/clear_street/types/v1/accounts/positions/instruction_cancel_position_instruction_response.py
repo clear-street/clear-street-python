@@ -1,7 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from .position_instruction import PositionInstruction
 from ....shared.base_response import BaseResponse
-from ....active.v1.accounts.positions.position_instruction import PositionInstruction
 
 __all__ = ["InstructionCancelPositionInstructionResponse"]
 

@@ -4,27 +4,6 @@
 from clear_street.types import APIError, BaseResponse, ResponseMetadata
 ```
 
-# Active
-
-## V1
-
-### Accounts
-
-#### Positions
-
-##### Instructions
-
-Types:
-
-```python
-from clear_street.types.active.v1.accounts.positions import (
-    PositionInstruction,
-    PositionInstructionList,
-    PositionInstructionStatus,
-    PositionInstructionType,
-)
-```
-
 # V1
 
 Types:
@@ -163,6 +142,10 @@ Types:
 
 ```python
 from clear_street.types.v1.accounts.positions import (
+    PositionInstruction,
+    PositionInstructionList,
+    PositionInstructionStatus,
+    PositionInstructionType,
     InstructionCancelPositionInstructionResponse,
     InstructionGetPositionInstructionsResponse,
     InstructionSubmitPositionInstructionsResponse,
