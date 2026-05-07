@@ -37,12 +37,6 @@ class PositionInstruction(BaseModel):
     instrument_id: str
     """OEMS instrument identifier the instruction is for."""
 
-    osi: str
-    """OSI option symbol (e.g.
-
-    `AAPL 280121C00195000`). Display-only; resolved from the instrument cache.
-    """
-
     quantity: str
     """Quantity of contracts."""
 
@@ -50,9 +44,10 @@ class PositionInstruction(BaseModel):
     """Current lifecycle status."""
 
     symbol: str
-    """Trading symbol resolved from the instrument cache.
-
-    Empty if the instrument cannot be resolved (e.g. expired option).
+    """
+    Trading symbol resolved from the instrument cache (OSI for options, since
+    exercises are options-only). Empty if the instrument cannot be resolved (e.g.
+    expired option). Display-only.
     """
 
     accepted_quantity: Optional[str] = None
