@@ -24,14 +24,6 @@ from .balances import (
 )
 from ...._types import Body, Omit, Query, Headers, NotGiven, Base64FileInput, omit, not_given
 from ...._utils import path_template, maybe_transform, async_maybe_transform
-from .positions import (
-    PositionsResource,
-    AsyncPositionsResource,
-    PositionsResourceWithRawResponse,
-    AsyncPositionsResourceWithRawResponse,
-    PositionsResourceWithStreamingResponse,
-    AsyncPositionsResourceWithStreamingResponse,
-)
 from ...._compat import cached_property
 from ....types.v1 import account_get_accounts_params, account_patch_account_by_id_params
 from ...._resource import SyncAPIResource, AsyncAPIResource
@@ -49,6 +41,14 @@ from .portfolio_history import (
     AsyncPortfolioHistoryResourceWithRawResponse,
     PortfolioHistoryResourceWithStreamingResponse,
     AsyncPortfolioHistoryResourceWithStreamingResponse,
+)
+from .positions.positions import (
+    PositionsResource,
+    AsyncPositionsResource,
+    PositionsResourceWithRawResponse,
+    AsyncPositionsResourceWithRawResponse,
+    PositionsResourceWithStreamingResponse,
+    AsyncPositionsResourceWithStreamingResponse,
 )
 from ....types.v1.risk_settings_param import RiskSettingsParam
 from ....types.v1.account_get_accounts_response import AccountGetAccountsResponse

@@ -67,11 +67,17 @@ Types:
 
 ```python
 from clear_street.types.v1.accounts import (
+    CancelOrderRequest,
+    InstrumentIDOrSymbol,
+    NewOrderRequest,
     Order,
     OrderList,
     OrderStatus,
     OrderType,
+    PositionEffect,
     QueueState,
+    RequestOrderType,
+    RequestTimeInForce,
     Side,
     TimeInForce,
     TrailingOffsetType,
@@ -126,9 +132,31 @@ from clear_street.types.v1.accounts import (
 
 Methods:
 
-- <code title="delete /v1/accounts/{account_id}/positions/{instrument_id}">client.v1.accounts.positions.<a href="./src/clear_street/resources/v1/accounts/positions.py">close_position</a>(instrument_id, \*, account_id, \*\*<a href="src/clear_street/types/v1/accounts/position_close_position_params.py">params</a>) -> <a href="./src/clear_street/types/v1/accounts/position_close_position_response.py">PositionClosePositionResponse</a></code>
-- <code title="delete /v1/accounts/{account_id}/positions">client.v1.accounts.positions.<a href="./src/clear_street/resources/v1/accounts/positions.py">close_positions</a>(account_id, \*\*<a href="src/clear_street/types/v1/accounts/position_close_positions_params.py">params</a>) -> <a href="./src/clear_street/types/v1/accounts/position_close_positions_response.py">PositionClosePositionsResponse</a></code>
-- <code title="get /v1/accounts/{account_id}/positions">client.v1.accounts.positions.<a href="./src/clear_street/resources/v1/accounts/positions.py">get_positions</a>(account_id, \*\*<a href="src/clear_street/types/v1/accounts/position_get_positions_params.py">params</a>) -> <a href="./src/clear_street/types/v1/accounts/position_get_positions_response.py">PositionGetPositionsResponse</a></code>
+- <code title="delete /v1/accounts/{account_id}/positions/{instrument_id}">client.v1.accounts.positions.<a href="./src/clear_street/resources/v1/accounts/positions/positions.py">close_position</a>(instrument_id, \*, account_id, \*\*<a href="src/clear_street/types/v1/accounts/position_close_position_params.py">params</a>) -> <a href="./src/clear_street/types/v1/accounts/position_close_position_response.py">PositionClosePositionResponse</a></code>
+- <code title="delete /v1/accounts/{account_id}/positions">client.v1.accounts.positions.<a href="./src/clear_street/resources/v1/accounts/positions/positions.py">close_positions</a>(account_id, \*\*<a href="src/clear_street/types/v1/accounts/position_close_positions_params.py">params</a>) -> <a href="./src/clear_street/types/v1/accounts/position_close_positions_response.py">PositionClosePositionsResponse</a></code>
+- <code title="get /v1/accounts/{account_id}/positions">client.v1.accounts.positions.<a href="./src/clear_street/resources/v1/accounts/positions/positions.py">get_positions</a>(account_id, \*\*<a href="src/clear_street/types/v1/accounts/position_get_positions_params.py">params</a>) -> <a href="./src/clear_street/types/v1/accounts/position_get_positions_response.py">PositionGetPositionsResponse</a></code>
+
+#### Instructions
+
+Types:
+
+```python
+from clear_street.types.v1.accounts.positions import (
+    PositionInstruction,
+    PositionInstructionList,
+    PositionInstructionStatus,
+    PositionInstructionType,
+    InstructionCancelPositionInstructionResponse,
+    InstructionGetPositionInstructionsResponse,
+    InstructionSubmitPositionInstructionsResponse,
+)
+```
+
+Methods:
+
+- <code title="delete /v1/accounts/{account_id}/positions/instructions/{instruction_id}">client.v1.accounts.positions.instructions.<a href="./src/clear_street/resources/v1/accounts/positions/instructions.py">cancel_position_instruction</a>(instruction_id, \*, account_id) -> <a href="./src/clear_street/types/v1/accounts/positions/instruction_cancel_position_instruction_response.py">InstructionCancelPositionInstructionResponse</a></code>
+- <code title="get /v1/accounts/{account_id}/positions/instructions">client.v1.accounts.positions.instructions.<a href="./src/clear_street/resources/v1/accounts/positions/instructions.py">get_position_instructions</a>(account_id, \*\*<a href="src/clear_street/types/v1/accounts/positions/instruction_get_position_instructions_params.py">params</a>) -> <a href="./src/clear_street/types/v1/accounts/positions/instruction_get_position_instructions_response.py">InstructionGetPositionInstructionsResponse</a></code>
+- <code title="post /v1/accounts/{account_id}/positions/instructions">client.v1.accounts.positions.instructions.<a href="./src/clear_street/resources/v1/accounts/positions/instructions.py">submit_position_instructions</a>(account_id, \*\*<a href="src/clear_street/types/v1/accounts/positions/instruction_submit_position_instructions_params.py">params</a>) -> <a href="./src/clear_street/types/v1/accounts/positions/instruction_submit_position_instructions_response.py">InstructionSubmitPositionInstructionsResponse</a></code>
 
 ## Calendars
 
@@ -387,6 +415,8 @@ from clear_street.types.v1 import (
     CreateMessageResponse,
     CreateThreadResponse,
     DataChart,
+    EntitlementAgreementKey,
+    EntitlementCode,
     ErrorStatus,
     Message,
     MessageContent,
@@ -397,14 +427,15 @@ from clear_street.types.v1 import (
     OpenChartAction,
     OpenEntitlementConsentAction,
     OpenScreenerAction,
-    OrderPayload,
+    PrefillCancelOrderAction,
+    PrefillNewOrderAction,
     PrefillOrderAction,
-    PrefillOrderActionType,
     PromptButtonAction,
     Response,
     ResponseContent,
     ResponseContentPart,
     ResponseStatus,
+    ScreenerFilter,
     StructuredAction,
     StructuredActionButtonAction,
     SuggestedActionsPayload,
@@ -518,63 +549,6 @@ Methods:
 
 - <code title="post /v1/omni-ai/threads/{thread_id}/messages">client.v1.omni_ai.threads.messages.<a href="./src/clear_street/resources/v1/omni_ai/threads/messages.py">create_message</a>(thread_id, \*\*<a href="src/clear_street/types/v1/omni_ai/threads/message_create_message_params.py">params</a>) -> <a href="./src/clear_street/types/v1/omni_ai/threads/message_create_message_response.py">MessageCreateMessageResponse</a></code>
 - <code title="get /v1/omni-ai/threads/{thread_id}/messages">client.v1.omni_ai.threads.messages.<a href="./src/clear_street/resources/v1/omni_ai/threads/messages.py">get_messages</a>(thread_id, \*\*<a href="src/clear_street/types/v1/omni_ai/threads/message_get_messages_params.py">params</a>) -> <a href="./src/clear_street/types/v1/omni_ai/threads/message_get_messages_response.py">MessageGetMessagesResponse</a></code>
-
-## SavedScreeners
-
-Types:
-
-```python
-from clear_street.types.v1 import (
-    ScreenerEntry,
-    ScreenerEntryList,
-    SavedScreenerCreateScreenerResponse,
-    SavedScreenerGetScreenerByIDResponse,
-    SavedScreenerGetScreenersResponse,
-    SavedScreenerReplaceScreenerResponse,
-)
-```
-
-Methods:
-
-- <code title="post /v1/saved-screeners">client.v1.saved_screeners.<a href="./src/clear_street/resources/v1/saved_screeners.py">create_screener</a>(\*\*<a href="src/clear_street/types/v1/saved_screener_create_screener_params.py">params</a>) -> <a href="./src/clear_street/types/v1/saved_screener_create_screener_response.py">SavedScreenerCreateScreenerResponse</a></code>
-- <code title="delete /v1/saved-screeners/{screener_id}">client.v1.saved_screeners.<a href="./src/clear_street/resources/v1/saved_screeners.py">delete_screener</a>(screener_id) -> None</code>
-- <code title="get /v1/saved-screeners/{screener_id}">client.v1.saved_screeners.<a href="./src/clear_street/resources/v1/saved_screeners.py">get_screener_by_id</a>(screener_id) -> <a href="./src/clear_street/types/v1/saved_screener_get_screener_by_id_response.py">SavedScreenerGetScreenerByIDResponse</a></code>
-- <code title="get /v1/saved-screeners">client.v1.saved_screeners.<a href="./src/clear_street/resources/v1/saved_screeners.py">get_screeners</a>() -> <a href="./src/clear_street/types/v1/saved_screener_get_screeners_response.py">SavedScreenerGetScreenersResponse</a></code>
-- <code title="put /v1/saved-screeners/{screener_id}">client.v1.saved_screeners.<a href="./src/clear_street/resources/v1/saved_screeners.py">replace_screener</a>(screener_id, \*\*<a href="src/clear_street/types/v1/saved_screener_replace_screener_params.py">params</a>) -> <a href="./src/clear_street/types/v1/saved_screener_replace_screener_response.py">SavedScreenerReplaceScreenerResponse</a></code>
-
-## Screener
-
-Types:
-
-```python
-from clear_street.types.v1 import (
-    FieldLookback,
-    FieldPeriod,
-    FieldRef,
-    FieldType,
-    FilterOpSpec,
-    FilterOperator,
-    FilterValue,
-    Modifier,
-    ModifierOp,
-    OperatorArg,
-    ScreenerColumn,
-    ScreenerFilter,
-    ScreenerItem,
-    ScreenerItemList,
-    ScreenerRow,
-    ScreenerRowList,
-    SearchFilter,
-    Variable,
-    ScreenerGetScreenerResponse,
-    ScreenerSearchScreenerResponse,
-)
-```
-
-Methods:
-
-- <code title="get /v1/screener">client.v1.screener.<a href="./src/clear_street/resources/v1/screener.py">get_screener</a>(\*\*<a href="src/clear_street/types/v1/screener_get_screener_params.py">params</a>) -> <a href="./src/clear_street/types/v1/screener_get_screener_response.py">ScreenerGetScreenerResponse</a></code>
-- <code title="post /v1/screener">client.v1.screener.<a href="./src/clear_street/resources/v1/screener.py">search_screener</a>(\*\*<a href="src/clear_street/types/v1/screener_search_screener_params.py">params</a>) -> <a href="./src/clear_street/types/v1/screener_search_screener_response.py">ScreenerSearchScreenerResponse</a></code>
 
 ## Version
 

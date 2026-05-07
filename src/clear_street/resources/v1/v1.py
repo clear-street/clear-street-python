@@ -29,14 +29,6 @@ from .version import (
     AsyncVersionResourceWithStreamingResponse,
 )
 from ..._types import Body, Query, Headers, NoneType, NotGiven, not_given
-from .screener import (
-    ScreenerResource,
-    AsyncScreenerResource,
-    ScreenerResourceWithRawResponse,
-    AsyncScreenerResourceWithRawResponse,
-    ScreenerResourceWithStreamingResponse,
-    AsyncScreenerResourceWithStreamingResponse,
-)
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -53,14 +45,6 @@ from .omni_ai.omni_ai import (
     AsyncOmniAIResourceWithRawResponse,
     OmniAIResourceWithStreamingResponse,
     AsyncOmniAIResourceWithStreamingResponse,
-)
-from .saved_screeners import (
-    SavedScreenersResource,
-    AsyncSavedScreenersResource,
-    SavedScreenersResourceWithRawResponse,
-    AsyncSavedScreenersResourceWithRawResponse,
-    SavedScreenersResourceWithStreamingResponse,
-    AsyncSavedScreenersResourceWithStreamingResponse,
 )
 from .accounts.accounts import (
     AccountsResource,
@@ -140,16 +124,6 @@ class V1Resource(SyncAPIResource):
     @cached_property
     def omni_ai(self) -> OmniAIResource:
         return OmniAIResource(self._client)
-
-    @cached_property
-    def saved_screeners(self) -> SavedScreenersResource:
-        """Search and manage saved screeners."""
-        return SavedScreenersResource(self._client)
-
-    @cached_property
-    def screener(self) -> ScreenerResource:
-        """Search and manage saved screeners."""
-        return ScreenerResource(self._client)
 
     @cached_property
     def version(self) -> VersionResource:
@@ -235,16 +209,6 @@ class AsyncV1Resource(AsyncAPIResource):
     @cached_property
     def omni_ai(self) -> AsyncOmniAIResource:
         return AsyncOmniAIResource(self._client)
-
-    @cached_property
-    def saved_screeners(self) -> AsyncSavedScreenersResource:
-        """Search and manage saved screeners."""
-        return AsyncSavedScreenersResource(self._client)
-
-    @cached_property
-    def screener(self) -> AsyncScreenerResource:
-        """Search and manage saved screeners."""
-        return AsyncScreenerResource(self._client)
 
     @cached_property
     def version(self) -> AsyncVersionResource:
@@ -337,16 +301,6 @@ class V1ResourceWithRawResponse:
         return OmniAIResourceWithRawResponse(self._v1.omni_ai)
 
     @cached_property
-    def saved_screeners(self) -> SavedScreenersResourceWithRawResponse:
-        """Search and manage saved screeners."""
-        return SavedScreenersResourceWithRawResponse(self._v1.saved_screeners)
-
-    @cached_property
-    def screener(self) -> ScreenerResourceWithRawResponse:
-        """Search and manage saved screeners."""
-        return ScreenerResourceWithRawResponse(self._v1.screener)
-
-    @cached_property
     def version(self) -> VersionResourceWithRawResponse:
         """Endpoints for API service metadata."""
         return VersionResourceWithRawResponse(self._v1.version)
@@ -396,16 +350,6 @@ class AsyncV1ResourceWithRawResponse:
     @cached_property
     def omni_ai(self) -> AsyncOmniAIResourceWithRawResponse:
         return AsyncOmniAIResourceWithRawResponse(self._v1.omni_ai)
-
-    @cached_property
-    def saved_screeners(self) -> AsyncSavedScreenersResourceWithRawResponse:
-        """Search and manage saved screeners."""
-        return AsyncSavedScreenersResourceWithRawResponse(self._v1.saved_screeners)
-
-    @cached_property
-    def screener(self) -> AsyncScreenerResourceWithRawResponse:
-        """Search and manage saved screeners."""
-        return AsyncScreenerResourceWithRawResponse(self._v1.screener)
 
     @cached_property
     def version(self) -> AsyncVersionResourceWithRawResponse:
@@ -459,16 +403,6 @@ class V1ResourceWithStreamingResponse:
         return OmniAIResourceWithStreamingResponse(self._v1.omni_ai)
 
     @cached_property
-    def saved_screeners(self) -> SavedScreenersResourceWithStreamingResponse:
-        """Search and manage saved screeners."""
-        return SavedScreenersResourceWithStreamingResponse(self._v1.saved_screeners)
-
-    @cached_property
-    def screener(self) -> ScreenerResourceWithStreamingResponse:
-        """Search and manage saved screeners."""
-        return ScreenerResourceWithStreamingResponse(self._v1.screener)
-
-    @cached_property
     def version(self) -> VersionResourceWithStreamingResponse:
         """Endpoints for API service metadata."""
         return VersionResourceWithStreamingResponse(self._v1.version)
@@ -518,16 +452,6 @@ class AsyncV1ResourceWithStreamingResponse:
     @cached_property
     def omni_ai(self) -> AsyncOmniAIResourceWithStreamingResponse:
         return AsyncOmniAIResourceWithStreamingResponse(self._v1.omni_ai)
-
-    @cached_property
-    def saved_screeners(self) -> AsyncSavedScreenersResourceWithStreamingResponse:
-        """Search and manage saved screeners."""
-        return AsyncSavedScreenersResourceWithStreamingResponse(self._v1.saved_screeners)
-
-    @cached_property
-    def screener(self) -> AsyncScreenerResourceWithStreamingResponse:
-        """Search and manage saved screeners."""
-        return AsyncScreenerResourceWithStreamingResponse(self._v1.screener)
 
     @cached_property
     def version(self) -> AsyncVersionResourceWithStreamingResponse:

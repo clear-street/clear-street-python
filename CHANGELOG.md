@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.3.0 (2026-05-07)
+
+Full Changelog: [v0.2.0...v0.3.0](https://github.com/clear-street/clear-street-python/compare/v0.2.0...v0.3.0)
+
+### Features
+
+* **api:** api update ([ec987e5](https://github.com/clear-street/clear-street-python/commit/ec987e5504b937d2925833c04b9e369d6cc415f8))
+* **api:** api update ([d37986e](https://github.com/clear-street/clear-street-python/commit/d37986e4ef82728d060c9322972a4e94e4361a64))
+* **api:** api update ([7a7d38f](https://github.com/clear-street/clear-street-python/commit/7a7d38f88925ea8f677ad8532813cff4186f593e))
+* **api:** api update ([929975a](https://github.com/clear-street/clear-street-python/commit/929975acf65ce78f0f136976dda5470bdefca671))
+* **api:** api update ([b7ac60a](https://github.com/clear-street/clear-street-python/commit/b7ac60a1a8843c75d571f4662de66d4f2c64fb24))
+* **api:** api update ([d1a9cc1](https://github.com/clear-street/clear-street-python/commit/d1a9cc1c992032b0d1a5287264b2286a3043fd1b))
+* **api:** api update ([729a6e4](https://github.com/clear-street/clear-street-python/commit/729a6e4ddbbc2d6e86f668b12ff90bfe6a11f544))
+* **api:** api update ([624d9ca](https://github.com/clear-street/clear-street-python/commit/624d9ca98822f7f6b94b4a10ab9918d92cb9950d))
+* **api:** api update ([99cbeff](https://github.com/clear-street/clear-street-python/commit/99cbeff9cdde6f3a47d02c4f971d2e03f61f1b3b))
+* **api:** manual updates ([c70ebf6](https://github.com/clear-street/clear-street-python/commit/c70ebf67ee3146a9b6f760ced2b7b17eb0c6c681))
+* **api:** manual updates ([48a914d](https://github.com/clear-street/clear-street-python/commit/48a914daea47e8ad7f769abc079cb439d0b9ce77))
+* **api:** manual updates ([cc2784b](https://github.com/clear-street/clear-street-python/commit/cc2784ba3f37dc583adf8752578ebaf30d9b3870))
+
+
+### Performance Improvements
+
+* **ACTIVE-4584:** reduce option index memory ([7344836](https://github.com/clear-street/clear-street-python/commit/734483639333292ea3dc3375e91d359fa07115b3))
+
 ## 0.2.0 (2026-05-05)
 
 Full Changelog: [v0.1.0...v0.2.0](https://github.com/clear-street/clear-street-python/compare/v0.1.0...v0.2.0)
