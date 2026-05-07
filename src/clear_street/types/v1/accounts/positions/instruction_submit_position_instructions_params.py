@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Iterable, Optional
 from typing_extensions import Required, TypedDict
 
-from ....active.v1.accounts.positions.position_instruction_type import PositionInstructionType
+from .position_instruction_type import PositionInstructionType
 
 __all__ = ["InstructionSubmitPositionInstructionsParams", "Instruction"]
 

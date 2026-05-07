@@ -3,7 +3,7 @@
 from typing import Optional
 from datetime import datetime
 
-from ......_models import BaseModel
+from ....._models import BaseModel
 from .position_instruction_type import PositionInstructionType
 from .position_instruction_status import PositionInstructionStatus
 
