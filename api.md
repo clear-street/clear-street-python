@@ -435,6 +435,7 @@ from clear_street.types.v1 import (
     ResponseContent,
     ResponseContentPart,
     ResponseStatus,
+    ScreenerFilter,
     StructuredAction,
     StructuredActionButtonAction,
     SuggestedActionsPayload,
@@ -548,63 +549,6 @@ Methods:
 
 - <code title="post /v1/omni-ai/threads/{thread_id}/messages">client.v1.omni_ai.threads.messages.<a href="./src/clear_street/resources/v1/omni_ai/threads/messages.py">create_message</a>(thread_id, \*\*<a href="src/clear_street/types/v1/omni_ai/threads/message_create_message_params.py">params</a>) -> <a href="./src/clear_street/types/v1/omni_ai/threads/message_create_message_response.py">MessageCreateMessageResponse</a></code>
 - <code title="get /v1/omni-ai/threads/{thread_id}/messages">client.v1.omni_ai.threads.messages.<a href="./src/clear_street/resources/v1/omni_ai/threads/messages.py">get_messages</a>(thread_id, \*\*<a href="src/clear_street/types/v1/omni_ai/threads/message_get_messages_params.py">params</a>) -> <a href="./src/clear_street/types/v1/omni_ai/threads/message_get_messages_response.py">MessageGetMessagesResponse</a></code>
-
-## SavedScreeners
-
-Types:
-
-```python
-from clear_street.types.v1 import (
-    ScreenerEntry,
-    ScreenerEntryList,
-    SavedScreenerCreateScreenerResponse,
-    SavedScreenerGetScreenerByIDResponse,
-    SavedScreenerGetScreenersResponse,
-    SavedScreenerReplaceScreenerResponse,
-)
-```
-
-Methods:
-
-- <code title="post /v1/saved-screeners">client.v1.saved_screeners.<a href="./src/clear_street/resources/v1/saved_screeners.py">create_screener</a>(\*\*<a href="src/clear_street/types/v1/saved_screener_create_screener_params.py">params</a>) -> <a href="./src/clear_street/types/v1/saved_screener_create_screener_response.py">SavedScreenerCreateScreenerResponse</a></code>
-- <code title="delete /v1/saved-screeners/{screener_id}">client.v1.saved_screeners.<a href="./src/clear_street/resources/v1/saved_screeners.py">delete_screener</a>(screener_id) -> None</code>
-- <code title="get /v1/saved-screeners/{screener_id}">client.v1.saved_screeners.<a href="./src/clear_street/resources/v1/saved_screeners.py">get_screener_by_id</a>(screener_id) -> <a href="./src/clear_street/types/v1/saved_screener_get_screener_by_id_response.py">SavedScreenerGetScreenerByIDResponse</a></code>
-- <code title="get /v1/saved-screeners">client.v1.saved_screeners.<a href="./src/clear_street/resources/v1/saved_screeners.py">get_screeners</a>() -> <a href="./src/clear_street/types/v1/saved_screener_get_screeners_response.py">SavedScreenerGetScreenersResponse</a></code>
-- <code title="put /v1/saved-screeners/{screener_id}">client.v1.saved_screeners.<a href="./src/clear_street/resources/v1/saved_screeners.py">replace_screener</a>(screener_id, \*\*<a href="src/clear_street/types/v1/saved_screener_replace_screener_params.py">params</a>) -> <a href="./src/clear_street/types/v1/saved_screener_replace_screener_response.py">SavedScreenerReplaceScreenerResponse</a></code>
-
-## Screener
-
-Types:
-
-```python
-from clear_street.types.v1 import (
-    FieldLookback,
-    FieldPeriod,
-    FieldRef,
-    FieldType,
-    FilterOpSpec,
-    FilterOperator,
-    FilterValue,
-    Modifier,
-    ModifierOp,
-    OperatorArg,
-    ScreenerColumn,
-    ScreenerFilter,
-    ScreenerItem,
-    ScreenerItemList,
-    ScreenerRow,
-    ScreenerRowList,
-    SearchFilter,
-    Variable,
-    ScreenerGetScreenerResponse,
-    ScreenerSearchScreenerResponse,
-)
-```
-
-Methods:
-
-- <code title="get /v1/screener">client.v1.screener.<a href="./src/clear_street/resources/v1/screener.py">get_screener</a>(\*\*<a href="src/clear_street/types/v1/screener_get_screener_params.py">params</a>) -> <a href="./src/clear_street/types/v1/screener_get_screener_response.py">ScreenerGetScreenerResponse</a></code>
-- <code title="post /v1/screener">client.v1.screener.<a href="./src/clear_street/resources/v1/screener.py">search_screener</a>(\*\*<a href="src/clear_street/types/v1/screener_search_screener_params.py">params</a>) -> <a href="./src/clear_street/types/v1/screener_search_screener_response.py">ScreenerSearchScreenerResponse</a></code>
 
 ## Version
 

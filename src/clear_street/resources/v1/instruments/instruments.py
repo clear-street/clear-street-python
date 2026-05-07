@@ -204,7 +204,6 @@ class InstrumentsResource(SyncAPIResource):
         self,
         *,
         easy_to_borrow: bool | Omit = omit,
-        id_filter: str | Omit = omit,
         instrument_ids: SequenceNotStr[str] | Omit = omit,
         instrument_type: Literal["COMMON_STOCK", "PREFERRED_STOCK", "OPTION", "CASH", "OTHER"] | Omit = omit,
         is_liquidation_only: bool | Omit = omit,
@@ -227,13 +226,11 @@ class InstrumentsResource(SyncAPIResource):
         Args:
           easy_to_borrow: Filter by easy to borrow status
 
-          id_filter: Filter IDs to those containing this substring. For options, and when
-              instrument_type is omitted and no instrument_ids filters are provided, this is
-              required.
-
           instrument_ids: Comma-separated OEMS instrument UUIDs
 
-          instrument_type: Filter by instrument type. If omitted, returns all supported instrument types.
+          instrument_type: Filter by instrument type. OPTION is not supported on this endpoint; use GET
+              /instruments/options/contracts to list option contracts. If omitted, returns all
+              supported instrument types except options.
 
           is_liquidation_only: Filter by liquidation only status
 
@@ -266,7 +263,6 @@ class InstrumentsResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "easy_to_borrow": easy_to_borrow,
-                        "id_filter": id_filter,
                         "instrument_ids": instrument_ids,
                         "instrument_type": instrument_type,
                         "is_liquidation_only": is_liquidation_only,
@@ -471,7 +467,6 @@ class AsyncInstrumentsResource(AsyncAPIResource):
         self,
         *,
         easy_to_borrow: bool | Omit = omit,
-        id_filter: str | Omit = omit,
         instrument_ids: SequenceNotStr[str] | Omit = omit,
         instrument_type: Literal["COMMON_STOCK", "PREFERRED_STOCK", "OPTION", "CASH", "OTHER"] | Omit = omit,
         is_liquidation_only: bool | Omit = omit,
@@ -494,13 +489,11 @@ class AsyncInstrumentsResource(AsyncAPIResource):
         Args:
           easy_to_borrow: Filter by easy to borrow status
 
-          id_filter: Filter IDs to those containing this substring. For options, and when
-              instrument_type is omitted and no instrument_ids filters are provided, this is
-              required.
-
           instrument_ids: Comma-separated OEMS instrument UUIDs
 
-          instrument_type: Filter by instrument type. If omitted, returns all supported instrument types.
+          instrument_type: Filter by instrument type. OPTION is not supported on this endpoint; use GET
+              /instruments/options/contracts to list option contracts. If omitted, returns all
+              supported instrument types except options.
 
           is_liquidation_only: Filter by liquidation only status
 
@@ -533,7 +526,6 @@ class AsyncInstrumentsResource(AsyncAPIResource):
                 query=await async_maybe_transform(
                     {
                         "easy_to_borrow": easy_to_borrow,
-                        "id_filter": id_filter,
                         "instrument_ids": instrument_ids,
                         "instrument_type": instrument_type,
                         "is_liquidation_only": is_liquidation_only,
