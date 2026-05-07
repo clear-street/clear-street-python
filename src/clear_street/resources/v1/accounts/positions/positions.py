@@ -7,7 +7,7 @@ from typing_extensions import Literal
 
 import httpx
 
-from ...._types import (
+from ....._types import (
     Body,
     Omit,
     Query,
@@ -18,32 +18,45 @@ from ...._types import (
     omit,
     not_given,
 )
-from ...._utils import path_template, maybe_transform, async_maybe_transform
-from ...._compat import cached_property
-from ...._resource import SyncAPIResource, AsyncAPIResource
-from ...._response import (
+from ....._utils import path_template, maybe_transform, async_maybe_transform
+from ....._compat import cached_property
+from .instructions import (
+    InstructionsResource,
+    AsyncInstructionsResource,
+    InstructionsResourceWithRawResponse,
+    AsyncInstructionsResourceWithRawResponse,
+    InstructionsResourceWithStreamingResponse,
+    AsyncInstructionsResourceWithStreamingResponse,
+)
+from ....._resource import SyncAPIResource, AsyncAPIResource
+from ....._response import (
     to_raw_response_wrapper,
     to_streamed_response_wrapper,
     async_to_raw_response_wrapper,
     async_to_streamed_response_wrapper,
 )
-from ...._base_client import make_request_options
-from ....types.v1.accounts import (
+from ....._base_client import make_request_options
+from .....types.v1.accounts import (
     InstrumentIDOrSymbol,
     position_get_positions_params,
     position_close_position_params,
     position_close_positions_params,
 )
-from ....types.v1.accounts.instrument_id_or_symbol import InstrumentIDOrSymbol
-from ....types.v1.accounts.position_get_positions_response import PositionGetPositionsResponse
-from ....types.v1.accounts.position_close_position_response import PositionClosePositionResponse
-from ....types.v1.accounts.position_close_positions_response import PositionClosePositionsResponse
+from .....types.v1.accounts.instrument_id_or_symbol import InstrumentIDOrSymbol
+from .....types.v1.accounts.position_get_positions_response import PositionGetPositionsResponse
+from .....types.v1.accounts.position_close_position_response import PositionClosePositionResponse
+from .....types.v1.accounts.position_close_positions_response import PositionClosePositionsResponse
 
 __all__ = ["PositionsResource", "AsyncPositionsResource"]
 
 
 class PositionsResource(SyncAPIResource):
     """View account positions."""
+
+    @cached_property
+    def instructions(self) -> InstructionsResource:
+        """Submit and monitor option exercise, DNE, CEA, and cancel instructions."""
+        return InstructionsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> PositionsResourceWithRawResponse:
@@ -217,6 +230,11 @@ class PositionsResource(SyncAPIResource):
 
 class AsyncPositionsResource(AsyncAPIResource):
     """View account positions."""
+
+    @cached_property
+    def instructions(self) -> AsyncInstructionsResource:
+        """Submit and monitor option exercise, DNE, CEA, and cancel instructions."""
+        return AsyncInstructionsResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncPositionsResourceWithRawResponse:
@@ -402,6 +420,11 @@ class PositionsResourceWithRawResponse:
             positions.get_positions,
         )
 
+    @cached_property
+    def instructions(self) -> InstructionsResourceWithRawResponse:
+        """Submit and monitor option exercise, DNE, CEA, and cancel instructions."""
+        return InstructionsResourceWithRawResponse(self._positions.instructions)
+
 
 class AsyncPositionsResourceWithRawResponse:
     def __init__(self, positions: AsyncPositionsResource) -> None:
@@ -416,6 +439,11 @@ class AsyncPositionsResourceWithRawResponse:
         self.get_positions = async_to_raw_response_wrapper(
             positions.get_positions,
         )
+
+    @cached_property
+    def instructions(self) -> AsyncInstructionsResourceWithRawResponse:
+        """Submit and monitor option exercise, DNE, CEA, and cancel instructions."""
+        return AsyncInstructionsResourceWithRawResponse(self._positions.instructions)
 
 
 class PositionsResourceWithStreamingResponse:
@@ -432,6 +460,11 @@ class PositionsResourceWithStreamingResponse:
             positions.get_positions,
         )
 
+    @cached_property
+    def instructions(self) -> InstructionsResourceWithStreamingResponse:
+        """Submit and monitor option exercise, DNE, CEA, and cancel instructions."""
+        return InstructionsResourceWithStreamingResponse(self._positions.instructions)
+
 
 class AsyncPositionsResourceWithStreamingResponse:
     def __init__(self, positions: AsyncPositionsResource) -> None:
@@ -446,3 +479,8 @@ class AsyncPositionsResourceWithStreamingResponse:
         self.get_positions = async_to_streamed_response_wrapper(
             positions.get_positions,
         )
+
+    @cached_property
+    def instructions(self) -> AsyncInstructionsResourceWithStreamingResponse:
+        """Submit and monitor option exercise, DNE, CEA, and cancel instructions."""
+        return AsyncInstructionsResourceWithStreamingResponse(self._positions.instructions)
