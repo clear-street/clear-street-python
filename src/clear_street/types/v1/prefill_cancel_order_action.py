@@ -3,7 +3,7 @@
 from typing import List
 
 from ..._models import BaseModel
-from .accounts.cancel_order_request import CancelOrderRequest
+from .cancel_order_request import CancelOrderRequest
 
 __all__ = ["PrefillCancelOrderAction"]
 

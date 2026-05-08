@@ -3,7 +3,7 @@
 from typing import List
 
 from ..._models import BaseModel
-from .accounts.new_order_request import NewOrderRequest
+from .new_order_request import NewOrderRequest
 
 __all__ = ["PrefillNewOrderAction"]
 

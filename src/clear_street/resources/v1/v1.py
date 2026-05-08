@@ -2,42 +2,72 @@
 
 from __future__ import annotations
 
-import httpx
-
-from .news import (
-    NewsResource,
-    AsyncNewsResource,
-    NewsResourceWithRawResponse,
-    AsyncNewsResourceWithRawResponse,
-    NewsResourceWithStreamingResponse,
-    AsyncNewsResourceWithStreamingResponse,
+from .orders import (
+    OrdersResource,
+    AsyncOrdersResource,
+    OrdersResourceWithRawResponse,
+    AsyncOrdersResourceWithRawResponse,
+    OrdersResourceWithStreamingResponse,
+    AsyncOrdersResourceWithStreamingResponse,
 )
-from .clock import (
-    ClockResource,
-    AsyncClockResource,
-    ClockResourceWithRawResponse,
-    AsyncClockResourceWithRawResponse,
-    ClockResourceWithStreamingResponse,
-    AsyncClockResourceWithStreamingResponse,
+from .accounts import (
+    AccountsResource,
+    AsyncAccountsResource,
+    AccountsResourceWithRawResponse,
+    AsyncAccountsResourceWithRawResponse,
+    AccountsResourceWithStreamingResponse,
+    AsyncAccountsResourceWithStreamingResponse,
 )
-from .version import (
-    VersionResource,
-    AsyncVersionResource,
-    VersionResourceWithRawResponse,
-    AsyncVersionResourceWithRawResponse,
-    VersionResourceWithStreamingResponse,
-    AsyncVersionResourceWithStreamingResponse,
+from .calendar import (
+    CalendarResource,
+    AsyncCalendarResource,
+    CalendarResourceWithRawResponse,
+    AsyncCalendarResourceWithRawResponse,
+    CalendarResourceWithStreamingResponse,
+    AsyncCalendarResourceWithStreamingResponse,
 )
-from ..._types import Body, Query, Headers, NoneType, NotGiven, not_given
 from ..._compat import cached_property
-from ..._resource import SyncAPIResource, AsyncAPIResource
-from ..._response import (
-    to_raw_response_wrapper,
-    to_streamed_response_wrapper,
-    async_to_raw_response_wrapper,
-    async_to_streamed_response_wrapper,
+from .positions import (
+    PositionsResource,
+    AsyncPositionsResource,
+    PositionsResourceWithRawResponse,
+    AsyncPositionsResourceWithRawResponse,
+    PositionsResourceWithStreamingResponse,
+    AsyncPositionsResourceWithStreamingResponse,
 )
-from ..._base_client import make_request_options
+from .watchlist import (
+    WatchlistResource,
+    AsyncWatchlistResource,
+    WatchlistResourceWithRawResponse,
+    AsyncWatchlistResourceWithRawResponse,
+    WatchlistResourceWithStreamingResponse,
+    AsyncWatchlistResourceWithStreamingResponse,
+)
+from .websocket import (
+    WebsocketResource,
+    AsyncWebsocketResource,
+    WebsocketResourceWithRawResponse,
+    AsyncWebsocketResourceWithRawResponse,
+    WebsocketResourceWithStreamingResponse,
+    AsyncWebsocketResourceWithStreamingResponse,
+)
+from ..._resource import SyncAPIResource, AsyncAPIResource
+from .api_version import (
+    APIVersionResource,
+    AsyncAPIVersionResource,
+    APIVersionResourceWithRawResponse,
+    AsyncAPIVersionResourceWithRawResponse,
+    APIVersionResourceWithStreamingResponse,
+    AsyncAPIVersionResourceWithStreamingResponse,
+)
+from .instruments import (
+    InstrumentsResource,
+    AsyncInstrumentsResource,
+    InstrumentsResourceWithRawResponse,
+    AsyncInstrumentsResourceWithRawResponse,
+    InstrumentsResourceWithStreamingResponse,
+    AsyncInstrumentsResourceWithStreamingResponse,
+)
 from .omni_ai.omni_ai import (
     OmniAIResource,
     AsyncOmniAIResource,
@@ -46,94 +76,67 @@ from .omni_ai.omni_ai import (
     OmniAIResourceWithStreamingResponse,
     AsyncOmniAIResourceWithStreamingResponse,
 )
-from .accounts.accounts import (
-    AccountsResource,
-    AsyncAccountsResource,
-    AccountsResourceWithRawResponse,
-    AsyncAccountsResourceWithRawResponse,
-    AccountsResourceWithStreamingResponse,
-    AsyncAccountsResourceWithStreamingResponse,
-)
-from .calendars.calendars import (
-    CalendarsResource,
-    AsyncCalendarsResource,
-    CalendarsResourceWithRawResponse,
-    AsyncCalendarsResourceWithRawResponse,
-    CalendarsResourceWithStreamingResponse,
-    AsyncCalendarsResourceWithStreamingResponse,
-)
-from .watchlists.watchlists import (
-    WatchlistsResource,
-    AsyncWatchlistsResource,
-    WatchlistsResourceWithRawResponse,
-    AsyncWatchlistsResourceWithRawResponse,
-    WatchlistsResourceWithStreamingResponse,
-    AsyncWatchlistsResourceWithStreamingResponse,
-)
-from .instruments.instruments import (
-    InstrumentsResource,
-    AsyncInstrumentsResource,
-    InstrumentsResourceWithRawResponse,
-    AsyncInstrumentsResourceWithRawResponse,
-    InstrumentsResourceWithStreamingResponse,
-    AsyncInstrumentsResourceWithStreamingResponse,
-)
-from .market_data.market_data import (
-    MarketDataResource,
-    AsyncMarketDataResource,
-    MarketDataResourceWithRawResponse,
-    AsyncMarketDataResourceWithRawResponse,
-    MarketDataResourceWithStreamingResponse,
-    AsyncMarketDataResourceWithStreamingResponse,
+from .instrument_data.instrument_data import (
+    InstrumentDataResource,
+    AsyncInstrumentDataResource,
+    InstrumentDataResourceWithRawResponse,
+    AsyncInstrumentDataResourceWithRawResponse,
+    InstrumentDataResourceWithStreamingResponse,
+    AsyncInstrumentDataResourceWithStreamingResponse,
 )
 
 __all__ = ["V1Resource", "AsyncV1Resource"]
 
 
 class V1Resource(SyncAPIResource):
-    """Active Websocket."""
-
     @cached_property
     def accounts(self) -> AccountsResource:
         """Manage trading accounts, balances, and portfolio history."""
         return AccountsResource(self._client)
 
     @cached_property
-    def calendars(self) -> CalendarsResource:
-        return CalendarsResource(self._client)
+    def api_version(self) -> APIVersionResource:
+        """Endpoints for API service metadata."""
+        return APIVersionResource(self._client)
 
     @cached_property
-    def clock(self) -> ClockResource:
-        """Access financial calendars for events like earnings, dividends, and splits."""
-        return ClockResource(self._client)
+    def calendar(self) -> CalendarResource:
+        """Access clocks and financial calendars for market sessions and events."""
+        return CalendarResource(self._client)
+
+    @cached_property
+    def instrument_data(self) -> InstrumentDataResource:
+        """Retrieve instrument analytics, market data, news, and related reference data."""
+        return InstrumentDataResource(self._client)
 
     @cached_property
     def instruments(self) -> InstrumentsResource:
-        """Retrieve details and lists of tradable instruments."""
+        """Retrieve core details and discovery endpoints for tradable instruments."""
         return InstrumentsResource(self._client)
-
-    @cached_property
-    def market_data(self) -> MarketDataResource:
-        return MarketDataResource(self._client)
-
-    @cached_property
-    def news(self) -> NewsResource:
-        """Retrieve market news and related instrument metadata."""
-        return NewsResource(self._client)
 
     @cached_property
     def omni_ai(self) -> OmniAIResource:
         return OmniAIResource(self._client)
 
     @cached_property
-    def version(self) -> VersionResource:
-        """Endpoints for API service metadata."""
-        return VersionResource(self._client)
+    def orders(self) -> OrdersResource:
+        """Place, monitor, and manage trading orders."""
+        return OrdersResource(self._client)
 
     @cached_property
-    def watchlists(self) -> WatchlistsResource:
+    def positions(self) -> PositionsResource:
+        """View positions and manage position instructions."""
+        return PositionsResource(self._client)
+
+    @cached_property
+    def watchlist(self) -> WatchlistResource:
         """Create and manage watchlists."""
-        return WatchlistsResource(self._client)
+        return WatchlistResource(self._client)
+
+    @cached_property
+    def websocket(self) -> WebsocketResource:
+        """Active Websocket."""
+        return WebsocketResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> V1ResourceWithRawResponse:
@@ -154,71 +157,56 @@ class V1Resource(SyncAPIResource):
         """
         return V1ResourceWithStreamingResponse(self)
 
-    def websocket_handler(
-        self,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
-        """Upgrade the HTTP connection to a WebSocket and echo incoming messages."""
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        return self._get(
-            "/v1/ws",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=NoneType,
-        )
-
 
 class AsyncV1Resource(AsyncAPIResource):
-    """Active Websocket."""
-
     @cached_property
     def accounts(self) -> AsyncAccountsResource:
         """Manage trading accounts, balances, and portfolio history."""
         return AsyncAccountsResource(self._client)
 
     @cached_property
-    def calendars(self) -> AsyncCalendarsResource:
-        return AsyncCalendarsResource(self._client)
+    def api_version(self) -> AsyncAPIVersionResource:
+        """Endpoints for API service metadata."""
+        return AsyncAPIVersionResource(self._client)
 
     @cached_property
-    def clock(self) -> AsyncClockResource:
-        """Access financial calendars for events like earnings, dividends, and splits."""
-        return AsyncClockResource(self._client)
+    def calendar(self) -> AsyncCalendarResource:
+        """Access clocks and financial calendars for market sessions and events."""
+        return AsyncCalendarResource(self._client)
+
+    @cached_property
+    def instrument_data(self) -> AsyncInstrumentDataResource:
+        """Retrieve instrument analytics, market data, news, and related reference data."""
+        return AsyncInstrumentDataResource(self._client)
 
     @cached_property
     def instruments(self) -> AsyncInstrumentsResource:
-        """Retrieve details and lists of tradable instruments."""
+        """Retrieve core details and discovery endpoints for tradable instruments."""
         return AsyncInstrumentsResource(self._client)
-
-    @cached_property
-    def market_data(self) -> AsyncMarketDataResource:
-        return AsyncMarketDataResource(self._client)
-
-    @cached_property
-    def news(self) -> AsyncNewsResource:
-        """Retrieve market news and related instrument metadata."""
-        return AsyncNewsResource(self._client)
 
     @cached_property
     def omni_ai(self) -> AsyncOmniAIResource:
         return AsyncOmniAIResource(self._client)
 
     @cached_property
-    def version(self) -> AsyncVersionResource:
-        """Endpoints for API service metadata."""
-        return AsyncVersionResource(self._client)
+    def orders(self) -> AsyncOrdersResource:
+        """Place, monitor, and manage trading orders."""
+        return AsyncOrdersResource(self._client)
 
     @cached_property
-    def watchlists(self) -> AsyncWatchlistsResource:
+    def positions(self) -> AsyncPositionsResource:
+        """View positions and manage position instructions."""
+        return AsyncPositionsResource(self._client)
+
+    @cached_property
+    def watchlist(self) -> AsyncWatchlistResource:
         """Create and manage watchlists."""
-        return AsyncWatchlistsResource(self._client)
+        return AsyncWatchlistResource(self._client)
+
+    @cached_property
+    def websocket(self) -> AsyncWebsocketResource:
+        """Active Websocket."""
+        return AsyncWebsocketResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncV1ResourceWithRawResponse:
@@ -239,34 +227,10 @@ class AsyncV1Resource(AsyncAPIResource):
         """
         return AsyncV1ResourceWithStreamingResponse(self)
 
-    async def websocket_handler(
-        self,
-        *,
-        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
-        # The extra values given here take precedence over values defined on the client or passed to this method.
-        extra_headers: Headers | None = None,
-        extra_query: Query | None = None,
-        extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> None:
-        """Upgrade the HTTP connection to a WebSocket and echo incoming messages."""
-        extra_headers = {"Accept": "*/*", **(extra_headers or {})}
-        return await self._get(
-            "/v1/ws",
-            options=make_request_options(
-                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
-            ),
-            cast_to=NoneType,
-        )
-
 
 class V1ResourceWithRawResponse:
     def __init__(self, v1: V1Resource) -> None:
         self._v1 = v1
-
-        self.websocket_handler = to_raw_response_wrapper(
-            v1.websocket_handler,
-        )
 
     @cached_property
     def accounts(self) -> AccountsResourceWithRawResponse:
@@ -274,50 +238,53 @@ class V1ResourceWithRawResponse:
         return AccountsResourceWithRawResponse(self._v1.accounts)
 
     @cached_property
-    def calendars(self) -> CalendarsResourceWithRawResponse:
-        return CalendarsResourceWithRawResponse(self._v1.calendars)
+    def api_version(self) -> APIVersionResourceWithRawResponse:
+        """Endpoints for API service metadata."""
+        return APIVersionResourceWithRawResponse(self._v1.api_version)
 
     @cached_property
-    def clock(self) -> ClockResourceWithRawResponse:
-        """Access financial calendars for events like earnings, dividends, and splits."""
-        return ClockResourceWithRawResponse(self._v1.clock)
+    def calendar(self) -> CalendarResourceWithRawResponse:
+        """Access clocks and financial calendars for market sessions and events."""
+        return CalendarResourceWithRawResponse(self._v1.calendar)
+
+    @cached_property
+    def instrument_data(self) -> InstrumentDataResourceWithRawResponse:
+        """Retrieve instrument analytics, market data, news, and related reference data."""
+        return InstrumentDataResourceWithRawResponse(self._v1.instrument_data)
 
     @cached_property
     def instruments(self) -> InstrumentsResourceWithRawResponse:
-        """Retrieve details and lists of tradable instruments."""
+        """Retrieve core details and discovery endpoints for tradable instruments."""
         return InstrumentsResourceWithRawResponse(self._v1.instruments)
-
-    @cached_property
-    def market_data(self) -> MarketDataResourceWithRawResponse:
-        return MarketDataResourceWithRawResponse(self._v1.market_data)
-
-    @cached_property
-    def news(self) -> NewsResourceWithRawResponse:
-        """Retrieve market news and related instrument metadata."""
-        return NewsResourceWithRawResponse(self._v1.news)
 
     @cached_property
     def omni_ai(self) -> OmniAIResourceWithRawResponse:
         return OmniAIResourceWithRawResponse(self._v1.omni_ai)
 
     @cached_property
-    def version(self) -> VersionResourceWithRawResponse:
-        """Endpoints for API service metadata."""
-        return VersionResourceWithRawResponse(self._v1.version)
+    def orders(self) -> OrdersResourceWithRawResponse:
+        """Place, monitor, and manage trading orders."""
+        return OrdersResourceWithRawResponse(self._v1.orders)
 
     @cached_property
-    def watchlists(self) -> WatchlistsResourceWithRawResponse:
+    def positions(self) -> PositionsResourceWithRawResponse:
+        """View positions and manage position instructions."""
+        return PositionsResourceWithRawResponse(self._v1.positions)
+
+    @cached_property
+    def watchlist(self) -> WatchlistResourceWithRawResponse:
         """Create and manage watchlists."""
-        return WatchlistsResourceWithRawResponse(self._v1.watchlists)
+        return WatchlistResourceWithRawResponse(self._v1.watchlist)
+
+    @cached_property
+    def websocket(self) -> WebsocketResourceWithRawResponse:
+        """Active Websocket."""
+        return WebsocketResourceWithRawResponse(self._v1.websocket)
 
 
 class AsyncV1ResourceWithRawResponse:
     def __init__(self, v1: AsyncV1Resource) -> None:
         self._v1 = v1
-
-        self.websocket_handler = async_to_raw_response_wrapper(
-            v1.websocket_handler,
-        )
 
     @cached_property
     def accounts(self) -> AsyncAccountsResourceWithRawResponse:
@@ -325,50 +292,53 @@ class AsyncV1ResourceWithRawResponse:
         return AsyncAccountsResourceWithRawResponse(self._v1.accounts)
 
     @cached_property
-    def calendars(self) -> AsyncCalendarsResourceWithRawResponse:
-        return AsyncCalendarsResourceWithRawResponse(self._v1.calendars)
+    def api_version(self) -> AsyncAPIVersionResourceWithRawResponse:
+        """Endpoints for API service metadata."""
+        return AsyncAPIVersionResourceWithRawResponse(self._v1.api_version)
 
     @cached_property
-    def clock(self) -> AsyncClockResourceWithRawResponse:
-        """Access financial calendars for events like earnings, dividends, and splits."""
-        return AsyncClockResourceWithRawResponse(self._v1.clock)
+    def calendar(self) -> AsyncCalendarResourceWithRawResponse:
+        """Access clocks and financial calendars for market sessions and events."""
+        return AsyncCalendarResourceWithRawResponse(self._v1.calendar)
+
+    @cached_property
+    def instrument_data(self) -> AsyncInstrumentDataResourceWithRawResponse:
+        """Retrieve instrument analytics, market data, news, and related reference data."""
+        return AsyncInstrumentDataResourceWithRawResponse(self._v1.instrument_data)
 
     @cached_property
     def instruments(self) -> AsyncInstrumentsResourceWithRawResponse:
-        """Retrieve details and lists of tradable instruments."""
+        """Retrieve core details and discovery endpoints for tradable instruments."""
         return AsyncInstrumentsResourceWithRawResponse(self._v1.instruments)
-
-    @cached_property
-    def market_data(self) -> AsyncMarketDataResourceWithRawResponse:
-        return AsyncMarketDataResourceWithRawResponse(self._v1.market_data)
-
-    @cached_property
-    def news(self) -> AsyncNewsResourceWithRawResponse:
-        """Retrieve market news and related instrument metadata."""
-        return AsyncNewsResourceWithRawResponse(self._v1.news)
 
     @cached_property
     def omni_ai(self) -> AsyncOmniAIResourceWithRawResponse:
         return AsyncOmniAIResourceWithRawResponse(self._v1.omni_ai)
 
     @cached_property
-    def version(self) -> AsyncVersionResourceWithRawResponse:
-        """Endpoints for API service metadata."""
-        return AsyncVersionResourceWithRawResponse(self._v1.version)
+    def orders(self) -> AsyncOrdersResourceWithRawResponse:
+        """Place, monitor, and manage trading orders."""
+        return AsyncOrdersResourceWithRawResponse(self._v1.orders)
 
     @cached_property
-    def watchlists(self) -> AsyncWatchlistsResourceWithRawResponse:
+    def positions(self) -> AsyncPositionsResourceWithRawResponse:
+        """View positions and manage position instructions."""
+        return AsyncPositionsResourceWithRawResponse(self._v1.positions)
+
+    @cached_property
+    def watchlist(self) -> AsyncWatchlistResourceWithRawResponse:
         """Create and manage watchlists."""
-        return AsyncWatchlistsResourceWithRawResponse(self._v1.watchlists)
+        return AsyncWatchlistResourceWithRawResponse(self._v1.watchlist)
+
+    @cached_property
+    def websocket(self) -> AsyncWebsocketResourceWithRawResponse:
+        """Active Websocket."""
+        return AsyncWebsocketResourceWithRawResponse(self._v1.websocket)
 
 
 class V1ResourceWithStreamingResponse:
     def __init__(self, v1: V1Resource) -> None:
         self._v1 = v1
-
-        self.websocket_handler = to_streamed_response_wrapper(
-            v1.websocket_handler,
-        )
 
     @cached_property
     def accounts(self) -> AccountsResourceWithStreamingResponse:
@@ -376,50 +346,53 @@ class V1ResourceWithStreamingResponse:
         return AccountsResourceWithStreamingResponse(self._v1.accounts)
 
     @cached_property
-    def calendars(self) -> CalendarsResourceWithStreamingResponse:
-        return CalendarsResourceWithStreamingResponse(self._v1.calendars)
+    def api_version(self) -> APIVersionResourceWithStreamingResponse:
+        """Endpoints for API service metadata."""
+        return APIVersionResourceWithStreamingResponse(self._v1.api_version)
 
     @cached_property
-    def clock(self) -> ClockResourceWithStreamingResponse:
-        """Access financial calendars for events like earnings, dividends, and splits."""
-        return ClockResourceWithStreamingResponse(self._v1.clock)
+    def calendar(self) -> CalendarResourceWithStreamingResponse:
+        """Access clocks and financial calendars for market sessions and events."""
+        return CalendarResourceWithStreamingResponse(self._v1.calendar)
+
+    @cached_property
+    def instrument_data(self) -> InstrumentDataResourceWithStreamingResponse:
+        """Retrieve instrument analytics, market data, news, and related reference data."""
+        return InstrumentDataResourceWithStreamingResponse(self._v1.instrument_data)
 
     @cached_property
     def instruments(self) -> InstrumentsResourceWithStreamingResponse:
-        """Retrieve details and lists of tradable instruments."""
+        """Retrieve core details and discovery endpoints for tradable instruments."""
         return InstrumentsResourceWithStreamingResponse(self._v1.instruments)
-
-    @cached_property
-    def market_data(self) -> MarketDataResourceWithStreamingResponse:
-        return MarketDataResourceWithStreamingResponse(self._v1.market_data)
-
-    @cached_property
-    def news(self) -> NewsResourceWithStreamingResponse:
-        """Retrieve market news and related instrument metadata."""
-        return NewsResourceWithStreamingResponse(self._v1.news)
 
     @cached_property
     def omni_ai(self) -> OmniAIResourceWithStreamingResponse:
         return OmniAIResourceWithStreamingResponse(self._v1.omni_ai)
 
     @cached_property
-    def version(self) -> VersionResourceWithStreamingResponse:
-        """Endpoints for API service metadata."""
-        return VersionResourceWithStreamingResponse(self._v1.version)
+    def orders(self) -> OrdersResourceWithStreamingResponse:
+        """Place, monitor, and manage trading orders."""
+        return OrdersResourceWithStreamingResponse(self._v1.orders)
 
     @cached_property
-    def watchlists(self) -> WatchlistsResourceWithStreamingResponse:
+    def positions(self) -> PositionsResourceWithStreamingResponse:
+        """View positions and manage position instructions."""
+        return PositionsResourceWithStreamingResponse(self._v1.positions)
+
+    @cached_property
+    def watchlist(self) -> WatchlistResourceWithStreamingResponse:
         """Create and manage watchlists."""
-        return WatchlistsResourceWithStreamingResponse(self._v1.watchlists)
+        return WatchlistResourceWithStreamingResponse(self._v1.watchlist)
+
+    @cached_property
+    def websocket(self) -> WebsocketResourceWithStreamingResponse:
+        """Active Websocket."""
+        return WebsocketResourceWithStreamingResponse(self._v1.websocket)
 
 
 class AsyncV1ResourceWithStreamingResponse:
     def __init__(self, v1: AsyncV1Resource) -> None:
         self._v1 = v1
-
-        self.websocket_handler = async_to_streamed_response_wrapper(
-            v1.websocket_handler,
-        )
 
     @cached_property
     def accounts(self) -> AsyncAccountsResourceWithStreamingResponse:
@@ -427,38 +400,45 @@ class AsyncV1ResourceWithStreamingResponse:
         return AsyncAccountsResourceWithStreamingResponse(self._v1.accounts)
 
     @cached_property
-    def calendars(self) -> AsyncCalendarsResourceWithStreamingResponse:
-        return AsyncCalendarsResourceWithStreamingResponse(self._v1.calendars)
+    def api_version(self) -> AsyncAPIVersionResourceWithStreamingResponse:
+        """Endpoints for API service metadata."""
+        return AsyncAPIVersionResourceWithStreamingResponse(self._v1.api_version)
 
     @cached_property
-    def clock(self) -> AsyncClockResourceWithStreamingResponse:
-        """Access financial calendars for events like earnings, dividends, and splits."""
-        return AsyncClockResourceWithStreamingResponse(self._v1.clock)
+    def calendar(self) -> AsyncCalendarResourceWithStreamingResponse:
+        """Access clocks and financial calendars for market sessions and events."""
+        return AsyncCalendarResourceWithStreamingResponse(self._v1.calendar)
+
+    @cached_property
+    def instrument_data(self) -> AsyncInstrumentDataResourceWithStreamingResponse:
+        """Retrieve instrument analytics, market data, news, and related reference data."""
+        return AsyncInstrumentDataResourceWithStreamingResponse(self._v1.instrument_data)
 
     @cached_property
     def instruments(self) -> AsyncInstrumentsResourceWithStreamingResponse:
-        """Retrieve details and lists of tradable instruments."""
+        """Retrieve core details and discovery endpoints for tradable instruments."""
         return AsyncInstrumentsResourceWithStreamingResponse(self._v1.instruments)
-
-    @cached_property
-    def market_data(self) -> AsyncMarketDataResourceWithStreamingResponse:
-        return AsyncMarketDataResourceWithStreamingResponse(self._v1.market_data)
-
-    @cached_property
-    def news(self) -> AsyncNewsResourceWithStreamingResponse:
-        """Retrieve market news and related instrument metadata."""
-        return AsyncNewsResourceWithStreamingResponse(self._v1.news)
 
     @cached_property
     def omni_ai(self) -> AsyncOmniAIResourceWithStreamingResponse:
         return AsyncOmniAIResourceWithStreamingResponse(self._v1.omni_ai)
 
     @cached_property
-    def version(self) -> AsyncVersionResourceWithStreamingResponse:
-        """Endpoints for API service metadata."""
-        return AsyncVersionResourceWithStreamingResponse(self._v1.version)
+    def orders(self) -> AsyncOrdersResourceWithStreamingResponse:
+        """Place, monitor, and manage trading orders."""
+        return AsyncOrdersResourceWithStreamingResponse(self._v1.orders)
 
     @cached_property
-    def watchlists(self) -> AsyncWatchlistsResourceWithStreamingResponse:
+    def positions(self) -> AsyncPositionsResourceWithStreamingResponse:
+        """View positions and manage position instructions."""
+        return AsyncPositionsResourceWithStreamingResponse(self._v1.positions)
+
+    @cached_property
+    def watchlist(self) -> AsyncWatchlistResourceWithStreamingResponse:
         """Create and manage watchlists."""
-        return AsyncWatchlistsResourceWithStreamingResponse(self._v1.watchlists)
+        return AsyncWatchlistResourceWithStreamingResponse(self._v1.watchlist)
+
+    @cached_property
+    def websocket(self) -> AsyncWebsocketResourceWithStreamingResponse:
+        """Active Websocket."""
+        return AsyncWebsocketResourceWithStreamingResponse(self._v1.websocket)
