@@ -18,10 +18,13 @@ from ...._response import (
 )
 from ...._base_client import make_request_options
 from ....types.v1.omni_ai import entitlement_get_entitlements_params, entitlement_create_entitlements_params
-from ....types.v1.entitlement_code import EntitlementCode
+from ....types.v1.omni_ai.entitlement_code import EntitlementCode
 from ....types.v1.omni_ai.entitlement_get_entitlements_response import EntitlementGetEntitlementsResponse
 from ....types.v1.omni_ai.entitlement_delete_entitlement_response import EntitlementDeleteEntitlementResponse
 from ....types.v1.omni_ai.entitlement_create_entitlements_response import EntitlementCreateEntitlementsResponse
+from ....types.v1.omni_ai.entitlement_get_entitlement_agreements_response import (
+    EntitlementGetEntitlementAgreementsResponse,
+)
 
 __all__ = ["EntitlementsResource", "AsyncEntitlementsResource"]
 
@@ -123,6 +126,25 @@ class EntitlementsResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=EntitlementDeleteEntitlementResponse,
+        )
+
+    def get_entitlement_agreements(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> EntitlementGetEntitlementAgreementsResponse:
+        """List current signable entitlement agreements for consent UX."""
+        return self._get(
+            "/v1/omni-ai/entitlement-agreements",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=EntitlementGetEntitlementAgreementsResponse,
         )
 
     def get_entitlements(
@@ -263,6 +285,25 @@ class AsyncEntitlementsResource(AsyncAPIResource):
             cast_to=EntitlementDeleteEntitlementResponse,
         )
 
+    async def get_entitlement_agreements(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> EntitlementGetEntitlementAgreementsResponse:
+        """List current signable entitlement agreements for consent UX."""
+        return await self._get(
+            "/v1/omni-ai/entitlement-agreements",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=EntitlementGetEntitlementAgreementsResponse,
+        )
+
     async def get_entitlements(
         self,
         *,
@@ -312,6 +353,9 @@ class EntitlementsResourceWithRawResponse:
         self.delete_entitlement = to_raw_response_wrapper(
             entitlements.delete_entitlement,
         )
+        self.get_entitlement_agreements = to_raw_response_wrapper(
+            entitlements.get_entitlement_agreements,
+        )
         self.get_entitlements = to_raw_response_wrapper(
             entitlements.get_entitlements,
         )
@@ -326,6 +370,9 @@ class AsyncEntitlementsResourceWithRawResponse:
         )
         self.delete_entitlement = async_to_raw_response_wrapper(
             entitlements.delete_entitlement,
+        )
+        self.get_entitlement_agreements = async_to_raw_response_wrapper(
+            entitlements.get_entitlement_agreements,
         )
         self.get_entitlements = async_to_raw_response_wrapper(
             entitlements.get_entitlements,
@@ -342,6 +389,9 @@ class EntitlementsResourceWithStreamingResponse:
         self.delete_entitlement = to_streamed_response_wrapper(
             entitlements.delete_entitlement,
         )
+        self.get_entitlement_agreements = to_streamed_response_wrapper(
+            entitlements.get_entitlement_agreements,
+        )
         self.get_entitlements = to_streamed_response_wrapper(
             entitlements.get_entitlements,
         )
@@ -356,6 +406,9 @@ class AsyncEntitlementsResourceWithStreamingResponse:
         )
         self.delete_entitlement = async_to_streamed_response_wrapper(
             entitlements.delete_entitlement,
+        )
+        self.get_entitlement_agreements = async_to_streamed_response_wrapper(
+            entitlements.get_entitlement_agreements,
         )
         self.get_entitlements = async_to_streamed_response_wrapper(
             entitlements.get_entitlements,
