@@ -10,3 +10,7 @@ __all__ = ["PositionClosePositionsParams"]
 
 class PositionClosePositionsParams(TypedDict, total=False):
     cancel_orders: Optional[bool]
+    """
+    Whether to cancel existing open orders for the position before submitting
+    closing orders.
+    """

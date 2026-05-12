@@ -13,6 +13,7 @@ __all__ = ["AccountGetPortfolioHistoryParams"]
 
 class AccountGetPortfolioHistoryParams(TypedDict, total=False):
     start_date: Required[Annotated[Union[str, date], PropertyInfo(format="iso8601")]]
+    """Start date for the portfolio history range, in YYYY-MM-DD format."""
 
     end_date: Annotated[Union[str, date], PropertyInfo(format="iso8601")]
     """Defaults to today in America/New_York when omitted."""

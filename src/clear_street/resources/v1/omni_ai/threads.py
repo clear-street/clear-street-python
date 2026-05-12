@@ -203,8 +203,11 @@ class ThreadsResource(SyncAPIResource):
         Args:
           account_id: Account ID for the request
 
-          page_token: Token for retrieving the next page of results. Contains encoded pagination state
-              (limit + offset). When provided, page_size is ignored.
+          page_size: The number of items to return per page. Only used when page_token is not
+              provided.
+
+          page_token: Token for retrieving the next or previous page of results. Contains encoded
+              pagination state; when provided, page_size is ignored.
 
           extra_headers: Send extra headers
 
@@ -354,8 +357,11 @@ class ThreadsResource(SyncAPIResource):
         Args:
           account_id: Account ID for the request
 
-          page_token: Token for retrieving the next page of results. Contains encoded pagination state
-              (limit + offset). When provided, page_size is ignored.
+          page_size: The number of items to return per page. Only used when page_token is not
+              provided.
+
+          page_token: Token for retrieving the next or previous page of results. Contains encoded
+              pagination state; when provided, page_size is ignored.
 
           extra_headers: Send extra headers
 
@@ -552,8 +558,11 @@ class AsyncThreadsResource(AsyncAPIResource):
         Args:
           account_id: Account ID for the request
 
-          page_token: Token for retrieving the next page of results. Contains encoded pagination state
-              (limit + offset). When provided, page_size is ignored.
+          page_size: The number of items to return per page. Only used when page_token is not
+              provided.
+
+          page_token: Token for retrieving the next or previous page of results. Contains encoded
+              pagination state; when provided, page_size is ignored.
 
           extra_headers: Send extra headers
 
@@ -703,8 +712,11 @@ class AsyncThreadsResource(AsyncAPIResource):
         Args:
           account_id: Account ID for the request
 
-          page_token: Token for retrieving the next page of results. Contains encoded pagination state
-              (limit + offset). When provided, page_size is ignored.
+          page_size: The number of items to return per page. Only used when page_token is not
+              provided.
+
+          page_token: Token for retrieving the next or previous page of results. Contains encoded
+              pagination state; when provided, page_size is ignored.
 
           extra_headers: Send extra headers
 
