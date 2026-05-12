@@ -250,8 +250,11 @@ class InstrumentDataResource(SyncAPIResource):
 
           from_date: The start date for the query range, inclusive (YYYY-MM-DD).
 
-          page_token: Token for retrieving the next page of results. Contains encoded pagination state
-              (limit + offset). When provided, page_size is ignored.
+          page_size: The number of items to return per page. Only used when page_token is not
+              provided.
+
+          page_token: Token for retrieving the next or previous page of results. Contains encoded
+              pagination state; when provided, page_size is ignored.
 
           to_date: The end date for the query range, inclusive (YYYY-MM-DD).
 
@@ -312,8 +315,11 @@ class InstrumentDataResource(SyncAPIResource):
 
           from_date: The start date for the query range, inclusive (YYYY-MM-DD).
 
-          page_token: Token for retrieving the next page of results. Contains encoded pagination state
-              (limit + offset). When provided, page_size is ignored.
+          page_size: The number of items to return per page. Only used when page_token is not
+              provided.
+
+          page_token: Token for retrieving the next or previous page of results. Contains encoded
+              pagination state; when provided, page_size is ignored.
 
           to_date: The end date for the query range, inclusive (YYYY-MM-DD).
 
@@ -468,8 +474,11 @@ class InstrumentDataResource(SyncAPIResource):
 
           from_date: The start date for the query range, inclusive (YYYY-MM-DD).
 
-          page_token: Token for retrieving the next page of results. Contains encoded pagination state
-              (limit + offset). When provided, page_size is ignored.
+          page_size: The number of items to return per page. Only used when page_token is not
+              provided.
+
+          page_token: Token for retrieving the next or previous page of results. Contains encoded
+              pagination state; when provided, page_size is ignored.
 
           to_date: The end date for the query range, inclusive (YYYY-MM-DD).
 
@@ -678,8 +687,11 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
 
           from_date: The start date for the query range, inclusive (YYYY-MM-DD).
 
-          page_token: Token for retrieving the next page of results. Contains encoded pagination state
-              (limit + offset). When provided, page_size is ignored.
+          page_size: The number of items to return per page. Only used when page_token is not
+              provided.
+
+          page_token: Token for retrieving the next or previous page of results. Contains encoded
+              pagination state; when provided, page_size is ignored.
 
           to_date: The end date for the query range, inclusive (YYYY-MM-DD).
 
@@ -740,8 +752,11 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
 
           from_date: The start date for the query range, inclusive (YYYY-MM-DD).
 
-          page_token: Token for retrieving the next page of results. Contains encoded pagination state
-              (limit + offset). When provided, page_size is ignored.
+          page_size: The number of items to return per page. Only used when page_token is not
+              provided.
+
+          page_token: Token for retrieving the next or previous page of results. Contains encoded
+              pagination state; when provided, page_size is ignored.
 
           to_date: The end date for the query range, inclusive (YYYY-MM-DD).
 
@@ -896,8 +911,11 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
 
           from_date: The start date for the query range, inclusive (YYYY-MM-DD).
 
-          page_token: Token for retrieving the next page of results. Contains encoded pagination state
-              (limit + offset). When provided, page_size is ignored.
+          page_size: The number of items to return per page. Only used when page_token is not
+              provided.
+
+          page_token: Token for retrieving the next or previous page of results. Contains encoded
+              pagination state; when provided, page_size is ignored.
 
           to_date: The end date for the query range, inclusive (YYYY-MM-DD).
 

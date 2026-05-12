@@ -156,8 +156,11 @@ class InstrumentsResource(SyncAPIResource):
 
           is_threshold_security: Filter by threshold security status
 
-          page_token: Token for retrieving the next page of results. Contains encoded pagination state
-              (limit + offset). When provided, page_size is ignored.
+          page_size: The number of items to return per page. Only used when page_token is not
+              provided.
+
+          page_token: Token for retrieving the next or previous page of results. Contains encoded
+              pagination state; when provided, page_size is ignored.
 
           extra_headers: Send extra headers
 
@@ -220,8 +223,11 @@ class InstrumentsResource(SyncAPIResource):
 
           expiry: Filter to contracts expiring on this date (YYYY-MM-DD)
 
-          page_token: Token for retrieving the next page of results. Contains encoded pagination state
-              (limit + offset). When provided, page_size is ignored.
+          page_size: The number of items to return per page. Only used when page_token is not
+              provided.
+
+          page_token: Token for retrieving the next or previous page of results. Contains encoded
+              pagination state; when provided, page_size is ignored.
 
           underlier: Underlier symbol (e.g., AAPL, SPX)
 
@@ -303,8 +309,11 @@ class InstrumentsResource(SyncAPIResource):
 
           include_restricted: Include restricted instruments. Default true (penalized in ranking).
 
-          page_token: Token for retrieving the next page of results. Contains encoded pagination state
-              (limit + offset). When provided, page_size is ignored.
+          page_size: The number of items to return per page. Only used when page_token is not
+              provided.
+
+          page_token: Token for retrieving the next or previous page of results. Contains encoded
+              pagination state; when provided, page_size is ignored.
 
           extra_headers: Send extra headers
 
@@ -448,8 +457,11 @@ class AsyncInstrumentsResource(AsyncAPIResource):
 
           is_threshold_security: Filter by threshold security status
 
-          page_token: Token for retrieving the next page of results. Contains encoded pagination state
-              (limit + offset). When provided, page_size is ignored.
+          page_size: The number of items to return per page. Only used when page_token is not
+              provided.
+
+          page_token: Token for retrieving the next or previous page of results. Contains encoded
+              pagination state; when provided, page_size is ignored.
 
           extra_headers: Send extra headers
 
@@ -512,8 +524,11 @@ class AsyncInstrumentsResource(AsyncAPIResource):
 
           expiry: Filter to contracts expiring on this date (YYYY-MM-DD)
 
-          page_token: Token for retrieving the next page of results. Contains encoded pagination state
-              (limit + offset). When provided, page_size is ignored.
+          page_size: The number of items to return per page. Only used when page_token is not
+              provided.
+
+          page_token: Token for retrieving the next or previous page of results. Contains encoded
+              pagination state; when provided, page_size is ignored.
 
           underlier: Underlier symbol (e.g., AAPL, SPX)
 
@@ -595,8 +610,11 @@ class AsyncInstrumentsResource(AsyncAPIResource):
 
           include_restricted: Include restricted instruments. Default true (penalized in ranking).
 
-          page_token: Token for retrieving the next page of results. Contains encoded pagination state
-              (limit + offset). When provided, page_size is ignored.
+          page_size: The number of items to return per page. Only used when page_token is not
+              provided.
+
+          page_token: Token for retrieving the next or previous page of results. Contains encoded
+              pagination state; when provided, page_size is ignored.
 
           extra_headers: Send extra headers
 

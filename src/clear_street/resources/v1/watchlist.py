@@ -245,8 +245,11 @@ class WatchlistResource(SyncAPIResource):
         List watchlists for the authenticated user
 
         Args:
-          page_token: Token for retrieving the next page of results. Contains encoded pagination state
-              (limit + offset). When provided, page_size is ignored.
+          page_size: The number of items to return per page. Only used when page_token is not
+              provided.
+
+          page_token: Token for retrieving the next or previous page of results. Contains encoded
+              pagination state; when provided, page_size is ignored.
 
           extra_headers: Send extra headers
 
@@ -490,8 +493,11 @@ class AsyncWatchlistResource(AsyncAPIResource):
         List watchlists for the authenticated user
 
         Args:
-          page_token: Token for retrieving the next page of results. Contains encoded pagination state
-              (limit + offset). When provided, page_size is ignored.
+          page_size: The number of items to return per page. Only used when page_token is not
+              provided.
+
+          page_token: Token for retrieving the next or previous page of results. Contains encoded
+              pagination state; when provided, page_size is ignored.
 
           extra_headers: Send extra headers
 

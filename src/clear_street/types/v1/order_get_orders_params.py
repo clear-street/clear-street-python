@@ -23,12 +23,15 @@ class OrderGetOrdersParams(TypedDict, total=False):
     """Instrument type filter (e.g., COMMON_STOCK, OPTION)"""
 
     page_size: int
+    """The number of items to return per page.
+
+    Only used when page_token is not provided.
+    """
 
     page_token: Annotated[Union[str, Base64FileInput], PropertyInfo(format="base64")]
-    """Token for retrieving the next page of results.
+    """Token for retrieving the next or previous page of results.
 
-    Contains encoded pagination state (limit + offset). When provided, page_size is
-    ignored.
+    Contains encoded pagination state; when provided, page_size is ignored.
     """
 
     status: List[

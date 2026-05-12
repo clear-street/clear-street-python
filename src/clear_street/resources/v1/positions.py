@@ -131,6 +131,9 @@ class PositionsResource(SyncAPIResource):
         Args:
           instrument_id: OEMS instrument UUID
 
+          cancel_orders: Whether to cancel existing open orders for the position before submitting
+              closing orders.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -174,6 +177,9 @@ class PositionsResource(SyncAPIResource):
         Closes all positions for the specified trading account.
 
         Args:
+          cancel_orders: Whether to cancel existing open orders for the position before submitting
+              closing orders.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -266,8 +272,11 @@ class PositionsResource(SyncAPIResource):
         Args:
           instrument_ids: Comma-separated OEMS instrument UUIDs
 
-          page_token: Token for retrieving the next page of results. Contains encoded pagination state
-              (limit + offset). When provided, page_size is ignored.
+          page_size: The number of items to return per page. Only used when page_token is not
+              provided.
+
+          page_token: Token for retrieving the next or previous page of results. Contains encoded
+              pagination state; when provided, page_size is ignored.
 
           sort_by: Field to sort by
 
@@ -423,6 +432,9 @@ class AsyncPositionsResource(AsyncAPIResource):
         Args:
           instrument_id: OEMS instrument UUID
 
+          cancel_orders: Whether to cancel existing open orders for the position before submitting
+              closing orders.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -466,6 +478,9 @@ class AsyncPositionsResource(AsyncAPIResource):
         Closes all positions for the specified trading account.
 
         Args:
+          cancel_orders: Whether to cancel existing open orders for the position before submitting
+              closing orders.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -558,8 +573,11 @@ class AsyncPositionsResource(AsyncAPIResource):
         Args:
           instrument_ids: Comma-separated OEMS instrument UUIDs
 
-          page_token: Token for retrieving the next page of results. Contains encoded pagination state
-              (limit + offset). When provided, page_size is ignored.
+          page_size: The number of items to return per page. Only used when page_token is not
+              provided.
+
+          page_token: Token for retrieving the next or previous page of results. Contains encoded
+              pagination state; when provided, page_size is ignored.
 
           sort_by: Field to sort by
 
