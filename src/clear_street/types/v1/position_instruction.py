@@ -11,56 +11,49 @@ __all__ = ["PositionInstruction"]
 
 
 class PositionInstruction(BaseModel):
-    """
-    The API representation of a single CSC instruction, combining the caller's
-    request with the `oems-csc` lifecycle state.
-    """
+    """A position instruction and its current lifecycle state."""
 
     id: str
-    """Stable server-assigned id for the instruction (the engine instruction UUID).
-
-    Used as the `{instruction_id}` path parameter on DELETE.
-    """
+    """Server-assigned id. Used as the path parameter on cancel."""
 
     account_id: int
     """Account the instruction belongs to."""
 
     instruction_id: str
     """
-    Caller-supplied instruction id (echoed from the submit request, or the
-    server-generated fallback when the caller omitted one).
+    Caller-supplied idempotency key echoed from the submit request; the
+    server-assigned fallback when none was supplied.
     """
 
     instruction_type: PositionInstructionType
-    """The instruction type as understood by this API."""
+    """The action this instruction requests."""
 
     instrument_id: str
-    """OEMS instrument identifier the instruction is for."""
+    """Identifier of the options contract this instruction acts on."""
 
     quantity: str
-    """Quantity of contracts."""
+    """Number of contracts included in the instruction."""
 
     status: PositionInstructionStatus
     """Current lifecycle status."""
 
     symbol: str
-    """
-    Trading symbol resolved from the instrument cache (OSI for options, since
-    exercises are options-only). Empty if the instrument cannot be resolved (e.g.
-    expired option). Display-only.
-    """
+    """Options symbol (OSI) for display."""
 
     accepted_quantity: Optional[str] = None
-    """Quantity accepted by OCC. Populated after `ACCEPTED`."""
+    """Number of contracts accepted by the clearing venue.
+
+    Populated once the instruction reaches `ACCEPTED`.
+    """
 
     created_at: Optional[datetime] = None
-    """Row creation timestamp surfaced from `oems-csc`."""
+    """When the instruction was first accepted by the service."""
 
     error: Optional[str] = None
-    """Inline error detail when a batch entry was rejected (omitted on success)."""
+    """Per-row error on a batch submission (omitted on success)."""
 
     rejection_reason: Optional[str] = None
-    """Reason text populated on terminal reject / cancel-failed statuses."""
+    """Explanation populated on terminal reject or cancel-failed statuses."""
 
     updated_at: Optional[datetime] = None
-    """Last update timestamp surfaced from `oems-csc`."""
+    """When the instruction's lifecycle state last changed."""

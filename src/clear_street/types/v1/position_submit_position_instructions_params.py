@@ -15,27 +15,23 @@ class PositionSubmitPositionInstructionsParams(TypedDict, total=False):
 
 
 class Instruction(TypedDict, total=False):
-    """One exercise / DNE / CEA instruction requested by a client.
+    """A position instruction to submit.
 
-    Cancel is not an instruction type — use `DELETE /accounts/{account_id}/positions/instructions/{instruction_id}`.
+    Use `DELETE /accounts/{account_id}/positions/instructions/{instruction_id}`
+    to cancel an outstanding instruction.
     """
 
     instruction_type: Required[PositionInstructionType]
-    """Instruction type."""
+    """The action to take."""
 
     instrument_id: Required[str]
-    """OEMS instrument identifier.
-
-    api-gw resolves this to `security_id` + `security_id_source` via the instrument
-    cache before dispatching to `oems-csc`. Unknown ids return 404.
-    """
+    """Identifier of the options contract to act on. Unknown ids return 404."""
 
     quantity: Required[str]
-    """Quantity of contracts to exercise / DNE / CEA."""
+    """Number of contracts to include in the instruction."""
 
     instruction_id: Optional[str]
-    """Caller-supplied instruction id.
+    """Caller-supplied idempotency key.
 
-    Echoed back on the response and used as the FIX `pos_req_id` (tag 710) for
-    idempotency. If omitted the server generates a UUID.
+    Echoed on the response. The server generates a unique id when omitted.
     """

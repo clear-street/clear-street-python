@@ -8,7 +8,4 @@ __all__ = ["PositionCancelPositionInstructionResponse"]
 
 class PositionCancelPositionInstructionResponse(BaseResponse):
     data: PositionInstruction
-    """
-    The API representation of a single CSC instruction, combining the caller's
-    request with the `oems-csc` lifecycle state.
-    """
+    """A position instruction and its current lifecycle state."""

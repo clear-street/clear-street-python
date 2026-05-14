@@ -11,4 +11,7 @@ __all__ = ["PositionGetPositionInstructionsParams"]
 
 class PositionGetPositionInstructionsParams(TypedDict, total=False):
     instrument_id: InstrumentIDOrSymbol
-    """Filter by OEMS instrument id or symbol (CMS / OSI)."""
+    """Limit results to a single contract.
+
+    Accepts the instrument id or the OSI symbol.
+    """

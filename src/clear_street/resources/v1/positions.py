@@ -81,11 +81,12 @@ class PositionsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PositionCancelPositionInstructionResponse:
-        """
-        Cancel an outstanding exercise / DNE / CEA instruction by its server- assigned
-        `id`. Returns the updated instruction with status `CANCEL_REQUESTED`; the
-        terminal `CANCELLED` / `CANCEL_FAILED` state arrives asynchronously via
-        subsequent GETs.
+        """Cancel an outstanding position instruction by its server-assigned `id`.
+
+        Returns
+        the updated instruction with status `CANCEL_REQUESTED`. The terminal `CANCELLED`
+        or `CANCEL_FAILED` state arrives asynchronously and is observable via subsequent
+        GETs.
 
         Args:
           extra_headers: Send extra headers
@@ -212,11 +213,11 @@ class PositionsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PositionGetPositionInstructionsResponse:
         """
-        Returns the current lifecycle state of exercise / DNE / CEA instructions for the
-        account. Optionally filter by a specific instrument.
+        Returns the current lifecycle state of the account's position instructions.
+        Optionally filter by a specific contract.
 
         Args:
-          instrument_id: Filter by OEMS instrument id or symbol (CMS / OSI).
+          instrument_id: Limit results to a single contract. Accepts the instrument id or the OSI symbol.
 
           extra_headers: Send extra headers
 
@@ -323,11 +324,11 @@ class PositionsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PositionSubmitPositionInstructionsResponse:
-        """Submit one or more option lifecycle instructions against the account.
-
-        Each row
-        is routed to `oems-csc` independently; per-row rejections are surfaced on the
-        corresponding response entry without failing the batch.
+        """
+        Submit one or more position instructions (Exercise, Do-Not-Exercise, Contrary
+        Exercise Advice) against the account. Each row is processed independently; a
+        rejected row is returned with an error on the corresponding response entry
+        without failing the batch.
 
         Args:
           extra_headers: Send extra headers
@@ -382,11 +383,12 @@ class AsyncPositionsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PositionCancelPositionInstructionResponse:
-        """
-        Cancel an outstanding exercise / DNE / CEA instruction by its server- assigned
-        `id`. Returns the updated instruction with status `CANCEL_REQUESTED`; the
-        terminal `CANCELLED` / `CANCEL_FAILED` state arrives asynchronously via
-        subsequent GETs.
+        """Cancel an outstanding position instruction by its server-assigned `id`.
+
+        Returns
+        the updated instruction with status `CANCEL_REQUESTED`. The terminal `CANCELLED`
+        or `CANCEL_FAILED` state arrives asynchronously and is observable via subsequent
+        GETs.
 
         Args:
           extra_headers: Send extra headers
@@ -513,11 +515,11 @@ class AsyncPositionsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PositionGetPositionInstructionsResponse:
         """
-        Returns the current lifecycle state of exercise / DNE / CEA instructions for the
-        account. Optionally filter by a specific instrument.
+        Returns the current lifecycle state of the account's position instructions.
+        Optionally filter by a specific contract.
 
         Args:
-          instrument_id: Filter by OEMS instrument id or symbol (CMS / OSI).
+          instrument_id: Limit results to a single contract. Accepts the instrument id or the OSI symbol.
 
           extra_headers: Send extra headers
 
@@ -624,11 +626,11 @@ class AsyncPositionsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PositionSubmitPositionInstructionsResponse:
-        """Submit one or more option lifecycle instructions against the account.
-
-        Each row
-        is routed to `oems-csc` independently; per-row rejections are surfaced on the
-        corresponding response entry without failing the batch.
+        """
+        Submit one or more position instructions (Exercise, Do-Not-Exercise, Contrary
+        Exercise Advice) against the account. Each row is processed independently; a
+        rejected row is returned with an error on the corresponding response entry
+        without failing the batch.
 
         Args:
           extra_headers: Send extra headers
