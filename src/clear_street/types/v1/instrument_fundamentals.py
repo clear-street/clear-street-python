@@ -53,5 +53,8 @@ class InstrumentFundamentals(BaseModel):
     price_to_earnings: Optional[str] = None
     """The price-to-earnings (P/E) ratio for the trailing twelve months (TTM)"""
 
+    reporting_currency: Optional[str] = None
+    """The currency used for reporting financial data"""
+
     sector: Optional[str] = None
     """The business sector of the instrument's issuer"""

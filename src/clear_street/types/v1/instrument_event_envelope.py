@@ -39,5 +39,8 @@ class InstrumentEventEnvelope(BaseModel):
     name: Optional[str] = None
     """Instrument name associated with the event, when available."""
 
+    reporting_currency: Optional[str] = None
+    """The currency used for reporting financial data."""
+
     stock_split_event_data: Optional[InstrumentSplitEvent] = None
     """Stock split payload when type is STOCK_SPLIT."""

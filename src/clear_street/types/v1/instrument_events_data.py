@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List
+from typing import List, Optional
 
 from ..._models import BaseModel
 from .instrument_earnings import InstrumentEarnings
@@ -24,3 +24,6 @@ class InstrumentEventsData(BaseModel):
 
     splits: List[InstrumentSplitEvent]
     """Stock split events"""
+
+    reporting_currency: Optional[str] = None
+    """The currency used for reporting financial data"""
