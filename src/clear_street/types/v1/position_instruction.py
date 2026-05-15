@@ -49,11 +49,13 @@ class PositionInstruction(BaseModel):
     created_at: Optional[datetime] = None
     """When the instruction was first accepted by the service."""
 
-    error: Optional[str] = None
-    """Per-row error on a batch submission (omitted on success)."""
-
     rejection_reason: Optional[str] = None
-    """Explanation populated on terminal reject or cancel-failed statuses."""
+    """
+    Human-readable explanation populated on any non-success terminal status —
+    `REJECTED`, `ENGINE_REJECTED`, or `CANCEL_FAILED`. On a `207 Multi-Status` batch
+    submit the top-level `error` field summarizes the batch; per-row detail
+    continues to live here.
+    """
 
     updated_at: Optional[datetime] = None
     """When the instruction's lifecycle state last changed."""
