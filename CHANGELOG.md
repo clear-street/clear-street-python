@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.4.0 (2026-05-16)
+
+Full Changelog: [v0.3.0...v0.4.0](https://github.com/clear-street/clear-street-python/compare/v0.3.0...v0.4.0)
+
+### Features
+
+* **api:** api update ([1acb9ee](https://github.com/clear-street/clear-street-python/commit/1acb9eedf289ef1667c1d08ab714ffc8a88e5a7e))
+* **api:** api update ([12126d5](https://github.com/clear-street/clear-street-python/commit/12126d5568fa9b0b45c9adb97a15af6e64100f3a))
+* **api:** api update ([133034f](https://github.com/clear-street/clear-street-python/commit/133034f50f45c8b4a9cd4b25afb0633d90d5b631))
+* **api:** api update ([2fb2f36](https://github.com/clear-street/clear-street-python/commit/2fb2f3615b4c75e9a4afea6d276471da7a518129))
+* **api:** api update ([b69907b](https://github.com/clear-street/clear-street-python/commit/b69907b5475ee4e1745337ca57a350806a6b960d))
+* **api:** api update ([f58efd5](https://github.com/clear-street/clear-street-python/commit/f58efd50c71e97abe54f77b24332f9b852f737b7))
+* **internal/types:** support eagerly validating pydantic iterators ([fb37475](https://github.com/clear-street/clear-street-python/commit/fb374754157023bdea4e94254731175d3b7f0e4d))
+
+
+### Bug Fixes
+
+* **client:** add missing f-string prefix in file type error message ([04e41db](https://github.com/clear-street/clear-street-python/commit/04e41db91ea685163d0d27770c41551c4c781101))
+
 ## 0.3.0 (2026-05-07)
 
 Full Changelog: [v0.2.0...v0.3.0](https://github.com/clear-street/clear-street-python/compare/v0.2.0...v0.3.0)

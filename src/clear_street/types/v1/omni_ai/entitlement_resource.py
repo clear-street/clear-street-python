@@ -1,7 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from ...._models import BaseModel
-from ..entitlement_code import EntitlementCode
+from .entitlement_code import EntitlementCode
 
 __all__ = ["EntitlementResource"]
 

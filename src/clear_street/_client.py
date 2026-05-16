@@ -138,7 +138,6 @@ class ClearStreet(SyncAPIClient):
 
     @cached_property
     def v1(self) -> V1Resource:
-        """Active Websocket."""
         from .resources.v1 import V1Resource
 
         return V1Resource(self)
@@ -350,7 +349,6 @@ class AsyncClearStreet(AsyncAPIClient):
 
     @cached_property
     def v1(self) -> AsyncV1Resource:
-        """Active Websocket."""
         from .resources.v1 import AsyncV1Resource
 
         return AsyncV1Resource(self)
@@ -489,7 +487,6 @@ class ClearStreetWithRawResponse:
 
     @cached_property
     def v1(self) -> v1.V1ResourceWithRawResponse:
-        """Active Websocket."""
         from .resources.v1 import V1ResourceWithRawResponse
 
         return V1ResourceWithRawResponse(self._client.v1)
@@ -503,7 +500,6 @@ class AsyncClearStreetWithRawResponse:
 
     @cached_property
     def v1(self) -> v1.AsyncV1ResourceWithRawResponse:
-        """Active Websocket."""
         from .resources.v1 import AsyncV1ResourceWithRawResponse
 
         return AsyncV1ResourceWithRawResponse(self._client.v1)
@@ -517,7 +513,6 @@ class ClearStreetWithStreamedResponse:
 
     @cached_property
     def v1(self) -> v1.V1ResourceWithStreamingResponse:
-        """Active Websocket."""
         from .resources.v1 import V1ResourceWithStreamingResponse
 
         return V1ResourceWithStreamingResponse(self._client.v1)
@@ -531,7 +526,6 @@ class AsyncClearStreetWithStreamedResponse:
 
     @cached_property
     def v1(self) -> v1.AsyncV1ResourceWithStreamingResponse:
-        """Active Websocket."""
         from .resources.v1 import AsyncV1ResourceWithStreamingResponse
 
         return AsyncV1ResourceWithStreamingResponse(self._client.v1)
