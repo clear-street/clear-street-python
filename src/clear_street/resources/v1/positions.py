@@ -339,9 +339,6 @@ class PositionsResource(SyncAPIResource):
           validation failures such as DNE/CEA on a non-expiry day, `503` if the clearing
           service is unavailable. No `data` is returned.
 
-        Pre-flight validation (unknown `instrument_id`, unencodable `quantity`)
-        short-circuits the whole batch with a `4xx` before any row is submitted.
-
         Args:
           extra_headers: Send extra headers
 
@@ -652,9 +649,6 @@ class AsyncPositionsResource(AsyncAPIResource):
           the underlying cause: `409` for duplicate `instruction_id`, `400` for
           validation failures such as DNE/CEA on a non-expiry day, `503` if the clearing
           service is unavailable. No `data` is returned.
-
-        Pre-flight validation (unknown `instrument_id`, unencodable `quantity`)
-        short-circuits the whole batch with a `4xx` before any row is submitted.
 
         Args:
           extra_headers: Send extra headers
