@@ -6,7 +6,6 @@ from typing import Union, Iterable, Optional
 from typing_extensions import Required, TypeAlias, TypedDict
 
 from .side import Side
-from ..security_type import SecurityType
 from .position_effect import PositionEffect
 from .request_order_type import RequestOrderType
 from .request_time_in_force import RequestTimeInForce
@@ -21,9 +20,6 @@ class OrderSubmitOrdersParams(TypedDict, total=False):
 
 class OrderNewOrderMultilegRequestLeg(TypedDict, total=False):
     """A single leg in a multileg strategy request."""
-
-    instrument_type: Required[SecurityType]
-    """Security type for the leg."""
 
     ratio: Required[str]
     """Ratio for the leg."""

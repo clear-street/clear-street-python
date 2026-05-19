@@ -5,7 +5,6 @@ from datetime import datetime
 
 from .side import Side
 from ..._models import BaseModel
-from ..security_type import SecurityType
 from .position_effect import PositionEffect
 from .request_order_type import RequestOrderType
 from .trailing_offset_type import TrailingOffsetType
@@ -17,9 +16,6 @@ __all__ = ["NewOrderRequest"]
 
 class NewOrderRequest(BaseModel):
     """Request to submit a new order (PlaceOrderRequest from spec)"""
-
-    instrument_type: SecurityType
-    """Type of security"""
 
     order_type: RequestOrderType
     """Type of order"""
@@ -65,10 +61,7 @@ class NewOrderRequest(BaseModel):
     """Limit price (required for LIMIT and STOP_LIMIT orders)"""
 
     position_effect: Optional[PositionEffect] = None
-    """Required when instrument_type is OPTION.
-
-    Specifies whether the order opens or closes a position.
-    """
+    """Required for options. Specifies whether the order opens or closes a position."""
 
     stop_price: Optional[str] = None
     """Stop price (required for STOP and STOP_LIMIT orders)"""

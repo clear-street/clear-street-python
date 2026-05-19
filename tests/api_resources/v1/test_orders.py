@@ -282,19 +282,16 @@ class TestOrders:
                 {
                     "legs": [
                         {
-                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-447a-706f-996f-097254663f02",
                             "side": "BUY",
                         },
                         {
-                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-4db4-78ec-b4fd-cba8be61cf8a",
                             "side": "SELL",
                         },
                         {
-                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-5264-7f20-8fd3-35df82cd6ef0",
                             "side": "BUY",
@@ -316,19 +313,16 @@ class TestOrders:
                 {
                     "legs": [
                         {
-                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-447a-706f-996f-097254663f02",
                             "side": "BUY",
                         },
                         {
-                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-4db4-78ec-b4fd-cba8be61cf8a",
                             "side": "SELL",
                         },
                         {
-                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-5264-7f20-8fd3-35df82cd6ef0",
                             "side": "BUY",
@@ -354,19 +348,16 @@ class TestOrders:
                 {
                     "legs": [
                         {
-                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-447a-706f-996f-097254663f02",
                             "side": "BUY",
                         },
                         {
-                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-4db4-78ec-b4fd-cba8be61cf8a",
                             "side": "SELL",
                         },
                         {
-                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-5264-7f20-8fd3-35df82cd6ef0",
                             "side": "BUY",
@@ -648,19 +639,16 @@ class TestAsyncOrders:
                 {
                     "legs": [
                         {
-                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-447a-706f-996f-097254663f02",
                             "side": "BUY",
                         },
                         {
-                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-4db4-78ec-b4fd-cba8be61cf8a",
                             "side": "SELL",
                         },
                         {
-                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-5264-7f20-8fd3-35df82cd6ef0",
                             "side": "BUY",
@@ -682,19 +670,16 @@ class TestAsyncOrders:
                 {
                     "legs": [
                         {
-                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-447a-706f-996f-097254663f02",
                             "side": "BUY",
                         },
                         {
-                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-4db4-78ec-b4fd-cba8be61cf8a",
                             "side": "SELL",
                         },
                         {
-                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-5264-7f20-8fd3-35df82cd6ef0",
                             "side": "BUY",
@@ -720,19 +705,16 @@ class TestAsyncOrders:
                 {
                     "legs": [
                         {
-                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-447a-706f-996f-097254663f02",
                             "side": "BUY",
                         },
                         {
-                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-4db4-78ec-b4fd-cba8be61cf8a",
                             "side": "SELL",
                         },
                         {
-                            "instrument_type": "OPTION",
                             "ratio": "ratio",
                             "security": "0193bb84-5264-7f20-8fd3-35df82cd6ef0",
                             "side": "BUY",
