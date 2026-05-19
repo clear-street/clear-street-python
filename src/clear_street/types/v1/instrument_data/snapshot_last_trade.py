@@ -10,3 +10,6 @@ class SnapshotLastTrade(BaseModel):
 
     price: str
     """Most recent last-sale eligible trade price."""
+
+    size: int
+    """Share quantity of the most recent last-sale eligible trade."""
