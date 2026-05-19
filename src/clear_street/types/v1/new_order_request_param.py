@@ -8,7 +8,6 @@ from typing_extensions import Required, Annotated, TypedDict
 
 from .side import Side
 from ..._utils import PropertyInfo
-from ..security_type import SecurityType
 from .position_effect import PositionEffect
 from .request_order_type import RequestOrderType
 from .trailing_offset_type import TrailingOffsetType
@@ -20,9 +19,6 @@ __all__ = ["NewOrderRequestParam"]
 
 class NewOrderRequestParam(TypedDict, total=False):
     """Request to submit a new order (PlaceOrderRequest from spec)"""
-
-    instrument_type: Required[SecurityType]
-    """Type of security"""
 
     order_type: Required[RequestOrderType]
     """Type of order"""
@@ -68,10 +64,7 @@ class NewOrderRequestParam(TypedDict, total=False):
     """Limit price (required for LIMIT and STOP_LIMIT orders)"""
 
     position_effect: PositionEffect
-    """Required when instrument_type is OPTION.
-
-    Specifies whether the order opens or closes a position.
-    """
+    """Required for options. Specifies whether the order opens or closes a position."""
 
     stop_price: Optional[str]
     """Stop price (required for STOP and STOP_LIMIT orders)"""
