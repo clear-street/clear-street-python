@@ -24,6 +24,9 @@ class Instrument(BaseModel):
     easy_to_borrow: bool
     """Indicates if the instrument is classified as Easy-To-Borrow"""
 
+    is_fractionable: bool
+    """Indicates if the instrument supports fractional-quantity orders"""
+
     is_liquidation_only: bool
     """Indicates if the instrument is liquidation only and cannot be bought"""
 
