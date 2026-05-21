@@ -230,7 +230,6 @@ from clear_street.types.v1 import (
     StructuredAction,
     StructuredActionButtonAction,
     SuggestedActionsPayload,
-    SymbolChart,
 )
 ```
 

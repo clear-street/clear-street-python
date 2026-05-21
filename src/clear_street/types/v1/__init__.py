@@ -23,7 +23,6 @@ from .clock_detail import ClockDetail as ClockDetail
 from .listing_type import ListingType as ListingType
 from .order_status import OrderStatus as OrderStatus
 from .price_target import PriceTarget as PriceTarget
-from .symbol_chart import SymbolChart as SymbolChart
 from .action_button import ActionButton as ActionButton
 from .chart_payload import ChartPayload as ChartPayload
 from .contract_type import ContractType as ContractType

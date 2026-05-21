@@ -18,13 +18,13 @@ class ResponseMetadata(BaseModel):
     """A unique ID for this request, generated upon ingestion of the request."""
 
     next_page_token: Optional[str] = None
-    """Base64URL-encoded pagination token containing limit and offset"""
+    """Base64URL-encoded pagination token"""
 
     page_number: Optional[int] = None
     """Pagination. Included if this was a GET (list) response"""
 
     previous_page_token: Optional[str] = None
-    """Base64URL-encoded pagination token containing limit and offset"""
+    """Base64URL-encoded pagination token"""
 
     total_items: Optional[int] = None
     """Total number of items available (not just in this page)."""
