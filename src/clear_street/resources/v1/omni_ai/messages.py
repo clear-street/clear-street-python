@@ -27,7 +27,7 @@ __all__ = ["MessagesResource", "AsyncMessagesResource"]
 class MessagesResource(SyncAPIResource):
     """Thread-centric AI assistant for conversational trading.
 
-    Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
+    Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use account_ids.
     """
 
     @cached_property
@@ -158,7 +158,7 @@ class MessagesResource(SyncAPIResource):
 class AsyncMessagesResource(AsyncAPIResource):
     """Thread-centric AI assistant for conversational trading.
 
-    Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
+    Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use account_ids.
     """
 
     @cached_property

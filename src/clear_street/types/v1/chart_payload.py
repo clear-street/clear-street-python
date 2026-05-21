@@ -6,7 +6,6 @@ from pydantic import Field as FieldInfo
 
 from ..._models import BaseModel
 from .data_chart import DataChart
-from .symbol_chart import SymbolChart
 from .action_button import ActionButton
 
 __all__ = ["ChartPayload"]
@@ -23,6 +22,3 @@ class ChartPayload(BaseModel):
 
     data_chart: Optional[DataChart] = FieldInfo(alias="dataChart", default=None)
     """Explicit series-driven chart definition."""
-
-    symbol_chart: Optional[SymbolChart] = FieldInfo(alias="symbolChart", default=None)
-    """Symbol-driven chart definition."""

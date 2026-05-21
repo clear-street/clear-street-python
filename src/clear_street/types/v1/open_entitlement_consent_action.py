@@ -12,11 +12,11 @@ __all__ = ["OpenEntitlementConsentAction"]
 class OpenEntitlementConsentAction(BaseModel):
     """Action to open entitlement consent flow for one or more accounts."""
 
+    account_ids: List[int]
+
     agreement_key: EntitlementAgreementKey
     """Stable entitlement agreement family key."""
 
+    entitlement_codes: List[EntitlementCode]
+
     reason: str
-
-    requested_entitlement_codes: List[EntitlementCode]
-
-    trading_account_ids: List[int]

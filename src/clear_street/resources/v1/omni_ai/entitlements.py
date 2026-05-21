@@ -32,7 +32,7 @@ __all__ = ["EntitlementsResource", "AsyncEntitlementsResource"]
 class EntitlementsResource(SyncAPIResource):
     """Thread-centric AI assistant for conversational trading.
 
-    Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
+    Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use account_ids.
     """
 
     @cached_property
@@ -57,9 +57,9 @@ class EntitlementsResource(SyncAPIResource):
     def create_entitlements(
         self,
         *,
+        account_ids: Iterable[int],
         agreement_id: str,
-        requested_entitlement_codes: List[EntitlementCode],
-        trading_account_ids: Iterable[int],
+        entitlement_codes: List[EntitlementCode],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -83,9 +83,9 @@ class EntitlementsResource(SyncAPIResource):
             "/v1/omni-ai/entitlements",
             body=maybe_transform(
                 {
+                    "account_ids": account_ids,
                     "agreement_id": agreement_id,
-                    "requested_entitlement_codes": requested_entitlement_codes,
-                    "trading_account_ids": trading_account_ids,
+                    "entitlement_codes": entitlement_codes,
                 },
                 entitlement_create_entitlements_params.EntitlementCreateEntitlementsParams,
             ),
@@ -189,7 +189,7 @@ class EntitlementsResource(SyncAPIResource):
 class AsyncEntitlementsResource(AsyncAPIResource):
     """Thread-centric AI assistant for conversational trading.
 
-    Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use trading_account_ids.
+    Create threads to start conversations, poll response objects for in-progress output, and read finalized messages from thread history. Thread/message/response endpoints require an explicit account_id. Entitlement endpoints are caller-scoped and use account_ids.
     """
 
     @cached_property
@@ -214,9 +214,9 @@ class AsyncEntitlementsResource(AsyncAPIResource):
     async def create_entitlements(
         self,
         *,
+        account_ids: Iterable[int],
         agreement_id: str,
-        requested_entitlement_codes: List[EntitlementCode],
-        trading_account_ids: Iterable[int],
+        entitlement_codes: List[EntitlementCode],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -240,9 +240,9 @@ class AsyncEntitlementsResource(AsyncAPIResource):
             "/v1/omni-ai/entitlements",
             body=await async_maybe_transform(
                 {
+                    "account_ids": account_ids,
                     "agreement_id": agreement_id,
-                    "requested_entitlement_codes": requested_entitlement_codes,
-                    "trading_account_ids": trading_account_ids,
+                    "entitlement_codes": entitlement_codes,
                 },
                 entitlement_create_entitlements_params.EntitlementCreateEntitlementsParams,
             ),

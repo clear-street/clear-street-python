@@ -11,8 +11,8 @@ __all__ = ["EntitlementCreateEntitlementsParams"]
 
 
 class EntitlementCreateEntitlementsParams(TypedDict, total=False):
+    account_ids: Required[Iterable[int]]
+
     agreement_id: Required[str]
 
-    requested_entitlement_codes: Required[List[EntitlementCode]]
-
-    trading_account_ids: Required[Iterable[int]]
+    entitlement_codes: Required[List[EntitlementCode]]
