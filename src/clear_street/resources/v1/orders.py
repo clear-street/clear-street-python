@@ -23,9 +23,11 @@ from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ...types.v1 import (
     RequestTimeInForce,
+    InstrumentIDOrSymbol,
     order_get_orders_params,
     order_replace_order_params,
     order_submit_orders_params,
+    order_get_executions_params,
     order_cancel_all_open_orders_params,
 )
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -37,9 +39,11 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.v1.request_time_in_force import RequestTimeInForce
+from ...types.v1.instrument_id_or_symbol import InstrumentIDOrSymbol
 from ...types.v1.order_get_orders_response import OrderGetOrdersResponse
 from ...types.v1.order_replace_order_response import OrderReplaceOrderResponse
 from ...types.v1.order_submit_orders_response import OrderSubmitOrdersResponse
+from ...types.v1.order_get_executions_response import OrderGetExecutionsResponse
 from ...types.v1.order_get_order_by_id_response import OrderGetOrderByIDResponse
 from ...types.v1.order_cancel_open_order_response import OrderCancelOpenOrderResponse
 from ...types.v1.order_cancel_all_open_orders_response import OrderCancelAllOpenOrdersResponse
@@ -157,6 +161,69 @@ class OrdersResource(SyncAPIResource):
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
             cast_to=OrderCancelOpenOrderResponse,
+        )
+
+    def get_executions(
+        self,
+        account_id: int,
+        *,
+        from_: Union[str, datetime] | Omit = omit,
+        instrument_id: InstrumentIDOrSymbol | Omit = omit,
+        page_size: int | Omit = omit,
+        page_token: Union[str, Base64FileInput] | Omit = omit,
+        to: Union[str, datetime] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> OrderGetExecutionsResponse:
+        """
+        Retrieves filled and partially-filled execution reports for the specified
+        trading account, ordered by transaction time (nanosecond precision) descending.
+
+        Args:
+          from_: The start date and time for the query range, inclusive (ISO 8601 format)
+
+          instrument_id: Optional instrument to filter by. Accepts either a symbol (e.g. `AAPL`) or an
+              OEMS instrument UUID.
+
+          page_size: The number of items to return per page. Only used when page_token is not
+              provided.
+
+          page_token: Token for retrieving the next or previous page of results. Contains encoded
+              pagination state; when provided, page_size is ignored.
+
+          to: The end date and time for the query range, inclusive (ISO 8601 format)
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            path_template("/v1/accounts/{account_id}/executions", account_id=account_id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "from_": from_,
+                        "instrument_id": instrument_id,
+                        "page_size": page_size,
+                        "page_token": page_token,
+                        "to": to,
+                    },
+                    order_get_executions_params.OrderGetExecutionsParams,
+                ),
+            ),
+            cast_to=OrderGetExecutionsResponse,
         )
 
     def get_order_by_id(
@@ -491,6 +558,69 @@ class AsyncOrdersResource(AsyncAPIResource):
             cast_to=OrderCancelOpenOrderResponse,
         )
 
+    async def get_executions(
+        self,
+        account_id: int,
+        *,
+        from_: Union[str, datetime] | Omit = omit,
+        instrument_id: InstrumentIDOrSymbol | Omit = omit,
+        page_size: int | Omit = omit,
+        page_token: Union[str, Base64FileInput] | Omit = omit,
+        to: Union[str, datetime] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> OrderGetExecutionsResponse:
+        """
+        Retrieves filled and partially-filled execution reports for the specified
+        trading account, ordered by transaction time (nanosecond precision) descending.
+
+        Args:
+          from_: The start date and time for the query range, inclusive (ISO 8601 format)
+
+          instrument_id: Optional instrument to filter by. Accepts either a symbol (e.g. `AAPL`) or an
+              OEMS instrument UUID.
+
+          page_size: The number of items to return per page. Only used when page_token is not
+              provided.
+
+          page_token: Token for retrieving the next or previous page of results. Contains encoded
+              pagination state; when provided, page_size is ignored.
+
+          to: The end date and time for the query range, inclusive (ISO 8601 format)
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            path_template("/v1/accounts/{account_id}/executions", account_id=account_id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "from_": from_,
+                        "instrument_id": instrument_id,
+                        "page_size": page_size,
+                        "page_token": page_token,
+                        "to": to,
+                    },
+                    order_get_executions_params.OrderGetExecutionsParams,
+                ),
+            ),
+            cast_to=OrderGetExecutionsResponse,
+        )
+
     async def get_order_by_id(
         self,
         order_id: str,
@@ -721,6 +851,9 @@ class OrdersResourceWithRawResponse:
         self.cancel_open_order = to_raw_response_wrapper(
             orders.cancel_open_order,
         )
+        self.get_executions = to_raw_response_wrapper(
+            orders.get_executions,
+        )
         self.get_order_by_id = to_raw_response_wrapper(
             orders.get_order_by_id,
         )
@@ -744,6 +877,9 @@ class AsyncOrdersResourceWithRawResponse:
         )
         self.cancel_open_order = async_to_raw_response_wrapper(
             orders.cancel_open_order,
+        )
+        self.get_executions = async_to_raw_response_wrapper(
+            orders.get_executions,
         )
         self.get_order_by_id = async_to_raw_response_wrapper(
             orders.get_order_by_id,
@@ -769,6 +905,9 @@ class OrdersResourceWithStreamingResponse:
         self.cancel_open_order = to_streamed_response_wrapper(
             orders.cancel_open_order,
         )
+        self.get_executions = to_streamed_response_wrapper(
+            orders.get_executions,
+        )
         self.get_order_by_id = to_streamed_response_wrapper(
             orders.get_order_by_id,
         )
@@ -792,6 +931,9 @@ class AsyncOrdersResourceWithStreamingResponse:
         )
         self.cancel_open_order = async_to_streamed_response_wrapper(
             orders.cancel_open_order,
+        )
+        self.get_executions = async_to_streamed_response_wrapper(
+            orders.get_executions,
         )
         self.get_order_by_id = async_to_streamed_response_wrapper(
             orders.get_order_by_id,

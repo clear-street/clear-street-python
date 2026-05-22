@@ -8,6 +8,7 @@ from .account import Account as Account
 from .version import Version as Version
 from .day_type import DayType as DayType
 from .position import Position as Position
+from .execution import Execution as Execution
 from .data_chart import DataChart as DataChart
 from .instrument import Instrument as Instrument
 from .order_list import OrderList as OrderList
@@ -33,6 +34,7 @@ from .risk_settings import RiskSettings as RiskSettings
 from .time_in_force import TimeInForce as TimeInForce
 from .account_status import AccountStatus as AccountStatus
 from .analyst_rating import AnalystRating as AnalystRating
+from .execution_list import ExecutionList as ExecutionList
 from .exercise_style import ExerciseStyle as ExerciseStyle
 from .margin_details import MarginDetails as MarginDetails
 from .account_subtype import AccountSubtype as AccountSubtype
@@ -99,6 +101,7 @@ from .account_get_accounts_params import AccountGetAccountsParams as AccountGetA
 from .calendar_get_clock_response import CalendarGetClockResponse as CalendarGetClockResponse
 from .content_part_custom_payload import ContentPartCustomPayload as ContentPartCustomPayload
 from .instrument_income_statement import InstrumentIncomeStatement as InstrumentIncomeStatement
+from .order_get_executions_params import OrderGetExecutionsParams as OrderGetExecutionsParams
 from .position_instruction_status import PositionInstructionStatus as PositionInstructionStatus
 from .prefill_cancel_order_action import PrefillCancelOrderAction as PrefillCancelOrderAction
 from .instrument_analyst_consensus import InstrumentAnalystConsensus as InstrumentAnalystConsensus
@@ -106,6 +109,7 @@ from .order_replace_order_response import OrderReplaceOrderResponse as OrderRepl
 from .order_submit_orders_response import OrderSubmitOrdersResponse as OrderSubmitOrdersResponse
 from .account_get_accounts_response import AccountGetAccountsResponse as AccountGetAccountsResponse
 from .content_part_thinking_payload import ContentPartThinkingPayload as ContentPartThinkingPayload
+from .order_get_executions_response import OrderGetExecutionsResponse as OrderGetExecutionsResponse
 from .position_get_positions_params import PositionGetPositionsParams as PositionGetPositionsParams
 from .instrument_cash_flow_statement import InstrumentCashFlowStatement as InstrumentCashFlowStatement
 from .order_get_order_by_id_response import OrderGetOrderByIDResponse as OrderGetOrderByIDResponse

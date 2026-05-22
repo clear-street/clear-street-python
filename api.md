@@ -86,6 +86,14 @@ Methods:
 - <code title="get /v1/clock">client.v1.calendar.<a href="./src/clear_street/resources/v1/calendar.py">get_clock</a>() -> <a href="./src/clear_street/types/v1/calendar_get_clock_response.py">CalendarGetClockResponse</a></code>
 - <code title="get /v1/calendars/market-hours">client.v1.calendar.<a href="./src/clear_street/resources/v1/calendar.py">get_market_hours_calendar</a>(\*\*<a href="src/clear_street/types/v1/calendar_get_market_hours_calendar_params.py">params</a>) -> <a href="./src/clear_street/types/v1/calendar_get_market_hours_calendar_response.py">CalendarGetMarketHoursCalendarResponse</a></code>
 
+## Executions
+
+Types:
+
+```python
+from clear_street.types.v1 import Execution, ExecutionList
+```
+
 ## InstrumentData
 
 Types:
@@ -355,6 +363,7 @@ from clear_street.types.v1 import (
     TrailingOffsetType,
     OrderCancelAllOpenOrdersResponse,
     OrderCancelOpenOrderResponse,
+    OrderGetExecutionsResponse,
     OrderGetOrderByIDResponse,
     OrderGetOrdersResponse,
     OrderReplaceOrderResponse,
@@ -366,6 +375,7 @@ Methods:
 
 - <code title="delete /v1/accounts/{account_id}/orders">client.v1.orders.<a href="./src/clear_street/resources/v1/orders.py">cancel_all_open_orders</a>(account_id, \*\*<a href="src/clear_street/types/v1/order_cancel_all_open_orders_params.py">params</a>) -> <a href="./src/clear_street/types/v1/order_cancel_all_open_orders_response.py">OrderCancelAllOpenOrdersResponse</a></code>
 - <code title="delete /v1/accounts/{account_id}/orders/{order_id}">client.v1.orders.<a href="./src/clear_street/resources/v1/orders.py">cancel_open_order</a>(order_id, \*, account_id) -> <a href="./src/clear_street/types/v1/order_cancel_open_order_response.py">OrderCancelOpenOrderResponse</a></code>
+- <code title="get /v1/accounts/{account_id}/executions">client.v1.orders.<a href="./src/clear_street/resources/v1/orders.py">get_executions</a>(account_id, \*\*<a href="src/clear_street/types/v1/order_get_executions_params.py">params</a>) -> <a href="./src/clear_street/types/v1/order_get_executions_response.py">OrderGetExecutionsResponse</a></code>
 - <code title="get /v1/accounts/{account_id}/orders/{order_id}">client.v1.orders.<a href="./src/clear_street/resources/v1/orders.py">get_order_by_id</a>(order_id, \*, account_id) -> <a href="./src/clear_street/types/v1/order_get_order_by_id_response.py">OrderGetOrderByIDResponse</a></code>
 - <code title="get /v1/accounts/{account_id}/orders">client.v1.orders.<a href="./src/clear_street/resources/v1/orders.py">get_orders</a>(account_id, \*\*<a href="src/clear_street/types/v1/order_get_orders_params.py">params</a>) -> <a href="./src/clear_street/types/v1/order_get_orders_response.py">OrderGetOrdersResponse</a></code>
 - <code title="patch /v1/accounts/{account_id}/orders/{order_id}">client.v1.orders.<a href="./src/clear_street/resources/v1/orders.py">replace_order</a>(order_id, \*, account_id, \*\*<a href="src/clear_street/types/v1/order_replace_order_params.py">params</a>) -> <a href="./src/clear_street/types/v1/order_replace_order_response.py">OrderReplaceOrderResponse</a></code>
