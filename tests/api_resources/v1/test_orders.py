@@ -15,6 +15,7 @@ from clear_street.types.v1 import (
     OrderGetOrderByIDResponse,
     OrderReplaceOrderResponse,
     OrderSubmitOrdersResponse,
+    OrderGetExecutionsResponse,
     OrderCancelOpenOrderResponse,
     OrderCancelAllOpenOrdersResponse,
 )
@@ -116,6 +117,53 @@ class TestOrders:
                 order_id="",
                 account_id=0,
             )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_get_executions(self, client: ClearStreet) -> None:
+        order = client.v1.orders.get_executions(
+            account_id=0,
+        )
+        assert_matches_type(OrderGetExecutionsResponse, order, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_get_executions_with_all_params(self, client: ClearStreet) -> None:
+        order = client.v1.orders.get_executions(
+            account_id=0,
+            from_=parse_datetime("2019-12-27T18:11:19.117Z"),
+            instrument_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            page_size=1,
+            page_token="U3RhaW5sZXNzIHJvY2tz",
+            to=parse_datetime("2019-12-27T18:11:19.117Z"),
+        )
+        assert_matches_type(OrderGetExecutionsResponse, order, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_get_executions(self, client: ClearStreet) -> None:
+        response = client.v1.orders.with_raw_response.get_executions(
+            account_id=0,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        order = response.parse()
+        assert_matches_type(OrderGetExecutionsResponse, order, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_get_executions(self, client: ClearStreet) -> None:
+        with client.v1.orders.with_streaming_response.get_executions(
+            account_id=0,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            order = response.parse()
+            assert_matches_type(OrderGetExecutionsResponse, order, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -473,6 +521,53 @@ class TestAsyncOrders:
                 order_id="",
                 account_id=0,
             )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_get_executions(self, async_client: AsyncClearStreet) -> None:
+        order = await async_client.v1.orders.get_executions(
+            account_id=0,
+        )
+        assert_matches_type(OrderGetExecutionsResponse, order, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_get_executions_with_all_params(self, async_client: AsyncClearStreet) -> None:
+        order = await async_client.v1.orders.get_executions(
+            account_id=0,
+            from_=parse_datetime("2019-12-27T18:11:19.117Z"),
+            instrument_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            page_size=1,
+            page_token="U3RhaW5sZXNzIHJvY2tz",
+            to=parse_datetime("2019-12-27T18:11:19.117Z"),
+        )
+        assert_matches_type(OrderGetExecutionsResponse, order, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_get_executions(self, async_client: AsyncClearStreet) -> None:
+        response = await async_client.v1.orders.with_raw_response.get_executions(
+            account_id=0,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        order = await response.parse()
+        assert_matches_type(OrderGetExecutionsResponse, order, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_get_executions(self, async_client: AsyncClearStreet) -> None:
+        async with async_client.v1.orders.with_streaming_response.get_executions(
+            account_id=0,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            order = await response.parse()
+            assert_matches_type(OrderGetExecutionsResponse, order, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
