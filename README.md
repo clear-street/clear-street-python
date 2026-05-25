@@ -33,7 +33,7 @@ from clear_street import ClearStreet
 client = ClearStreet(
     api_key="My API Key",
     # defaults to "production".
-    environment="staging",
+    environment="dev",
 )
 
 response = client.v1.accounts.get_accounts()
@@ -50,7 +50,7 @@ from clear_street import AsyncClearStreet
 client = AsyncClearStreet(
     api_key="My API Key",
     # defaults to "production".
-    environment="staging",
+    environment="dev",
 )
 
 
