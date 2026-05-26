@@ -34,6 +34,12 @@ class InstrumentSearchInstrumentsParams(TypedDict, total=False):
     include_inactive: bool
     """Include inactive instruments. Default false."""
 
+    include_ptp: bool
+    """Include publicly traded partnership (PTP) instruments.
+
+    Default true (penalized in ranking).
+    """
+
     include_restricted: bool
     """Include restricted instruments. Default true (penalized in ranking)."""
 

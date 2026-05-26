@@ -122,6 +122,7 @@ class InstrumentsResource(SyncAPIResource):
         instrument_type: Literal["COMMON_STOCK", "PREFERRED_STOCK", "OPTION", "CASH", "OTHER"] | Omit = omit,
         is_liquidation_only: bool | Omit = omit,
         is_marginable: bool | Omit = omit,
+        is_ptp: bool | Omit = omit,
         is_restricted: bool | Omit = omit,
         is_short_prohibited: bool | Omit = omit,
         is_threshold_security: bool | Omit = omit,
@@ -149,6 +150,8 @@ class InstrumentsResource(SyncAPIResource):
           is_liquidation_only: Filter by liquidation only status
 
           is_marginable: Filter by marginable status
+
+          is_ptp: Filter by publicly traded partnership (PTP) status
 
           is_restricted: Filter by restricted status
 
@@ -184,6 +187,7 @@ class InstrumentsResource(SyncAPIResource):
                         "instrument_type": instrument_type,
                         "is_liquidation_only": is_liquidation_only,
                         "is_marginable": is_marginable,
+                        "is_ptp": is_ptp,
                         "is_restricted": is_restricted,
                         "is_short_prohibited": is_short_prohibited,
                         "is_threshold_security": is_threshold_security,
@@ -271,6 +275,7 @@ class InstrumentsResource(SyncAPIResource):
         country: str | Omit = omit,
         currency: str | Omit = omit,
         include_inactive: bool | Omit = omit,
+        include_ptp: bool | Omit = omit,
         include_restricted: bool | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
@@ -307,6 +312,9 @@ class InstrumentsResource(SyncAPIResource):
 
           include_inactive: Include inactive instruments. Default false.
 
+          include_ptp: Include publicly traded partnership (PTP) instruments. Default true (penalized
+              in ranking).
+
           include_restricted: Include restricted instruments. Default true (penalized in ranking).
 
           page_size: The number of items to return per page. Only used when page_token is not
@@ -337,6 +345,7 @@ class InstrumentsResource(SyncAPIResource):
                         "country": country,
                         "currency": currency,
                         "include_inactive": include_inactive,
+                        "include_ptp": include_ptp,
                         "include_restricted": include_restricted,
                         "page_size": page_size,
                         "page_token": page_token,
@@ -423,6 +432,7 @@ class AsyncInstrumentsResource(AsyncAPIResource):
         instrument_type: Literal["COMMON_STOCK", "PREFERRED_STOCK", "OPTION", "CASH", "OTHER"] | Omit = omit,
         is_liquidation_only: bool | Omit = omit,
         is_marginable: bool | Omit = omit,
+        is_ptp: bool | Omit = omit,
         is_restricted: bool | Omit = omit,
         is_short_prohibited: bool | Omit = omit,
         is_threshold_security: bool | Omit = omit,
@@ -450,6 +460,8 @@ class AsyncInstrumentsResource(AsyncAPIResource):
           is_liquidation_only: Filter by liquidation only status
 
           is_marginable: Filter by marginable status
+
+          is_ptp: Filter by publicly traded partnership (PTP) status
 
           is_restricted: Filter by restricted status
 
@@ -485,6 +497,7 @@ class AsyncInstrumentsResource(AsyncAPIResource):
                         "instrument_type": instrument_type,
                         "is_liquidation_only": is_liquidation_only,
                         "is_marginable": is_marginable,
+                        "is_ptp": is_ptp,
                         "is_restricted": is_restricted,
                         "is_short_prohibited": is_short_prohibited,
                         "is_threshold_security": is_threshold_security,
@@ -572,6 +585,7 @@ class AsyncInstrumentsResource(AsyncAPIResource):
         country: str | Omit = omit,
         currency: str | Omit = omit,
         include_inactive: bool | Omit = omit,
+        include_ptp: bool | Omit = omit,
         include_restricted: bool | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
@@ -608,6 +622,9 @@ class AsyncInstrumentsResource(AsyncAPIResource):
 
           include_inactive: Include inactive instruments. Default false.
 
+          include_ptp: Include publicly traded partnership (PTP) instruments. Default true (penalized
+              in ranking).
+
           include_restricted: Include restricted instruments. Default true (penalized in ranking).
 
           page_size: The number of items to return per page. Only used when page_token is not
@@ -638,6 +655,7 @@ class AsyncInstrumentsResource(AsyncAPIResource):
                         "country": country,
                         "currency": currency,
                         "include_inactive": include_inactive,
+                        "include_ptp": include_ptp,
                         "include_restricted": include_restricted,
                         "page_size": page_size,
                         "page_token": page_token,
