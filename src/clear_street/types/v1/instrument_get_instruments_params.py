@@ -32,6 +32,9 @@ class InstrumentGetInstrumentsParams(TypedDict, total=False):
     is_marginable: bool
     """Filter by marginable status"""
 
+    is_ptp: bool
+    """Filter by publicly traded partnership (PTP) status"""
+
     is_restricted: bool
     """Filter by restricted status"""
 
