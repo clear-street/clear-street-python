@@ -86,14 +86,6 @@ Methods:
 - <code title="get /v1/clock">client.v1.calendar.<a href="./src/clear_street/resources/v1/calendar.py">get_clock</a>() -> <a href="./src/clear_street/types/v1/calendar_get_clock_response.py">CalendarGetClockResponse</a></code>
 - <code title="get /v1/calendars/market-hours">client.v1.calendar.<a href="./src/clear_street/resources/v1/calendar.py">get_market_hours_calendar</a>(\*\*<a href="src/clear_street/types/v1/calendar_get_market_hours_calendar_params.py">params</a>) -> <a href="./src/clear_street/types/v1/calendar_get_market_hours_calendar_response.py">CalendarGetMarketHoursCalendarResponse</a></code>
 
-## Executions
-
-Types:
-
-```python
-from clear_street.types.v1 import Execution, ExecutionList
-```
-
 ## InstrumentData
 
 Types:
@@ -348,6 +340,8 @@ Types:
 ```python
 from clear_street.types.v1 import (
     CancelOrderRequest,
+    Execution,
+    ExecutionList,
     InstrumentIDOrSymbol,
     NewOrderRequest,
     Order,
