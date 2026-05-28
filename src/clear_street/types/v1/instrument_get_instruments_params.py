@@ -27,9 +27,6 @@ class InstrumentGetInstrumentsParams(TypedDict, total=False):
     is_ptp: bool
     """Filter by publicly traded partnership (PTP) status"""
 
-    is_restricted: bool
-    """Filter by restricted status"""
-
     is_short_prohibited: bool
     """Filter by short prohibited status"""
 

@@ -121,7 +121,6 @@ class InstrumentsResource(SyncAPIResource):
         is_liquidation_only: bool | Omit = omit,
         is_marginable: bool | Omit = omit,
         is_ptp: bool | Omit = omit,
-        is_restricted: bool | Omit = omit,
         is_short_prohibited: bool | Omit = omit,
         is_threshold_security: bool | Omit = omit,
         page_size: int | Omit = omit,
@@ -146,8 +145,6 @@ class InstrumentsResource(SyncAPIResource):
           is_marginable: Filter by marginable status
 
           is_ptp: Filter by publicly traded partnership (PTP) status
-
-          is_restricted: Filter by restricted status
 
           is_short_prohibited: Filter by short prohibited status
 
@@ -181,7 +178,6 @@ class InstrumentsResource(SyncAPIResource):
                         "is_liquidation_only": is_liquidation_only,
                         "is_marginable": is_marginable,
                         "is_ptp": is_ptp,
-                        "is_restricted": is_restricted,
                         "is_short_prohibited": is_short_prohibited,
                         "is_threshold_security": is_threshold_security,
                         "page_size": page_size,
@@ -269,7 +265,6 @@ class InstrumentsResource(SyncAPIResource):
         currency: str | Omit = omit,
         include_inactive: bool | Omit = omit,
         include_ptp: bool | Omit = omit,
-        include_restricted: bool | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -308,8 +303,6 @@ class InstrumentsResource(SyncAPIResource):
           include_ptp: Include publicly traded partnership (PTP) instruments. Default true (penalized
               in ranking).
 
-          include_restricted: Include restricted instruments. Default true (penalized in ranking).
-
           page_size: The number of items to return per page. Only used when page_token is not
               provided.
 
@@ -339,7 +332,6 @@ class InstrumentsResource(SyncAPIResource):
                         "currency": currency,
                         "include_inactive": include_inactive,
                         "include_ptp": include_ptp,
-                        "include_restricted": include_restricted,
                         "page_size": page_size,
                         "page_token": page_token,
                     },
@@ -425,7 +417,6 @@ class AsyncInstrumentsResource(AsyncAPIResource):
         is_liquidation_only: bool | Omit = omit,
         is_marginable: bool | Omit = omit,
         is_ptp: bool | Omit = omit,
-        is_restricted: bool | Omit = omit,
         is_short_prohibited: bool | Omit = omit,
         is_threshold_security: bool | Omit = omit,
         page_size: int | Omit = omit,
@@ -450,8 +441,6 @@ class AsyncInstrumentsResource(AsyncAPIResource):
           is_marginable: Filter by marginable status
 
           is_ptp: Filter by publicly traded partnership (PTP) status
-
-          is_restricted: Filter by restricted status
 
           is_short_prohibited: Filter by short prohibited status
 
@@ -485,7 +474,6 @@ class AsyncInstrumentsResource(AsyncAPIResource):
                         "is_liquidation_only": is_liquidation_only,
                         "is_marginable": is_marginable,
                         "is_ptp": is_ptp,
-                        "is_restricted": is_restricted,
                         "is_short_prohibited": is_short_prohibited,
                         "is_threshold_security": is_threshold_security,
                         "page_size": page_size,
@@ -573,7 +561,6 @@ class AsyncInstrumentsResource(AsyncAPIResource):
         currency: str | Omit = omit,
         include_inactive: bool | Omit = omit,
         include_ptp: bool | Omit = omit,
-        include_restricted: bool | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -612,8 +599,6 @@ class AsyncInstrumentsResource(AsyncAPIResource):
           include_ptp: Include publicly traded partnership (PTP) instruments. Default true (penalized
               in ranking).
 
-          include_restricted: Include restricted instruments. Default true (penalized in ranking).
-
           page_size: The number of items to return per page. Only used when page_token is not
               provided.
 
@@ -643,7 +628,6 @@ class AsyncInstrumentsResource(AsyncAPIResource):
                         "currency": currency,
                         "include_inactive": include_inactive,
                         "include_ptp": include_ptp,
-                        "include_restricted": include_restricted,
                         "page_size": page_size,
                         "page_token": page_token,
                     },

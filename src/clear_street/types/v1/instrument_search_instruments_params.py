@@ -40,9 +40,6 @@ class InstrumentSearchInstrumentsParams(TypedDict, total=False):
     Default true (penalized in ranking).
     """
 
-    include_restricted: bool
-    """Include restricted instruments. Default true (penalized in ranking)."""
-
     page_size: int
     """The number of items to return per page.
 

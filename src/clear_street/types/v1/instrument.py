@@ -39,9 +39,6 @@ class Instrument(BaseModel):
     are subject to a 10% withholding tax for non-US tax residents.
     """
 
-    is_restricted: bool
-    """Indicates if the instrument is restricted from trading"""
-
     is_short_prohibited: bool
     """Indicates if short selling is prohibited for the instrument"""
 
