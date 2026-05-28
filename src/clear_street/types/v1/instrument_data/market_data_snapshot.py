@@ -4,6 +4,7 @@ from typing import Optional
 
 from ...._models import BaseModel
 from .snapshot_quote import SnapshotQuote
+from .snapshot_greeks import SnapshotGreeks
 from .snapshot_session import SnapshotSession
 from .snapshot_last_trade import SnapshotLastTrade
 
@@ -23,6 +24,12 @@ class MarketDataSnapshot(BaseModel):
     """
     Cumulative traded volume reported on the most recent trade, in shares for
     equities or contracts for options. Absent when no trade is available.
+    """
+
+    greeks: Optional[SnapshotGreeks] = None
+    """Theoretical price and Greeks for option instruments.
+
+    `None` for equities, and for options whose Greeks have not yet been observed
     """
 
     last_quote: Optional[SnapshotQuote] = None

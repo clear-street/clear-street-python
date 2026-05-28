@@ -8,6 +8,7 @@ from .daily_summary import DailySummary as DailySummary
 from .news_item_list import NewsItemList as NewsItemList
 from .snapshot_quote import SnapshotQuote as SnapshotQuote
 from .news_instrument import NewsInstrument as NewsInstrument
+from .snapshot_greeks import SnapshotGreeks as SnapshotGreeks
 from .snapshot_session import SnapshotSession as SnapshotSession
 from .daily_summary_list import DailySummaryList as DailySummaryList
 from .snapshot_last_trade import SnapshotLastTrade as SnapshotLastTrade
