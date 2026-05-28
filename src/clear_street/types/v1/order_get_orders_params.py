@@ -19,7 +19,7 @@ class OrderGetOrdersParams(TypedDict, total=False):
     instrument_ids: SequenceNotStr[str]
     """Comma-separated OEMS instrument UUIDs"""
 
-    instrument_type: Literal["COMMON_STOCK", "PREFERRED_STOCK", "OPTION", "CASH", "OTHER"]
+    instrument_type: Literal["COMMON_STOCK", "OPTION", "CASH"]
     """Instrument type filter (e.g., COMMON_STOCK, OPTION)"""
 
     page_size: int

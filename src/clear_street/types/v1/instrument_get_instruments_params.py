@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Union
-from typing_extensions import Literal, Annotated, TypedDict
+from typing_extensions import Annotated, TypedDict
 
 from ..._types import SequenceNotStr, Base64FileInput
 from ..._utils import PropertyInfo
@@ -17,14 +17,6 @@ class InstrumentGetInstrumentsParams(TypedDict, total=False):
 
     instrument_ids: SequenceNotStr[str]
     """Comma-separated OEMS instrument UUIDs"""
-
-    instrument_type: Literal["COMMON_STOCK", "PREFERRED_STOCK", "OPTION", "CASH", "OTHER"]
-    """Filter by instrument type.
-
-    OPTION is not supported on this endpoint; use GET /instruments/options/contracts
-    to list option contracts. If omitted, returns all supported instrument types
-    except options.
-    """
 
     is_liquidation_only: bool
     """Filter by liquidation only status"""
