@@ -89,7 +89,6 @@ class TestInstruments:
             is_liquidation_only=True,
             is_marginable=True,
             is_ptp=True,
-            is_restricted=True,
             is_short_prohibited=True,
             is_threshold_security=True,
             page_size=1,
@@ -178,7 +177,6 @@ class TestInstruments:
             currency="currency",
             include_inactive=True,
             include_ptp=True,
-            include_restricted=True,
             page_size=1,
             page_token="U3RhaW5sZXNzIHJvY2tz",
         )
@@ -282,7 +280,6 @@ class TestAsyncInstruments:
             is_liquidation_only=True,
             is_marginable=True,
             is_ptp=True,
-            is_restricted=True,
             is_short_prohibited=True,
             is_threshold_security=True,
             page_size=1,
@@ -371,7 +368,6 @@ class TestAsyncInstruments:
             currency="currency",
             include_inactive=True,
             include_ptp=True,
-            include_restricted=True,
             page_size=1,
             page_token="U3RhaW5sZXNzIHJvY2tz",
         )
