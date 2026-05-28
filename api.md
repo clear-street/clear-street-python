@@ -143,6 +143,7 @@ from clear_street.types.v1.instrument_data import (
     DailySummaryList,
     MarketDataSnapshot,
     MarketDataSnapshotList,
+    SnapshotGreeks,
     SnapshotLastTrade,
     SnapshotQuote,
     SnapshotSession,
