@@ -86,6 +86,7 @@ class TestInstruments:
         instrument = client.v1.instruments.get_instruments(
             easy_to_borrow=True,
             instrument_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            instrument_type="COMMON_STOCK",
             is_liquidation_only=True,
             is_marginable=True,
             is_ptp=True,
@@ -277,6 +278,7 @@ class TestAsyncInstruments:
         instrument = await async_client.v1.instruments.get_instruments(
             easy_to_borrow=True,
             instrument_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            instrument_type="COMMON_STOCK",
             is_liquidation_only=True,
             is_marginable=True,
             is_ptp=True,
