@@ -57,6 +57,9 @@ class Instrument(BaseModel):
     adv: Optional[str] = None
     """Average daily share volume from the security definition."""
 
+    expiry: Optional[date] = None
+    """The expiration date for options instruments"""
+
     instrument_type: Optional[SecurityType] = None
     """The type of security (e.g., Common Stock, ETF)"""
 
@@ -85,3 +88,6 @@ class Instrument(BaseModel):
 
     short_margin_rate: Optional[str] = None
     """The percent of a short position's value you must post as margin"""
+
+    strike_price: Optional[str] = None
+    """The strike price for options instruments"""

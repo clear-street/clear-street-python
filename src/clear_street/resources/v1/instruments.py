@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing import Union, Optional
 from datetime import date
+from typing_extensions import Literal
 
 import httpx
 
@@ -118,6 +119,7 @@ class InstrumentsResource(SyncAPIResource):
         *,
         easy_to_borrow: bool | Omit = omit,
         instrument_ids: SequenceNotStr[str] | Omit = omit,
+        instrument_type: Literal["COMMON_STOCK", "OPTION", "CASH"] | Omit = omit,
         is_liquidation_only: bool | Omit = omit,
         is_marginable: bool | Omit = omit,
         is_ptp: bool | Omit = omit,
@@ -139,6 +141,8 @@ class InstrumentsResource(SyncAPIResource):
           easy_to_borrow: Filter by easy to borrow status
 
           instrument_ids: Comma-separated OEMS instrument UUIDs
+
+          instrument_type: Filter by instrument type (e.g. COMMON_STOCK, OPTION)
 
           is_liquidation_only: Filter by liquidation only status
 
@@ -175,6 +179,7 @@ class InstrumentsResource(SyncAPIResource):
                     {
                         "easy_to_borrow": easy_to_borrow,
                         "instrument_ids": instrument_ids,
+                        "instrument_type": instrument_type,
                         "is_liquidation_only": is_liquidation_only,
                         "is_marginable": is_marginable,
                         "is_ptp": is_ptp,
@@ -414,6 +419,7 @@ class AsyncInstrumentsResource(AsyncAPIResource):
         *,
         easy_to_borrow: bool | Omit = omit,
         instrument_ids: SequenceNotStr[str] | Omit = omit,
+        instrument_type: Literal["COMMON_STOCK", "OPTION", "CASH"] | Omit = omit,
         is_liquidation_only: bool | Omit = omit,
         is_marginable: bool | Omit = omit,
         is_ptp: bool | Omit = omit,
@@ -435,6 +441,8 @@ class AsyncInstrumentsResource(AsyncAPIResource):
           easy_to_borrow: Filter by easy to borrow status
 
           instrument_ids: Comma-separated OEMS instrument UUIDs
+
+          instrument_type: Filter by instrument type (e.g. COMMON_STOCK, OPTION)
 
           is_liquidation_only: Filter by liquidation only status
 
@@ -471,6 +479,7 @@ class AsyncInstrumentsResource(AsyncAPIResource):
                     {
                         "easy_to_borrow": easy_to_borrow,
                         "instrument_ids": instrument_ids,
+                        "instrument_type": instrument_type,
                         "is_liquidation_only": is_liquidation_only,
                         "is_marginable": is_marginable,
                         "is_ptp": is_ptp,
