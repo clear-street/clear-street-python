@@ -7,9 +7,9 @@ from typing import Any, cast
 
 import pytest
 
+from clearstreet import ClearStreet, AsyncClearStreet
 from tests.utils import assert_matches_type
-from clear_street import ClearStreet, AsyncClearStreet
-from clear_street.types.v1 import (
+from clearstreet.types.v1 import (
     CalendarGetClockResponse,
     CalendarGetMarketHoursCalendarResponse,
 )

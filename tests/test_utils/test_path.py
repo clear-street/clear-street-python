@@ -4,7 +4,7 @@ from typing import Any
 
 import pytest
 
-from clear_street._utils._path import path_template
+from clearstreet._utils._path import path_template
 
 
 @pytest.mark.parametrize(

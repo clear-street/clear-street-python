@@ -5,8 +5,8 @@ from typing import Union
 
 import pydantic
 
-from clear_street import _compat
-from clear_street._utils._json import openapi_dumps
+from clearstreet import _compat
+from clearstreet._utils._json import openapi_dumps
 
 
 class TestOpenapiDumps:

@@ -8,8 +8,8 @@ from typing import Any, TypeVar, Iterator, Sequence, cast
 from datetime import date, datetime
 from typing_extensions import Literal, get_args, get_origin, assert_type
 
-from clear_street._types import Omit, NoneType
-from clear_street._utils import (
+from clearstreet._types import Omit, NoneType
+from clearstreet._utils import (
     is_dict,
     is_list,
     is_list_type,
@@ -19,8 +19,8 @@ from clear_street._utils import (
     is_annotated_type,
     is_type_alias_type,
 )
-from clear_street._compat import PYDANTIC_V1, field_outer_type, get_model_fields
-from clear_street._models import BaseModel
+from clearstreet._compat import PYDANTIC_V1, field_outer_type, get_model_fields
+from clearstreet._models import BaseModel
 
 BaseModelT = TypeVar("BaseModelT", bound=BaseModel)
 

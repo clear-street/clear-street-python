@@ -153,7 +153,7 @@ class ClearStreet(SyncAPIClient):
     @property
     @override
     def qs(self) -> Querystring:
-        return Querystring(array_format="indices")
+        return Querystring(array_format="comma")
 
     @property
     @override
@@ -364,7 +364,7 @@ class AsyncClearStreet(AsyncAPIClient):
     @property
     @override
     def qs(self) -> Querystring:
-        return Querystring(array_format="indices")
+        return Querystring(array_format="comma")
 
     @property
     @override

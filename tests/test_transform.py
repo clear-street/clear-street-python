@@ -8,15 +8,15 @@ from typing_extensions import Required, Annotated, TypedDict
 
 import pytest
 
-from clear_street._types import Base64FileInput, omit, not_given
-from clear_street._utils import (
+from clearstreet._types import Base64FileInput, omit, not_given
+from clearstreet._utils import (
     PropertyInfo,
     transform as _transform,
     parse_datetime,
     async_transform as _async_transform,
 )
-from clear_street._compat import PYDANTIC_V1
-from clear_street._models import BaseModel
+from clearstreet._compat import PYDANTIC_V1
+from clearstreet._models import BaseModel
 
 _T = TypeVar("_T")
 

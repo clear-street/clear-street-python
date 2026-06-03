@@ -61,6 +61,6 @@
   ],
   "release-type": "python",
   "extra-files": [
-    "src/clear_street/_version.py"
+    "src/clearstreet/_version.py"
   ]
 }

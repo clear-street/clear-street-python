@@ -18,7 +18,7 @@ from ...._response import (
 )
 from ...._base_client import make_request_options
 from ....types.v1.omni_ai import entitlement_get_entitlements_params, entitlement_create_entitlements_params
-from ....types.v1.omni_ai.entitlement_code import EntitlementCode
+from ....types.v1.entitlement_code import EntitlementCode
 from ....types.v1.omni_ai.entitlement_get_entitlements_response import EntitlementGetEntitlementsResponse
 from ....types.v1.omni_ai.entitlement_delete_entitlement_response import EntitlementDeleteEntitlementResponse
 from ....types.v1.omni_ai.entitlement_create_entitlements_response import EntitlementCreateEntitlementsResponse

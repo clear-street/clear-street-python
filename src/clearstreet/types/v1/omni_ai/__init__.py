@@ -12,7 +12,6 @@ from .message_role import MessageRole as MessageRole
 from .message_content import MessageContent as MessageContent
 from .message_outcome import MessageOutcome as MessageOutcome
 from .response_status import ResponseStatus as ResponseStatus
-from .entitlement_code import EntitlementCode as EntitlementCode
 from .response_content import ResponseContent as ResponseContent
 from .entitlement_resource import EntitlementResource as EntitlementResource
 from .message_content_part import MessageContentPart as MessageContentPart
@@ -21,7 +20,6 @@ from .create_thread_response import CreateThreadResponse as CreateThreadResponse
 from .cancel_response_payload import CancelResponsePayload as CancelResponsePayload
 from .create_message_response import CreateMessageResponse as CreateMessageResponse
 from .create_feedback_response import CreateFeedbackResponse as CreateFeedbackResponse
-from .entitlement_agreement_key import EntitlementAgreementKey as EntitlementAgreementKey
 from .entitlement_resource_list import EntitlementResourceList as EntitlementResourceList
 from .thread_get_threads_params import ThreadGetThreadsParams as ThreadGetThreadsParams
 from .thread_get_messages_params import ThreadGetMessagesParams as ThreadGetMessagesParams

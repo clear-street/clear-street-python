@@ -7,13 +7,15 @@ from typing import Any, cast
 
 import pytest
 
+from clearstreet import ClearStreet, AsyncClearStreet
 from tests.utils import assert_matches_type
-from clear_street import ClearStreet, AsyncClearStreet
-from clear_street.types.v1 import (
+from clearstreet.types.v1 import (
     WatchlistGetWatchlistsResponse,
     WatchlistCreateWatchlistResponse,
+    WatchlistDeleteWatchlistResponse,
     WatchlistAddWatchlistItemResponse,
     WatchlistGetWatchlistByIDResponse,
+    WatchlistDeleteWatchlistItemResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -108,7 +110,7 @@ class TestWatchlist:
         watchlist = client.v1.watchlist.delete_watchlist(
             "550e8400-e29b-41d4-a716-446655440000",
         )
-        assert_matches_type(object, watchlist, path=["response"])
+        assert_matches_type(WatchlistDeleteWatchlistResponse, watchlist, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -120,7 +122,7 @@ class TestWatchlist:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         watchlist = response.parse()
-        assert_matches_type(object, watchlist, path=["response"])
+        assert_matches_type(WatchlistDeleteWatchlistResponse, watchlist, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -132,7 +134,7 @@ class TestWatchlist:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             watchlist = response.parse()
-            assert_matches_type(object, watchlist, path=["response"])
+            assert_matches_type(WatchlistDeleteWatchlistResponse, watchlist, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -151,7 +153,7 @@ class TestWatchlist:
             item_id="660e8400-e29b-41d4-a716-446655440001",
             watchlist_id="550e8400-e29b-41d4-a716-446655440000",
         )
-        assert_matches_type(object, watchlist, path=["response"])
+        assert_matches_type(WatchlistDeleteWatchlistItemResponse, watchlist, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -164,7 +166,7 @@ class TestWatchlist:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         watchlist = response.parse()
-        assert_matches_type(object, watchlist, path=["response"])
+        assert_matches_type(WatchlistDeleteWatchlistItemResponse, watchlist, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -177,7 +179,7 @@ class TestWatchlist:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             watchlist = response.parse()
-            assert_matches_type(object, watchlist, path=["response"])
+            assert_matches_type(WatchlistDeleteWatchlistItemResponse, watchlist, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -367,7 +369,7 @@ class TestAsyncWatchlist:
         watchlist = await async_client.v1.watchlist.delete_watchlist(
             "550e8400-e29b-41d4-a716-446655440000",
         )
-        assert_matches_type(object, watchlist, path=["response"])
+        assert_matches_type(WatchlistDeleteWatchlistResponse, watchlist, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -379,7 +381,7 @@ class TestAsyncWatchlist:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         watchlist = await response.parse()
-        assert_matches_type(object, watchlist, path=["response"])
+        assert_matches_type(WatchlistDeleteWatchlistResponse, watchlist, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -391,7 +393,7 @@ class TestAsyncWatchlist:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             watchlist = await response.parse()
-            assert_matches_type(object, watchlist, path=["response"])
+            assert_matches_type(WatchlistDeleteWatchlistResponse, watchlist, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -410,7 +412,7 @@ class TestAsyncWatchlist:
             item_id="660e8400-e29b-41d4-a716-446655440001",
             watchlist_id="550e8400-e29b-41d4-a716-446655440000",
         )
-        assert_matches_type(object, watchlist, path=["response"])
+        assert_matches_type(WatchlistDeleteWatchlistItemResponse, watchlist, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -423,7 +425,7 @@ class TestAsyncWatchlist:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         watchlist = await response.parse()
-        assert_matches_type(object, watchlist, path=["response"])
+        assert_matches_type(WatchlistDeleteWatchlistItemResponse, watchlist, path=["response"])
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
@@ -436,7 +438,7 @@ class TestAsyncWatchlist:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             watchlist = await response.parse()
-            assert_matches_type(object, watchlist, path=["response"])
+            assert_matches_type(WatchlistDeleteWatchlistItemResponse, watchlist, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

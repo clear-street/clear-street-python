@@ -44,6 +44,7 @@ from .screener_filter import ScreenerFilter as ScreenerFilter
 from .watchlist_entry import WatchlistEntry as WatchlistEntry
 from .account_balances import AccountBalances as AccountBalances
 from .account_settings import AccountSettings as AccountSettings
+from .entitlement_code import EntitlementCode as EntitlementCode
 from .options_contract import OptionsContract as OptionsContract
 from .session_schedule import SessionSchedule as SessionSchedule
 from .trading_sessions import TradingSessions as TradingSessions
@@ -83,6 +84,7 @@ from .order_get_orders_params import OrderGetOrdersParams as OrderGetOrdersParam
 from .market_hours_detail_list import MarketHoursDetailList as MarketHoursDetailList
 from .prefill_new_order_action import PrefillNewOrderAction as PrefillNewOrderAction
 from .content_part_text_payload import ContentPartTextPayload as ContentPartTextPayload
+from .entitlement_agreement_key import EntitlementAgreementKey as EntitlementAgreementKey
 from .instrument_dividend_event import InstrumentDividendEvent as InstrumentDividendEvent
 from .instrument_event_envelope import InstrumentEventEnvelope as InstrumentEventEnvelope
 from .instrument_event_ipo_item import InstrumentEventIpoItem as InstrumentEventIpoItem
@@ -136,6 +138,7 @@ from .instrument_get_instruments_response import InstrumentGetInstrumentsRespons
 from .order_cancel_all_open_orders_params import OrderCancelAllOpenOrdersParams as OrderCancelAllOpenOrdersParams
 from .watchlist_add_watchlist_item_params import WatchlistAddWatchlistItemParams as WatchlistAddWatchlistItemParams
 from .watchlist_create_watchlist_response import WatchlistCreateWatchlistResponse as WatchlistCreateWatchlistResponse
+from .watchlist_delete_watchlist_response import WatchlistDeleteWatchlistResponse as WatchlistDeleteWatchlistResponse
 from .account_get_portfolio_history_params import AccountGetPortfolioHistoryParams as AccountGetPortfolioHistoryParams
 from .account_patch_account_by_id_response import AccountPatchAccountByIDResponse as AccountPatchAccountByIDResponse
 from .instrument_search_instruments_params import InstrumentSearchInstrumentsParams as InstrumentSearchInstrumentsParams
@@ -175,6 +178,9 @@ from .instrument_get_instrument_by_id_response import (
 )
 from .instrument_get_option_contracts_response import (
     InstrumentGetOptionContractsResponse as InstrumentGetOptionContractsResponse,
+)
+from .watchlist_delete_watchlist_item_response import (
+    WatchlistDeleteWatchlistItemResponse as WatchlistDeleteWatchlistItemResponse,
 )
 from .calendar_get_market_hours_calendar_params import (
     CalendarGetMarketHoursCalendarParams as CalendarGetMarketHoursCalendarParams,

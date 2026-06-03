@@ -1,5 +1,5 @@
 [project]
-name = "clear-street"
+name = "clearstreet"
 version = "0.3.0"
 description = "The official Python library for the clear-street API"
 dynamic = ["readme"]
@@ -86,7 +86,7 @@ include = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/clear_street"]
+packages = ["src/clearstreet"]
 
 [tool.hatch.build.targets.sdist]
 # Basically everything except hidden files/directories (such as .github, .devcontainers, .python-version, etc)
@@ -154,7 +154,7 @@ show_error_codes = true
 #
 # We also exclude our `tests` as mypy doesn't always infer
 # types correctly and Pyright will still catch any type errors.
-exclude = ["src/clear_street/_files.py", "_dev/.*.py", "tests/.*"]
+exclude = ["src/clearstreet/_files.py", "_dev/.*.py", "tests/.*"]
 
 strict_equality = true
 implicit_reexport = true
@@ -246,7 +246,7 @@ length-sort = true
 length-sort-straight = true
 combine-as-imports = true
 extra-standard-library = ["typing_extensions"]
-known-first-party = ["clear_street", "tests"]
+known-first-party = ["clearstreet", "tests"]
 
 [tool.ruff.lint.per-file-ignores]
 "bin/**.py" = ["T201", "T203"]
