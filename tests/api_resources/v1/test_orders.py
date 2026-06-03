@@ -7,10 +7,10 @@ from typing import Any, cast
 
 import pytest
 
+from clearstreet import ClearStreet, AsyncClearStreet
 from tests.utils import assert_matches_type
-from clear_street import ClearStreet, AsyncClearStreet
-from clear_street._utils import parse_datetime
-from clear_street.types.v1 import (
+from clearstreet._utils import parse_datetime
+from clearstreet.types.v1 import (
     OrderGetOrdersResponse,
     OrderGetOrderByIDResponse,
     OrderReplaceOrderResponse,
@@ -232,7 +232,7 @@ class TestOrders:
             status=["PENDING_NEW"],
             symbol="symbol",
             to=parse_datetime("2019-12-27T18:11:19.117Z"),
-            underlying_instrument_ids="underlying_instrument_ids",
+            underlying_instrument_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
         )
         assert_matches_type(OrderGetOrdersResponse, order, path=["response"])
 
@@ -636,7 +636,7 @@ class TestAsyncOrders:
             status=["PENDING_NEW"],
             symbol="symbol",
             to=parse_datetime("2019-12-27T18:11:19.117Z"),
-            underlying_instrument_ids="underlying_instrument_ids",
+            underlying_instrument_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
         )
         assert_matches_type(OrderGetOrdersResponse, order, path=["response"])
 

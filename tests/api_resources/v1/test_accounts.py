@@ -7,10 +7,10 @@ from typing import Any, cast
 
 import pytest
 
+from clearstreet import ClearStreet, AsyncClearStreet
 from tests.utils import assert_matches_type
-from clear_street import ClearStreet, AsyncClearStreet
-from clear_street._utils import parse_date
-from clear_street.types.v1 import (
+from clearstreet._utils import parse_date
+from clearstreet.types.v1 import (
     AccountGetAccountsResponse,
     AccountGetAccountByIDResponse,
     AccountPatchAccountByIDResponse,

@@ -7,9 +7,9 @@ from typing import Any, cast
 
 import pytest
 
+from clearstreet import ClearStreet, AsyncClearStreet
 from tests.utils import assert_matches_type
-from clear_street import ClearStreet, AsyncClearStreet
-from clear_street.types.v1.instrument_data import NewsGetNewsResponse
+from clearstreet.types.v1.instrument_data import NewsGetNewsResponse
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 

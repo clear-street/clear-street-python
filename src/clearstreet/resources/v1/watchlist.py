@@ -26,8 +26,10 @@ from ..._base_client import make_request_options
 from ...types.v1.instrument_id_or_symbol import InstrumentIDOrSymbol
 from ...types.v1.watchlist_get_watchlists_response import WatchlistGetWatchlistsResponse
 from ...types.v1.watchlist_create_watchlist_response import WatchlistCreateWatchlistResponse
+from ...types.v1.watchlist_delete_watchlist_response import WatchlistDeleteWatchlistResponse
 from ...types.v1.watchlist_add_watchlist_item_response import WatchlistAddWatchlistItemResponse
 from ...types.v1.watchlist_get_watchlist_by_id_response import WatchlistGetWatchlistByIDResponse
+from ...types.v1.watchlist_delete_watchlist_item_response import WatchlistDeleteWatchlistItemResponse
 
 __all__ = ["WatchlistResource", "AsyncWatchlistResource"]
 
@@ -137,7 +139,7 @@ class WatchlistResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> WatchlistDeleteWatchlistResponse:
         """
         Delete a watchlist and all its items
 
@@ -157,7 +159,7 @@ class WatchlistResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=WatchlistDeleteWatchlistResponse,
         )
 
     def delete_watchlist_item(
@@ -171,7 +173,7 @@ class WatchlistResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> WatchlistDeleteWatchlistItemResponse:
         """
         Delete an instrument from a watchlist
 
@@ -193,7 +195,7 @@ class WatchlistResource(SyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=WatchlistDeleteWatchlistItemResponse,
         )
 
     def get_watchlist_by_id(
@@ -385,7 +387,7 @@ class AsyncWatchlistResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> WatchlistDeleteWatchlistResponse:
         """
         Delete a watchlist and all its items
 
@@ -405,7 +407,7 @@ class AsyncWatchlistResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=WatchlistDeleteWatchlistResponse,
         )
 
     async def delete_watchlist_item(
@@ -419,7 +421,7 @@ class AsyncWatchlistResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> object:
+    ) -> WatchlistDeleteWatchlistItemResponse:
         """
         Delete an instrument from a watchlist
 
@@ -441,7 +443,7 @@ class AsyncWatchlistResource(AsyncAPIResource):
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=object,
+            cast_to=WatchlistDeleteWatchlistItemResponse,
         )
 
     async def get_watchlist_by_id(

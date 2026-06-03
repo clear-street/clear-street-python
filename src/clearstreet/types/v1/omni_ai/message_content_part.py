@@ -9,37 +9,46 @@ from ..content_part_custom_payload import ContentPartCustomPayload
 from ..content_part_structured_action_payload import ContentPartStructuredActionPayload
 from ..content_part_suggested_actions_payload import ContentPartSuggestedActionsPayload
 
-__all__ = ["MessageContentPart", "UnionMember0", "UnionMember1", "UnionMember2", "UnionMember3", "UnionMember4"]
+__all__ = [
+    "MessageContentPart",
+    "ContentPartText",
+    "ContentPartStructuredAction",
+    "ContentPartChart",
+    "ContentPartSuggestedActions",
+    "ContentPartCustom",
+]
 
 
-class UnionMember0(ContentPartTextPayload):
+class ContentPartText(ContentPartTextPayload):
     """Text content part."""
 
     type: Literal["text"]
 
 
-class UnionMember1(ContentPartStructuredActionPayload):
+class ContentPartStructuredAction(ContentPartStructuredActionPayload):
     """Structured action content part."""
 
     type: Literal["structured_action"]
 
 
-class UnionMember2(ContentPartChartPayload):
+class ContentPartChart(ContentPartChartPayload):
     """Chart payload content part."""
 
     type: Literal["chart"]
 
 
-class UnionMember3(ContentPartSuggestedActionsPayload):
+class ContentPartSuggestedActions(ContentPartSuggestedActionsPayload):
     """Suggested actions payload content part."""
 
     type: Literal["suggested_actions"]
 
 
-class UnionMember4(ContentPartCustomPayload):
+class ContentPartCustom(ContentPartCustomPayload):
     """Escape-hatch custom payload content part."""
 
     type: Literal["custom"]
 
 
-MessageContentPart: TypeAlias = Union[UnionMember0, UnionMember1, UnionMember2, UnionMember3, UnionMember4]
+MessageContentPart: TypeAlias = Union[
+    ContentPartText, ContentPartStructuredAction, ContentPartChart, ContentPartSuggestedActions, ContentPartCustom
+]

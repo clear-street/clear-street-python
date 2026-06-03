@@ -8,9 +8,9 @@ import pytest
 import pydantic
 from pydantic import Field
 
-from clear_street._utils import PropertyInfo
-from clear_street._compat import PYDANTIC_V1, parse_obj, model_dump, model_json
-from clear_street._models import DISCRIMINATOR_CACHE, BaseModel, EagerIterable, construct_type
+from clearstreet._utils import PropertyInfo
+from clearstreet._compat import PYDANTIC_V1, parse_obj, model_dump, model_json
+from clearstreet._models import DISCRIMINATOR_CACHE, BaseModel, EagerIterable, construct_type
 
 
 class BasicModel(BaseModel):

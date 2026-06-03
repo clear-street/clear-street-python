@@ -1,7 +1,7 @@
 # Clear Street Python API library
 
 <!-- prettier-ignore -->
-[![PyPI version](https://img.shields.io/pypi/v/clear-street.svg?label=pypi%20(stable))](https://pypi.org/project/clear-street/)
+[![PyPI version](https://img.shields.io/pypi/v/clearstreet.svg?label=pypi%20(stable))](https://pypi.org/project/clearstreet/)
 
 The Clear Street Python library provides convenient access to the Clear Street REST API from any Python 3.9+
 application. The library includes type definitions for all request params and response fields,
@@ -16,19 +16,16 @@ The full API of this library can be found in [api.md](api.md).
 ## Installation
 
 ```sh
-# install from the production repo
-pip install git+ssh://git@github.com/clear-street/clear-street-python.git
+# install from PyPI
+pip install clearstreet
 ```
-
-> [!NOTE]
-> Once this package is [published to PyPI](https://www.stainless.com/docs/guides/publish), this will become: `pip install clear-street`
 
 ## Usage
 
 The full API of this library can be found in [api.md](api.md).
 
 ```python
-from clear_street import ClearStreet
+from clearstreet import ClearStreet
 
 client = ClearStreet(
     api_key="My API Key",
@@ -45,7 +42,7 @@ Simply import `AsyncClearStreet` instead of `ClearStreet` and use `await` with e
 
 ```python
 import asyncio
-from clear_street import AsyncClearStreet
+from clearstreet import AsyncClearStreet
 
 client = AsyncClearStreet(
     api_key="My API Key",
@@ -70,16 +67,16 @@ By default, the async client uses `httpx` for HTTP requests. However, for improv
 You can enable this by installing `aiohttp`:
 
 ```sh
-# install from the production repo
-pip install 'clear-street[aiohttp] @ git+ssh://git@github.com/clear-street/clear-street-python.git'
+# install from PyPI
+pip install clearstreet[aiohttp]
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
 
 ```python
 import asyncio
-from clear_street import DefaultAioHttpClient
-from clear_street import AsyncClearStreet
+from clearstreet import DefaultAioHttpClient
+from clearstreet import AsyncClearStreet
 
 
 async def main() -> None:
@@ -107,7 +104,7 @@ Typed requests and responses provide autocomplete and documentation within your 
 Nested parameters are dictionaries, typed using `TypedDict`, for example:
 
 ```python
-from clear_street import ClearStreet
+from clearstreet import ClearStreet
 
 client = ClearStreet()
 
@@ -120,27 +117,27 @@ print(response.risk)
 
 ## Handling errors
 
-When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `clear_street.APIConnectionError` is raised.
+When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `clearstreet.APIConnectionError` is raised.
 
 When the API returns a non-success status code (that is, 4xx or 5xx
-response), a subclass of `clear_street.APIStatusError` is raised, containing `status_code` and `response` properties.
+response), a subclass of `clearstreet.APIStatusError` is raised, containing `status_code` and `response` properties.
 
-All errors inherit from `clear_street.APIError`.
+All errors inherit from `clearstreet.APIError`.
 
 ```python
-import clear_street
-from clear_street import ClearStreet
+import clearstreet
+from clearstreet import ClearStreet
 
 client = ClearStreet()
 
 try:
     client.v1.accounts.get_accounts()
-except clear_street.APIConnectionError as e:
+except clearstreet.APIConnectionError as e:
     print("The server could not be reached")
     print(e.__cause__)  # an underlying Exception, likely raised within httpx.
-except clear_street.RateLimitError as e:
+except clearstreet.RateLimitError as e:
     print("A 429 status code was received; we should back off a bit.")
-except clear_street.APIStatusError as e:
+except clearstreet.APIStatusError as e:
     print("Another non-200-range status code was received")
     print(e.status_code)
     print(e.response)
@@ -168,7 +165,7 @@ Connection errors (for example, due to a network connectivity problem), 408 Requ
 You can use the `max_retries` option to configure or disable retry settings:
 
 ```python
-from clear_street import ClearStreet
+from clearstreet import ClearStreet
 
 # Configure the default for all requests:
 client = ClearStreet(
@@ -186,7 +183,7 @@ By default requests time out after 1 minute. You can configure this with a `time
 which accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/timeouts/#fine-tuning-the-configuration) object:
 
 ```python
-from clear_street import ClearStreet
+from clearstreet import ClearStreet
 
 # Configure the default for all requests:
 client = ClearStreet(
@@ -238,7 +235,7 @@ if response.my_field is None:
 The "raw" Response object can be accessed by prefixing `.with_raw_response.` to any HTTP method call, e.g.,
 
 ```py
-from clear_street import ClearStreet
+from clearstreet import ClearStreet
 
 client = ClearStreet()
 response = client.v1.accounts.with_raw_response.get_accounts()
@@ -248,9 +245,9 @@ account = response.parse()  # get the object that `v1.accounts.get_accounts()` w
 print(account)
 ```
 
-These methods return an [`APIResponse`](https://github.com/clear-street/clear-street-python/tree/main/src/clear_street/_response.py) object.
+These methods return an [`APIResponse`](https://github.com/clear-street/clear-street-python/tree/main/src/clearstreet/_response.py) object.
 
-The async client returns an [`AsyncAPIResponse`](https://github.com/clear-street/clear-street-python/tree/main/src/clear_street/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
+The async client returns an [`AsyncAPIResponse`](https://github.com/clear-street/clear-street-python/tree/main/src/clearstreet/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.
 
 #### `.with_streaming_response`
 
@@ -312,7 +309,7 @@ You can directly override the [httpx client](https://www.python-httpx.org/api/#c
 
 ```python
 import httpx
-from clear_street import ClearStreet, DefaultHttpxClient
+from clearstreet import ClearStreet, DefaultHttpxClient
 
 client = ClearStreet(
     # Or use the `CLEAR_STREET_BASE_URL` env var
@@ -335,7 +332,7 @@ client.with_options(http_client=DefaultHttpxClient(...))
 By default the library closes underlying HTTP connections whenever the client is [garbage collected](https://docs.python.org/3/reference/datamodel.html#object.__del__). You can manually close the client using the `.close()` method if desired, or with a context manager that closes when exiting.
 
 ```py
-from clear_street import ClearStreet
+from clearstreet import ClearStreet
 
 with ClearStreet() as client:
   # make requests here
@@ -363,8 +360,8 @@ If you've upgraded to the latest version but aren't seeing any new features you 
 You can determine the version that is being used at runtime with:
 
 ```py
-import clear_street
-print(clear_street.__version__)
+import clearstreet
+print(clearstreet.__version__)
 ```
 
 ## Requirements

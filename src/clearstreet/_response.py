@@ -221,7 +221,7 @@ class BaseAPIResponse(Generic[R]):
             and issubclass(origin, pydantic.BaseModel)
         ):
             raise TypeError(
-                "Pydantic models must subclass our base model type, e.g. `from clear_street import BaseModel`"
+                "Pydantic models must subclass our base model type, e.g. `from clearstreet import BaseModel`"
             )
 
         if (
@@ -288,7 +288,7 @@ class APIResponse(BaseAPIResponse[R]):
         the `to` argument, e.g.
 
         ```py
-        from clear_street import BaseModel
+        from clearstreet import BaseModel
 
 
         class MyModel(BaseModel):
@@ -390,7 +390,7 @@ class AsyncAPIResponse(BaseAPIResponse[R]):
         the `to` argument, e.g.
 
         ```py
-        from clear_street import BaseModel
+        from clearstreet import BaseModel
 
 
         class MyModel(BaseModel):
@@ -561,7 +561,7 @@ class AsyncStreamedBinaryAPIResponse(AsyncAPIResponse[bytes]):
 class MissingStreamClassError(TypeError):
     def __init__(self) -> None:
         super().__init__(
-            "The `stream` argument was set to `True` but the `stream_cls` argument was not given. See `clear_street._streaming` for reference",
+            "The `stream` argument was set to `True` but the `stream_cls` argument was not given. See `clearstreet._streaming` for reference",
         )
 
 

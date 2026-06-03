@@ -3,8 +3,8 @@
 from typing import List
 
 from ...._models import BaseModel
-from .entitlement_code import EntitlementCode
-from .entitlement_agreement_key import EntitlementAgreementKey
+from ..entitlement_code import EntitlementCode
+from ..entitlement_agreement_key import EntitlementAgreementKey
 
 __all__ = ["EntitlementAgreementResource"]
 

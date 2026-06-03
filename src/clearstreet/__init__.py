@@ -93,12 +93,12 @@ _setup_logging()
 # Update the __module__ attribute for exported symbols so that
 # error messages point to this module instead of the module
 # it was originally defined in, e.g.
-# clear_street._exceptions.NotFoundError -> clear_street.NotFoundError
+# clearstreet._exceptions.NotFoundError -> clearstreet.NotFoundError
 __locals = locals()
 for __name in __all__:
     if not __name.startswith("__"):
         try:
-            __locals[__name].__module__ = "clear_street"
+            __locals[__name].__module__ = "clearstreet"
         except (TypeError, AttributeError):
             # Some of our exported symbols are builtins which we can't set attributes for.
             pass
