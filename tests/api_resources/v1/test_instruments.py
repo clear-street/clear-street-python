@@ -7,12 +7,14 @@ from typing import Any, cast
 
 import pytest
 
+from clearstreet import ClearStreet, AsyncClearStreet
 from tests.utils import assert_matches_type
-from clear_street import ClearStreet, AsyncClearStreet
-from clear_street.types.v1 import (
+from clearstreet._utils import parse_date
+from clearstreet.types.v1 import (
     InstrumentGetInstrumentsResponse,
     InstrumentGetInstrumentByIDResponse,
     InstrumentSearchInstrumentsResponse,
+    InstrumentGetOptionContractsResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -87,7 +89,7 @@ class TestInstruments:
             instrument_type="COMMON_STOCK",
             is_liquidation_only=True,
             is_marginable=True,
-            is_restricted=True,
+            is_ptp=True,
             is_short_prohibited=True,
             is_threshold_security=True,
             page_size=1,
@@ -119,6 +121,47 @@ class TestInstruments:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    def test_method_get_option_contracts(self, client: ClearStreet) -> None:
+        instrument = client.v1.instruments.get_option_contracts()
+        assert_matches_type(InstrumentGetOptionContractsResponse, instrument, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_method_get_option_contracts_with_all_params(self, client: ClearStreet) -> None:
+        instrument = client.v1.instruments.get_option_contracts(
+            contract_type="CALL",
+            expiry=parse_date("2019-12-27"),
+            page_size=1,
+            page_token="U3RhaW5sZXNzIHJvY2tz",
+            underlier="underlier",
+            underlying_instrument_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(InstrumentGetOptionContractsResponse, instrument, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_get_option_contracts(self, client: ClearStreet) -> None:
+        response = client.v1.instruments.with_raw_response.get_option_contracts()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        instrument = response.parse()
+        assert_matches_type(InstrumentGetOptionContractsResponse, instrument, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_get_option_contracts(self, client: ClearStreet) -> None:
+        with client.v1.instruments.with_streaming_response.get_option_contracts() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            instrument = response.parse()
+            assert_matches_type(InstrumentGetOptionContractsResponse, instrument, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     def test_method_search_instruments(self, client: ClearStreet) -> None:
         instrument = client.v1.instruments.search_instruments(
             q="q",
@@ -134,7 +177,7 @@ class TestInstruments:
             country="country",
             currency="currency",
             include_inactive=True,
-            include_restricted=True,
+            include_ptp=True,
             page_size=1,
             page_token="U3RhaW5sZXNzIHJvY2tz",
         )
@@ -238,7 +281,7 @@ class TestAsyncInstruments:
             instrument_type="COMMON_STOCK",
             is_liquidation_only=True,
             is_marginable=True,
-            is_restricted=True,
+            is_ptp=True,
             is_short_prohibited=True,
             is_threshold_security=True,
             page_size=1,
@@ -270,6 +313,47 @@ class TestAsyncInstruments:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    async def test_method_get_option_contracts(self, async_client: AsyncClearStreet) -> None:
+        instrument = await async_client.v1.instruments.get_option_contracts()
+        assert_matches_type(InstrumentGetOptionContractsResponse, instrument, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_get_option_contracts_with_all_params(self, async_client: AsyncClearStreet) -> None:
+        instrument = await async_client.v1.instruments.get_option_contracts(
+            contract_type="CALL",
+            expiry=parse_date("2019-12-27"),
+            page_size=1,
+            page_token="U3RhaW5sZXNzIHJvY2tz",
+            underlier="underlier",
+            underlying_instrument_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+        )
+        assert_matches_type(InstrumentGetOptionContractsResponse, instrument, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_get_option_contracts(self, async_client: AsyncClearStreet) -> None:
+        response = await async_client.v1.instruments.with_raw_response.get_option_contracts()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        instrument = await response.parse()
+        assert_matches_type(InstrumentGetOptionContractsResponse, instrument, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_get_option_contracts(self, async_client: AsyncClearStreet) -> None:
+        async with async_client.v1.instruments.with_streaming_response.get_option_contracts() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            instrument = await response.parse()
+            assert_matches_type(InstrumentGetOptionContractsResponse, instrument, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     async def test_method_search_instruments(self, async_client: AsyncClearStreet) -> None:
         instrument = await async_client.v1.instruments.search_instruments(
             q="q",
@@ -285,7 +369,7 @@ class TestAsyncInstruments:
             country="country",
             currency="currency",
             include_inactive=True,
-            include_restricted=True,
+            include_ptp=True,
             page_size=1,
             page_token="U3RhaW5sZXNzIHJvY2tz",
         )

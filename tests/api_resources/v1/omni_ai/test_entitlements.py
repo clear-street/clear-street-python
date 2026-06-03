@@ -7,12 +7,13 @@ from typing import Any, cast
 
 import pytest
 
+from clearstreet import ClearStreet, AsyncClearStreet
 from tests.utils import assert_matches_type
-from clear_street import ClearStreet, AsyncClearStreet
-from clear_street.types.v1.omni_ai import (
+from clearstreet.types.v1.omni_ai import (
     EntitlementGetEntitlementsResponse,
     EntitlementDeleteEntitlementResponse,
     EntitlementCreateEntitlementsResponse,
+    EntitlementGetEntitlementAgreementsResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -25,9 +26,9 @@ class TestEntitlements:
     @parametrize
     def test_method_create_entitlements(self, client: ClearStreet) -> None:
         entitlement = client.v1.omni_ai.entitlements.create_entitlements(
+            account_ids=[100019, 100021],
             agreement_id="01JZ0000000000000000000000",
-            requested_entitlement_codes=["omni.account_data"],
-            trading_account_ids=[100019, 100021],
+            entitlement_codes=["omni.account_data"],
         )
         assert_matches_type(EntitlementCreateEntitlementsResponse, entitlement, path=["response"])
 
@@ -35,9 +36,9 @@ class TestEntitlements:
     @parametrize
     def test_raw_response_create_entitlements(self, client: ClearStreet) -> None:
         response = client.v1.omni_ai.entitlements.with_raw_response.create_entitlements(
+            account_ids=[100019, 100021],
             agreement_id="01JZ0000000000000000000000",
-            requested_entitlement_codes=["omni.account_data"],
-            trading_account_ids=[100019, 100021],
+            entitlement_codes=["omni.account_data"],
         )
 
         assert response.is_closed is True
@@ -49,9 +50,9 @@ class TestEntitlements:
     @parametrize
     def test_streaming_response_create_entitlements(self, client: ClearStreet) -> None:
         with client.v1.omni_ai.entitlements.with_streaming_response.create_entitlements(
+            account_ids=[100019, 100021],
             agreement_id="01JZ0000000000000000000000",
-            requested_entitlement_codes=["omni.account_data"],
-            trading_account_ids=[100019, 100021],
+            entitlement_codes=["omni.account_data"],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -105,6 +106,34 @@ class TestEntitlements:
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
+    def test_method_get_entitlement_agreements(self, client: ClearStreet) -> None:
+        entitlement = client.v1.omni_ai.entitlements.get_entitlement_agreements()
+        assert_matches_type(EntitlementGetEntitlementAgreementsResponse, entitlement, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_raw_response_get_entitlement_agreements(self, client: ClearStreet) -> None:
+        response = client.v1.omni_ai.entitlements.with_raw_response.get_entitlement_agreements()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        entitlement = response.parse()
+        assert_matches_type(EntitlementGetEntitlementAgreementsResponse, entitlement, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    def test_streaming_response_get_entitlement_agreements(self, client: ClearStreet) -> None:
+        with client.v1.omni_ai.entitlements.with_streaming_response.get_entitlement_agreements() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            entitlement = response.parse()
+            assert_matches_type(EntitlementGetEntitlementAgreementsResponse, entitlement, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
     def test_method_get_entitlements(self, client: ClearStreet) -> None:
         entitlement = client.v1.omni_ai.entitlements.get_entitlements()
         assert_matches_type(EntitlementGetEntitlementsResponse, entitlement, path=["response"])
@@ -149,9 +178,9 @@ class TestAsyncEntitlements:
     @parametrize
     async def test_method_create_entitlements(self, async_client: AsyncClearStreet) -> None:
         entitlement = await async_client.v1.omni_ai.entitlements.create_entitlements(
+            account_ids=[100019, 100021],
             agreement_id="01JZ0000000000000000000000",
-            requested_entitlement_codes=["omni.account_data"],
-            trading_account_ids=[100019, 100021],
+            entitlement_codes=["omni.account_data"],
         )
         assert_matches_type(EntitlementCreateEntitlementsResponse, entitlement, path=["response"])
 
@@ -159,9 +188,9 @@ class TestAsyncEntitlements:
     @parametrize
     async def test_raw_response_create_entitlements(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.omni_ai.entitlements.with_raw_response.create_entitlements(
+            account_ids=[100019, 100021],
             agreement_id="01JZ0000000000000000000000",
-            requested_entitlement_codes=["omni.account_data"],
-            trading_account_ids=[100019, 100021],
+            entitlement_codes=["omni.account_data"],
         )
 
         assert response.is_closed is True
@@ -173,9 +202,9 @@ class TestAsyncEntitlements:
     @parametrize
     async def test_streaming_response_create_entitlements(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.omni_ai.entitlements.with_streaming_response.create_entitlements(
+            account_ids=[100019, 100021],
             agreement_id="01JZ0000000000000000000000",
-            requested_entitlement_codes=["omni.account_data"],
-            trading_account_ids=[100019, 100021],
+            entitlement_codes=["omni.account_data"],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -226,6 +255,36 @@ class TestAsyncEntitlements:
             await async_client.v1.omni_ai.entitlements.with_raw_response.delete_entitlement(
                 "",
             )
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_method_get_entitlement_agreements(self, async_client: AsyncClearStreet) -> None:
+        entitlement = await async_client.v1.omni_ai.entitlements.get_entitlement_agreements()
+        assert_matches_type(EntitlementGetEntitlementAgreementsResponse, entitlement, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_raw_response_get_entitlement_agreements(self, async_client: AsyncClearStreet) -> None:
+        response = await async_client.v1.omni_ai.entitlements.with_raw_response.get_entitlement_agreements()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        entitlement = await response.parse()
+        assert_matches_type(EntitlementGetEntitlementAgreementsResponse, entitlement, path=["response"])
+
+    @pytest.mark.skip(reason="Mock server tests are disabled")
+    @parametrize
+    async def test_streaming_response_get_entitlement_agreements(self, async_client: AsyncClearStreet) -> None:
+        async with (
+            async_client.v1.omni_ai.entitlements.with_streaming_response.get_entitlement_agreements()
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            entitlement = await response.parse()
+            assert_matches_type(EntitlementGetEntitlementAgreementsResponse, entitlement, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
 
     @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize

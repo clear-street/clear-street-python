@@ -5,8 +5,8 @@ from typing import Iterator, AsyncIterator
 import httpx
 import pytest
 
-from clear_street import ClearStreet, AsyncClearStreet
-from clear_street._streaming import Stream, AsyncStream, ServerSentEvent
+from clearstreet import ClearStreet, AsyncClearStreet
+from clearstreet._streaming import Stream, AsyncStream, ServerSentEvent
 
 
 @pytest.mark.asyncio
