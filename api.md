@@ -28,6 +28,7 @@ from clearstreet.types.v1 import (
     AccountType,
     MarginDetails,
     MarginDetailsUsage,
+    MarginSessionDetails,
     MarginTopContributor,
     MarginType,
     PortfolioHistoryResponse,

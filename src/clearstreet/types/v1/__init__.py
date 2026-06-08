@@ -75,6 +75,7 @@ from .options_contract_list import OptionsContractList as OptionsContractList
 from .request_time_in_force import RequestTimeInForce as RequestTimeInForce
 from .instrument_events_data import InstrumentEventsData as InstrumentEventsData
 from .instrument_split_event import InstrumentSplitEvent as InstrumentSplitEvent
+from .margin_session_details import MarginSessionDetails as MarginSessionDetails
 from .margin_top_contributor import MarginTopContributor as MarginTopContributor
 from .add_watchlist_item_data import AddWatchlistItemData as AddWatchlistItemData
 from .instrument_fundamentals import InstrumentFundamentals as InstrumentFundamentals
