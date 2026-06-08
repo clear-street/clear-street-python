@@ -21,7 +21,7 @@ class DailySummary(BaseModel):
     """
 
     instrument_id: str
-    """OEMS instrument identifier. Always populated; echoes the request ID."""
+    """Unique instrument identifier. Always populated; echoes the request ID."""
 
     high: Optional[str] = None
     """Session high."""

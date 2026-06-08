@@ -72,7 +72,7 @@ class AccountsResource(SyncAPIResource):
         Fetch account balance information
 
         Args:
-          top_margin_contributors_limit: Limit the number of top margin contributors returned by the engine.
+          top_margin_contributors_limit: Limit the number of top margin contributors returned.
 
           extra_headers: Send extra headers
 
@@ -297,7 +297,7 @@ class AsyncAccountsResource(AsyncAPIResource):
         Fetch account balance information
 
         Args:
-          top_margin_contributors_limit: Limit the number of top margin contributors returned by the engine.
+          top_margin_contributors_limit: Limit the number of top margin contributors returned.
 
           extra_headers: Send extra headers
 

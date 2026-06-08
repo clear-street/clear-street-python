@@ -11,7 +11,7 @@ class SnapshotGreeks(BaseModel):
     """Theoretical price and Greeks for an options snapshot.
 
     All values are
-    **per share** as published by RENG; no contract multiplier is applied.
+    **per share**; no contract multiplier is applied.
     """
 
     delta: str
@@ -33,7 +33,7 @@ class SnapshotGreeks(BaseModel):
     """Theta per trading day."""
 
     timestamp: datetime
-    """Event timestamp published by RENG."""
+    """Timestamp when the Greeks were calculated."""
 
     vega: str
     """Vega per 1.0 vol point."""

@@ -22,7 +22,7 @@ class InstrumentDataGetAllInstrumentEventsParams(TypedDict, total=False):
     """The start date for the query range, inclusive (YYYY-MM-DD)."""
 
     instrument_ids: SequenceNotStr[str]
-    """Filter by OEMS instrument ID(s).
+    """Filter by instrument ID(s).
 
     Comma-delimited list of UUIDs. Example:
     `instrument_ids=550e8400-e29b-41d4-a716-446655440000`.

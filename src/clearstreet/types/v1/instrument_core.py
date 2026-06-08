@@ -11,7 +11,7 @@ __all__ = ["InstrumentCore"]
 
 class InstrumentCore(BaseModel):
     id: str
-    """Unique OEMS instrument identifier (UUID)"""
+    """Unique instrument identifier (UUID)"""
 
     country_of_issue: str
     """The ISO country code of the instrument's issue"""
@@ -68,12 +68,7 @@ class InstrumentCore(BaseModel):
     """The full name of the instrument or its issuer"""
 
     notional_adv: Optional[str] = None
-    """Notional ADV (`adv × previous_close`).
-
-    The primary liquidity signal used by `/instruments/search` ranking. Computed at
-    response time so it stays consistent with whatever `adv` and `previous_close`
-    show.
-    """
+    """Notional average daily volume (ADV multiplied by previous close price)."""
 
     previous_close: Optional[str] = None
     """Last close price from the security definition."""

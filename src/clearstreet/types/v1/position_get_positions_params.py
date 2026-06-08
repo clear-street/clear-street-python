@@ -13,7 +13,7 @@ __all__ = ["PositionGetPositionsParams"]
 
 class PositionGetPositionsParams(TypedDict, total=False):
     instrument_ids: SequenceNotStr[str]
-    """Comma-separated OEMS instrument UUIDs"""
+    """Comma-separated instrument identifiers"""
 
     page_size: int
     """The number of items to return per page.

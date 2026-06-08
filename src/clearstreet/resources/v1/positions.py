@@ -130,7 +130,7 @@ class PositionsResource(SyncAPIResource):
         Retrieves orders generated to close the position.
 
         Args:
-          instrument_id: OEMS instrument UUID
+          instrument_id: Instrument identifier
 
           cancel_orders: Whether to cancel existing open orders for the position before submitting
               closing orders.
@@ -271,7 +271,7 @@ class PositionsResource(SyncAPIResource):
         Retrieves all positions for the specified trading account.
 
         Args:
-          instrument_ids: Comma-separated OEMS instrument UUIDs
+          instrument_ids: Comma-separated instrument identifiers
 
           page_size: The number of items to return per page. Only used when page_token is not
               provided.
@@ -443,7 +443,7 @@ class AsyncPositionsResource(AsyncAPIResource):
         Retrieves orders generated to close the position.
 
         Args:
-          instrument_id: OEMS instrument UUID
+          instrument_id: Instrument identifier
 
           cancel_orders: Whether to cancel existing open orders for the position before submitting
               closing orders.
@@ -584,7 +584,7 @@ class AsyncPositionsResource(AsyncAPIResource):
         Retrieves all positions for the specified trading account.
 
         Args:
-          instrument_ids: Comma-separated OEMS instrument UUIDs
+          instrument_ids: Comma-separated instrument identifiers
 
           page_size: The number of items to return per page. Only used when page_token is not
               provided.

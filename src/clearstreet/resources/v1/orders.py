@@ -93,7 +93,7 @@ class OrdersResource(SyncAPIResource):
         Cancel all orders for an account
 
         Args:
-          instrument_ids: Comma-separated OEMS instrument UUIDs
+          instrument_ids: Comma-separated instrument identifiers
 
           instrument_type: Filter by instrument type (e.g., COMMON_STOCK, OPTION)
 
@@ -187,7 +187,7 @@ class OrdersResource(SyncAPIResource):
           from_: The start date and time for the query range, inclusive (ISO 8601 format)
 
           instrument_id: Optional instrument to filter by. Accepts either a symbol (e.g. `AAPL`) or an
-              OEMS instrument UUID.
+              instrument identifier.
 
           page_size: The number of items to return per page. Only used when page_token is not
               provided.
@@ -305,7 +305,7 @@ class OrdersResource(SyncAPIResource):
         Args:
           from_: The start date and time for the query range, inclusive (ISO 8601 format)
 
-          instrument_ids: Comma-separated OEMS instrument UUIDs
+          instrument_ids: Comma-separated instrument identifiers
 
           instrument_type: Instrument type filter (e.g., COMMON_STOCK, OPTION)
 
@@ -321,7 +321,7 @@ class OrdersResource(SyncAPIResource):
 
           to: The end date and time for the query range, inclusive (ISO 8601 format)
 
-          underlying_instrument_ids: Comma-separated OEMS instrument UUIDs. Matches options orders whose resolved
+          underlying_instrument_ids: Comma-separated instrument identifiers. Matches options orders whose resolved
               underlier is any of the given IDs.
 
           extra_headers: Send extra headers
@@ -488,7 +488,7 @@ class AsyncOrdersResource(AsyncAPIResource):
         Cancel all orders for an account
 
         Args:
-          instrument_ids: Comma-separated OEMS instrument UUIDs
+          instrument_ids: Comma-separated instrument identifiers
 
           instrument_type: Filter by instrument type (e.g., COMMON_STOCK, OPTION)
 
@@ -582,7 +582,7 @@ class AsyncOrdersResource(AsyncAPIResource):
           from_: The start date and time for the query range, inclusive (ISO 8601 format)
 
           instrument_id: Optional instrument to filter by. Accepts either a symbol (e.g. `AAPL`) or an
-              OEMS instrument UUID.
+              instrument identifier.
 
           page_size: The number of items to return per page. Only used when page_token is not
               provided.
@@ -700,7 +700,7 @@ class AsyncOrdersResource(AsyncAPIResource):
         Args:
           from_: The start date and time for the query range, inclusive (ISO 8601 format)
 
-          instrument_ids: Comma-separated OEMS instrument UUIDs
+          instrument_ids: Comma-separated instrument identifiers
 
           instrument_type: Instrument type filter (e.g., COMMON_STOCK, OPTION)
 
@@ -716,7 +716,7 @@ class AsyncOrdersResource(AsyncAPIResource):
 
           to: The end date and time for the query range, inclusive (ISO 8601 format)
 
-          underlying_instrument_ids: Comma-separated OEMS instrument UUIDs. Matches options orders whose resolved
+          underlying_instrument_ids: Comma-separated instrument identifiers. Matches options orders whose resolved
               underlier is any of the given IDs.
 
           extra_headers: Send extra headers

@@ -20,7 +20,7 @@ class OrderGetExecutionsParams(TypedDict, total=False):
     instrument_id: InstrumentIDOrSymbol
     """Optional instrument to filter by.
 
-    Accepts either a symbol (e.g. `AAPL`) or an OEMS instrument UUID.
+    Accepts either a symbol (e.g. `AAPL`) or an instrument identifier.
     """
 
     page_size: int

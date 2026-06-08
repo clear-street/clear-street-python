@@ -11,4 +11,4 @@ __all__ = ["MarketDataGetSnapshotsParams"]
 
 class MarketDataGetSnapshotsParams(TypedDict, total=False):
     instrument_ids: SequenceNotStr[str]
-    """Comma-separated OEMS instrument UUIDs."""
+    """Comma-separated instrument identifiers."""

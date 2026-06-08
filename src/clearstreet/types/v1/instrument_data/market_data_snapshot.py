@@ -15,7 +15,7 @@ class MarketDataSnapshot(BaseModel):
     """Market data snapshot for a single security."""
 
     instrument_id: str
-    """OEMS instrument identifier."""
+    """Unique instrument identifier."""
 
     symbol: str
     """Display symbol for the security."""
