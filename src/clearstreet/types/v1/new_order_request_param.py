@@ -55,7 +55,7 @@ class NewOrderRequestParam(TypedDict, total=False):
     """
 
     instrument_id: Optional[InstrumentIDOrSymbol]
-    """OEMS instrument UUID"""
+    """Instrument identifier"""
 
     limit_offset: Optional[str]
     """Limit offset for trailing stop-limit orders (signed)"""

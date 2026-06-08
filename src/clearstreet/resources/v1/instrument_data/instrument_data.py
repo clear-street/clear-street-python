@@ -135,7 +135,7 @@ class InstrumentDataResource(SyncAPIResource):
           from_date: The start date for the query range, inclusive (YYYY-MM-DD).
 
           instrument_ids:
-              Filter by OEMS instrument ID(s). Comma-delimited list of UUIDs. Example:
+              Filter by instrument ID(s). Comma-delimited list of UUIDs. Example:
               `instrument_ids=550e8400-e29b-41d4-a716-446655440000`.
 
           to_date: The end date for the query range, inclusive (YYYY-MM-DD).
@@ -185,7 +185,7 @@ class InstrumentDataResource(SyncAPIResource):
         Retrieves analyst ratings and price targets for an instrument.
 
         Args:
-          instrument_id: OEMS instrument UUID
+          instrument_id: Instrument identifier
 
           from_: The start date for the query range, inclusive (YYYY-MM-DD)
 
@@ -246,7 +246,7 @@ class InstrumentDataResource(SyncAPIResource):
         - `to_date`: None (no upper bound)
 
         Args:
-          instrument_id: OEMS instrument UUID
+          instrument_id: Instrument identifier
 
           from_date: The start date for the query range, inclusive (YYYY-MM-DD).
 
@@ -311,7 +311,7 @@ class InstrumentDataResource(SyncAPIResource):
         financing activities.
 
         Args:
-          instrument_id: OEMS instrument UUID
+          instrument_id: Instrument identifier
 
           from_date: The start date for the query range, inclusive (YYYY-MM-DD).
 
@@ -376,7 +376,7 @@ class InstrumentDataResource(SyncAPIResource):
         - `to_date`: today + 60 days
 
         Args:
-          instrument_id: OEMS instrument UUID
+          instrument_id: Instrument identifier
 
           from_date: The start date for the query range, inclusive (YYYY-MM-DD).
 
@@ -425,7 +425,7 @@ class InstrumentDataResource(SyncAPIResource):
         Retrieves supplemental fundamentals and company profile data for an instrument.
 
         Args:
-          instrument_id: OEMS instrument UUID
+          instrument_id: Instrument identifier
 
           extra_headers: Send extra headers
 
@@ -470,7 +470,7 @@ class InstrumentDataResource(SyncAPIResource):
         - `to_date`: None (no upper bound)
 
         Args:
-          instrument_id: OEMS instrument UUID
+          instrument_id: Instrument identifier
 
           from_date: The start date for the query range, inclusive (YYYY-MM-DD).
 
@@ -572,7 +572,7 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
           from_date: The start date for the query range, inclusive (YYYY-MM-DD).
 
           instrument_ids:
-              Filter by OEMS instrument ID(s). Comma-delimited list of UUIDs. Example:
+              Filter by instrument ID(s). Comma-delimited list of UUIDs. Example:
               `instrument_ids=550e8400-e29b-41d4-a716-446655440000`.
 
           to_date: The end date for the query range, inclusive (YYYY-MM-DD).
@@ -622,7 +622,7 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
         Retrieves analyst ratings and price targets for an instrument.
 
         Args:
-          instrument_id: OEMS instrument UUID
+          instrument_id: Instrument identifier
 
           from_: The start date for the query range, inclusive (YYYY-MM-DD)
 
@@ -683,7 +683,7 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
         - `to_date`: None (no upper bound)
 
         Args:
-          instrument_id: OEMS instrument UUID
+          instrument_id: Instrument identifier
 
           from_date: The start date for the query range, inclusive (YYYY-MM-DD).
 
@@ -748,7 +748,7 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
         financing activities.
 
         Args:
-          instrument_id: OEMS instrument UUID
+          instrument_id: Instrument identifier
 
           from_date: The start date for the query range, inclusive (YYYY-MM-DD).
 
@@ -813,7 +813,7 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
         - `to_date`: today + 60 days
 
         Args:
-          instrument_id: OEMS instrument UUID
+          instrument_id: Instrument identifier
 
           from_date: The start date for the query range, inclusive (YYYY-MM-DD).
 
@@ -862,7 +862,7 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
         Retrieves supplemental fundamentals and company profile data for an instrument.
 
         Args:
-          instrument_id: OEMS instrument UUID
+          instrument_id: Instrument identifier
 
           extra_headers: Send extra headers
 
@@ -907,7 +907,7 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
         - `to_date`: None (no upper bound)
 
         Args:
-          instrument_id: OEMS instrument UUID
+          instrument_id: Instrument identifier
 
           from_date: The start date for the query range, inclusive (YYYY-MM-DD).
 

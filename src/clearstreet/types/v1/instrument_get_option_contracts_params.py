@@ -37,4 +37,4 @@ class InstrumentGetOptionContractsParams(TypedDict, total=False):
     """Underlier symbol (e.g., AAPL, SPX)"""
 
     underlying_instrument_id: InstrumentIDOrSymbol
-    """OEMS instrument UUID or symbol of the underlying equity/index"""
+    """Instrument identifier or symbol of the underlying equity/index"""

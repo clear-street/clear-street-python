@@ -20,7 +20,7 @@ class Position(BaseModel):
     """The quantity of a position that is free to be operated on."""
 
     instrument_id: str
-    """OEMS instrument UUID"""
+    """Unique instrument identifier"""
 
     instrument_type: SecurityType
     """Type of security"""
@@ -62,7 +62,7 @@ class Position(BaseModel):
     """The current market price of the instrument"""
 
     underlying_instrument_id: Optional[str] = None
-    """OEMS instrument identifier of the underlying instrument, if resolvable"""
+    """Identifier of the underlying instrument, when available"""
 
     unrealized_pnl: Optional[str] = None
     """

@@ -20,7 +20,7 @@ class InstrumentEventsData(BaseModel):
     """Earnings announcement events"""
 
     instrument_id: str
-    """OEMS instrument UUID from the request"""
+    """Instrument identifier"""
 
     splits: List[InstrumentSplitEvent]
     """Stock split events"""

@@ -17,7 +17,7 @@ class OrderGetOrdersParams(TypedDict, total=False):
     """The start date and time for the query range, inclusive (ISO 8601 format)"""
 
     instrument_ids: SequenceNotStr[str]
-    """Comma-separated OEMS instrument UUIDs"""
+    """Comma-separated instrument identifiers"""
 
     instrument_type: Literal["COMMON_STOCK", "OPTION", "CASH"]
     """Instrument type filter (e.g., COMMON_STOCK, OPTION)"""
@@ -62,7 +62,7 @@ class OrderGetOrdersParams(TypedDict, total=False):
     """The end date and time for the query range, inclusive (ISO 8601 format)"""
 
     underlying_instrument_ids: SequenceNotStr[str]
-    """Comma-separated OEMS instrument UUIDs.
+    """Comma-separated instrument identifiers.
 
     Matches options orders whose resolved underlier is any of the given IDs.
     """

@@ -72,7 +72,7 @@ class WatchlistResource(SyncAPIResource):
         Add an instrument to a watchlist
 
         Args:
-          instrument_id: OEMS instrument UUID
+          instrument_id: Instrument identifier
 
           extra_headers: Send extra headers
 
@@ -318,7 +318,7 @@ class AsyncWatchlistResource(AsyncAPIResource):
         Add an instrument to a watchlist
 
         Args:
-          instrument_id: OEMS instrument UUID
+          instrument_id: Instrument identifier
 
           extra_headers: Send extra headers
 

@@ -28,10 +28,7 @@ class InstrumentEventEnvelope(BaseModel):
     """Earnings payload when type is EARNINGS."""
 
     instrument_id: Optional[str] = None
-    """
-    OEMS instrument identifier, when the instrument is found in the instrument
-    cache.
-    """
+    """Instrument identifier, when available."""
 
     ipo_event_data: Optional[InstrumentEventIpoItem] = None
     """IPO payload when type is IPO."""

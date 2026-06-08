@@ -9,4 +9,4 @@ __all__ = ["AccountGetAccountBalancesParams"]
 
 class AccountGetAccountBalancesParams(TypedDict, total=False):
     top_margin_contributors_limit: int
-    """Limit the number of top margin contributors returned by the engine."""
+    """Limit the number of top margin contributors returned."""

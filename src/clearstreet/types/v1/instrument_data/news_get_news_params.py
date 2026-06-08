@@ -28,7 +28,7 @@ class NewsGetNewsParams(TypedDict, total=False):
     """
 
     instrument_ids: SequenceNotStr[str]
-    """Comma-delimited OEMS instrument UUIDs to filter by."""
+    """Comma-delimited instrument identifiers to filter by."""
 
     news_type: Literal["NEWS", "PRESS_RELEASE"]
     """Filter by news type."""

@@ -29,7 +29,7 @@ class Order(BaseModel):
     """Account placing the order"""
 
     client_order_id: str
-    """Client-provided identifier echoed back (FIX tag 11)."""
+    """Client-provided identifier echoed back."""
 
     created_at: datetime
     """Timestamp when order was created (UTC)"""
@@ -38,7 +38,7 @@ class Order(BaseModel):
     """Cumulative filled quantity"""
 
     instrument_id: str
-    """OEMS instrument UUID for the traded instrument."""
+    """Instrument identifier for the traded instrument."""
 
     instrument_type: SecurityType
     """Type of security"""
@@ -122,8 +122,8 @@ class Order(BaseModel):
     """Trailing watermark timestamp for trailing orders"""
 
     underlying_instrument_id: Optional[str] = None
-    """OEMS instrument ID of the option's underlying instrument.
+    """Instrument ID of the option's underlying instrument.
 
-    Populated only for OPTIONS orders; `null` for non-options and for options whose
-    underlier cannot be resolved from the instrument cache.
+    Populated only for options orders; `null` for non-options and for options whose
+    underlier cannot be resolved.
     """

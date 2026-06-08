@@ -15,7 +15,7 @@ class OptionsContract(BaseModel):
     """An options contract with options-specific metadata"""
 
     id: str
-    """OEMS instrument identifier"""
+    """Instrument identifier"""
 
     contract_type: ContractType
     """Whether this is a CALL or PUT"""
@@ -54,4 +54,4 @@ class OptionsContract(BaseModel):
     """Open interest (number of outstanding contracts), if available"""
 
     underlying_instrument_id: Optional[str] = None
-    """OEMS instrument ID of the underlying instrument, if resolvable"""
+    """Instrument ID of the underlying instrument, when available"""

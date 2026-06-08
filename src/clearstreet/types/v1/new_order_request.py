@@ -52,7 +52,7 @@ class NewOrderRequest(BaseModel):
     """
 
     instrument_id: Optional[InstrumentIDOrSymbol] = None
-    """OEMS instrument UUID"""
+    """Instrument identifier"""
 
     limit_offset: Optional[str] = None
     """Limit offset for trailing stop-limit orders (signed)"""
