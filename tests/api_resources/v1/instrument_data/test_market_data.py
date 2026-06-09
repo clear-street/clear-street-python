@@ -20,7 +20,6 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestMarketData:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_daily_summaries(self, client: ClearStreet) -> None:
         market_data = client.v1.instrument_data.market_data.get_daily_summaries(
@@ -28,7 +27,6 @@ class TestMarketData:
         )
         assert_matches_type(MarketDataGetDailySummariesResponse, market_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_daily_summaries(self, client: ClearStreet) -> None:
         response = client.v1.instrument_data.market_data.with_raw_response.get_daily_summaries(
@@ -40,7 +38,6 @@ class TestMarketData:
         market_data = response.parse()
         assert_matches_type(MarketDataGetDailySummariesResponse, market_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_daily_summaries(self, client: ClearStreet) -> None:
         with client.v1.instrument_data.market_data.with_streaming_response.get_daily_summaries(
@@ -54,13 +51,11 @@ class TestMarketData:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_snapshots(self, client: ClearStreet) -> None:
         market_data = client.v1.instrument_data.market_data.get_snapshots()
         assert_matches_type(MarketDataGetSnapshotsResponse, market_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_snapshots_with_all_params(self, client: ClearStreet) -> None:
         market_data = client.v1.instrument_data.market_data.get_snapshots(
@@ -68,7 +63,6 @@ class TestMarketData:
         )
         assert_matches_type(MarketDataGetSnapshotsResponse, market_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_snapshots(self, client: ClearStreet) -> None:
         response = client.v1.instrument_data.market_data.with_raw_response.get_snapshots()
@@ -78,7 +72,6 @@ class TestMarketData:
         market_data = response.parse()
         assert_matches_type(MarketDataGetSnapshotsResponse, market_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_snapshots(self, client: ClearStreet) -> None:
         with client.v1.instrument_data.market_data.with_streaming_response.get_snapshots() as response:
@@ -96,7 +89,6 @@ class TestAsyncMarketData:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_daily_summaries(self, async_client: AsyncClearStreet) -> None:
         market_data = await async_client.v1.instrument_data.market_data.get_daily_summaries(
@@ -104,7 +96,6 @@ class TestAsyncMarketData:
         )
         assert_matches_type(MarketDataGetDailySummariesResponse, market_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_daily_summaries(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.instrument_data.market_data.with_raw_response.get_daily_summaries(
@@ -116,7 +107,6 @@ class TestAsyncMarketData:
         market_data = await response.parse()
         assert_matches_type(MarketDataGetDailySummariesResponse, market_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_daily_summaries(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.instrument_data.market_data.with_streaming_response.get_daily_summaries(
@@ -130,13 +120,11 @@ class TestAsyncMarketData:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_snapshots(self, async_client: AsyncClearStreet) -> None:
         market_data = await async_client.v1.instrument_data.market_data.get_snapshots()
         assert_matches_type(MarketDataGetSnapshotsResponse, market_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_snapshots_with_all_params(self, async_client: AsyncClearStreet) -> None:
         market_data = await async_client.v1.instrument_data.market_data.get_snapshots(
@@ -144,7 +132,6 @@ class TestAsyncMarketData:
         )
         assert_matches_type(MarketDataGetSnapshotsResponse, market_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_snapshots(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.instrument_data.market_data.with_raw_response.get_snapshots()
@@ -154,7 +141,6 @@ class TestAsyncMarketData:
         market_data = await response.parse()
         assert_matches_type(MarketDataGetSnapshotsResponse, market_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_snapshots(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.instrument_data.market_data.with_streaming_response.get_snapshots() as response:

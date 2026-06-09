@@ -17,13 +17,11 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestAPIVersion:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_version(self, client: ClearStreet) -> None:
         api_version = client.v1.api_version.get_version()
         assert_matches_type(APIVersionGetVersionResponse, api_version, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_version(self, client: ClearStreet) -> None:
         response = client.v1.api_version.with_raw_response.get_version()
@@ -33,7 +31,6 @@ class TestAPIVersion:
         api_version = response.parse()
         assert_matches_type(APIVersionGetVersionResponse, api_version, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_version(self, client: ClearStreet) -> None:
         with client.v1.api_version.with_streaming_response.get_version() as response:
@@ -51,13 +48,11 @@ class TestAsyncAPIVersion:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_version(self, async_client: AsyncClearStreet) -> None:
         api_version = await async_client.v1.api_version.get_version()
         assert_matches_type(APIVersionGetVersionResponse, api_version, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_version(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.api_version.with_raw_response.get_version()
@@ -67,7 +62,6 @@ class TestAsyncAPIVersion:
         api_version = await response.parse()
         assert_matches_type(APIVersionGetVersionResponse, api_version, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_version(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.api_version.with_streaming_response.get_version() as response:
