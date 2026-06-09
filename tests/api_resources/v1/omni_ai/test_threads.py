@@ -24,7 +24,6 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestThreads:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_message(self, client: ClearStreet) -> None:
         thread = client.v1.omni_ai.threads.create_message(
@@ -34,7 +33,6 @@ class TestThreads:
         )
         assert_matches_type(ThreadCreateMessageResponse, thread, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_message_with_all_params(self, client: ClearStreet) -> None:
         thread = client.v1.omni_ai.threads.create_message(
@@ -45,7 +43,6 @@ class TestThreads:
         )
         assert_matches_type(ThreadCreateMessageResponse, thread, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create_message(self, client: ClearStreet) -> None:
         response = client.v1.omni_ai.threads.with_raw_response.create_message(
@@ -59,7 +56,6 @@ class TestThreads:
         thread = response.parse()
         assert_matches_type(ThreadCreateMessageResponse, thread, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create_message(self, client: ClearStreet) -> None:
         with client.v1.omni_ai.threads.with_streaming_response.create_message(
@@ -75,7 +71,6 @@ class TestThreads:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_create_message(self, client: ClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `thread_id` but received ''"):
@@ -85,7 +80,6 @@ class TestThreads:
                 text="Compare that to AMD.",
             )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_thread(self, client: ClearStreet) -> None:
         thread = client.v1.omni_ai.threads.create_thread(
@@ -94,7 +88,6 @@ class TestThreads:
         )
         assert_matches_type(ThreadCreateThreadResponse, thread, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_create_thread_with_all_params(self, client: ClearStreet) -> None:
         thread = client.v1.omni_ai.threads.create_thread(
@@ -110,7 +103,6 @@ class TestThreads:
         )
         assert_matches_type(ThreadCreateThreadResponse, thread, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_create_thread(self, client: ClearStreet) -> None:
         response = client.v1.omni_ai.threads.with_raw_response.create_thread(
@@ -123,7 +115,6 @@ class TestThreads:
         thread = response.parse()
         assert_matches_type(ThreadCreateThreadResponse, thread, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_create_thread(self, client: ClearStreet) -> None:
         with client.v1.omni_ai.threads.with_streaming_response.create_thread(
@@ -138,7 +129,6 @@ class TestThreads:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_messages(self, client: ClearStreet) -> None:
         thread = client.v1.omni_ai.threads.get_messages(
@@ -147,7 +137,6 @@ class TestThreads:
         )
         assert_matches_type(ThreadGetMessagesResponse, thread, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_messages_with_all_params(self, client: ClearStreet) -> None:
         thread = client.v1.omni_ai.threads.get_messages(
@@ -158,7 +147,6 @@ class TestThreads:
         )
         assert_matches_type(ThreadGetMessagesResponse, thread, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_messages(self, client: ClearStreet) -> None:
         response = client.v1.omni_ai.threads.with_raw_response.get_messages(
@@ -171,7 +159,6 @@ class TestThreads:
         thread = response.parse()
         assert_matches_type(ThreadGetMessagesResponse, thread, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_messages(self, client: ClearStreet) -> None:
         with client.v1.omni_ai.threads.with_streaming_response.get_messages(
@@ -186,7 +173,6 @@ class TestThreads:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_get_messages(self, client: ClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `thread_id` but received ''"):
@@ -195,7 +181,6 @@ class TestThreads:
                 account_id=0,
             )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_thread_by_id(self, client: ClearStreet) -> None:
         thread = client.v1.omni_ai.threads.get_thread_by_id(
@@ -204,7 +189,6 @@ class TestThreads:
         )
         assert_matches_type(ThreadGetThreadByIDResponse, thread, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_thread_by_id(self, client: ClearStreet) -> None:
         response = client.v1.omni_ai.threads.with_raw_response.get_thread_by_id(
@@ -217,7 +201,6 @@ class TestThreads:
         thread = response.parse()
         assert_matches_type(ThreadGetThreadByIDResponse, thread, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_thread_by_id(self, client: ClearStreet) -> None:
         with client.v1.omni_ai.threads.with_streaming_response.get_thread_by_id(
@@ -232,7 +215,6 @@ class TestThreads:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_get_thread_by_id(self, client: ClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `thread_id` but received ''"):
@@ -241,7 +223,6 @@ class TestThreads:
                 account_id=0,
             )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_thread_response(self, client: ClearStreet) -> None:
         thread = client.v1.omni_ai.threads.get_thread_response(
@@ -250,7 +231,6 @@ class TestThreads:
         )
         assert_matches_type(ThreadGetThreadResponseResponse, thread, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_thread_response(self, client: ClearStreet) -> None:
         response = client.v1.omni_ai.threads.with_raw_response.get_thread_response(
@@ -263,7 +243,6 @@ class TestThreads:
         thread = response.parse()
         assert_matches_type(ThreadGetThreadResponseResponse, thread, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_thread_response(self, client: ClearStreet) -> None:
         with client.v1.omni_ai.threads.with_streaming_response.get_thread_response(
@@ -278,7 +257,6 @@ class TestThreads:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_get_thread_response(self, client: ClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `thread_id` but received ''"):
@@ -287,7 +265,6 @@ class TestThreads:
                 account_id=0,
             )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_threads(self, client: ClearStreet) -> None:
         thread = client.v1.omni_ai.threads.get_threads(
@@ -295,7 +272,6 @@ class TestThreads:
         )
         assert_matches_type(ThreadGetThreadsResponse, thread, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_threads_with_all_params(self, client: ClearStreet) -> None:
         thread = client.v1.omni_ai.threads.get_threads(
@@ -305,7 +281,6 @@ class TestThreads:
         )
         assert_matches_type(ThreadGetThreadsResponse, thread, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_threads(self, client: ClearStreet) -> None:
         response = client.v1.omni_ai.threads.with_raw_response.get_threads(
@@ -317,7 +292,6 @@ class TestThreads:
         thread = response.parse()
         assert_matches_type(ThreadGetThreadsResponse, thread, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_threads(self, client: ClearStreet) -> None:
         with client.v1.omni_ai.threads.with_streaming_response.get_threads(
@@ -337,7 +311,6 @@ class TestAsyncThreads:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_message(self, async_client: AsyncClearStreet) -> None:
         thread = await async_client.v1.omni_ai.threads.create_message(
@@ -347,7 +320,6 @@ class TestAsyncThreads:
         )
         assert_matches_type(ThreadCreateMessageResponse, thread, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_message_with_all_params(self, async_client: AsyncClearStreet) -> None:
         thread = await async_client.v1.omni_ai.threads.create_message(
@@ -358,7 +330,6 @@ class TestAsyncThreads:
         )
         assert_matches_type(ThreadCreateMessageResponse, thread, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create_message(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.omni_ai.threads.with_raw_response.create_message(
@@ -372,7 +343,6 @@ class TestAsyncThreads:
         thread = await response.parse()
         assert_matches_type(ThreadCreateMessageResponse, thread, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create_message(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.omni_ai.threads.with_streaming_response.create_message(
@@ -388,7 +358,6 @@ class TestAsyncThreads:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_create_message(self, async_client: AsyncClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `thread_id` but received ''"):
@@ -398,7 +367,6 @@ class TestAsyncThreads:
                 text="Compare that to AMD.",
             )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_thread(self, async_client: AsyncClearStreet) -> None:
         thread = await async_client.v1.omni_ai.threads.create_thread(
@@ -407,7 +375,6 @@ class TestAsyncThreads:
         )
         assert_matches_type(ThreadCreateThreadResponse, thread, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_create_thread_with_all_params(self, async_client: AsyncClearStreet) -> None:
         thread = await async_client.v1.omni_ai.threads.create_thread(
@@ -423,7 +390,6 @@ class TestAsyncThreads:
         )
         assert_matches_type(ThreadCreateThreadResponse, thread, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_create_thread(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.omni_ai.threads.with_raw_response.create_thread(
@@ -436,7 +402,6 @@ class TestAsyncThreads:
         thread = await response.parse()
         assert_matches_type(ThreadCreateThreadResponse, thread, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_create_thread(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.omni_ai.threads.with_streaming_response.create_thread(
@@ -451,7 +416,6 @@ class TestAsyncThreads:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_messages(self, async_client: AsyncClearStreet) -> None:
         thread = await async_client.v1.omni_ai.threads.get_messages(
@@ -460,7 +424,6 @@ class TestAsyncThreads:
         )
         assert_matches_type(ThreadGetMessagesResponse, thread, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_messages_with_all_params(self, async_client: AsyncClearStreet) -> None:
         thread = await async_client.v1.omni_ai.threads.get_messages(
@@ -471,7 +434,6 @@ class TestAsyncThreads:
         )
         assert_matches_type(ThreadGetMessagesResponse, thread, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_messages(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.omni_ai.threads.with_raw_response.get_messages(
@@ -484,7 +446,6 @@ class TestAsyncThreads:
         thread = await response.parse()
         assert_matches_type(ThreadGetMessagesResponse, thread, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_messages(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.omni_ai.threads.with_streaming_response.get_messages(
@@ -499,7 +460,6 @@ class TestAsyncThreads:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_get_messages(self, async_client: AsyncClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `thread_id` but received ''"):
@@ -508,7 +468,6 @@ class TestAsyncThreads:
                 account_id=0,
             )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_thread_by_id(self, async_client: AsyncClearStreet) -> None:
         thread = await async_client.v1.omni_ai.threads.get_thread_by_id(
@@ -517,7 +476,6 @@ class TestAsyncThreads:
         )
         assert_matches_type(ThreadGetThreadByIDResponse, thread, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_thread_by_id(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.omni_ai.threads.with_raw_response.get_thread_by_id(
@@ -530,7 +488,6 @@ class TestAsyncThreads:
         thread = await response.parse()
         assert_matches_type(ThreadGetThreadByIDResponse, thread, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_thread_by_id(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.omni_ai.threads.with_streaming_response.get_thread_by_id(
@@ -545,7 +502,6 @@ class TestAsyncThreads:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_get_thread_by_id(self, async_client: AsyncClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `thread_id` but received ''"):
@@ -554,7 +510,6 @@ class TestAsyncThreads:
                 account_id=0,
             )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_thread_response(self, async_client: AsyncClearStreet) -> None:
         thread = await async_client.v1.omni_ai.threads.get_thread_response(
@@ -563,7 +518,6 @@ class TestAsyncThreads:
         )
         assert_matches_type(ThreadGetThreadResponseResponse, thread, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_thread_response(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.omni_ai.threads.with_raw_response.get_thread_response(
@@ -576,7 +530,6 @@ class TestAsyncThreads:
         thread = await response.parse()
         assert_matches_type(ThreadGetThreadResponseResponse, thread, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_thread_response(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.omni_ai.threads.with_streaming_response.get_thread_response(
@@ -591,7 +544,6 @@ class TestAsyncThreads:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_get_thread_response(self, async_client: AsyncClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `thread_id` but received ''"):
@@ -600,7 +552,6 @@ class TestAsyncThreads:
                 account_id=0,
             )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_threads(self, async_client: AsyncClearStreet) -> None:
         thread = await async_client.v1.omni_ai.threads.get_threads(
@@ -608,7 +559,6 @@ class TestAsyncThreads:
         )
         assert_matches_type(ThreadGetThreadsResponse, thread, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_threads_with_all_params(self, async_client: AsyncClearStreet) -> None:
         thread = await async_client.v1.omni_ai.threads.get_threads(
@@ -618,7 +568,6 @@ class TestAsyncThreads:
         )
         assert_matches_type(ThreadGetThreadsResponse, thread, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_threads(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.omni_ai.threads.with_raw_response.get_threads(
@@ -630,7 +579,6 @@ class TestAsyncThreads:
         thread = await response.parse()
         assert_matches_type(ThreadGetThreadsResponse, thread, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_threads(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.omni_ai.threads.with_streaming_response.get_threads(

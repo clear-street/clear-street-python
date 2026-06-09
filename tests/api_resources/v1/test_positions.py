@@ -24,7 +24,6 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestPositions:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_cancel_position_instruction(self, client: ClearStreet) -> None:
         position = client.v1.positions.cancel_position_instruction(
@@ -33,7 +32,6 @@ class TestPositions:
         )
         assert_matches_type(PositionCancelPositionInstructionResponse, position, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_cancel_position_instruction(self, client: ClearStreet) -> None:
         response = client.v1.positions.with_raw_response.cancel_position_instruction(
@@ -46,7 +44,6 @@ class TestPositions:
         position = response.parse()
         assert_matches_type(PositionCancelPositionInstructionResponse, position, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_cancel_position_instruction(self, client: ClearStreet) -> None:
         with client.v1.positions.with_streaming_response.cancel_position_instruction(
@@ -61,7 +58,6 @@ class TestPositions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_cancel_position_instruction(self, client: ClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `instruction_id` but received ''"):
@@ -70,7 +66,6 @@ class TestPositions:
                 account_id=0,
             )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_close_position(self, client: ClearStreet) -> None:
         position = client.v1.positions.close_position(
@@ -79,7 +74,6 @@ class TestPositions:
         )
         assert_matches_type(PositionClosePositionResponse, position, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_close_position_with_all_params(self, client: ClearStreet) -> None:
         position = client.v1.positions.close_position(
@@ -89,7 +83,6 @@ class TestPositions:
         )
         assert_matches_type(PositionClosePositionResponse, position, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_close_position(self, client: ClearStreet) -> None:
         response = client.v1.positions.with_raw_response.close_position(
@@ -102,7 +95,6 @@ class TestPositions:
         position = response.parse()
         assert_matches_type(PositionClosePositionResponse, position, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_close_position(self, client: ClearStreet) -> None:
         with client.v1.positions.with_streaming_response.close_position(
@@ -117,7 +109,6 @@ class TestPositions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_close_position(self, client: ClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `instrument_id` but received ''"):
@@ -126,7 +117,6 @@ class TestPositions:
                 account_id=0,
             )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_close_positions(self, client: ClearStreet) -> None:
         position = client.v1.positions.close_positions(
@@ -134,7 +124,6 @@ class TestPositions:
         )
         assert_matches_type(PositionClosePositionsResponse, position, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_close_positions_with_all_params(self, client: ClearStreet) -> None:
         position = client.v1.positions.close_positions(
@@ -143,7 +132,6 @@ class TestPositions:
         )
         assert_matches_type(PositionClosePositionsResponse, position, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_close_positions(self, client: ClearStreet) -> None:
         response = client.v1.positions.with_raw_response.close_positions(
@@ -155,7 +143,6 @@ class TestPositions:
         position = response.parse()
         assert_matches_type(PositionClosePositionsResponse, position, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_close_positions(self, client: ClearStreet) -> None:
         with client.v1.positions.with_streaming_response.close_positions(
@@ -169,7 +156,6 @@ class TestPositions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_position_instructions(self, client: ClearStreet) -> None:
         position = client.v1.positions.get_position_instructions(
@@ -177,7 +163,6 @@ class TestPositions:
         )
         assert_matches_type(PositionGetPositionInstructionsResponse, position, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_position_instructions_with_all_params(self, client: ClearStreet) -> None:
         position = client.v1.positions.get_position_instructions(
@@ -186,7 +171,6 @@ class TestPositions:
         )
         assert_matches_type(PositionGetPositionInstructionsResponse, position, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_position_instructions(self, client: ClearStreet) -> None:
         response = client.v1.positions.with_raw_response.get_position_instructions(
@@ -198,7 +182,6 @@ class TestPositions:
         position = response.parse()
         assert_matches_type(PositionGetPositionInstructionsResponse, position, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_position_instructions(self, client: ClearStreet) -> None:
         with client.v1.positions.with_streaming_response.get_position_instructions(
@@ -212,7 +195,6 @@ class TestPositions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_positions(self, client: ClearStreet) -> None:
         position = client.v1.positions.get_positions(
@@ -220,7 +202,6 @@ class TestPositions:
         )
         assert_matches_type(PositionGetPositionsResponse, position, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_positions_with_all_params(self, client: ClearStreet) -> None:
         position = client.v1.positions.get_positions(
@@ -233,7 +214,6 @@ class TestPositions:
         )
         assert_matches_type(PositionGetPositionsResponse, position, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_positions(self, client: ClearStreet) -> None:
         response = client.v1.positions.with_raw_response.get_positions(
@@ -245,7 +225,6 @@ class TestPositions:
         position = response.parse()
         assert_matches_type(PositionGetPositionsResponse, position, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_positions(self, client: ClearStreet) -> None:
         with client.v1.positions.with_streaming_response.get_positions(
@@ -259,7 +238,6 @@ class TestPositions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_submit_position_instructions(self, client: ClearStreet) -> None:
         position = client.v1.positions.submit_position_instructions(
@@ -274,7 +252,6 @@ class TestPositions:
         )
         assert_matches_type(PositionSubmitPositionInstructionsResponse, position, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_submit_position_instructions(self, client: ClearStreet) -> None:
         response = client.v1.positions.with_raw_response.submit_position_instructions(
@@ -293,7 +270,6 @@ class TestPositions:
         position = response.parse()
         assert_matches_type(PositionSubmitPositionInstructionsResponse, position, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_submit_position_instructions(self, client: ClearStreet) -> None:
         with client.v1.positions.with_streaming_response.submit_position_instructions(
@@ -320,7 +296,6 @@ class TestAsyncPositions:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_cancel_position_instruction(self, async_client: AsyncClearStreet) -> None:
         position = await async_client.v1.positions.cancel_position_instruction(
@@ -329,7 +304,6 @@ class TestAsyncPositions:
         )
         assert_matches_type(PositionCancelPositionInstructionResponse, position, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_cancel_position_instruction(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.positions.with_raw_response.cancel_position_instruction(
@@ -342,7 +316,6 @@ class TestAsyncPositions:
         position = await response.parse()
         assert_matches_type(PositionCancelPositionInstructionResponse, position, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_cancel_position_instruction(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.positions.with_streaming_response.cancel_position_instruction(
@@ -357,7 +330,6 @@ class TestAsyncPositions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_cancel_position_instruction(self, async_client: AsyncClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `instruction_id` but received ''"):
@@ -366,7 +338,6 @@ class TestAsyncPositions:
                 account_id=0,
             )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_close_position(self, async_client: AsyncClearStreet) -> None:
         position = await async_client.v1.positions.close_position(
@@ -375,7 +346,6 @@ class TestAsyncPositions:
         )
         assert_matches_type(PositionClosePositionResponse, position, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_close_position_with_all_params(self, async_client: AsyncClearStreet) -> None:
         position = await async_client.v1.positions.close_position(
@@ -385,7 +355,6 @@ class TestAsyncPositions:
         )
         assert_matches_type(PositionClosePositionResponse, position, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_close_position(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.positions.with_raw_response.close_position(
@@ -398,7 +367,6 @@ class TestAsyncPositions:
         position = await response.parse()
         assert_matches_type(PositionClosePositionResponse, position, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_close_position(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.positions.with_streaming_response.close_position(
@@ -413,7 +381,6 @@ class TestAsyncPositions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_close_position(self, async_client: AsyncClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `instrument_id` but received ''"):
@@ -422,7 +389,6 @@ class TestAsyncPositions:
                 account_id=0,
             )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_close_positions(self, async_client: AsyncClearStreet) -> None:
         position = await async_client.v1.positions.close_positions(
@@ -430,7 +396,6 @@ class TestAsyncPositions:
         )
         assert_matches_type(PositionClosePositionsResponse, position, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_close_positions_with_all_params(self, async_client: AsyncClearStreet) -> None:
         position = await async_client.v1.positions.close_positions(
@@ -439,7 +404,6 @@ class TestAsyncPositions:
         )
         assert_matches_type(PositionClosePositionsResponse, position, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_close_positions(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.positions.with_raw_response.close_positions(
@@ -451,7 +415,6 @@ class TestAsyncPositions:
         position = await response.parse()
         assert_matches_type(PositionClosePositionsResponse, position, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_close_positions(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.positions.with_streaming_response.close_positions(
@@ -465,7 +428,6 @@ class TestAsyncPositions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_position_instructions(self, async_client: AsyncClearStreet) -> None:
         position = await async_client.v1.positions.get_position_instructions(
@@ -473,7 +435,6 @@ class TestAsyncPositions:
         )
         assert_matches_type(PositionGetPositionInstructionsResponse, position, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_position_instructions_with_all_params(self, async_client: AsyncClearStreet) -> None:
         position = await async_client.v1.positions.get_position_instructions(
@@ -482,7 +443,6 @@ class TestAsyncPositions:
         )
         assert_matches_type(PositionGetPositionInstructionsResponse, position, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_position_instructions(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.positions.with_raw_response.get_position_instructions(
@@ -494,7 +454,6 @@ class TestAsyncPositions:
         position = await response.parse()
         assert_matches_type(PositionGetPositionInstructionsResponse, position, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_position_instructions(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.positions.with_streaming_response.get_position_instructions(
@@ -508,7 +467,6 @@ class TestAsyncPositions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_positions(self, async_client: AsyncClearStreet) -> None:
         position = await async_client.v1.positions.get_positions(
@@ -516,7 +474,6 @@ class TestAsyncPositions:
         )
         assert_matches_type(PositionGetPositionsResponse, position, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_positions_with_all_params(self, async_client: AsyncClearStreet) -> None:
         position = await async_client.v1.positions.get_positions(
@@ -529,7 +486,6 @@ class TestAsyncPositions:
         )
         assert_matches_type(PositionGetPositionsResponse, position, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_positions(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.positions.with_raw_response.get_positions(
@@ -541,7 +497,6 @@ class TestAsyncPositions:
         position = await response.parse()
         assert_matches_type(PositionGetPositionsResponse, position, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_positions(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.positions.with_streaming_response.get_positions(
@@ -555,7 +510,6 @@ class TestAsyncPositions:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_submit_position_instructions(self, async_client: AsyncClearStreet) -> None:
         position = await async_client.v1.positions.submit_position_instructions(
@@ -570,7 +524,6 @@ class TestAsyncPositions:
         )
         assert_matches_type(PositionSubmitPositionInstructionsResponse, position, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_submit_position_instructions(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.positions.with_raw_response.submit_position_instructions(
@@ -589,7 +542,6 @@ class TestAsyncPositions:
         position = await response.parse()
         assert_matches_type(PositionSubmitPositionInstructionsResponse, position, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_submit_position_instructions(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.positions.with_streaming_response.submit_position_instructions(

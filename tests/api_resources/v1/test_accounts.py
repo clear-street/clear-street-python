@@ -24,7 +24,6 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestAccounts:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_account_balances(self, client: ClearStreet) -> None:
         account = client.v1.accounts.get_account_balances(
@@ -32,7 +31,6 @@ class TestAccounts:
         )
         assert_matches_type(AccountGetAccountBalancesResponse, account, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_account_balances_with_all_params(self, client: ClearStreet) -> None:
         account = client.v1.accounts.get_account_balances(
@@ -41,7 +39,6 @@ class TestAccounts:
         )
         assert_matches_type(AccountGetAccountBalancesResponse, account, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_account_balances(self, client: ClearStreet) -> None:
         response = client.v1.accounts.with_raw_response.get_account_balances(
@@ -53,7 +50,6 @@ class TestAccounts:
         account = response.parse()
         assert_matches_type(AccountGetAccountBalancesResponse, account, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_account_balances(self, client: ClearStreet) -> None:
         with client.v1.accounts.with_streaming_response.get_account_balances(
@@ -67,7 +63,6 @@ class TestAccounts:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_account_by_id(self, client: ClearStreet) -> None:
         account = client.v1.accounts.get_account_by_id(
@@ -75,7 +70,6 @@ class TestAccounts:
         )
         assert_matches_type(AccountGetAccountByIDResponse, account, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_account_by_id(self, client: ClearStreet) -> None:
         response = client.v1.accounts.with_raw_response.get_account_by_id(
@@ -87,7 +81,6 @@ class TestAccounts:
         account = response.parse()
         assert_matches_type(AccountGetAccountByIDResponse, account, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_account_by_id(self, client: ClearStreet) -> None:
         with client.v1.accounts.with_streaming_response.get_account_by_id(
@@ -101,13 +94,11 @@ class TestAccounts:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_accounts(self, client: ClearStreet) -> None:
         account = client.v1.accounts.get_accounts()
         assert_matches_type(AccountGetAccountsResponse, account, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_accounts_with_all_params(self, client: ClearStreet) -> None:
         account = client.v1.accounts.get_accounts(
@@ -116,7 +107,6 @@ class TestAccounts:
         )
         assert_matches_type(AccountGetAccountsResponse, account, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_accounts(self, client: ClearStreet) -> None:
         response = client.v1.accounts.with_raw_response.get_accounts()
@@ -126,7 +116,6 @@ class TestAccounts:
         account = response.parse()
         assert_matches_type(AccountGetAccountsResponse, account, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_accounts(self, client: ClearStreet) -> None:
         with client.v1.accounts.with_streaming_response.get_accounts() as response:
@@ -138,7 +127,6 @@ class TestAccounts:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_portfolio_history(self, client: ClearStreet) -> None:
         account = client.v1.accounts.get_portfolio_history(
@@ -147,7 +135,6 @@ class TestAccounts:
         )
         assert_matches_type(AccountGetPortfolioHistoryResponse, account, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_portfolio_history_with_all_params(self, client: ClearStreet) -> None:
         account = client.v1.accounts.get_portfolio_history(
@@ -157,7 +144,6 @@ class TestAccounts:
         )
         assert_matches_type(AccountGetPortfolioHistoryResponse, account, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_portfolio_history(self, client: ClearStreet) -> None:
         response = client.v1.accounts.with_raw_response.get_portfolio_history(
@@ -170,7 +156,6 @@ class TestAccounts:
         account = response.parse()
         assert_matches_type(AccountGetPortfolioHistoryResponse, account, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_portfolio_history(self, client: ClearStreet) -> None:
         with client.v1.accounts.with_streaming_response.get_portfolio_history(
@@ -185,7 +170,6 @@ class TestAccounts:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_patch_account_by_id(self, client: ClearStreet) -> None:
         account = client.v1.accounts.patch_account_by_id(
@@ -193,7 +177,6 @@ class TestAccounts:
         )
         assert_matches_type(AccountPatchAccountByIDResponse, account, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_patch_account_by_id_with_all_params(self, client: ClearStreet) -> None:
         account = client.v1.accounts.patch_account_by_id(
@@ -202,7 +185,6 @@ class TestAccounts:
         )
         assert_matches_type(AccountPatchAccountByIDResponse, account, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_patch_account_by_id(self, client: ClearStreet) -> None:
         response = client.v1.accounts.with_raw_response.patch_account_by_id(
@@ -214,7 +196,6 @@ class TestAccounts:
         account = response.parse()
         assert_matches_type(AccountPatchAccountByIDResponse, account, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_patch_account_by_id(self, client: ClearStreet) -> None:
         with client.v1.accounts.with_streaming_response.patch_account_by_id(
@@ -234,7 +215,6 @@ class TestAsyncAccounts:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_account_balances(self, async_client: AsyncClearStreet) -> None:
         account = await async_client.v1.accounts.get_account_balances(
@@ -242,7 +222,6 @@ class TestAsyncAccounts:
         )
         assert_matches_type(AccountGetAccountBalancesResponse, account, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_account_balances_with_all_params(self, async_client: AsyncClearStreet) -> None:
         account = await async_client.v1.accounts.get_account_balances(
@@ -251,7 +230,6 @@ class TestAsyncAccounts:
         )
         assert_matches_type(AccountGetAccountBalancesResponse, account, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_account_balances(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.accounts.with_raw_response.get_account_balances(
@@ -263,7 +241,6 @@ class TestAsyncAccounts:
         account = await response.parse()
         assert_matches_type(AccountGetAccountBalancesResponse, account, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_account_balances(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.accounts.with_streaming_response.get_account_balances(
@@ -277,7 +254,6 @@ class TestAsyncAccounts:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_account_by_id(self, async_client: AsyncClearStreet) -> None:
         account = await async_client.v1.accounts.get_account_by_id(
@@ -285,7 +261,6 @@ class TestAsyncAccounts:
         )
         assert_matches_type(AccountGetAccountByIDResponse, account, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_account_by_id(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.accounts.with_raw_response.get_account_by_id(
@@ -297,7 +272,6 @@ class TestAsyncAccounts:
         account = await response.parse()
         assert_matches_type(AccountGetAccountByIDResponse, account, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_account_by_id(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.accounts.with_streaming_response.get_account_by_id(
@@ -311,13 +285,11 @@ class TestAsyncAccounts:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_accounts(self, async_client: AsyncClearStreet) -> None:
         account = await async_client.v1.accounts.get_accounts()
         assert_matches_type(AccountGetAccountsResponse, account, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_accounts_with_all_params(self, async_client: AsyncClearStreet) -> None:
         account = await async_client.v1.accounts.get_accounts(
@@ -326,7 +298,6 @@ class TestAsyncAccounts:
         )
         assert_matches_type(AccountGetAccountsResponse, account, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_accounts(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.accounts.with_raw_response.get_accounts()
@@ -336,7 +307,6 @@ class TestAsyncAccounts:
         account = await response.parse()
         assert_matches_type(AccountGetAccountsResponse, account, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_accounts(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.accounts.with_streaming_response.get_accounts() as response:
@@ -348,7 +318,6 @@ class TestAsyncAccounts:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_portfolio_history(self, async_client: AsyncClearStreet) -> None:
         account = await async_client.v1.accounts.get_portfolio_history(
@@ -357,7 +326,6 @@ class TestAsyncAccounts:
         )
         assert_matches_type(AccountGetPortfolioHistoryResponse, account, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_portfolio_history_with_all_params(self, async_client: AsyncClearStreet) -> None:
         account = await async_client.v1.accounts.get_portfolio_history(
@@ -367,7 +335,6 @@ class TestAsyncAccounts:
         )
         assert_matches_type(AccountGetPortfolioHistoryResponse, account, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_portfolio_history(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.accounts.with_raw_response.get_portfolio_history(
@@ -380,7 +347,6 @@ class TestAsyncAccounts:
         account = await response.parse()
         assert_matches_type(AccountGetPortfolioHistoryResponse, account, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_portfolio_history(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.accounts.with_streaming_response.get_portfolio_history(
@@ -395,7 +361,6 @@ class TestAsyncAccounts:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_patch_account_by_id(self, async_client: AsyncClearStreet) -> None:
         account = await async_client.v1.accounts.patch_account_by_id(
@@ -403,7 +368,6 @@ class TestAsyncAccounts:
         )
         assert_matches_type(AccountPatchAccountByIDResponse, account, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_patch_account_by_id_with_all_params(self, async_client: AsyncClearStreet) -> None:
         account = await async_client.v1.accounts.patch_account_by_id(
@@ -412,7 +376,6 @@ class TestAsyncAccounts:
         )
         assert_matches_type(AccountPatchAccountByIDResponse, account, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_patch_account_by_id(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.accounts.with_raw_response.patch_account_by_id(
@@ -424,7 +387,6 @@ class TestAsyncAccounts:
         account = await response.parse()
         assert_matches_type(AccountPatchAccountByIDResponse, account, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_patch_account_by_id(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.accounts.with_streaming_response.patch_account_by_id(
