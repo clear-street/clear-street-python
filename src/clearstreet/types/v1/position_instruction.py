@@ -52,9 +52,9 @@ class PositionInstruction(BaseModel):
     rejection_reason: Optional[str] = None
     """
     Human-readable explanation populated on any non-success terminal status —
-    `REJECTED`, `ENGINE_REJECTED`, or `CANCEL_FAILED`. On a `207 Multi-Status` batch
-    submit the top-level `error` field summarizes the batch; per-row detail
-    continues to live here.
+    `REJECTED` or `CANCEL_FAILED`. On a `207 Multi-Status` batch submit the
+    top-level `error` field summarizes the batch; per-row detail continues to live
+    here.
     """
 
     updated_at: Optional[datetime] = None
