@@ -56,14 +56,6 @@ from .watchlist import (
     WatchlistResourceWithStreamingResponse,
     AsyncWatchlistResourceWithStreamingResponse,
 )
-from .websocket import (
-    WebsocketResource,
-    AsyncWebsocketResource,
-    WebsocketResourceWithRawResponse,
-    AsyncWebsocketResourceWithRawResponse,
-    WebsocketResourceWithStreamingResponse,
-    AsyncWebsocketResourceWithStreamingResponse,
-)
 from .api_version import (
     APIVersionResource,
     AsyncAPIVersionResource,
@@ -144,12 +136,6 @@ __all__ = [
     "AsyncWatchlistResourceWithRawResponse",
     "WatchlistResourceWithStreamingResponse",
     "AsyncWatchlistResourceWithStreamingResponse",
-    "WebsocketResource",
-    "AsyncWebsocketResource",
-    "WebsocketResourceWithRawResponse",
-    "AsyncWebsocketResourceWithRawResponse",
-    "WebsocketResourceWithStreamingResponse",
-    "AsyncWebsocketResourceWithStreamingResponse",
     "V1Resource",
     "AsyncV1Resource",
     "V1ResourceWithRawResponse",

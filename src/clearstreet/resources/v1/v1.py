@@ -43,14 +43,6 @@ from .watchlist import (
     WatchlistResourceWithStreamingResponse,
     AsyncWatchlistResourceWithStreamingResponse,
 )
-from .websocket import (
-    WebsocketResource,
-    AsyncWebsocketResource,
-    WebsocketResourceWithRawResponse,
-    AsyncWebsocketResourceWithRawResponse,
-    WebsocketResourceWithStreamingResponse,
-    AsyncWebsocketResourceWithStreamingResponse,
-)
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from .api_version import (
     APIVersionResource,
@@ -134,11 +126,6 @@ class V1Resource(SyncAPIResource):
         return WatchlistResource(self._client)
 
     @cached_property
-    def websocket(self) -> WebsocketResource:
-        """Active Websocket."""
-        return WebsocketResource(self._client)
-
-    @cached_property
     def with_raw_response(self) -> V1ResourceWithRawResponse:
         """
         This property can be used as a prefix for any HTTP method call to return
@@ -202,11 +189,6 @@ class AsyncV1Resource(AsyncAPIResource):
     def watchlist(self) -> AsyncWatchlistResource:
         """Create and manage watchlists."""
         return AsyncWatchlistResource(self._client)
-
-    @cached_property
-    def websocket(self) -> AsyncWebsocketResource:
-        """Active Websocket."""
-        return AsyncWebsocketResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncV1ResourceWithRawResponse:
@@ -276,11 +258,6 @@ class V1ResourceWithRawResponse:
         """Create and manage watchlists."""
         return WatchlistResourceWithRawResponse(self._v1.watchlist)
 
-    @cached_property
-    def websocket(self) -> WebsocketResourceWithRawResponse:
-        """Active Websocket."""
-        return WebsocketResourceWithRawResponse(self._v1.websocket)
-
 
 class AsyncV1ResourceWithRawResponse:
     def __init__(self, v1: AsyncV1Resource) -> None:
@@ -329,11 +306,6 @@ class AsyncV1ResourceWithRawResponse:
     def watchlist(self) -> AsyncWatchlistResourceWithRawResponse:
         """Create and manage watchlists."""
         return AsyncWatchlistResourceWithRawResponse(self._v1.watchlist)
-
-    @cached_property
-    def websocket(self) -> AsyncWebsocketResourceWithRawResponse:
-        """Active Websocket."""
-        return AsyncWebsocketResourceWithRawResponse(self._v1.websocket)
 
 
 class V1ResourceWithStreamingResponse:
@@ -384,11 +356,6 @@ class V1ResourceWithStreamingResponse:
         """Create and manage watchlists."""
         return WatchlistResourceWithStreamingResponse(self._v1.watchlist)
 
-    @cached_property
-    def websocket(self) -> WebsocketResourceWithStreamingResponse:
-        """Active Websocket."""
-        return WebsocketResourceWithStreamingResponse(self._v1.websocket)
-
 
 class AsyncV1ResourceWithStreamingResponse:
     def __init__(self, v1: AsyncV1Resource) -> None:
@@ -437,8 +404,3 @@ class AsyncV1ResourceWithStreamingResponse:
     def watchlist(self) -> AsyncWatchlistResourceWithStreamingResponse:
         """Create and manage watchlists."""
         return AsyncWatchlistResourceWithStreamingResponse(self._v1.watchlist)
-
-    @cached_property
-    def websocket(self) -> AsyncWebsocketResourceWithStreamingResponse:
-        """Active Websocket."""
-        return AsyncWebsocketResourceWithStreamingResponse(self._v1.websocket)
