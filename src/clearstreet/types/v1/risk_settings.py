@@ -11,4 +11,7 @@ class RiskSettings(BaseModel):
     """Risk settings for an account"""
 
     max_notional: Optional[str] = None
-    """The maximum notional value available to the account"""
+    """
+    The maximum notional value available to the account When a null/undefined value
+    is observed, it indicates that there is no available data.
+    """

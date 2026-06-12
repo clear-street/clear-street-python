@@ -32,4 +32,4 @@ class Message(BaseModel):
     thread_id: str
 
     error: Optional[ErrorStatus] = None
-    """Shared sanitized error payload."""
+    """When a null/undefined value is observed, it indicates it does not apply."""

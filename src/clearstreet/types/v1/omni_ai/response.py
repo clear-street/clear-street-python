@@ -23,9 +23,13 @@ class Response(BaseModel):
     user_message_id: str
 
     content: Optional[ResponseContent] = None
-    """Dynamic response content container. May include thinking parts."""
+    """
+    When a null/undefined value is observed, it indicates that there is no available
+    data.
+    """
 
     error: Optional[ErrorStatus] = None
-    """Shared sanitized error payload."""
+    """When a null/undefined value is observed, it indicates it does not apply."""
 
     output_message_id: Optional[str] = None
+    """When a null/undefined value is observed, it indicates it does not apply."""

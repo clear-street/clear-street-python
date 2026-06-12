@@ -62,10 +62,19 @@ class AccountBalances(BaseModel):
     """The amount of cash currently available to withdraw."""
 
     margin_details: Optional[MarginDetails] = None
-    """Margin-account-only details."""
+    """
+    Margin-account-only details. When a null/undefined value is observed, it
+    indicates it does not apply.
+    """
 
     multiplier: Optional[str] = None
-    """Applied multiplier for margin calculations."""
+    """
+    Applied multiplier for margin calculations. When a null/undefined value is
+    observed, it indicates it does not apply.
+    """
 
     short_market_value: Optional[str] = None
-    """The total market value of all short positions."""
+    """
+    The total market value of all short positions. When null/undefined, the value
+    should be assumed to be zero. The field is omitted to simplify the response.
+    """

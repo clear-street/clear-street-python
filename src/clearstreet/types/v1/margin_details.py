@@ -36,10 +36,17 @@ class MarginDetails(BaseModel):
     """`true` if the account is currently flagged as a PDT, otherwise `false`."""
 
     day_trade_buying_power_usage: Optional[str] = None
-    """The amount of day-trade buying power used during the current trading day."""
+    """
+    The amount of day-trade buying power used during the current trading day. When
+    null/undefined, the value should be assumed to be zero. The field is omitted to
+    simplify the response.
+    """
 
     top_contributors: Optional[List[MarginTopContributor]] = None
     """Optional top margin contributors, returned only when explicitly requested."""
 
     usage: Optional[MarginDetailsUsage] = None
-    """Current usage totals."""
+    """
+    Current usage totals. When a null/undefined value is observed, it indicates that
+    there is no available data.
+    """

@@ -18,10 +18,19 @@ class InstrumentAnalystConsensus(BaseModel):
     """The date the consensus snapshot was generated"""
 
     distribution: Optional[AnalystDistribution] = None
-    """Count of individual analyst recommendations by category"""
+    """
+    Count of individual analyst recommendations by category When a null/undefined
+    value is observed, it indicates that there is no available data.
+    """
 
     price_target: Optional[PriceTarget] = None
-    """Aggregated analyst price target statistics"""
+    """
+    Aggregated analyst price target statistics When a null/undefined value is
+    observed, it indicates that there is no available data.
+    """
 
     rating: Optional[AnalystRating] = None
-    """Consensus analyst rating"""
+    """
+    Consensus analyst rating When a null/undefined value is observed, it indicates
+    that there is no available data.
+    """

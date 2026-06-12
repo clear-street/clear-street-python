@@ -32,10 +32,19 @@ class NewsItem(BaseModel):
     """Canonical URL to the full article."""
 
     image_url: Optional[str] = None
-    """URL of an associated image if provided by the source."""
+    """
+    URL of an associated image if provided by the source. When a null/undefined
+    value is observed, it indicates that there is no available data.
+    """
 
     site: Optional[str] = None
-    """The primary domain/site of the publisher."""
+    """
+    The primary domain/site of the publisher. When a null/undefined value is
+    observed, it indicates that there is no available data.
+    """
 
     text: Optional[str] = None
-    """The full or excerpted article body."""
+    """
+    The full or excerpted article body. When a null/undefined value is observed, it
+    indicates that there is no available data.
+    """

@@ -15,3 +15,4 @@ class ErrorStatus(BaseModel):
     message: str
 
     details: Optional[object] = None
+    """When a null/undefined value is observed, it indicates it does not apply."""

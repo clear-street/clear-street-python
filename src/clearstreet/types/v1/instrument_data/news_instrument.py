@@ -14,7 +14,13 @@ class NewsInstrument(BaseModel):
     """Instrument identifier."""
 
     name: Optional[str] = None
-    """Instrument name/description, if available."""
+    """
+    Instrument name/description, if available. When a null/undefined value is
+    observed, it indicates that there is no available data.
+    """
 
     symbol: Optional[str] = None
-    """Trading symbol, if available."""
+    """
+    Trading symbol, if available. When a null/undefined value is observed, it
+    indicates that there is no available data.
+    """

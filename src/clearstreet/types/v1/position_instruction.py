@@ -43,19 +43,26 @@ class PositionInstruction(BaseModel):
     accepted_quantity: Optional[str] = None
     """Number of contracts accepted by the clearing venue.
 
-    Populated once the instruction reaches `ACCEPTED`.
+    Populated once the instruction reaches `ACCEPTED`. When a null/undefined value
+    is observed, it indicates that there is no available data.
     """
 
     created_at: Optional[datetime] = None
-    """When the instruction was first accepted by the service."""
+    """
+    When the instruction was first accepted by the service. When a null/undefined
+    value is observed, it indicates that there is no available data.
+    """
 
     rejection_reason: Optional[str] = None
     """
     Human-readable explanation populated on any non-success terminal status —
     `REJECTED` or `CANCEL_FAILED`. On a `207 Multi-Status` batch submit the
     top-level `error` field summarizes the batch; per-row detail continues to live
-    here.
+    here. When a null/undefined value is observed, it indicates it does not apply.
     """
 
     updated_at: Optional[datetime] = None
-    """When the instruction's lifecycle state last changed."""
+    """
+    When the instruction's lifecycle state last changed. When a null/undefined value
+    is observed, it indicates that there is no available data.
+    """

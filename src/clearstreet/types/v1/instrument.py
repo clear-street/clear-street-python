@@ -55,34 +55,62 @@ class Instrument(BaseModel):
     """The MIC code of the primary listing venue"""
 
     adv: Optional[str] = None
-    """Average daily share volume from the security definition."""
+    """
+    Average daily share volume from the security definition. When a null/undefined
+    value is observed, it indicates that there is no available data.
+    """
 
     expiry: Optional[date] = None
-    """The expiration date for options instruments"""
+    """
+    The expiration date for options instruments When a null/undefined value is
+    observed, it indicates it does not apply.
+    """
 
     instrument_type: Optional[SecurityType] = None
-    """The type of security (e.g., Common Stock, ETF)"""
+    """
+    The type of security (e.g., Common Stock, ETF) When a null/undefined value is
+    observed, it indicates that there is no available data.
+    """
 
     long_margin_rate: Optional[str] = None
-    """The percent of a long position's value you must post as margin"""
+    """
+    The percent of a long position's value you must post as margin When a
+    null/undefined value is observed, it indicates that there is no available data.
+    """
 
     name: Optional[str] = None
-    """The full name of the instrument or its issuer"""
+    """
+    The full name of the instrument or its issuer When a null/undefined value is
+    observed, it indicates that there is no available data.
+    """
 
     notional_adv: Optional[str] = None
-    """Notional average daily volume (ADV multiplied by previous close price)."""
+    """
+    Notional average daily volume (ADV multiplied by previous close price). When a
+    null/undefined value is observed, it indicates that there is no available data.
+    """
 
     options_expiry_dates: Optional[List[date]] = None
     """
     Available options expiration dates for this instrument. Present only when
-    `include_options_expiry_dates=true` in the request.
+    `include_options_expiry_dates=true` in the request. When a null/undefined value
+    is observed, it indicates it does not apply.
     """
 
     previous_close: Optional[str] = None
-    """Last close price from the security definition."""
+    """
+    Last close price from the security definition. When a null/undefined value is
+    observed, it indicates that there is no available data.
+    """
 
     short_margin_rate: Optional[str] = None
-    """The percent of a short position's value you must post as margin"""
+    """
+    The percent of a short position's value you must post as margin When a
+    null/undefined value is observed, it indicates that there is no available data.
+    """
 
     strike_price: Optional[str] = None
-    """The strike price for options instruments"""
+    """
+    The strike price for options instruments When a null/undefined value is
+    observed, it indicates it does not apply.
+    """

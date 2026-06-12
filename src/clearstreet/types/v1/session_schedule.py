@@ -18,10 +18,15 @@ class SessionSchedule(BaseModel):
     """Session open timestamp with timezone offset"""
 
     time_until_close: Optional[str] = None
-    """ISO 8601 duration until session closes. Null if session is not currently open."""
+    """ISO 8601 duration until session closes.
+
+    Null if session is not currently open. When a null/undefined value is observed,
+    it indicates it does not apply.
+    """
 
     time_until_open: Optional[str] = None
     """ISO 8601 duration until session opens.
 
-    Null if session has already started or closed.
+    Null if session has already started or closed. When a null/undefined value is
+    observed, it indicates it does not apply.
     """

@@ -26,4 +26,7 @@ class InstrumentEventsData(BaseModel):
     """Stock split events"""
 
     reporting_currency: Optional[str] = None
-    """The currency used for reporting financial data"""
+    """
+    The currency used for reporting financial data When a null/undefined value is
+    observed, it indicates that there is no available data.
+    """

@@ -22,22 +22,43 @@ class InstrumentEventEnvelope(BaseModel):
     """Event type discriminator."""
 
     dividend_event_data: Optional[InstrumentDividendEvent] = None
-    """Dividend payload when type is DIVIDEND."""
+    """
+    Dividend payload when type is DIVIDEND. When a null/undefined value is observed,
+    it indicates it does not apply.
+    """
 
     earnings_event_data: Optional[InstrumentEarnings] = None
-    """Earnings payload when type is EARNINGS."""
+    """
+    Earnings payload when type is EARNINGS. When a null/undefined value is observed,
+    it indicates it does not apply.
+    """
 
     instrument_id: Optional[str] = None
-    """Instrument identifier, when available."""
+    """
+    Instrument identifier, when available. When a null/undefined value is observed,
+    it indicates that there is no available data.
+    """
 
     ipo_event_data: Optional[InstrumentEventIpoItem] = None
-    """IPO payload when type is IPO."""
+    """
+    IPO payload when type is IPO. When a null/undefined value is observed, it
+    indicates it does not apply.
+    """
 
     name: Optional[str] = None
-    """Instrument name associated with the event, when available."""
+    """
+    Instrument name associated with the event, when available. When a null/undefined
+    value is observed, it indicates that there is no available data.
+    """
 
     reporting_currency: Optional[str] = None
-    """The currency used for reporting financial data."""
+    """
+    The currency used for reporting financial data. When a null/undefined value is
+    observed, it indicates that there is no available data.
+    """
 
     stock_split_event_data: Optional[InstrumentSplitEvent] = None
-    """Stock split payload when type is STOCK_SPLIT."""
+    """
+    Stock split payload when type is STOCK_SPLIT. When a null/undefined value is
+    observed, it indicates it does not apply.
+    """
