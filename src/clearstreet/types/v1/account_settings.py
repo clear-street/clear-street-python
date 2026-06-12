@@ -10,4 +10,7 @@ __all__ = ["AccountSettings"]
 
 class AccountSettings(BaseModel):
     risk: Optional[RiskSettings] = None
-    """Risk settings for the account"""
+    """
+    Risk settings for the account When a null/undefined value is observed, it
+    indicates that there is no available data.
+    """

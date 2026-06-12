@@ -19,4 +19,7 @@ class MarketStatus(BaseModel):
     """Whether the market is currently open (real-time)"""
 
     current_session: Optional[MarketSessionType] = None
-    """Current session type if market is open, null if closed"""
+    """
+    Current session type if market is open, null if closed When a null/undefined
+    value is observed, it indicates it does not apply.
+    """

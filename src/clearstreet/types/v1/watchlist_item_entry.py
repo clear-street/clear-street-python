@@ -19,7 +19,13 @@ class WatchlistItemEntry(BaseModel):
     """When the item was added"""
 
     added_price: Optional[str] = None
-    """Price when the item was added"""
+    """
+    Price when the item was added When a null/undefined value is observed, it
+    indicates that there is no available data.
+    """
 
     instrument: Optional[Instrument] = None
-    """Instrument details"""
+    """
+    Instrument details When a null/undefined value is observed, it indicates that
+    there is no available data.
+    """

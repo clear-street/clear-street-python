@@ -12,10 +12,19 @@ class TradingSessions(BaseModel):
     """Trading sessions for a market day with full timestamps"""
 
     after_hours: Optional[SessionSchedule] = None
-    """After-hours session schedule, null if not available"""
+    """
+    After-hours session schedule, null if not available When a null/undefined value
+    is observed, it indicates it does not apply.
+    """
 
     pre_market: Optional[SessionSchedule] = None
-    """Pre-market session schedule, null if not available"""
+    """
+    Pre-market session schedule, null if not available When a null/undefined value
+    is observed, it indicates it does not apply.
+    """
 
     regular: Optional[SessionSchedule] = None
-    """Regular trading session schedule, null if holiday/weekend"""
+    """
+    Regular trading session schedule, null if holiday/weekend When a null/undefined
+    value is observed, it indicates it does not apply.
+    """

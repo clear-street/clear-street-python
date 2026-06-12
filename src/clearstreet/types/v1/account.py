@@ -42,4 +42,7 @@ class Account(BaseModel):
     """The type of account"""
 
     close_date: Optional[date] = None
-    """The date the account was closed, if applicable"""
+    """
+    The date the account was closed, if applicable When a null/undefined value is
+    observed, it indicates it does not apply.
+    """

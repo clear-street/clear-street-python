@@ -24,19 +24,38 @@ class DailySummary(BaseModel):
     """Unique instrument identifier. Always populated; echoes the request ID."""
 
     high: Optional[str] = None
-    """Session high."""
+    """
+    Session high. When a null/undefined value is observed, it indicates that there
+    is no available data.
+    """
 
     low: Optional[str] = None
-    """Session low."""
+    """
+    Session low. When a null/undefined value is observed, it indicates that there is
+    no available data.
+    """
 
     open: Optional[str] = None
-    """Opening price for the session."""
+    """
+    Opening price for the session. When a null/undefined value is observed, it
+    indicates that there is no available data.
+    """
 
     symbol: Optional[str] = None
-    """Display symbol for the security. `None` for unresolvable IDs."""
+    """Display symbol for the security.
+
+    `None` for unresolvable IDs. When a null/undefined value is observed, it
+    indicates that there is no available data.
+    """
 
     trade_date: Optional[date] = None
-    """Session date the OHLV represents, US/Eastern."""
+    """
+    Session date the OHLV represents, US/Eastern. When a null/undefined value is
+    observed, it indicates that there is no available data.
+    """
 
     volume: Optional[int] = None
-    """Session cumulative trading volume."""
+    """
+    Session cumulative trading volume. When a null/undefined value is observed, it
+    indicates that there is no available data.
+    """

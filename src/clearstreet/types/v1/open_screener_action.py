@@ -15,13 +15,25 @@ class OpenScreenerAction(BaseModel):
     """Filter criteria for the screener"""
 
     field_filter: Optional[List[str]] = None
-    """Optional field/column selection for screener results."""
+    """
+    Optional field/column selection for screener results. When a null/undefined
+    value is observed, it indicates it does not apply.
+    """
 
     page_size: Optional[int] = None
-    """Optional page size."""
+    """
+    Optional page size. When a null/undefined value is observed, it indicates it
+    does not apply.
+    """
 
     sort_by: Optional[str] = None
-    """Optional sort field for screener rows."""
+    """
+    Optional sort field for screener rows. When a null/undefined value is observed,
+    it indicates it does not apply.
+    """
 
     sort_direction: Optional[str] = None
-    """Optional sort direction (`ASC` or `DESC`)."""
+    """
+    Optional sort direction (`ASC` or `DESC`). When a null/undefined value is
+    observed, it indicates it does not apply.
+    """

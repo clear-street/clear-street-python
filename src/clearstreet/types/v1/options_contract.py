@@ -51,7 +51,13 @@ class OptionsContract(BaseModel):
     """OSI symbol (e.g. "AAPL 251219C00150000")"""
 
     open_interest: Optional[int] = None
-    """Open interest (number of outstanding contracts), if available"""
+    """
+    Open interest (number of outstanding contracts), if available When a
+    null/undefined value is observed, it indicates that there is no available data.
+    """
 
     underlying_instrument_id: Optional[str] = None
-    """Instrument ID of the underlying instrument, when available"""
+    """
+    Instrument ID of the underlying instrument, when available When a null/undefined
+    value is observed, it indicates that there is no available data.
+    """
