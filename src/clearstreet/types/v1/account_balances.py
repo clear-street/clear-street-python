@@ -22,6 +22,12 @@ class AccountBalances(BaseModel):
     currency: str
     """Currency identifier for all monetary values."""
 
+    daily_change: str
+    """Difference between current equity and start-of-day equity."""
+
+    daily_pnl: str
+    """Total profit or loss since start of day."""
+
     daily_realized_pnl: str
     """Realized profit or loss since start of day."""
 
@@ -51,6 +57,9 @@ class AccountBalances(BaseModel):
 
     trade_cash: str
     """Trade-date effective cash."""
+
+    unrealized_pnl: str
+    """Total unrealized profit or loss across all open positions."""
 
     unsettled_credits: str
     """Trade-date unsettled cash credits."""

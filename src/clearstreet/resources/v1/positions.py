@@ -263,6 +263,7 @@ class PositionsResource(SyncAPIResource):
             "POSITION_TYPE",
             "UNREALIZED_PNL",
             "DAILY_UNREALIZED_PNL",
+            "DAILY_REALIZED_PNL",
         ]
         | Omit = omit,
         sort_direction: Literal["ASC", "DESC"] | Omit = omit,
@@ -582,6 +583,7 @@ class AsyncPositionsResource(AsyncAPIResource):
             "POSITION_TYPE",
             "UNREALIZED_PNL",
             "DAILY_UNREALIZED_PNL",
+            "DAILY_REALIZED_PNL",
         ]
         | Omit = omit,
         sort_direction: Literal["ASC", "DESC"] | Omit = omit,

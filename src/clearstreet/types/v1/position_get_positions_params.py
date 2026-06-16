@@ -35,6 +35,7 @@ class PositionGetPositionsParams(TypedDict, total=False):
         "POSITION_TYPE",
         "UNREALIZED_PNL",
         "DAILY_UNREALIZED_PNL",
+        "DAILY_REALIZED_PNL",
     ]
     """Field to sort by"""
 
