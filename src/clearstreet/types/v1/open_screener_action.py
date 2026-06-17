@@ -14,11 +14,14 @@ class OpenScreenerAction(BaseModel):
     filters: List[ScreenerFilter]
     """Filter criteria for the screener"""
 
-    field_filter: Optional[List[str]] = None
+    columns: Optional[List[str]] = None
     """
     Optional field/column selection for screener results. When a null/undefined
     value is observed, it indicates it does not apply.
     """
+
+    field_filter: Optional[List[str]] = None
+    """Deprecated: use `columns` instead. Mirrors `columns`."""
 
     page_size: Optional[int] = None
     """
