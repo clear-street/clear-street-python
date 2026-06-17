@@ -140,7 +140,8 @@ class InstrumentsResource(SyncAPIResource):
         Args:
           easy_to_borrow: Filter by easy to borrow status
 
-          instrument_ids: Comma-separated instrument identifiers
+          instrument_ids: Comma-separated instrument identifiers: unique identifiers or symbols (symbol
+              for equities, OSI for options)
 
           instrument_type: Filter by instrument type (e.g. COMMON_STOCK, OPTION)
 
@@ -440,7 +441,8 @@ class AsyncInstrumentsResource(AsyncAPIResource):
         Args:
           easy_to_borrow: Filter by easy to borrow status
 
-          instrument_ids: Comma-separated instrument identifiers
+          instrument_ids: Comma-separated instrument identifiers: unique identifiers or symbols (symbol
+              for equities, OSI for options)
 
           instrument_type: Filter by instrument type (e.g. COMMON_STOCK, OPTION)
 
