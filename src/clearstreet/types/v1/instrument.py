@@ -61,9 +61,10 @@ class Instrument(BaseModel):
     """
 
     expiry: Optional[date] = None
-    """
-    The expiration date for options instruments When a null/undefined value is
-    observed, it indicates it does not apply.
+    """Deprecated.
+
+    Always null. When a null/undefined value is observed, it indicates it does not
+    apply.
     """
 
     instrument_type: Optional[SecurityType] = None
@@ -110,7 +111,8 @@ class Instrument(BaseModel):
     """
 
     strike_price: Optional[str] = None
-    """
-    The strike price for options instruments When a null/undefined value is
-    observed, it indicates it does not apply.
+    """Deprecated.
+
+    Always null. When a null/undefined value is observed, it indicates it does not
+    apply.
     """
