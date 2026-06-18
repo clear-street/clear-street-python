@@ -22,6 +22,12 @@ class OrderGetOrdersParams(TypedDict, total=False):
     instrument_type: Literal["COMMON_STOCK", "OPTION", "CASH"]
     """Instrument type filter (e.g., COMMON_STOCK, OPTION)"""
 
+    order_ids: SequenceNotStr[str]
+    """Comma-separated order IDs to filter by.
+
+    When provided, only orders whose order ID is in this set are returned.
+    """
+
     page_size: int
     """The number of items to return per page.
 

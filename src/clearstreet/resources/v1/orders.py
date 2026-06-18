@@ -267,6 +267,7 @@ class OrdersResource(SyncAPIResource):
         from_: Union[str, datetime] | Omit = omit,
         instrument_ids: SequenceNotStr[str] | Omit = omit,
         instrument_type: Literal["COMMON_STOCK", "OPTION", "CASH"] | Omit = omit,
+        order_ids: SequenceNotStr[str] | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         status: List[
@@ -309,6 +310,9 @@ class OrdersResource(SyncAPIResource):
 
           instrument_type: Instrument type filter (e.g., COMMON_STOCK, OPTION)
 
+          order_ids: Comma-separated order IDs to filter by. When provided, only orders whose order
+              ID is in this set are returned.
+
           page_size: The number of items to return per page. Only used when page_token is not
               provided.
 
@@ -344,6 +348,7 @@ class OrdersResource(SyncAPIResource):
                         "from_": from_,
                         "instrument_ids": instrument_ids,
                         "instrument_type": instrument_type,
+                        "order_ids": order_ids,
                         "page_size": page_size,
                         "page_token": page_token,
                         "status": status,
@@ -662,6 +667,7 @@ class AsyncOrdersResource(AsyncAPIResource):
         from_: Union[str, datetime] | Omit = omit,
         instrument_ids: SequenceNotStr[str] | Omit = omit,
         instrument_type: Literal["COMMON_STOCK", "OPTION", "CASH"] | Omit = omit,
+        order_ids: SequenceNotStr[str] | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         status: List[
@@ -704,6 +710,9 @@ class AsyncOrdersResource(AsyncAPIResource):
 
           instrument_type: Instrument type filter (e.g., COMMON_STOCK, OPTION)
 
+          order_ids: Comma-separated order IDs to filter by. When provided, only orders whose order
+              ID is in this set are returned.
+
           page_size: The number of items to return per page. Only used when page_token is not
               provided.
 
@@ -739,6 +748,7 @@ class AsyncOrdersResource(AsyncAPIResource):
                         "from_": from_,
                         "instrument_ids": instrument_ids,
                         "instrument_type": instrument_type,
+                        "order_ids": order_ids,
                         "page_size": page_size,
                         "page_token": page_token,
                         "status": status,
