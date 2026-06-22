@@ -69,8 +69,8 @@ class NewOrderRequest(BaseModel):
     symbol: Optional[str] = None
     """Trading symbol.
 
-    For equities, use the ticker symbol (e.g., "AAPL"). For options, use the OSI
-    symbol (e.g., "AAPL 250117C00190000"). Either `symbol` or `instrument_id` must
+    For equities, use the ticker symbol (e.g., "TSLA"). For options, use the OSI
+    symbol (e.g., "TSLA 250117C00190000"). Either `symbol` or `instrument_id` must
     be provided.
     """
 

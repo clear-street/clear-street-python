@@ -223,7 +223,8 @@ class PositionsResource(SyncAPIResource):
         `POST` response and never appear in this list.
 
         Args:
-          instrument_id: Limit results to a single contract. Accepts the instrument id or the OSI symbol.
+          instrument_id: Limit results to a single contract. Instrument ID (UUID) or symbol (equity
+              ticker or OSI option symbol).
 
           extra_headers: Send extra headers
 
@@ -543,7 +544,8 @@ class AsyncPositionsResource(AsyncAPIResource):
         `POST` response and never appear in this list.
 
         Args:
-          instrument_id: Limit results to a single contract. Accepts the instrument id or the OSI symbol.
+          instrument_id: Limit results to a single contract. Instrument ID (UUID) or symbol (equity
+              ticker or OSI option symbol).
 
           extra_headers: Send extra headers
 

@@ -256,9 +256,9 @@ class TestOrders:
         order = client.v1.orders.replace_order(
             order_id="order_id",
             account_id=0,
-            limit_price="150.50",
-            quantity="125",
-            stop_price="148.00",
+            limit_price="49.00",
+            quantity="1",
+            stop_price="52.00",
             time_in_force="DAY",
         )
         assert_matches_type(OrderReplaceOrderResponse, order, path=["response"])
@@ -303,24 +303,9 @@ class TestOrders:
             account_id=0,
             orders=[
                 {
-                    "legs": [
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-447a-706f-996f-097254663f02",
-                            "side": "BUY",
-                        },
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-4db4-78ec-b4fd-cba8be61cf8a",
-                            "side": "SELL",
-                        },
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-5264-7f20-8fd3-35df82cd6ef0",
-                            "side": "BUY",
-                        },
-                    ],
                     "order_type": "LIMIT",
+                    "quantity": "1",
+                    "side": "BUY",
                     "time_in_force": "DAY",
                 }
             ],
@@ -333,24 +318,9 @@ class TestOrders:
             account_id=0,
             orders=[
                 {
-                    "legs": [
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-447a-706f-996f-097254663f02",
-                            "side": "BUY",
-                        },
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-4db4-78ec-b4fd-cba8be61cf8a",
-                            "side": "SELL",
-                        },
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-5264-7f20-8fd3-35df82cd6ef0",
-                            "side": "BUY",
-                        },
-                    ],
                     "order_type": "LIMIT",
+                    "quantity": "1",
+                    "side": "BUY",
                     "time_in_force": "DAY",
                 }
             ],
@@ -367,24 +337,9 @@ class TestOrders:
             account_id=0,
             orders=[
                 {
-                    "legs": [
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-447a-706f-996f-097254663f02",
-                            "side": "BUY",
-                        },
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-4db4-78ec-b4fd-cba8be61cf8a",
-                            "side": "SELL",
-                        },
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-5264-7f20-8fd3-35df82cd6ef0",
-                            "side": "BUY",
-                        },
-                    ],
                     "order_type": "LIMIT",
+                    "quantity": "1",
+                    "side": "BUY",
                     "time_in_force": "DAY",
                 }
             ],
@@ -633,9 +588,9 @@ class TestAsyncOrders:
         order = await async_client.v1.orders.replace_order(
             order_id="order_id",
             account_id=0,
-            limit_price="150.50",
-            quantity="125",
-            stop_price="148.00",
+            limit_price="49.00",
+            quantity="1",
+            stop_price="52.00",
             time_in_force="DAY",
         )
         assert_matches_type(OrderReplaceOrderResponse, order, path=["response"])
@@ -680,24 +635,9 @@ class TestAsyncOrders:
             account_id=0,
             orders=[
                 {
-                    "legs": [
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-447a-706f-996f-097254663f02",
-                            "side": "BUY",
-                        },
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-4db4-78ec-b4fd-cba8be61cf8a",
-                            "side": "SELL",
-                        },
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-5264-7f20-8fd3-35df82cd6ef0",
-                            "side": "BUY",
-                        },
-                    ],
                     "order_type": "LIMIT",
+                    "quantity": "1",
+                    "side": "BUY",
                     "time_in_force": "DAY",
                 }
             ],
@@ -710,24 +650,9 @@ class TestAsyncOrders:
             account_id=0,
             orders=[
                 {
-                    "legs": [
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-447a-706f-996f-097254663f02",
-                            "side": "BUY",
-                        },
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-4db4-78ec-b4fd-cba8be61cf8a",
-                            "side": "SELL",
-                        },
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-5264-7f20-8fd3-35df82cd6ef0",
-                            "side": "BUY",
-                        },
-                    ],
                     "order_type": "LIMIT",
+                    "quantity": "1",
+                    "side": "BUY",
                     "time_in_force": "DAY",
                 }
             ],
@@ -744,24 +669,9 @@ class TestAsyncOrders:
             account_id=0,
             orders=[
                 {
-                    "legs": [
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-447a-706f-996f-097254663f02",
-                            "side": "BUY",
-                        },
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-4db4-78ec-b4fd-cba8be61cf8a",
-                            "side": "SELL",
-                        },
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-5264-7f20-8fd3-35df82cd6ef0",
-                            "side": "BUY",
-                        },
-                    ],
                     "order_type": "LIMIT",
+                    "quantity": "1",
+                    "side": "BUY",
                     "time_in_force": "DAY",
                 }
             ],

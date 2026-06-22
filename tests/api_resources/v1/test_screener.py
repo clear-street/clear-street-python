@@ -56,7 +56,7 @@ class TestScreener:
                         "value_type": "DECIMAL",
                     },
                     "op": {
-                        "name": "LESS_THAN",
+                        "name": "GREATER_OR_EQUAL",
                         "args": ["LEFT_INCLUSIVE"],
                     },
                     "right": [
@@ -247,7 +247,7 @@ class TestScreener:
                         "value_type": "DECIMAL",
                     },
                     "op": {
-                        "name": "LESS_THAN",
+                        "name": "GREATER_OR_EQUAL",
                         "args": ["LEFT_INCLUSIVE"],
                     },
                     "right": [
@@ -357,7 +357,7 @@ class TestScreener:
                         "value_type": "DECIMAL",
                     },
                     "op": {
-                        "name": "LESS_THAN",
+                        "name": "GREATER_OR_EQUAL",
                         "args": ["LEFT_INCLUSIVE"],
                     },
                     "right": [
@@ -452,7 +452,7 @@ class TestAsyncScreener:
                         "value_type": "DECIMAL",
                     },
                     "op": {
-                        "name": "LESS_THAN",
+                        "name": "GREATER_OR_EQUAL",
                         "args": ["LEFT_INCLUSIVE"],
                     },
                     "right": [
@@ -643,7 +643,7 @@ class TestAsyncScreener:
                         "value_type": "DECIMAL",
                     },
                     "op": {
-                        "name": "LESS_THAN",
+                        "name": "GREATER_OR_EQUAL",
                         "args": ["LEFT_INCLUSIVE"],
                     },
                     "right": [
@@ -753,7 +753,7 @@ class TestAsyncScreener:
                         "value_type": "DECIMAL",
                     },
                     "op": {
-                        "name": "LESS_THAN",
+                        "name": "GREATER_OR_EQUAL",
                         "args": ["LEFT_INCLUSIVE"],
                     },
                     "right": [
