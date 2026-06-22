@@ -102,6 +102,8 @@ class TestAccounts:
     @parametrize
     def test_method_get_accounts_with_all_params(self, client: ClearStreet) -> None:
         account = client.v1.accounts.get_accounts(
+            account_id="account_id",
+            account_name="account_name",
             page_size=1,
             page_token="U3RhaW5sZXNzIHJvY2tz",
         )
@@ -293,6 +295,8 @@ class TestAsyncAccounts:
     @parametrize
     async def test_method_get_accounts_with_all_params(self, async_client: AsyncClearStreet) -> None:
         account = await async_client.v1.accounts.get_accounts(
+            account_id="account_id",
+            account_name="account_name",
             page_size=1,
             page_token="U3RhaW5sZXNzIHJvY2tz",
         )

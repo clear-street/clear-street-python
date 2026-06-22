@@ -12,6 +12,18 @@ __all__ = ["AccountGetAccountsParams"]
 
 
 class AccountGetAccountsParams(TypedDict, total=False):
+    account_id: str
+    """
+    Filter to accounts whose id starts with this value (lexicographic prefix match
+    on the decimal id, e.g. `100` matches `100345`).
+    """
+
+    account_name: str
+    """
+    Filter to accounts whose full name contains this value (case-insensitive
+    substring match).
+    """
+
     page_size: int
     """The number of items to return per page.
 
