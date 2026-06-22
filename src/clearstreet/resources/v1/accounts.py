@@ -131,6 +131,8 @@ class AccountsResource(SyncAPIResource):
     def get_accounts(
         self,
         *,
+        account_id: str | Omit = omit,
+        account_name: str | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -141,9 +143,21 @@ class AccountsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountGetAccountsResponse:
         """
-        List accounts the authenticated user has permission to access
+        List accounts the authenticated user has permission to access.
+
+        Results can be narrowed with the optional `account_id` and `account_name`
+        filters. `account_id` is a lexicographic prefix match on the decimal account id
+        (e.g. `100` matches `100345` and `100567`); `account_name` is a case-insensitive
+        substring match on the account's full name. When both are supplied an account
+        must match both. When neither is supplied every accessible account is returned.
 
         Args:
+          account_id: Filter to accounts whose id starts with this value (lexicographic prefix match
+              on the decimal id, e.g. `100` matches `100345`).
+
+          account_name: Filter to accounts whose full name contains this value (case-insensitive
+              substring match).
+
           page_size: The number of items to return per page. Only used when page_token is not
               provided.
 
@@ -167,6 +181,8 @@ class AccountsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "account_id": account_id,
+                        "account_name": account_name,
                         "page_size": page_size,
                         "page_token": page_token,
                     },
@@ -356,6 +372,8 @@ class AsyncAccountsResource(AsyncAPIResource):
     async def get_accounts(
         self,
         *,
+        account_id: str | Omit = omit,
+        account_name: str | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -366,9 +384,21 @@ class AsyncAccountsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountGetAccountsResponse:
         """
-        List accounts the authenticated user has permission to access
+        List accounts the authenticated user has permission to access.
+
+        Results can be narrowed with the optional `account_id` and `account_name`
+        filters. `account_id` is a lexicographic prefix match on the decimal account id
+        (e.g. `100` matches `100345` and `100567`); `account_name` is a case-insensitive
+        substring match on the account's full name. When both are supplied an account
+        must match both. When neither is supplied every accessible account is returned.
 
         Args:
+          account_id: Filter to accounts whose id starts with this value (lexicographic prefix match
+              on the decimal id, e.g. `100` matches `100345`).
+
+          account_name: Filter to accounts whose full name contains this value (case-insensitive
+              substring match).
+
           page_size: The number of items to return per page. Only used when page_token is not
               provided.
 
@@ -392,6 +422,8 @@ class AsyncAccountsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
+                        "account_id": account_id,
+                        "account_name": account_name,
                         "page_size": page_size,
                         "page_token": page_token,
                     },
