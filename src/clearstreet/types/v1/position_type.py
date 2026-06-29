@@ -4,4 +4,4 @@ from typing_extensions import Literal, TypeAlias
 
 __all__ = ["PositionType"]
 
-PositionType: TypeAlias = Literal["LONG", "SHORT", "LONG_CALL", "SHORT_CALL", "LONG_PUT", "SHORT_PUT"]
+PositionType: TypeAlias = Literal["LONG", "SHORT"]
