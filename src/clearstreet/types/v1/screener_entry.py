@@ -27,7 +27,4 @@ class ScreenerEntry(BaseModel):
     columns: Optional[List[FieldRef]] = None
     """Field references included when running this screener."""
 
-    field_filter: Optional[List[FieldRef]] = None
-    """Deprecated: use `columns` instead. Mirrors `columns`."""
-
     sorts: Optional[List[SortSpec]] = None

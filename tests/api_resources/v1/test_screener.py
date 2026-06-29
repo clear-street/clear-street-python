@@ -39,14 +39,6 @@ class TestScreener:
                     "value_type": "DECIMAL",
                 }
             ],
-            field_filter=[
-                {
-                    "name": "market_cap",
-                    "lookback": "ONE_DAY",
-                    "period": "QUARTER",
-                    "value_type": "DECIMAL",
-                }
-            ],
             filters=[
                 {
                     "left": {
@@ -230,14 +222,6 @@ class TestScreener:
                     "value_type": "DECIMAL",
                 }
             ],
-            field_filter=[
-                {
-                    "name": "market_cap",
-                    "lookback": "ONE_DAY",
-                    "period": "QUARTER",
-                    "value_type": "DECIMAL",
-                }
-            ],
             filters=[
                 {
                     "left": {
@@ -340,14 +324,6 @@ class TestScreener:
                     "value_type": "DECIMAL",
                 },
             ],
-            field_filter=[
-                {
-                    "name": "market_cap",
-                    "lookback": "ONE_DAY",
-                    "period": "QUARTER",
-                    "value_type": "DECIMAL",
-                }
-            ],
             filters=[
                 {
                     "left": {
@@ -428,14 +404,6 @@ class TestAsyncScreener:
     async def test_method_create_screener_with_all_params(self, async_client: AsyncClearStreet) -> None:
         screener = await async_client.v1.screener.create_screener(
             columns=[
-                {
-                    "name": "market_cap",
-                    "lookback": "ONE_DAY",
-                    "period": "QUARTER",
-                    "value_type": "DECIMAL",
-                }
-            ],
-            field_filter=[
                 {
                     "name": "market_cap",
                     "lookback": "ONE_DAY",
@@ -626,14 +594,6 @@ class TestAsyncScreener:
                     "value_type": "DECIMAL",
                 }
             ],
-            field_filter=[
-                {
-                    "name": "market_cap",
-                    "lookback": "ONE_DAY",
-                    "period": "QUARTER",
-                    "value_type": "DECIMAL",
-                }
-            ],
             filters=[
                 {
                     "left": {
@@ -735,14 +695,6 @@ class TestAsyncScreener:
                     "period": "QUARTER",
                     "value_type": "DECIMAL",
                 },
-            ],
-            field_filter=[
-                {
-                    "name": "market_cap",
-                    "lookback": "ONE_DAY",
-                    "period": "QUARTER",
-                    "value_type": "DECIMAL",
-                }
             ],
             filters=[
                 {

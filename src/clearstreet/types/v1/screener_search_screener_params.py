@@ -18,9 +18,6 @@ class ScreenerSearchScreenerParams(TypedDict, total=False):
     columns: Optional[Iterable[FieldRefParam]]
     """Subset of fields to include in the response."""
 
-    field_filter: Optional[Iterable[FieldRefParam]]
-    """Deprecated: use `columns` instead. Ignored when `columns` is provided."""
-
     filters: Optional[Iterable[SearchFilterParam]]
     """Filter conditions to apply."""
 
