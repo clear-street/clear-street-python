@@ -60,7 +60,6 @@ class ScreenerResource(SyncAPIResource):
         self,
         *,
         columns: Optional[Iterable[FieldRefParam]] | Omit = omit,
-        field_filter: Optional[Iterable[FieldRefParam]] | Omit = omit,
         filters: Optional[Iterable[SearchFilterParam]] | Omit = omit,
         name: Optional[str] | Omit = omit,
         sorts: Optional[Iterable[SortSpecParam]] | Omit = omit,
@@ -78,8 +77,6 @@ class ScreenerResource(SyncAPIResource):
 
         Args:
           columns: Structured field references to include when running this screener
-
-          field_filter: Deprecated: use `columns` instead. Ignored when `columns` is provided.
 
           filters: Structured search filter criteria
 
@@ -100,7 +97,6 @@ class ScreenerResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "columns": columns,
-                    "field_filter": field_filter,
                     "filters": filters,
                     "name": name,
                     "sorts": sorts,
@@ -212,7 +208,6 @@ class ScreenerResource(SyncAPIResource):
         screener_id: str,
         *,
         columns: Optional[Iterable[FieldRefParam]] | Omit = omit,
-        field_filter: Optional[Iterable[FieldRefParam]] | Omit = omit,
         filters: Optional[Iterable[SearchFilterParam]] | Omit = omit,
         name: Optional[str] | Omit = omit,
         sorts: Optional[Iterable[SortSpecParam]] | Omit = omit,
@@ -231,8 +226,6 @@ class ScreenerResource(SyncAPIResource):
 
         Args:
           columns: Structured field references to include when running this screener
-
-          field_filter: Deprecated: use `columns` instead. Ignored when `columns` is provided.
 
           filters: Structured search filter criteria
 
@@ -255,7 +248,6 @@ class ScreenerResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "columns": columns,
-                    "field_filter": field_filter,
                     "filters": filters,
                     "name": name,
                     "sorts": sorts,
@@ -272,7 +264,6 @@ class ScreenerResource(SyncAPIResource):
         self,
         *,
         columns: Optional[Iterable[FieldRefParam]] | Omit = omit,
-        field_filter: Optional[Iterable[FieldRefParam]] | Omit = omit,
         filters: Optional[Iterable[SearchFilterParam]] | Omit = omit,
         page_size: Optional[int] | Omit = omit,
         page_token: Union[str, Base64FileInput, None] | Omit = omit,
@@ -297,8 +288,6 @@ class ScreenerResource(SyncAPIResource):
 
         Args:
           columns: Subset of fields to include in the response.
-
-          field_filter: Deprecated: use `columns` instead. Ignored when `columns` is provided.
 
           filters: Filter conditions to apply.
 
@@ -325,7 +314,6 @@ class ScreenerResource(SyncAPIResource):
             body=maybe_transform(
                 {
                     "columns": columns,
-                    "field_filter": field_filter,
                     "filters": filters,
                     "page_size": page_size,
                     "page_token": page_token,
@@ -367,7 +355,6 @@ class AsyncScreenerResource(AsyncAPIResource):
         self,
         *,
         columns: Optional[Iterable[FieldRefParam]] | Omit = omit,
-        field_filter: Optional[Iterable[FieldRefParam]] | Omit = omit,
         filters: Optional[Iterable[SearchFilterParam]] | Omit = omit,
         name: Optional[str] | Omit = omit,
         sorts: Optional[Iterable[SortSpecParam]] | Omit = omit,
@@ -385,8 +372,6 @@ class AsyncScreenerResource(AsyncAPIResource):
 
         Args:
           columns: Structured field references to include when running this screener
-
-          field_filter: Deprecated: use `columns` instead. Ignored when `columns` is provided.
 
           filters: Structured search filter criteria
 
@@ -407,7 +392,6 @@ class AsyncScreenerResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "columns": columns,
-                    "field_filter": field_filter,
                     "filters": filters,
                     "name": name,
                     "sorts": sorts,
@@ -519,7 +503,6 @@ class AsyncScreenerResource(AsyncAPIResource):
         screener_id: str,
         *,
         columns: Optional[Iterable[FieldRefParam]] | Omit = omit,
-        field_filter: Optional[Iterable[FieldRefParam]] | Omit = omit,
         filters: Optional[Iterable[SearchFilterParam]] | Omit = omit,
         name: Optional[str] | Omit = omit,
         sorts: Optional[Iterable[SortSpecParam]] | Omit = omit,
@@ -538,8 +521,6 @@ class AsyncScreenerResource(AsyncAPIResource):
 
         Args:
           columns: Structured field references to include when running this screener
-
-          field_filter: Deprecated: use `columns` instead. Ignored when `columns` is provided.
 
           filters: Structured search filter criteria
 
@@ -562,7 +543,6 @@ class AsyncScreenerResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "columns": columns,
-                    "field_filter": field_filter,
                     "filters": filters,
                     "name": name,
                     "sorts": sorts,
@@ -579,7 +559,6 @@ class AsyncScreenerResource(AsyncAPIResource):
         self,
         *,
         columns: Optional[Iterable[FieldRefParam]] | Omit = omit,
-        field_filter: Optional[Iterable[FieldRefParam]] | Omit = omit,
         filters: Optional[Iterable[SearchFilterParam]] | Omit = omit,
         page_size: Optional[int] | Omit = omit,
         page_token: Union[str, Base64FileInput, None] | Omit = omit,
@@ -604,8 +583,6 @@ class AsyncScreenerResource(AsyncAPIResource):
 
         Args:
           columns: Subset of fields to include in the response.
-
-          field_filter: Deprecated: use `columns` instead. Ignored when `columns` is provided.
 
           filters: Filter conditions to apply.
 
@@ -632,7 +609,6 @@ class AsyncScreenerResource(AsyncAPIResource):
             body=await async_maybe_transform(
                 {
                     "columns": columns,
-                    "field_filter": field_filter,
                     "filters": filters,
                     "page_size": page_size,
                     "page_token": page_token,

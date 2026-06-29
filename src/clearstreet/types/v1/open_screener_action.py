@@ -20,9 +20,6 @@ class OpenScreenerAction(BaseModel):
     value is observed, it indicates it does not apply.
     """
 
-    field_filter: Optional[List[str]] = None
-    """Deprecated: use `columns` instead. Mirrors `columns`."""
-
     page_size: Optional[int] = None
     """
     Optional page size. When a null/undefined value is observed, it indicates it

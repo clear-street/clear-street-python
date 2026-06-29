@@ -16,9 +16,6 @@ class ScreenerReplaceScreenerParams(TypedDict, total=False):
     columns: Optional[Iterable[FieldRefParam]]
     """Structured field references to include when running this screener"""
 
-    field_filter: Optional[Iterable[FieldRefParam]]
-    """Deprecated: use `columns` instead. Ignored when `columns` is provided."""
-
     filters: Optional[Iterable[SearchFilterParam]]
     """Structured search filter criteria"""
 
