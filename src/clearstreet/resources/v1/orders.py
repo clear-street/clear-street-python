@@ -26,7 +26,6 @@ from ...types.v1 import (
     InstrumentIDOrSymbol,
     order_get_orders_params,
     order_replace_order_params,
-    order_submit_orders_params,
     order_get_executions_params,
     order_cancel_all_open_orders_params,
 )
@@ -40,6 +39,7 @@ from ..._response import (
 from ..._base_client import make_request_options
 from ...types.v1.request_time_in_force import RequestTimeInForce
 from ...types.v1.instrument_id_or_symbol import InstrumentIDOrSymbol
+from ...types.v1.new_order_request_param import NewOrderRequestParam
 from ...types.v1.order_get_orders_response import OrderGetOrdersResponse
 from ...types.v1.order_replace_order_response import OrderReplaceOrderResponse
 from ...types.v1.order_submit_orders_response import OrderSubmitOrdersResponse
@@ -421,7 +421,7 @@ class OrdersResource(SyncAPIResource):
         self,
         account_id: int,
         *,
-        orders: Iterable[order_submit_orders_params.Order],
+        orders: Iterable[NewOrderRequestParam],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -443,7 +443,7 @@ class OrdersResource(SyncAPIResource):
         """
         return self._post(
             path_template("/v1/accounts/{account_id}/orders", account_id=account_id),
-            body=maybe_transform(orders, Iterable[order_submit_orders_params.Order]),
+            body=maybe_transform(orders, Iterable[NewOrderRequestParam]),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -821,7 +821,7 @@ class AsyncOrdersResource(AsyncAPIResource):
         self,
         account_id: int,
         *,
-        orders: Iterable[order_submit_orders_params.Order],
+        orders: Iterable[NewOrderRequestParam],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -843,7 +843,7 @@ class AsyncOrdersResource(AsyncAPIResource):
         """
         return await self._post(
             path_template("/v1/accounts/{account_id}/orders", account_id=account_id),
-            body=await async_maybe_transform(orders, Iterable[order_submit_orders_params.Order]),
+            body=await async_maybe_transform(orders, Iterable[NewOrderRequestParam]),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
