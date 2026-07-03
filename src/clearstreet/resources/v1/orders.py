@@ -23,7 +23,6 @@ from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ...types.v1 import (
     RequestTimeInForce,
-    InstrumentIDOrSymbol,
     order_get_orders_params,
     order_replace_order_params,
     order_get_executions_params,
@@ -38,7 +37,6 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.v1.request_time_in_force import RequestTimeInForce
-from ...types.v1.instrument_id_or_symbol import InstrumentIDOrSymbol
 from ...types.v1.new_order_request_param import NewOrderRequestParam
 from ...types.v1.order_get_orders_response import OrderGetOrdersResponse
 from ...types.v1.order_replace_order_response import OrderReplaceOrderResponse
@@ -168,7 +166,7 @@ class OrdersResource(SyncAPIResource):
         account_id: int,
         *,
         from_: Union[str, datetime] | Omit = omit,
-        instrument_id: InstrumentIDOrSymbol | Omit = omit,
+        instrument_ids: SequenceNotStr[str] | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         to: Union[str, datetime] | Omit = omit,
@@ -186,8 +184,9 @@ class OrdersResource(SyncAPIResource):
         Args:
           from_: The start date and time for the query range, inclusive (ISO 8601 format)
 
-          instrument_id: Optional instrument to filter by. Accepts either a symbol (e.g. `AAPL`) or an
-              instrument identifier.
+          instrument_ids: Comma-separated instrument identifiers (UUIDs) or symbols (e.g. `AAPL`) to
+              filter by. When provided, only executions for any of the listed instruments are
+              returned.
 
           page_size: The number of items to return per page. Only used when page_token is not
               provided.
@@ -215,7 +214,7 @@ class OrdersResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "from_": from_,
-                        "instrument_id": instrument_id,
+                        "instrument_ids": instrument_ids,
                         "page_size": page_size,
                         "page_token": page_token,
                         "to": to,
@@ -568,7 +567,7 @@ class AsyncOrdersResource(AsyncAPIResource):
         account_id: int,
         *,
         from_: Union[str, datetime] | Omit = omit,
-        instrument_id: InstrumentIDOrSymbol | Omit = omit,
+        instrument_ids: SequenceNotStr[str] | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         to: Union[str, datetime] | Omit = omit,
@@ -586,8 +585,9 @@ class AsyncOrdersResource(AsyncAPIResource):
         Args:
           from_: The start date and time for the query range, inclusive (ISO 8601 format)
 
-          instrument_id: Optional instrument to filter by. Accepts either a symbol (e.g. `AAPL`) or an
-              instrument identifier.
+          instrument_ids: Comma-separated instrument identifiers (UUIDs) or symbols (e.g. `AAPL`) to
+              filter by. When provided, only executions for any of the listed instruments are
+              returned.
 
           page_size: The number of items to return per page. Only used when page_token is not
               provided.
@@ -615,7 +615,7 @@ class AsyncOrdersResource(AsyncAPIResource):
                 query=await async_maybe_transform(
                     {
                         "from_": from_,
-                        "instrument_id": instrument_id,
+                        "instrument_ids": instrument_ids,
                         "page_size": page_size,
                         "page_token": page_token,
                         "to": to,
