@@ -6,9 +6,8 @@ from typing import Union
 from datetime import datetime
 from typing_extensions import Annotated, TypedDict
 
-from ..._types import Base64FileInput
+from ..._types import SequenceNotStr, Base64FileInput
 from ..._utils import PropertyInfo
-from .instrument_id_or_symbol import InstrumentIDOrSymbol
 
 __all__ = ["OrderGetExecutionsParams"]
 
@@ -17,10 +16,11 @@ class OrderGetExecutionsParams(TypedDict, total=False):
     from_: Annotated[Union[str, datetime], PropertyInfo(alias="from", format="iso8601")]
     """The start date and time for the query range, inclusive (ISO 8601 format)"""
 
-    instrument_id: InstrumentIDOrSymbol
-    """Optional instrument to filter by.
+    instrument_ids: SequenceNotStr[str]
+    """Comma-separated instrument identifiers (UUIDs) or symbols (e.g.
 
-    Accepts either a symbol (e.g. `AAPL`) or an instrument identifier.
+    `AAPL`) to filter by. When provided, only executions for any of the listed
+    instruments are returned.
     """
 
     page_size: int
