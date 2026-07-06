@@ -349,7 +349,6 @@ from clearstreet.types.v1 import (
     OrderList,
     OrderStatus,
     OrderType,
-    PositionEffect,
     QueueState,
     RequestOrderType,
     RequestTimeInForce,

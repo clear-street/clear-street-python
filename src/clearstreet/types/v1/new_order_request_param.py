@@ -8,7 +8,6 @@ from typing_extensions import Required, Annotated, TypedDict
 
 from .side import Side
 from ..._utils import PropertyInfo
-from .position_effect import PositionEffect
 from .request_order_type import RequestOrderType
 from .trailing_offset_type import TrailingOffsetType
 from .request_time_in_force import RequestTimeInForce
@@ -62,9 +61,6 @@ class NewOrderRequestParam(TypedDict, total=False):
 
     limit_price: Optional[str]
     """Limit price (required for LIMIT and STOP_LIMIT orders)"""
-
-    position_effect: PositionEffect
-    """Required for options. Specifies whether the order opens or closes a position."""
 
     stop_price: Optional[str]
     """Stop price (required for STOP and STOP_LIMIT orders)"""
