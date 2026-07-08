@@ -5,7 +5,7 @@ description = "The official Python library for the clear-street API"
 dynamic = ["readme"]
 license = "Apache-2.0"
 authors = [
-{ name = "Clear Street", email = "support@clearstreet.io" },
+{ name = "Clear Street", email = "concierge@clearstreet.com" },
 ]
 
 dependencies = [
