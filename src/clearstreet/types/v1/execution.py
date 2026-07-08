@@ -15,7 +15,7 @@ class Execution(BaseModel):
     """Unique identifier for this execution report."""
 
     instrument_id: str
-    """OEMS instrument identifier."""
+    """Unique instrument identifier."""
 
     order_id: str
     """Identifier of the order this execution belongs to."""

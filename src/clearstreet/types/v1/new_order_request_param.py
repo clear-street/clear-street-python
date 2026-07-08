@@ -8,7 +8,6 @@ from typing_extensions import Required, Annotated, TypedDict
 
 from .side import Side
 from ..._utils import PropertyInfo
-from .position_effect import PositionEffect
 from .request_order_type import RequestOrderType
 from .trailing_offset_type import TrailingOffsetType
 from .request_time_in_force import RequestTimeInForce
@@ -55,7 +54,7 @@ class NewOrderRequestParam(TypedDict, total=False):
     """
 
     instrument_id: Optional[InstrumentIDOrSymbol]
-    """OEMS instrument UUID"""
+    """Instrument identifier"""
 
     limit_offset: Optional[str]
     """Limit offset for trailing stop-limit orders (signed)"""
@@ -63,17 +62,14 @@ class NewOrderRequestParam(TypedDict, total=False):
     limit_price: Optional[str]
     """Limit price (required for LIMIT and STOP_LIMIT orders)"""
 
-    position_effect: PositionEffect
-    """Required for options. Specifies whether the order opens or closes a position."""
-
     stop_price: Optional[str]
     """Stop price (required for STOP and STOP_LIMIT orders)"""
 
     symbol: Optional[str]
     """Trading symbol.
 
-    For equities, use the ticker symbol (e.g., "AAPL"). For options, use the OSI
-    symbol (e.g., "AAPL 250117C00190000"). Either `symbol` or `instrument_id` must
+    For equities, use the ticker symbol (e.g., "TSLA"). For options, use the OSI
+    symbol (e.g., "TSLA 250117C00190000"). Either `symbol` or `instrument_id` must
     be provided.
     """
 

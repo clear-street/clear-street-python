@@ -9,4 +9,4 @@ __all__ = ["MarketDataGetDailySummariesParams"]
 
 class MarketDataGetDailySummariesParams(TypedDict, total=False):
     instrument_ids: Required[str]
-    """Comma-separated OEMS instrument UUIDs (required, 1..=100)"""
+    """Comma-separated instrument identifiers (required, 1..=100)"""

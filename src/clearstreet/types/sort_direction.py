@@ -2,6 +2,6 @@
 
 from typing_extensions import Literal, TypeAlias
 
-__all__ = ["PositionEffect"]
+__all__ = ["SortDirection"]
 
-PositionEffect: TypeAlias = Literal["OPEN", "CLOSE"]
+SortDirection: TypeAlias = Literal["ASC", "DESC"]

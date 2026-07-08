@@ -16,7 +16,10 @@ class InstrumentGetInstrumentsParams(TypedDict, total=False):
     """Filter by easy to borrow status"""
 
     instrument_ids: SequenceNotStr[str]
-    """Comma-separated OEMS instrument UUIDs"""
+    """
+    Comma-separated instrument identifiers: unique identifiers or symbols (symbol
+    for equities, OSI for options)
+    """
 
     instrument_type: Literal["COMMON_STOCK", "OPTION", "CASH"]
     """Filter by instrument type (e.g. COMMON_STOCK, OPTION)"""

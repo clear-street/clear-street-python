@@ -21,4 +21,7 @@ class ChartPayload(BaseModel):
     """Buttons associated with this chart."""
 
     data_chart: Optional[DataChart] = FieldInfo(alias="dataChart", default=None)
-    """Explicit series-driven chart definition."""
+    """
+    Explicit series-driven chart definition. When a null/undefined value is
+    observed, it indicates it does not apply.
+    """

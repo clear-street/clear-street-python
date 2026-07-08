@@ -56,21 +56,16 @@ class MarketDataResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MarketDataGetDailySummariesResponse:
         """
-        Returns the most recent OHLV and current price for the requested OEMS
-        instruments. Backed by the in-memory Polygon snapshot cache.
+        Returns the most recent open, high, low, volume (OHLV) and current price for the
+        requested instruments.
 
         Response contract: every request returns one row per **unique** `instrument_id`,
         in first-seen request order. Unresolvable IDs come back with `symbol = null` and
-        every market-data field `null`; resolvable IDs with no cache entry come back
+        every market-data field `null`; resolvable IDs with no available data come back
         with `symbol` populated but market-data fields `null`.
 
-        **Note (temporary):** ID resolution currently goes through the supplemental
-        screener (OEMS instrument_id → FMP fmp_symbol → metadata_id → realtime cache).
-        Removed when the market-data service serves daily aggregates directly, or when
-        Polygon symbology is loaded into the instrument cache.
-
         Args:
-          instrument_ids: Comma-separated OEMS instrument UUIDs (required, 1..=100)
+          instrument_ids: Comma-separated instrument identifiers (required, 1..=100)
 
           extra_headers: Send extra headers
 
@@ -110,7 +105,7 @@ class MarketDataResource(SyncAPIResource):
         Get market data snapshots for one or more securities.
 
         Args:
-          instrument_ids: Comma-separated OEMS instrument UUIDs.
+          instrument_ids: Comma-separated instrument identifiers.
 
           extra_headers: Send extra headers
 
@@ -169,21 +164,16 @@ class AsyncMarketDataResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MarketDataGetDailySummariesResponse:
         """
-        Returns the most recent OHLV and current price for the requested OEMS
-        instruments. Backed by the in-memory Polygon snapshot cache.
+        Returns the most recent open, high, low, volume (OHLV) and current price for the
+        requested instruments.
 
         Response contract: every request returns one row per **unique** `instrument_id`,
         in first-seen request order. Unresolvable IDs come back with `symbol = null` and
-        every market-data field `null`; resolvable IDs with no cache entry come back
+        every market-data field `null`; resolvable IDs with no available data come back
         with `symbol` populated but market-data fields `null`.
 
-        **Note (temporary):** ID resolution currently goes through the supplemental
-        screener (OEMS instrument_id → FMP fmp_symbol → metadata_id → realtime cache).
-        Removed when the market-data service serves daily aggregates directly, or when
-        Polygon symbology is loaded into the instrument cache.
-
         Args:
-          instrument_ids: Comma-separated OEMS instrument UUIDs (required, 1..=100)
+          instrument_ids: Comma-separated instrument identifiers (required, 1..=100)
 
           extra_headers: Send extra headers
 
@@ -223,7 +213,7 @@ class AsyncMarketDataResource(AsyncAPIResource):
         Get market data snapshots for one or more securities.
 
         Args:
-          instrument_ids: Comma-separated OEMS instrument UUIDs.
+          instrument_ids: Comma-separated instrument identifiers.
 
           extra_headers: Send extra headers
 

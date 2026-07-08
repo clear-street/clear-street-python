@@ -104,7 +104,7 @@ class NewsResource(SyncAPIResource):
           include_publishers: Comma-separated list of publishers to include (mutually exclusive with
               exclude_publishers).
 
-          instrument_ids: Comma-delimited OEMS instrument UUIDs to filter by.
+          instrument_ids: Comma-delimited instrument identifiers to filter by.
 
           news_type: Filter by news type.
 
@@ -225,7 +225,7 @@ class AsyncNewsResource(AsyncAPIResource):
           include_publishers: Comma-separated list of publishers to include (mutually exclusive with
               exclude_publishers).
 
-          instrument_ids: Comma-delimited OEMS instrument UUIDs to filter by.
+          instrument_ids: Comma-delimited instrument identifiers to filter by.
 
           news_type: Filter by news type.
 

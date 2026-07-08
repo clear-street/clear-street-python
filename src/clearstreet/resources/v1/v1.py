@@ -26,6 +26,14 @@ from .calendar import (
     CalendarResourceWithStreamingResponse,
     AsyncCalendarResourceWithStreamingResponse,
 )
+from .screener import (
+    ScreenerResource,
+    AsyncScreenerResource,
+    ScreenerResourceWithRawResponse,
+    AsyncScreenerResourceWithRawResponse,
+    ScreenerResourceWithStreamingResponse,
+    AsyncScreenerResourceWithStreamingResponse,
+)
 from ..._compat import cached_property
 from .positions import (
     PositionsResource,
@@ -42,14 +50,6 @@ from .watchlist import (
     AsyncWatchlistResourceWithRawResponse,
     WatchlistResourceWithStreamingResponse,
     AsyncWatchlistResourceWithStreamingResponse,
-)
-from .websocket import (
-    WebsocketResource,
-    AsyncWebsocketResource,
-    WebsocketResourceWithRawResponse,
-    AsyncWebsocketResourceWithRawResponse,
-    WebsocketResourceWithStreamingResponse,
-    AsyncWebsocketResourceWithStreamingResponse,
 )
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from .api_version import (
@@ -129,14 +129,14 @@ class V1Resource(SyncAPIResource):
         return PositionsResource(self._client)
 
     @cached_property
+    def screener(self) -> ScreenerResource:
+        """Search instruments and manage saved screeners."""
+        return ScreenerResource(self._client)
+
+    @cached_property
     def watchlist(self) -> WatchlistResource:
         """Create and manage watchlists."""
         return WatchlistResource(self._client)
-
-    @cached_property
-    def websocket(self) -> WebsocketResource:
-        """Active Websocket."""
-        return WebsocketResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> V1ResourceWithRawResponse:
@@ -199,14 +199,14 @@ class AsyncV1Resource(AsyncAPIResource):
         return AsyncPositionsResource(self._client)
 
     @cached_property
+    def screener(self) -> AsyncScreenerResource:
+        """Search instruments and manage saved screeners."""
+        return AsyncScreenerResource(self._client)
+
+    @cached_property
     def watchlist(self) -> AsyncWatchlistResource:
         """Create and manage watchlists."""
         return AsyncWatchlistResource(self._client)
-
-    @cached_property
-    def websocket(self) -> AsyncWebsocketResource:
-        """Active Websocket."""
-        return AsyncWebsocketResource(self._client)
 
     @cached_property
     def with_raw_response(self) -> AsyncV1ResourceWithRawResponse:
@@ -272,14 +272,14 @@ class V1ResourceWithRawResponse:
         return PositionsResourceWithRawResponse(self._v1.positions)
 
     @cached_property
+    def screener(self) -> ScreenerResourceWithRawResponse:
+        """Search instruments and manage saved screeners."""
+        return ScreenerResourceWithRawResponse(self._v1.screener)
+
+    @cached_property
     def watchlist(self) -> WatchlistResourceWithRawResponse:
         """Create and manage watchlists."""
         return WatchlistResourceWithRawResponse(self._v1.watchlist)
-
-    @cached_property
-    def websocket(self) -> WebsocketResourceWithRawResponse:
-        """Active Websocket."""
-        return WebsocketResourceWithRawResponse(self._v1.websocket)
 
 
 class AsyncV1ResourceWithRawResponse:
@@ -326,14 +326,14 @@ class AsyncV1ResourceWithRawResponse:
         return AsyncPositionsResourceWithRawResponse(self._v1.positions)
 
     @cached_property
+    def screener(self) -> AsyncScreenerResourceWithRawResponse:
+        """Search instruments and manage saved screeners."""
+        return AsyncScreenerResourceWithRawResponse(self._v1.screener)
+
+    @cached_property
     def watchlist(self) -> AsyncWatchlistResourceWithRawResponse:
         """Create and manage watchlists."""
         return AsyncWatchlistResourceWithRawResponse(self._v1.watchlist)
-
-    @cached_property
-    def websocket(self) -> AsyncWebsocketResourceWithRawResponse:
-        """Active Websocket."""
-        return AsyncWebsocketResourceWithRawResponse(self._v1.websocket)
 
 
 class V1ResourceWithStreamingResponse:
@@ -380,14 +380,14 @@ class V1ResourceWithStreamingResponse:
         return PositionsResourceWithStreamingResponse(self._v1.positions)
 
     @cached_property
+    def screener(self) -> ScreenerResourceWithStreamingResponse:
+        """Search instruments and manage saved screeners."""
+        return ScreenerResourceWithStreamingResponse(self._v1.screener)
+
+    @cached_property
     def watchlist(self) -> WatchlistResourceWithStreamingResponse:
         """Create and manage watchlists."""
         return WatchlistResourceWithStreamingResponse(self._v1.watchlist)
-
-    @cached_property
-    def websocket(self) -> WebsocketResourceWithStreamingResponse:
-        """Active Websocket."""
-        return WebsocketResourceWithStreamingResponse(self._v1.websocket)
 
 
 class AsyncV1ResourceWithStreamingResponse:
@@ -434,11 +434,11 @@ class AsyncV1ResourceWithStreamingResponse:
         return AsyncPositionsResourceWithStreamingResponse(self._v1.positions)
 
     @cached_property
+    def screener(self) -> AsyncScreenerResourceWithStreamingResponse:
+        """Search instruments and manage saved screeners."""
+        return AsyncScreenerResourceWithStreamingResponse(self._v1.screener)
+
+    @cached_property
     def watchlist(self) -> AsyncWatchlistResourceWithStreamingResponse:
         """Create and manage watchlists."""
         return AsyncWatchlistResourceWithStreamingResponse(self._v1.watchlist)
-
-    @cached_property
-    def websocket(self) -> AsyncWebsocketResourceWithStreamingResponse:
-        """Active Websocket."""
-        return AsyncWebsocketResourceWithStreamingResponse(self._v1.websocket)

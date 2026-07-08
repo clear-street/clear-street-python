@@ -20,7 +20,7 @@ class Position(BaseModel):
     """The quantity of a position that is free to be operated on."""
 
     instrument_id: str
-    """OEMS instrument UUID"""
+    """Unique instrument identifier"""
 
     instrument_type: SecurityType
     """Type of security"""
@@ -38,40 +38,71 @@ class Position(BaseModel):
     """The trading symbol for the instrument"""
 
     avg_price: Optional[str] = None
-    """The average price paid per share or contract for this position"""
+    """
+    The average price paid per share or contract for this position When a
+    null/undefined value is observed, it indicates that there is no available data.
+    """
 
     closing_price: Optional[str] = None
-    """The closing price used to value the position for the last trading day"""
+    """
+    The closing price used to value the position for the last trading day When a
+    null/undefined value is observed, it indicates that there is no available data.
+    """
 
     closing_price_date: Optional[date] = None
-    """The market date associated with `closing_price`"""
+    """
+    The market date associated with `closing_price` When a null/undefined value is
+    observed, it indicates that there is no available data.
+    """
 
     cost_basis: Optional[str] = None
-    """The total cost basis for this position"""
+    """
+    The total cost basis for this position When a null/undefined value is observed,
+    it indicates that there is no available data.
+    """
+
+    daily_realized_pnl: Optional[str] = None
+    """
+    The realized profit or loss for this position for the current day When a
+    null/undefined value is observed, it indicates that there is no available data.
+    """
 
     daily_unrealized_pnl: Optional[str] = None
-    """The unrealized profit or loss for this position relative to the previous close"""
+    """
+    The unrealized profit or loss for this position relative to the previous close
+    When a null/undefined value is observed, it indicates that there is no available
+    data.
+    """
 
     daily_unrealized_pnl_pct: Optional[str] = None
     """
     The unrealized profit/loss for the position for the current day, expressed as a
-    percentage of the baseline value (range: 0-100).
+    percentage of the baseline value (range: 0-100). When a null/undefined value is
+    observed, it indicates that there is no available data.
     """
 
     instrument_price: Optional[str] = None
-    """The current market price of the instrument"""
+    """
+    The current market price of the instrument When a null/undefined value is
+    observed, it indicates that there is no available data.
+    """
 
     underlying_instrument_id: Optional[str] = None
-    """OEMS instrument identifier of the underlying instrument, if resolvable"""
+    """
+    Identifier of the underlying instrument, when available When a null/undefined
+    value is observed, it indicates it does not apply.
+    """
 
     unrealized_pnl: Optional[str] = None
     """
     The total unrealized profit or loss for this position based on current market
-    value
+    value When a null/undefined value is observed, it indicates that there is no
+    available data.
     """
 
     unrealized_pnl_pct: Optional[str] = None
     """
     The unrealized profit/loss for the position, expressed as a percentage of the
-    position's cost basis (range: 0-100).
+    position's cost basis (range: 0-100). When a null/undefined value is observed,
+    it indicates that there is no available data.
     """

@@ -29,7 +29,7 @@ class Order(BaseModel):
     """Account placing the order"""
 
     client_order_id: str
-    """Client-provided identifier echoed back (FIX tag 11)."""
+    """Client-provided identifier echoed back."""
 
     created_at: datetime
     """Timestamp when order was created (UTC)"""
@@ -38,7 +38,7 @@ class Order(BaseModel):
     """Cumulative filled quantity"""
 
     instrument_id: str
-    """OEMS instrument UUID for the traded instrument."""
+    """Instrument identifier for the traded instrument."""
 
     instrument_type: SecurityType
     """Type of security"""
@@ -71,7 +71,10 @@ class Order(BaseModel):
     """MIC code of the venue where the order is routed"""
 
     average_fill_price: Optional[str] = None
-    """Average fill price across all executions"""
+    """
+    Average fill price across all executions When a null/undefined value is
+    observed, it indicates that there is no available data.
+    """
 
     details: Optional[List[str]] = None
     """Contains execution, rejection or cancellation details, if any"""
@@ -79,51 +82,85 @@ class Order(BaseModel):
     expires_at: Optional[datetime] = None
     """Timestamp when the order will expire (UTC).
 
-    Present when time_in_force is GOOD_TILL_DATE.
+    Present when time_in_force is GOOD_TILL_DATE. When a null/undefined value is
+    observed, it indicates it does not apply.
     """
 
     extended_hours: Optional[bool] = None
     """Whether the order is eligible for extended-hours trading."""
 
     limit_offset: Optional[str] = None
-    """Limit offset for trailing stop-limit orders (signed)"""
+    """
+    Limit offset for trailing stop-limit orders (signed) When a null/undefined value
+    is observed, it indicates it does not apply.
+    """
 
     limit_price: Optional[str] = None
-    """Limit price (for LIMIT and STOP_LIMIT orders)"""
+    """
+    Limit price (for LIMIT and STOP_LIMIT orders) When a null/undefined value is
+    observed, it indicates it does not apply.
+    """
 
     queue_state: Optional[QueueState] = None
     """
     Parent order queue state, present when the order is awaiting release or
-    released.
+    released. When a null/undefined value is observed, it indicates it does not
+    apply.
     """
 
     releases_at: Optional[datetime] = None
-    """Scheduled release time for orders awaiting release."""
+    """
+    Scheduled release time for orders awaiting release. When a null/undefined value
+    is observed, it indicates it does not apply.
+    """
 
     stop_price: Optional[str] = None
-    """Stop price (for STOP and STOP_LIMIT orders)"""
+    """
+    Stop price (for STOP and STOP_LIMIT orders) When a null/undefined value is
+    observed, it indicates it does not apply.
+    """
 
     trailing_limit_px: Optional[str] = None
-    """Current trailing limit price computed by the trailing strategy"""
+    """
+    Current trailing limit price computed by the trailing strategy When a
+    null/undefined value is observed, it indicates it does not apply.
+    """
 
     trailing_offset: Optional[str] = None
-    """Trailing offset amount for trailing orders"""
+    """
+    Trailing offset amount for trailing orders When a null/undefined value is
+    observed, it indicates it does not apply.
+    """
 
     trailing_offset_type: Optional[TrailingOffsetType] = None
-    """Trailing offset type for trailing orders"""
+    """
+    Trailing offset type for trailing orders When a null/undefined value is
+    observed, it indicates it does not apply.
+    """
 
     trailing_stop_px: Optional[str] = None
-    """Current trailing stop price computed by the trailing strategy"""
+    """
+    Current trailing stop price computed by the trailing strategy When a
+    null/undefined value is observed, it indicates it does not apply.
+    """
 
     trailing_watermark_px: Optional[str] = None
-    """Trailing watermark price for trailing orders"""
+    """
+    Trailing watermark price for trailing orders When a null/undefined value is
+    observed, it indicates it does not apply.
+    """
 
     trailing_watermark_ts: Optional[datetime] = None
-    """Trailing watermark timestamp for trailing orders"""
+    """
+    Trailing watermark timestamp for trailing orders When a null/undefined value is
+    observed, it indicates it does not apply.
+    """
 
     underlying_instrument_id: Optional[str] = None
-    """OEMS instrument ID of the option's underlying instrument.
+    """Instrument ID of the option's underlying instrument.
 
-    Populated only for OPTIONS orders; `null` for non-options and for options whose
-    underlier cannot be resolved from the instrument cache.
+    Populated only for options orders. A `null` means one of two things: the order
+    is not an option, so the field does not apply; or the order is an option whose
+    underlier has not yet been resolved. When a null/undefined value is observed, it
+    indicates it does not apply.
     """

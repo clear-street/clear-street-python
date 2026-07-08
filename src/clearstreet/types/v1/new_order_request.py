@@ -5,7 +5,6 @@ from datetime import datetime
 
 from .side import Side
 from ..._models import BaseModel
-from .position_effect import PositionEffect
 from .request_order_type import RequestOrderType
 from .trailing_offset_type import TrailingOffsetType
 from .request_time_in_force import RequestTimeInForce
@@ -52,7 +51,7 @@ class NewOrderRequest(BaseModel):
     """
 
     instrument_id: Optional[InstrumentIDOrSymbol] = None
-    """OEMS instrument UUID"""
+    """Instrument identifier"""
 
     limit_offset: Optional[str] = None
     """Limit offset for trailing stop-limit orders (signed)"""
@@ -60,17 +59,14 @@ class NewOrderRequest(BaseModel):
     limit_price: Optional[str] = None
     """Limit price (required for LIMIT and STOP_LIMIT orders)"""
 
-    position_effect: Optional[PositionEffect] = None
-    """Required for options. Specifies whether the order opens or closes a position."""
-
     stop_price: Optional[str] = None
     """Stop price (required for STOP and STOP_LIMIT orders)"""
 
     symbol: Optional[str] = None
     """Trading symbol.
 
-    For equities, use the ticker symbol (e.g., "AAPL"). For options, use the OSI
-    symbol (e.g., "AAPL 250117C00190000"). Either `symbol` or `instrument_id` must
+    For equities, use the ticker symbol (e.g., "TSLA"). For options, use the OSI
+    symbol (e.g., "TSLA 250117C00190000"). Either `symbol` or `instrument_id` must
     be provided.
     """
 

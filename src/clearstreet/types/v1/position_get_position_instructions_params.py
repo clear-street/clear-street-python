@@ -13,5 +13,5 @@ class PositionGetPositionInstructionsParams(TypedDict, total=False):
     instrument_id: InstrumentIDOrSymbol
     """Limit results to a single contract.
 
-    Accepts the instrument id or the OSI symbol.
+    Instrument ID (UUID) or symbol (equity ticker or OSI option symbol).
     """

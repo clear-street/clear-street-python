@@ -21,7 +21,13 @@ class ActionButton(BaseModel):
     """User-visible label."""
 
     prompt: Optional[PromptButtonAction] = None
-    """Follow-up prompt to submit as the next user message."""
+    """
+    Follow-up prompt to submit as the next user message. When a null/undefined value
+    is observed, it indicates it does not apply.
+    """
 
     structured_action: Optional[StructuredActionButtonAction] = FieldInfo(alias="structuredAction", default=None)
-    """Structured action in the same message to execute on click."""
+    """
+    Structured action in the same message to execute on click. When a null/undefined
+    value is observed, it indicates it does not apply.
+    """

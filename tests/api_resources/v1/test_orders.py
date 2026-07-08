@@ -26,7 +26,6 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestOrders:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_cancel_all_open_orders(self, client: ClearStreet) -> None:
         order = client.v1.orders.cancel_all_open_orders(
@@ -34,7 +33,6 @@ class TestOrders:
         )
         assert_matches_type(OrderCancelAllOpenOrdersResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_cancel_all_open_orders_with_all_params(self, client: ClearStreet) -> None:
         order = client.v1.orders.cancel_all_open_orders(
@@ -46,7 +44,6 @@ class TestOrders:
         )
         assert_matches_type(OrderCancelAllOpenOrdersResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_cancel_all_open_orders(self, client: ClearStreet) -> None:
         response = client.v1.orders.with_raw_response.cancel_all_open_orders(
@@ -58,7 +55,6 @@ class TestOrders:
         order = response.parse()
         assert_matches_type(OrderCancelAllOpenOrdersResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_cancel_all_open_orders(self, client: ClearStreet) -> None:
         with client.v1.orders.with_streaming_response.cancel_all_open_orders(
@@ -72,7 +68,6 @@ class TestOrders:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_cancel_open_order(self, client: ClearStreet) -> None:
         order = client.v1.orders.cancel_open_order(
@@ -81,7 +76,6 @@ class TestOrders:
         )
         assert_matches_type(OrderCancelOpenOrderResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_cancel_open_order(self, client: ClearStreet) -> None:
         response = client.v1.orders.with_raw_response.cancel_open_order(
@@ -94,7 +88,6 @@ class TestOrders:
         order = response.parse()
         assert_matches_type(OrderCancelOpenOrderResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_cancel_open_order(self, client: ClearStreet) -> None:
         with client.v1.orders.with_streaming_response.cancel_open_order(
@@ -109,7 +102,6 @@ class TestOrders:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_cancel_open_order(self, client: ClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `order_id` but received ''"):
@@ -118,7 +110,6 @@ class TestOrders:
                 account_id=0,
             )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_executions(self, client: ClearStreet) -> None:
         order = client.v1.orders.get_executions(
@@ -126,20 +117,18 @@ class TestOrders:
         )
         assert_matches_type(OrderGetExecutionsResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_executions_with_all_params(self, client: ClearStreet) -> None:
         order = client.v1.orders.get_executions(
             account_id=0,
             from_=parse_datetime("2019-12-27T18:11:19.117Z"),
-            instrument_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            instrument_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             page_size=1,
             page_token="U3RhaW5sZXNzIHJvY2tz",
             to=parse_datetime("2019-12-27T18:11:19.117Z"),
         )
         assert_matches_type(OrderGetExecutionsResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_executions(self, client: ClearStreet) -> None:
         response = client.v1.orders.with_raw_response.get_executions(
@@ -151,7 +140,6 @@ class TestOrders:
         order = response.parse()
         assert_matches_type(OrderGetExecutionsResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_executions(self, client: ClearStreet) -> None:
         with client.v1.orders.with_streaming_response.get_executions(
@@ -165,7 +153,6 @@ class TestOrders:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_order_by_id(self, client: ClearStreet) -> None:
         order = client.v1.orders.get_order_by_id(
@@ -174,7 +161,6 @@ class TestOrders:
         )
         assert_matches_type(OrderGetOrderByIDResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_order_by_id(self, client: ClearStreet) -> None:
         response = client.v1.orders.with_raw_response.get_order_by_id(
@@ -187,7 +173,6 @@ class TestOrders:
         order = response.parse()
         assert_matches_type(OrderGetOrderByIDResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_order_by_id(self, client: ClearStreet) -> None:
         with client.v1.orders.with_streaming_response.get_order_by_id(
@@ -202,7 +187,6 @@ class TestOrders:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_get_order_by_id(self, client: ClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `order_id` but received ''"):
@@ -211,7 +195,6 @@ class TestOrders:
                 account_id=0,
             )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_orders(self, client: ClearStreet) -> None:
         order = client.v1.orders.get_orders(
@@ -219,7 +202,6 @@ class TestOrders:
         )
         assert_matches_type(OrderGetOrdersResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_orders_with_all_params(self, client: ClearStreet) -> None:
         order = client.v1.orders.get_orders(
@@ -227,6 +209,7 @@ class TestOrders:
             from_=parse_datetime("2019-12-27T18:11:19.117Z"),
             instrument_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             instrument_type="COMMON_STOCK",
+            order_ids=["string"],
             page_size=1,
             page_token="U3RhaW5sZXNzIHJvY2tz",
             status=["PENDING_NEW"],
@@ -236,7 +219,6 @@ class TestOrders:
         )
         assert_matches_type(OrderGetOrdersResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_orders(self, client: ClearStreet) -> None:
         response = client.v1.orders.with_raw_response.get_orders(
@@ -248,7 +230,6 @@ class TestOrders:
         order = response.parse()
         assert_matches_type(OrderGetOrdersResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_orders(self, client: ClearStreet) -> None:
         with client.v1.orders.with_streaming_response.get_orders(
@@ -262,7 +243,6 @@ class TestOrders:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_replace_order(self, client: ClearStreet) -> None:
         order = client.v1.orders.replace_order(
@@ -271,20 +251,18 @@ class TestOrders:
         )
         assert_matches_type(OrderReplaceOrderResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_replace_order_with_all_params(self, client: ClearStreet) -> None:
         order = client.v1.orders.replace_order(
             order_id="order_id",
             account_id=0,
-            limit_price="150.50",
-            quantity="125",
-            stop_price="148.00",
+            limit_price="49.00",
+            quantity="1",
+            stop_price="52.00",
             time_in_force="DAY",
         )
         assert_matches_type(OrderReplaceOrderResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_replace_order(self, client: ClearStreet) -> None:
         response = client.v1.orders.with_raw_response.replace_order(
@@ -297,7 +275,6 @@ class TestOrders:
         order = response.parse()
         assert_matches_type(OrderReplaceOrderResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_replace_order(self, client: ClearStreet) -> None:
         with client.v1.orders.with_streaming_response.replace_order(
@@ -312,7 +289,6 @@ class TestOrders:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_replace_order(self, client: ClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `order_id` but received ''"):
@@ -321,62 +297,30 @@ class TestOrders:
                 account_id=0,
             )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_submit_orders(self, client: ClearStreet) -> None:
         order = client.v1.orders.submit_orders(
             account_id=0,
             orders=[
                 {
-                    "legs": [
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-447a-706f-996f-097254663f02",
-                            "side": "BUY",
-                        },
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-4db4-78ec-b4fd-cba8be61cf8a",
-                            "side": "SELL",
-                        },
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-5264-7f20-8fd3-35df82cd6ef0",
-                            "side": "BUY",
-                        },
-                    ],
                     "order_type": "LIMIT",
+                    "quantity": "1",
+                    "side": "BUY",
                     "time_in_force": "DAY",
                 }
             ],
         )
         assert_matches_type(OrderSubmitOrdersResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_submit_orders(self, client: ClearStreet) -> None:
         response = client.v1.orders.with_raw_response.submit_orders(
             account_id=0,
             orders=[
                 {
-                    "legs": [
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-447a-706f-996f-097254663f02",
-                            "side": "BUY",
-                        },
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-4db4-78ec-b4fd-cba8be61cf8a",
-                            "side": "SELL",
-                        },
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-5264-7f20-8fd3-35df82cd6ef0",
-                            "side": "BUY",
-                        },
-                    ],
                     "order_type": "LIMIT",
+                    "quantity": "1",
+                    "side": "BUY",
                     "time_in_force": "DAY",
                 }
             ],
@@ -387,31 +331,15 @@ class TestOrders:
         order = response.parse()
         assert_matches_type(OrderSubmitOrdersResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_submit_orders(self, client: ClearStreet) -> None:
         with client.v1.orders.with_streaming_response.submit_orders(
             account_id=0,
             orders=[
                 {
-                    "legs": [
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-447a-706f-996f-097254663f02",
-                            "side": "BUY",
-                        },
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-4db4-78ec-b4fd-cba8be61cf8a",
-                            "side": "SELL",
-                        },
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-5264-7f20-8fd3-35df82cd6ef0",
-                            "side": "BUY",
-                        },
-                    ],
                     "order_type": "LIMIT",
+                    "quantity": "1",
+                    "side": "BUY",
                     "time_in_force": "DAY",
                 }
             ],
@@ -430,7 +358,6 @@ class TestAsyncOrders:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_cancel_all_open_orders(self, async_client: AsyncClearStreet) -> None:
         order = await async_client.v1.orders.cancel_all_open_orders(
@@ -438,7 +365,6 @@ class TestAsyncOrders:
         )
         assert_matches_type(OrderCancelAllOpenOrdersResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_cancel_all_open_orders_with_all_params(self, async_client: AsyncClearStreet) -> None:
         order = await async_client.v1.orders.cancel_all_open_orders(
@@ -450,7 +376,6 @@ class TestAsyncOrders:
         )
         assert_matches_type(OrderCancelAllOpenOrdersResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_cancel_all_open_orders(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.orders.with_raw_response.cancel_all_open_orders(
@@ -462,7 +387,6 @@ class TestAsyncOrders:
         order = await response.parse()
         assert_matches_type(OrderCancelAllOpenOrdersResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_cancel_all_open_orders(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.orders.with_streaming_response.cancel_all_open_orders(
@@ -476,7 +400,6 @@ class TestAsyncOrders:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_cancel_open_order(self, async_client: AsyncClearStreet) -> None:
         order = await async_client.v1.orders.cancel_open_order(
@@ -485,7 +408,6 @@ class TestAsyncOrders:
         )
         assert_matches_type(OrderCancelOpenOrderResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_cancel_open_order(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.orders.with_raw_response.cancel_open_order(
@@ -498,7 +420,6 @@ class TestAsyncOrders:
         order = await response.parse()
         assert_matches_type(OrderCancelOpenOrderResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_cancel_open_order(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.orders.with_streaming_response.cancel_open_order(
@@ -513,7 +434,6 @@ class TestAsyncOrders:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_cancel_open_order(self, async_client: AsyncClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `order_id` but received ''"):
@@ -522,7 +442,6 @@ class TestAsyncOrders:
                 account_id=0,
             )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_executions(self, async_client: AsyncClearStreet) -> None:
         order = await async_client.v1.orders.get_executions(
@@ -530,20 +449,18 @@ class TestAsyncOrders:
         )
         assert_matches_type(OrderGetExecutionsResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_executions_with_all_params(self, async_client: AsyncClearStreet) -> None:
         order = await async_client.v1.orders.get_executions(
             account_id=0,
             from_=parse_datetime("2019-12-27T18:11:19.117Z"),
-            instrument_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            instrument_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             page_size=1,
             page_token="U3RhaW5sZXNzIHJvY2tz",
             to=parse_datetime("2019-12-27T18:11:19.117Z"),
         )
         assert_matches_type(OrderGetExecutionsResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_executions(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.orders.with_raw_response.get_executions(
@@ -555,7 +472,6 @@ class TestAsyncOrders:
         order = await response.parse()
         assert_matches_type(OrderGetExecutionsResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_executions(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.orders.with_streaming_response.get_executions(
@@ -569,7 +485,6 @@ class TestAsyncOrders:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_order_by_id(self, async_client: AsyncClearStreet) -> None:
         order = await async_client.v1.orders.get_order_by_id(
@@ -578,7 +493,6 @@ class TestAsyncOrders:
         )
         assert_matches_type(OrderGetOrderByIDResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_order_by_id(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.orders.with_raw_response.get_order_by_id(
@@ -591,7 +505,6 @@ class TestAsyncOrders:
         order = await response.parse()
         assert_matches_type(OrderGetOrderByIDResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_order_by_id(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.orders.with_streaming_response.get_order_by_id(
@@ -606,7 +519,6 @@ class TestAsyncOrders:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_get_order_by_id(self, async_client: AsyncClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `order_id` but received ''"):
@@ -615,7 +527,6 @@ class TestAsyncOrders:
                 account_id=0,
             )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_orders(self, async_client: AsyncClearStreet) -> None:
         order = await async_client.v1.orders.get_orders(
@@ -623,7 +534,6 @@ class TestAsyncOrders:
         )
         assert_matches_type(OrderGetOrdersResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_orders_with_all_params(self, async_client: AsyncClearStreet) -> None:
         order = await async_client.v1.orders.get_orders(
@@ -631,6 +541,7 @@ class TestAsyncOrders:
             from_=parse_datetime("2019-12-27T18:11:19.117Z"),
             instrument_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
             instrument_type="COMMON_STOCK",
+            order_ids=["string"],
             page_size=1,
             page_token="U3RhaW5sZXNzIHJvY2tz",
             status=["PENDING_NEW"],
@@ -640,7 +551,6 @@ class TestAsyncOrders:
         )
         assert_matches_type(OrderGetOrdersResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_orders(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.orders.with_raw_response.get_orders(
@@ -652,7 +562,6 @@ class TestAsyncOrders:
         order = await response.parse()
         assert_matches_type(OrderGetOrdersResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_orders(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.orders.with_streaming_response.get_orders(
@@ -666,7 +575,6 @@ class TestAsyncOrders:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_replace_order(self, async_client: AsyncClearStreet) -> None:
         order = await async_client.v1.orders.replace_order(
@@ -675,20 +583,18 @@ class TestAsyncOrders:
         )
         assert_matches_type(OrderReplaceOrderResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_replace_order_with_all_params(self, async_client: AsyncClearStreet) -> None:
         order = await async_client.v1.orders.replace_order(
             order_id="order_id",
             account_id=0,
-            limit_price="150.50",
-            quantity="125",
-            stop_price="148.00",
+            limit_price="49.00",
+            quantity="1",
+            stop_price="52.00",
             time_in_force="DAY",
         )
         assert_matches_type(OrderReplaceOrderResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_replace_order(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.orders.with_raw_response.replace_order(
@@ -701,7 +607,6 @@ class TestAsyncOrders:
         order = await response.parse()
         assert_matches_type(OrderReplaceOrderResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_replace_order(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.orders.with_streaming_response.replace_order(
@@ -716,7 +621,6 @@ class TestAsyncOrders:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_replace_order(self, async_client: AsyncClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `order_id` but received ''"):
@@ -725,62 +629,30 @@ class TestAsyncOrders:
                 account_id=0,
             )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_submit_orders(self, async_client: AsyncClearStreet) -> None:
         order = await async_client.v1.orders.submit_orders(
             account_id=0,
             orders=[
                 {
-                    "legs": [
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-447a-706f-996f-097254663f02",
-                            "side": "BUY",
-                        },
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-4db4-78ec-b4fd-cba8be61cf8a",
-                            "side": "SELL",
-                        },
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-5264-7f20-8fd3-35df82cd6ef0",
-                            "side": "BUY",
-                        },
-                    ],
                     "order_type": "LIMIT",
+                    "quantity": "1",
+                    "side": "BUY",
                     "time_in_force": "DAY",
                 }
             ],
         )
         assert_matches_type(OrderSubmitOrdersResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_submit_orders(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.orders.with_raw_response.submit_orders(
             account_id=0,
             orders=[
                 {
-                    "legs": [
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-447a-706f-996f-097254663f02",
-                            "side": "BUY",
-                        },
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-4db4-78ec-b4fd-cba8be61cf8a",
-                            "side": "SELL",
-                        },
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-5264-7f20-8fd3-35df82cd6ef0",
-                            "side": "BUY",
-                        },
-                    ],
                     "order_type": "LIMIT",
+                    "quantity": "1",
+                    "side": "BUY",
                     "time_in_force": "DAY",
                 }
             ],
@@ -791,31 +663,15 @@ class TestAsyncOrders:
         order = await response.parse()
         assert_matches_type(OrderSubmitOrdersResponse, order, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_submit_orders(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.orders.with_streaming_response.submit_orders(
             account_id=0,
             orders=[
                 {
-                    "legs": [
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-447a-706f-996f-097254663f02",
-                            "side": "BUY",
-                        },
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-4db4-78ec-b4fd-cba8be61cf8a",
-                            "side": "SELL",
-                        },
-                        {
-                            "ratio": "ratio",
-                            "security": "0193bb84-5264-7f20-8fd3-35df82cd6ef0",
-                            "side": "BUY",
-                        },
-                    ],
                     "order_type": "LIMIT",
+                    "quantity": "1",
+                    "side": "BUY",
                     "time_in_force": "DAY",
                 }
             ],

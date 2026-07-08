@@ -26,13 +26,11 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestInstrumentData:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_all_instrument_events(self, client: ClearStreet) -> None:
         instrument_data = client.v1.instrument_data.get_all_instrument_events()
         assert_matches_type(InstrumentDataGetAllInstrumentEventsResponse, instrument_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_all_instrument_events_with_all_params(self, client: ClearStreet) -> None:
         instrument_data = client.v1.instrument_data.get_all_instrument_events(
@@ -43,7 +41,6 @@ class TestInstrumentData:
         )
         assert_matches_type(InstrumentDataGetAllInstrumentEventsResponse, instrument_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_all_instrument_events(self, client: ClearStreet) -> None:
         response = client.v1.instrument_data.with_raw_response.get_all_instrument_events()
@@ -53,7 +50,6 @@ class TestInstrumentData:
         instrument_data = response.parse()
         assert_matches_type(InstrumentDataGetAllInstrumentEventsResponse, instrument_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_all_instrument_events(self, client: ClearStreet) -> None:
         with client.v1.instrument_data.with_streaming_response.get_all_instrument_events() as response:
@@ -65,7 +61,6 @@ class TestInstrumentData:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_instrument_analyst_consensus(self, client: ClearStreet) -> None:
         instrument_data = client.v1.instrument_data.get_instrument_analyst_consensus(
@@ -73,7 +68,6 @@ class TestInstrumentData:
         )
         assert_matches_type(InstrumentDataGetInstrumentAnalystConsensusResponse, instrument_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_instrument_analyst_consensus_with_all_params(self, client: ClearStreet) -> None:
         instrument_data = client.v1.instrument_data.get_instrument_analyst_consensus(
@@ -83,7 +77,6 @@ class TestInstrumentData:
         )
         assert_matches_type(InstrumentDataGetInstrumentAnalystConsensusResponse, instrument_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_instrument_analyst_consensus(self, client: ClearStreet) -> None:
         response = client.v1.instrument_data.with_raw_response.get_instrument_analyst_consensus(
@@ -95,7 +88,6 @@ class TestInstrumentData:
         instrument_data = response.parse()
         assert_matches_type(InstrumentDataGetInstrumentAnalystConsensusResponse, instrument_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_instrument_analyst_consensus(self, client: ClearStreet) -> None:
         with client.v1.instrument_data.with_streaming_response.get_instrument_analyst_consensus(
@@ -109,7 +101,6 @@ class TestInstrumentData:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_get_instrument_analyst_consensus(self, client: ClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `instrument_id` but received ''"):
@@ -117,7 +108,6 @@ class TestInstrumentData:
                 instrument_id="",
             )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_instrument_balance_sheet_statements(self, client: ClearStreet) -> None:
         instrument_data = client.v1.instrument_data.get_instrument_balance_sheet_statements(
@@ -127,7 +117,6 @@ class TestInstrumentData:
             InstrumentDataGetInstrumentBalanceSheetStatementsResponse, instrument_data, path=["response"]
         )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_instrument_balance_sheet_statements_with_all_params(self, client: ClearStreet) -> None:
         instrument_data = client.v1.instrument_data.get_instrument_balance_sheet_statements(
@@ -141,7 +130,6 @@ class TestInstrumentData:
             InstrumentDataGetInstrumentBalanceSheetStatementsResponse, instrument_data, path=["response"]
         )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_instrument_balance_sheet_statements(self, client: ClearStreet) -> None:
         response = client.v1.instrument_data.with_raw_response.get_instrument_balance_sheet_statements(
@@ -155,7 +143,6 @@ class TestInstrumentData:
             InstrumentDataGetInstrumentBalanceSheetStatementsResponse, instrument_data, path=["response"]
         )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_instrument_balance_sheet_statements(self, client: ClearStreet) -> None:
         with client.v1.instrument_data.with_streaming_response.get_instrument_balance_sheet_statements(
@@ -171,7 +158,6 @@ class TestInstrumentData:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_get_instrument_balance_sheet_statements(self, client: ClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `instrument_id` but received ''"):
@@ -179,7 +165,6 @@ class TestInstrumentData:
                 instrument_id="",
             )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_instrument_cash_flow_statements(self, client: ClearStreet) -> None:
         instrument_data = client.v1.instrument_data.get_instrument_cash_flow_statements(
@@ -187,7 +172,6 @@ class TestInstrumentData:
         )
         assert_matches_type(InstrumentDataGetInstrumentCashFlowStatementsResponse, instrument_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_instrument_cash_flow_statements_with_all_params(self, client: ClearStreet) -> None:
         instrument_data = client.v1.instrument_data.get_instrument_cash_flow_statements(
@@ -199,7 +183,6 @@ class TestInstrumentData:
         )
         assert_matches_type(InstrumentDataGetInstrumentCashFlowStatementsResponse, instrument_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_instrument_cash_flow_statements(self, client: ClearStreet) -> None:
         response = client.v1.instrument_data.with_raw_response.get_instrument_cash_flow_statements(
@@ -211,7 +194,6 @@ class TestInstrumentData:
         instrument_data = response.parse()
         assert_matches_type(InstrumentDataGetInstrumentCashFlowStatementsResponse, instrument_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_instrument_cash_flow_statements(self, client: ClearStreet) -> None:
         with client.v1.instrument_data.with_streaming_response.get_instrument_cash_flow_statements(
@@ -227,7 +209,6 @@ class TestInstrumentData:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_get_instrument_cash_flow_statements(self, client: ClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `instrument_id` but received ''"):
@@ -235,7 +216,6 @@ class TestInstrumentData:
                 instrument_id="",
             )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_instrument_events(self, client: ClearStreet) -> None:
         instrument_data = client.v1.instrument_data.get_instrument_events(
@@ -243,7 +223,6 @@ class TestInstrumentData:
         )
         assert_matches_type(InstrumentDataGetInstrumentEventsResponse, instrument_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_instrument_events_with_all_params(self, client: ClearStreet) -> None:
         instrument_data = client.v1.instrument_data.get_instrument_events(
@@ -253,7 +232,6 @@ class TestInstrumentData:
         )
         assert_matches_type(InstrumentDataGetInstrumentEventsResponse, instrument_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_instrument_events(self, client: ClearStreet) -> None:
         response = client.v1.instrument_data.with_raw_response.get_instrument_events(
@@ -265,7 +243,6 @@ class TestInstrumentData:
         instrument_data = response.parse()
         assert_matches_type(InstrumentDataGetInstrumentEventsResponse, instrument_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_instrument_events(self, client: ClearStreet) -> None:
         with client.v1.instrument_data.with_streaming_response.get_instrument_events(
@@ -279,7 +256,6 @@ class TestInstrumentData:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_get_instrument_events(self, client: ClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `instrument_id` but received ''"):
@@ -287,7 +263,6 @@ class TestInstrumentData:
                 instrument_id="",
             )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_instrument_fundamentals(self, client: ClearStreet) -> None:
         instrument_data = client.v1.instrument_data.get_instrument_fundamentals(
@@ -295,7 +270,6 @@ class TestInstrumentData:
         )
         assert_matches_type(InstrumentDataGetInstrumentFundamentalsResponse, instrument_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_instrument_fundamentals(self, client: ClearStreet) -> None:
         response = client.v1.instrument_data.with_raw_response.get_instrument_fundamentals(
@@ -307,7 +281,6 @@ class TestInstrumentData:
         instrument_data = response.parse()
         assert_matches_type(InstrumentDataGetInstrumentFundamentalsResponse, instrument_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_instrument_fundamentals(self, client: ClearStreet) -> None:
         with client.v1.instrument_data.with_streaming_response.get_instrument_fundamentals(
@@ -321,7 +294,6 @@ class TestInstrumentData:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_get_instrument_fundamentals(self, client: ClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `instrument_id` but received ''"):
@@ -329,7 +301,6 @@ class TestInstrumentData:
                 "",
             )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_instrument_income_statements(self, client: ClearStreet) -> None:
         instrument_data = client.v1.instrument_data.get_instrument_income_statements(
@@ -337,7 +308,6 @@ class TestInstrumentData:
         )
         assert_matches_type(InstrumentDataGetInstrumentIncomeStatementsResponse, instrument_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_instrument_income_statements_with_all_params(self, client: ClearStreet) -> None:
         instrument_data = client.v1.instrument_data.get_instrument_income_statements(
@@ -349,7 +319,6 @@ class TestInstrumentData:
         )
         assert_matches_type(InstrumentDataGetInstrumentIncomeStatementsResponse, instrument_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_instrument_income_statements(self, client: ClearStreet) -> None:
         response = client.v1.instrument_data.with_raw_response.get_instrument_income_statements(
@@ -361,7 +330,6 @@ class TestInstrumentData:
         instrument_data = response.parse()
         assert_matches_type(InstrumentDataGetInstrumentIncomeStatementsResponse, instrument_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_instrument_income_statements(self, client: ClearStreet) -> None:
         with client.v1.instrument_data.with_streaming_response.get_instrument_income_statements(
@@ -375,7 +343,6 @@ class TestInstrumentData:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_get_instrument_income_statements(self, client: ClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `instrument_id` but received ''"):
@@ -389,13 +356,11 @@ class TestAsyncInstrumentData:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_all_instrument_events(self, async_client: AsyncClearStreet) -> None:
         instrument_data = await async_client.v1.instrument_data.get_all_instrument_events()
         assert_matches_type(InstrumentDataGetAllInstrumentEventsResponse, instrument_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_all_instrument_events_with_all_params(self, async_client: AsyncClearStreet) -> None:
         instrument_data = await async_client.v1.instrument_data.get_all_instrument_events(
@@ -406,7 +371,6 @@ class TestAsyncInstrumentData:
         )
         assert_matches_type(InstrumentDataGetAllInstrumentEventsResponse, instrument_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_all_instrument_events(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.instrument_data.with_raw_response.get_all_instrument_events()
@@ -416,7 +380,6 @@ class TestAsyncInstrumentData:
         instrument_data = await response.parse()
         assert_matches_type(InstrumentDataGetAllInstrumentEventsResponse, instrument_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_all_instrument_events(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.instrument_data.with_streaming_response.get_all_instrument_events() as response:
@@ -428,7 +391,6 @@ class TestAsyncInstrumentData:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_instrument_analyst_consensus(self, async_client: AsyncClearStreet) -> None:
         instrument_data = await async_client.v1.instrument_data.get_instrument_analyst_consensus(
@@ -436,7 +398,6 @@ class TestAsyncInstrumentData:
         )
         assert_matches_type(InstrumentDataGetInstrumentAnalystConsensusResponse, instrument_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_instrument_analyst_consensus_with_all_params(
         self, async_client: AsyncClearStreet
@@ -448,7 +409,6 @@ class TestAsyncInstrumentData:
         )
         assert_matches_type(InstrumentDataGetInstrumentAnalystConsensusResponse, instrument_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_instrument_analyst_consensus(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.instrument_data.with_raw_response.get_instrument_analyst_consensus(
@@ -460,7 +420,6 @@ class TestAsyncInstrumentData:
         instrument_data = await response.parse()
         assert_matches_type(InstrumentDataGetInstrumentAnalystConsensusResponse, instrument_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_instrument_analyst_consensus(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.instrument_data.with_streaming_response.get_instrument_analyst_consensus(
@@ -474,7 +433,6 @@ class TestAsyncInstrumentData:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_get_instrument_analyst_consensus(self, async_client: AsyncClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `instrument_id` but received ''"):
@@ -482,7 +440,6 @@ class TestAsyncInstrumentData:
                 instrument_id="",
             )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_instrument_balance_sheet_statements(self, async_client: AsyncClearStreet) -> None:
         instrument_data = await async_client.v1.instrument_data.get_instrument_balance_sheet_statements(
@@ -492,7 +449,6 @@ class TestAsyncInstrumentData:
             InstrumentDataGetInstrumentBalanceSheetStatementsResponse, instrument_data, path=["response"]
         )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_instrument_balance_sheet_statements_with_all_params(
         self, async_client: AsyncClearStreet
@@ -508,7 +464,6 @@ class TestAsyncInstrumentData:
             InstrumentDataGetInstrumentBalanceSheetStatementsResponse, instrument_data, path=["response"]
         )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_instrument_balance_sheet_statements(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.instrument_data.with_raw_response.get_instrument_balance_sheet_statements(
@@ -522,7 +477,6 @@ class TestAsyncInstrumentData:
             InstrumentDataGetInstrumentBalanceSheetStatementsResponse, instrument_data, path=["response"]
         )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_instrument_balance_sheet_statements(
         self, async_client: AsyncClearStreet
@@ -540,7 +494,6 @@ class TestAsyncInstrumentData:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_get_instrument_balance_sheet_statements(self, async_client: AsyncClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `instrument_id` but received ''"):
@@ -548,7 +501,6 @@ class TestAsyncInstrumentData:
                 instrument_id="",
             )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_instrument_cash_flow_statements(self, async_client: AsyncClearStreet) -> None:
         instrument_data = await async_client.v1.instrument_data.get_instrument_cash_flow_statements(
@@ -556,7 +508,6 @@ class TestAsyncInstrumentData:
         )
         assert_matches_type(InstrumentDataGetInstrumentCashFlowStatementsResponse, instrument_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_instrument_cash_flow_statements_with_all_params(
         self, async_client: AsyncClearStreet
@@ -570,7 +521,6 @@ class TestAsyncInstrumentData:
         )
         assert_matches_type(InstrumentDataGetInstrumentCashFlowStatementsResponse, instrument_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_instrument_cash_flow_statements(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.instrument_data.with_raw_response.get_instrument_cash_flow_statements(
@@ -582,7 +532,6 @@ class TestAsyncInstrumentData:
         instrument_data = await response.parse()
         assert_matches_type(InstrumentDataGetInstrumentCashFlowStatementsResponse, instrument_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_instrument_cash_flow_statements(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.instrument_data.with_streaming_response.get_instrument_cash_flow_statements(
@@ -598,7 +547,6 @@ class TestAsyncInstrumentData:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_get_instrument_cash_flow_statements(self, async_client: AsyncClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `instrument_id` but received ''"):
@@ -606,7 +554,6 @@ class TestAsyncInstrumentData:
                 instrument_id="",
             )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_instrument_events(self, async_client: AsyncClearStreet) -> None:
         instrument_data = await async_client.v1.instrument_data.get_instrument_events(
@@ -614,7 +561,6 @@ class TestAsyncInstrumentData:
         )
         assert_matches_type(InstrumentDataGetInstrumentEventsResponse, instrument_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_instrument_events_with_all_params(self, async_client: AsyncClearStreet) -> None:
         instrument_data = await async_client.v1.instrument_data.get_instrument_events(
@@ -624,7 +570,6 @@ class TestAsyncInstrumentData:
         )
         assert_matches_type(InstrumentDataGetInstrumentEventsResponse, instrument_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_instrument_events(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.instrument_data.with_raw_response.get_instrument_events(
@@ -636,7 +581,6 @@ class TestAsyncInstrumentData:
         instrument_data = await response.parse()
         assert_matches_type(InstrumentDataGetInstrumentEventsResponse, instrument_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_instrument_events(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.instrument_data.with_streaming_response.get_instrument_events(
@@ -650,7 +594,6 @@ class TestAsyncInstrumentData:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_get_instrument_events(self, async_client: AsyncClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `instrument_id` but received ''"):
@@ -658,7 +601,6 @@ class TestAsyncInstrumentData:
                 instrument_id="",
             )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_instrument_fundamentals(self, async_client: AsyncClearStreet) -> None:
         instrument_data = await async_client.v1.instrument_data.get_instrument_fundamentals(
@@ -666,7 +608,6 @@ class TestAsyncInstrumentData:
         )
         assert_matches_type(InstrumentDataGetInstrumentFundamentalsResponse, instrument_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_instrument_fundamentals(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.instrument_data.with_raw_response.get_instrument_fundamentals(
@@ -678,7 +619,6 @@ class TestAsyncInstrumentData:
         instrument_data = await response.parse()
         assert_matches_type(InstrumentDataGetInstrumentFundamentalsResponse, instrument_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_instrument_fundamentals(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.instrument_data.with_streaming_response.get_instrument_fundamentals(
@@ -692,7 +632,6 @@ class TestAsyncInstrumentData:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_get_instrument_fundamentals(self, async_client: AsyncClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `instrument_id` but received ''"):
@@ -700,7 +639,6 @@ class TestAsyncInstrumentData:
                 "",
             )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_instrument_income_statements(self, async_client: AsyncClearStreet) -> None:
         instrument_data = await async_client.v1.instrument_data.get_instrument_income_statements(
@@ -708,7 +646,6 @@ class TestAsyncInstrumentData:
         )
         assert_matches_type(InstrumentDataGetInstrumentIncomeStatementsResponse, instrument_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_instrument_income_statements_with_all_params(
         self, async_client: AsyncClearStreet
@@ -722,7 +659,6 @@ class TestAsyncInstrumentData:
         )
         assert_matches_type(InstrumentDataGetInstrumentIncomeStatementsResponse, instrument_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_instrument_income_statements(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.instrument_data.with_raw_response.get_instrument_income_statements(
@@ -734,7 +670,6 @@ class TestAsyncInstrumentData:
         instrument_data = await response.parse()
         assert_matches_type(InstrumentDataGetInstrumentIncomeStatementsResponse, instrument_data, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_instrument_income_statements(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.instrument_data.with_streaming_response.get_instrument_income_statements(
@@ -748,7 +683,6 @@ class TestAsyncInstrumentData:
 
         assert cast(Any, response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_get_instrument_income_statements(self, async_client: AsyncClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `instrument_id` but received ''"):

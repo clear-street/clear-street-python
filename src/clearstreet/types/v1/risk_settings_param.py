@@ -12,4 +12,7 @@ class RiskSettingsParam(TypedDict, total=False):
     """Risk settings for an account"""
 
     max_notional: Optional[str]
-    """The maximum notional value available to the account"""
+    """
+    The maximum notional value available to the account When a null/undefined value
+    is observed, it indicates that there is no available data.
+    """

@@ -20,7 +20,6 @@ base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 class TestResponses:
     parametrize = pytest.mark.parametrize("client", [False, True], indirect=True, ids=["loose", "strict"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_cancel_response(self, client: ClearStreet) -> None:
         response = client.v1.omni_ai.responses.cancel_response(
@@ -29,7 +28,6 @@ class TestResponses:
         )
         assert_matches_type(ResponseCancelResponseResponse, response, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_cancel_response(self, client: ClearStreet) -> None:
         http_response = client.v1.omni_ai.responses.with_raw_response.cancel_response(
@@ -42,7 +40,6 @@ class TestResponses:
         response = http_response.parse()
         assert_matches_type(ResponseCancelResponseResponse, response, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_cancel_response(self, client: ClearStreet) -> None:
         with client.v1.omni_ai.responses.with_streaming_response.cancel_response(
@@ -57,7 +54,6 @@ class TestResponses:
 
         assert cast(Any, http_response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_cancel_response(self, client: ClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `response_id` but received ''"):
@@ -66,7 +62,6 @@ class TestResponses:
                 account_id=0,
             )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_method_get_response_by_id(self, client: ClearStreet) -> None:
         response = client.v1.omni_ai.responses.get_response_by_id(
@@ -75,7 +70,6 @@ class TestResponses:
         )
         assert_matches_type(ResponseGetResponseByIDResponse, response, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_raw_response_get_response_by_id(self, client: ClearStreet) -> None:
         http_response = client.v1.omni_ai.responses.with_raw_response.get_response_by_id(
@@ -88,7 +82,6 @@ class TestResponses:
         response = http_response.parse()
         assert_matches_type(ResponseGetResponseByIDResponse, response, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_streaming_response_get_response_by_id(self, client: ClearStreet) -> None:
         with client.v1.omni_ai.responses.with_streaming_response.get_response_by_id(
@@ -103,7 +96,6 @@ class TestResponses:
 
         assert cast(Any, http_response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     def test_path_params_get_response_by_id(self, client: ClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `response_id` but received ''"):
@@ -118,7 +110,6 @@ class TestAsyncResponses:
         "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
     )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_cancel_response(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.omni_ai.responses.cancel_response(
@@ -127,7 +118,6 @@ class TestAsyncResponses:
         )
         assert_matches_type(ResponseCancelResponseResponse, response, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_cancel_response(self, async_client: AsyncClearStreet) -> None:
         http_response = await async_client.v1.omni_ai.responses.with_raw_response.cancel_response(
@@ -140,7 +130,6 @@ class TestAsyncResponses:
         response = await http_response.parse()
         assert_matches_type(ResponseCancelResponseResponse, response, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_cancel_response(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.omni_ai.responses.with_streaming_response.cancel_response(
@@ -155,7 +144,6 @@ class TestAsyncResponses:
 
         assert cast(Any, http_response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_cancel_response(self, async_client: AsyncClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `response_id` but received ''"):
@@ -164,7 +152,6 @@ class TestAsyncResponses:
                 account_id=0,
             )
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_method_get_response_by_id(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.omni_ai.responses.get_response_by_id(
@@ -173,7 +160,6 @@ class TestAsyncResponses:
         )
         assert_matches_type(ResponseGetResponseByIDResponse, response, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_raw_response_get_response_by_id(self, async_client: AsyncClearStreet) -> None:
         http_response = await async_client.v1.omni_ai.responses.with_raw_response.get_response_by_id(
@@ -186,7 +172,6 @@ class TestAsyncResponses:
         response = await http_response.parse()
         assert_matches_type(ResponseGetResponseByIDResponse, response, path=["response"])
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_streaming_response_get_response_by_id(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.omni_ai.responses.with_streaming_response.get_response_by_id(
@@ -201,7 +186,6 @@ class TestAsyncResponses:
 
         assert cast(Any, http_response.is_closed) is True
 
-    @pytest.mark.skip(reason="Mock server tests are disabled")
     @parametrize
     async def test_path_params_get_response_by_id(self, async_client: AsyncClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `response_id` but received ''"):

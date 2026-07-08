@@ -11,10 +11,16 @@ class NewsInstrument(BaseModel):
     """Instrument associated with a news item."""
 
     instrument_id: str
-    """OEMS instrument UUID."""
+    """Instrument identifier."""
 
     name: Optional[str] = None
-    """Instrument name/description, if available from instrument cache enrichment."""
+    """
+    Instrument name/description, if available. When a null/undefined value is
+    observed, it indicates that there is no available data.
+    """
 
     symbol: Optional[str] = None
-    """Trading symbol, if available from instrument cache enrichment."""
+    """
+    Trading symbol, if available. When a null/undefined value is observed, it
+    indicates that there is no available data.
+    """

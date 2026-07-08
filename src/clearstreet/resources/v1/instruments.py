@@ -85,7 +85,7 @@ class InstrumentsResource(SyncAPIResource):
         Retrieves detailed information for a specific instrument.
 
         Args:
-          instrument_id: OEMS instrument UUID
+          instrument_id: Instrument identifier
 
           include_options_expiry_dates: When true, include unique options expiry dates for this instrument
 
@@ -140,7 +140,8 @@ class InstrumentsResource(SyncAPIResource):
         Args:
           easy_to_borrow: Filter by easy to borrow status
 
-          instrument_ids: Comma-separated OEMS instrument UUIDs
+          instrument_ids: Comma-separated instrument identifiers: unique identifiers or symbols (symbol
+              for equities, OSI for options)
 
           instrument_type: Filter by instrument type (e.g. COMMON_STOCK, OPTION)
 
@@ -229,7 +230,7 @@ class InstrumentsResource(SyncAPIResource):
 
           underlier: Underlier symbol (e.g., AAPL, SPX)
 
-          underlying_instrument_id: OEMS instrument UUID or symbol of the underlying equity/index
+          underlying_instrument_id: Instrument identifier or symbol of the underlying equity/index
 
           extra_headers: Send extra headers
 
@@ -283,18 +284,18 @@ class InstrumentsResource(SyncAPIResource):
         Search instruments by symbol, alternate identifier, or company name.
 
         The `q` parameter is case-insensitive and supports ticker symbols, alternate
-        identifiers such as CUSIP, ISIN, OPRA root, and CMS identifiers, and company
-        names for non-option instruments. Results are ranked by match quality plus
-        instrument quality signals including log-scaled ADV, listing status,
-        marginability, easy-to-borrow status, and OTC, restricted, and liquidation-only
-        penalties. Defaults to the `EQUITY` asset class (common stocks, preferred
+        identifiers such as CUSIP, ISIN, and OPRA root, and company names for non-option
+        instruments. Results are ranked by match quality plus instrument quality signals
+        and relevance. Defaults to the `EQUITY` asset class (common stocks, preferred
         shares, ADRs, ETFs, and exchange-traded mutual funds). Pass `asset_class=OPTION`
-        to search option contracts by symbol or alternate identifier.
+        to search option contracts: by full OSI symbol, by an OSI prefix (root +
+        `YYMMDD` expiry, e.g. `AAPL 261217`), or by a root-scoped phrase such as
+        `AAPL Dec 250 call`.
 
         Args:
           q: Search term applied case-insensitively to ticker symbols, alternate identifiers
-              (CUSIP, ISIN, OPRA root, CMS), and company names for non-option instruments.
-              Option searches match symbols and alternate identifiers.
+              (CUSIP, ISIN, OPRA root), and company names for non-option instruments. Option
+              searches match symbols and alternate identifiers.
 
           asset_class: Comma-separated asset classes (EQUITY|OPTION|WARRANT|BOND|FX|OTHER). Defaults to
               EQUITY.
@@ -385,7 +386,7 @@ class AsyncInstrumentsResource(AsyncAPIResource):
         Retrieves detailed information for a specific instrument.
 
         Args:
-          instrument_id: OEMS instrument UUID
+          instrument_id: Instrument identifier
 
           include_options_expiry_dates: When true, include unique options expiry dates for this instrument
 
@@ -440,7 +441,8 @@ class AsyncInstrumentsResource(AsyncAPIResource):
         Args:
           easy_to_borrow: Filter by easy to borrow status
 
-          instrument_ids: Comma-separated OEMS instrument UUIDs
+          instrument_ids: Comma-separated instrument identifiers: unique identifiers or symbols (symbol
+              for equities, OSI for options)
 
           instrument_type: Filter by instrument type (e.g. COMMON_STOCK, OPTION)
 
@@ -529,7 +531,7 @@ class AsyncInstrumentsResource(AsyncAPIResource):
 
           underlier: Underlier symbol (e.g., AAPL, SPX)
 
-          underlying_instrument_id: OEMS instrument UUID or symbol of the underlying equity/index
+          underlying_instrument_id: Instrument identifier or symbol of the underlying equity/index
 
           extra_headers: Send extra headers
 
@@ -583,18 +585,18 @@ class AsyncInstrumentsResource(AsyncAPIResource):
         Search instruments by symbol, alternate identifier, or company name.
 
         The `q` parameter is case-insensitive and supports ticker symbols, alternate
-        identifiers such as CUSIP, ISIN, OPRA root, and CMS identifiers, and company
-        names for non-option instruments. Results are ranked by match quality plus
-        instrument quality signals including log-scaled ADV, listing status,
-        marginability, easy-to-borrow status, and OTC, restricted, and liquidation-only
-        penalties. Defaults to the `EQUITY` asset class (common stocks, preferred
+        identifiers such as CUSIP, ISIN, and OPRA root, and company names for non-option
+        instruments. Results are ranked by match quality plus instrument quality signals
+        and relevance. Defaults to the `EQUITY` asset class (common stocks, preferred
         shares, ADRs, ETFs, and exchange-traded mutual funds). Pass `asset_class=OPTION`
-        to search option contracts by symbol or alternate identifier.
+        to search option contracts: by full OSI symbol, by an OSI prefix (root +
+        `YYMMDD` expiry, e.g. `AAPL 261217`), or by a root-scoped phrase such as
+        `AAPL Dec 250 call`.
 
         Args:
           q: Search term applied case-insensitively to ticker symbols, alternate identifiers
-              (CUSIP, ISIN, OPRA root, CMS), and company names for non-option instruments.
-              Option searches match symbols and alternate identifiers.
+              (CUSIP, ISIN, OPRA root), and company names for non-option instruments. Option
+              searches match symbols and alternate identifiers.
 
           asset_class: Comma-separated asset classes (EQUITY|OPTION|WARRANT|BOND|FX|OTHER). Defaults to
               EQUITY.

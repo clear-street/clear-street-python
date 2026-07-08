@@ -13,4 +13,7 @@ class StructuredActionButtonAction(BaseModel):
     """Structured-action button behavior."""
 
     action_id: Optional[str] = FieldInfo(alias="actionId", default=None)
-    """UUID of a `structured_action` content part in the same message."""
+    """
+    UUID of a `structured_action` content part in the same message. When a
+    null/undefined value is observed, it indicates it does not apply.
+    """

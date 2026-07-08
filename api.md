@@ -9,7 +9,7 @@ from clearstreet.types import APIError, BaseResponse, ResponseMetadata
 Types:
 
 ```python
-from clearstreet.types import SecurityType
+from clearstreet.types import SecurityType, SortDirection
 ```
 
 ## Accounts
@@ -28,6 +28,7 @@ from clearstreet.types.v1 import (
     AccountType,
     MarginDetails,
     MarginDetailsUsage,
+    MarginSessionDetails,
     MarginTopContributor,
     MarginType,
     PortfolioHistoryResponse,
@@ -229,7 +230,6 @@ from clearstreet.types.v1 import (
     PrefillNewOrderAction,
     PrefillOrderAction,
     PromptButtonAction,
-    ScreenerFilter,
     StructuredAction,
     StructuredActionButtonAction,
     SuggestedActionsPayload,
@@ -349,7 +349,6 @@ from clearstreet.types.v1 import (
     OrderList,
     OrderStatus,
     OrderType,
-    PositionEffect,
     QueueState,
     RequestOrderType,
     RequestTimeInForce,
@@ -407,6 +406,48 @@ Methods:
 - <code title="get /v1/accounts/{account_id}/positions">client.v1.positions.<a href="./src/clearstreet/resources/v1/positions.py">get_positions</a>(account_id, \*\*<a href="src/clearstreet/types/v1/position_get_positions_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/position_get_positions_response.py">PositionGetPositionsResponse</a></code>
 - <code title="post /v1/accounts/{account_id}/positions/instructions">client.v1.positions.<a href="./src/clearstreet/resources/v1/positions.py">submit_position_instructions</a>(account_id, \*\*<a href="src/clearstreet/types/v1/position_submit_position_instructions_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/position_submit_position_instructions_response.py">PositionSubmitPositionInstructionsResponse</a></code>
 
+## Screener
+
+Types:
+
+```python
+from clearstreet.types.v1 import (
+    FieldLookback,
+    FieldPeriod,
+    FieldRef,
+    FieldType,
+    FilterOpSpec,
+    FilterOperator,
+    FilterValue,
+    Modifier,
+    ModifierOp,
+    OperatorArg,
+    ScreenerColumn,
+    ScreenerEntry,
+    ScreenerEntryList,
+    ScreenerFilter,
+    ScreenerRow,
+    ScreenerRowList,
+    SearchFilter,
+    SortSpec,
+    Variable,
+    ScreenerCreateScreenerResponse,
+    ScreenerGetScreenerByIDResponse,
+    ScreenerGetScreenersResponse,
+    ScreenerReplaceScreenerResponse,
+    ScreenerSearchScreenerResponse,
+)
+```
+
+Methods:
+
+- <code title="post /v1/saved-screeners">client.v1.screener.<a href="./src/clearstreet/resources/v1/screener.py">create_screener</a>(\*\*<a href="src/clearstreet/types/v1/screener_create_screener_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/screener_create_screener_response.py">ScreenerCreateScreenerResponse</a></code>
+- <code title="delete /v1/saved-screeners/{screener_id}">client.v1.screener.<a href="./src/clearstreet/resources/v1/screener.py">delete_screener</a>(screener_id) -> None</code>
+- <code title="get /v1/saved-screeners/{screener_id}">client.v1.screener.<a href="./src/clearstreet/resources/v1/screener.py">get_screener_by_id</a>(screener_id) -> <a href="./src/clearstreet/types/v1/screener_get_screener_by_id_response.py">ScreenerGetScreenerByIDResponse</a></code>
+- <code title="get /v1/saved-screeners">client.v1.screener.<a href="./src/clearstreet/resources/v1/screener.py">get_screeners</a>() -> <a href="./src/clearstreet/types/v1/screener_get_screeners_response.py">ScreenerGetScreenersResponse</a></code>
+- <code title="put /v1/saved-screeners/{screener_id}">client.v1.screener.<a href="./src/clearstreet/resources/v1/screener.py">replace_screener</a>(screener_id, \*\*<a href="src/clearstreet/types/v1/screener_replace_screener_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/screener_replace_screener_response.py">ScreenerReplaceScreenerResponse</a></code>
+- <code title="post /v1/screener">client.v1.screener.<a href="./src/clearstreet/resources/v1/screener.py">search_screener</a>(\*\*<a href="src/clearstreet/types/v1/screener_search_screener_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/screener_search_screener_response.py">ScreenerSearchScreenerResponse</a></code>
+
 ## Watchlist
 
 Types:
@@ -435,9 +476,3 @@ Methods:
 - <code title="delete /v1/watchlists/{watchlist_id}/items/{item_id}">client.v1.watchlist.<a href="./src/clearstreet/resources/v1/watchlist.py">delete_watchlist_item</a>(item_id, \*, watchlist_id) -> <a href="./src/clearstreet/types/v1/watchlist_delete_watchlist_item_response.py">WatchlistDeleteWatchlistItemResponse</a></code>
 - <code title="get /v1/watchlists/{watchlist_id}">client.v1.watchlist.<a href="./src/clearstreet/resources/v1/watchlist.py">get_watchlist_by_id</a>(watchlist_id) -> <a href="./src/clearstreet/types/v1/watchlist_get_watchlist_by_id_response.py">WatchlistGetWatchlistByIDResponse</a></code>
 - <code title="get /v1/watchlists">client.v1.watchlist.<a href="./src/clearstreet/resources/v1/watchlist.py">get_watchlists</a>(\*\*<a href="src/clearstreet/types/v1/watchlist_get_watchlists_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/watchlist_get_watchlists_response.py">WatchlistGetWatchlistsResponse</a></code>
-
-## Websocket
-
-Methods:
-
-- <code title="get /v1/ws">client.v1.websocket.<a href="./src/clearstreet/resources/v1/websocket.py">websocket_handler</a>() -> None</code>

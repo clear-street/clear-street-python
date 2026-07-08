@@ -20,10 +20,13 @@ class InstrumentEventsData(BaseModel):
     """Earnings announcement events"""
 
     instrument_id: str
-    """OEMS instrument UUID from the request"""
+    """Instrument identifier"""
 
     splits: List[InstrumentSplitEvent]
     """Stock split events"""
 
     reporting_currency: Optional[str] = None
-    """The currency used for reporting financial data"""
+    """
+    The currency used for reporting financial data When a null/undefined value is
+    observed, it indicates that there is no available data.
+    """

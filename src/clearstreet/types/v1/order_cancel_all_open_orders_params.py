@@ -11,7 +11,7 @@ __all__ = ["OrderCancelAllOpenOrdersParams"]
 
 class OrderCancelAllOpenOrdersParams(TypedDict, total=False):
     instrument_ids: SequenceNotStr[str]
-    """Comma-separated OEMS instrument UUIDs"""
+    """Comma-separated instrument identifiers"""
 
     instrument_type: Literal["COMMON_STOCK", "OPTION", "CASH"]
     """Filter by instrument type (e.g., COMMON_STOCK, OPTION)"""

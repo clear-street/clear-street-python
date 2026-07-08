@@ -23,10 +23,8 @@ from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ...types.v1 import (
     RequestTimeInForce,
-    InstrumentIDOrSymbol,
     order_get_orders_params,
     order_replace_order_params,
-    order_submit_orders_params,
     order_get_executions_params,
     order_cancel_all_open_orders_params,
 )
@@ -39,7 +37,7 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.v1.request_time_in_force import RequestTimeInForce
-from ...types.v1.instrument_id_or_symbol import InstrumentIDOrSymbol
+from ...types.v1.new_order_request_param import NewOrderRequestParam
 from ...types.v1.order_get_orders_response import OrderGetOrdersResponse
 from ...types.v1.order_replace_order_response import OrderReplaceOrderResponse
 from ...types.v1.order_submit_orders_response import OrderSubmitOrdersResponse
@@ -93,7 +91,7 @@ class OrdersResource(SyncAPIResource):
         Cancel all orders for an account
 
         Args:
-          instrument_ids: Comma-separated OEMS instrument UUIDs
+          instrument_ids: Comma-separated instrument identifiers
 
           instrument_type: Filter by instrument type (e.g., COMMON_STOCK, OPTION)
 
@@ -168,7 +166,7 @@ class OrdersResource(SyncAPIResource):
         account_id: int,
         *,
         from_: Union[str, datetime] | Omit = omit,
-        instrument_id: InstrumentIDOrSymbol | Omit = omit,
+        instrument_ids: SequenceNotStr[str] | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         to: Union[str, datetime] | Omit = omit,
@@ -186,8 +184,9 @@ class OrdersResource(SyncAPIResource):
         Args:
           from_: The start date and time for the query range, inclusive (ISO 8601 format)
 
-          instrument_id: Optional instrument to filter by. Accepts either a symbol (e.g. `AAPL`) or an
-              OEMS instrument UUID.
+          instrument_ids: Comma-separated instrument identifiers (UUIDs) or symbols (e.g. `AAPL`) to
+              filter by. When provided, only executions for any of the listed instruments are
+              returned.
 
           page_size: The number of items to return per page. Only used when page_token is not
               provided.
@@ -215,7 +214,7 @@ class OrdersResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "from_": from_,
-                        "instrument_id": instrument_id,
+                        "instrument_ids": instrument_ids,
                         "page_size": page_size,
                         "page_token": page_token,
                         "to": to,
@@ -267,6 +266,7 @@ class OrdersResource(SyncAPIResource):
         from_: Union[str, datetime] | Omit = omit,
         instrument_ids: SequenceNotStr[str] | Omit = omit,
         instrument_type: Literal["COMMON_STOCK", "OPTION", "CASH"] | Omit = omit,
+        order_ids: SequenceNotStr[str] | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         status: List[
@@ -305,9 +305,12 @@ class OrdersResource(SyncAPIResource):
         Args:
           from_: The start date and time for the query range, inclusive (ISO 8601 format)
 
-          instrument_ids: Comma-separated OEMS instrument UUIDs
+          instrument_ids: Comma-separated instrument identifiers
 
           instrument_type: Instrument type filter (e.g., COMMON_STOCK, OPTION)
+
+          order_ids: Comma-separated order IDs to filter by. When provided, only orders whose order
+              ID is in this set are returned.
 
           page_size: The number of items to return per page. Only used when page_token is not
               provided.
@@ -321,7 +324,7 @@ class OrdersResource(SyncAPIResource):
 
           to: The end date and time for the query range, inclusive (ISO 8601 format)
 
-          underlying_instrument_ids: Comma-separated OEMS instrument UUIDs. Matches options orders whose resolved
+          underlying_instrument_ids: Comma-separated instrument identifiers. Matches options orders whose resolved
               underlier is any of the given IDs.
 
           extra_headers: Send extra headers
@@ -344,6 +347,7 @@ class OrdersResource(SyncAPIResource):
                         "from_": from_,
                         "instrument_ids": instrument_ids,
                         "instrument_type": instrument_type,
+                        "order_ids": order_ids,
                         "page_size": page_size,
                         "page_token": page_token,
                         "status": status,
@@ -416,7 +420,7 @@ class OrdersResource(SyncAPIResource):
         self,
         account_id: int,
         *,
-        orders: Iterable[order_submit_orders_params.Order],
+        orders: Iterable[NewOrderRequestParam],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -438,7 +442,7 @@ class OrdersResource(SyncAPIResource):
         """
         return self._post(
             path_template("/v1/accounts/{account_id}/orders", account_id=account_id),
-            body=maybe_transform(orders, Iterable[order_submit_orders_params.Order]),
+            body=maybe_transform(orders, Iterable[NewOrderRequestParam]),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -488,7 +492,7 @@ class AsyncOrdersResource(AsyncAPIResource):
         Cancel all orders for an account
 
         Args:
-          instrument_ids: Comma-separated OEMS instrument UUIDs
+          instrument_ids: Comma-separated instrument identifiers
 
           instrument_type: Filter by instrument type (e.g., COMMON_STOCK, OPTION)
 
@@ -563,7 +567,7 @@ class AsyncOrdersResource(AsyncAPIResource):
         account_id: int,
         *,
         from_: Union[str, datetime] | Omit = omit,
-        instrument_id: InstrumentIDOrSymbol | Omit = omit,
+        instrument_ids: SequenceNotStr[str] | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         to: Union[str, datetime] | Omit = omit,
@@ -581,8 +585,9 @@ class AsyncOrdersResource(AsyncAPIResource):
         Args:
           from_: The start date and time for the query range, inclusive (ISO 8601 format)
 
-          instrument_id: Optional instrument to filter by. Accepts either a symbol (e.g. `AAPL`) or an
-              OEMS instrument UUID.
+          instrument_ids: Comma-separated instrument identifiers (UUIDs) or symbols (e.g. `AAPL`) to
+              filter by. When provided, only executions for any of the listed instruments are
+              returned.
 
           page_size: The number of items to return per page. Only used when page_token is not
               provided.
@@ -610,7 +615,7 @@ class AsyncOrdersResource(AsyncAPIResource):
                 query=await async_maybe_transform(
                     {
                         "from_": from_,
-                        "instrument_id": instrument_id,
+                        "instrument_ids": instrument_ids,
                         "page_size": page_size,
                         "page_token": page_token,
                         "to": to,
@@ -662,6 +667,7 @@ class AsyncOrdersResource(AsyncAPIResource):
         from_: Union[str, datetime] | Omit = omit,
         instrument_ids: SequenceNotStr[str] | Omit = omit,
         instrument_type: Literal["COMMON_STOCK", "OPTION", "CASH"] | Omit = omit,
+        order_ids: SequenceNotStr[str] | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         status: List[
@@ -700,9 +706,12 @@ class AsyncOrdersResource(AsyncAPIResource):
         Args:
           from_: The start date and time for the query range, inclusive (ISO 8601 format)
 
-          instrument_ids: Comma-separated OEMS instrument UUIDs
+          instrument_ids: Comma-separated instrument identifiers
 
           instrument_type: Instrument type filter (e.g., COMMON_STOCK, OPTION)
+
+          order_ids: Comma-separated order IDs to filter by. When provided, only orders whose order
+              ID is in this set are returned.
 
           page_size: The number of items to return per page. Only used when page_token is not
               provided.
@@ -716,7 +725,7 @@ class AsyncOrdersResource(AsyncAPIResource):
 
           to: The end date and time for the query range, inclusive (ISO 8601 format)
 
-          underlying_instrument_ids: Comma-separated OEMS instrument UUIDs. Matches options orders whose resolved
+          underlying_instrument_ids: Comma-separated instrument identifiers. Matches options orders whose resolved
               underlier is any of the given IDs.
 
           extra_headers: Send extra headers
@@ -739,6 +748,7 @@ class AsyncOrdersResource(AsyncAPIResource):
                         "from_": from_,
                         "instrument_ids": instrument_ids,
                         "instrument_type": instrument_type,
+                        "order_ids": order_ids,
                         "page_size": page_size,
                         "page_token": page_token,
                         "status": status,
@@ -811,7 +821,7 @@ class AsyncOrdersResource(AsyncAPIResource):
         self,
         account_id: int,
         *,
-        orders: Iterable[order_submit_orders_params.Order],
+        orders: Iterable[NewOrderRequestParam],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -833,7 +843,7 @@ class AsyncOrdersResource(AsyncAPIResource):
         """
         return await self._post(
             path_template("/v1/accounts/{account_id}/orders", account_id=account_id),
-            body=await async_maybe_transform(orders, Iterable[order_submit_orders_params.Order]),
+            body=await async_maybe_transform(orders, Iterable[NewOrderRequestParam]),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

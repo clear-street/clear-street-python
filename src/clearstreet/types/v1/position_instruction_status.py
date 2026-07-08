@@ -5,5 +5,5 @@ from typing_extensions import Literal, TypeAlias
 __all__ = ["PositionInstructionStatus"]
 
 PositionInstructionStatus: TypeAlias = Literal[
-    "SENT", "ACCEPTED", "REJECTED", "ENGINE_REJECTED", "CANCEL_REQUESTED", "CANCELLED", "CANCEL_FAILED", "UNKNOWN"
+    "SENT", "ACCEPTED", "REJECTED", "CANCEL_REQUESTED", "CANCELLED", "CANCEL_FAILED", "UNKNOWN"
 ]
