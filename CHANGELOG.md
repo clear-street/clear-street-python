@@ -1,5 +1,42 @@
 # Changelog
 
+## 0.5.0 (2026-07-08)
+
+Full Changelog: [v0.4.0...v0.5.0](https://github.com/clear-street/clear-street-python/compare/v0.4.0...v0.5.0)
+
+### Features
+
+* **api:** api update ([044c516](https://github.com/clear-street/clear-street-python/commit/044c516fade769dfdd9adf39a6047b84b2fcce71))
+* **api:** api update ([4cc92d6](https://github.com/clear-street/clear-street-python/commit/4cc92d6bef0aba3710cf45be7b3c17c6217ae245))
+* **api:** api update ([ab0e87c](https://github.com/clear-street/clear-street-python/commit/ab0e87c8720763706029abf1f3017d73c41995db))
+* **api:** api update ([4391121](https://github.com/clear-street/clear-street-python/commit/4391121bc0b068137c79efc9f4f7dca74a59b5bf))
+* **api:** api update ([2de2283](https://github.com/clear-street/clear-street-python/commit/2de228301feb4388547bc63e4a90dd60cfaec72d))
+* **api:** api update ([4e9e0d6](https://github.com/clear-street/clear-street-python/commit/4e9e0d6bfa18839d6e00e058aa5bde5fda712ef4))
+* **api:** api update ([7fec209](https://github.com/clear-street/clear-street-python/commit/7fec2098683e7a75b88ac22516ad9f02f1235876))
+* **api:** api update ([d7fe7bd](https://github.com/clear-street/clear-street-python/commit/d7fe7bd078725b52a5d487f108d166c2e094d857))
+* **api:** api update ([fd825b3](https://github.com/clear-street/clear-street-python/commit/fd825b3695251ab7cef1b2c707627d1af5f413de))
+* **api:** api update ([881f865](https://github.com/clear-street/clear-street-python/commit/881f8659babbbd7edb28314c063f092852dcdcbe))
+* **api:** api update ([a7117ea](https://github.com/clear-street/clear-street-python/commit/a7117ead2ee04ffea823132513c9743d0625b2ac))
+* **api:** api update ([ab1fa34](https://github.com/clear-street/clear-street-python/commit/ab1fa346992ca1272d61daff8ec6c7cd5bd0e3d3))
+* **api:** api update ([89aa53d](https://github.com/clear-street/clear-street-python/commit/89aa53da64d0beb64000d934f06c76359960680f))
+* **api:** api update ([c028e36](https://github.com/clear-street/clear-street-python/commit/c028e3648bad482c76f1c7b99d9e489d2bb3f3a4))
+* **api:** api update ([b6be99d](https://github.com/clear-street/clear-street-python/commit/b6be99d2969f71762f16778ed010138b8a3e5575))
+* **api:** api update ([e0defc0](https://github.com/clear-street/clear-street-python/commit/e0defc0df81917094232686332fde1a3104ddd70))
+* **api:** api update ([41d649c](https://github.com/clear-street/clear-street-python/commit/41d649c2743ac28ddc718ba93166368f5aff1511))
+* **api:** api update ([9471e67](https://github.com/clear-street/clear-street-python/commit/9471e675875066bf04ae7cfa9cb8b079e8effda7))
+* **api:** api update ([bc03dfb](https://github.com/clear-street/clear-street-python/commit/bc03dfbfc16e87f25f7a65b684e2ccbd1c9d5a5a))
+* **api:** api update ([8bf96af](https://github.com/clear-street/clear-street-python/commit/8bf96af2ca6af690ae3a1c636b13b5cd3f919128))
+* **api:** api update ([f7a2d31](https://github.com/clear-street/clear-street-python/commit/f7a2d313bf82857fd86c0a9a46b52fe36d3452a7))
+* **api:** api update ([044a398](https://github.com/clear-street/clear-street-python/commit/044a3988e0d20af44e74100b56f9c037d4399932))
+* **api:** api update ([2c07783](https://github.com/clear-street/clear-street-python/commit/2c0778360f628ec7f8adf6ebe7359e8de81928d5))
+* **api:** api update ([8a4d9e0](https://github.com/clear-street/clear-street-python/commit/8a4d9e0ac7ac8e3862516c0476b269897e64cfe2))
+
+
+### Chores
+
+* remove custom code ([6d6af2e](https://github.com/clear-street/clear-street-python/commit/6d6af2eb5432fe8a5311e42715491a88ee608e97))
+* update SDK settings ([179c874](https://github.com/clear-street/clear-street-python/commit/179c874ede8056c6bace730f80232744d3ba1bc8))
+
 ## 0.4.0 (2026-06-03)
 
 Full Changelog: [v0.3.0...v0.4.0](https://github.com/clear-street/clear-street-python/compare/v0.3.0...v0.4.0)
