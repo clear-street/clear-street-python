@@ -11,7 +11,7 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 ## Documentation
 
-The full API of this library can be found in [api.md](api.md).
+The REST API documentation is available at [docs.clearstreet.com](https://docs.clearstreet.com/?utm_source=github&utm_medium=developer&utm_campaign=developer_tools&utm_content=python_readme_docs). The full API of this library can be found in [api.md](api.md).
 
 ## Installation
 
