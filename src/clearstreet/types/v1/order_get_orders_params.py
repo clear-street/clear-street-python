@@ -8,7 +8,6 @@ from typing_extensions import Literal, Annotated, TypedDict
 
 from ..._types import SequenceNotStr, Base64FileInput
 from ..._utils import PropertyInfo
-from .instrument_id_or_symbol import InstrumentIDOrSymbol
 
 __all__ = ["OrderGetOrdersParams"]
 
@@ -17,11 +16,8 @@ class OrderGetOrdersParams(TypedDict, total=False):
     from_: Annotated[Union[str, datetime], PropertyInfo(alias="from", format="iso8601")]
     """The start date and time for the query range, inclusive (ISO 8601 format)"""
 
-    instrument_ids: SequenceNotStr[InstrumentIDOrSymbol]
-    """
-    Comma-separated instrument IDs (UUID) or symbols (equity tickers or OSI option
-    symbols).
-    """
+    instrument_ids: SequenceNotStr[str]
+    """Comma-separated instrument identifiers"""
 
     instrument_type: Literal["COMMON_STOCK", "OPTION", "CASH"]
     """Instrument type filter (e.g., COMMON_STOCK, OPTION)"""
@@ -71,9 +67,8 @@ class OrderGetOrdersParams(TypedDict, total=False):
     to: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
     """The end date and time for the query range, inclusive (ISO 8601 format)"""
 
-    underlying_instrument_ids: SequenceNotStr[InstrumentIDOrSymbol]
-    """
-    Comma-separated instrument IDs (UUID) or symbols (equity tickers or OSI option
-    symbols). Matches options orders whose resolved underlier is any of the given
-    instruments.
+    underlying_instrument_ids: SequenceNotStr[str]
+    """Comma-separated instrument identifiers.
+
+    Matches options orders whose resolved underlier is any of the given IDs.
     """
