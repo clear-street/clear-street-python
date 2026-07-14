@@ -16,6 +16,7 @@ from ...._response import (
 )
 from ...._base_client import make_request_options
 from ....types.v1.instrument_data import market_data_get_snapshots_params, market_data_get_daily_summaries_params
+from ....types.v1.instrument_id_or_symbol import InstrumentIDOrSymbol
 from ....types.v1.instrument_data.market_data_get_snapshots_response import MarketDataGetSnapshotsResponse
 from ....types.v1.instrument_data.market_data_get_daily_summaries_response import MarketDataGetDailySummariesResponse
 
@@ -93,7 +94,7 @@ class MarketDataResource(SyncAPIResource):
     def get_snapshots(
         self,
         *,
-        instrument_ids: SequenceNotStr[str] | Omit = omit,
+        instrument_ids: SequenceNotStr[InstrumentIDOrSymbol] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -105,7 +106,8 @@ class MarketDataResource(SyncAPIResource):
         Get market data snapshots for one or more securities.
 
         Args:
-          instrument_ids: Comma-separated instrument identifiers.
+          instrument_ids: Comma-separated instrument IDs (UUID) or symbols (equity tickers or OSI option
+              symbols).
 
           extra_headers: Send extra headers
 
@@ -201,7 +203,7 @@ class AsyncMarketDataResource(AsyncAPIResource):
     async def get_snapshots(
         self,
         *,
-        instrument_ids: SequenceNotStr[str] | Omit = omit,
+        instrument_ids: SequenceNotStr[InstrumentIDOrSymbol] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -213,7 +215,8 @@ class AsyncMarketDataResource(AsyncAPIResource):
         Get market data snapshots for one or more securities.
 
         Args:
-          instrument_ids: Comma-separated instrument identifiers.
+          instrument_ids: Comma-separated instrument IDs (UUID) or symbols (equity tickers or OSI option
+              symbols).
 
           extra_headers: Send extra headers
 
