@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, TypedDict
+from typing_extensions import TypedDict
 
 from .market_type import MarketType
 
@@ -10,7 +10,7 @@ __all__ = ["CalendarGetMarketHoursCalendarParams"]
 
 
 class CalendarGetMarketHoursCalendarParams(TypedDict, total=False):
-    date: Required[str]
+    date: str
     """The date to query market hours for (YYYY-MM-DD). Defaults to today."""
 
     market: MarketType

@@ -47,9 +47,7 @@ class TestCalendar:
 
     @parametrize
     def test_method_get_market_hours_calendar(self, client: ClearStreet) -> None:
-        calendar = client.v1.calendar.get_market_hours_calendar(
-            date="date",
-        )
+        calendar = client.v1.calendar.get_market_hours_calendar()
         assert_matches_type(CalendarGetMarketHoursCalendarResponse, calendar, path=["response"])
 
     @parametrize
@@ -62,9 +60,7 @@ class TestCalendar:
 
     @parametrize
     def test_raw_response_get_market_hours_calendar(self, client: ClearStreet) -> None:
-        response = client.v1.calendar.with_raw_response.get_market_hours_calendar(
-            date="date",
-        )
+        response = client.v1.calendar.with_raw_response.get_market_hours_calendar()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -73,9 +69,7 @@ class TestCalendar:
 
     @parametrize
     def test_streaming_response_get_market_hours_calendar(self, client: ClearStreet) -> None:
-        with client.v1.calendar.with_streaming_response.get_market_hours_calendar(
-            date="date",
-        ) as response:
+        with client.v1.calendar.with_streaming_response.get_market_hours_calendar() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -117,9 +111,7 @@ class TestAsyncCalendar:
 
     @parametrize
     async def test_method_get_market_hours_calendar(self, async_client: AsyncClearStreet) -> None:
-        calendar = await async_client.v1.calendar.get_market_hours_calendar(
-            date="date",
-        )
+        calendar = await async_client.v1.calendar.get_market_hours_calendar()
         assert_matches_type(CalendarGetMarketHoursCalendarResponse, calendar, path=["response"])
 
     @parametrize
@@ -132,9 +124,7 @@ class TestAsyncCalendar:
 
     @parametrize
     async def test_raw_response_get_market_hours_calendar(self, async_client: AsyncClearStreet) -> None:
-        response = await async_client.v1.calendar.with_raw_response.get_market_hours_calendar(
-            date="date",
-        )
+        response = await async_client.v1.calendar.with_raw_response.get_market_hours_calendar()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -143,9 +133,7 @@ class TestAsyncCalendar:
 
     @parametrize
     async def test_streaming_response_get_market_hours_calendar(self, async_client: AsyncClearStreet) -> None:
-        async with async_client.v1.calendar.with_streaming_response.get_market_hours_calendar(
-            date="date",
-        ) as response:
+        async with async_client.v1.calendar.with_streaming_response.get_market_hours_calendar() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
