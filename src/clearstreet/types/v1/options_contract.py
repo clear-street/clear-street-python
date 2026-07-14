@@ -38,9 +38,6 @@ class OptionsContract(BaseModel):
     is_marginable: bool
     """Whether the contract is marginable"""
 
-    is_tradable: bool
-    """Whether the contract is tradable"""
-
     listing_type: ListingType
     """Listing type"""
 

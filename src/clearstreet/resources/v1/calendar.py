@@ -67,7 +67,7 @@ class CalendarResource(SyncAPIResource):
     def get_market_hours_calendar(
         self,
         *,
-        date: str,
+        date: str | Omit = omit,
         market: MarketType | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -157,7 +157,7 @@ class AsyncCalendarResource(AsyncAPIResource):
     async def get_market_hours_calendar(
         self,
         *,
-        date: str,
+        date: str | Omit = omit,
         market: MarketType | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
