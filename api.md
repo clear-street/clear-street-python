@@ -114,6 +114,7 @@ from clearstreet.types.v1 import (
     InstrumentIncomeStatementList,
     InstrumentSplitEvent,
     PriceTarget,
+    ReportTime,
     InstrumentDataGetAllInstrumentEventsResponse,
     InstrumentDataGetInstrumentAnalystConsensusResponse,
     InstrumentDataGetInstrumentBalanceSheetStatementsResponse,

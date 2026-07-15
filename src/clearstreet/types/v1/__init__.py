@@ -23,6 +23,7 @@ from .margin_type import MarginType as MarginType
 from .market_type import MarketType as MarketType
 from .modifier_op import ModifierOp as ModifierOp
 from .queue_state import QueueState as QueueState
+from .report_time import ReportTime as ReportTime
 from .account_list import AccountList as AccountList
 from .account_type import AccountType as AccountType
 from .chart_series import ChartSeries as ChartSeries
