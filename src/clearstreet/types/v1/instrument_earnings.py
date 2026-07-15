@@ -4,6 +4,7 @@ import datetime
 from typing import Optional
 
 from ..._models import BaseModel
+from .report_time import ReportTime
 
 __all__ = ["InstrumentEarnings"]
 
@@ -29,6 +30,12 @@ class InstrumentEarnings(BaseModel):
     eps_surprise_percent: Optional[str] = None
     """
     The percentage difference between actual and estimated EPS When a null/undefined
+    value is observed, it indicates that there is no available data.
+    """
+
+    report_time: Optional[ReportTime] = None
+    """
+    Report timing: before market open or after market close When a null/undefined
     value is observed, it indicates that there is no available data.
     """
 
