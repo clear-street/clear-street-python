@@ -130,7 +130,7 @@ class TestEntitlements:
     @parametrize
     def test_method_get_entitlements_with_all_params(self, client: ClearStreet) -> None:
         entitlement = client.v1.omni_ai.entitlements.get_entitlements(
-            trading_account_id=0,
+            account_id=0,
         )
         assert_matches_type(EntitlementGetEntitlementsResponse, entitlement, path=["response"])
 
@@ -270,7 +270,7 @@ class TestAsyncEntitlements:
     @parametrize
     async def test_method_get_entitlements_with_all_params(self, async_client: AsyncClearStreet) -> None:
         entitlement = await async_client.v1.omni_ai.entitlements.get_entitlements(
-            trading_account_id=0,
+            account_id=0,
         )
         assert_matches_type(EntitlementGetEntitlementsResponse, entitlement, path=["response"])
 
