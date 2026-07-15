@@ -150,7 +150,7 @@ class EntitlementsResource(SyncAPIResource):
     def get_entitlements(
         self,
         *,
-        trading_account_id: int | Omit = omit,
+        account_id: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -178,8 +178,7 @@ class EntitlementsResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=maybe_transform(
-                    {"trading_account_id": trading_account_id},
-                    entitlement_get_entitlements_params.EntitlementGetEntitlementsParams,
+                    {"account_id": account_id}, entitlement_get_entitlements_params.EntitlementGetEntitlementsParams
                 ),
             ),
             cast_to=EntitlementGetEntitlementsResponse,
@@ -307,7 +306,7 @@ class AsyncEntitlementsResource(AsyncAPIResource):
     async def get_entitlements(
         self,
         *,
-        trading_account_id: int | Omit = omit,
+        account_id: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -335,8 +334,7 @@ class AsyncEntitlementsResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"trading_account_id": trading_account_id},
-                    entitlement_get_entitlements_params.EntitlementGetEntitlementsParams,
+                    {"account_id": account_id}, entitlement_get_entitlements_params.EntitlementGetEntitlementsParams
                 ),
             ),
             cast_to=EntitlementGetEntitlementsResponse,
