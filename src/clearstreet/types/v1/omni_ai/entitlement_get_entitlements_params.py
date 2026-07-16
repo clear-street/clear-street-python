@@ -8,4 +8,4 @@ __all__ = ["EntitlementGetEntitlementsParams"]
 
 
 class EntitlementGetEntitlementsParams(TypedDict, total=False):
-    account_id: int
+    trading_account_id: int
