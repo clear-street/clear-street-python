@@ -76,7 +76,7 @@ class OrdersResource(SyncAPIResource):
         self,
         account_id: int,
         *,
-        instrument_ids: SequenceNotStr[str] | Omit = omit,
+        instrument_ids: SequenceNotStr[InstrumentIDOrSymbol] | Omit = omit,
         instrument_type: Literal["COMMON_STOCK", "OPTION", "CASH"] | Omit = omit,
         side: Literal["BUY", "SELL", "SELL_SHORT", "OTHER"] | Omit = omit,
         type: Literal["MARKET", "LIMIT", "STOP", "STOP_LIMIT", "TRAILING_STOP", "TRAILING_STOP_LIMIT", "OTHER"]
@@ -92,7 +92,8 @@ class OrdersResource(SyncAPIResource):
         Cancel all orders for an account
 
         Args:
-          instrument_ids: Comma-separated instrument identifiers
+          instrument_ids: Comma-separated instrument IDs (UUID) or symbols (equity tickers or OSI option
+              symbols).
 
           instrument_type: Filter by instrument type (e.g., COMMON_STOCK, OPTION)
 
@@ -479,7 +480,7 @@ class AsyncOrdersResource(AsyncAPIResource):
         self,
         account_id: int,
         *,
-        instrument_ids: SequenceNotStr[str] | Omit = omit,
+        instrument_ids: SequenceNotStr[InstrumentIDOrSymbol] | Omit = omit,
         instrument_type: Literal["COMMON_STOCK", "OPTION", "CASH"] | Omit = omit,
         side: Literal["BUY", "SELL", "SELL_SHORT", "OTHER"] | Omit = omit,
         type: Literal["MARKET", "LIMIT", "STOP", "STOP_LIMIT", "TRAILING_STOP", "TRAILING_STOP_LIMIT", "OTHER"]
@@ -495,7 +496,8 @@ class AsyncOrdersResource(AsyncAPIResource):
         Cancel all orders for an account
 
         Args:
-          instrument_ids: Comma-separated instrument identifiers
+          instrument_ids: Comma-separated instrument IDs (UUID) or symbols (equity tickers or OSI option
+              symbols).
 
           instrument_type: Filter by instrument type (e.g., COMMON_STOCK, OPTION)
 
