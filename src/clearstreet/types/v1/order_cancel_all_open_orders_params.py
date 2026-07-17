@@ -17,7 +17,7 @@ class OrderCancelAllOpenOrdersParams(TypedDict, total=False):
     symbols).
     """
 
-    instrument_type: Literal["COMMON_STOCK", "OPTION", "CASH"]
+    instrument_type: Literal["COMMON_STOCK", "INDEX", "OPTION", "CASH"]
     """Filter by instrument type (e.g., COMMON_STOCK, OPTION)"""
 
     side: Literal["BUY", "SELL", "SELL_SHORT", "OTHER"]

@@ -23,7 +23,7 @@ class OrderGetOrdersParams(TypedDict, total=False):
     symbols).
     """
 
-    instrument_type: Literal["COMMON_STOCK", "OPTION", "CASH"]
+    instrument_type: Literal["COMMON_STOCK", "INDEX", "OPTION", "CASH"]
     """Instrument type filter (e.g., COMMON_STOCK, OPTION)"""
 
     order_ids: SequenceNotStr[str]
