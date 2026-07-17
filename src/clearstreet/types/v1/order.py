@@ -37,12 +37,6 @@ class Order(BaseModel):
     filled_quantity: str
     """Cumulative filled quantity"""
 
-    instrument_id: str
-    """Instrument identifier for the traded instrument."""
-
-    instrument_type: SecurityType
-    """Type of security"""
-
     leaves_quantity: str
     """Remaining unfilled quantity"""
 
@@ -57,9 +51,6 @@ class Order(BaseModel):
 
     status: OrderStatus
     """Current status of the order"""
-
-    symbol: str
-    """Trading symbol"""
 
     time_in_force: TimeInForce
     """Time in force instruction"""
@@ -88,6 +79,20 @@ class Order(BaseModel):
 
     extended_hours: Optional[bool] = None
     """Whether the order is eligible for extended-hours trading."""
+
+    instrument_id: Optional[str] = None
+    """Instrument identifier for the traded instrument.
+
+    `null` when the order has no single resolvable instrument. When a null/undefined
+    value is observed, it indicates it does not apply.
+    """
+
+    instrument_type: Optional[SecurityType] = None
+    """Type of security.
+
+    `null` when the order has no single resolvable instrument. When a null/undefined
+    value is observed, it indicates it does not apply.
+    """
 
     limit_offset: Optional[str] = None
     """
@@ -118,6 +123,13 @@ class Order(BaseModel):
     """
     Stop price (for STOP and STOP_LIMIT orders) When a null/undefined value is
     observed, it indicates it does not apply.
+    """
+
+    symbol: Optional[str] = None
+    """Trading symbol.
+
+    `null` when the order has no single resolvable instrument. When a null/undefined
+    value is observed, it indicates it does not apply.
     """
 
     trailing_limit_px: Optional[str] = None
