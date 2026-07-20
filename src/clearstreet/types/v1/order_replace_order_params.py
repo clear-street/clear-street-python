@@ -5,8 +5,6 @@ from __future__ import annotations
 from typing import Optional
 from typing_extensions import Required, TypedDict
 
-from .request_time_in_force import RequestTimeInForce
-
 __all__ = ["OrderReplaceOrderParams"]
 
 
@@ -21,6 +19,3 @@ class OrderReplaceOrderParams(TypedDict, total=False):
 
     stop_price: Optional[str]
     """New stop price for the order"""
-
-    time_in_force: RequestTimeInForce
-    """New time in force for the order"""
