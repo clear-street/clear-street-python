@@ -22,7 +22,6 @@ from ..._types import (
 from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ...types.v1 import (
-    RequestTimeInForce,
     order_get_orders_params,
     order_replace_order_params,
     order_get_executions_params,
@@ -36,7 +35,6 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.v1.request_time_in_force import RequestTimeInForce
 from ...types.v1.instrument_id_or_symbol import InstrumentIDOrSymbol
 from ...types.v1.new_order_request_param import NewOrderRequestParam
 from ...types.v1.order_get_orders_response import OrderGetOrdersResponse
@@ -373,7 +371,6 @@ class OrdersResource(SyncAPIResource):
         limit_price: Optional[str] | Omit = omit,
         quantity: Optional[str] | Omit = omit,
         stop_price: Optional[str] | Omit = omit,
-        time_in_force: RequestTimeInForce | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -390,8 +387,6 @@ class OrdersResource(SyncAPIResource):
           quantity: New quantity for the order
 
           stop_price: New stop price for the order
-
-          time_in_force: New time in force for the order
 
           extra_headers: Send extra headers
 
@@ -410,7 +405,6 @@ class OrdersResource(SyncAPIResource):
                     "limit_price": limit_price,
                     "quantity": quantity,
                     "stop_price": stop_price,
-                    "time_in_force": time_in_force,
                 },
                 order_replace_order_params.OrderReplaceOrderParams,
             ),
@@ -777,7 +771,6 @@ class AsyncOrdersResource(AsyncAPIResource):
         limit_price: Optional[str] | Omit = omit,
         quantity: Optional[str] | Omit = omit,
         stop_price: Optional[str] | Omit = omit,
-        time_in_force: RequestTimeInForce | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -794,8 +787,6 @@ class AsyncOrdersResource(AsyncAPIResource):
           quantity: New quantity for the order
 
           stop_price: New stop price for the order
-
-          time_in_force: New time in force for the order
 
           extra_headers: Send extra headers
 
@@ -814,7 +805,6 @@ class AsyncOrdersResource(AsyncAPIResource):
                     "limit_price": limit_price,
                     "quantity": quantity,
                     "stop_price": stop_price,
-                    "time_in_force": time_in_force,
                 },
                 order_replace_order_params.OrderReplaceOrderParams,
             ),
