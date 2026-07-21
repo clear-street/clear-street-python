@@ -109,7 +109,8 @@ class AccountsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountGetAccountByIDResponse:
         """
-        Fetch account details by ID
+        Fetch account details by ID, including the mailing address, date of birth, phone
+        number, and country of tax residency of the account-holder entity when on file.
 
         Args:
           extra_headers: Send extra headers
@@ -350,7 +351,8 @@ class AsyncAccountsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountGetAccountByIDResponse:
         """
-        Fetch account details by ID
+        Fetch account details by ID, including the mailing address, date of birth, phone
+        number, and country of tax residency of the account-holder entity when on file.
 
         Args:
           extra_headers: Send extra headers

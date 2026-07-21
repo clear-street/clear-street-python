@@ -1,7 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import Optional
-from datetime import date
 
 from ..._models import BaseModel
 from ..security_type import SecurityType
@@ -58,13 +57,6 @@ class InstrumentCore(BaseModel):
     value is observed, it indicates that there is no available data.
     """
 
-    expiry: Optional[date] = None
-    """Deprecated.
-
-    Always null. When a null/undefined value is observed, it indicates it does not
-    apply.
-    """
-
     instrument_type: Optional[SecurityType] = None
     """
     The type of security (e.g., Common Stock, ETF) When a null/undefined value is
@@ -99,11 +91,4 @@ class InstrumentCore(BaseModel):
     """
     The percent of a short position's value you must post as margin When a
     null/undefined value is observed, it indicates that there is no available data.
-    """
-
-    strike_price: Optional[str] = None
-    """Deprecated.
-
-    Always null. When a null/undefined value is observed, it indicates it does not
-    apply.
     """

@@ -22,7 +22,6 @@ from ..._types import (
 from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ...types.v1 import (
-    RequestTimeInForce,
     order_get_orders_params,
     order_replace_order_params,
     order_get_executions_params,
@@ -36,7 +35,7 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.v1.request_time_in_force import RequestTimeInForce
+from ...types.v1.instrument_id_or_symbol import InstrumentIDOrSymbol
 from ...types.v1.new_order_request_param import NewOrderRequestParam
 from ...types.v1.order_get_orders_response import OrderGetOrdersResponse
 from ...types.v1.order_replace_order_response import OrderReplaceOrderResponse
@@ -75,8 +74,8 @@ class OrdersResource(SyncAPIResource):
         self,
         account_id: int,
         *,
-        instrument_ids: SequenceNotStr[str] | Omit = omit,
-        instrument_type: Literal["COMMON_STOCK", "OPTION", "CASH"] | Omit = omit,
+        instrument_ids: SequenceNotStr[InstrumentIDOrSymbol] | Omit = omit,
+        instrument_type: Literal["COMMON_STOCK", "INDEX", "OPTION", "CASH"] | Omit = omit,
         side: Literal["BUY", "SELL", "SELL_SHORT", "OTHER"] | Omit = omit,
         type: Literal["MARKET", "LIMIT", "STOP", "STOP_LIMIT", "TRAILING_STOP", "TRAILING_STOP_LIMIT", "OTHER"]
         | Omit = omit,
@@ -91,7 +90,8 @@ class OrdersResource(SyncAPIResource):
         Cancel all orders for an account
 
         Args:
-          instrument_ids: Comma-separated instrument identifiers
+          instrument_ids: Comma-separated instrument IDs (UUID) or symbols (equity tickers or OSI option
+              symbols).
 
           instrument_type: Filter by instrument type (e.g., COMMON_STOCK, OPTION)
 
@@ -264,8 +264,8 @@ class OrdersResource(SyncAPIResource):
         account_id: int,
         *,
         from_: Union[str, datetime] | Omit = omit,
-        instrument_ids: SequenceNotStr[str] | Omit = omit,
-        instrument_type: Literal["COMMON_STOCK", "OPTION", "CASH"] | Omit = omit,
+        instrument_ids: SequenceNotStr[InstrumentIDOrSymbol] | Omit = omit,
+        instrument_type: Literal["COMMON_STOCK", "INDEX", "OPTION", "CASH"] | Omit = omit,
         order_ids: SequenceNotStr[str] | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
@@ -291,7 +291,7 @@ class OrdersResource(SyncAPIResource):
         | Omit = omit,
         symbol: str | Omit = omit,
         to: Union[str, datetime] | Omit = omit,
-        underlying_instrument_ids: SequenceNotStr[str] | Omit = omit,
+        underlying_instrument_ids: SequenceNotStr[InstrumentIDOrSymbol] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -305,7 +305,8 @@ class OrdersResource(SyncAPIResource):
         Args:
           from_: The start date and time for the query range, inclusive (ISO 8601 format)
 
-          instrument_ids: Comma-separated instrument identifiers
+          instrument_ids: Comma-separated instrument IDs (UUID) or symbols (equity tickers or OSI option
+              symbols).
 
           instrument_type: Instrument type filter (e.g., COMMON_STOCK, OPTION)
 
@@ -324,8 +325,9 @@ class OrdersResource(SyncAPIResource):
 
           to: The end date and time for the query range, inclusive (ISO 8601 format)
 
-          underlying_instrument_ids: Comma-separated instrument identifiers. Matches options orders whose resolved
-              underlier is any of the given IDs.
+          underlying_instrument_ids: Comma-separated instrument IDs (UUID) or symbols (equity tickers or OSI option
+              symbols). Matches options orders whose resolved underlier is any of the given
+              instruments.
 
           extra_headers: Send extra headers
 
@@ -369,7 +371,6 @@ class OrdersResource(SyncAPIResource):
         limit_price: Optional[str] | Omit = omit,
         quantity: Optional[str] | Omit = omit,
         stop_price: Optional[str] | Omit = omit,
-        time_in_force: RequestTimeInForce | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -386,8 +387,6 @@ class OrdersResource(SyncAPIResource):
           quantity: New quantity for the order
 
           stop_price: New stop price for the order
-
-          time_in_force: New time in force for the order
 
           extra_headers: Send extra headers
 
@@ -406,7 +405,6 @@ class OrdersResource(SyncAPIResource):
                     "limit_price": limit_price,
                     "quantity": quantity,
                     "stop_price": stop_price,
-                    "time_in_force": time_in_force,
                 },
                 order_replace_order_params.OrderReplaceOrderParams,
             ),
@@ -476,8 +474,8 @@ class AsyncOrdersResource(AsyncAPIResource):
         self,
         account_id: int,
         *,
-        instrument_ids: SequenceNotStr[str] | Omit = omit,
-        instrument_type: Literal["COMMON_STOCK", "OPTION", "CASH"] | Omit = omit,
+        instrument_ids: SequenceNotStr[InstrumentIDOrSymbol] | Omit = omit,
+        instrument_type: Literal["COMMON_STOCK", "INDEX", "OPTION", "CASH"] | Omit = omit,
         side: Literal["BUY", "SELL", "SELL_SHORT", "OTHER"] | Omit = omit,
         type: Literal["MARKET", "LIMIT", "STOP", "STOP_LIMIT", "TRAILING_STOP", "TRAILING_STOP_LIMIT", "OTHER"]
         | Omit = omit,
@@ -492,7 +490,8 @@ class AsyncOrdersResource(AsyncAPIResource):
         Cancel all orders for an account
 
         Args:
-          instrument_ids: Comma-separated instrument identifiers
+          instrument_ids: Comma-separated instrument IDs (UUID) or symbols (equity tickers or OSI option
+              symbols).
 
           instrument_type: Filter by instrument type (e.g., COMMON_STOCK, OPTION)
 
@@ -665,8 +664,8 @@ class AsyncOrdersResource(AsyncAPIResource):
         account_id: int,
         *,
         from_: Union[str, datetime] | Omit = omit,
-        instrument_ids: SequenceNotStr[str] | Omit = omit,
-        instrument_type: Literal["COMMON_STOCK", "OPTION", "CASH"] | Omit = omit,
+        instrument_ids: SequenceNotStr[InstrumentIDOrSymbol] | Omit = omit,
+        instrument_type: Literal["COMMON_STOCK", "INDEX", "OPTION", "CASH"] | Omit = omit,
         order_ids: SequenceNotStr[str] | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
@@ -692,7 +691,7 @@ class AsyncOrdersResource(AsyncAPIResource):
         | Omit = omit,
         symbol: str | Omit = omit,
         to: Union[str, datetime] | Omit = omit,
-        underlying_instrument_ids: SequenceNotStr[str] | Omit = omit,
+        underlying_instrument_ids: SequenceNotStr[InstrumentIDOrSymbol] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -706,7 +705,8 @@ class AsyncOrdersResource(AsyncAPIResource):
         Args:
           from_: The start date and time for the query range, inclusive (ISO 8601 format)
 
-          instrument_ids: Comma-separated instrument identifiers
+          instrument_ids: Comma-separated instrument IDs (UUID) or symbols (equity tickers or OSI option
+              symbols).
 
           instrument_type: Instrument type filter (e.g., COMMON_STOCK, OPTION)
 
@@ -725,8 +725,9 @@ class AsyncOrdersResource(AsyncAPIResource):
 
           to: The end date and time for the query range, inclusive (ISO 8601 format)
 
-          underlying_instrument_ids: Comma-separated instrument identifiers. Matches options orders whose resolved
-              underlier is any of the given IDs.
+          underlying_instrument_ids: Comma-separated instrument IDs (UUID) or symbols (equity tickers or OSI option
+              symbols). Matches options orders whose resolved underlier is any of the given
+              instruments.
 
           extra_headers: Send extra headers
 
@@ -770,7 +771,6 @@ class AsyncOrdersResource(AsyncAPIResource):
         limit_price: Optional[str] | Omit = omit,
         quantity: Optional[str] | Omit = omit,
         stop_price: Optional[str] | Omit = omit,
-        time_in_force: RequestTimeInForce | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -787,8 +787,6 @@ class AsyncOrdersResource(AsyncAPIResource):
           quantity: New quantity for the order
 
           stop_price: New stop price for the order
-
-          time_in_force: New time in force for the order
 
           extra_headers: Send extra headers
 
@@ -807,7 +805,6 @@ class AsyncOrdersResource(AsyncAPIResource):
                     "limit_price": limit_price,
                     "quantity": quantity,
                     "stop_price": stop_price,
-                    "time_in_force": time_in_force,
                 },
                 order_replace_order_params.OrderReplaceOrderParams,
             ),

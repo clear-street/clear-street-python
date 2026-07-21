@@ -2,6 +2,6 @@
 
 from typing_extensions import Literal, TypeAlias
 
-__all__ = ["FieldPeriod"]
+__all__ = ["ReportTime"]
 
-FieldPeriod: TypeAlias = Literal["QUARTER", "TRAILING_TWELVE_MONTHS", "ANNUAL"]
+ReportTime: TypeAlias = Literal["BMO", "AMC"]

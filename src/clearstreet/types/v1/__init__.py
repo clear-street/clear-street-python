@@ -5,6 +5,7 @@ from __future__ import annotations
 from .side import Side as Side
 from .order import Order as Order
 from .account import Account as Account
+from .address import Address as Address
 from .version import Version as Version
 from .day_type import DayType as DayType
 from .modifier import Modifier as Modifier
@@ -23,6 +24,7 @@ from .margin_type import MarginType as MarginType
 from .market_type import MarketType as MarketType
 from .modifier_op import ModifierOp as ModifierOp
 from .queue_state import QueueState as QueueState
+from .report_time import ReportTime as ReportTime
 from .account_list import AccountList as AccountList
 from .account_type import AccountType as AccountType
 from .chart_series import ChartSeries as ChartSeries
@@ -131,10 +133,13 @@ from .instrument_income_statement import InstrumentIncomeStatement as Instrument
 from .order_get_executions_params import OrderGetExecutionsParams as OrderGetExecutionsParams
 from .position_instruction_status import PositionInstructionStatus as PositionInstructionStatus
 from .prefill_cancel_order_action import PrefillCancelOrderAction as PrefillCancelOrderAction
+from .prefill_modify_order_action import PrefillModifyOrderAction as PrefillModifyOrderAction
 from .instrument_analyst_consensus import InstrumentAnalystConsensus as InstrumentAnalystConsensus
 from .order_replace_order_response import OrderReplaceOrderResponse as OrderReplaceOrderResponse
 from .order_submit_orders_response import OrderSubmitOrdersResponse as OrderSubmitOrdersResponse
+from .prefill_modify_order_request import PrefillModifyOrderRequest as PrefillModifyOrderRequest
 from .account_get_accounts_response import AccountGetAccountsResponse as AccountGetAccountsResponse
+from .account_with_personal_details import AccountWithPersonalDetails as AccountWithPersonalDetails
 from .content_part_thinking_payload import ContentPartThinkingPayload as ContentPartThinkingPayload
 from .order_get_executions_response import OrderGetExecutionsResponse as OrderGetExecutionsResponse
 from .position_get_positions_params import PositionGetPositionsParams as PositionGetPositionsParams

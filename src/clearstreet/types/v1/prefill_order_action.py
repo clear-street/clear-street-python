@@ -3,9 +3,9 @@
 from typing import Union
 from typing_extensions import Literal, TypeAlias
 
-from . import prefill_new_order_action, prefill_cancel_order_action
+from . import prefill_new_order_action, prefill_cancel_order_action, prefill_modify_order_action
 
-__all__ = ["PrefillOrderAction", "PrefillNewOrderAction", "PrefillCancelOrderAction"]
+__all__ = ["PrefillOrderAction", "PrefillNewOrderAction", "PrefillCancelOrderAction", "PrefillModifyOrderAction"]
 
 
 class PrefillNewOrderAction(prefill_new_order_action.PrefillNewOrderAction):
@@ -20,4 +20,10 @@ class PrefillCancelOrderAction(prefill_cancel_order_action.PrefillCancelOrderAct
     action_type: Literal["CANCEL"]
 
 
-PrefillOrderAction: TypeAlias = Union[PrefillNewOrderAction, PrefillCancelOrderAction]
+class PrefillModifyOrderAction(prefill_modify_order_action.PrefillModifyOrderAction):
+    """Modify one or more existing orders."""
+
+    action_type: Literal["MODIFY"]
+
+
+PrefillOrderAction: TypeAlias = Union[PrefillNewOrderAction, PrefillCancelOrderAction, PrefillModifyOrderAction]

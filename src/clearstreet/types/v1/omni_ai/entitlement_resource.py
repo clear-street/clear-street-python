@@ -7,6 +7,8 @@ __all__ = ["EntitlementResource"]
 
 
 class EntitlementResource(BaseModel):
+    account_id: int
+
     agreement_id: str
 
     entitlement_code: EntitlementCode
@@ -15,5 +17,3 @@ class EntitlementResource(BaseModel):
     entitlement_id: str
 
     granted_at: str
-
-    trading_account_id: int

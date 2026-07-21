@@ -1,5 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from typing import Optional
 from datetime import datetime
 
 from .side import Side
@@ -14,9 +15,6 @@ class Execution(BaseModel):
     id: str
     """Unique identifier for this execution report."""
 
-    instrument_id: str
-    """Unique instrument identifier."""
-
     order_id: str
     """Identifier of the order this execution belongs to."""
 
@@ -29,8 +27,19 @@ class Execution(BaseModel):
     side: Side
     """Side of the fill."""
 
-    symbol: str
-    """Trading symbol."""
-
     transaction_time: datetime
     """Transaction timestamp in nanosecond precision (UTC)."""
+
+    instrument_id: Optional[str] = None
+    """Unique instrument identifier.
+
+    `null` when this fill has no single resolvable instrument. When a null/undefined
+    value is observed, it indicates it does not apply.
+    """
+
+    symbol: Optional[str] = None
+    """Trading symbol.
+
+    `null` when this fill has no single resolvable instrument. When a null/undefined
+    value is observed, it indicates it does not apply.
+    """

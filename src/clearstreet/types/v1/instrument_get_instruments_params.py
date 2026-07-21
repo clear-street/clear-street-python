@@ -21,7 +21,7 @@ class InstrumentGetInstrumentsParams(TypedDict, total=False):
     for equities, OSI for options)
     """
 
-    instrument_type: Literal["COMMON_STOCK", "OPTION", "CASH"]
+    instrument_type: Literal["COMMON_STOCK", "INDEX", "OPTION", "CASH"]
     """Filter by instrument type (e.g. COMMON_STOCK, OPTION)"""
 
     is_liquidation_only: bool
