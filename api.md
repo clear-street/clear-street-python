@@ -26,6 +26,8 @@ from clearstreet.types.v1 import (
     AccountStatus,
     AccountSubtype,
     AccountType,
+    AccountWithPersonalDetails,
+    Address,
     MarginDetails,
     MarginDetailsUsage,
     MarginSessionDetails,
