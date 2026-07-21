@@ -5,6 +5,7 @@ from __future__ import annotations
 from .side import Side as Side
 from .order import Order as Order
 from .account import Account as Account
+from .address import Address as Address
 from .version import Version as Version
 from .day_type import DayType as DayType
 from .modifier import Modifier as Modifier
@@ -138,6 +139,7 @@ from .order_replace_order_response import OrderReplaceOrderResponse as OrderRepl
 from .order_submit_orders_response import OrderSubmitOrdersResponse as OrderSubmitOrdersResponse
 from .prefill_modify_order_request import PrefillModifyOrderRequest as PrefillModifyOrderRequest
 from .account_get_accounts_response import AccountGetAccountsResponse as AccountGetAccountsResponse
+from .account_with_personal_details import AccountWithPersonalDetails as AccountWithPersonalDetails
 from .content_part_thinking_payload import ContentPartThinkingPayload as ContentPartThinkingPayload
 from .order_get_executions_response import OrderGetExecutionsResponse as OrderGetExecutionsResponse
 from .position_get_positions_params import PositionGetPositionsParams as PositionGetPositionsParams
