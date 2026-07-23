@@ -123,9 +123,15 @@ class InstrumentDataResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> InstrumentDataGetAllInstrumentEventsResponse:
         """
-        List instrument events across all securities.
+        List instrument events across all securities, grouped by date.
 
-        Retrieves all instrument events grouped by date.
+        Date range defaults (anchored on the current trading day, or the next trading
+        day if today is a weekend or US market holiday):
+
+        - Unfiltered (no `instrument_ids`): a single trading day (`from_date` =
+          `to_date` = anchor); the requested span is capped at 6 days.
+        - Filtered (with `instrument_ids`): a 30-day lookback ending on the anchor
+          (`from_date` = anchor − 30 days, `to_date` = anchor).
 
         Args:
           event_types:
@@ -560,9 +566,15 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> InstrumentDataGetAllInstrumentEventsResponse:
         """
-        List instrument events across all securities.
+        List instrument events across all securities, grouped by date.
 
-        Retrieves all instrument events grouped by date.
+        Date range defaults (anchored on the current trading day, or the next trading
+        day if today is a weekend or US market holiday):
+
+        - Unfiltered (no `instrument_ids`): a single trading day (`from_date` =
+          `to_date` = anchor); the requested span is capped at 6 days.
+        - Filtered (with `instrument_ids`): a 30-day lookback ending on the anchor
+          (`from_date` = anchor − 30 days, `to_date` = anchor).
 
         Args:
           event_types:
