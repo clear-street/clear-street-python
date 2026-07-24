@@ -29,7 +29,6 @@ from ...._types import (
 from ...._utils import path_template, maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ....types.v1 import (
-    InstrumentIDOrSymbol,
     instrument_data_get_instrument_events_params,
     instrument_data_get_all_instrument_events_params,
     instrument_data_get_instrument_analyst_consensus_params,
@@ -176,7 +175,7 @@ class InstrumentDataResource(SyncAPIResource):
 
     def get_instrument_analyst_consensus(
         self,
-        instrument_id: InstrumentIDOrSymbol,
+        instrument_id: str,
         *,
         from_: Union[str, date] | Omit = omit,
         to: Union[str, date] | Omit = omit,
@@ -191,7 +190,8 @@ class InstrumentDataResource(SyncAPIResource):
         Retrieves analyst ratings and price targets for an instrument.
 
         Args:
-          instrument_id: Instrument identifier
+          instrument_id: Instrument identifier: either an instrument UUID or a symbol (symbol for
+              equities, OSI for options). Non-UUID inputs are resolved server-side.
 
           from_: The start date for the query range, inclusive (YYYY-MM-DD)
 
@@ -227,7 +227,7 @@ class InstrumentDataResource(SyncAPIResource):
 
     def get_instrument_balance_sheet_statements(
         self,
-        instrument_id: InstrumentIDOrSymbol,
+        instrument_id: str,
         *,
         from_date: str | Omit = omit,
         page_size: int | Omit = omit,
@@ -252,7 +252,8 @@ class InstrumentDataResource(SyncAPIResource):
         - `to_date`: None (no upper bound)
 
         Args:
-          instrument_id: Instrument identifier
+          instrument_id: Instrument identifier: either an instrument UUID or a symbol (symbol for
+              equities, OSI for options). Non-UUID inputs are resolved server-side.
 
           from_date: The start date for the query range, inclusive (YYYY-MM-DD).
 
@@ -296,7 +297,7 @@ class InstrumentDataResource(SyncAPIResource):
 
     def get_instrument_cash_flow_statements(
         self,
-        instrument_id: InstrumentIDOrSymbol,
+        instrument_id: str,
         *,
         from_date: str | Omit = omit,
         page_size: int | Omit = omit,
@@ -317,7 +318,8 @@ class InstrumentDataResource(SyncAPIResource):
         financing activities.
 
         Args:
-          instrument_id: Instrument identifier
+          instrument_id: Instrument identifier: either an instrument UUID or a symbol (symbol for
+              equities, OSI for options). Non-UUID inputs are resolved server-side.
 
           from_date: The start date for the query range, inclusive (YYYY-MM-DD).
 
@@ -361,7 +363,7 @@ class InstrumentDataResource(SyncAPIResource):
 
     def get_instrument_events(
         self,
-        instrument_id: InstrumentIDOrSymbol,
+        instrument_id: str,
         *,
         from_date: str | Omit = omit,
         to_date: str | Omit = omit,
@@ -382,7 +384,8 @@ class InstrumentDataResource(SyncAPIResource):
         - `to_date`: today + 60 days
 
         Args:
-          instrument_id: Instrument identifier
+          instrument_id: Instrument identifier: either an instrument UUID or a symbol (symbol for
+              equities, OSI for options). Non-UUID inputs are resolved server-side.
 
           from_date: The start date for the query range, inclusive (YYYY-MM-DD).
 
@@ -418,7 +421,7 @@ class InstrumentDataResource(SyncAPIResource):
 
     def get_instrument_fundamentals(
         self,
-        instrument_id: InstrumentIDOrSymbol,
+        instrument_id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -431,7 +434,8 @@ class InstrumentDataResource(SyncAPIResource):
         Retrieves supplemental fundamentals and company profile data for an instrument.
 
         Args:
-          instrument_id: Instrument identifier
+          instrument_id: Instrument identifier: either an instrument UUID or a symbol (symbol for
+              equities, OSI for options). Non-UUID inputs are resolved server-side.
 
           extra_headers: Send extra headers
 
@@ -453,7 +457,7 @@ class InstrumentDataResource(SyncAPIResource):
 
     def get_instrument_income_statements(
         self,
-        instrument_id: InstrumentIDOrSymbol,
+        instrument_id: str,
         *,
         from_date: str | Omit = omit,
         page_size: int | Omit = omit,
@@ -476,7 +480,8 @@ class InstrumentDataResource(SyncAPIResource):
         - `to_date`: None (no upper bound)
 
         Args:
-          instrument_id: Instrument identifier
+          instrument_id: Instrument identifier: either an instrument UUID or a symbol (symbol for
+              equities, OSI for options). Non-UUID inputs are resolved server-side.
 
           from_date: The start date for the query range, inclusive (YYYY-MM-DD).
 
@@ -619,7 +624,7 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
 
     async def get_instrument_analyst_consensus(
         self,
-        instrument_id: InstrumentIDOrSymbol,
+        instrument_id: str,
         *,
         from_: Union[str, date] | Omit = omit,
         to: Union[str, date] | Omit = omit,
@@ -634,7 +639,8 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
         Retrieves analyst ratings and price targets for an instrument.
 
         Args:
-          instrument_id: Instrument identifier
+          instrument_id: Instrument identifier: either an instrument UUID or a symbol (symbol for
+              equities, OSI for options). Non-UUID inputs are resolved server-side.
 
           from_: The start date for the query range, inclusive (YYYY-MM-DD)
 
@@ -670,7 +676,7 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
 
     async def get_instrument_balance_sheet_statements(
         self,
-        instrument_id: InstrumentIDOrSymbol,
+        instrument_id: str,
         *,
         from_date: str | Omit = omit,
         page_size: int | Omit = omit,
@@ -695,7 +701,8 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
         - `to_date`: None (no upper bound)
 
         Args:
-          instrument_id: Instrument identifier
+          instrument_id: Instrument identifier: either an instrument UUID or a symbol (symbol for
+              equities, OSI for options). Non-UUID inputs are resolved server-side.
 
           from_date: The start date for the query range, inclusive (YYYY-MM-DD).
 
@@ -739,7 +746,7 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
 
     async def get_instrument_cash_flow_statements(
         self,
-        instrument_id: InstrumentIDOrSymbol,
+        instrument_id: str,
         *,
         from_date: str | Omit = omit,
         page_size: int | Omit = omit,
@@ -760,7 +767,8 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
         financing activities.
 
         Args:
-          instrument_id: Instrument identifier
+          instrument_id: Instrument identifier: either an instrument UUID or a symbol (symbol for
+              equities, OSI for options). Non-UUID inputs are resolved server-side.
 
           from_date: The start date for the query range, inclusive (YYYY-MM-DD).
 
@@ -804,7 +812,7 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
 
     async def get_instrument_events(
         self,
-        instrument_id: InstrumentIDOrSymbol,
+        instrument_id: str,
         *,
         from_date: str | Omit = omit,
         to_date: str | Omit = omit,
@@ -825,7 +833,8 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
         - `to_date`: today + 60 days
 
         Args:
-          instrument_id: Instrument identifier
+          instrument_id: Instrument identifier: either an instrument UUID or a symbol (symbol for
+              equities, OSI for options). Non-UUID inputs are resolved server-side.
 
           from_date: The start date for the query range, inclusive (YYYY-MM-DD).
 
@@ -861,7 +870,7 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
 
     async def get_instrument_fundamentals(
         self,
-        instrument_id: InstrumentIDOrSymbol,
+        instrument_id: str,
         *,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -874,7 +883,8 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
         Retrieves supplemental fundamentals and company profile data for an instrument.
 
         Args:
-          instrument_id: Instrument identifier
+          instrument_id: Instrument identifier: either an instrument UUID or a symbol (symbol for
+              equities, OSI for options). Non-UUID inputs are resolved server-side.
 
           extra_headers: Send extra headers
 
@@ -896,7 +906,7 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
 
     async def get_instrument_income_statements(
         self,
-        instrument_id: InstrumentIDOrSymbol,
+        instrument_id: str,
         *,
         from_date: str | Omit = omit,
         page_size: int | Omit = omit,
@@ -919,7 +929,8 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
         - `to_date`: None (no upper bound)
 
         Args:
-          instrument_id: Instrument identifier
+          instrument_id: Instrument identifier: either an instrument UUID or a symbol (symbol for
+              equities, OSI for options). Non-UUID inputs are resolved server-side.
 
           from_date: The start date for the query range, inclusive (YYYY-MM-DD).
 

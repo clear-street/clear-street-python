@@ -26,14 +26,14 @@ class TestInstruments:
     @parametrize
     def test_method_get_instrument_by_id(self, client: ClearStreet) -> None:
         instrument = client.v1.instruments.get_instrument_by_id(
-            instrument_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            instrument_id="x",
         )
         assert_matches_type(InstrumentGetInstrumentByIDResponse, instrument, path=["response"])
 
     @parametrize
     def test_method_get_instrument_by_id_with_all_params(self, client: ClearStreet) -> None:
         instrument = client.v1.instruments.get_instrument_by_id(
-            instrument_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            instrument_id="x",
             include_options_expiry_dates=True,
         )
         assert_matches_type(InstrumentGetInstrumentByIDResponse, instrument, path=["response"])
@@ -41,7 +41,7 @@ class TestInstruments:
     @parametrize
     def test_raw_response_get_instrument_by_id(self, client: ClearStreet) -> None:
         response = client.v1.instruments.with_raw_response.get_instrument_by_id(
-            instrument_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            instrument_id="x",
         )
 
         assert response.is_closed is True
@@ -52,7 +52,7 @@ class TestInstruments:
     @parametrize
     def test_streaming_response_get_instrument_by_id(self, client: ClearStreet) -> None:
         with client.v1.instruments.with_streaming_response.get_instrument_by_id(
-            instrument_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            instrument_id="x",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -78,7 +78,7 @@ class TestInstruments:
     def test_method_get_instruments_with_all_params(self, client: ClearStreet) -> None:
         instrument = client.v1.instruments.get_instruments(
             easy_to_borrow=True,
-            instrument_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            instrument_ids=["x"],
             instrument_type="COMMON_STOCK",
             is_liquidation_only=True,
             is_marginable=True,
@@ -123,7 +123,7 @@ class TestInstruments:
             page_size=1,
             page_token="U3RhaW5sZXNzIHJvY2tz",
             underlier="underlier",
-            underlying_instrument_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            underlying_instrument_id="x",
         )
         assert_matches_type(InstrumentGetOptionContractsResponse, instrument, path=["response"])
 
@@ -201,14 +201,14 @@ class TestAsyncInstruments:
     @parametrize
     async def test_method_get_instrument_by_id(self, async_client: AsyncClearStreet) -> None:
         instrument = await async_client.v1.instruments.get_instrument_by_id(
-            instrument_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            instrument_id="x",
         )
         assert_matches_type(InstrumentGetInstrumentByIDResponse, instrument, path=["response"])
 
     @parametrize
     async def test_method_get_instrument_by_id_with_all_params(self, async_client: AsyncClearStreet) -> None:
         instrument = await async_client.v1.instruments.get_instrument_by_id(
-            instrument_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            instrument_id="x",
             include_options_expiry_dates=True,
         )
         assert_matches_type(InstrumentGetInstrumentByIDResponse, instrument, path=["response"])
@@ -216,7 +216,7 @@ class TestAsyncInstruments:
     @parametrize
     async def test_raw_response_get_instrument_by_id(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.instruments.with_raw_response.get_instrument_by_id(
-            instrument_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            instrument_id="x",
         )
 
         assert response.is_closed is True
@@ -227,7 +227,7 @@ class TestAsyncInstruments:
     @parametrize
     async def test_streaming_response_get_instrument_by_id(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.instruments.with_streaming_response.get_instrument_by_id(
-            instrument_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            instrument_id="x",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -253,7 +253,7 @@ class TestAsyncInstruments:
     async def test_method_get_instruments_with_all_params(self, async_client: AsyncClearStreet) -> None:
         instrument = await async_client.v1.instruments.get_instruments(
             easy_to_borrow=True,
-            instrument_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            instrument_ids=["x"],
             instrument_type="COMMON_STOCK",
             is_liquidation_only=True,
             is_marginable=True,
@@ -298,7 +298,7 @@ class TestAsyncInstruments:
             page_size=1,
             page_token="U3RhaW5sZXNzIHJvY2tz",
             underlier="underlier",
-            underlying_instrument_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            underlying_instrument_id="x",
         )
         assert_matches_type(InstrumentGetOptionContractsResponse, instrument, path=["response"])
 

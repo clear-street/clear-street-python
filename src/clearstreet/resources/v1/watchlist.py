@@ -72,7 +72,7 @@ class WatchlistResource(SyncAPIResource):
         Add an instrument to a watchlist
 
         Args:
-          instrument_id: Instrument identifier
+          instrument_id: Instrument ID (UUID) or symbol (equity ticker or OSI option symbol).
 
           extra_headers: Send extra headers
 
@@ -318,7 +318,7 @@ class AsyncWatchlistResource(AsyncAPIResource):
         Add an instrument to a watchlist
 
         Args:
-          instrument_id: Instrument identifier
+          instrument_id: Instrument ID (UUID) or symbol (equity ticker or OSI option symbol).
 
           extra_headers: Send extra headers
 

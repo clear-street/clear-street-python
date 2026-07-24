@@ -4,18 +4,16 @@ from __future__ import annotations
 
 from typing import Union
 from datetime import date
-from typing_extensions import Annotated, TypedDict
+from typing_extensions import Literal, Annotated, TypedDict
 
 from ..._types import Base64FileInput
 from ..._utils import PropertyInfo
-from .contract_type import ContractType
-from .instrument_id_or_symbol import InstrumentIDOrSymbol
 
 __all__ = ["InstrumentGetOptionContractsParams"]
 
 
 class InstrumentGetOptionContractsParams(TypedDict, total=False):
-    contract_type: ContractType
+    contract_type: Literal["CALL", "PUT"]
     """Filter by contract type: CALL or PUT"""
 
     expiry: Annotated[Union[str, date], PropertyInfo(format="iso8601")]
@@ -36,5 +34,5 @@ class InstrumentGetOptionContractsParams(TypedDict, total=False):
     underlier: str
     """Underlier symbol (e.g., AAPL, SPX)"""
 
-    underlying_instrument_id: InstrumentIDOrSymbol
+    underlying_instrument_id: str
     """Instrument identifier or symbol of the underlying equity/index"""

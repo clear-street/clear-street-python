@@ -54,7 +54,10 @@ class NewOrderRequestParam(TypedDict, total=False):
     """
 
     instrument_id: Optional[InstrumentIDOrSymbol]
-    """Instrument identifier"""
+    """Instrument ID (UUID) or symbol (equity ticker or OSI option symbol).
+
+    Either `symbol` or `instrument_id` must be provided.
+    """
 
     limit_offset: Optional[str]
     """Limit offset for trailing stop-limit orders (signed)"""

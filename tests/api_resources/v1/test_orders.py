@@ -37,7 +37,7 @@ class TestOrders:
     def test_method_cancel_all_open_orders_with_all_params(self, client: ClearStreet) -> None:
         order = client.v1.orders.cancel_all_open_orders(
             account_id=0,
-            instrument_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            instrument_ids=["x"],
             instrument_type="COMMON_STOCK",
             side="BUY",
             type="MARKET",
@@ -122,7 +122,7 @@ class TestOrders:
         order = client.v1.orders.get_executions(
             account_id=0,
             from_=parse_datetime("2019-12-27T18:11:19.117Z"),
-            instrument_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            instrument_ids=["x"],
             page_size=1,
             page_token="U3RhaW5sZXNzIHJvY2tz",
             to=parse_datetime("2019-12-27T18:11:19.117Z"),
@@ -207,7 +207,7 @@ class TestOrders:
         order = client.v1.orders.get_orders(
             account_id=0,
             from_=parse_datetime("2019-12-27T18:11:19.117Z"),
-            instrument_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            instrument_ids=["x"],
             instrument_type="COMMON_STOCK",
             order_ids=["string"],
             page_size=1,
@@ -215,7 +215,7 @@ class TestOrders:
             status=["PENDING_NEW"],
             symbol="symbol",
             to=parse_datetime("2019-12-27T18:11:19.117Z"),
-            underlying_instrument_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            underlying_instrument_ids=["x"],
         )
         assert_matches_type(OrderGetOrdersResponse, order, path=["response"])
 
@@ -368,7 +368,7 @@ class TestAsyncOrders:
     async def test_method_cancel_all_open_orders_with_all_params(self, async_client: AsyncClearStreet) -> None:
         order = await async_client.v1.orders.cancel_all_open_orders(
             account_id=0,
-            instrument_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            instrument_ids=["x"],
             instrument_type="COMMON_STOCK",
             side="BUY",
             type="MARKET",
@@ -453,7 +453,7 @@ class TestAsyncOrders:
         order = await async_client.v1.orders.get_executions(
             account_id=0,
             from_=parse_datetime("2019-12-27T18:11:19.117Z"),
-            instrument_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            instrument_ids=["x"],
             page_size=1,
             page_token="U3RhaW5sZXNzIHJvY2tz",
             to=parse_datetime("2019-12-27T18:11:19.117Z"),
@@ -538,7 +538,7 @@ class TestAsyncOrders:
         order = await async_client.v1.orders.get_orders(
             account_id=0,
             from_=parse_datetime("2019-12-27T18:11:19.117Z"),
-            instrument_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            instrument_ids=["x"],
             instrument_type="COMMON_STOCK",
             order_ids=["string"],
             page_size=1,
@@ -546,7 +546,7 @@ class TestAsyncOrders:
             status=["PENDING_NEW"],
             symbol="symbol",
             to=parse_datetime("2019-12-27T18:11:19.117Z"),
-            underlying_instrument_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            underlying_instrument_ids=["x"],
         )
         assert_matches_type(OrderGetOrdersResponse, order, path=["response"])
 

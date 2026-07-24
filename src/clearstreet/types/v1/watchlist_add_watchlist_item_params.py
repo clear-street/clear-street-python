@@ -11,4 +11,4 @@ __all__ = ["WatchlistAddWatchlistItemParams"]
 
 class WatchlistAddWatchlistItemParams(TypedDict, total=False):
     instrument_id: Required[InstrumentIDOrSymbol]
-    """Instrument identifier"""
+    """Instrument ID (UUID) or symbol (equity ticker or OSI option symbol)."""

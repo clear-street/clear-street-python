@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
+from typing_extensions import Literal
+
 import httpx
 
 from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
-from ...types.v1 import MarketType, calendar_get_market_hours_calendar_params
+from ...types.v1 import calendar_get_market_hours_calendar_params
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
     to_raw_response_wrapper,
@@ -16,7 +18,6 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.v1.market_type import MarketType
 from ...types.v1.calendar_get_clock_response import CalendarGetClockResponse
 from ...types.v1.calendar_get_market_hours_calendar_response import CalendarGetMarketHoursCalendarResponse
 
@@ -68,7 +69,7 @@ class CalendarResource(SyncAPIResource):
         self,
         *,
         date: str | Omit = omit,
-        market: MarketType | Omit = omit,
+        market: Literal["us_equities", "us_options"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -158,7 +159,7 @@ class AsyncCalendarResource(AsyncAPIResource):
         self,
         *,
         date: str | Omit = omit,
-        market: MarketType | Omit = omit,
+        market: Literal["us_equities", "us_options"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

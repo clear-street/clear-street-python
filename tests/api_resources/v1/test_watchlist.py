@@ -28,7 +28,7 @@ class TestWatchlist:
     def test_method_add_watchlist_item(self, client: ClearStreet) -> None:
         watchlist = client.v1.watchlist.add_watchlist_item(
             watchlist_id="550e8400-e29b-41d4-a716-446655440000",
-            instrument_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            instrument_id="x",
         )
         assert_matches_type(WatchlistAddWatchlistItemResponse, watchlist, path=["response"])
 
@@ -36,7 +36,7 @@ class TestWatchlist:
     def test_raw_response_add_watchlist_item(self, client: ClearStreet) -> None:
         response = client.v1.watchlist.with_raw_response.add_watchlist_item(
             watchlist_id="550e8400-e29b-41d4-a716-446655440000",
-            instrument_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            instrument_id="x",
         )
 
         assert response.is_closed is True
@@ -48,7 +48,7 @@ class TestWatchlist:
     def test_streaming_response_add_watchlist_item(self, client: ClearStreet) -> None:
         with client.v1.watchlist.with_streaming_response.add_watchlist_item(
             watchlist_id="550e8400-e29b-41d4-a716-446655440000",
-            instrument_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            instrument_id="x",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -63,7 +63,7 @@ class TestWatchlist:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `watchlist_id` but received ''"):
             client.v1.watchlist.with_raw_response.add_watchlist_item(
                 watchlist_id="",
-                instrument_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                instrument_id="x",
             )
 
     @parametrize
@@ -264,7 +264,7 @@ class TestAsyncWatchlist:
     async def test_method_add_watchlist_item(self, async_client: AsyncClearStreet) -> None:
         watchlist = await async_client.v1.watchlist.add_watchlist_item(
             watchlist_id="550e8400-e29b-41d4-a716-446655440000",
-            instrument_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            instrument_id="x",
         )
         assert_matches_type(WatchlistAddWatchlistItemResponse, watchlist, path=["response"])
 
@@ -272,7 +272,7 @@ class TestAsyncWatchlist:
     async def test_raw_response_add_watchlist_item(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.watchlist.with_raw_response.add_watchlist_item(
             watchlist_id="550e8400-e29b-41d4-a716-446655440000",
-            instrument_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            instrument_id="x",
         )
 
         assert response.is_closed is True
@@ -284,7 +284,7 @@ class TestAsyncWatchlist:
     async def test_streaming_response_add_watchlist_item(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.watchlist.with_streaming_response.add_watchlist_item(
             watchlist_id="550e8400-e29b-41d4-a716-446655440000",
-            instrument_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            instrument_id="x",
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -299,7 +299,7 @@ class TestAsyncWatchlist:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `watchlist_id` but received ''"):
             await async_client.v1.watchlist.with_raw_response.add_watchlist_item(
                 watchlist_id="",
-                instrument_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+                instrument_id="x",
             )
 
     @parametrize

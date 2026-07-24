@@ -130,7 +130,8 @@ class PositionsResource(SyncAPIResource):
         Retrieves orders generated to close the position.
 
         Args:
-          instrument_id: Instrument identifier
+          instrument_id: Instrument identifier: either an instrument UUID or a symbol (symbol for
+              equities, OSI for options). Non-UUID inputs are resolved server-side.
 
           cancel_orders: Whether to cancel existing open orders for the position before submitting
               closing orders.
@@ -451,7 +452,8 @@ class AsyncPositionsResource(AsyncAPIResource):
         Retrieves orders generated to close the position.
 
         Args:
-          instrument_id: Instrument identifier
+          instrument_id: Instrument identifier: either an instrument UUID or a symbol (symbol for
+              equities, OSI for options). Non-UUID inputs are resolved server-side.
 
           cancel_orders: Whether to cancel existing open orders for the position before submitting
               closing orders.

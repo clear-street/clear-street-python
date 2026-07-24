@@ -69,7 +69,7 @@ class TestPositions:
     @parametrize
     def test_method_close_position(self, client: ClearStreet) -> None:
         position = client.v1.positions.close_position(
-            instrument_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            instrument_id="x",
             account_id=0,
         )
         assert_matches_type(PositionClosePositionResponse, position, path=["response"])
@@ -77,7 +77,7 @@ class TestPositions:
     @parametrize
     def test_method_close_position_with_all_params(self, client: ClearStreet) -> None:
         position = client.v1.positions.close_position(
-            instrument_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            instrument_id="x",
             account_id=0,
             cancel_orders=False,
         )
@@ -86,7 +86,7 @@ class TestPositions:
     @parametrize
     def test_raw_response_close_position(self, client: ClearStreet) -> None:
         response = client.v1.positions.with_raw_response.close_position(
-            instrument_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            instrument_id="x",
             account_id=0,
         )
 
@@ -98,7 +98,7 @@ class TestPositions:
     @parametrize
     def test_streaming_response_close_position(self, client: ClearStreet) -> None:
         with client.v1.positions.with_streaming_response.close_position(
-            instrument_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            instrument_id="x",
             account_id=0,
         ) as response:
             assert not response.is_closed
@@ -167,7 +167,7 @@ class TestPositions:
     def test_method_get_position_instructions_with_all_params(self, client: ClearStreet) -> None:
         position = client.v1.positions.get_position_instructions(
             account_id=0,
-            instrument_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            instrument_id="x",
         )
         assert_matches_type(PositionGetPositionInstructionsResponse, position, path=["response"])
 
@@ -341,7 +341,7 @@ class TestAsyncPositions:
     @parametrize
     async def test_method_close_position(self, async_client: AsyncClearStreet) -> None:
         position = await async_client.v1.positions.close_position(
-            instrument_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            instrument_id="x",
             account_id=0,
         )
         assert_matches_type(PositionClosePositionResponse, position, path=["response"])
@@ -349,7 +349,7 @@ class TestAsyncPositions:
     @parametrize
     async def test_method_close_position_with_all_params(self, async_client: AsyncClearStreet) -> None:
         position = await async_client.v1.positions.close_position(
-            instrument_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            instrument_id="x",
             account_id=0,
             cancel_orders=False,
         )
@@ -358,7 +358,7 @@ class TestAsyncPositions:
     @parametrize
     async def test_raw_response_close_position(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.positions.with_raw_response.close_position(
-            instrument_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            instrument_id="x",
             account_id=0,
         )
 
@@ -370,7 +370,7 @@ class TestAsyncPositions:
     @parametrize
     async def test_streaming_response_close_position(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.positions.with_streaming_response.close_position(
-            instrument_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            instrument_id="x",
             account_id=0,
         ) as response:
             assert not response.is_closed
@@ -439,7 +439,7 @@ class TestAsyncPositions:
     async def test_method_get_position_instructions_with_all_params(self, async_client: AsyncClearStreet) -> None:
         position = await async_client.v1.positions.get_position_instructions(
             account_id=0,
-            instrument_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            instrument_id="x",
         )
         assert_matches_type(PositionGetPositionInstructionsResponse, position, path=["response"])
 

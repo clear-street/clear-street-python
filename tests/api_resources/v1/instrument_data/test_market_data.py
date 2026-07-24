@@ -59,7 +59,7 @@ class TestMarketData:
     @parametrize
     def test_method_get_snapshots_with_all_params(self, client: ClearStreet) -> None:
         market_data = client.v1.instrument_data.market_data.get_snapshots(
-            instrument_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            instrument_ids=["x"],
         )
         assert_matches_type(MarketDataGetSnapshotsResponse, market_data, path=["response"])
 
@@ -128,7 +128,7 @@ class TestAsyncMarketData:
     @parametrize
     async def test_method_get_snapshots_with_all_params(self, async_client: AsyncClearStreet) -> None:
         market_data = await async_client.v1.instrument_data.market_data.get_snapshots(
-            instrument_ids=["182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e"],
+            instrument_ids=["x"],
         )
         assert_matches_type(MarketDataGetSnapshotsResponse, market_data, path=["response"])
 

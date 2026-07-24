@@ -22,8 +22,6 @@ from ..._types import (
 from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ...types.v1 import (
-    ContractType,
-    InstrumentIDOrSymbol,
     instrument_get_instruments_params,
     instrument_search_instruments_params,
     instrument_get_instrument_by_id_params,
@@ -37,8 +35,6 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
-from ...types.v1.contract_type import ContractType
-from ...types.v1.instrument_id_or_symbol import InstrumentIDOrSymbol
 from ...types.v1.instrument_get_instruments_response import InstrumentGetInstrumentsResponse
 from ...types.v1.instrument_search_instruments_response import InstrumentSearchInstrumentsResponse
 from ...types.v1.instrument_get_instrument_by_id_response import InstrumentGetInstrumentByIDResponse
@@ -71,7 +67,7 @@ class InstrumentsResource(SyncAPIResource):
 
     def get_instrument_by_id(
         self,
-        instrument_id: InstrumentIDOrSymbol,
+        instrument_id: str,
         *,
         include_options_expiry_dates: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -85,7 +81,8 @@ class InstrumentsResource(SyncAPIResource):
         Retrieves detailed information for a specific instrument.
 
         Args:
-          instrument_id: Instrument identifier
+          instrument_id: Instrument identifier: either an instrument UUID or a symbol (symbol for
+              equities, OSI for options). Non-UUID inputs are resolved server-side.
 
           include_options_expiry_dates: When true, include unique options expiry dates for this instrument
 
@@ -198,12 +195,12 @@ class InstrumentsResource(SyncAPIResource):
     def get_option_contracts(
         self,
         *,
-        contract_type: ContractType | Omit = omit,
+        contract_type: Literal["CALL", "PUT"] | Omit = omit,
         expiry: Union[str, date] | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         underlier: str | Omit = omit,
-        underlying_instrument_id: InstrumentIDOrSymbol | Omit = omit,
+        underlying_instrument_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -372,7 +369,7 @@ class AsyncInstrumentsResource(AsyncAPIResource):
 
     async def get_instrument_by_id(
         self,
-        instrument_id: InstrumentIDOrSymbol,
+        instrument_id: str,
         *,
         include_options_expiry_dates: Optional[bool] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -386,7 +383,8 @@ class AsyncInstrumentsResource(AsyncAPIResource):
         Retrieves detailed information for a specific instrument.
 
         Args:
-          instrument_id: Instrument identifier
+          instrument_id: Instrument identifier: either an instrument UUID or a symbol (symbol for
+              equities, OSI for options). Non-UUID inputs are resolved server-side.
 
           include_options_expiry_dates: When true, include unique options expiry dates for this instrument
 
@@ -499,12 +497,12 @@ class AsyncInstrumentsResource(AsyncAPIResource):
     async def get_option_contracts(
         self,
         *,
-        contract_type: ContractType | Omit = omit,
+        contract_type: Literal["CALL", "PUT"] | Omit = omit,
         expiry: Union[str, date] | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         underlier: str | Omit = omit,
-        underlying_instrument_id: InstrumentIDOrSymbol | Omit = omit,
+        underlying_instrument_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
