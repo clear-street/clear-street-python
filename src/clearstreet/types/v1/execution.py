@@ -18,9 +18,6 @@ class Execution(BaseModel):
     order_id: str
     """Identifier of the order this execution belongs to."""
 
-    price: str
-    """Fill price."""
-
     quantity: str
     """Filled quantity."""
 
@@ -35,6 +32,13 @@ class Execution(BaseModel):
 
     `null` when this fill has no single resolvable instrument. When a null/undefined
     value is observed, it indicates it does not apply.
+    """
+
+    price: Optional[str] = None
+    """Fill price.
+
+    `null` for multileg fills, whose price lives only at the leg level. When a
+    null/undefined value is observed, it indicates it does not apply.
     """
 
     symbol: Optional[str] = None
