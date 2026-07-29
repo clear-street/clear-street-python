@@ -1,7 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import Optional
-from datetime import date
+from datetime import date, datetime
 
 from ..._models import BaseModel
 from .listing_type import ListingType
@@ -52,6 +52,18 @@ class OptionsContract(BaseModel):
 
     symbol: str
     """OSI symbol (e.g. "AAPL 251219C00150000")"""
+
+    is_settle_on_open: Optional[bool] = None
+    """
+    Whether the option settles on the opening price (AM settlement), if known When a
+    null/undefined value is observed, it indicates that there is no available data.
+    """
+
+    last_trade_cutoff: Optional[datetime] = None
+    """
+    Last moment the option can trade (UTC), if known When a null/undefined value is
+    observed, it indicates that there is no available data.
+    """
 
     open_interest: Optional[int] = None
     """
