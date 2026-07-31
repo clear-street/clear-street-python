@@ -15,9 +15,11 @@ class DailySummary(BaseModel):
     `instrument_id` and `not_applicable` is `Option`:
     - Unresolvable `instrument_id` → all other fields `None` (including `symbol`).
     - Resolvable `instrument_id` with no realtime cache entry → `symbol`
-      populated, OHLV/`trade_date` `None`.
+      populated, OHLV/`trade_date`/`open_interest` `None`.
     - `trade_date` reflects the session the OHLV represents (today during
       trading hours, the last trading date during weekends/holidays).
+    - `open_interest` is populated for options only; `None` for equities and
+      indices.
     - `not_applicable` is a non-optional `bool`, always serialized: `true` for
       instrument types with no daily summary by definition (e.g. an index, whose
       OHLV/`trade_date` are `None`), `false` otherwise.
@@ -49,6 +51,13 @@ class DailySummary(BaseModel):
     """
     Opening price for the session. When a null/undefined value is observed, it
     indicates that there is no available data.
+    """
+
+    open_interest: Optional[int] = None
+    """Open interest (outstanding contracts).
+
+    Populated for options only; `None` for equities and indices. When a
+    null/undefined value is observed, it indicates that there is no available data.
     """
 
     symbol: Optional[str] = None
