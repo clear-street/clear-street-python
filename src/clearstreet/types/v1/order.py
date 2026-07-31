@@ -62,8 +62,11 @@ class Order(BaseModel):
     """MIC code of the venue where the order is routed"""
 
     average_fill_price: Optional[str] = None
-    """
-    Average fill price across all executions When a null/undefined value is
+    """Average fill price across all executions.
+
+    For multileg orders this is the venue's strategy-level average when reported,
+    else the signed net package price derived from the leg averages: net debit
+    positive, net credit negative, zero possible. When a null/undefined value is
     observed, it indicates that there is no available data.
     """
 
