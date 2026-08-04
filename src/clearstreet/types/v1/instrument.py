@@ -60,6 +60,13 @@ class Instrument(BaseModel):
     value is observed, it indicates that there is no available data.
     """
 
+    cax_adjusted_previous_close: Optional[str] = None
+    """
+    Corporate-action-adjusted last close; present only when an adjustment exists for
+    the previous_close date. When a null/undefined value is observed, it indicates
+    that there is no available data.
+    """
+
     instrument_type: Optional[SecurityType] = None
     """
     The type of security (e.g., Common Stock, ETF) When a null/undefined value is
@@ -80,8 +87,9 @@ class Instrument(BaseModel):
 
     notional_adv: Optional[str] = None
     """
-    Notional average daily volume (ADV multiplied by previous close price). When a
-    null/undefined value is observed, it indicates that there is no available data.
+    Notional average daily volume (ADV multiplied by the cax-adjusted close when
+    present, the raw previous close otherwise). When a null/undefined value is
+    observed, it indicates that there is no available data.
     """
 
     options_expiry_dates: Optional[List[date]] = None
