@@ -237,8 +237,13 @@ class OrdersResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrderGetOrderByIDResponse:
-        """
-        Get Order By ID
+        """Fetch a single order.
+
+        The `{order_id}` path parameter accepts either the order's
+        `id` or its `client_order_id`. A `client_order_id` can only be used while the
+        order is open; after that, use the `id` returned in every order response, or
+        find the order with the list-orders endpoint's `order_ids` filter, which accepts
+        both identifiers at any time.
 
         Args:
           extra_headers: Send extra headers
@@ -310,8 +315,9 @@ class OrdersResource(SyncAPIResource):
 
           instrument_type: Instrument type filter (e.g., COMMON_STOCK, OPTION)
 
-          order_ids: Comma-separated order IDs to filter by. When provided, only orders whose order
-              ID is in this set are returned.
+          order_ids: Comma-separated list of order identifiers. Each value may be an order's `id` or
+              its `client_order_id`; only orders matching one of the given identifiers are
+              returned.
 
           page_size: The number of items to return per page. Only used when page_token is not
               provided.
@@ -637,8 +643,13 @@ class AsyncOrdersResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> OrderGetOrderByIDResponse:
-        """
-        Get Order By ID
+        """Fetch a single order.
+
+        The `{order_id}` path parameter accepts either the order's
+        `id` or its `client_order_id`. A `client_order_id` can only be used while the
+        order is open; after that, use the `id` returned in every order response, or
+        find the order with the list-orders endpoint's `order_ids` filter, which accepts
+        both identifiers at any time.
 
         Args:
           extra_headers: Send extra headers
@@ -710,8 +721,9 @@ class AsyncOrdersResource(AsyncAPIResource):
 
           instrument_type: Instrument type filter (e.g., COMMON_STOCK, OPTION)
 
-          order_ids: Comma-separated order IDs to filter by. When provided, only orders whose order
-              ID is in this set are returned.
+          order_ids: Comma-separated list of order identifiers. Each value may be an order's `id` or
+              its `client_order_id`; only orders matching one of the given identifiers are
+              returned.
 
           page_size: The number of items to return per page. Only used when page_token is not
               provided.

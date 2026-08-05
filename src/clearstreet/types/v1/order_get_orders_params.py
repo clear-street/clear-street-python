@@ -27,9 +27,10 @@ class OrderGetOrdersParams(TypedDict, total=False):
     """Instrument type filter (e.g., COMMON_STOCK, OPTION)"""
 
     order_ids: SequenceNotStr[str]
-    """Comma-separated order IDs to filter by.
+    """Comma-separated list of order identifiers.
 
-    When provided, only orders whose order ID is in this set are returned.
+    Each value may be an order's `id` or its `client_order_id`; only orders matching
+    one of the given identifiers are returned.
     """
 
     page_size: int
