@@ -27,12 +27,6 @@ class AccountBalancesSod(BaseModel):
     it indicates that there is no available data.
     """
 
-    day_trade_buying_power: Optional[str] = None
-    """
-    Start-of-day day-trade buying power. When a null/undefined value is observed, it
-    indicates it does not apply.
-    """
-
     maintenance_margin_excess: Optional[str] = None
     """
     Start-of-day maintenance margin excess. When a null/undefined value is observed,

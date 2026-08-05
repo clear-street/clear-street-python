@@ -11,9 +11,6 @@ __all__ = ["MarginDetails"]
 
 
 class MarginDetails(BaseModel):
-    day_trade_count: int
-    """The number of day trades executed over the 5 most recent trading days."""
-
     initial_margin_excess: str
     """Initial margin excess for trade-date balances."""
 
@@ -31,16 +28,6 @@ class MarginDetails(BaseModel):
 
     overnight_details: MarginSessionDetails
     """Overnight session margin calculation details."""
-
-    pattern_day_trader: bool
-    """`true` if the account is currently flagged as a PDT, otherwise `false`."""
-
-    day_trade_buying_power_usage: Optional[str] = None
-    """
-    The amount of day-trade buying power used during the current trading day. When
-    null/undefined, the value should be assumed to be zero. The field is omitted to
-    simplify the response.
-    """
 
     top_contributors: Optional[List[MarginTopContributor]] = None
     """Optional top margin contributors, returned only when explicitly requested."""

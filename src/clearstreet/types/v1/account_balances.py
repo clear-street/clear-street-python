@@ -31,9 +31,6 @@ class AccountBalances(BaseModel):
     daily_realized_pnl: str
     """Realized profit or loss since start of day."""
 
-    daily_total_pnl: str
-    """Total profit or loss since start of day."""
-
     daily_unrealized_pnl: str
     """Total unrealized profit or loss across all positions relative to prior close."""
 
