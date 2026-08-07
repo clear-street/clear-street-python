@@ -113,6 +113,8 @@ class InstrumentDataResource(SyncAPIResource):
         event_types: List[AllEventsEventType] | Omit = omit,
         from_date: str | Omit = omit,
         instrument_ids: SequenceNotStr[InstrumentIDOrSymbol] | Omit = omit,
+        page_size: int | Omit = omit,
+        page_token: Union[str, Base64FileInput] | Omit = omit,
         to_date: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -121,14 +123,17 @@ class InstrumentDataResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> InstrumentDataGetAllInstrumentEventsResponse:
-        """
-        List instrument events across all securities, grouped by date.
+        """List instrument events across all securities, grouped by date.
+
+        Results are
+        paginated via `page_size` / `page_token`; a date's events may span two pages.
 
         Date range defaults (anchored on the current trading day, or the next trading
         day if today is a weekend or US market holiday):
 
         - Unfiltered (no `instrument_ids`): a single trading day (`from_date` =
-          `to_date` = anchor); the requested span is capped at 6 days.
+          `to_date` = anchor). If only one bound is given, the other defaults to 6 days
+          from it; there is no maximum span once both bounds are given.
         - Filtered (with `instrument_ids`): a 30-day lookback ending on the anchor
           (`from_date` = anchor − 30 days, `to_date` = anchor).
 
@@ -142,6 +147,12 @@ class InstrumentDataResource(SyncAPIResource):
           instrument_ids: Filter by instrument. Comma-separated instrument IDs (UUID) or symbols (equity
               tickers or OSI option symbols). Example:
               `instrument_ids=550e8400-e29b-41d4-a716-446655440000,AAPL`.
+
+          page_size: The number of items to return per page. Only used when page_token is not
+              provided.
+
+          page_token: Token for retrieving the next or previous page of results. Contains encoded
+              pagination state; when provided, page_size is ignored.
 
           to_date: The end date for the query range, inclusive (YYYY-MM-DD).
 
@@ -165,6 +176,8 @@ class InstrumentDataResource(SyncAPIResource):
                         "event_types": event_types,
                         "from_date": from_date,
                         "instrument_ids": instrument_ids,
+                        "page_size": page_size,
+                        "page_token": page_token,
                         "to_date": to_date,
                     },
                     instrument_data_get_all_instrument_events_params.InstrumentDataGetAllInstrumentEventsParams,
@@ -365,6 +378,7 @@ class InstrumentDataResource(SyncAPIResource):
         self,
         instrument_id: str,
         *,
+        event_types: List[AllEventsEventType] | Omit = omit,
         from_date: str | Omit = omit,
         to_date: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -375,8 +389,8 @@ class InstrumentDataResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> InstrumentDataGetInstrumentEventsResponse:
         """
-        Retrieves corporate events (dividends, splits, etc.) for an instrument, grouped
-        by event type.
+        Retrieves corporate events (earnings, dividends, splits, IPO) for an instrument,
+        grouped by event type. Filter to specific types via `event_types`.
 
         Date range defaults:
 
@@ -386,6 +400,10 @@ class InstrumentDataResource(SyncAPIResource):
         Args:
           instrument_id: Instrument identifier: either an instrument UUID or a symbol (symbol for
               equities, OSI for options). Non-UUID inputs are resolved server-side.
+
+          event_types:
+              Filter by event type(s). Comma-delimited list. Example:
+              `event_types=EARNINGS,IPO`.
 
           from_date: The start date for the query range, inclusive (YYYY-MM-DD).
 
@@ -410,6 +428,7 @@ class InstrumentDataResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "event_types": event_types,
                         "from_date": from_date,
                         "to_date": to_date,
                     },
@@ -562,6 +581,8 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
         event_types: List[AllEventsEventType] | Omit = omit,
         from_date: str | Omit = omit,
         instrument_ids: SequenceNotStr[InstrumentIDOrSymbol] | Omit = omit,
+        page_size: int | Omit = omit,
+        page_token: Union[str, Base64FileInput] | Omit = omit,
         to_date: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -570,14 +591,17 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> InstrumentDataGetAllInstrumentEventsResponse:
-        """
-        List instrument events across all securities, grouped by date.
+        """List instrument events across all securities, grouped by date.
+
+        Results are
+        paginated via `page_size` / `page_token`; a date's events may span two pages.
 
         Date range defaults (anchored on the current trading day, or the next trading
         day if today is a weekend or US market holiday):
 
         - Unfiltered (no `instrument_ids`): a single trading day (`from_date` =
-          `to_date` = anchor); the requested span is capped at 6 days.
+          `to_date` = anchor). If only one bound is given, the other defaults to 6 days
+          from it; there is no maximum span once both bounds are given.
         - Filtered (with `instrument_ids`): a 30-day lookback ending on the anchor
           (`from_date` = anchor − 30 days, `to_date` = anchor).
 
@@ -591,6 +615,12 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
           instrument_ids: Filter by instrument. Comma-separated instrument IDs (UUID) or symbols (equity
               tickers or OSI option symbols). Example:
               `instrument_ids=550e8400-e29b-41d4-a716-446655440000,AAPL`.
+
+          page_size: The number of items to return per page. Only used when page_token is not
+              provided.
+
+          page_token: Token for retrieving the next or previous page of results. Contains encoded
+              pagination state; when provided, page_size is ignored.
 
           to_date: The end date for the query range, inclusive (YYYY-MM-DD).
 
@@ -614,6 +644,8 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
                         "event_types": event_types,
                         "from_date": from_date,
                         "instrument_ids": instrument_ids,
+                        "page_size": page_size,
+                        "page_token": page_token,
                         "to_date": to_date,
                     },
                     instrument_data_get_all_instrument_events_params.InstrumentDataGetAllInstrumentEventsParams,
@@ -814,6 +846,7 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
         self,
         instrument_id: str,
         *,
+        event_types: List[AllEventsEventType] | Omit = omit,
         from_date: str | Omit = omit,
         to_date: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -824,8 +857,8 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> InstrumentDataGetInstrumentEventsResponse:
         """
-        Retrieves corporate events (dividends, splits, etc.) for an instrument, grouped
-        by event type.
+        Retrieves corporate events (earnings, dividends, splits, IPO) for an instrument,
+        grouped by event type. Filter to specific types via `event_types`.
 
         Date range defaults:
 
@@ -835,6 +868,10 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
         Args:
           instrument_id: Instrument identifier: either an instrument UUID or a symbol (symbol for
               equities, OSI for options). Non-UUID inputs are resolved server-side.
+
+          event_types:
+              Filter by event type(s). Comma-delimited list. Example:
+              `event_types=EARNINGS,IPO`.
 
           from_date: The start date for the query range, inclusive (YYYY-MM-DD).
 
@@ -859,6 +896,7 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
+                        "event_types": event_types,
                         "from_date": from_date,
                         "to_date": to_date,
                     },

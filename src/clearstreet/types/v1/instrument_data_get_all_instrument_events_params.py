@@ -2,10 +2,11 @@
 
 from __future__ import annotations
 
-from typing import List
-from typing_extensions import TypedDict
+from typing import List, Union
+from typing_extensions import Annotated, TypedDict
 
-from ..._types import SequenceNotStr
+from ..._types import SequenceNotStr, Base64FileInput
+from ..._utils import PropertyInfo
 from .all_events_event_type import AllEventsEventType
 from .instrument_id_or_symbol import InstrumentIDOrSymbol
 
@@ -27,6 +28,18 @@ class InstrumentDataGetAllInstrumentEventsParams(TypedDict, total=False):
 
     Comma-separated instrument IDs (UUID) or symbols (equity tickers or OSI option
     symbols). Example: `instrument_ids=550e8400-e29b-41d4-a716-446655440000,AAPL`.
+    """
+
+    page_size: int
+    """The number of items to return per page.
+
+    Only used when page_token is not provided.
+    """
+
+    page_token: Annotated[Union[str, Base64FileInput], PropertyInfo(format="base64")]
+    """Token for retrieving the next or previous page of results.
+
+    Contains encoded pagination state; when provided, page_size is ignored.
     """
 
     to_date: str

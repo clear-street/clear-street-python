@@ -37,6 +37,8 @@ class TestInstrumentData:
             event_types=["EARNINGS"],
             from_date="from_date",
             instrument_ids=["x"],
+            page_size=1,
+            page_token="U3RhaW5sZXNzIHJvY2tz",
             to_date="to_date",
         )
         assert_matches_type(InstrumentDataGetAllInstrumentEventsResponse, instrument_data, path=["response"])
@@ -227,6 +229,7 @@ class TestInstrumentData:
     def test_method_get_instrument_events_with_all_params(self, client: ClearStreet) -> None:
         instrument_data = client.v1.instrument_data.get_instrument_events(
             instrument_id="x",
+            event_types=["EARNINGS"],
             from_date="from_date",
             to_date="to_date",
         )
@@ -367,6 +370,8 @@ class TestAsyncInstrumentData:
             event_types=["EARNINGS"],
             from_date="from_date",
             instrument_ids=["x"],
+            page_size=1,
+            page_token="U3RhaW5sZXNzIHJvY2tz",
             to_date="to_date",
         )
         assert_matches_type(InstrumentDataGetAllInstrumentEventsResponse, instrument_data, path=["response"])
@@ -565,6 +570,7 @@ class TestAsyncInstrumentData:
     async def test_method_get_instrument_events_with_all_params(self, async_client: AsyncClearStreet) -> None:
         instrument_data = await async_client.v1.instrument_data.get_instrument_events(
             instrument_id="x",
+            event_types=["EARNINGS"],
             from_date="from_date",
             to_date="to_date",
         )

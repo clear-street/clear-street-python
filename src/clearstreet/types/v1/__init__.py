@@ -88,6 +88,7 @@ from .analyst_distribution import AnalystDistribution as AnalystDistribution
 from .cancel_order_request import CancelOrderRequest as CancelOrderRequest
 from .filter_op_spec_param import FilterOpSpecParam as FilterOpSpecParam
 from .instrument_core_list import InstrumentCoreList as InstrumentCoreList
+from .instrument_ipo_event import InstrumentIpoEvent as InstrumentIpoEvent
 from .margin_details_usage import MarginDetailsUsage as MarginDetailsUsage
 from .open_screener_action import OpenScreenerAction as OpenScreenerAction
 from .position_instruction import PositionInstruction as PositionInstruction

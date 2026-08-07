@@ -4,6 +4,7 @@ from typing import List, Optional
 
 from ..._models import BaseModel
 from .instrument_earnings import InstrumentEarnings
+from .instrument_ipo_event import InstrumentIpoEvent
 from .instrument_split_event import InstrumentSplitEvent
 from .instrument_dividend_event import InstrumentDividendEvent
 
@@ -21,6 +22,9 @@ class InstrumentEventsData(BaseModel):
 
     instrument_id: str
     """Instrument identifier"""
+
+    ipos: List[InstrumentIpoEvent]
+    """IPO events"""
 
     splits: List[InstrumentSplitEvent]
     """Stock split events"""
