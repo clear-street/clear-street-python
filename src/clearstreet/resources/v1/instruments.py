@@ -35,6 +35,7 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
+from ...types.v1.instrument_id_or_symbol import InstrumentIDOrSymbol
 from ...types.v1.instrument_get_instruments_response import InstrumentGetInstrumentsResponse
 from ...types.v1.instrument_search_instruments_response import InstrumentSearchInstrumentsResponse
 from ...types.v1.instrument_get_instrument_by_id_response import InstrumentGetInstrumentByIDResponse
@@ -195,6 +196,7 @@ class InstrumentsResource(SyncAPIResource):
     def get_option_contracts(
         self,
         *,
+        contract_ids: SequenceNotStr[InstrumentIDOrSymbol] | Omit = omit,
         contract_type: Literal["CALL", "PUT"] | Omit = omit,
         expiry: Union[str, date] | Omit = omit,
         page_size: int | Omit = omit,
@@ -211,10 +213,16 @@ class InstrumentsResource(SyncAPIResource):
         """
         List options contracts.
 
-        Returns options contracts for a given underlier with options-specific metadata.
-        Exactly one underlier identifier must be provided.
+        Returns options contracts with options-specific metadata. Exactly one identifier
+        must be provided: `underlier`/`underlying_instrument_id` (list all contracts for
+        that underlier) or `contract_ids` (look up specific contracts directly).
+        `expiry`/`contract_type` apply as filters in either case.
 
         Args:
+          contract_ids: Comma-separated contract instrument IDs (UUID) or OSI option symbols to look up
+              directly, bypassing underlier expansion. Mutually exclusive with
+              underlier/underlying_instrument_id; up to 100 values.
+
           contract_type: Filter by contract type: CALL or PUT
 
           expiry: Filter to contracts expiring on this date (YYYY-MM-DD)
@@ -246,6 +254,7 @@ class InstrumentsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "contract_ids": contract_ids,
                         "contract_type": contract_type,
                         "expiry": expiry,
                         "page_size": page_size,
@@ -497,6 +506,7 @@ class AsyncInstrumentsResource(AsyncAPIResource):
     async def get_option_contracts(
         self,
         *,
+        contract_ids: SequenceNotStr[InstrumentIDOrSymbol] | Omit = omit,
         contract_type: Literal["CALL", "PUT"] | Omit = omit,
         expiry: Union[str, date] | Omit = omit,
         page_size: int | Omit = omit,
@@ -513,10 +523,16 @@ class AsyncInstrumentsResource(AsyncAPIResource):
         """
         List options contracts.
 
-        Returns options contracts for a given underlier with options-specific metadata.
-        Exactly one underlier identifier must be provided.
+        Returns options contracts with options-specific metadata. Exactly one identifier
+        must be provided: `underlier`/`underlying_instrument_id` (list all contracts for
+        that underlier) or `contract_ids` (look up specific contracts directly).
+        `expiry`/`contract_type` apply as filters in either case.
 
         Args:
+          contract_ids: Comma-separated contract instrument IDs (UUID) or OSI option symbols to look up
+              directly, bypassing underlier expansion. Mutually exclusive with
+              underlier/underlying_instrument_id; up to 100 values.
+
           contract_type: Filter by contract type: CALL or PUT
 
           expiry: Filter to contracts expiring on this date (YYYY-MM-DD)
@@ -548,6 +564,7 @@ class AsyncInstrumentsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
+                        "contract_ids": contract_ids,
                         "contract_type": contract_type,
                         "expiry": expiry,
                         "page_size": page_size,

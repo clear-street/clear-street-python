@@ -118,6 +118,7 @@ class TestInstruments:
     @parametrize
     def test_method_get_option_contracts_with_all_params(self, client: ClearStreet) -> None:
         instrument = client.v1.instruments.get_option_contracts(
+            contract_ids=["x"],
             contract_type="CALL",
             expiry=parse_date("2019-12-27"),
             page_size=1,
@@ -293,6 +294,7 @@ class TestAsyncInstruments:
     @parametrize
     async def test_method_get_option_contracts_with_all_params(self, async_client: AsyncClearStreet) -> None:
         instrument = await async_client.v1.instruments.get_option_contracts(
+            contract_ids=["x"],
             contract_type="CALL",
             expiry=parse_date("2019-12-27"),
             page_size=1,

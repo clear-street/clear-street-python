@@ -6,13 +6,21 @@ from typing import Union
 from datetime import date
 from typing_extensions import Literal, Annotated, TypedDict
 
-from ..._types import Base64FileInput
+from ..._types import SequenceNotStr, Base64FileInput
 from ..._utils import PropertyInfo
+from .instrument_id_or_symbol import InstrumentIDOrSymbol
 
 __all__ = ["InstrumentGetOptionContractsParams"]
 
 
 class InstrumentGetOptionContractsParams(TypedDict, total=False):
+    contract_ids: SequenceNotStr[InstrumentIDOrSymbol]
+    """
+    Comma-separated contract instrument IDs (UUID) or OSI option symbols to look up
+    directly, bypassing underlier expansion. Mutually exclusive with
+    underlier/underlying_instrument_id; up to 100 values.
+    """
+
     contract_type: Literal["CALL", "PUT"]
     """Filter by contract type: CALL or PUT"""
 
