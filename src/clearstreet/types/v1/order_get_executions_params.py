@@ -23,6 +23,12 @@ class OrderGetExecutionsParams(TypedDict, total=False):
     instruments are returned.
     """
 
+    order_ids: SequenceNotStr[str]
+    """Comma-separated order IDs to filter by.
+
+    When provided, only executions belonging to an order in this set are returned.
+    """
+
     page_size: int
     """The number of items to return per page.
 
@@ -37,3 +43,10 @@ class OrderGetExecutionsParams(TypedDict, total=False):
 
     to: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
     """The end date and time for the query range, inclusive (ISO 8601 format)"""
+
+    underlying_instrument_ids: SequenceNotStr[str]
+    """
+    Comma-separated instrument IDs (UUID) or symbols (equity tickers or OSI option
+    symbols). Matches option fills whose resolved underlier is any of the given
+    instruments.
+    """

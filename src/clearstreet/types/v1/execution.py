@@ -47,3 +47,19 @@ class Execution(BaseModel):
     `null` when this fill has no single resolvable instrument. When a null/undefined
     value is observed, it indicates it does not apply.
     """
+
+    underlying_instrument_id: Optional[str] = None
+    """Underlying instrument identifier for a derivative fill.
+
+    `null` for a non-derivative fill, when the underlier could not be resolved, or
+    when a multileg fill's legs resolve to different underliers. When a
+    null/undefined value is observed, it indicates it does not apply.
+    """
+
+    venue: Optional[str] = None
+    """Venue where this fill occurred, as reported by that venue.
+
+    Distinct from an order's `venue`, which is the routing destination. Codes are
+    not normalized, so the format varies by venue. When a null/undefined value is
+    observed, it indicates that there is no available data.
+    """

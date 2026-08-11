@@ -167,9 +167,11 @@ class OrdersResource(SyncAPIResource):
         *,
         from_: Union[str, datetime] | Omit = omit,
         instrument_ids: SequenceNotStr[str] | Omit = omit,
+        order_ids: SequenceNotStr[str] | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         to: Union[str, datetime] | Omit = omit,
+        underlying_instrument_ids: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -188,6 +190,9 @@ class OrdersResource(SyncAPIResource):
               filter by. When provided, only executions for any of the listed instruments are
               returned.
 
+          order_ids: Comma-separated order IDs to filter by. When provided, only executions belonging
+              to an order in this set are returned.
+
           page_size: The number of items to return per page. Only used when page_token is not
               provided.
 
@@ -195,6 +200,10 @@ class OrdersResource(SyncAPIResource):
               pagination state; when provided, page_size is ignored.
 
           to: The end date and time for the query range, inclusive (ISO 8601 format)
+
+          underlying_instrument_ids: Comma-separated instrument IDs (UUID) or symbols (equity tickers or OSI option
+              symbols). Matches option fills whose resolved underlier is any of the given
+              instruments.
 
           extra_headers: Send extra headers
 
@@ -215,9 +224,11 @@ class OrdersResource(SyncAPIResource):
                     {
                         "from_": from_,
                         "instrument_ids": instrument_ids,
+                        "order_ids": order_ids,
                         "page_size": page_size,
                         "page_token": page_token,
                         "to": to,
+                        "underlying_instrument_ids": underlying_instrument_ids,
                     },
                     order_get_executions_params.OrderGetExecutionsParams,
                 ),
@@ -573,9 +584,11 @@ class AsyncOrdersResource(AsyncAPIResource):
         *,
         from_: Union[str, datetime] | Omit = omit,
         instrument_ids: SequenceNotStr[str] | Omit = omit,
+        order_ids: SequenceNotStr[str] | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         to: Union[str, datetime] | Omit = omit,
+        underlying_instrument_ids: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -594,6 +607,9 @@ class AsyncOrdersResource(AsyncAPIResource):
               filter by. When provided, only executions for any of the listed instruments are
               returned.
 
+          order_ids: Comma-separated order IDs to filter by. When provided, only executions belonging
+              to an order in this set are returned.
+
           page_size: The number of items to return per page. Only used when page_token is not
               provided.
 
@@ -601,6 +617,10 @@ class AsyncOrdersResource(AsyncAPIResource):
               pagination state; when provided, page_size is ignored.
 
           to: The end date and time for the query range, inclusive (ISO 8601 format)
+
+          underlying_instrument_ids: Comma-separated instrument IDs (UUID) or symbols (equity tickers or OSI option
+              symbols). Matches option fills whose resolved underlier is any of the given
+              instruments.
 
           extra_headers: Send extra headers
 
@@ -621,9 +641,11 @@ class AsyncOrdersResource(AsyncAPIResource):
                     {
                         "from_": from_,
                         "instrument_ids": instrument_ids,
+                        "order_ids": order_ids,
                         "page_size": page_size,
                         "page_token": page_token,
                         "to": to,
+                        "underlying_instrument_ids": underlying_instrument_ids,
                     },
                     order_get_executions_params.OrderGetExecutionsParams,
                 ),

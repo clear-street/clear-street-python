@@ -123,9 +123,11 @@ class TestOrders:
             account_id=0,
             from_=parse_datetime("2019-12-27T18:11:19.117Z"),
             instrument_ids=["x"],
+            order_ids=["string"],
             page_size=1,
             page_token="U3RhaW5sZXNzIHJvY2tz",
             to=parse_datetime("2019-12-27T18:11:19.117Z"),
+            underlying_instrument_ids=["x"],
         )
         assert_matches_type(OrderGetExecutionsResponse, order, path=["response"])
 
@@ -454,9 +456,11 @@ class TestAsyncOrders:
             account_id=0,
             from_=parse_datetime("2019-12-27T18:11:19.117Z"),
             instrument_ids=["x"],
+            order_ids=["string"],
             page_size=1,
             page_token="U3RhaW5sZXNzIHJvY2tz",
             to=parse_datetime("2019-12-27T18:11:19.117Z"),
+            underlying_instrument_ids=["x"],
         )
         assert_matches_type(OrderGetExecutionsResponse, order, path=["response"])
 
