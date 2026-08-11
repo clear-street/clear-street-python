@@ -52,6 +52,32 @@ Methods:
 - <code title="get /v1/accounts/{account_id}/portfolio-history">client.v1.accounts.<a href="./src/clearstreet/resources/v1/accounts.py">get_portfolio_history</a>(account_id, \*\*<a href="src/clearstreet/types/v1/account_get_portfolio_history_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/account_get_portfolio_history_response.py">AccountGetPortfolioHistoryResponse</a></code>
 - <code title="patch /v1/accounts/{account_id}">client.v1.accounts.<a href="./src/clearstreet/resources/v1/accounts.py">patch_account_by_id</a>(account_id, \*\*<a href="src/clearstreet/types/v1/account_patch_account_by_id_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/account_patch_account_by_id_response.py">AccountPatchAccountByIDResponse</a></code>
 
+## Alerts
+
+Types:
+
+```python
+from clearstreet.types.v1 import (
+    Alert,
+    AlertList,
+    AlertSource,
+    AlertStatus,
+    CreateAlertResponse,
+    Schedule,
+    TriggerMode,
+    AlertCreateAlertResponse,
+    AlertGetAlertByIDResponse,
+    AlertGetAlertsResponse,
+)
+```
+
+Methods:
+
+- <code title="post /v1/alerts">client.v1.alerts.<a href="./src/clearstreet/resources/v1/alerts.py">create_alert</a>(\*\*<a href="src/clearstreet/types/v1/alert_create_alert_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/alert_create_alert_response.py">AlertCreateAlertResponse</a></code>
+- <code title="delete /v1/alerts/{alert_id}">client.v1.alerts.<a href="./src/clearstreet/resources/v1/alerts.py">delete_alert</a>(alert_id) -> None</code>
+- <code title="get /v1/alerts/{alert_id}">client.v1.alerts.<a href="./src/clearstreet/resources/v1/alerts.py">get_alert_by_id</a>(alert_id) -> <a href="./src/clearstreet/types/v1/alert_get_alert_by_id_response.py">AlertGetAlertByIDResponse</a></code>
+- <code title="get /v1/alerts">client.v1.alerts.<a href="./src/clearstreet/resources/v1/alerts.py">get_alerts</a>(\*\*<a href="src/clearstreet/types/v1/alert_get_alerts_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/alert_get_alerts_response.py">AlertGetAlertsResponse</a></code>
+
 ## APIVersion
 
 Types:
