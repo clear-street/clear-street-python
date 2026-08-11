@@ -76,6 +76,7 @@ from .screener_row_list import ScreenerRowList as ScreenerRowList
 from .structured_action import StructuredAction as StructuredAction
 from .filter_value_param import FilterValueParam as FilterValueParam
 from .fiscal_period_type import FiscalPeriodType as FiscalPeriodType
+from .option_expiry_date import OptionExpiryDate as OptionExpiryDate
 from .request_order_type import RequestOrderType as RequestOrderType
 from .instrument_earnings import InstrumentEarnings as InstrumentEarnings
 from .market_hours_detail import MarketHoursDetail as MarketHoursDetail

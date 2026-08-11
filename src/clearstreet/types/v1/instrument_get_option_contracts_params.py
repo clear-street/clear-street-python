@@ -27,6 +27,12 @@ class InstrumentGetOptionContractsParams(TypedDict, total=False):
     expiry: Annotated[Union[str, date], PropertyInfo(format="iso8601")]
     """Filter to contracts expiring on this date (YYYY-MM-DD)"""
 
+    is_settle_on_open: bool
+    """
+    Filter by settlement cycle: true for early-settling (AM, settle-on-open)
+    contracts, false for normal (PM) contracts. Omit to return both.
+    """
+
     page_size: int
     """The number of items to return per page.
 

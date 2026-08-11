@@ -199,6 +199,7 @@ class InstrumentsResource(SyncAPIResource):
         contract_ids: SequenceNotStr[InstrumentIDOrSymbol] | Omit = omit,
         contract_type: Literal["CALL", "PUT"] | Omit = omit,
         expiry: Union[str, date] | Omit = omit,
+        is_settle_on_open: bool | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         underlier: str | Omit = omit,
@@ -226,6 +227,9 @@ class InstrumentsResource(SyncAPIResource):
           contract_type: Filter by contract type: CALL or PUT
 
           expiry: Filter to contracts expiring on this date (YYYY-MM-DD)
+
+          is_settle_on_open: Filter by settlement cycle: true for early-settling (AM, settle-on-open)
+              contracts, false for normal (PM) contracts. Omit to return both.
 
           page_size: The number of items to return per page. Only used when page_token is not
               provided.
@@ -257,6 +261,7 @@ class InstrumentsResource(SyncAPIResource):
                         "contract_ids": contract_ids,
                         "contract_type": contract_type,
                         "expiry": expiry,
+                        "is_settle_on_open": is_settle_on_open,
                         "page_size": page_size,
                         "page_token": page_token,
                         "underlier": underlier,
@@ -509,6 +514,7 @@ class AsyncInstrumentsResource(AsyncAPIResource):
         contract_ids: SequenceNotStr[InstrumentIDOrSymbol] | Omit = omit,
         contract_type: Literal["CALL", "PUT"] | Omit = omit,
         expiry: Union[str, date] | Omit = omit,
+        is_settle_on_open: bool | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         underlier: str | Omit = omit,
@@ -536,6 +542,9 @@ class AsyncInstrumentsResource(AsyncAPIResource):
           contract_type: Filter by contract type: CALL or PUT
 
           expiry: Filter to contracts expiring on this date (YYYY-MM-DD)
+
+          is_settle_on_open: Filter by settlement cycle: true for early-settling (AM, settle-on-open)
+              contracts, false for normal (PM) contracts. Omit to return both.
 
           page_size: The number of items to return per page. Only used when page_token is not
               provided.
@@ -567,6 +576,7 @@ class AsyncInstrumentsResource(AsyncAPIResource):
                         "contract_ids": contract_ids,
                         "contract_type": contract_type,
                         "expiry": expiry,
+                        "is_settle_on_open": is_settle_on_open,
                         "page_size": page_size,
                         "page_token": page_token,
                         "underlier": underlier,

@@ -5,6 +5,7 @@ from datetime import date
 
 from ..._models import BaseModel
 from ..security_type import SecurityType
+from .option_expiry_date import OptionExpiryDate
 
 __all__ = ["Instrument"]
 
@@ -92,11 +93,22 @@ class Instrument(BaseModel):
     observed, it indicates that there is no available data.
     """
 
+    options_contract_expiry_dates: Optional[List[OptionExpiryDate]] = None
+    """
+    Available options expiration dates for this instrument, each annotated with
+    which settlement cycles have listed contracts on it. Present only when
+    `include_options_expiry_dates=true` in the request. When a null/undefined value
+    is observed, it indicates it does not apply.
+    """
+
     options_expiry_dates: Optional[List[date]] = None
     """
     Available options expiration dates for this instrument. Present only when
-    `include_options_expiry_dates=true` in the request. When a null/undefined value
-    is observed, it indicates it does not apply.
+    `include_options_expiry_dates=true` in the request.
+
+    Deprecated: use `options_contract_expiry_dates`, which carries the same dates
+    annotated with settlement-cycle information. When a null/undefined value is
+    observed, it indicates it does not apply.
     """
 
     previous_close: Optional[str] = None
