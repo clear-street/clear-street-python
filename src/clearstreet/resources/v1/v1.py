@@ -2,14 +2,6 @@
 
 from __future__ import annotations
 
-from .alerts import (
-    AlertsResource,
-    AsyncAlertsResource,
-    AlertsResourceWithRawResponse,
-    AsyncAlertsResourceWithRawResponse,
-    AlertsResourceWithStreamingResponse,
-    AsyncAlertsResourceWithStreamingResponse,
-)
 from .orders import (
     OrdersResource,
     AsyncOrdersResource,
@@ -103,13 +95,6 @@ class V1Resource(SyncAPIResource):
         return AccountsResource(self._client)
 
     @cached_property
-    def alerts(self) -> AlertsResource:
-        """
-        Create and manage alerts that watch market and portfolio conditions on an account and notify when they trigger.
-        """
-        return AlertsResource(self._client)
-
-    @cached_property
     def api_version(self) -> APIVersionResource:
         """Endpoints for API service metadata."""
         return APIVersionResource(self._client)
@@ -178,13 +163,6 @@ class AsyncV1Resource(AsyncAPIResource):
     def accounts(self) -> AsyncAccountsResource:
         """Manage trading accounts, balances, and portfolio history."""
         return AsyncAccountsResource(self._client)
-
-    @cached_property
-    def alerts(self) -> AsyncAlertsResource:
-        """
-        Create and manage alerts that watch market and portfolio conditions on an account and notify when they trigger.
-        """
-        return AsyncAlertsResource(self._client)
 
     @cached_property
     def api_version(self) -> AsyncAPIVersionResource:
@@ -260,13 +238,6 @@ class V1ResourceWithRawResponse:
         return AccountsResourceWithRawResponse(self._v1.accounts)
 
     @cached_property
-    def alerts(self) -> AlertsResourceWithRawResponse:
-        """
-        Create and manage alerts that watch market and portfolio conditions on an account and notify when they trigger.
-        """
-        return AlertsResourceWithRawResponse(self._v1.alerts)
-
-    @cached_property
     def api_version(self) -> APIVersionResourceWithRawResponse:
         """Endpoints for API service metadata."""
         return APIVersionResourceWithRawResponse(self._v1.api_version)
@@ -319,13 +290,6 @@ class AsyncV1ResourceWithRawResponse:
     def accounts(self) -> AsyncAccountsResourceWithRawResponse:
         """Manage trading accounts, balances, and portfolio history."""
         return AsyncAccountsResourceWithRawResponse(self._v1.accounts)
-
-    @cached_property
-    def alerts(self) -> AsyncAlertsResourceWithRawResponse:
-        """
-        Create and manage alerts that watch market and portfolio conditions on an account and notify when they trigger.
-        """
-        return AsyncAlertsResourceWithRawResponse(self._v1.alerts)
 
     @cached_property
     def api_version(self) -> AsyncAPIVersionResourceWithRawResponse:
@@ -382,13 +346,6 @@ class V1ResourceWithStreamingResponse:
         return AccountsResourceWithStreamingResponse(self._v1.accounts)
 
     @cached_property
-    def alerts(self) -> AlertsResourceWithStreamingResponse:
-        """
-        Create and manage alerts that watch market and portfolio conditions on an account and notify when they trigger.
-        """
-        return AlertsResourceWithStreamingResponse(self._v1.alerts)
-
-    @cached_property
     def api_version(self) -> APIVersionResourceWithStreamingResponse:
         """Endpoints for API service metadata."""
         return APIVersionResourceWithStreamingResponse(self._v1.api_version)
@@ -441,13 +398,6 @@ class AsyncV1ResourceWithStreamingResponse:
     def accounts(self) -> AsyncAccountsResourceWithStreamingResponse:
         """Manage trading accounts, balances, and portfolio history."""
         return AsyncAccountsResourceWithStreamingResponse(self._v1.accounts)
-
-    @cached_property
-    def alerts(self) -> AsyncAlertsResourceWithStreamingResponse:
-        """
-        Create and manage alerts that watch market and portfolio conditions on an account and notify when they trigger.
-        """
-        return AsyncAlertsResourceWithStreamingResponse(self._v1.alerts)
 
     @cached_property
     def api_version(self) -> AsyncAPIVersionResourceWithStreamingResponse:
