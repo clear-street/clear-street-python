@@ -12,8 +12,5 @@ TimeInForce: TypeAlias = Literal[
     "GOOD_TILL_DATE",
     "AT_THE_OPENING",
     "AT_THE_CLOSE",
-    "GOOD_TILL_CROSSING",
-    "GOOD_THROUGH_CROSSING",
-    "AT_CROSSING",
     "OTHER",
 ]

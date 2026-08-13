@@ -258,9 +258,12 @@ class TestOrders:
         order = client.v1.orders.replace_order(
             order_id="order_id",
             account_id=0,
+            limit_offset="0.50",
             limit_price="49.00",
             quantity="1",
             stop_price="52.00",
+            trailing_offset="2.00",
+            trailing_offset_type="PRICE",
         )
         assert_matches_type(OrderReplaceOrderResponse, order, path=["response"])
 
@@ -591,9 +594,12 @@ class TestAsyncOrders:
         order = await async_client.v1.orders.replace_order(
             order_id="order_id",
             account_id=0,
+            limit_offset="0.50",
             limit_price="49.00",
             quantity="1",
             stop_price="52.00",
+            trailing_offset="2.00",
+            trailing_offset_type="PRICE",
         )
         assert_matches_type(OrderReplaceOrderResponse, order, path=["response"])
 

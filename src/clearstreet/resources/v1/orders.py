@@ -22,6 +22,7 @@ from ..._types import (
 from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ...types.v1 import (
+    TrailingOffsetType,
     order_get_orders_params,
     order_replace_order_params,
     order_get_executions_params,
@@ -35,6 +36,7 @@ from ..._response import (
     async_to_streamed_response_wrapper,
 )
 from ..._base_client import make_request_options
+from ...types.v1.trailing_offset_type import TrailingOffsetType
 from ...types.v1.instrument_id_or_symbol import InstrumentIDOrSymbol
 from ...types.v1.new_order_request_param import NewOrderRequestParam
 from ...types.v1.order_get_orders_response import OrderGetOrdersResponse
@@ -385,9 +387,12 @@ class OrdersResource(SyncAPIResource):
         order_id: str,
         *,
         account_id: int,
+        limit_offset: Optional[str] | Omit = omit,
         limit_price: Optional[str] | Omit = omit,
         quantity: Optional[str] | Omit = omit,
         stop_price: Optional[str] | Omit = omit,
+        trailing_offset: Optional[str] | Omit = omit,
+        trailing_offset_type: Optional[TrailingOffsetType] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -399,11 +404,17 @@ class OrdersResource(SyncAPIResource):
         Replace an order with new parameters
 
         Args:
+          limit_offset: New limit offset for trailing stop-limit orders (signed)
+
           limit_price: New limit price for the order
 
           quantity: New quantity for the order
 
           stop_price: New stop price for the order
+
+          trailing_offset: New trailing offset for trailing orders
+
+          trailing_offset_type: New trailing offset type (PRICE or BPS)
 
           extra_headers: Send extra headers
 
@@ -419,9 +430,12 @@ class OrdersResource(SyncAPIResource):
             path_template("/v1/accounts/{account_id}/orders/{order_id}", account_id=account_id, order_id=order_id),
             body=maybe_transform(
                 {
+                    "limit_offset": limit_offset,
                     "limit_price": limit_price,
                     "quantity": quantity,
                     "stop_price": stop_price,
+                    "trailing_offset": trailing_offset,
+                    "trailing_offset_type": trailing_offset_type,
                 },
                 order_replace_order_params.OrderReplaceOrderParams,
             ),
@@ -802,9 +816,12 @@ class AsyncOrdersResource(AsyncAPIResource):
         order_id: str,
         *,
         account_id: int,
+        limit_offset: Optional[str] | Omit = omit,
         limit_price: Optional[str] | Omit = omit,
         quantity: Optional[str] | Omit = omit,
         stop_price: Optional[str] | Omit = omit,
+        trailing_offset: Optional[str] | Omit = omit,
+        trailing_offset_type: Optional[TrailingOffsetType] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -816,11 +833,17 @@ class AsyncOrdersResource(AsyncAPIResource):
         Replace an order with new parameters
 
         Args:
+          limit_offset: New limit offset for trailing stop-limit orders (signed)
+
           limit_price: New limit price for the order
 
           quantity: New quantity for the order
 
           stop_price: New stop price for the order
+
+          trailing_offset: New trailing offset for trailing orders
+
+          trailing_offset_type: New trailing offset type (PRICE or BPS)
 
           extra_headers: Send extra headers
 
@@ -836,9 +859,12 @@ class AsyncOrdersResource(AsyncAPIResource):
             path_template("/v1/accounts/{account_id}/orders/{order_id}", account_id=account_id, order_id=order_id),
             body=await async_maybe_transform(
                 {
+                    "limit_offset": limit_offset,
                     "limit_price": limit_price,
                     "quantity": quantity,
                     "stop_price": stop_price,
+                    "trailing_offset": trailing_offset,
+                    "trailing_offset_type": trailing_offset_type,
                 },
                 order_replace_order_params.OrderReplaceOrderParams,
             ),

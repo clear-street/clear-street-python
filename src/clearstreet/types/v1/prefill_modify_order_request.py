@@ -3,6 +3,7 @@
 from typing import Optional
 
 from ..._models import BaseModel
+from .trailing_offset_type import TrailingOffsetType
 
 __all__ = ["PrefillModifyOrderRequest"]
 
@@ -16,6 +17,9 @@ class PrefillModifyOrderRequest(BaseModel):
     account_id: Optional[int] = None
     """Account ID that owns the order."""
 
+    limit_offset: Optional[str] = None
+    """New limit offset for trailing stop-limit orders (signed)"""
+
     limit_price: Optional[str] = None
     """New limit price for the order"""
 
@@ -27,3 +31,9 @@ class PrefillModifyOrderRequest(BaseModel):
 
     stop_price: Optional[str] = None
     """New stop price for the order"""
+
+    trailing_offset: Optional[str] = None
+    """New trailing offset for trailing orders"""
+
+    trailing_offset_type: Optional[TrailingOffsetType] = None
+    """New trailing offset type (PRICE or BPS)"""
