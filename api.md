@@ -414,6 +414,41 @@ Methods:
 - <code title="get /v1/accounts/{account_id}/positions">client.v1.positions.<a href="./src/clearstreet/resources/v1/positions.py">get_positions</a>(account_id, \*\*<a href="src/clearstreet/types/v1/position_get_positions_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/position_get_positions_response.py">PositionGetPositionsResponse</a></code>
 - <code title="post /v1/accounts/{account_id}/positions/instructions">client.v1.positions.<a href="./src/clearstreet/resources/v1/positions.py">submit_position_instructions</a>(account_id, \*\*<a href="src/clearstreet/types/v1/position_submit_position_instructions_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/position_submit_position_instructions_response.py">PositionSubmitPositionInstructionsResponse</a></code>
 
+## PrivateMarkets
+
+### Offerings
+
+Types:
+
+```python
+from clearstreet.types.v1.private_markets import (
+    Currency,
+    MetricUnit,
+    MetricValueType,
+    OfferingCard,
+    OfferingCardList,
+    OfferingClass,
+    OfferingCompany,
+    OfferingDetail,
+    OfferingDocumentResource,
+    OfferingDocumentType,
+    OfferingHighlight,
+    OfferingKeyRisk,
+    OfferingParticipantResource,
+    OfferingSpv,
+    ParticipantRole,
+    SpvStatus,
+    ValuationBasis,
+    OfferingGetOfferingByIDResponse,
+    OfferingGetOfferingsResponse,
+)
+```
+
+Methods:
+
+- <code title="get /v1/private-markets/offerings/{offering_id}">client.v1.private_markets.offerings.<a href="./src/clearstreet/resources/v1/private_markets/offerings.py">get_offering_by_id</a>(offering_id, \*\*<a href="src/clearstreet/types/v1/private_markets/offering_get_offering_by_id_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/private_markets/offering_get_offering_by_id_response.py">OfferingGetOfferingByIDResponse</a></code>
+- <code title="get /v1/private-markets/offerings">client.v1.private_markets.offerings.<a href="./src/clearstreet/resources/v1/private_markets/offerings.py">get_offerings</a>(\*\*<a href="src/clearstreet/types/v1/private_markets/offering_get_offerings_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/private_markets/offering_get_offerings_response.py">OfferingGetOfferingsResponse</a></code>
+
 ## Screener
 
 Types:

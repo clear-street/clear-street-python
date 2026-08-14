@@ -286,6 +286,9 @@ class ScreenerResource(SyncAPIResource):
         Use `columns` to select which columns appear in each row. When omitted, the
         default field set is returned.
 
+        Due to the volatility of screener responses we recommend reconciling page
+        results since results can shuffle between calls.
+
         Args:
           columns: Subset of fields to include in the response.
 
@@ -580,6 +583,9 @@ class AsyncScreenerResource(AsyncAPIResource):
 
         Use `columns` to select which columns appear in each row. When omitted, the
         default field set is returned.
+
+        Due to the volatility of screener responses we recommend reconciling page
+        results since results can shuffle between calls.
 
         Args:
           columns: Subset of fields to include in the response.

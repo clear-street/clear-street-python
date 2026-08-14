@@ -17,7 +17,12 @@ class AccountBalances(BaseModel):
     """The unique identifier for the account"""
 
     buying_power: str
-    """The total buying power available in the account."""
+    """
+    The total buying power available in the account: base buying power plus the open
+    order adjustment, where base buying power is maintenance margin excess times the
+    multiplier for intraday and initial margin excess times the multiplier for
+    overnight.
+    """
 
     currency: str
     """Currency identifier for all monetary values."""
@@ -35,7 +40,10 @@ class AccountBalances(BaseModel):
     """Total unrealized profit or loss across all positions relative to prior close."""
 
     equity: str
-    """The total equity in the account."""
+    """
+    The total equity in the account: cash plus long market value plus short market
+    value, where short market value is negative.
+    """
 
     long_market_value: str
     """The total market value of all long positions."""
@@ -44,7 +52,11 @@ class AccountBalances(BaseModel):
     """The applicable margin model for the account"""
 
     open_order_adjustment: str
-    """Signed buying-power correction from open orders."""
+    """
+    Buying power correction from open orders, computed as projected buying power
+    minus actual buying power. A negative value means open orders are consuming
+    buying power.
+    """
 
     settled_cash: str
     """The amount of cash that is settled and available for withdrawal or trading."""
@@ -75,7 +87,8 @@ class AccountBalances(BaseModel):
 
     multiplier: Optional[str] = None
     """
-    Applied multiplier for margin calculations. When a null/undefined value is
+    Margin multiplier: 4 during intraday sessions (pre-market, regular, and
+    after-hours) and 2 during the overnight session. When a null/undefined value is
     observed, it indicates it does not apply.
     """
 

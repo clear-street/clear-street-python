@@ -12,19 +12,19 @@ __all__ = ["MarginDetails"]
 
 class MarginDetails(BaseModel):
     initial_margin_excess: str
-    """Initial margin excess for trade-date balances."""
+    """The difference between equity and the initial margin requirement."""
 
     initial_margin_requirement: str
-    """Initial margin requirement for trade-date balances."""
+    """The amount of equity required to open new positions."""
 
     intraday_details: MarginSessionDetails
     """Intraday session margin calculation details."""
 
     maintenance_margin_excess: str
-    """Maintenance margin excess for trade-date balances."""
+    """The difference between equity and the maintenance margin requirement."""
 
     maintenance_margin_requirement: str
-    """Maintenance margin requirement for trade-date balances."""
+    """The amount of equity required to maintain current positions."""
 
     overnight_details: MarginSessionDetails
     """Overnight session margin calculation details."""

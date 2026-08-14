@@ -29,14 +29,16 @@ class AccountBalancesSod(BaseModel):
 
     maintenance_margin_excess: Optional[str] = None
     """
-    Start-of-day maintenance margin excess. When a null/undefined value is observed,
-    it indicates it does not apply.
+    Start-of-day maintenance margin excess: the difference between equity and the
+    maintenance margin requirement. When a null/undefined value is observed, it
+    indicates it does not apply.
     """
 
     maintenance_margin_requirement: Optional[str] = None
     """
-    Start-of-day maintenance margin requirement. When a null/undefined value is
-    observed, it indicates it does not apply.
+    Start-of-day maintenance margin requirement: the amount of equity required to
+    maintain current positions. When a null/undefined value is observed, it
+    indicates it does not apply.
     """
 
     trade_cash: Optional[str] = None
