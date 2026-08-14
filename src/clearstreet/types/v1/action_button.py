@@ -20,6 +20,13 @@ class ActionButton(BaseModel):
     label: str
     """User-visible label."""
 
+    item_id: Optional[str] = FieldInfo(alias="itemId", default=None)
+    """Interaction-tracking identity.
+
+    Absent on messages created before tracking. When a null/undefined value is
+    observed, it indicates that there is no available data.
+    """
+
     prompt: Optional[PromptButtonAction] = None
     """
     Follow-up prompt to submit as the next user message. When a null/undefined value

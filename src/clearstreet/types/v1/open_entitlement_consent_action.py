@@ -1,6 +1,6 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List
+from typing import List, Optional
 
 from ..._models import BaseModel
 from .entitlement_code import EntitlementCode
@@ -20,3 +20,10 @@ class OpenEntitlementConsentAction(BaseModel):
     entitlement_codes: List[EntitlementCode]
 
     reason: str
+
+    item_id: Optional[str] = None
+    """Interaction-tracking identity.
+
+    Absent on messages created before tracking. When a null/undefined value is
+    observed, it indicates that there is no available data.
+    """

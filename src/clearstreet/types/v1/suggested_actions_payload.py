@@ -15,3 +15,6 @@ class SuggestedActionsPayload(BaseModel):
 
     action_buttons: Optional[List[ActionButton]] = FieldInfo(alias="actionButtons", default=None)
     """Ordered message-level buttons."""
+
+    clicked_item_ids: Optional[List[str]] = FieldInfo(alias="clickedItemIds", default=None)
+    """IDs of buttons clicked by the current user."""

@@ -232,9 +232,11 @@ from clearstreet.types.v1 import (
     OpenEntitlementConsentAction,
     OpenScreenerAction,
     PrefillCancelOrderAction,
+    PrefillCancelOrderRequest,
     PrefillModifyOrderAction,
     PrefillModifyOrderRequest,
     PrefillNewOrderAction,
+    PrefillNewOrderRequest,
     PrefillOrderAction,
     PromptButtonAction,
     StructuredAction,
@@ -347,7 +349,6 @@ Types:
 
 ```python
 from clearstreet.types.v1 import (
-    CancelOrderRequest,
     Execution,
     ExecutionList,
     InstrumentIDOrSymbol,

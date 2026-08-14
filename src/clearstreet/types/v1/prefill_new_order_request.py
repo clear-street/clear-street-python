@@ -10,10 +10,10 @@ from .trailing_offset_type import TrailingOffsetType
 from .request_time_in_force import RequestTimeInForce
 from .instrument_id_or_symbol import InstrumentIDOrSymbol
 
-__all__ = ["NewOrderRequest"]
+__all__ = ["PrefillNewOrderRequest"]
 
 
-class NewOrderRequest(BaseModel):
+class PrefillNewOrderRequest(BaseModel):
     """Request to submit a new order (PlaceOrderRequest from spec)"""
 
     order_type: RequestOrderType
@@ -54,6 +54,13 @@ class NewOrderRequest(BaseModel):
     """Instrument ID (UUID) or symbol (equity ticker or OSI option symbol).
 
     Either `symbol` or `instrument_id` must be provided.
+    """
+
+    item_id: Optional[str] = None
+    """Interaction-tracking identity.
+
+    Absent on messages created before tracking. When a null/undefined value is
+    observed, it indicates that there is no available data.
     """
 
     limit_offset: Optional[str] = None

@@ -70,7 +70,6 @@ from .options_contract import OptionsContract as OptionsContract
 from .session_schedule import SessionSchedule as SessionSchedule
 from .trading_sessions import TradingSessions as TradingSessions
 from .watchlist_detail import WatchlistDetail as WatchlistDetail
-from .new_order_request import NewOrderRequest as NewOrderRequest
 from .open_chart_action import OpenChartAction as OpenChartAction
 from .screener_row_list import ScreenerRowList as ScreenerRowList
 from .structured_action import StructuredAction as StructuredAction
@@ -86,7 +85,6 @@ from .screener_entry_list import ScreenerEntryList as ScreenerEntryList
 from .search_filter_param import SearchFilterParam as SearchFilterParam
 from .account_balances_sod import AccountBalancesSod as AccountBalancesSod
 from .analyst_distribution import AnalystDistribution as AnalystDistribution
-from .cancel_order_request import CancelOrderRequest as CancelOrderRequest
 from .filter_op_spec_param import FilterOpSpecParam as FilterOpSpecParam
 from .instrument_core_list import InstrumentCoreList as InstrumentCoreList
 from .instrument_ipo_event import InstrumentIpoEvent as InstrumentIpoEvent
@@ -122,6 +120,7 @@ from .order_get_orders_response import OrderGetOrdersResponse as OrderGetOrdersR
 from .portfolio_history_segment import PortfolioHistorySegment as PortfolioHistorySegment
 from .position_instruction_list import PositionInstructionList as PositionInstructionList
 from .position_instruction_type import PositionInstructionType as PositionInstructionType
+from .prefill_new_order_request import PrefillNewOrderRequest as PrefillNewOrderRequest
 from .suggested_actions_payload import SuggestedActionsPayload as SuggestedActionsPayload
 from .content_part_chart_payload import ContentPartChartPayload as ContentPartChartPayload
 from .instrument_all_events_data import InstrumentAllEventsData as InstrumentAllEventsData
@@ -139,6 +138,7 @@ from .prefill_modify_order_action import PrefillModifyOrderAction as PrefillModi
 from .instrument_analyst_consensus import InstrumentAnalystConsensus as InstrumentAnalystConsensus
 from .order_replace_order_response import OrderReplaceOrderResponse as OrderReplaceOrderResponse
 from .order_submit_orders_response import OrderSubmitOrdersResponse as OrderSubmitOrdersResponse
+from .prefill_cancel_order_request import PrefillCancelOrderRequest as PrefillCancelOrderRequest
 from .prefill_modify_order_request import PrefillModifyOrderRequest as PrefillModifyOrderRequest
 from .account_get_accounts_response import AccountGetAccountsResponse as AccountGetAccountsResponse
 from .account_with_personal_details import AccountWithPersonalDetails as AccountWithPersonalDetails

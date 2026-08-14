@@ -3,7 +3,7 @@
 from typing import List
 
 from ..._models import BaseModel
-from .cancel_order_request import CancelOrderRequest
+from .prefill_cancel_order_request import PrefillCancelOrderRequest
 
 __all__ = ["PrefillCancelOrderAction"]
 
@@ -11,5 +11,5 @@ __all__ = ["PrefillCancelOrderAction"]
 class PrefillCancelOrderAction(BaseModel):
     """Cancel-order prefill action."""
 
-    orders: List[CancelOrderRequest]
+    orders: List[PrefillCancelOrderRequest]
     """Orders to cancel using the same identifiers required by the cancel-order API."""

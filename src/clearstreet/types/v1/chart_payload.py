@@ -17,6 +17,9 @@ class ChartPayload(BaseModel):
     chart_id: str = FieldInfo(alias="chartId")
     """Stable chart identifier scoped to the content part."""
 
+    clicked: bool
+    """Whether the current user clicked this chart."""
+
     action_buttons: Optional[List[ActionButton]] = FieldInfo(alias="actionButtons", default=None)
     """Buttons associated with this chart."""
 
@@ -24,4 +27,11 @@ class ChartPayload(BaseModel):
     """
     Explicit series-driven chart definition. When a null/undefined value is
     observed, it indicates it does not apply.
+    """
+
+    item_id: Optional[str] = FieldInfo(alias="itemId", default=None)
+    """Interaction-tracking identity.
+
+    Absent on messages created before tracking. When a null/undefined value is
+    observed, it indicates that there is no available data.
     """

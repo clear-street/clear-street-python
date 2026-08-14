@@ -20,6 +20,13 @@ class OpenScreenerAction(BaseModel):
     value is observed, it indicates it does not apply.
     """
 
+    item_id: Optional[str] = None
+    """Interaction-tracking identity.
+
+    Absent on messages created before tracking. When a null/undefined value is
+    observed, it indicates that there is no available data.
+    """
+
     page_size: Optional[int] = None
     """
     Optional page size. When a null/undefined value is observed, it indicates it

@@ -17,6 +17,13 @@ class PrefillModifyOrderRequest(BaseModel):
     account_id: Optional[int] = None
     """Account ID that owns the order."""
 
+    item_id: Optional[str] = None
+    """Interaction-tracking identity.
+
+    Absent on messages created before tracking. When a null/undefined value is
+    observed, it indicates that there is no available data.
+    """
+
     limit_offset: Optional[str] = None
     """New limit offset for trailing stop-limit orders (signed)"""
 
