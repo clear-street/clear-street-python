@@ -78,7 +78,7 @@ class OrdersResource(SyncAPIResource):
         *,
         instrument_ids: SequenceNotStr[InstrumentIDOrSymbol] | Omit = omit,
         instrument_type: Literal["COMMON_STOCK", "INDEX", "OPTION", "CASH"] | Omit = omit,
-        side: Literal["BUY", "SELL", "SELL_SHORT", "OTHER"] | Omit = omit,
+        side: Literal["BUY", "SELL"] | Omit = omit,
         type: Literal["MARKET", "LIMIT", "STOP", "STOP_LIMIT", "TRAILING_STOP", "TRAILING_STOP_LIMIT", "OTHER"]
         | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -507,7 +507,7 @@ class AsyncOrdersResource(AsyncAPIResource):
         *,
         instrument_ids: SequenceNotStr[InstrumentIDOrSymbol] | Omit = omit,
         instrument_type: Literal["COMMON_STOCK", "INDEX", "OPTION", "CASH"] | Omit = omit,
-        side: Literal["BUY", "SELL", "SELL_SHORT", "OTHER"] | Omit = omit,
+        side: Literal["BUY", "SELL"] | Omit = omit,
         type: Literal["MARKET", "LIMIT", "STOP", "STOP_LIMIT", "TRAILING_STOP", "TRAILING_STOP_LIMIT", "OTHER"]
         | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.

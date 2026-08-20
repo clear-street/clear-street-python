@@ -22,5 +22,11 @@ class ScreenerReplaceScreenerParams(TypedDict, total=False):
     name: Optional[str]
     """The name for this screener configuration"""
 
+    shared: Optional[bool]
+    """Whether any user may fetch this screener by id.
+
+    Omit to leave the existing value unchanged (defaults to `false` when creating).
+    """
+
     sorts: Optional[Iterable[SortSpecParam]]
     """Multi-field sort specifications"""

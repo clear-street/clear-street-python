@@ -47,7 +47,7 @@ class Order(BaseModel):
     """Total order quantity"""
 
     side: Side
-    """Side of the order (BUY, SELL, SELL_SHORT)"""
+    """Side of the order (BUY or SELL)"""
 
     status: OrderStatus
     """Current status of the order"""

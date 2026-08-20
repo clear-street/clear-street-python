@@ -360,6 +360,7 @@ from clearstreet.types.v1 import (
     QueueState,
     ReplaceOrderRequest,
     RequestOrderType,
+    RequestPositionEffect,
     RequestTimeInForce,
     Side,
     TimeInForce,
@@ -456,6 +457,11 @@ Types:
 
 ```python
 from clearstreet.types.v1 import (
+    Catalog,
+    Combination,
+    Enums,
+    FieldColumns,
+    FieldKind,
     FieldLookback,
     FieldPeriod,
     FieldRef,
@@ -464,8 +470,11 @@ from clearstreet.types.v1 import (
     FilterOperator,
     FilterValue,
     Modifier,
+    ModifierArg,
+    ModifierDef,
     ModifierOp,
     OperatorArg,
+    Rules,
     ScreenerColumn,
     ScreenerEntry,
     ScreenerEntryList,
@@ -475,8 +484,10 @@ from clearstreet.types.v1 import (
     SearchFilter,
     SortSpec,
     Variable,
+    VariableDef,
     ScreenerCreateScreenerResponse,
     ScreenerGetScreenerByIDResponse,
+    ScreenerGetScreenerCatalogResponse,
     ScreenerGetScreenersResponse,
     ScreenerReplaceScreenerResponse,
     ScreenerSearchScreenerResponse,
@@ -488,6 +499,7 @@ Methods:
 - <code title="post /v1/saved-screeners">client.v1.screener.<a href="./src/clearstreet/resources/v1/screener.py">create_screener</a>(\*\*<a href="src/clearstreet/types/v1/screener_create_screener_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/screener_create_screener_response.py">ScreenerCreateScreenerResponse</a></code>
 - <code title="delete /v1/saved-screeners/{screener_id}">client.v1.screener.<a href="./src/clearstreet/resources/v1/screener.py">delete_screener</a>(screener_id) -> None</code>
 - <code title="get /v1/saved-screeners/{screener_id}">client.v1.screener.<a href="./src/clearstreet/resources/v1/screener.py">get_screener_by_id</a>(screener_id) -> <a href="./src/clearstreet/types/v1/screener_get_screener_by_id_response.py">ScreenerGetScreenerByIDResponse</a></code>
+- <code title="get /v1/screener/catalog">client.v1.screener.<a href="./src/clearstreet/resources/v1/screener.py">get_screener_catalog</a>() -> <a href="./src/clearstreet/types/v1/screener_get_screener_catalog_response.py">ScreenerGetScreenerCatalogResponse</a></code>
 - <code title="get /v1/saved-screeners">client.v1.screener.<a href="./src/clearstreet/resources/v1/screener.py">get_screeners</a>() -> <a href="./src/clearstreet/types/v1/screener_get_screeners_response.py">ScreenerGetScreenersResponse</a></code>
 - <code title="put /v1/saved-screeners/{screener_id}">client.v1.screener.<a href="./src/clearstreet/resources/v1/screener.py">replace_screener</a>(screener_id, \*\*<a href="src/clearstreet/types/v1/screener_replace_screener_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/screener_replace_screener_response.py">ScreenerReplaceScreenerResponse</a></code>
 - <code title="post /v1/screener">client.v1.screener.<a href="./src/clearstreet/resources/v1/screener.py">search_screener</a>(\*\*<a href="src/clearstreet/types/v1/screener_search_screener_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/screener_search_screener_response.py">ScreenerSearchScreenerResponse</a></code>

@@ -2,6 +2,6 @@
 
 from typing_extensions import Literal, TypeAlias
 
-__all__ = ["Side"]
+__all__ = ["RequestPositionEffect"]
 
-Side: TypeAlias = Literal["BUY", "SELL"]
+RequestPositionEffect: TypeAlias = Literal["OPEN", "CLOSE"]

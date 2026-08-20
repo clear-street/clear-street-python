@@ -15,6 +15,7 @@ from clearstreet.types.v1 import (
     ScreenerSearchScreenerResponse,
     ScreenerGetScreenerByIDResponse,
     ScreenerReplaceScreenerResponse,
+    ScreenerGetScreenerCatalogResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -68,6 +69,7 @@ class TestScreener:
                 }
             ],
             name="name",
+            shared=True,
             sorts=[
                 {
                     "field": {
@@ -179,6 +181,31 @@ class TestScreener:
             )
 
     @parametrize
+    def test_method_get_screener_catalog(self, client: ClearStreet) -> None:
+        screener = client.v1.screener.get_screener_catalog()
+        assert_matches_type(ScreenerGetScreenerCatalogResponse, screener, path=["response"])
+
+    @parametrize
+    def test_raw_response_get_screener_catalog(self, client: ClearStreet) -> None:
+        response = client.v1.screener.with_raw_response.get_screener_catalog()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        screener = response.parse()
+        assert_matches_type(ScreenerGetScreenerCatalogResponse, screener, path=["response"])
+
+    @parametrize
+    def test_streaming_response_get_screener_catalog(self, client: ClearStreet) -> None:
+        with client.v1.screener.with_streaming_response.get_screener_catalog() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            screener = response.parse()
+            assert_matches_type(ScreenerGetScreenerCatalogResponse, screener, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
     def test_method_get_screeners(self, client: ClearStreet) -> None:
         screener = client.v1.screener.get_screeners()
         assert_matches_type(ScreenerGetScreenersResponse, screener, path=["response"])
@@ -251,6 +278,7 @@ class TestScreener:
                 }
             ],
             name="name",
+            shared=True,
             sorts=[
                 {
                     "field": {
@@ -440,6 +468,7 @@ class TestAsyncScreener:
                 }
             ],
             name="name",
+            shared=True,
             sorts=[
                 {
                     "field": {
@@ -551,6 +580,31 @@ class TestAsyncScreener:
             )
 
     @parametrize
+    async def test_method_get_screener_catalog(self, async_client: AsyncClearStreet) -> None:
+        screener = await async_client.v1.screener.get_screener_catalog()
+        assert_matches_type(ScreenerGetScreenerCatalogResponse, screener, path=["response"])
+
+    @parametrize
+    async def test_raw_response_get_screener_catalog(self, async_client: AsyncClearStreet) -> None:
+        response = await async_client.v1.screener.with_raw_response.get_screener_catalog()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        screener = await response.parse()
+        assert_matches_type(ScreenerGetScreenerCatalogResponse, screener, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_get_screener_catalog(self, async_client: AsyncClearStreet) -> None:
+        async with async_client.v1.screener.with_streaming_response.get_screener_catalog() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            screener = await response.parse()
+            assert_matches_type(ScreenerGetScreenerCatalogResponse, screener, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
     async def test_method_get_screeners(self, async_client: AsyncClearStreet) -> None:
         screener = await async_client.v1.screener.get_screeners()
         assert_matches_type(ScreenerGetScreenersResponse, screener, path=["response"])
@@ -623,6 +677,7 @@ class TestAsyncScreener:
                 }
             ],
             name="name",
+            shared=True,
             sorts=[
                 {
                     "field": {

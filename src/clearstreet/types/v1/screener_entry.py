@@ -22,6 +22,9 @@ class ScreenerEntry(BaseModel):
 
     name: str
 
+    shared: bool
+    """Whether any user may fetch this screener by id."""
+
     updated_at: datetime
 
     columns: Optional[List[FieldRef]] = None

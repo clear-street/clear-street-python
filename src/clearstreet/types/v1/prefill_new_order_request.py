@@ -9,6 +9,7 @@ from .request_order_type import RequestOrderType
 from .trailing_offset_type import TrailingOffsetType
 from .request_time_in_force import RequestTimeInForce
 from .instrument_id_or_symbol import InstrumentIDOrSymbol
+from .request_position_effect import RequestPositionEffect
 
 __all__ = ["PrefillNewOrderRequest"]
 
@@ -68,6 +69,12 @@ class PrefillNewOrderRequest(BaseModel):
 
     limit_price: Optional[str] = None
     """Limit price (required for LIMIT and STOP_LIMIT orders)"""
+
+    position_intent: Optional[RequestPositionEffect] = None
+    """Optional open/close intent for this order.
+
+    When omitted, the platform determines the position effect.
+    """
 
     stop_price: Optional[str] = None
     """Stop price (required for STOP and STOP_LIMIT orders)"""

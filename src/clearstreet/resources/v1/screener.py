@@ -30,6 +30,7 @@ from ...types.v1.screener_create_screener_response import ScreenerCreateScreener
 from ...types.v1.screener_search_screener_response import ScreenerSearchScreenerResponse
 from ...types.v1.screener_replace_screener_response import ScreenerReplaceScreenerResponse
 from ...types.v1.screener_get_screener_by_id_response import ScreenerGetScreenerByIDResponse
+from ...types.v1.screener_get_screener_catalog_response import ScreenerGetScreenerCatalogResponse
 
 __all__ = ["ScreenerResource", "AsyncScreenerResource"]
 
@@ -62,6 +63,7 @@ class ScreenerResource(SyncAPIResource):
         columns: Optional[Iterable[FieldRefParam]] | Omit = omit,
         filters: Optional[Iterable[SearchFilterParam]] | Omit = omit,
         name: Optional[str] | Omit = omit,
+        shared: Optional[bool] | Omit = omit,
         sorts: Optional[Iterable[SortSpecParam]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -82,6 +84,9 @@ class ScreenerResource(SyncAPIResource):
 
           name: The name for this screener configuration
 
+          shared: Whether any user may fetch this screener by id. Omit to leave the existing value
+              unchanged (defaults to `false` when creating).
+
           sorts: Multi-field sort specifications
 
           extra_headers: Send extra headers
@@ -99,6 +104,7 @@ class ScreenerResource(SyncAPIResource):
                     "columns": columns,
                     "filters": filters,
                     "name": name,
+                    "shared": shared,
                     "sorts": sorts,
                 },
                 screener_create_screener_params.ScreenerCreateScreenerParams,
@@ -180,6 +186,32 @@ class ScreenerResource(SyncAPIResource):
             cast_to=ScreenerGetScreenerByIDResponse,
         )
 
+    def get_screener_catalog(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ScreenerGetScreenerCatalogResponse:
+        """
+        Returns the complete screener field catalog: the field `kinds`, the per-field
+        data, the enum universes, the request-side `rules`, the built-in variables and
+        modifiers, and the `POST /screener` default response fields.
+
+        `POST /screener` field references are validated against this catalog; its
+        `rules` object documents how to compose a valid request.
+        """
+        return self._get(
+            "/v1/screener/catalog",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ScreenerGetScreenerCatalogResponse,
+        )
+
     def get_screeners(
         self,
         *,
@@ -210,6 +242,7 @@ class ScreenerResource(SyncAPIResource):
         columns: Optional[Iterable[FieldRefParam]] | Omit = omit,
         filters: Optional[Iterable[SearchFilterParam]] | Omit = omit,
         name: Optional[str] | Omit = omit,
+        shared: Optional[bool] | Omit = omit,
         sorts: Optional[Iterable[SortSpecParam]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -231,6 +264,9 @@ class ScreenerResource(SyncAPIResource):
 
           name: The name for this screener configuration
 
+          shared: Whether any user may fetch this screener by id. Omit to leave the existing value
+              unchanged (defaults to `false` when creating).
+
           sorts: Multi-field sort specifications
 
           extra_headers: Send extra headers
@@ -250,6 +286,7 @@ class ScreenerResource(SyncAPIResource):
                     "columns": columns,
                     "filters": filters,
                     "name": name,
+                    "shared": shared,
                     "sorts": sorts,
                 },
                 screener_replace_screener_params.ScreenerReplaceScreenerParams,
@@ -279,12 +316,19 @@ class ScreenerResource(SyncAPIResource):
         """
         Search instruments using structured filters.
 
-        Returns a columnar response where each row is an array of column objects. Each
-        column contains a human-readable name, a field reference, an optional type hint
-        (e.g. `CURR_USD`, `PERCENT`), and the value.
+        Compose a request with `filters`, plus optional `sorts`, `columns`, and
+        `page_size`/`page_token` for pagination. Each filter pairs a field reference
+        (`left`) with an operator (`op`, e.g. `GREATER_OR_EQUAL`, `BETWEEN`) and
+        comparison values (`right`), which can be literals or date variables such as
+        `today` with a modifier. Field names, periods, and lookbacks come from the
+        screener field catalog. `sorts` order results; `columns` selects which fields
+        appear in each row (the default field set when omitted).
 
-        Use `columns` to select which columns appear in each row. When omitted, the
-        default field set is returned.
+        The response is a paginated, columnar list of matching instruments. Each row is
+        an array of column objects, each with a display `name`, the `field` reference,
+        an optional value `type` hint (e.g. `CURR_USD`, `PERCENT`), and the `value`. An
+        `instrument_id` column is always prepended. Metadata carries `total_items`,
+        `total_pages`, and `next_page_token` for paging.
 
         Due to the volatility of screener responses we recommend reconciling page
         results since results can shuffle between calls.
@@ -360,6 +404,7 @@ class AsyncScreenerResource(AsyncAPIResource):
         columns: Optional[Iterable[FieldRefParam]] | Omit = omit,
         filters: Optional[Iterable[SearchFilterParam]] | Omit = omit,
         name: Optional[str] | Omit = omit,
+        shared: Optional[bool] | Omit = omit,
         sorts: Optional[Iterable[SortSpecParam]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -380,6 +425,9 @@ class AsyncScreenerResource(AsyncAPIResource):
 
           name: The name for this screener configuration
 
+          shared: Whether any user may fetch this screener by id. Omit to leave the existing value
+              unchanged (defaults to `false` when creating).
+
           sorts: Multi-field sort specifications
 
           extra_headers: Send extra headers
@@ -397,6 +445,7 @@ class AsyncScreenerResource(AsyncAPIResource):
                     "columns": columns,
                     "filters": filters,
                     "name": name,
+                    "shared": shared,
                     "sorts": sorts,
                 },
                 screener_create_screener_params.ScreenerCreateScreenerParams,
@@ -478,6 +527,32 @@ class AsyncScreenerResource(AsyncAPIResource):
             cast_to=ScreenerGetScreenerByIDResponse,
         )
 
+    async def get_screener_catalog(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ScreenerGetScreenerCatalogResponse:
+        """
+        Returns the complete screener field catalog: the field `kinds`, the per-field
+        data, the enum universes, the request-side `rules`, the built-in variables and
+        modifiers, and the `POST /screener` default response fields.
+
+        `POST /screener` field references are validated against this catalog; its
+        `rules` object documents how to compose a valid request.
+        """
+        return await self._get(
+            "/v1/screener/catalog",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ScreenerGetScreenerCatalogResponse,
+        )
+
     async def get_screeners(
         self,
         *,
@@ -508,6 +583,7 @@ class AsyncScreenerResource(AsyncAPIResource):
         columns: Optional[Iterable[FieldRefParam]] | Omit = omit,
         filters: Optional[Iterable[SearchFilterParam]] | Omit = omit,
         name: Optional[str] | Omit = omit,
+        shared: Optional[bool] | Omit = omit,
         sorts: Optional[Iterable[SortSpecParam]] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
@@ -529,6 +605,9 @@ class AsyncScreenerResource(AsyncAPIResource):
 
           name: The name for this screener configuration
 
+          shared: Whether any user may fetch this screener by id. Omit to leave the existing value
+              unchanged (defaults to `false` when creating).
+
           sorts: Multi-field sort specifications
 
           extra_headers: Send extra headers
@@ -548,6 +627,7 @@ class AsyncScreenerResource(AsyncAPIResource):
                     "columns": columns,
                     "filters": filters,
                     "name": name,
+                    "shared": shared,
                     "sorts": sorts,
                 },
                 screener_replace_screener_params.ScreenerReplaceScreenerParams,
@@ -577,12 +657,19 @@ class AsyncScreenerResource(AsyncAPIResource):
         """
         Search instruments using structured filters.
 
-        Returns a columnar response where each row is an array of column objects. Each
-        column contains a human-readable name, a field reference, an optional type hint
-        (e.g. `CURR_USD`, `PERCENT`), and the value.
+        Compose a request with `filters`, plus optional `sorts`, `columns`, and
+        `page_size`/`page_token` for pagination. Each filter pairs a field reference
+        (`left`) with an operator (`op`, e.g. `GREATER_OR_EQUAL`, `BETWEEN`) and
+        comparison values (`right`), which can be literals or date variables such as
+        `today` with a modifier. Field names, periods, and lookbacks come from the
+        screener field catalog. `sorts` order results; `columns` selects which fields
+        appear in each row (the default field set when omitted).
 
-        Use `columns` to select which columns appear in each row. When omitted, the
-        default field set is returned.
+        The response is a paginated, columnar list of matching instruments. Each row is
+        an array of column objects, each with a display `name`, the `field` reference,
+        an optional value `type` hint (e.g. `CURR_USD`, `PERCENT`), and the `value`. An
+        `instrument_id` column is always prepended. Metadata carries `total_items`,
+        `total_pages`, and `next_page_token` for paging.
 
         Due to the volatility of screener responses we recommend reconciling page
         results since results can shuffle between calls.
@@ -643,6 +730,9 @@ class ScreenerResourceWithRawResponse:
         self.get_screener_by_id = to_raw_response_wrapper(
             screener.get_screener_by_id,
         )
+        self.get_screener_catalog = to_raw_response_wrapper(
+            screener.get_screener_catalog,
+        )
         self.get_screeners = to_raw_response_wrapper(
             screener.get_screeners,
         )
@@ -666,6 +756,9 @@ class AsyncScreenerResourceWithRawResponse:
         )
         self.get_screener_by_id = async_to_raw_response_wrapper(
             screener.get_screener_by_id,
+        )
+        self.get_screener_catalog = async_to_raw_response_wrapper(
+            screener.get_screener_catalog,
         )
         self.get_screeners = async_to_raw_response_wrapper(
             screener.get_screeners,
@@ -691,6 +784,9 @@ class ScreenerResourceWithStreamingResponse:
         self.get_screener_by_id = to_streamed_response_wrapper(
             screener.get_screener_by_id,
         )
+        self.get_screener_catalog = to_streamed_response_wrapper(
+            screener.get_screener_catalog,
+        )
         self.get_screeners = to_streamed_response_wrapper(
             screener.get_screeners,
         )
@@ -714,6 +810,9 @@ class AsyncScreenerResourceWithStreamingResponse:
         )
         self.get_screener_by_id = async_to_streamed_response_wrapper(
             screener.get_screener_by_id,
+        )
+        self.get_screener_catalog = async_to_streamed_response_wrapper(
+            screener.get_screener_catalog,
         )
         self.get_screeners = async_to_streamed_response_wrapper(
             screener.get_screeners,
