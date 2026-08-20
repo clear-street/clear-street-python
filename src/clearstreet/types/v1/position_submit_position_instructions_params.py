@@ -30,7 +30,7 @@ class Instruction(TypedDict, total=False):
     quantity: Required[str]
     """Number of contracts to include in the instruction."""
 
-    instruction_id: Optional[str]
+    client_instruction_id: Optional[str]
     """Caller-supplied idempotency key.
 
     Echoed on the response. The server generates a unique id when omitted.

@@ -347,8 +347,8 @@ class PositionsResource(SyncAPIResource):
           cause: `409` when every row was a duplicate, `400` for validation failures
           like DNE/CEA on a non-expiry day, `503` if the clearing service is
           unavailable. `data` still contains every row carrying `status = REJECTED` and
-          `rejection_reason` so callers can attribute failures by `instruction_id`; the
-          top-level `error` summarizes the batch.
+          `rejection_reason` so callers can attribute failures by
+          `client_instruction_id`; the top-level `error` summarizes the batch.
 
         Args:
           extra_headers: Send extra headers
@@ -669,8 +669,8 @@ class AsyncPositionsResource(AsyncAPIResource):
           cause: `409` when every row was a duplicate, `400` for validation failures
           like DNE/CEA on a non-expiry day, `503` if the clearing service is
           unavailable. `data` still contains every row carrying `status = REJECTED` and
-          `rejection_reason` so callers can attribute failures by `instruction_id`; the
-          top-level `error` summarizes the batch.
+          `rejection_reason` so callers can attribute failures by
+          `client_instruction_id`; the top-level `error` summarizes the batch.
 
         Args:
           extra_headers: Send extra headers

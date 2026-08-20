@@ -19,7 +19,7 @@ class PositionInstruction(BaseModel):
     account_id: int
     """Account the instruction belongs to."""
 
-    instruction_id: str
+    client_instruction_id: str
     """
     Caller-supplied idempotency key echoed from the submit request; the
     server-assigned fallback when none was supplied.
