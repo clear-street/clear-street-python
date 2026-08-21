@@ -15,3 +15,10 @@ class PositionGetPositionInstructionsParams(TypedDict, total=False):
 
     Instrument ID (UUID) or symbol (equity ticker or OSI option symbol).
     """
+
+    underlying_instrument_id: InstrumentIDOrSymbol
+    """
+    Limit results to instructions whose contract has this underlier. Instrument ID
+    (UUID) or symbol (equity ticker or OSI option symbol). Combined with
+    `instrument_id` as a logical AND when both are supplied.
+    """

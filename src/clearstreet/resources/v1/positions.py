@@ -206,6 +206,7 @@ class PositionsResource(SyncAPIResource):
         account_id: int,
         *,
         instrument_id: InstrumentIDOrSymbol | Omit = omit,
+        underlying_instrument_id: InstrumentIDOrSymbol | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -227,6 +228,10 @@ class PositionsResource(SyncAPIResource):
           instrument_id: Limit results to a single contract. Instrument ID (UUID) or symbol (equity
               ticker or OSI option symbol).
 
+          underlying_instrument_id: Limit results to instructions whose contract has this underlier. Instrument ID
+              (UUID) or symbol (equity ticker or OSI option symbol). Combined with
+              `instrument_id` as a logical AND when both are supplied.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -243,7 +248,10 @@ class PositionsResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=maybe_transform(
-                    {"instrument_id": instrument_id},
+                    {
+                        "instrument_id": instrument_id,
+                        "underlying_instrument_id": underlying_instrument_id,
+                    },
                     position_get_position_instructions_params.PositionGetPositionInstructionsParams,
                 ),
             ),
@@ -528,6 +536,7 @@ class AsyncPositionsResource(AsyncAPIResource):
         account_id: int,
         *,
         instrument_id: InstrumentIDOrSymbol | Omit = omit,
+        underlying_instrument_id: InstrumentIDOrSymbol | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -549,6 +558,10 @@ class AsyncPositionsResource(AsyncAPIResource):
           instrument_id: Limit results to a single contract. Instrument ID (UUID) or symbol (equity
               ticker or OSI option symbol).
 
+          underlying_instrument_id: Limit results to instructions whose contract has this underlier. Instrument ID
+              (UUID) or symbol (equity ticker or OSI option symbol). Combined with
+              `instrument_id` as a logical AND when both are supplied.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -565,7 +578,10 @@ class AsyncPositionsResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"instrument_id": instrument_id},
+                    {
+                        "instrument_id": instrument_id,
+                        "underlying_instrument_id": underlying_instrument_id,
+                    },
                     position_get_position_instructions_params.PositionGetPositionInstructionsParams,
                 ),
             ),

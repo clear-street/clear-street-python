@@ -168,6 +168,7 @@ class TestPositions:
         position = client.v1.positions.get_position_instructions(
             account_id=0,
             instrument_id="x",
+            underlying_instrument_id="x",
         )
         assert_matches_type(PositionGetPositionInstructionsResponse, position, path=["response"])
 
@@ -440,6 +441,7 @@ class TestAsyncPositions:
         position = await async_client.v1.positions.get_position_instructions(
             account_id=0,
             instrument_id="x",
+            underlying_instrument_id="x",
         )
         assert_matches_type(PositionGetPositionInstructionsResponse, position, path=["response"])
 

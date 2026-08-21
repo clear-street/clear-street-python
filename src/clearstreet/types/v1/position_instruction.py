@@ -61,6 +61,12 @@ class PositionInstruction(BaseModel):
     here. When a null/undefined value is observed, it indicates it does not apply.
     """
 
+    underlying_instrument_id: Optional[str] = None
+    """
+    Identifier of the underlying instrument, when available. When a null/undefined
+    value is observed, it indicates it does not apply.
+    """
+
     updated_at: Optional[datetime] = None
     """
     When the instruction's lifecycle state last changed. When a null/undefined value
