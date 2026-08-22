@@ -192,6 +192,7 @@ from .account_get_account_balances_params import AccountGetAccountBalancesParams
 from .instrument_cash_flow_statement_list import InstrumentCashFlowStatementList as InstrumentCashFlowStatementList
 from .instrument_get_instruments_response import InstrumentGetInstrumentsResponse as InstrumentGetInstrumentsResponse
 from .order_cancel_all_open_orders_params import OrderCancelAllOpenOrdersParams as OrderCancelAllOpenOrdersParams
+from .private_market_get_spv_by_id_params import PrivateMarketGetSpvByIDParams as PrivateMarketGetSpvByIDParams
 from .watchlist_add_watchlist_item_params import WatchlistAddWatchlistItemParams as WatchlistAddWatchlistItemParams
 from .watchlist_create_watchlist_response import WatchlistCreateWatchlistResponse as WatchlistCreateWatchlistResponse
 from .watchlist_delete_watchlist_response import WatchlistDeleteWatchlistResponse as WatchlistDeleteWatchlistResponse
@@ -203,6 +204,7 @@ from .account_get_account_balances_response import (
     AccountGetAccountBalancesResponse as AccountGetAccountBalancesResponse,
 )
 from .order_cancel_all_open_orders_response import OrderCancelAllOpenOrdersResponse as OrderCancelAllOpenOrdersResponse
+from .private_market_get_spv_by_id_response import PrivateMarketGetSpvByIDResponse as PrivateMarketGetSpvByIDResponse
 from .watchlist_add_watchlist_item_response import (
     WatchlistAddWatchlistItemResponse as WatchlistAddWatchlistItemResponse,
 )
@@ -233,6 +235,9 @@ from .watchlist_get_watchlist_by_id_response import (
 from .instrument_balance_sheet_statement_list import (
     InstrumentBalanceSheetStatementList as InstrumentBalanceSheetStatementList,
 )
+from .private_market_get_company_by_id_params import (
+    PrivateMarketGetCompanyByIDParams as PrivateMarketGetCompanyByIDParams,
+)
 from .instrument_get_instrument_by_id_response import (
     InstrumentGetInstrumentByIDResponse as InstrumentGetInstrumentByIDResponse,
 )
@@ -247,6 +252,9 @@ from .calendar_get_market_hours_calendar_params import (
 )
 from .position_get_position_instructions_params import (
     PositionGetPositionInstructionsParams as PositionGetPositionInstructionsParams,
+)
+from .private_market_get_company_by_id_response import (
+    PrivateMarketGetCompanyByIDResponse as PrivateMarketGetCompanyByIDResponse,
 )
 from .calendar_get_market_hours_calendar_response import (
     CalendarGetMarketHoursCalendarResponse as CalendarGetMarketHoursCalendarResponse,
