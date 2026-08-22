@@ -138,6 +138,10 @@ class V1Resource(SyncAPIResource):
 
     @cached_property
     def private_markets(self) -> PrivateMarketsResource:
+        """Browse private-market offerings and their indicative terms.
+
+        Access requires the account holder to hold an accreditation attestation.
+        """
         return PrivateMarketsResource(self._client)
 
     @cached_property
@@ -212,6 +216,10 @@ class AsyncV1Resource(AsyncAPIResource):
 
     @cached_property
     def private_markets(self) -> AsyncPrivateMarketsResource:
+        """Browse private-market offerings and their indicative terms.
+
+        Access requires the account holder to hold an accreditation attestation.
+        """
         return AsyncPrivateMarketsResource(self._client)
 
     @cached_property
@@ -289,6 +297,10 @@ class V1ResourceWithRawResponse:
 
     @cached_property
     def private_markets(self) -> PrivateMarketsResourceWithRawResponse:
+        """Browse private-market offerings and their indicative terms.
+
+        Access requires the account holder to hold an accreditation attestation.
+        """
         return PrivateMarketsResourceWithRawResponse(self._v1.private_markets)
 
     @cached_property
@@ -347,6 +359,10 @@ class AsyncV1ResourceWithRawResponse:
 
     @cached_property
     def private_markets(self) -> AsyncPrivateMarketsResourceWithRawResponse:
+        """Browse private-market offerings and their indicative terms.
+
+        Access requires the account holder to hold an accreditation attestation.
+        """
         return AsyncPrivateMarketsResourceWithRawResponse(self._v1.private_markets)
 
     @cached_property
@@ -405,6 +421,10 @@ class V1ResourceWithStreamingResponse:
 
     @cached_property
     def private_markets(self) -> PrivateMarketsResourceWithStreamingResponse:
+        """Browse private-market offerings and their indicative terms.
+
+        Access requires the account holder to hold an accreditation attestation.
+        """
         return PrivateMarketsResourceWithStreamingResponse(self._v1.private_markets)
 
     @cached_property
@@ -463,6 +483,10 @@ class AsyncV1ResourceWithStreamingResponse:
 
     @cached_property
     def private_markets(self) -> AsyncPrivateMarketsResourceWithStreamingResponse:
+        """Browse private-market offerings and their indicative terms.
+
+        Access requires the account holder to hold an accreditation attestation.
+        """
         return AsyncPrivateMarketsResourceWithStreamingResponse(self._v1.private_markets)
 
     @cached_property

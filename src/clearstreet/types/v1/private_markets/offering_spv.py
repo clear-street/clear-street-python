@@ -4,6 +4,7 @@ from typing import Optional
 
 from ...._models import BaseModel
 from .spv_status import SpvStatus
+from .nda_agreement_resource import NdaAgreementResource
 
 __all__ = ["OfferingSpv"]
 
@@ -30,6 +31,9 @@ class OfferingSpv(BaseModel):
 
     manager_name: Optional[str] = None
     """SPV manager."""
+
+    nda_agreement: Optional[NdaAgreementResource] = None
+    """Current NDA agreement. Absent when this SPV does not require one."""
 
     share_class: Optional[str] = None
     """Underlying share class, when specified."""

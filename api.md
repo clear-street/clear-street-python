@@ -418,6 +418,38 @@ Methods:
 
 ## PrivateMarkets
 
+Types:
+
+```python
+from clearstreet.types.v1 import (
+    PrivateMarketCreateIoiResponse,
+    PrivateMarketGetIoisResponse,
+    PrivateMarketUpdateIoiResponse,
+)
+```
+
+Methods:
+
+- <code title="post /v1/private-markets/iois">client.v1.private_markets.<a href="./src/clearstreet/resources/v1/private_markets/private_markets.py">create_ioi</a>(\*\*<a href="src/clearstreet/types/v1/private_market_create_ioi_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/private_market_create_ioi_response.py">PrivateMarketCreateIoiResponse</a></code>
+- <code title="delete /v1/private-markets/iois/{ioi_id}">client.v1.private_markets.<a href="./src/clearstreet/resources/v1/private_markets/private_markets.py">delete_ioi</a>(ioi_id, \*\*<a href="src/clearstreet/types/v1/private_market_delete_ioi_params.py">params</a>) -> None</code>
+- <code title="get /v1/private-markets/iois">client.v1.private_markets.<a href="./src/clearstreet/resources/v1/private_markets/private_markets.py">get_iois</a>(\*\*<a href="src/clearstreet/types/v1/private_market_get_iois_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/private_market_get_iois_response.py">PrivateMarketGetIoisResponse</a></code>
+- <code title="patch /v1/private-markets/iois/{ioi_id}">client.v1.private_markets.<a href="./src/clearstreet/resources/v1/private_markets/private_markets.py">update_ioi</a>(ioi_id, \*\*<a href="src/clearstreet/types/v1/private_market_update_ioi_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/private_market_update_ioi_response.py">PrivateMarketUpdateIoiResponse</a></code>
+
+### Iois
+
+Types:
+
+```python
+from clearstreet.types.v1.private_markets import (
+    IoiCompanyResource,
+    IoiListingResource,
+    IoiListingResourceList,
+    IoiOfferingResource,
+    IoiResource,
+    NdaAcceptanceResource,
+)
+```
+
 ### Offerings
 
 Types:
@@ -427,6 +459,7 @@ from clearstreet.types.v1.private_markets import (
     Currency,
     MetricUnit,
     MetricValueType,
+    NdaAgreementResource,
     OfferingCard,
     OfferingCardList,
     OfferingClass,

@@ -5,6 +5,7 @@ from __future__ import annotations
 from .currency import Currency as Currency
 from .spv_status import SpvStatus as SpvStatus
 from .metric_unit import MetricUnit as MetricUnit
+from .ioi_resource import IoiResource as IoiResource
 from .offering_spv import OfferingSpv as OfferingSpv
 from .offering_card import OfferingCard as OfferingCard
 from .offering_class import OfferingClass as OfferingClass
@@ -16,7 +17,13 @@ from .metric_value_type import MetricValueType as MetricValueType
 from .offering_key_risk import OfferingKeyRisk as OfferingKeyRisk
 from .offering_card_list import OfferingCardList as OfferingCardList
 from .offering_highlight import OfferingHighlight as OfferingHighlight
+from .ioi_company_resource import IoiCompanyResource as IoiCompanyResource
+from .ioi_listing_resource import IoiListingResource as IoiListingResource
+from .ioi_offering_resource import IoiOfferingResource as IoiOfferingResource
+from .nda_agreement_resource import NdaAgreementResource as NdaAgreementResource
 from .offering_document_type import OfferingDocumentType as OfferingDocumentType
+from .nda_acceptance_resource import NdaAcceptanceResource as NdaAcceptanceResource
+from .ioi_listing_resource_list import IoiListingResourceList as IoiListingResourceList
 from .offering_document_resource import OfferingDocumentResource as OfferingDocumentResource
 from .offering_get_offerings_params import OfferingGetOfferingsParams as OfferingGetOfferingsParams
 from .offering_participant_resource import OfferingParticipantResource as OfferingParticipantResource
