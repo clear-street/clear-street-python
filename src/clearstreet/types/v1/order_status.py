@@ -6,6 +6,8 @@ __all__ = ["OrderStatus"]
 
 OrderStatus: TypeAlias = Literal[
     "PENDING_NEW",
+    "QUEUED",
+    "PENDING_TRIGGER",
     "NEW",
     "PARTIALLY_FILLED",
     "FILLED",

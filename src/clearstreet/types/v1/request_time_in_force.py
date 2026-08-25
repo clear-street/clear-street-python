@@ -5,5 +5,5 @@ from typing_extensions import Literal, TypeAlias
 __all__ = ["RequestTimeInForce"]
 
 RequestTimeInForce: TypeAlias = Literal[
-    "DAY", "GOOD_TILL_CANCEL", "IMMEDIATE_OR_CANCEL", "FILL_OR_KILL", "GOOD_TILL_DATE", "AT_THE_OPENING", "AT_THE_CLOSE"
+    "DAY", "GOOD_TILL_CANCEL", "IMMEDIATE_OR_CANCEL", "FILL_OR_KILL", "GOOD_TILL_DATE", "AT_OPEN", "AT_CLOSE"
 ]

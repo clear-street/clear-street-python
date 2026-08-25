@@ -290,6 +290,8 @@ class OrdersResource(SyncAPIResource):
         status: List[
             Literal[
                 "PENDING_NEW",
+                "QUEUED",
+                "PENDING_TRIGGER",
                 "NEW",
                 "PARTIALLY_FILLED",
                 "FILLED",
@@ -719,6 +721,8 @@ class AsyncOrdersResource(AsyncAPIResource):
         status: List[
             Literal[
                 "PENDING_NEW",
+                "QUEUED",
+                "PENDING_TRIGGER",
                 "NEW",
                 "PARTIALLY_FILLED",
                 "FILLED",

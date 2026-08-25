@@ -48,6 +48,8 @@ class OrderGetOrdersParams(TypedDict, total=False):
     status: List[
         Literal[
             "PENDING_NEW",
+            "QUEUED",
+            "PENDING_TRIGGER",
             "NEW",
             "PARTIALLY_FILLED",
             "FILLED",
