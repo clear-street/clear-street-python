@@ -218,6 +218,12 @@ class TestOrders:
             symbol="symbol",
             to=parse_datetime("2019-12-27T18:11:19.117Z"),
             underlying_instrument_ids=["x"],
+            updated_at={
+                "gt": parse_datetime("2019-12-27T18:11:19.117Z"),
+                "gte": parse_datetime("2019-12-27T18:11:19.117Z"),
+                "lt": parse_datetime("2019-12-27T18:11:19.117Z"),
+                "lte": parse_datetime("2019-12-27T18:11:19.117Z"),
+            },
         )
         assert_matches_type(OrderGetOrdersResponse, order, path=["response"])
 
@@ -554,6 +560,12 @@ class TestAsyncOrders:
             symbol="symbol",
             to=parse_datetime("2019-12-27T18:11:19.117Z"),
             underlying_instrument_ids=["x"],
+            updated_at={
+                "gt": parse_datetime("2019-12-27T18:11:19.117Z"),
+                "gte": parse_datetime("2019-12-27T18:11:19.117Z"),
+                "lt": parse_datetime("2019-12-27T18:11:19.117Z"),
+                "lte": parse_datetime("2019-12-27T18:11:19.117Z"),
+            },
         )
         assert_matches_type(OrderGetOrdersResponse, order, path=["response"])
 

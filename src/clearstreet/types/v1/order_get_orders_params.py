@@ -10,7 +10,7 @@ from ..._types import SequenceNotStr, Base64FileInput
 from ..._utils import PropertyInfo
 from .instrument_id_or_symbol import InstrumentIDOrSymbol
 
-__all__ = ["OrderGetOrdersParams"]
+__all__ = ["OrderGetOrdersParams", "UpdatedAt"]
 
 
 class OrderGetOrdersParams(TypedDict, total=False):
@@ -80,3 +80,15 @@ class OrderGetOrdersParams(TypedDict, total=False):
     symbols). Matches options orders whose resolved underlier is any of the given
     instruments.
     """
+
+    updated_at: UpdatedAt
+
+
+class UpdatedAt(TypedDict, total=False):
+    gt: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
+
+    gte: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
+
+    lt: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
+
+    lte: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]

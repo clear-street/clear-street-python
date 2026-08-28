@@ -312,6 +312,7 @@ class OrdersResource(SyncAPIResource):
         symbol: str | Omit = omit,
         to: Union[str, datetime] | Omit = omit,
         underlying_instrument_ids: SequenceNotStr[InstrumentIDOrSymbol] | Omit = omit,
+        updated_at: order_get_orders_params.UpdatedAt | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -377,6 +378,7 @@ class OrdersResource(SyncAPIResource):
                         "symbol": symbol,
                         "to": to,
                         "underlying_instrument_ids": underlying_instrument_ids,
+                        "updated_at": updated_at,
                     },
                     order_get_orders_params.OrderGetOrdersParams,
                 ),
@@ -743,6 +745,7 @@ class AsyncOrdersResource(AsyncAPIResource):
         symbol: str | Omit = omit,
         to: Union[str, datetime] | Omit = omit,
         underlying_instrument_ids: SequenceNotStr[InstrumentIDOrSymbol] | Omit = omit,
+        updated_at: order_get_orders_params.UpdatedAt | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -808,6 +811,7 @@ class AsyncOrdersResource(AsyncAPIResource):
                         "symbol": symbol,
                         "to": to,
                         "underlying_instrument_ids": underlying_instrument_ids,
+                        "updated_at": updated_at,
                     },
                     order_get_orders_params.OrderGetOrdersParams,
                 ),
