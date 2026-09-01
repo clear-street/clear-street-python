@@ -88,14 +88,6 @@ from .instrument_data import (
     InstrumentDataResourceWithStreamingResponse,
     AsyncInstrumentDataResourceWithStreamingResponse,
 )
-from .private_markets import (
-    PrivateMarketsResource,
-    AsyncPrivateMarketsResource,
-    PrivateMarketsResourceWithRawResponse,
-    AsyncPrivateMarketsResourceWithRawResponse,
-    PrivateMarketsResourceWithStreamingResponse,
-    AsyncPrivateMarketsResourceWithStreamingResponse,
-)
 
 __all__ = [
     "AccountsResource",
@@ -146,12 +138,6 @@ __all__ = [
     "AsyncPositionsResourceWithRawResponse",
     "PositionsResourceWithStreamingResponse",
     "AsyncPositionsResourceWithStreamingResponse",
-    "PrivateMarketsResource",
-    "AsyncPrivateMarketsResource",
-    "PrivateMarketsResourceWithRawResponse",
-    "AsyncPrivateMarketsResourceWithRawResponse",
-    "PrivateMarketsResourceWithStreamingResponse",
-    "AsyncPrivateMarketsResourceWithStreamingResponse",
     "ScreenerResource",
     "AsyncScreenerResource",
     "ScreenerResourceWithRawResponse",

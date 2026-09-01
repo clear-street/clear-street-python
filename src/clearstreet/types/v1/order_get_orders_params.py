@@ -86,9 +86,25 @@ class OrderGetOrdersParams(TypedDict, total=False):
 
 class UpdatedAt(TypedDict, total=False):
     gt: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
+    """
+    > **Alpha** — this parameter is experimental and may change or be removed at any
+    > time.
+    """
 
     gte: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
+    """
+    > **Alpha** — this parameter is experimental and may change or be removed at any
+    > time.
+    """
 
     lt: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
+    """
+    > **Alpha** — this parameter is experimental and may change or be removed at any
+    > time.
+    """
 
     lte: Annotated[Union[str, datetime], PropertyInfo(format="iso8601")]
+    """
+    > **Alpha** — this parameter is experimental and may change or be removed at any
+    > time.
+    """
