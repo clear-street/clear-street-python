@@ -21,6 +21,7 @@ from clearstreet.types.v1 import (
     Account,
     AccountBalances,
     AccountBalancesSod,
+    AccountHolderEntityKind,
     AccountList,
     AccountSettings,
     AccountStatus,

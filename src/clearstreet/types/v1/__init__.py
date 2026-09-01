@@ -132,6 +132,7 @@ from .position_instruction_list import PositionInstructionList as PositionInstru
 from .position_instruction_type import PositionInstructionType as PositionInstructionType
 from .prefill_new_order_request import PrefillNewOrderRequest as PrefillNewOrderRequest
 from .suggested_actions_payload import SuggestedActionsPayload as SuggestedActionsPayload
+from .account_holder_entity_kind import AccountHolderEntityKind as AccountHolderEntityKind
 from .content_part_chart_payload import ContentPartChartPayload as ContentPartChartPayload
 from .instrument_all_events_data import InstrumentAllEventsData as InstrumentAllEventsData
 from .order_replace_order_params import OrderReplaceOrderParams as OrderReplaceOrderParams

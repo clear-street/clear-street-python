@@ -7,6 +7,7 @@ from ..._models import BaseModel
 from .account_type import AccountType
 from .account_status import AccountStatus
 from .account_subtype import AccountSubtype
+from .account_holder_entity_kind import AccountHolderEntityKind
 
 __all__ = ["Account"]
 
@@ -19,6 +20,9 @@ class Account(BaseModel):
 
     account_holder_entity_id: int
     """The account holder entity identifier"""
+
+    account_holder_entity_kind: AccountHolderEntityKind
+    """Whether the account holder is a natural person or a legal entity."""
 
     full_name: str
     """The full legal name of the account"""
