@@ -4,4 +4,4 @@ from typing_extensions import Literal, TypeAlias
 
 __all__ = ["MarketSessionType"]
 
-MarketSessionType: TypeAlias = Literal["pre_market", "regular", "after_hours"]
+MarketSessionType: TypeAlias = Literal["overnight", "pre_market", "regular", "after_hours"]

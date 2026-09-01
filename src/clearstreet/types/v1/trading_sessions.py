@@ -17,6 +17,13 @@ class TradingSessions(BaseModel):
     is observed, it indicates it does not apply.
     """
 
+    overnight: Optional[SessionSchedule] = None
+    """
+    Overnight session schedule (prior evening through early morning), null if not
+    available When a null/undefined value is observed, it indicates it does not
+    apply.
+    """
+
     pre_market: Optional[SessionSchedule] = None
     """
     Pre-market session schedule, null if not available When a null/undefined value
