@@ -344,6 +344,26 @@ Methods:
 - <code title="get /v1/omni-ai/threads/{thread_id}/response">client.v1.omni_ai.threads.<a href="./src/clearstreet/resources/v1/omni_ai/threads.py">get_thread_response</a>(thread_id, \*\*<a href="src/clearstreet/types/v1/omni_ai/thread_get_thread_response_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/omni_ai/thread_get_thread_response_response.py">ThreadGetThreadResponseResponse</a></code>
 - <code title="get /v1/omni-ai/threads">client.v1.omni_ai.threads.<a href="./src/clearstreet/resources/v1/omni_ai/threads.py">get_threads</a>(\*\*<a href="src/clearstreet/types/v1/omni_ai/thread_get_threads_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/omni_ai/thread_get_threads_response.py">ThreadGetThreadsResponse</a></code>
 
+## OmniFeed
+
+Types:
+
+```python
+from clearstreet.types.v1 import (
+    FeedItem,
+    FeedItemKind,
+    FeedItemMetric,
+    FeedMetricType,
+    FeedPage,
+    OmniFeedGetFeedResponse,
+)
+```
+
+Methods:
+
+- <code title="get /v1/omni-ai/feed">client.v1.omni_feed.<a href="./src/clearstreet/resources/v1/omni_feed.py">get_feed</a>(\*\*<a href="src/clearstreet/types/v1/omni_feed_get_feed_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/omni_feed_get_feed_response.py">OmniFeedGetFeedResponse</a></code>
+- <code title="post /v1/omni-ai/feed/events">client.v1.omni_feed.<a href="./src/clearstreet/resources/v1/omni_feed.py">post_feed_event</a>(\*\*<a href="src/clearstreet/types/v1/omni_feed_post_feed_event_params.py">params</a>) -> None</code>
+
 ## Orders
 
 Types:

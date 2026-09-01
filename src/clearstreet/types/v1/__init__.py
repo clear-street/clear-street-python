@@ -15,6 +15,8 @@ from .modifier import Modifier as Modifier
 from .position import Position as Position
 from .variable import Variable as Variable
 from .execution import Execution as Execution
+from .feed_item import FeedItem as FeedItem
+from .feed_page import FeedPage as FeedPage
 from .field_ref import FieldRef as FieldRef
 from .sort_spec import SortSpec as SortSpec
 from .data_chart import DataChart as DataChart
@@ -58,6 +60,7 @@ from .account_status import AccountStatus as AccountStatus
 from .analyst_rating import AnalystRating as AnalystRating
 from .execution_list import ExecutionList as ExecutionList
 from .exercise_style import ExerciseStyle as ExerciseStyle
+from .feed_item_kind import FeedItemKind as FeedItemKind
 from .field_lookback import FieldLookback as FieldLookback
 from .filter_op_spec import FilterOpSpec as FilterOpSpec
 from .margin_details import MarginDetails as MarginDetails
@@ -75,6 +78,8 @@ from .watchlist_entry import WatchlistEntry as WatchlistEntry
 from .account_balances import AccountBalances as AccountBalances
 from .account_settings import AccountSettings as AccountSettings
 from .entitlement_code import EntitlementCode as EntitlementCode
+from .feed_item_metric import FeedItemMetric as FeedItemMetric
+from .feed_metric_type import FeedMetricType as FeedMetricType
 from .options_contract import OptionsContract as OptionsContract
 from .session_schedule import SessionSchedule as SessionSchedule
 from .trading_sessions import TradingSessions as TradingSessions
@@ -126,6 +131,7 @@ from .instrument_dividend_event import InstrumentDividendEvent as InstrumentDivi
 from .instrument_event_envelope import InstrumentEventEnvelope as InstrumentEventEnvelope
 from .instrument_event_ipo_item import InstrumentEventIpoItem as InstrumentEventIpoItem
 from .instrument_events_by_date import InstrumentEventsByDate as InstrumentEventsByDate
+from .omni_feed_get_feed_params import OmniFeedGetFeedParams as OmniFeedGetFeedParams
 from .order_get_orders_response import OrderGetOrdersResponse as OrderGetOrdersResponse
 from .portfolio_history_segment import PortfolioHistorySegment as PortfolioHistorySegment
 from .position_instruction_list import PositionInstructionList as PositionInstructionList
@@ -142,6 +148,7 @@ from .account_get_accounts_params import AccountGetAccountsParams as AccountGetA
 from .calendar_get_clock_response import CalendarGetClockResponse as CalendarGetClockResponse
 from .content_part_custom_payload import ContentPartCustomPayload as ContentPartCustomPayload
 from .instrument_income_statement import InstrumentIncomeStatement as InstrumentIncomeStatement
+from .omni_feed_get_feed_response import OmniFeedGetFeedResponse as OmniFeedGetFeedResponse
 from .order_get_executions_params import OrderGetExecutionsParams as OrderGetExecutionsParams
 from .position_instruction_status import PositionInstructionStatus as PositionInstructionStatus
 from .prefill_cancel_order_action import PrefillCancelOrderAction as PrefillCancelOrderAction
@@ -169,6 +176,7 @@ from .structured_action_button_action import StructuredActionButtonAction as Str
 from .watchlist_get_watchlists_params import WatchlistGetWatchlistsParams as WatchlistGetWatchlistsParams
 from .api_version_get_version_response import APIVersionGetVersionResponse as APIVersionGetVersionResponse
 from .instrument_income_statement_list import InstrumentIncomeStatementList as InstrumentIncomeStatementList
+from .omni_feed_post_feed_event_params import OmniFeedPostFeedEventParams as OmniFeedPostFeedEventParams
 from .order_cancel_open_order_response import OrderCancelOpenOrderResponse as OrderCancelOpenOrderResponse
 from .position_close_position_response import PositionClosePositionResponse as PositionClosePositionResponse
 from .screener_replace_screener_params import ScreenerReplaceScreenerParams as ScreenerReplaceScreenerParams

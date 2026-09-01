@@ -35,6 +35,14 @@ from .screener import (
     AsyncScreenerResourceWithStreamingResponse,
 )
 from ..._compat import cached_property
+from .omni_feed import (
+    OmniFeedResource,
+    AsyncOmniFeedResource,
+    OmniFeedResourceWithRawResponse,
+    AsyncOmniFeedResourceWithRawResponse,
+    OmniFeedResourceWithStreamingResponse,
+    AsyncOmniFeedResourceWithStreamingResponse,
+)
 from .positions import (
     PositionsResource,
     AsyncPositionsResource,
@@ -119,6 +127,13 @@ class V1Resource(SyncAPIResource):
         return OmniAIResource(self._client)
 
     @cached_property
+    def omni_feed(self) -> OmniFeedResource:
+        """
+        Personalized feed of market stories: upcoming earnings, dividends, and splits, plus market news. Served per caller in a stable order; item ids double as pagination cursors, so any previously returned page can be re-read.
+        """
+        return OmniFeedResource(self._client)
+
+    @cached_property
     def orders(self) -> OrdersResource:
         """Place, monitor, and manage trading orders."""
         return OrdersResource(self._client)
@@ -187,6 +202,13 @@ class AsyncV1Resource(AsyncAPIResource):
     @cached_property
     def omni_ai(self) -> AsyncOmniAIResource:
         return AsyncOmniAIResource(self._client)
+
+    @cached_property
+    def omni_feed(self) -> AsyncOmniFeedResource:
+        """
+        Personalized feed of market stories: upcoming earnings, dividends, and splits, plus market news. Served per caller in a stable order; item ids double as pagination cursors, so any previously returned page can be re-read.
+        """
+        return AsyncOmniFeedResource(self._client)
 
     @cached_property
     def orders(self) -> AsyncOrdersResource:
@@ -262,6 +284,13 @@ class V1ResourceWithRawResponse:
         return OmniAIResourceWithRawResponse(self._v1.omni_ai)
 
     @cached_property
+    def omni_feed(self) -> OmniFeedResourceWithRawResponse:
+        """
+        Personalized feed of market stories: upcoming earnings, dividends, and splits, plus market news. Served per caller in a stable order; item ids double as pagination cursors, so any previously returned page can be re-read.
+        """
+        return OmniFeedResourceWithRawResponse(self._v1.omni_feed)
+
+    @cached_property
     def orders(self) -> OrdersResourceWithRawResponse:
         """Place, monitor, and manage trading orders."""
         return OrdersResourceWithRawResponse(self._v1.orders)
@@ -314,6 +343,13 @@ class AsyncV1ResourceWithRawResponse:
     @cached_property
     def omni_ai(self) -> AsyncOmniAIResourceWithRawResponse:
         return AsyncOmniAIResourceWithRawResponse(self._v1.omni_ai)
+
+    @cached_property
+    def omni_feed(self) -> AsyncOmniFeedResourceWithRawResponse:
+        """
+        Personalized feed of market stories: upcoming earnings, dividends, and splits, plus market news. Served per caller in a stable order; item ids double as pagination cursors, so any previously returned page can be re-read.
+        """
+        return AsyncOmniFeedResourceWithRawResponse(self._v1.omni_feed)
 
     @cached_property
     def orders(self) -> AsyncOrdersResourceWithRawResponse:
@@ -370,6 +406,13 @@ class V1ResourceWithStreamingResponse:
         return OmniAIResourceWithStreamingResponse(self._v1.omni_ai)
 
     @cached_property
+    def omni_feed(self) -> OmniFeedResourceWithStreamingResponse:
+        """
+        Personalized feed of market stories: upcoming earnings, dividends, and splits, plus market news. Served per caller in a stable order; item ids double as pagination cursors, so any previously returned page can be re-read.
+        """
+        return OmniFeedResourceWithStreamingResponse(self._v1.omni_feed)
+
+    @cached_property
     def orders(self) -> OrdersResourceWithStreamingResponse:
         """Place, monitor, and manage trading orders."""
         return OrdersResourceWithStreamingResponse(self._v1.orders)
@@ -422,6 +465,13 @@ class AsyncV1ResourceWithStreamingResponse:
     @cached_property
     def omni_ai(self) -> AsyncOmniAIResourceWithStreamingResponse:
         return AsyncOmniAIResourceWithStreamingResponse(self._v1.omni_ai)
+
+    @cached_property
+    def omni_feed(self) -> AsyncOmniFeedResourceWithStreamingResponse:
+        """
+        Personalized feed of market stories: upcoming earnings, dividends, and splits, plus market news. Served per caller in a stable order; item ids double as pagination cursors, so any previously returned page can be re-read.
+        """
+        return AsyncOmniFeedResourceWithStreamingResponse(self._v1.omni_feed)
 
     @cached_property
     def orders(self) -> AsyncOrdersResourceWithStreamingResponse:

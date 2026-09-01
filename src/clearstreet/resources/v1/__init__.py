@@ -48,6 +48,14 @@ from .screener import (
     ScreenerResourceWithStreamingResponse,
     AsyncScreenerResourceWithStreamingResponse,
 )
+from .omni_feed import (
+    OmniFeedResource,
+    AsyncOmniFeedResource,
+    OmniFeedResourceWithRawResponse,
+    AsyncOmniFeedResourceWithRawResponse,
+    OmniFeedResourceWithStreamingResponse,
+    AsyncOmniFeedResourceWithStreamingResponse,
+)
 from .positions import (
     PositionsResource,
     AsyncPositionsResource,
@@ -126,6 +134,12 @@ __all__ = [
     "AsyncOmniAIResourceWithRawResponse",
     "OmniAIResourceWithStreamingResponse",
     "AsyncOmniAIResourceWithStreamingResponse",
+    "OmniFeedResource",
+    "AsyncOmniFeedResource",
+    "OmniFeedResourceWithRawResponse",
+    "AsyncOmniFeedResourceWithRawResponse",
+    "OmniFeedResourceWithStreamingResponse",
+    "AsyncOmniFeedResourceWithStreamingResponse",
     "OrdersResource",
     "AsyncOrdersResource",
     "OrdersResourceWithRawResponse",
