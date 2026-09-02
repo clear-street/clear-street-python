@@ -92,6 +92,14 @@ from .instrument_data.instrument_data import (
     InstrumentDataResourceWithStreamingResponse,
     AsyncInstrumentDataResourceWithStreamingResponse,
 )
+from .private_markets.private_markets import (
+    PrivateMarketsResource,
+    AsyncPrivateMarketsResource,
+    PrivateMarketsResourceWithRawResponse,
+    AsyncPrivateMarketsResourceWithRawResponse,
+    PrivateMarketsResourceWithStreamingResponse,
+    AsyncPrivateMarketsResourceWithStreamingResponse,
+)
 
 __all__ = ["V1Resource", "AsyncV1Resource"]
 
@@ -142,6 +150,14 @@ class V1Resource(SyncAPIResource):
     def positions(self) -> PositionsResource:
         """View positions and manage position instructions."""
         return PositionsResource(self._client)
+
+    @cached_property
+    def private_markets(self) -> PrivateMarketsResource:
+        """Browse private-market offerings and their indicative terms.
+
+        Access requires the account holder to hold an accreditation attestation.
+        """
+        return PrivateMarketsResource(self._client)
 
     @cached_property
     def screener(self) -> ScreenerResource:
@@ -219,6 +235,14 @@ class AsyncV1Resource(AsyncAPIResource):
     def positions(self) -> AsyncPositionsResource:
         """View positions and manage position instructions."""
         return AsyncPositionsResource(self._client)
+
+    @cached_property
+    def private_markets(self) -> AsyncPrivateMarketsResource:
+        """Browse private-market offerings and their indicative terms.
+
+        Access requires the account holder to hold an accreditation attestation.
+        """
+        return AsyncPrivateMarketsResource(self._client)
 
     @cached_property
     def screener(self) -> AsyncScreenerResource:
@@ -301,6 +325,14 @@ class V1ResourceWithRawResponse:
         return PositionsResourceWithRawResponse(self._v1.positions)
 
     @cached_property
+    def private_markets(self) -> PrivateMarketsResourceWithRawResponse:
+        """Browse private-market offerings and their indicative terms.
+
+        Access requires the account holder to hold an accreditation attestation.
+        """
+        return PrivateMarketsResourceWithRawResponse(self._v1.private_markets)
+
+    @cached_property
     def screener(self) -> ScreenerResourceWithRawResponse:
         """Search instruments and manage saved screeners."""
         return ScreenerResourceWithRawResponse(self._v1.screener)
@@ -360,6 +392,14 @@ class AsyncV1ResourceWithRawResponse:
     def positions(self) -> AsyncPositionsResourceWithRawResponse:
         """View positions and manage position instructions."""
         return AsyncPositionsResourceWithRawResponse(self._v1.positions)
+
+    @cached_property
+    def private_markets(self) -> AsyncPrivateMarketsResourceWithRawResponse:
+        """Browse private-market offerings and their indicative terms.
+
+        Access requires the account holder to hold an accreditation attestation.
+        """
+        return AsyncPrivateMarketsResourceWithRawResponse(self._v1.private_markets)
 
     @cached_property
     def screener(self) -> AsyncScreenerResourceWithRawResponse:
@@ -423,6 +463,14 @@ class V1ResourceWithStreamingResponse:
         return PositionsResourceWithStreamingResponse(self._v1.positions)
 
     @cached_property
+    def private_markets(self) -> PrivateMarketsResourceWithStreamingResponse:
+        """Browse private-market offerings and their indicative terms.
+
+        Access requires the account holder to hold an accreditation attestation.
+        """
+        return PrivateMarketsResourceWithStreamingResponse(self._v1.private_markets)
+
+    @cached_property
     def screener(self) -> ScreenerResourceWithStreamingResponse:
         """Search instruments and manage saved screeners."""
         return ScreenerResourceWithStreamingResponse(self._v1.screener)
@@ -482,6 +530,14 @@ class AsyncV1ResourceWithStreamingResponse:
     def positions(self) -> AsyncPositionsResourceWithStreamingResponse:
         """View positions and manage position instructions."""
         return AsyncPositionsResourceWithStreamingResponse(self._v1.positions)
+
+    @cached_property
+    def private_markets(self) -> AsyncPrivateMarketsResourceWithStreamingResponse:
+        """Browse private-market offerings and their indicative terms.
+
+        Access requires the account holder to hold an accreditation attestation.
+        """
+        return AsyncPrivateMarketsResourceWithStreamingResponse(self._v1.private_markets)
 
     @cached_property
     def screener(self) -> AsyncScreenerResourceWithStreamingResponse:
