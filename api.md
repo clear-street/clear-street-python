@@ -590,6 +590,7 @@ from clearstreet.types.v1 import (
     ScreenerGetScreenerByIDResponse,
     ScreenerGetScreenerCatalogResponse,
     ScreenerGetScreenersResponse,
+    ScreenerPatchScreenerResponse,
     ScreenerReplaceScreenerResponse,
     ScreenerSearchScreenerResponse,
 )
@@ -602,6 +603,7 @@ Methods:
 - <code title="get /v1/saved-screeners/{screener_id}">client.v1.screener.<a href="./src/clearstreet/resources/v1/screener.py">get_screener_by_id</a>(screener_id) -> <a href="./src/clearstreet/types/v1/screener_get_screener_by_id_response.py">ScreenerGetScreenerByIDResponse</a></code>
 - <code title="get /v1/screener/catalog">client.v1.screener.<a href="./src/clearstreet/resources/v1/screener.py">get_screener_catalog</a>() -> <a href="./src/clearstreet/types/v1/screener_get_screener_catalog_response.py">ScreenerGetScreenerCatalogResponse</a></code>
 - <code title="get /v1/saved-screeners">client.v1.screener.<a href="./src/clearstreet/resources/v1/screener.py">get_screeners</a>() -> <a href="./src/clearstreet/types/v1/screener_get_screeners_response.py">ScreenerGetScreenersResponse</a></code>
+- <code title="patch /v1/saved-screeners/{screener_id}">client.v1.screener.<a href="./src/clearstreet/resources/v1/screener.py">patch_screener</a>(screener_id, \*\*<a href="src/clearstreet/types/v1/screener_patch_screener_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/screener_patch_screener_response.py">ScreenerPatchScreenerResponse</a></code>
 - <code title="put /v1/saved-screeners/{screener_id}">client.v1.screener.<a href="./src/clearstreet/resources/v1/screener.py">replace_screener</a>(screener_id, \*\*<a href="src/clearstreet/types/v1/screener_replace_screener_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/screener_replace_screener_response.py">ScreenerReplaceScreenerResponse</a></code>
 - <code title="post /v1/screener">client.v1.screener.<a href="./src/clearstreet/resources/v1/screener.py">search_screener</a>(\*\*<a href="src/clearstreet/types/v1/screener_search_screener_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/screener_search_screener_response.py">ScreenerSearchScreenerResponse</a></code>
 

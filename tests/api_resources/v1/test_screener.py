@@ -11,12 +11,15 @@ from clearstreet import ClearStreet, AsyncClearStreet
 from tests.utils import assert_matches_type
 from clearstreet.types.v1 import (
     ScreenerGetScreenersResponse,
+    ScreenerPatchScreenerResponse,
     ScreenerCreateScreenerResponse,
     ScreenerSearchScreenerResponse,
     ScreenerGetScreenerByIDResponse,
     ScreenerReplaceScreenerResponse,
     ScreenerGetScreenerCatalogResponse,
 )
+
+# pyright: reportDeprecated=false
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
@@ -231,15 +234,15 @@ class TestScreener:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    def test_method_replace_screener(self, client: ClearStreet) -> None:
-        screener = client.v1.screener.replace_screener(
+    def test_method_patch_screener(self, client: ClearStreet) -> None:
+        screener = client.v1.screener.patch_screener(
             screener_id="550e8400-e29b-41d4-a716-446655440000",
         )
-        assert_matches_type(ScreenerReplaceScreenerResponse, screener, path=["response"])
+        assert_matches_type(ScreenerPatchScreenerResponse, screener, path=["response"])
 
     @parametrize
-    def test_method_replace_screener_with_all_params(self, client: ClearStreet) -> None:
-        screener = client.v1.screener.replace_screener(
+    def test_method_patch_screener_with_all_params(self, client: ClearStreet) -> None:
+        screener = client.v1.screener.patch_screener(
             screener_id="550e8400-e29b-41d4-a716-446655440000",
             columns=[
                 {
@@ -291,13 +294,112 @@ class TestScreener:
                 }
             ],
         )
+        assert_matches_type(ScreenerPatchScreenerResponse, screener, path=["response"])
+
+    @parametrize
+    def test_raw_response_patch_screener(self, client: ClearStreet) -> None:
+        response = client.v1.screener.with_raw_response.patch_screener(
+            screener_id="550e8400-e29b-41d4-a716-446655440000",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        screener = response.parse()
+        assert_matches_type(ScreenerPatchScreenerResponse, screener, path=["response"])
+
+    @parametrize
+    def test_streaming_response_patch_screener(self, client: ClearStreet) -> None:
+        with client.v1.screener.with_streaming_response.patch_screener(
+            screener_id="550e8400-e29b-41d4-a716-446655440000",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            screener = response.parse()
+            assert_matches_type(ScreenerPatchScreenerResponse, screener, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_patch_screener(self, client: ClearStreet) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `screener_id` but received ''"):
+            client.v1.screener.with_raw_response.patch_screener(
+                screener_id="",
+            )
+
+    @parametrize
+    def test_method_replace_screener(self, client: ClearStreet) -> None:
+        with pytest.warns(DeprecationWarning):
+            screener = client.v1.screener.replace_screener(
+                screener_id="550e8400-e29b-41d4-a716-446655440000",
+            )
+
+        assert_matches_type(ScreenerReplaceScreenerResponse, screener, path=["response"])
+
+    @parametrize
+    def test_method_replace_screener_with_all_params(self, client: ClearStreet) -> None:
+        with pytest.warns(DeprecationWarning):
+            screener = client.v1.screener.replace_screener(
+                screener_id="550e8400-e29b-41d4-a716-446655440000",
+                columns=[
+                    {
+                        "name": "market_cap",
+                        "lookback": "ONE_DAY",
+                        "period": "QUARTER",
+                        "value_type": "DECIMAL",
+                    }
+                ],
+                filters=[
+                    {
+                        "left": {
+                            "name": "market_cap",
+                            "lookback": "ONE_DAY",
+                            "period": "QUARTER",
+                            "value_type": "DECIMAL",
+                        },
+                        "op": {
+                            "name": "GREATER_OR_EQUAL",
+                            "args": ["LEFT_INCLUSIVE"],
+                        },
+                        "right": [
+                            {
+                                "value": 1000000000,
+                                "variable": {
+                                    "name": "today",
+                                    "lookback": "ONE_DAY",
+                                    "modifier": {
+                                        "args": [30, "DAY"],
+                                        "name": "SUBTRACT",
+                                    },
+                                    "period": "QUARTER",
+                                },
+                            }
+                        ],
+                    }
+                ],
+                name="name",
+                shared=True,
+                sorts=[
+                    {
+                        "field": {
+                            "name": "market_cap",
+                            "lookback": "ONE_DAY",
+                            "period": "QUARTER",
+                            "value_type": "DECIMAL",
+                        },
+                        "direction": "DESC",
+                    }
+                ],
+            )
+
         assert_matches_type(ScreenerReplaceScreenerResponse, screener, path=["response"])
 
     @parametrize
     def test_raw_response_replace_screener(self, client: ClearStreet) -> None:
-        response = client.v1.screener.with_raw_response.replace_screener(
-            screener_id="550e8400-e29b-41d4-a716-446655440000",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = client.v1.screener.with_raw_response.replace_screener(
+                screener_id="550e8400-e29b-41d4-a716-446655440000",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -306,23 +408,25 @@ class TestScreener:
 
     @parametrize
     def test_streaming_response_replace_screener(self, client: ClearStreet) -> None:
-        with client.v1.screener.with_streaming_response.replace_screener(
-            screener_id="550e8400-e29b-41d4-a716-446655440000",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            with client.v1.screener.with_streaming_response.replace_screener(
+                screener_id="550e8400-e29b-41d4-a716-446655440000",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            screener = response.parse()
-            assert_matches_type(ScreenerReplaceScreenerResponse, screener, path=["response"])
+                screener = response.parse()
+                assert_matches_type(ScreenerReplaceScreenerResponse, screener, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @parametrize
     def test_path_params_replace_screener(self, client: ClearStreet) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `screener_id` but received ''"):
-            client.v1.screener.with_raw_response.replace_screener(
-                screener_id="",
-            )
+        with pytest.warns(DeprecationWarning):
+            with pytest.raises(ValueError, match=r"Expected a non-empty value for `screener_id` but received ''"):
+                client.v1.screener.with_raw_response.replace_screener(
+                    screener_id="",
+                )
 
     @parametrize
     def test_method_search_screener(self, client: ClearStreet) -> None:
@@ -630,15 +734,15 @@ class TestAsyncScreener:
         assert cast(Any, response.is_closed) is True
 
     @parametrize
-    async def test_method_replace_screener(self, async_client: AsyncClearStreet) -> None:
-        screener = await async_client.v1.screener.replace_screener(
+    async def test_method_patch_screener(self, async_client: AsyncClearStreet) -> None:
+        screener = await async_client.v1.screener.patch_screener(
             screener_id="550e8400-e29b-41d4-a716-446655440000",
         )
-        assert_matches_type(ScreenerReplaceScreenerResponse, screener, path=["response"])
+        assert_matches_type(ScreenerPatchScreenerResponse, screener, path=["response"])
 
     @parametrize
-    async def test_method_replace_screener_with_all_params(self, async_client: AsyncClearStreet) -> None:
-        screener = await async_client.v1.screener.replace_screener(
+    async def test_method_patch_screener_with_all_params(self, async_client: AsyncClearStreet) -> None:
+        screener = await async_client.v1.screener.patch_screener(
             screener_id="550e8400-e29b-41d4-a716-446655440000",
             columns=[
                 {
@@ -690,13 +794,112 @@ class TestAsyncScreener:
                 }
             ],
         )
+        assert_matches_type(ScreenerPatchScreenerResponse, screener, path=["response"])
+
+    @parametrize
+    async def test_raw_response_patch_screener(self, async_client: AsyncClearStreet) -> None:
+        response = await async_client.v1.screener.with_raw_response.patch_screener(
+            screener_id="550e8400-e29b-41d4-a716-446655440000",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        screener = await response.parse()
+        assert_matches_type(ScreenerPatchScreenerResponse, screener, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_patch_screener(self, async_client: AsyncClearStreet) -> None:
+        async with async_client.v1.screener.with_streaming_response.patch_screener(
+            screener_id="550e8400-e29b-41d4-a716-446655440000",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            screener = await response.parse()
+            assert_matches_type(ScreenerPatchScreenerResponse, screener, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_patch_screener(self, async_client: AsyncClearStreet) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `screener_id` but received ''"):
+            await async_client.v1.screener.with_raw_response.patch_screener(
+                screener_id="",
+            )
+
+    @parametrize
+    async def test_method_replace_screener(self, async_client: AsyncClearStreet) -> None:
+        with pytest.warns(DeprecationWarning):
+            screener = await async_client.v1.screener.replace_screener(
+                screener_id="550e8400-e29b-41d4-a716-446655440000",
+            )
+
+        assert_matches_type(ScreenerReplaceScreenerResponse, screener, path=["response"])
+
+    @parametrize
+    async def test_method_replace_screener_with_all_params(self, async_client: AsyncClearStreet) -> None:
+        with pytest.warns(DeprecationWarning):
+            screener = await async_client.v1.screener.replace_screener(
+                screener_id="550e8400-e29b-41d4-a716-446655440000",
+                columns=[
+                    {
+                        "name": "market_cap",
+                        "lookback": "ONE_DAY",
+                        "period": "QUARTER",
+                        "value_type": "DECIMAL",
+                    }
+                ],
+                filters=[
+                    {
+                        "left": {
+                            "name": "market_cap",
+                            "lookback": "ONE_DAY",
+                            "period": "QUARTER",
+                            "value_type": "DECIMAL",
+                        },
+                        "op": {
+                            "name": "GREATER_OR_EQUAL",
+                            "args": ["LEFT_INCLUSIVE"],
+                        },
+                        "right": [
+                            {
+                                "value": 1000000000,
+                                "variable": {
+                                    "name": "today",
+                                    "lookback": "ONE_DAY",
+                                    "modifier": {
+                                        "args": [30, "DAY"],
+                                        "name": "SUBTRACT",
+                                    },
+                                    "period": "QUARTER",
+                                },
+                            }
+                        ],
+                    }
+                ],
+                name="name",
+                shared=True,
+                sorts=[
+                    {
+                        "field": {
+                            "name": "market_cap",
+                            "lookback": "ONE_DAY",
+                            "period": "QUARTER",
+                            "value_type": "DECIMAL",
+                        },
+                        "direction": "DESC",
+                    }
+                ],
+            )
+
         assert_matches_type(ScreenerReplaceScreenerResponse, screener, path=["response"])
 
     @parametrize
     async def test_raw_response_replace_screener(self, async_client: AsyncClearStreet) -> None:
-        response = await async_client.v1.screener.with_raw_response.replace_screener(
-            screener_id="550e8400-e29b-41d4-a716-446655440000",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = await async_client.v1.screener.with_raw_response.replace_screener(
+                screener_id="550e8400-e29b-41d4-a716-446655440000",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -705,23 +908,25 @@ class TestAsyncScreener:
 
     @parametrize
     async def test_streaming_response_replace_screener(self, async_client: AsyncClearStreet) -> None:
-        async with async_client.v1.screener.with_streaming_response.replace_screener(
-            screener_id="550e8400-e29b-41d4-a716-446655440000",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            async with async_client.v1.screener.with_streaming_response.replace_screener(
+                screener_id="550e8400-e29b-41d4-a716-446655440000",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            screener = await response.parse()
-            assert_matches_type(ScreenerReplaceScreenerResponse, screener, path=["response"])
+                screener = await response.parse()
+                assert_matches_type(ScreenerReplaceScreenerResponse, screener, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
     @parametrize
     async def test_path_params_replace_screener(self, async_client: AsyncClearStreet) -> None:
-        with pytest.raises(ValueError, match=r"Expected a non-empty value for `screener_id` but received ''"):
-            await async_client.v1.screener.with_raw_response.replace_screener(
-                screener_id="",
-            )
+        with pytest.warns(DeprecationWarning):
+            with pytest.raises(ValueError, match=r"Expected a non-empty value for `screener_id` but received ''"):
+                await async_client.v1.screener.with_raw_response.replace_screener(
+                    screener_id="",
+                )
 
     @parametrize
     async def test_method_search_screener(self, async_client: AsyncClearStreet) -> None:

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import typing_extensions
 from typing import Union, Iterable, Optional
 
 import httpx
@@ -10,6 +11,7 @@ from ..._types import Body, Omit, Query, Headers, NoneType, NotGiven, Base64File
 from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ...types.v1 import (
+    screener_patch_screener_params,
     screener_create_screener_params,
     screener_search_screener_params,
     screener_replace_screener_params,
@@ -26,6 +28,7 @@ from ...types.v1.field_ref_param import FieldRefParam
 from ...types.v1.sort_spec_param import SortSpecParam
 from ...types.v1.search_filter_param import SearchFilterParam
 from ...types.v1.screener_get_screeners_response import ScreenerGetScreenersResponse
+from ...types.v1.screener_patch_screener_response import ScreenerPatchScreenerResponse
 from ...types.v1.screener_create_screener_response import ScreenerCreateScreenerResponse
 from ...types.v1.screener_search_screener_response import ScreenerSearchScreenerResponse
 from ...types.v1.screener_replace_screener_response import ScreenerReplaceScreenerResponse
@@ -235,6 +238,79 @@ class ScreenerResource(SyncAPIResource):
             cast_to=ScreenerGetScreenersResponse,
         )
 
+    def patch_screener(
+        self,
+        screener_id: str,
+        *,
+        columns: Optional[Iterable[FieldRefParam]] | Omit = omit,
+        filters: Optional[Iterable[SearchFilterParam]] | Omit = omit,
+        name: Optional[str] | Omit = omit,
+        shared: Optional[bool] | Omit = omit,
+        sorts: Optional[Iterable[SortSpecParam]] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ScreenerPatchScreenerResponse:
+        """Partially update a saved screener configuration.
+
+        Every field is optional.
+
+        Omitting a field, or sending it as `null`, leaves the
+        stored value unchanged. Sending a field's empty value clears it: `columns: []`
+        clears the stored columns, `sorts: []` clears the stored sort, and `filters: []`
+        clears the stored filters. `name: ""` is rejected -- a screener's name cannot be
+        cleared. `shared: false` sets it to `false`; it is a value, not a clear.
+
+        Unknown fields are rejected with a 422.
+
+        Args:
+          columns: Structured field references to include when running this screener. Omit or send
+              `null` to leave unchanged; `[]` clears the stored columns.
+
+          filters: Structured search filter criteria. Omit or send `null` to leave unchanged; `[]`
+              clears the stored filters.
+
+          name: The name for this screener configuration. Omit or send `null` to leave
+              unchanged. Cannot be set to an empty string.
+
+          shared: Whether any user may fetch this screener by id. Omit or send `null` to leave
+              unchanged. `false` is a value, not a clear.
+
+          sorts: Multi-field sort specifications. Omit or send `null` to leave unchanged; `[]`
+              clears the stored sort.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not screener_id:
+            raise ValueError(f"Expected a non-empty value for `screener_id` but received {screener_id!r}")
+        return self._patch(
+            path_template("/v1/saved-screeners/{screener_id}", screener_id=screener_id),
+            body=maybe_transform(
+                {
+                    "columns": columns,
+                    "filters": filters,
+                    "name": name,
+                    "shared": shared,
+                    "sorts": sorts,
+                },
+                screener_patch_screener_params.ScreenerPatchScreenerParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ScreenerPatchScreenerResponse,
+        )
+
+    @typing_extensions.deprecated("deprecated")
     def replace_screener(
         self,
         screener_id: str,
@@ -256,6 +332,9 @@ class ScreenerResource(SyncAPIResource):
 
         Replaces the screener configuration for the authenticated user. If `name` is
         null, the existing name is preserved.
+
+        Deprecated -- use `PATCH /saved-screeners/{screener_id}`; PUT replaces omitted
+        `columns`, `filters` and `sorts` with empty values.
 
         Args:
           columns: Structured field references to include when running this screener
@@ -576,6 +655,79 @@ class AsyncScreenerResource(AsyncAPIResource):
             cast_to=ScreenerGetScreenersResponse,
         )
 
+    async def patch_screener(
+        self,
+        screener_id: str,
+        *,
+        columns: Optional[Iterable[FieldRefParam]] | Omit = omit,
+        filters: Optional[Iterable[SearchFilterParam]] | Omit = omit,
+        name: Optional[str] | Omit = omit,
+        shared: Optional[bool] | Omit = omit,
+        sorts: Optional[Iterable[SortSpecParam]] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> ScreenerPatchScreenerResponse:
+        """Partially update a saved screener configuration.
+
+        Every field is optional.
+
+        Omitting a field, or sending it as `null`, leaves the
+        stored value unchanged. Sending a field's empty value clears it: `columns: []`
+        clears the stored columns, `sorts: []` clears the stored sort, and `filters: []`
+        clears the stored filters. `name: ""` is rejected -- a screener's name cannot be
+        cleared. `shared: false` sets it to `false`; it is a value, not a clear.
+
+        Unknown fields are rejected with a 422.
+
+        Args:
+          columns: Structured field references to include when running this screener. Omit or send
+              `null` to leave unchanged; `[]` clears the stored columns.
+
+          filters: Structured search filter criteria. Omit or send `null` to leave unchanged; `[]`
+              clears the stored filters.
+
+          name: The name for this screener configuration. Omit or send `null` to leave
+              unchanged. Cannot be set to an empty string.
+
+          shared: Whether any user may fetch this screener by id. Omit or send `null` to leave
+              unchanged. `false` is a value, not a clear.
+
+          sorts: Multi-field sort specifications. Omit or send `null` to leave unchanged; `[]`
+              clears the stored sort.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not screener_id:
+            raise ValueError(f"Expected a non-empty value for `screener_id` but received {screener_id!r}")
+        return await self._patch(
+            path_template("/v1/saved-screeners/{screener_id}", screener_id=screener_id),
+            body=await async_maybe_transform(
+                {
+                    "columns": columns,
+                    "filters": filters,
+                    "name": name,
+                    "shared": shared,
+                    "sorts": sorts,
+                },
+                screener_patch_screener_params.ScreenerPatchScreenerParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=ScreenerPatchScreenerResponse,
+        )
+
+    @typing_extensions.deprecated("deprecated")
     async def replace_screener(
         self,
         screener_id: str,
@@ -597,6 +749,9 @@ class AsyncScreenerResource(AsyncAPIResource):
 
         Replaces the screener configuration for the authenticated user. If `name` is
         null, the existing name is preserved.
+
+        Deprecated -- use `PATCH /saved-screeners/{screener_id}`; PUT replaces omitted
+        `columns`, `filters` and `sorts` with empty values.
 
         Args:
           columns: Structured field references to include when running this screener
@@ -736,8 +891,13 @@ class ScreenerResourceWithRawResponse:
         self.get_screeners = to_raw_response_wrapper(
             screener.get_screeners,
         )
-        self.replace_screener = to_raw_response_wrapper(
-            screener.replace_screener,
+        self.patch_screener = to_raw_response_wrapper(
+            screener.patch_screener,
+        )
+        self.replace_screener = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                screener.replace_screener,  # pyright: ignore[reportDeprecated],
+            )
         )
         self.search_screener = to_raw_response_wrapper(
             screener.search_screener,
@@ -763,8 +923,13 @@ class AsyncScreenerResourceWithRawResponse:
         self.get_screeners = async_to_raw_response_wrapper(
             screener.get_screeners,
         )
-        self.replace_screener = async_to_raw_response_wrapper(
-            screener.replace_screener,
+        self.patch_screener = async_to_raw_response_wrapper(
+            screener.patch_screener,
+        )
+        self.replace_screener = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                screener.replace_screener,  # pyright: ignore[reportDeprecated],
+            )
         )
         self.search_screener = async_to_raw_response_wrapper(
             screener.search_screener,
@@ -790,8 +955,13 @@ class ScreenerResourceWithStreamingResponse:
         self.get_screeners = to_streamed_response_wrapper(
             screener.get_screeners,
         )
-        self.replace_screener = to_streamed_response_wrapper(
-            screener.replace_screener,
+        self.patch_screener = to_streamed_response_wrapper(
+            screener.patch_screener,
+        )
+        self.replace_screener = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                screener.replace_screener,  # pyright: ignore[reportDeprecated],
+            )
         )
         self.search_screener = to_streamed_response_wrapper(
             screener.search_screener,
@@ -817,8 +987,13 @@ class AsyncScreenerResourceWithStreamingResponse:
         self.get_screeners = async_to_streamed_response_wrapper(
             screener.get_screeners,
         )
-        self.replace_screener = async_to_streamed_response_wrapper(
-            screener.replace_screener,
+        self.patch_screener = async_to_streamed_response_wrapper(
+            screener.patch_screener,
+        )
+        self.replace_screener = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                screener.replace_screener,  # pyright: ignore[reportDeprecated],
+            )
         )
         self.search_screener = async_to_streamed_response_wrapper(
             screener.search_screener,
