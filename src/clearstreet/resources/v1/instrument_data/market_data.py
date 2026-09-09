@@ -60,10 +60,11 @@ class MarketDataResource(SyncAPIResource):
         Returns the most recent open, high, low, volume (OHLV) and current price for the
         requested instruments.
 
-        Response contract: every request returns one row per **unique** `instrument_id`,
-        in first-seen request order. Unresolvable IDs come back with `symbol = null` and
-        every market-data field `null`; resolvable IDs with no available data come back
-        with `symbol` populated but market-data fields `null`.
+        Response contract: every request returns one row per **unique** resolved
+        `instrument_id`, in first-seen request order. Resolvable ids with no available
+        data come back with `symbol` populated but market-data fields `null`. Ids that
+        fail to resolve are omitted from `data` and reported in `error` instead (see the
+        207/404 responses below).
 
         Args:
           instrument_ids: Comma-separated instrument identifiers (required, 1..=100)
@@ -169,10 +170,11 @@ class AsyncMarketDataResource(AsyncAPIResource):
         Returns the most recent open, high, low, volume (OHLV) and current price for the
         requested instruments.
 
-        Response contract: every request returns one row per **unique** `instrument_id`,
-        in first-seen request order. Unresolvable IDs come back with `symbol = null` and
-        every market-data field `null`; resolvable IDs with no available data come back
-        with `symbol` populated but market-data fields `null`.
+        Response contract: every request returns one row per **unique** resolved
+        `instrument_id`, in first-seen request order. Resolvable ids with no available
+        data come back with `symbol` populated but market-data fields `null`. Ids that
+        fail to resolve are omitted from `data` and reported in `error` instead (see the
+        207/404 responses below).
 
         Args:
           instrument_ids: Comma-separated instrument identifiers (required, 1..=100)
