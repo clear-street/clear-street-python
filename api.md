@@ -415,6 +415,7 @@ from clearstreet.types.v1 import (
     Position,
     PositionInstruction,
     PositionInstructionList,
+    PositionInstructionRejection,
     PositionInstructionStatus,
     PositionInstructionType,
     PositionList,

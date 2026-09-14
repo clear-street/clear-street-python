@@ -6,6 +6,7 @@ from datetime import datetime
 from ..._models import BaseModel
 from .position_instruction_type import PositionInstructionType
 from .position_instruction_status import PositionInstructionStatus
+from .position_instruction_rejection import PositionInstructionRejection
 
 __all__ = ["PositionInstruction"]
 
@@ -51,6 +52,15 @@ class PositionInstruction(BaseModel):
     """
     When the instruction was first accepted by the service. When a null/undefined
     value is observed, it indicates that there is no available data.
+    """
+
+    rejection: Optional[PositionInstructionRejection] = None
+    """
+    Machine-readable counterpart to `rejection_reason`: a stable reason code plus
+    params, populated on the submit and cancel responses for a row rejected with a
+    structured reason. Branch on `rejection.reason` instead of parsing
+    `rejection_reason`. Absent when listing historical instructions. When a
+    null/undefined value is observed, it indicates it does not apply.
     """
 
     rejection_reason: Optional[str] = None
