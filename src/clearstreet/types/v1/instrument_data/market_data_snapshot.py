@@ -42,9 +42,11 @@ class MarketDataSnapshot(BaseModel):
     """
 
     last_trade: Optional[SnapshotLastTrade] = None
-    """
-    Most recent last-sale trade if available. When a null/undefined value is
-    observed, it indicates that there is no available data.
+    """Most recent last-sale-eligible trade if available.
+
+    Omitted when the most recent known print is ineligible (e.g. an odd lot or an
+    out-of-sequence report) rather than showing that print's price. When a
+    null/undefined value is observed, it indicates that there is no available data.
     """
 
     name: Optional[str] = None

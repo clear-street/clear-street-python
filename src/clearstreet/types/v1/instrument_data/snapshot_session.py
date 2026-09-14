@@ -11,10 +11,12 @@ class SnapshotSession(BaseModel):
     """Session-level pricing metrics for a market data snapshot."""
 
     change: str
-    """Absolute change from previous close to last trade."""
+    """
+    Absolute change from previous close to the most recent last-sale-eligible trade.
+    """
 
     change_percent: str
-    """Percent change from previous close to last trade."""
+    """Percent change from previous close to the most recent last-sale-eligible trade."""
 
     previous_close: str
     """Previous session close price.
