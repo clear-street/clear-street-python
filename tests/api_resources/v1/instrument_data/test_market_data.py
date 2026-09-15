@@ -14,6 +14,8 @@ from clearstreet.types.v1.instrument_data import (
     MarketDataGetDailySummariesResponse,
 )
 
+# pyright: reportDeprecated=false
+
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
 
 
@@ -22,16 +24,19 @@ class TestMarketData:
 
     @parametrize
     def test_method_get_daily_summaries(self, client: ClearStreet) -> None:
-        market_data = client.v1.instrument_data.market_data.get_daily_summaries(
-            instrument_ids="instrument_ids",
-        )
+        with pytest.warns(DeprecationWarning):
+            market_data = client.v1.instrument_data.market_data.get_daily_summaries(
+                instrument_ids="instrument_ids",
+            )
+
         assert_matches_type(MarketDataGetDailySummariesResponse, market_data, path=["response"])
 
     @parametrize
     def test_raw_response_get_daily_summaries(self, client: ClearStreet) -> None:
-        response = client.v1.instrument_data.market_data.with_raw_response.get_daily_summaries(
-            instrument_ids="instrument_ids",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = client.v1.instrument_data.market_data.with_raw_response.get_daily_summaries(
+                instrument_ids="instrument_ids",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -40,14 +45,15 @@ class TestMarketData:
 
     @parametrize
     def test_streaming_response_get_daily_summaries(self, client: ClearStreet) -> None:
-        with client.v1.instrument_data.market_data.with_streaming_response.get_daily_summaries(
-            instrument_ids="instrument_ids",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            with client.v1.instrument_data.market_data.with_streaming_response.get_daily_summaries(
+                instrument_ids="instrument_ids",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            market_data = response.parse()
-            assert_matches_type(MarketDataGetDailySummariesResponse, market_data, path=["response"])
+                market_data = response.parse()
+                assert_matches_type(MarketDataGetDailySummariesResponse, market_data, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -91,16 +97,19 @@ class TestAsyncMarketData:
 
     @parametrize
     async def test_method_get_daily_summaries(self, async_client: AsyncClearStreet) -> None:
-        market_data = await async_client.v1.instrument_data.market_data.get_daily_summaries(
-            instrument_ids="instrument_ids",
-        )
+        with pytest.warns(DeprecationWarning):
+            market_data = await async_client.v1.instrument_data.market_data.get_daily_summaries(
+                instrument_ids="instrument_ids",
+            )
+
         assert_matches_type(MarketDataGetDailySummariesResponse, market_data, path=["response"])
 
     @parametrize
     async def test_raw_response_get_daily_summaries(self, async_client: AsyncClearStreet) -> None:
-        response = await async_client.v1.instrument_data.market_data.with_raw_response.get_daily_summaries(
-            instrument_ids="instrument_ids",
-        )
+        with pytest.warns(DeprecationWarning):
+            response = await async_client.v1.instrument_data.market_data.with_raw_response.get_daily_summaries(
+                instrument_ids="instrument_ids",
+            )
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -109,14 +118,15 @@ class TestAsyncMarketData:
 
     @parametrize
     async def test_streaming_response_get_daily_summaries(self, async_client: AsyncClearStreet) -> None:
-        async with async_client.v1.instrument_data.market_data.with_streaming_response.get_daily_summaries(
-            instrument_ids="instrument_ids",
-        ) as response:
-            assert not response.is_closed
-            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        with pytest.warns(DeprecationWarning):
+            async with async_client.v1.instrument_data.market_data.with_streaming_response.get_daily_summaries(
+                instrument_ids="instrument_ids",
+            ) as response:
+                assert not response.is_closed
+                assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
-            market_data = await response.parse()
-            assert_matches_type(MarketDataGetDailySummariesResponse, market_data, path=["response"])
+                market_data = await response.parse()
+                assert_matches_type(MarketDataGetDailySummariesResponse, market_data, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

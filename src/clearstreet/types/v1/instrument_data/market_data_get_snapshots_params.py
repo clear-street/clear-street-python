@@ -14,5 +14,6 @@ class MarketDataGetSnapshotsParams(TypedDict, total=False):
     instrument_ids: SequenceNotStr[InstrumentIDOrSymbol]
     """
     Comma-separated instrument IDs (UUID) or symbols (equity tickers or OSI option
-    symbols).
+    symbols). Required; accepts 1 to 100 IDs. Duplicate resolved ids collapse to a
+    single row.
     """

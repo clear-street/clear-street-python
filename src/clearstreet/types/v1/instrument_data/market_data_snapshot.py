@@ -17,14 +17,23 @@ class MarketDataSnapshot(BaseModel):
     instrument_id: str
     """Unique instrument identifier."""
 
+    session: SnapshotSession
+    """Session-level pricing and OHLV metrics.
+
+    Always present; each inner field is independently nullable.
+    """
+
     symbol: str
     """Display symbol for the security."""
 
     cumulative_volume: Optional[int] = None
     """
     Cumulative traded volume reported on the most recent trade, in shares for
-    equities or contracts for options. Absent when no trade is available. When a
-    null/undefined value is observed, it indicates that there is no available data.
+    equities or contracts for options. Absent when no trade is available.
+
+    Deprecated: use `session.cumulative_volume`, the same value from the same
+    source. When a null/undefined value is observed, it indicates that there is no
+    available data.
     """
 
     greeks: Optional[SnapshotGreeks] = None
@@ -55,9 +64,9 @@ class MarketDataSnapshot(BaseModel):
     indicates that there is no available data.
     """
 
-    session: Optional[SnapshotSession] = None
-    """
-    Session metrics computed from previous close and last trade, if available. When
-    a null/undefined value is observed, it indicates that there is no available
-    data.
+    open_interest: Optional[int] = None
+    """Open interest (outstanding contracts) as of the most recent OPRA Refresh.
+
+    Populated for options only; absent for equities and indices. When a
+    null/undefined value is observed, it indicates that there is no available data.
     """

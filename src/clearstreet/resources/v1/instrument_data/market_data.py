@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import typing_extensions
+
 import httpx
 
 from ...._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
@@ -45,6 +47,7 @@ class MarketDataResource(SyncAPIResource):
         """
         return MarketDataResourceWithStreamingResponse(self)
 
+    @typing_extensions.deprecated("deprecated")
     def get_daily_summaries(
         self,
         *,
@@ -57,6 +60,10 @@ class MarketDataResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MarketDataGetDailySummariesResponse:
         """
+        **Deprecated**: use `GET /market-data/snapshot` instead, which now reports the
+        same open/high/low/volume/open-interest fields under `session` and top-level
+        `open_interest`.
+
         Returns the most recent open, high, low, volume (OHLV) and current price for the
         requested instruments.
 
@@ -108,7 +115,8 @@ class MarketDataResource(SyncAPIResource):
 
         Args:
           instrument_ids: Comma-separated instrument IDs (UUID) or symbols (equity tickers or OSI option
-              symbols).
+              symbols). Required; accepts 1 to 100 IDs. Duplicate resolved ids collapse to a
+              single row.
 
           extra_headers: Send extra headers
 
@@ -155,6 +163,7 @@ class AsyncMarketDataResource(AsyncAPIResource):
         """
         return AsyncMarketDataResourceWithStreamingResponse(self)
 
+    @typing_extensions.deprecated("deprecated")
     async def get_daily_summaries(
         self,
         *,
@@ -167,6 +176,10 @@ class AsyncMarketDataResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MarketDataGetDailySummariesResponse:
         """
+        **Deprecated**: use `GET /market-data/snapshot` instead, which now reports the
+        same open/high/low/volume/open-interest fields under `session` and top-level
+        `open_interest`.
+
         Returns the most recent open, high, low, volume (OHLV) and current price for the
         requested instruments.
 
@@ -218,7 +231,8 @@ class AsyncMarketDataResource(AsyncAPIResource):
 
         Args:
           instrument_ids: Comma-separated instrument IDs (UUID) or symbols (equity tickers or OSI option
-              symbols).
+              symbols). Required; accepts 1 to 100 IDs. Duplicate resolved ids collapse to a
+              single row.
 
           extra_headers: Send extra headers
 
@@ -247,8 +261,10 @@ class MarketDataResourceWithRawResponse:
     def __init__(self, market_data: MarketDataResource) -> None:
         self._market_data = market_data
 
-        self.get_daily_summaries = to_raw_response_wrapper(
-            market_data.get_daily_summaries,
+        self.get_daily_summaries = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                market_data.get_daily_summaries,  # pyright: ignore[reportDeprecated],
+            )
         )
         self.get_snapshots = to_raw_response_wrapper(
             market_data.get_snapshots,
@@ -259,8 +275,10 @@ class AsyncMarketDataResourceWithRawResponse:
     def __init__(self, market_data: AsyncMarketDataResource) -> None:
         self._market_data = market_data
 
-        self.get_daily_summaries = async_to_raw_response_wrapper(
-            market_data.get_daily_summaries,
+        self.get_daily_summaries = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                market_data.get_daily_summaries,  # pyright: ignore[reportDeprecated],
+            )
         )
         self.get_snapshots = async_to_raw_response_wrapper(
             market_data.get_snapshots,
@@ -271,8 +289,10 @@ class MarketDataResourceWithStreamingResponse:
     def __init__(self, market_data: MarketDataResource) -> None:
         self._market_data = market_data
 
-        self.get_daily_summaries = to_streamed_response_wrapper(
-            market_data.get_daily_summaries,
+        self.get_daily_summaries = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                market_data.get_daily_summaries,  # pyright: ignore[reportDeprecated],
+            )
         )
         self.get_snapshots = to_streamed_response_wrapper(
             market_data.get_snapshots,
@@ -283,8 +303,10 @@ class AsyncMarketDataResourceWithStreamingResponse:
     def __init__(self, market_data: AsyncMarketDataResource) -> None:
         self._market_data = market_data
 
-        self.get_daily_summaries = async_to_streamed_response_wrapper(
-            market_data.get_daily_summaries,
+        self.get_daily_summaries = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                market_data.get_daily_summaries,  # pyright: ignore[reportDeprecated],
+            )
         )
         self.get_snapshots = async_to_streamed_response_wrapper(
             market_data.get_snapshots,
