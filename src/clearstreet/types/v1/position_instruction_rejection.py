@@ -1,5 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from typing import Dict
+
 from ..._models import BaseModel
 
 __all__ = ["PositionInstructionRejection"]
@@ -8,10 +10,12 @@ __all__ = ["PositionInstructionRejection"]
 class PositionInstructionRejection(BaseModel):
     """Machine-readable detail for a rejected position instruction.
 
-    Populated on the submit and cancel responses for a row rejected with a
-    structured reason. Branch on `reason` for programmatic handling and render
-    your own copy; `rejection_reason` remains the human-readable fallback and is
-    the field to use when listing historical instructions.
+    Present on every rejected row that carries a `rejection_reason`, across the
+    full lifecycle — submit, cancel, get, and list. Branch on `reason` for
+    programmatic handling and template your own copy from `metadata`;
+    `rejection_reason` remains the human-readable fallback. Forward-only:
+    instructions rejected before this field shipped may carry only
+    `rejection_reason`.
     """
 
     domain: str
@@ -21,11 +25,18 @@ class PositionInstructionRejection(BaseModel):
     reasons.
     """
 
-    metadata: object
-    """Reason-specific parameters as string key/value pairs (e.g.
+    metadata: Dict[str, str]
+    """Reason-specific parameters as a string→string map.
 
-    `available` / `requested`, `expiry` / `business_date`, `required_level` /
-    `account_level`). May be empty.
+    Which keys are present depends on `reason`:
+
+    - `INSUFFICIENT_POSITION` → `available`, `requested`
+    - `DNE_NOT_ON_EXPIRY` / `CEA_NOT_ON_EXPIRY` → `expiry`, `business_date`
+    - `EXERCISE_PAST_CUTOFF` → `cutoff_time`
+    - `DUPLICATE_INSTRUCTION` → `existing_id`
+
+    Empty for reasons that carry no parameters. New keys may be added over time, so
+    treat unknown keys leniently.
     """
 
     reason: str

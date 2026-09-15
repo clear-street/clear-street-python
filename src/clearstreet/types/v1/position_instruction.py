@@ -57,10 +57,11 @@ class PositionInstruction(BaseModel):
     rejection: Optional[PositionInstructionRejection] = None
     """
     Machine-readable counterpart to `rejection_reason`: a stable reason code plus
-    params, populated on the submit and cancel responses for a row rejected with a
-    structured reason. Branch on `rejection.reason` instead of parsing
-    `rejection_reason`. Absent when listing historical instructions. When a
-    null/undefined value is observed, it indicates it does not apply.
+    params, present on every rejected row that has a `rejection_reason` — on submit,
+    cancel, get, and list alike. Branch on `rejection.reason` instead of parsing
+    `rejection_reason`. Forward-only: instructions rejected before this field
+    shipped may carry only `rejection_reason`. When a null/undefined value is
+    observed, it indicates it does not apply.
     """
 
     rejection_reason: Optional[str] = None
