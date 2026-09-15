@@ -93,6 +93,12 @@ class Position(BaseModel):
     value is observed, it indicates it does not apply.
     """
 
+    underlying_instrument_type: Optional[SecurityType] = None
+    """
+    Type of the underlying instrument, alongside `underlying_instrument_id` When a
+    null/undefined value is observed, it indicates it does not apply.
+    """
+
     unrealized_pnl: Optional[str] = None
     """
     The total unrealized profit or loss for this position based on current market

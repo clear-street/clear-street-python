@@ -5,6 +5,7 @@ from datetime import datetime
 
 from .side import Side
 from ..._models import BaseModel
+from ..security_type import SecurityType
 
 __all__ = ["Execution"]
 
@@ -54,6 +55,12 @@ class Execution(BaseModel):
     Omitted for a non-derivative fill, when the underlier could not be resolved, or
     for a multileg fill (per-leg underliers live in `legs[]`). When a null/undefined
     value is observed, it indicates it does not apply.
+    """
+
+    underlying_instrument_type: Optional[SecurityType] = None
+    """
+    Type of the underlying instrument, alongside `underlying_instrument_id`. When a
+    null/undefined value is observed, it indicates it does not apply.
     """
 
     venue: Optional[str] = None

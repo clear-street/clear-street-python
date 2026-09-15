@@ -179,3 +179,9 @@ class Order(BaseModel):
     underlier has not yet been resolved. When a null/undefined value is observed, it
     indicates it does not apply.
     """
+
+    underlying_instrument_type: Optional[SecurityType] = None
+    """
+    Type of the underlying instrument, alongside `underlying_instrument_id`. When a
+    null/undefined value is observed, it indicates it does not apply.
+    """
