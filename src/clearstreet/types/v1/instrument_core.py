@@ -1,8 +1,9 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import List, Optional
 
 from ..._models import BaseModel
+from .tick_rule import TickRule
 from ..security_type import SecurityType
 
 __all__ = ["InstrumentCore"]
@@ -99,4 +100,11 @@ class InstrumentCore(BaseModel):
     """
     The percent of a short position's value you must post as margin When a
     null/undefined value is observed, it indicates that there is no available data.
+    """
+
+    tick_rules: Optional[List[TickRule]] = None
+    """Price bands this instrument quotes on, ascending.
+
+    Absent when we have no schedule for it, which includes an option whose
+    penny-program status our reference data never supplied.
     """

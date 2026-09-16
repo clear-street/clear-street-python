@@ -19,6 +19,7 @@ from .feed_item import FeedItem as FeedItem
 from .feed_page import FeedPage as FeedPage
 from .field_ref import FieldRef as FieldRef
 from .sort_spec import SortSpec as SortSpec
+from .tick_rule import TickRule as TickRule
 from .data_chart import DataChart as DataChart
 from .field_kind import FieldKind as FieldKind
 from .field_type import FieldType as FieldType

@@ -4,6 +4,7 @@ from typing import List, Optional
 from datetime import date
 
 from ..._models import BaseModel
+from .tick_rule import TickRule
 from ..security_type import SecurityType
 from .option_expiry_date import OptionExpiryDate
 
@@ -121,4 +122,11 @@ class Instrument(BaseModel):
     """
     The percent of a short position's value you must post as margin When a
     null/undefined value is observed, it indicates that there is no available data.
+    """
+
+    tick_rules: Optional[List[TickRule]] = None
+    """Price bands this instrument quotes on, ascending.
+
+    Absent when we have no schedule for it, which includes an option whose
+    penny-program status our reference data never supplied.
     """

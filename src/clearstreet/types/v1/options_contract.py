@@ -1,9 +1,10 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import List, Optional
 from datetime import date, datetime
 
 from ..._models import BaseModel
+from .tick_rule import TickRule
 from .listing_type import ListingType
 from .contract_type import ContractType
 from .exercise_style import ExerciseStyle
@@ -69,6 +70,13 @@ class OptionsContract(BaseModel):
     """
     Open interest (number of outstanding contracts), if available When a
     null/undefined value is observed, it indicates that there is no available data.
+    """
+
+    tick_rules: Optional[List[TickRule]] = None
+    """Price bands this contract quotes on, ascending.
+
+    Absent when our reference data never supplied the contract's penny-program
+    status.
     """
 
     underlying_instrument_id: Optional[str] = None

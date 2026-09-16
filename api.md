@@ -196,6 +196,7 @@ from clearstreet.types.v1 import (
     OptionExpiryDate,
     OptionsContract,
     OptionsContractList,
+    TickRule,
     InstrumentGetInstrumentByIDResponse,
     InstrumentGetInstrumentsResponse,
     InstrumentGetOptionContractsResponse,
