@@ -15,4 +15,4 @@ class ModifierDef(BaseModel):
     """The positional `args` slots, in order."""
 
     name: str
-    """`"ADD"` or `"SUBTRACT"`."""
+    """The modifier operation name: one of `"ADD"` or `"SUBTRACT"`."""

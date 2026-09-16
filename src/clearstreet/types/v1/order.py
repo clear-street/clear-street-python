@@ -160,15 +160,19 @@ class Order(BaseModel):
     """
 
     trailing_watermark_px: Optional[str] = None
-    """
-    Trailing watermark price for trailing orders When a null/undefined value is
-    observed, it indicates it does not apply.
+    """Trailing watermark price for trailing orders.
+
+    Strategy-computed, so it is absent on the order-submission acknowledgement and
+    only appears once fetched via the order fetch or list endpoints. When a
+    null/undefined value is observed, it indicates it does not apply.
     """
 
     trailing_watermark_ts: Optional[datetime] = None
-    """
-    Trailing watermark timestamp for trailing orders When a null/undefined value is
-    observed, it indicates it does not apply.
+    """Trailing watermark timestamp for trailing orders.
+
+    Strategy-computed, so it is absent on the order-submission acknowledgement and
+    only appears once fetched via the order fetch or list endpoints. When a
+    null/undefined value is observed, it indicates it does not apply.
     """
 
     underlying_instrument_id: Optional[str] = None

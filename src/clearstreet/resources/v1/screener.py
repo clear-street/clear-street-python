@@ -409,8 +409,8 @@ class ScreenerResource(SyncAPIResource):
         `instrument_id` column is always prepended. Metadata carries `total_items`,
         `total_pages`, and `next_page_token` for paging.
 
-        Due to the volatility of screener responses we recommend reconciling page
-        results since results can shuffle between calls.
+        Screener results can shuffle between calls; reconcile by re-checking rows across
+        pages rather than assuming stable ordering.
 
         Args:
           columns: Subset of fields to include in the response.
@@ -826,8 +826,8 @@ class AsyncScreenerResource(AsyncAPIResource):
         `instrument_id` column is always prepended. Metadata carries `total_items`,
         `total_pages`, and `next_page_token` for paging.
 
-        Due to the volatility of screener responses we recommend reconciling page
-        results since results can shuffle between calls.
+        Screener results can shuffle between calls; reconcile by re-checking rows across
+        pages rather than assuming stable ordering.
 
         Args:
           columns: Subset of fields to include in the response.

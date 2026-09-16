@@ -13,13 +13,13 @@ class WatchlistDetail(BaseModel):
     """Detailed watchlist with all items"""
 
     id: str
-    """Watchlist ID"""
+    """The unique identifier for the watchlist."""
 
     created_at: datetime
-    """Creation timestamp"""
+    """The timestamp when the watchlist was created."""
 
     items: List[WatchlistItemEntry]
     """Items in the watchlist"""
 
     name: str
-    """Watchlist name"""
+    """The user-provided watchlist name."""

@@ -1,6 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 from typing import Optional
+from datetime import datetime
 
 from ...._models import BaseModel
 from .error_status import ErrorStatus
@@ -19,7 +20,7 @@ class Message(BaseModel):
     content: MessageContent
     """Finalized immutable message content container. Never includes thinking parts."""
 
-    created_at: str
+    created_at: datetime
 
     outcome: MessageOutcome
     """Immutable terminal outcome for a finalized assistant message."""

@@ -1,5 +1,7 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from datetime import datetime
+
 from ...._models import BaseModel
 
 __all__ = ["Thread"]
@@ -10,8 +12,8 @@ class Thread(BaseModel):
 
     id: str
 
-    created_at: str
+    created_at: datetime
 
     title: str
 
-    updated_at: str
+    updated_at: datetime

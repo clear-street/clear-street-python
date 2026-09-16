@@ -15,7 +15,7 @@ __all__ = ["PrefillNewOrderRequest"]
 
 
 class PrefillNewOrderRequest(BaseModel):
-    """Request to submit a new order (PlaceOrderRequest from spec)"""
+    """Request to submit a new order"""
 
     order_type: RequestOrderType
     """Type of order"""

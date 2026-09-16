@@ -18,7 +18,7 @@ __all__ = ["NewOrderRequestParam"]
 
 
 class NewOrderRequestParam(TypedDict, total=False):
-    """Request to submit a new order (PlaceOrderRequest from spec)"""
+    """Request to submit a new order"""
 
     order_type: Required[RequestOrderType]
     """Type of order"""
