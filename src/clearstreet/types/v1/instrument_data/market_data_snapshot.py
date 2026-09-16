@@ -5,6 +5,7 @@ from typing import Optional
 from ...._models import BaseModel
 from .snapshot_quote import SnapshotQuote
 from .snapshot_greeks import SnapshotGreeks
+from .snapshot_rule201 import SnapshotRule201
 from .snapshot_session import SnapshotSession
 from .snapshot_last_trade import SnapshotLastTrade
 
@@ -16,6 +17,17 @@ class MarketDataSnapshot(BaseModel):
 
     instrument_id: str
     """Unique instrument identifier."""
+
+    rule_201: SnapshotRule201
+    """Live SEC Rule 201 short-sale price test state, from the trading-status feed.
+
+    Always present.
+
+    This is the current market condition, not a statement about whether Clear Street
+    will reject your order. It is also distinct from `is_short_prohibited` on the
+    instrument endpoints, which is a standing property of the security rather than a
+    live circuit breaker.
+    """
 
     session: SnapshotSession
     """Session-level pricing and OHLV metrics.

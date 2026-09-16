@@ -38,7 +38,11 @@ class InstrumentCore(BaseModel):
     """
 
     is_short_prohibited: bool
-    """Indicates if short selling is prohibited for the instrument"""
+    """Indicates if short selling is prohibited for the instrument.
+
+    This is a standing property of the security. For the live Rule 201 circuit
+    breaker, see `rule_201` on the market-data snapshot.
+    """
 
     is_threshold_security: bool
     """Indicates if the instrument is on the Regulation SHO Threshold Security List"""
