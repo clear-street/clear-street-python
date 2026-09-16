@@ -5,7 +5,6 @@ from typing import Optional
 from ...._models import BaseModel
 from .snapshot_quote import SnapshotQuote
 from .snapshot_greeks import SnapshotGreeks
-from .snapshot_rule201 import SnapshotRule201
 from .snapshot_session import SnapshotSession
 from .snapshot_last_trade import SnapshotLastTrade
 
@@ -18,21 +17,28 @@ class MarketDataSnapshot(BaseModel):
     instrument_id: str
     """Unique instrument identifier."""
 
-    rule_201: SnapshotRule201
-    """Live SEC Rule 201 short-sale price test state, from the trading-status feed.
-
-    Always present.
-
-    This is the current market condition, not a statement about whether Clear Street
-    will reject your order. It is also distinct from `is_short_prohibited` on the
-    instrument endpoints, which is a standing property of the security rather than a
-    live circuit breaker.
-    """
-
     session: SnapshotSession
     """Session-level pricing and OHLV metrics.
 
     Always present; each inner field is independently nullable.
+    """
+
+    short_sale_restricted: Optional[bool] = None
+    """
+    Whether the SEC Rule 201 short-sale price test is currently restricting short
+    sales in this security, from the trading-status feed.
+
+    `true` restricts non-exempt short sales at or below the national best bid.
+    `null` means we have no answer, either because no trading status has been seen
+    for this security yet or because Rule 201 does not cover this security type. A
+    `null` is not a statement that short selling is unrestricted, and must not be
+    treated as clear to short.
+
+    This is the current market condition, not a statement about whether Clear Street
+    will reject your order. It is also distinct from `is_short_prohibited` on the
+    instrument endpoints, which is a standing property of the security rather than a
+    live circuit breaker. When a null/undefined value is observed, it indicates that
+    there is no available data.
     """
 
     symbol: str
