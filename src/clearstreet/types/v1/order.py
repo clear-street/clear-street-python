@@ -1,7 +1,9 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import List, Optional
+from typing import TYPE_CHECKING, Dict, List, Optional
 from datetime import datetime
+
+from pydantic import Field as FieldInfo
 
 from .side import Side
 from ..._models import BaseModel
@@ -12,7 +14,32 @@ from .time_in_force import TimeInForce
 from ..security_type import SecurityType
 from .trailing_offset_type import TrailingOffsetType
 
-__all__ = ["Order"]
+__all__ = ["Order", "Strategy"]
+
+
+class Strategy(BaseModel):
+    """The execution strategy the order was submitted with, if any."""
+
+    type: str
+    """Execution strategy type."""
+
+    end_at: Optional[datetime] = None
+    """UTC timestamp (RFC 3339) at which execution ends."""
+
+    start_at: Optional[datetime] = None
+    """UTC timestamp (RFC 3339) at which execution begins."""
+
+    if TYPE_CHECKING:
+        # Some versions of Pydantic <2.8.0 have a bug and don’t allow assigning a
+        # value to this field, so for compatibility we avoid doing it at runtime.
+        __pydantic_extra__: Dict[str, object] = FieldInfo(init=False)  # pyright: ignore[reportIncompatibleVariableOverride]
+
+        # Stub to indicate that arbitrary properties are accepted.
+        # To access properties that are not valid identifiers you can use `getattr`, e.g.
+        # `getattr(obj, '$type')`
+        def __getattr__(self, attr: str) -> object: ...
+    else:
+        __pydantic_extra__: Dict[str, object]
 
 
 class Order(BaseModel):
@@ -127,6 +154,9 @@ class Order(BaseModel):
     Stop price (for STOP and STOP_LIMIT orders) When a null/undefined value is
     observed, it indicates it does not apply.
     """
+
+    strategy: Optional[Strategy] = None
+    """The execution strategy the order was submitted with, if any."""
 
     symbol: Optional[str] = None
     """Trading symbol.

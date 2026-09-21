@@ -66,6 +66,7 @@ from .field_lookback import FieldLookback as FieldLookback
 from .filter_op_spec import FilterOpSpec as FilterOpSpec
 from .margin_details import MarginDetails as MarginDetails
 from .modifier_param import ModifierParam as ModifierParam
+from .order_strategy import OrderStrategy as OrderStrategy
 from .screener_entry import ScreenerEntry as ScreenerEntry
 from .variable_param import VariableParam as VariableParam
 from .account_subtype import AccountSubtype as AccountSubtype
@@ -105,6 +106,7 @@ from .instrument_core_list import InstrumentCoreList as InstrumentCoreList
 from .instrument_ipo_event import InstrumentIpoEvent as InstrumentIpoEvent
 from .margin_details_usage import MarginDetailsUsage as MarginDetailsUsage
 from .open_screener_action import OpenScreenerAction as OpenScreenerAction
+from .order_strategy_param import OrderStrategyParam as OrderStrategyParam
 from .position_instruction import PositionInstruction as PositionInstruction
 from .prefill_order_action import PrefillOrderAction as PrefillOrderAction
 from .prompt_button_action import PromptButtonAction as PromptButtonAction

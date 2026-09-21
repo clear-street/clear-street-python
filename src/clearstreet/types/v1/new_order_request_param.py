@@ -9,6 +9,7 @@ from typing_extensions import Required, Annotated, TypedDict
 from .side import Side
 from ..._utils import PropertyInfo
 from .request_order_type import RequestOrderType
+from .order_strategy_param import OrderStrategyParam
 from .trailing_offset_type import TrailingOffsetType
 from .request_time_in_force import RequestTimeInForce
 from .instrument_id_or_symbol import InstrumentIDOrSymbol
@@ -74,6 +75,14 @@ class NewOrderRequestParam(TypedDict, total=False):
 
     stop_price: Optional[str]
     """Stop price (required for STOP and STOP_LIMIT orders)"""
+
+    strategy: Optional[OrderStrategyParam]
+    """Optional execution strategy.
+
+    Omit to use standard routing. One of `SOR`, `VWAP`, or `TWAP`. Supported only on
+    `MARKET` and `LIMIT` orders with `DAY` time-in-force, and not supported on OTC
+    common-stock orders.
+    """
 
     symbol: Optional[str]
     """Trading symbol.

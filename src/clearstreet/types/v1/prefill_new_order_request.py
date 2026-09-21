@@ -5,6 +5,7 @@ from datetime import datetime
 
 from .side import Side
 from ..._models import BaseModel
+from .order_strategy import OrderStrategy
 from .request_order_type import RequestOrderType
 from .trailing_offset_type import TrailingOffsetType
 from .request_time_in_force import RequestTimeInForce
@@ -78,6 +79,14 @@ class PrefillNewOrderRequest(BaseModel):
 
     stop_price: Optional[str] = None
     """Stop price (required for STOP and STOP_LIMIT orders)"""
+
+    strategy: Optional[OrderStrategy] = None
+    """Optional execution strategy.
+
+    Omit to use standard routing. One of `SOR`, `VWAP`, or `TWAP`. Supported only on
+    `MARKET` and `LIMIT` orders with `DAY` time-in-force, and not supported on OTC
+    common-stock orders.
+    """
 
     symbol: Optional[str] = None
     """Trading symbol.

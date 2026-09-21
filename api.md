@@ -380,6 +380,7 @@ from clearstreet.types.v1 import (
     Order,
     OrderList,
     OrderStatus,
+    OrderStrategy,
     OrderType,
     QueueState,
     ReplaceOrderRequest,
