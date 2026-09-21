@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Union
-from typing_extensions import Required, Annotated, TypedDict
+from typing_extensions import Annotated, TypedDict
 
 from ...._types import Base64FileInput
 from ...._utils import PropertyInfo
@@ -12,8 +12,12 @@ __all__ = ["ThreadGetMessagesParams"]
 
 
 class ThreadGetMessagesParams(TypedDict, total=False):
-    account_id: Required[int]
-    """Account ID for the request"""
+    account_id: int
+    """
+    Lists only conversations for this account, or unlinked conversations when
+    omitted. Other reads authorize the resource's linked account. Omit when no
+    account is selected; empty values and the string null are invalid.
+    """
 
     page_size: int
     """The number of items to return per page.

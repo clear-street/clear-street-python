@@ -2,11 +2,15 @@
 
 from __future__ import annotations
 
-from typing_extensions import Required, TypedDict
+from typing_extensions import TypedDict
 
 __all__ = ["ResponseGetResponseByIDParams"]
 
 
 class ResponseGetResponseByIDParams(TypedDict, total=False):
-    account_id: Required[int]
-    """Account ID for the request"""
+    account_id: int
+    """
+    Lists only conversations for this account, or unlinked conversations when
+    omitted. Other reads authorize the resource's linked account. Omit when no
+    account is selected; empty values and the string null are invalid.
+    """

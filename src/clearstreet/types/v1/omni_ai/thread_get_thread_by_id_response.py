@@ -8,4 +8,4 @@ __all__ = ["ThreadGetThreadByIDResponse"]
 
 class ThreadGetThreadByIDResponse(BaseResponse):
     data: Thread
-    """Thread metadata returned by list/get thread endpoints."""
+    """Thread metadata."""

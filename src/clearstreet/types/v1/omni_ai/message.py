@@ -6,6 +6,7 @@ from datetime import datetime
 from ...._models import BaseModel
 from .error_status import ErrorStatus
 from .message_role import MessageRole
+from .turn_context import TurnContext
 from .message_content import MessageContent
 from .message_outcome import MessageOutcome
 
@@ -31,6 +32,13 @@ class Message(BaseModel):
     seq: int
 
     thread_id: str
+
+    context: Optional[TurnContext] = None
+    """Immutable snapshots attached to this user message.
+
+    Omitted when none were supplied. When a null/undefined value is observed, it
+    indicates that there is no available data.
+    """
 
     error: Optional[ErrorStatus] = None
     """When a null/undefined value is observed, it indicates it does not apply."""

@@ -24,7 +24,14 @@ class TestResponses:
     def test_method_cancel_response(self, client: ClearStreet) -> None:
         response = client.v1.omni_ai.responses.cancel_response(
             response_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
+        )
+        assert_matches_type(ResponseCancelResponseResponse, response, path=["response"])
+
+    @parametrize
+    def test_method_cancel_response_with_all_params(self, client: ClearStreet) -> None:
+        response = client.v1.omni_ai.responses.cancel_response(
+            response_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id=1,
         )
         assert_matches_type(ResponseCancelResponseResponse, response, path=["response"])
 
@@ -32,7 +39,6 @@ class TestResponses:
     def test_raw_response_cancel_response(self, client: ClearStreet) -> None:
         http_response = client.v1.omni_ai.responses.with_raw_response.cancel_response(
             response_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
         )
 
         assert http_response.is_closed is True
@@ -44,7 +50,6 @@ class TestResponses:
     def test_streaming_response_cancel_response(self, client: ClearStreet) -> None:
         with client.v1.omni_ai.responses.with_streaming_response.cancel_response(
             response_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
         ) as http_response:
             assert not http_response.is_closed
             assert http_response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -59,14 +64,20 @@ class TestResponses:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `response_id` but received ''"):
             client.v1.omni_ai.responses.with_raw_response.cancel_response(
                 response_id="",
-                account_id=0,
             )
 
     @parametrize
     def test_method_get_response_by_id(self, client: ClearStreet) -> None:
         response = client.v1.omni_ai.responses.get_response_by_id(
             response_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
+        )
+        assert_matches_type(ResponseGetResponseByIDResponse, response, path=["response"])
+
+    @parametrize
+    def test_method_get_response_by_id_with_all_params(self, client: ClearStreet) -> None:
+        response = client.v1.omni_ai.responses.get_response_by_id(
+            response_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id=1,
         )
         assert_matches_type(ResponseGetResponseByIDResponse, response, path=["response"])
 
@@ -74,7 +85,6 @@ class TestResponses:
     def test_raw_response_get_response_by_id(self, client: ClearStreet) -> None:
         http_response = client.v1.omni_ai.responses.with_raw_response.get_response_by_id(
             response_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
         )
 
         assert http_response.is_closed is True
@@ -86,7 +96,6 @@ class TestResponses:
     def test_streaming_response_get_response_by_id(self, client: ClearStreet) -> None:
         with client.v1.omni_ai.responses.with_streaming_response.get_response_by_id(
             response_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
         ) as http_response:
             assert not http_response.is_closed
             assert http_response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -101,7 +110,6 @@ class TestResponses:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `response_id` but received ''"):
             client.v1.omni_ai.responses.with_raw_response.get_response_by_id(
                 response_id="",
-                account_id=0,
             )
 
 
@@ -114,7 +122,14 @@ class TestAsyncResponses:
     async def test_method_cancel_response(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.omni_ai.responses.cancel_response(
             response_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
+        )
+        assert_matches_type(ResponseCancelResponseResponse, response, path=["response"])
+
+    @parametrize
+    async def test_method_cancel_response_with_all_params(self, async_client: AsyncClearStreet) -> None:
+        response = await async_client.v1.omni_ai.responses.cancel_response(
+            response_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id=1,
         )
         assert_matches_type(ResponseCancelResponseResponse, response, path=["response"])
 
@@ -122,7 +137,6 @@ class TestAsyncResponses:
     async def test_raw_response_cancel_response(self, async_client: AsyncClearStreet) -> None:
         http_response = await async_client.v1.omni_ai.responses.with_raw_response.cancel_response(
             response_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
         )
 
         assert http_response.is_closed is True
@@ -134,7 +148,6 @@ class TestAsyncResponses:
     async def test_streaming_response_cancel_response(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.omni_ai.responses.with_streaming_response.cancel_response(
             response_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
         ) as http_response:
             assert not http_response.is_closed
             assert http_response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -149,14 +162,20 @@ class TestAsyncResponses:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `response_id` but received ''"):
             await async_client.v1.omni_ai.responses.with_raw_response.cancel_response(
                 response_id="",
-                account_id=0,
             )
 
     @parametrize
     async def test_method_get_response_by_id(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.omni_ai.responses.get_response_by_id(
             response_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
+        )
+        assert_matches_type(ResponseGetResponseByIDResponse, response, path=["response"])
+
+    @parametrize
+    async def test_method_get_response_by_id_with_all_params(self, async_client: AsyncClearStreet) -> None:
+        response = await async_client.v1.omni_ai.responses.get_response_by_id(
+            response_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id=1,
         )
         assert_matches_type(ResponseGetResponseByIDResponse, response, path=["response"])
 
@@ -164,7 +183,6 @@ class TestAsyncResponses:
     async def test_raw_response_get_response_by_id(self, async_client: AsyncClearStreet) -> None:
         http_response = await async_client.v1.omni_ai.responses.with_raw_response.get_response_by_id(
             response_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
         )
 
         assert http_response.is_closed is True
@@ -176,7 +194,6 @@ class TestAsyncResponses:
     async def test_streaming_response_get_response_by_id(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.omni_ai.responses.with_streaming_response.get_response_by_id(
             response_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
         ) as http_response:
             assert not http_response.is_closed
             assert http_response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -191,5 +208,4 @@ class TestAsyncResponses:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `response_id` but received ''"):
             await async_client.v1.omni_ai.responses.with_raw_response.get_response_by_id(
                 response_id="",
-                account_id=0,
             )

@@ -9,11 +9,11 @@ __all__ = ["MessageSubmitFeedbackParams"]
 
 
 class MessageSubmitFeedbackParams(TypedDict, total=False):
-    account_id: Required[int]
-    """Account ID for the request"""
-
     score: Required[int]
-    """Feedback score (-1, 0, +1 or 1-5)"""
+    """Feedback score (-1, 0, +1 or 1-5)."""
+
+    account_id: Optional[int]
+    """Optional selection. Feedback always uses the thread's linked account."""
 
     comment: str
     """Optional feedback comment"""

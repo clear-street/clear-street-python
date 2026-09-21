@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import httpx
 
-from ...._types import Body, Query, Headers, NotGiven, not_given
+from ...._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
 from ...._utils import path_template, maybe_transform, async_maybe_transform
 from ...._compat import cached_property
 from ...._resource import SyncAPIResource, AsyncAPIResource
@@ -51,7 +51,7 @@ class ResponsesResource(SyncAPIResource):
         self,
         response_id: str,
         *,
-        account_id: int,
+        account_id: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -59,17 +59,18 @@ class ResponsesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ResponseCancelResponseResponse:
-        """Cancel a response.
+        """Cancel a queued or running response.
 
-        Requests cancellation of a queued or running response.
+        Cancellation is idempotent after the
+        response becomes terminal. A canceled turn still produces a finalized assistant
+        message with outcome `canceled` in the thread history.
 
-        If the response has
-        already reached a terminal status, this is an idempotent success. A canceled
-        turn still produces a final assistant message with outcome `canceled` in the
-        thread history.
+        Authorization uses the linked account before any cancellation.
 
         Args:
-          account_id: Account ID for the request
+          account_id: Lists only conversations for this account, or unlinked conversations when
+              omitted. Other reads authorize the resource's linked account. Omit when no
+              account is selected; empty values and the string null are invalid.
 
           extra_headers: Send extra headers
 
@@ -99,7 +100,7 @@ class ResponsesResource(SyncAPIResource):
         self,
         response_id: str,
         *,
-        account_id: int,
+        account_id: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -108,18 +109,19 @@ class ResponsesResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ResponseGetResponseByIDResponse:
         """
-        Poll a response for assistant output.
+        Poll the current snapshot of an in-progress or completed assistant response.
+        While its status is `queued` or `running`, content may be partial and include
+        thinking parts. Continue polling until it becomes `succeeded`, `failed`, or
+        `canceled`.
 
-        Returns the current snapshot of an in-progress or completed response. While the
-        status is `queued` or `running`, the content may be partial and may include
-        `thinking` parts. Poll this endpoint periodically until the status reaches a
-        terminal value (`succeeded`, `failed`, or `canceled`).
-
-        Once terminal, the finalized assistant message is available in thread history
-        via `GET /omni-ai/threads/{thread_id}/messages`.
+        Once terminal, the finalized message is available through
+        `GET /omni-ai/threads/{thread_id}/messages`. Authorization uses the current
+        parent thread account, including for responses created before the account link.
 
         Args:
-          account_id: Account ID for the request
+          account_id: Lists only conversations for this account, or unlinked conversations when
+              omitted. Other reads authorize the resource's linked account. Omit when no
+              account is selected; empty values and the string null are invalid.
 
           extra_headers: Send extra headers
 
@@ -175,7 +177,7 @@ class AsyncResponsesResource(AsyncAPIResource):
         self,
         response_id: str,
         *,
-        account_id: int,
+        account_id: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -183,17 +185,18 @@ class AsyncResponsesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ResponseCancelResponseResponse:
-        """Cancel a response.
+        """Cancel a queued or running response.
 
-        Requests cancellation of a queued or running response.
+        Cancellation is idempotent after the
+        response becomes terminal. A canceled turn still produces a finalized assistant
+        message with outcome `canceled` in the thread history.
 
-        If the response has
-        already reached a terminal status, this is an idempotent success. A canceled
-        turn still produces a final assistant message with outcome `canceled` in the
-        thread history.
+        Authorization uses the linked account before any cancellation.
 
         Args:
-          account_id: Account ID for the request
+          account_id: Lists only conversations for this account, or unlinked conversations when
+              omitted. Other reads authorize the resource's linked account. Omit when no
+              account is selected; empty values and the string null are invalid.
 
           extra_headers: Send extra headers
 
@@ -223,7 +226,7 @@ class AsyncResponsesResource(AsyncAPIResource):
         self,
         response_id: str,
         *,
-        account_id: int,
+        account_id: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -232,18 +235,19 @@ class AsyncResponsesResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ResponseGetResponseByIDResponse:
         """
-        Poll a response for assistant output.
+        Poll the current snapshot of an in-progress or completed assistant response.
+        While its status is `queued` or `running`, content may be partial and include
+        thinking parts. Continue polling until it becomes `succeeded`, `failed`, or
+        `canceled`.
 
-        Returns the current snapshot of an in-progress or completed response. While the
-        status is `queued` or `running`, the content may be partial and may include
-        `thinking` parts. Poll this endpoint periodically until the status reaches a
-        terminal value (`succeeded`, `failed`, or `canceled`).
-
-        Once terminal, the finalized assistant message is available in thread history
-        via `GET /omni-ai/threads/{thread_id}/messages`.
+        Once terminal, the finalized message is available through
+        `GET /omni-ai/threads/{thread_id}/messages`. Authorization uses the current
+        parent thread account, including for responses created before the account link.
 
         Args:
-          account_id: Account ID for the request
+          account_id: Lists only conversations for this account, or unlinked conversations when
+              omitted. Other reads authorize the resource's linked account. Omit when no
+              account is selected; empty values and the string null are invalid.
 
           extra_headers: Send extra headers
 

@@ -26,6 +26,7 @@ from ....types.v1.omni_ai import (
     thread_get_thread_by_id_params,
     thread_get_thread_response_params,
 )
+from ....types.v1.omni_ai.turn_context_param import TurnContextParam
 from ....types.v1.omni_ai.thread_get_threads_response import ThreadGetThreadsResponse
 from ....types.v1.omni_ai.thread_get_messages_response import ThreadGetMessagesResponse
 from ....types.v1.omni_ai.thread_create_thread_response import ThreadCreateThreadResponse
@@ -65,10 +66,11 @@ class ThreadsResource(SyncAPIResource):
         self,
         thread_id: str,
         *,
-        account_id: int,
         text: str,
+        account_id: Optional[int] | Omit = omit,
         capabilities: List[Literal["PREFILL_ORDER", "OPEN_CHART", "OPEN_SCREENER", "OPEN_ENTITLEMENT_CONSENT"]]
         | Omit = omit,
+        context: Optional[TurnContextParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -77,17 +79,25 @@ class ThreadsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ThreadCreateMessageResponse:
         """
-        Continue an existing conversation thread.
-
-        Appends a new user message to the thread and starts an assistant response. Only
-        one response may be active per thread at a time — if the previous turn is still
-        in progress, this endpoint returns **409 Conflict**. Wait for the active
-        response to reach a terminal status before submitting the next turn.
-
+        Append a user message to an existing thread and start an assistant response.
         Poll the returned `response_id` via `GET /omni-ai/responses/{response_id}` for
         assistant output.
 
+        Only one response may be active per thread. Wait for it to reach a terminal
+        status before submitting another turn; otherwise this endpoint returns 409.
+
+        The first accepted selected-account message links an unlinked thread. A linked
+        thread keeps its account regardless of omission or another selection. A changed
+        scope also returns 409 without accepting a turn.
+
         Args:
+          account_id: Selected account for creation or the first account-linked turn. Omit for an
+              unlinked conversation. An existing account link remains authoritative even when
+              another account is selected.
+
+          context: Snapshots for this instant-chat message. Omission does not remove earlier
+              attachments.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -102,9 +112,10 @@ class ThreadsResource(SyncAPIResource):
             path_template("/v1/omni-ai/threads/{thread_id}/messages", thread_id=thread_id),
             body=maybe_transform(
                 {
-                    "account_id": account_id,
                     "text": text,
+                    "account_id": account_id,
                     "capabilities": capabilities,
+                    "context": context,
                 },
                 thread_create_message_params.ThreadCreateMessageParams,
             ),
@@ -117,10 +128,11 @@ class ThreadsResource(SyncAPIResource):
     def create_thread(
         self,
         *,
-        account_id: int,
         type: Literal["instant", "deep_insights"],
+        account_id: Optional[int] | Omit = omit,
         capabilities: List[Literal["PREFILL_ORDER", "OPEN_CHART", "OPEN_SCREENER", "OPEN_ENTITLEMENT_CONSENT"]]
         | Omit = omit,
+        context: Optional[TurnContextParam] | Omit = omit,
         target: Optional[thread_create_thread_params.Target] | Omit = omit,
         text: Optional[str] | Omit = omit,
         thesis: Optional[str] | Omit = omit,
@@ -131,21 +143,27 @@ class ThreadsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ThreadCreateThreadResponse:
-        """
-        Create a new conversation thread.
+        """Atomically create a conversation and submit its first user turn.
 
-        Atomically creates a new thread and submits the first user turn. The response
-        contains a `response_id` that should be polled via
-        `GET /omni-ai/responses/{response_id}` for assistant output.
+        Use `instant`
+        with `text` for a prompt, or `deep_insights` with a ticker `target` and optional
+        `thesis` for long-form research.
 
-        Two creation modes are supported:
+        Poll the returned `response_id` via `GET /omni-ai/responses/{response_id}` for
+        assistant output.
 
-        - **instant** — provide `text` with a natural-language prompt.
-        - **deep_insights** — provide a `target` ticker and optional `thesis` for
-          long-form research.
+        Omit `account_id` to start without an account. The first accepted turn with a
+        selected account links that account permanently. Reuse `Idempotency-Key` only
+        for an identical request.
 
         Args:
           type: Thread creation mode.
+
+          account_id: Selected account for creation or the first account-linked turn. Omit for an
+              unlinked conversation. An existing account link remains authoritative even when
+              another account is selected.
+
+          context: Snapshots for the first instant-chat message. Omit to attach no new context.
 
           target: Deep-insights target payload.
 
@@ -161,9 +179,10 @@ class ThreadsResource(SyncAPIResource):
             "/v1/omni-ai/threads",
             body=maybe_transform(
                 {
-                    "account_id": account_id,
                     "type": type,
+                    "account_id": account_id,
                     "capabilities": capabilities,
+                    "context": context,
                     "target": target,
                     "text": text,
                     "thesis": thesis,
@@ -180,7 +199,7 @@ class ThreadsResource(SyncAPIResource):
         self,
         thread_id: str,
         *,
-        account_id: int,
+        account_id: int | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -191,18 +210,18 @@ class ThreadsResource(SyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ThreadGetMessagesResponse:
         """
-        List finalized messages in a thread.
+        List finalized messages, including messages created before the account link.
+        Return the latest page by default, in chronological order within each page. Use
+        the returned page token to navigate history.
 
-        Returns the latest page of **finalized** messages by default, with messages
-        within each page ordered chronologically. Messages from in-progress assistant
-        turns are excluded — use `GET /omni-ai/threads/{thread_id}/response` or
-        `GET /omni-ai/responses/{response_id}` for live output.
-
-        If the last finalized message has role `USER`, an active response likely exists
-        and should be polled separately.
+        In-progress assistant output is not included. Poll
+        `GET /omni-ai/responses/{response_id}` until the response reaches a terminal
+        status, then read its finalized message here.
 
         Args:
-          account_id: Account ID for the request
+          account_id: Lists only conversations for this account, or unlinked conversations when
+              omitted. Other reads authorize the resource's linked account. Omit when no
+              account is selected; empty values and the string null are invalid.
 
           page_size: The number of items to return per page. Only used when page_token is not
               provided.
@@ -243,7 +262,7 @@ class ThreadsResource(SyncAPIResource):
         self,
         thread_id: str,
         *,
-        account_id: int,
+        account_id: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -251,16 +270,17 @@ class ThreadsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ThreadGetThreadByIDResponse:
-        """Get a specific thread.
+        """Read an owned thread's metadata.
 
-        Returns metadata (title, timestamps) for a single thread.
+        Use `GET /omni-ai/threads/{thread_id}/messages`
+        for conversation history.
 
-        Does not include
-        messages — use `GET /omni-ai/threads/{thread_id}/messages` for conversation
-        history.
+        Omission or another account selection does not change authorization.
 
         Args:
-          account_id: Account ID for the request
+          account_id: Lists only conversations for this account, or unlinked conversations when
+              omitted. Other reads authorize the resource's linked account. Omit when no
+              account is selected; empty values and the string null are invalid.
 
           extra_headers: Send extra headers
 
@@ -290,7 +310,7 @@ class ThreadsResource(SyncAPIResource):
         self,
         thread_id: str,
         *,
-        account_id: int,
+        account_id: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -298,18 +318,18 @@ class ThreadsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ThreadGetThreadResponseResponse:
-        """
-        Get the active response for a thread.
+        """Look up the currently active response without knowing its `response_id`.
 
-        Convenience endpoint to look up the currently active response for a thread
-        without knowing the `response_id`. Useful when reloading a thread whose last
-        finalized message is a `USER` message — this indicates an assistant turn is
-        likely in progress.
+        Use
+        this endpoint when reopening a thread whose assistant turn may still be in
+        progress.
 
-        Returns **404** if no active response exists (the thread is idle).
+        An idle owned thread returns HTTP 200 with `data: null`.
 
         Args:
-          account_id: Account ID for the request
+          account_id: Lists only conversations for this account, or unlinked conversations when
+              omitted. Other reads authorize the resource's linked account. Omit when no
+              account is selected; empty values and the string null are invalid.
 
           extra_headers: Send extra headers
 
@@ -338,7 +358,7 @@ class ThreadsResource(SyncAPIResource):
     def get_threads(
         self,
         *,
-        account_id: int,
+        account_id: int | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -348,15 +368,19 @@ class ThreadsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ThreadGetThreadsResponse:
-        """
-        List conversation threads.
+        """List authorized conversation metadata, newest first.
 
-        Returns thread metadata ordered by most recently created first. Use `page_size`
-        and `page_token` for pagination. Thread objects contain only metadata (title,
-        timestamps) — use the messages endpoint for conversation history.
+        Use `page_size` and
+        `page_token` for pagination, and the messages endpoint for conversation history.
+
+        With `account_id`, list only conversations linked to that account and require
+        current account access. Without it, list only conversations with no linked
+        account.
 
         Args:
-          account_id: Account ID for the request
+          account_id: Lists only conversations for this account, or unlinked conversations when
+              omitted. Other reads authorize the resource's linked account. Omit when no
+              account is selected; empty values and the string null are invalid.
 
           page_size: The number of items to return per page. Only used when page_token is not
               provided.
@@ -421,10 +445,11 @@ class AsyncThreadsResource(AsyncAPIResource):
         self,
         thread_id: str,
         *,
-        account_id: int,
         text: str,
+        account_id: Optional[int] | Omit = omit,
         capabilities: List[Literal["PREFILL_ORDER", "OPEN_CHART", "OPEN_SCREENER", "OPEN_ENTITLEMENT_CONSENT"]]
         | Omit = omit,
+        context: Optional[TurnContextParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -433,17 +458,25 @@ class AsyncThreadsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ThreadCreateMessageResponse:
         """
-        Continue an existing conversation thread.
-
-        Appends a new user message to the thread and starts an assistant response. Only
-        one response may be active per thread at a time — if the previous turn is still
-        in progress, this endpoint returns **409 Conflict**. Wait for the active
-        response to reach a terminal status before submitting the next turn.
-
+        Append a user message to an existing thread and start an assistant response.
         Poll the returned `response_id` via `GET /omni-ai/responses/{response_id}` for
         assistant output.
 
+        Only one response may be active per thread. Wait for it to reach a terminal
+        status before submitting another turn; otherwise this endpoint returns 409.
+
+        The first accepted selected-account message links an unlinked thread. A linked
+        thread keeps its account regardless of omission or another selection. A changed
+        scope also returns 409 without accepting a turn.
+
         Args:
+          account_id: Selected account for creation or the first account-linked turn. Omit for an
+              unlinked conversation. An existing account link remains authoritative even when
+              another account is selected.
+
+          context: Snapshots for this instant-chat message. Omission does not remove earlier
+              attachments.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -458,9 +491,10 @@ class AsyncThreadsResource(AsyncAPIResource):
             path_template("/v1/omni-ai/threads/{thread_id}/messages", thread_id=thread_id),
             body=await async_maybe_transform(
                 {
-                    "account_id": account_id,
                     "text": text,
+                    "account_id": account_id,
                     "capabilities": capabilities,
+                    "context": context,
                 },
                 thread_create_message_params.ThreadCreateMessageParams,
             ),
@@ -473,10 +507,11 @@ class AsyncThreadsResource(AsyncAPIResource):
     async def create_thread(
         self,
         *,
-        account_id: int,
         type: Literal["instant", "deep_insights"],
+        account_id: Optional[int] | Omit = omit,
         capabilities: List[Literal["PREFILL_ORDER", "OPEN_CHART", "OPEN_SCREENER", "OPEN_ENTITLEMENT_CONSENT"]]
         | Omit = omit,
+        context: Optional[TurnContextParam] | Omit = omit,
         target: Optional[thread_create_thread_params.Target] | Omit = omit,
         text: Optional[str] | Omit = omit,
         thesis: Optional[str] | Omit = omit,
@@ -487,21 +522,27 @@ class AsyncThreadsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ThreadCreateThreadResponse:
-        """
-        Create a new conversation thread.
+        """Atomically create a conversation and submit its first user turn.
 
-        Atomically creates a new thread and submits the first user turn. The response
-        contains a `response_id` that should be polled via
-        `GET /omni-ai/responses/{response_id}` for assistant output.
+        Use `instant`
+        with `text` for a prompt, or `deep_insights` with a ticker `target` and optional
+        `thesis` for long-form research.
 
-        Two creation modes are supported:
+        Poll the returned `response_id` via `GET /omni-ai/responses/{response_id}` for
+        assistant output.
 
-        - **instant** — provide `text` with a natural-language prompt.
-        - **deep_insights** — provide a `target` ticker and optional `thesis` for
-          long-form research.
+        Omit `account_id` to start without an account. The first accepted turn with a
+        selected account links that account permanently. Reuse `Idempotency-Key` only
+        for an identical request.
 
         Args:
           type: Thread creation mode.
+
+          account_id: Selected account for creation or the first account-linked turn. Omit for an
+              unlinked conversation. An existing account link remains authoritative even when
+              another account is selected.
+
+          context: Snapshots for the first instant-chat message. Omit to attach no new context.
 
           target: Deep-insights target payload.
 
@@ -517,9 +558,10 @@ class AsyncThreadsResource(AsyncAPIResource):
             "/v1/omni-ai/threads",
             body=await async_maybe_transform(
                 {
-                    "account_id": account_id,
                     "type": type,
+                    "account_id": account_id,
                     "capabilities": capabilities,
+                    "context": context,
                     "target": target,
                     "text": text,
                     "thesis": thesis,
@@ -536,7 +578,7 @@ class AsyncThreadsResource(AsyncAPIResource):
         self,
         thread_id: str,
         *,
-        account_id: int,
+        account_id: int | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -547,18 +589,18 @@ class AsyncThreadsResource(AsyncAPIResource):
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ThreadGetMessagesResponse:
         """
-        List finalized messages in a thread.
+        List finalized messages, including messages created before the account link.
+        Return the latest page by default, in chronological order within each page. Use
+        the returned page token to navigate history.
 
-        Returns the latest page of **finalized** messages by default, with messages
-        within each page ordered chronologically. Messages from in-progress assistant
-        turns are excluded — use `GET /omni-ai/threads/{thread_id}/response` or
-        `GET /omni-ai/responses/{response_id}` for live output.
-
-        If the last finalized message has role `USER`, an active response likely exists
-        and should be polled separately.
+        In-progress assistant output is not included. Poll
+        `GET /omni-ai/responses/{response_id}` until the response reaches a terminal
+        status, then read its finalized message here.
 
         Args:
-          account_id: Account ID for the request
+          account_id: Lists only conversations for this account, or unlinked conversations when
+              omitted. Other reads authorize the resource's linked account. Omit when no
+              account is selected; empty values and the string null are invalid.
 
           page_size: The number of items to return per page. Only used when page_token is not
               provided.
@@ -599,7 +641,7 @@ class AsyncThreadsResource(AsyncAPIResource):
         self,
         thread_id: str,
         *,
-        account_id: int,
+        account_id: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -607,16 +649,17 @@ class AsyncThreadsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ThreadGetThreadByIDResponse:
-        """Get a specific thread.
+        """Read an owned thread's metadata.
 
-        Returns metadata (title, timestamps) for a single thread.
+        Use `GET /omni-ai/threads/{thread_id}/messages`
+        for conversation history.
 
-        Does not include
-        messages — use `GET /omni-ai/threads/{thread_id}/messages` for conversation
-        history.
+        Omission or another account selection does not change authorization.
 
         Args:
-          account_id: Account ID for the request
+          account_id: Lists only conversations for this account, or unlinked conversations when
+              omitted. Other reads authorize the resource's linked account. Omit when no
+              account is selected; empty values and the string null are invalid.
 
           extra_headers: Send extra headers
 
@@ -646,7 +689,7 @@ class AsyncThreadsResource(AsyncAPIResource):
         self,
         thread_id: str,
         *,
-        account_id: int,
+        account_id: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -654,18 +697,18 @@ class AsyncThreadsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ThreadGetThreadResponseResponse:
-        """
-        Get the active response for a thread.
+        """Look up the currently active response without knowing its `response_id`.
 
-        Convenience endpoint to look up the currently active response for a thread
-        without knowing the `response_id`. Useful when reloading a thread whose last
-        finalized message is a `USER` message — this indicates an assistant turn is
-        likely in progress.
+        Use
+        this endpoint when reopening a thread whose assistant turn may still be in
+        progress.
 
-        Returns **404** if no active response exists (the thread is idle).
+        An idle owned thread returns HTTP 200 with `data: null`.
 
         Args:
-          account_id: Account ID for the request
+          account_id: Lists only conversations for this account, or unlinked conversations when
+              omitted. Other reads authorize the resource's linked account. Omit when no
+              account is selected; empty values and the string null are invalid.
 
           extra_headers: Send extra headers
 
@@ -694,7 +737,7 @@ class AsyncThreadsResource(AsyncAPIResource):
     async def get_threads(
         self,
         *,
-        account_id: int,
+        account_id: int | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -704,15 +747,19 @@ class AsyncThreadsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> ThreadGetThreadsResponse:
-        """
-        List conversation threads.
+        """List authorized conversation metadata, newest first.
 
-        Returns thread metadata ordered by most recently created first. Use `page_size`
-        and `page_token` for pagination. Thread objects contain only metadata (title,
-        timestamps) — use the messages endpoint for conversation history.
+        Use `page_size` and
+        `page_token` for pagination, and the messages endpoint for conversation history.
+
+        With `account_id`, list only conversations linked to that account and require
+        current account access. Without it, list only conversations with no linked
+        account.
 
         Args:
-          account_id: Account ID for the request
+          account_id: Lists only conversations for this account, or unlinked conversations when
+              omitted. Other reads authorize the resource's linked account. Omit when no
+              account is selected; empty values and the string null are invalid.
 
           page_size: The number of items to return per page. Only used when page_token is not
               provided.

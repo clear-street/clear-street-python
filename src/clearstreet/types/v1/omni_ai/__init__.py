@@ -6,13 +6,17 @@ from .thread import Thread as Thread
 from .message import Message as Message
 from .response import Response as Response
 from .thread_list import ThreadList as ThreadList
+from .context_item import ContextItem as ContextItem
 from .error_status import ErrorStatus as ErrorStatus
 from .message_list import MessageList as MessageList
 from .message_role import MessageRole as MessageRole
+from .turn_context import TurnContext as TurnContext
 from .message_content import MessageContent as MessageContent
 from .message_outcome import MessageOutcome as MessageOutcome
 from .response_status import ResponseStatus as ResponseStatus
 from .response_content import ResponseContent as ResponseContent
+from .context_item_param import ContextItemParam as ContextItemParam
+from .turn_context_param import TurnContextParam as TurnContextParam
 from .entitlement_resource import EntitlementResource as EntitlementResource
 from .message_content_part import MessageContentPart as MessageContentPart
 from .response_content_part import ResponseContentPart as ResponseContentPart

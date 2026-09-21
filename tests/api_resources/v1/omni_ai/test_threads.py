@@ -9,6 +9,7 @@ import pytest
 
 from clearstreet import ClearStreet, AsyncClearStreet
 from tests.utils import assert_matches_type
+from clearstreet._utils import parse_datetime
 from clearstreet.types.v1.omni_ai import (
     ThreadGetThreadsResponse,
     ThreadGetMessagesResponse,
@@ -28,7 +29,6 @@ class TestThreads:
     def test_method_create_message(self, client: ClearStreet) -> None:
         thread = client.v1.omni_ai.threads.create_message(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=19816,
             text="Compare that to AMD.",
         )
         assert_matches_type(ThreadCreateMessageResponse, thread, path=["response"])
@@ -37,9 +37,23 @@ class TestThreads:
     def test_method_create_message_with_all_params(self, client: ClearStreet) -> None:
         thread = client.v1.omni_ai.threads.create_message(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=19816,
             text="Compare that to AMD.",
+            account_id=19816,
             capabilities=["PREFILL_ORDER"],
+            context={
+                "items": [
+                    {
+                        "data": {
+                            "change_pct": "bar",
+                            "range": "bar",
+                            "ticker": "bar",
+                        },
+                        "kind": "chart",
+                        "label": "NVDA intraday performance",
+                        "captured_at": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    }
+                ]
+            },
         )
         assert_matches_type(ThreadCreateMessageResponse, thread, path=["response"])
 
@@ -47,7 +61,6 @@ class TestThreads:
     def test_raw_response_create_message(self, client: ClearStreet) -> None:
         response = client.v1.omni_ai.threads.with_raw_response.create_message(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=19816,
             text="Compare that to AMD.",
         )
 
@@ -60,7 +73,6 @@ class TestThreads:
     def test_streaming_response_create_message(self, client: ClearStreet) -> None:
         with client.v1.omni_ai.threads.with_streaming_response.create_message(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=19816,
             text="Compare that to AMD.",
         ) as response:
             assert not response.is_closed
@@ -76,14 +88,12 @@ class TestThreads:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `thread_id` but received ''"):
             client.v1.omni_ai.threads.with_raw_response.create_message(
                 thread_id="",
-                account_id=19816,
                 text="Compare that to AMD.",
             )
 
     @parametrize
     def test_method_create_thread(self, client: ClearStreet) -> None:
         thread = client.v1.omni_ai.threads.create_thread(
-            account_id=19816,
             type="instant",
         )
         assert_matches_type(ThreadCreateThreadResponse, thread, path=["response"])
@@ -91,9 +101,23 @@ class TestThreads:
     @parametrize
     def test_method_create_thread_with_all_params(self, client: ClearStreet) -> None:
         thread = client.v1.omni_ai.threads.create_thread(
-            account_id=19816,
             type="instant",
+            account_id=19816,
             capabilities=["PREFILL_ORDER"],
+            context={
+                "items": [
+                    {
+                        "data": {
+                            "change_pct": "bar",
+                            "range": "bar",
+                            "ticker": "bar",
+                        },
+                        "kind": "chart",
+                        "label": "NVDA intraday performance",
+                        "captured_at": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    }
+                ]
+            },
             target={
                 "ticker": "ticker",
                 "type": "ticker",
@@ -106,7 +130,6 @@ class TestThreads:
     @parametrize
     def test_raw_response_create_thread(self, client: ClearStreet) -> None:
         response = client.v1.omni_ai.threads.with_raw_response.create_thread(
-            account_id=19816,
             type="instant",
         )
 
@@ -118,7 +141,6 @@ class TestThreads:
     @parametrize
     def test_streaming_response_create_thread(self, client: ClearStreet) -> None:
         with client.v1.omni_ai.threads.with_streaming_response.create_thread(
-            account_id=19816,
             type="instant",
         ) as response:
             assert not response.is_closed
@@ -133,7 +155,6 @@ class TestThreads:
     def test_method_get_messages(self, client: ClearStreet) -> None:
         thread = client.v1.omni_ai.threads.get_messages(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
         )
         assert_matches_type(ThreadGetMessagesResponse, thread, path=["response"])
 
@@ -141,7 +162,7 @@ class TestThreads:
     def test_method_get_messages_with_all_params(self, client: ClearStreet) -> None:
         thread = client.v1.omni_ai.threads.get_messages(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
+            account_id=1,
             page_size=1,
             page_token="U3RhaW5sZXNzIHJvY2tz",
         )
@@ -151,7 +172,6 @@ class TestThreads:
     def test_raw_response_get_messages(self, client: ClearStreet) -> None:
         response = client.v1.omni_ai.threads.with_raw_response.get_messages(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
         )
 
         assert response.is_closed is True
@@ -163,7 +183,6 @@ class TestThreads:
     def test_streaming_response_get_messages(self, client: ClearStreet) -> None:
         with client.v1.omni_ai.threads.with_streaming_response.get_messages(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -178,14 +197,20 @@ class TestThreads:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `thread_id` but received ''"):
             client.v1.omni_ai.threads.with_raw_response.get_messages(
                 thread_id="",
-                account_id=0,
             )
 
     @parametrize
     def test_method_get_thread_by_id(self, client: ClearStreet) -> None:
         thread = client.v1.omni_ai.threads.get_thread_by_id(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
+        )
+        assert_matches_type(ThreadGetThreadByIDResponse, thread, path=["response"])
+
+    @parametrize
+    def test_method_get_thread_by_id_with_all_params(self, client: ClearStreet) -> None:
+        thread = client.v1.omni_ai.threads.get_thread_by_id(
+            thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id=1,
         )
         assert_matches_type(ThreadGetThreadByIDResponse, thread, path=["response"])
 
@@ -193,7 +218,6 @@ class TestThreads:
     def test_raw_response_get_thread_by_id(self, client: ClearStreet) -> None:
         response = client.v1.omni_ai.threads.with_raw_response.get_thread_by_id(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
         )
 
         assert response.is_closed is True
@@ -205,7 +229,6 @@ class TestThreads:
     def test_streaming_response_get_thread_by_id(self, client: ClearStreet) -> None:
         with client.v1.omni_ai.threads.with_streaming_response.get_thread_by_id(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -220,14 +243,20 @@ class TestThreads:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `thread_id` but received ''"):
             client.v1.omni_ai.threads.with_raw_response.get_thread_by_id(
                 thread_id="",
-                account_id=0,
             )
 
     @parametrize
     def test_method_get_thread_response(self, client: ClearStreet) -> None:
         thread = client.v1.omni_ai.threads.get_thread_response(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
+        )
+        assert_matches_type(ThreadGetThreadResponseResponse, thread, path=["response"])
+
+    @parametrize
+    def test_method_get_thread_response_with_all_params(self, client: ClearStreet) -> None:
+        thread = client.v1.omni_ai.threads.get_thread_response(
+            thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id=1,
         )
         assert_matches_type(ThreadGetThreadResponseResponse, thread, path=["response"])
 
@@ -235,7 +264,6 @@ class TestThreads:
     def test_raw_response_get_thread_response(self, client: ClearStreet) -> None:
         response = client.v1.omni_ai.threads.with_raw_response.get_thread_response(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
         )
 
         assert response.is_closed is True
@@ -247,7 +275,6 @@ class TestThreads:
     def test_streaming_response_get_thread_response(self, client: ClearStreet) -> None:
         with client.v1.omni_ai.threads.with_streaming_response.get_thread_response(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -262,20 +289,17 @@ class TestThreads:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `thread_id` but received ''"):
             client.v1.omni_ai.threads.with_raw_response.get_thread_response(
                 thread_id="",
-                account_id=0,
             )
 
     @parametrize
     def test_method_get_threads(self, client: ClearStreet) -> None:
-        thread = client.v1.omni_ai.threads.get_threads(
-            account_id=0,
-        )
+        thread = client.v1.omni_ai.threads.get_threads()
         assert_matches_type(ThreadGetThreadsResponse, thread, path=["response"])
 
     @parametrize
     def test_method_get_threads_with_all_params(self, client: ClearStreet) -> None:
         thread = client.v1.omni_ai.threads.get_threads(
-            account_id=0,
+            account_id=1,
             page_size=1,
             page_token="U3RhaW5sZXNzIHJvY2tz",
         )
@@ -283,9 +307,7 @@ class TestThreads:
 
     @parametrize
     def test_raw_response_get_threads(self, client: ClearStreet) -> None:
-        response = client.v1.omni_ai.threads.with_raw_response.get_threads(
-            account_id=0,
-        )
+        response = client.v1.omni_ai.threads.with_raw_response.get_threads()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -294,9 +316,7 @@ class TestThreads:
 
     @parametrize
     def test_streaming_response_get_threads(self, client: ClearStreet) -> None:
-        with client.v1.omni_ai.threads.with_streaming_response.get_threads(
-            account_id=0,
-        ) as response:
+        with client.v1.omni_ai.threads.with_streaming_response.get_threads() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
@@ -315,7 +335,6 @@ class TestAsyncThreads:
     async def test_method_create_message(self, async_client: AsyncClearStreet) -> None:
         thread = await async_client.v1.omni_ai.threads.create_message(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=19816,
             text="Compare that to AMD.",
         )
         assert_matches_type(ThreadCreateMessageResponse, thread, path=["response"])
@@ -324,9 +343,23 @@ class TestAsyncThreads:
     async def test_method_create_message_with_all_params(self, async_client: AsyncClearStreet) -> None:
         thread = await async_client.v1.omni_ai.threads.create_message(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=19816,
             text="Compare that to AMD.",
+            account_id=19816,
             capabilities=["PREFILL_ORDER"],
+            context={
+                "items": [
+                    {
+                        "data": {
+                            "change_pct": "bar",
+                            "range": "bar",
+                            "ticker": "bar",
+                        },
+                        "kind": "chart",
+                        "label": "NVDA intraday performance",
+                        "captured_at": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    }
+                ]
+            },
         )
         assert_matches_type(ThreadCreateMessageResponse, thread, path=["response"])
 
@@ -334,7 +367,6 @@ class TestAsyncThreads:
     async def test_raw_response_create_message(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.omni_ai.threads.with_raw_response.create_message(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=19816,
             text="Compare that to AMD.",
         )
 
@@ -347,7 +379,6 @@ class TestAsyncThreads:
     async def test_streaming_response_create_message(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.omni_ai.threads.with_streaming_response.create_message(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=19816,
             text="Compare that to AMD.",
         ) as response:
             assert not response.is_closed
@@ -363,14 +394,12 @@ class TestAsyncThreads:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `thread_id` but received ''"):
             await async_client.v1.omni_ai.threads.with_raw_response.create_message(
                 thread_id="",
-                account_id=19816,
                 text="Compare that to AMD.",
             )
 
     @parametrize
     async def test_method_create_thread(self, async_client: AsyncClearStreet) -> None:
         thread = await async_client.v1.omni_ai.threads.create_thread(
-            account_id=19816,
             type="instant",
         )
         assert_matches_type(ThreadCreateThreadResponse, thread, path=["response"])
@@ -378,9 +407,23 @@ class TestAsyncThreads:
     @parametrize
     async def test_method_create_thread_with_all_params(self, async_client: AsyncClearStreet) -> None:
         thread = await async_client.v1.omni_ai.threads.create_thread(
-            account_id=19816,
             type="instant",
+            account_id=19816,
             capabilities=["PREFILL_ORDER"],
+            context={
+                "items": [
+                    {
+                        "data": {
+                            "change_pct": "bar",
+                            "range": "bar",
+                            "ticker": "bar",
+                        },
+                        "kind": "chart",
+                        "label": "NVDA intraday performance",
+                        "captured_at": parse_datetime("2019-12-27T18:11:19.117Z"),
+                    }
+                ]
+            },
             target={
                 "ticker": "ticker",
                 "type": "ticker",
@@ -393,7 +436,6 @@ class TestAsyncThreads:
     @parametrize
     async def test_raw_response_create_thread(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.omni_ai.threads.with_raw_response.create_thread(
-            account_id=19816,
             type="instant",
         )
 
@@ -405,7 +447,6 @@ class TestAsyncThreads:
     @parametrize
     async def test_streaming_response_create_thread(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.omni_ai.threads.with_streaming_response.create_thread(
-            account_id=19816,
             type="instant",
         ) as response:
             assert not response.is_closed
@@ -420,7 +461,6 @@ class TestAsyncThreads:
     async def test_method_get_messages(self, async_client: AsyncClearStreet) -> None:
         thread = await async_client.v1.omni_ai.threads.get_messages(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
         )
         assert_matches_type(ThreadGetMessagesResponse, thread, path=["response"])
 
@@ -428,7 +468,7 @@ class TestAsyncThreads:
     async def test_method_get_messages_with_all_params(self, async_client: AsyncClearStreet) -> None:
         thread = await async_client.v1.omni_ai.threads.get_messages(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
+            account_id=1,
             page_size=1,
             page_token="U3RhaW5sZXNzIHJvY2tz",
         )
@@ -438,7 +478,6 @@ class TestAsyncThreads:
     async def test_raw_response_get_messages(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.omni_ai.threads.with_raw_response.get_messages(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
         )
 
         assert response.is_closed is True
@@ -450,7 +489,6 @@ class TestAsyncThreads:
     async def test_streaming_response_get_messages(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.omni_ai.threads.with_streaming_response.get_messages(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -465,14 +503,20 @@ class TestAsyncThreads:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `thread_id` but received ''"):
             await async_client.v1.omni_ai.threads.with_raw_response.get_messages(
                 thread_id="",
-                account_id=0,
             )
 
     @parametrize
     async def test_method_get_thread_by_id(self, async_client: AsyncClearStreet) -> None:
         thread = await async_client.v1.omni_ai.threads.get_thread_by_id(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
+        )
+        assert_matches_type(ThreadGetThreadByIDResponse, thread, path=["response"])
+
+    @parametrize
+    async def test_method_get_thread_by_id_with_all_params(self, async_client: AsyncClearStreet) -> None:
+        thread = await async_client.v1.omni_ai.threads.get_thread_by_id(
+            thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id=1,
         )
         assert_matches_type(ThreadGetThreadByIDResponse, thread, path=["response"])
 
@@ -480,7 +524,6 @@ class TestAsyncThreads:
     async def test_raw_response_get_thread_by_id(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.omni_ai.threads.with_raw_response.get_thread_by_id(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
         )
 
         assert response.is_closed is True
@@ -492,7 +535,6 @@ class TestAsyncThreads:
     async def test_streaming_response_get_thread_by_id(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.omni_ai.threads.with_streaming_response.get_thread_by_id(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -507,14 +549,20 @@ class TestAsyncThreads:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `thread_id` but received ''"):
             await async_client.v1.omni_ai.threads.with_raw_response.get_thread_by_id(
                 thread_id="",
-                account_id=0,
             )
 
     @parametrize
     async def test_method_get_thread_response(self, async_client: AsyncClearStreet) -> None:
         thread = await async_client.v1.omni_ai.threads.get_thread_response(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
+        )
+        assert_matches_type(ThreadGetThreadResponseResponse, thread, path=["response"])
+
+    @parametrize
+    async def test_method_get_thread_response_with_all_params(self, async_client: AsyncClearStreet) -> None:
+        thread = await async_client.v1.omni_ai.threads.get_thread_response(
+            thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id=1,
         )
         assert_matches_type(ThreadGetThreadResponseResponse, thread, path=["response"])
 
@@ -522,7 +570,6 @@ class TestAsyncThreads:
     async def test_raw_response_get_thread_response(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.omni_ai.threads.with_raw_response.get_thread_response(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
         )
 
         assert response.is_closed is True
@@ -534,7 +581,6 @@ class TestAsyncThreads:
     async def test_streaming_response_get_thread_response(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.omni_ai.threads.with_streaming_response.get_thread_response(
             thread_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -549,20 +595,17 @@ class TestAsyncThreads:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `thread_id` but received ''"):
             await async_client.v1.omni_ai.threads.with_raw_response.get_thread_response(
                 thread_id="",
-                account_id=0,
             )
 
     @parametrize
     async def test_method_get_threads(self, async_client: AsyncClearStreet) -> None:
-        thread = await async_client.v1.omni_ai.threads.get_threads(
-            account_id=0,
-        )
+        thread = await async_client.v1.omni_ai.threads.get_threads()
         assert_matches_type(ThreadGetThreadsResponse, thread, path=["response"])
 
     @parametrize
     async def test_method_get_threads_with_all_params(self, async_client: AsyncClearStreet) -> None:
         thread = await async_client.v1.omni_ai.threads.get_threads(
-            account_id=0,
+            account_id=1,
             page_size=1,
             page_token="U3RhaW5sZXNzIHJvY2tz",
         )
@@ -570,9 +613,7 @@ class TestAsyncThreads:
 
     @parametrize
     async def test_raw_response_get_threads(self, async_client: AsyncClearStreet) -> None:
-        response = await async_client.v1.omni_ai.threads.with_raw_response.get_threads(
-            account_id=0,
-        )
+        response = await async_client.v1.omni_ai.threads.with_raw_response.get_threads()
 
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -581,9 +622,7 @@ class TestAsyncThreads:
 
     @parametrize
     async def test_streaming_response_get_threads(self, async_client: AsyncClearStreet) -> None:
-        async with async_client.v1.omni_ai.threads.with_streaming_response.get_threads(
-            account_id=0,
-        ) as response:
+        async with async_client.v1.omni_ai.threads.with_streaming_response.get_threads() as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 

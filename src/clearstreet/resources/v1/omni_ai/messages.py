@@ -53,7 +53,7 @@ class MessagesResource(SyncAPIResource):
         self,
         message_id: str,
         *,
-        account_id: int,
+        account_id: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -61,16 +61,15 @@ class MessagesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MessageGetMessageByIDResponse:
-        """Get a finalized message by ID.
-
-        Returns a single finalized message.
-
-        Returns **404** if the message belongs to an
-        in-progress assistant turn (use the response endpoint for live output). Once the
-        turn completes, the message becomes available here.
+        """
+        Read a finalized message using its parent thread for ownership and
+        linked-account authorization. In-progress assistant messages are not available
+        here; use the response polling endpoint instead.
 
         Args:
-          account_id: Account ID for the request
+          account_id: Lists only conversations for this account, or unlinked conversations when
+              omitted. Other reads authorize the resource's linked account. Omit when no
+              account is selected; empty values and the string null are invalid.
 
           extra_headers: Send extra headers
 
@@ -100,8 +99,8 @@ class MessagesResource(SyncAPIResource):
         self,
         message_id: str,
         *,
-        account_id: int,
         score: int,
+        account_id: Optional[int] | Omit = omit,
         comment: str | Omit = omit,
         metadata: Optional[object] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -111,17 +110,19 @@ class MessagesResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MessageSubmitFeedbackResponse:
-        """
-        Submit feedback on a finalized assistant message.
+        """Attach a score and optional comment to a finalized assistant message.
 
-        Attaches a score and optional comment to a finalized assistant message. Feedback
+        Feedback
         is only valid for messages with role `ASSISTANT` that have reached a terminal
         outcome.
 
-        Args:
-          account_id: Account ID for the request
+        The current thread account governs access even when the message predates its
+        account link.
 
-          score: Feedback score (-1, 0, +1 or 1-5)
+        Args:
+          score: Feedback score (-1, 0, +1 or 1-5).
+
+          account_id: Optional selection. Feedback always uses the thread's linked account.
 
           comment: Optional feedback comment
 
@@ -141,8 +142,8 @@ class MessagesResource(SyncAPIResource):
             path_template("/v1/omni-ai/messages/{message_id}/feedback", message_id=message_id),
             body=maybe_transform(
                 {
-                    "account_id": account_id,
                     "score": score,
+                    "account_id": account_id,
                     "comment": comment,
                     "metadata": metadata,
                 },
@@ -184,7 +185,7 @@ class AsyncMessagesResource(AsyncAPIResource):
         self,
         message_id: str,
         *,
-        account_id: int,
+        account_id: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -192,16 +193,15 @@ class AsyncMessagesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MessageGetMessageByIDResponse:
-        """Get a finalized message by ID.
-
-        Returns a single finalized message.
-
-        Returns **404** if the message belongs to an
-        in-progress assistant turn (use the response endpoint for live output). Once the
-        turn completes, the message becomes available here.
+        """
+        Read a finalized message using its parent thread for ownership and
+        linked-account authorization. In-progress assistant messages are not available
+        here; use the response polling endpoint instead.
 
         Args:
-          account_id: Account ID for the request
+          account_id: Lists only conversations for this account, or unlinked conversations when
+              omitted. Other reads authorize the resource's linked account. Omit when no
+              account is selected; empty values and the string null are invalid.
 
           extra_headers: Send extra headers
 
@@ -231,8 +231,8 @@ class AsyncMessagesResource(AsyncAPIResource):
         self,
         message_id: str,
         *,
-        account_id: int,
         score: int,
+        account_id: Optional[int] | Omit = omit,
         comment: str | Omit = omit,
         metadata: Optional[object] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -242,17 +242,19 @@ class AsyncMessagesResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> MessageSubmitFeedbackResponse:
-        """
-        Submit feedback on a finalized assistant message.
+        """Attach a score and optional comment to a finalized assistant message.
 
-        Attaches a score and optional comment to a finalized assistant message. Feedback
+        Feedback
         is only valid for messages with role `ASSISTANT` that have reached a terminal
         outcome.
 
-        Args:
-          account_id: Account ID for the request
+        The current thread account governs access even when the message predates its
+        account link.
 
-          score: Feedback score (-1, 0, +1 or 1-5)
+        Args:
+          score: Feedback score (-1, 0, +1 or 1-5).
+
+          account_id: Optional selection. Feedback always uses the thread's linked account.
 
           comment: Optional feedback comment
 
@@ -272,8 +274,8 @@ class AsyncMessagesResource(AsyncAPIResource):
             path_template("/v1/omni-ai/messages/{message_id}/feedback", message_id=message_id),
             body=await async_maybe_transform(
                 {
-                    "account_id": account_id,
                     "score": score,
+                    "account_id": account_id,
                     "comment": comment,
                     "metadata": metadata,
                 },

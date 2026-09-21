@@ -24,7 +24,14 @@ class TestMessages:
     def test_method_get_message_by_id(self, client: ClearStreet) -> None:
         message = client.v1.omni_ai.messages.get_message_by_id(
             message_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
+        )
+        assert_matches_type(MessageGetMessageByIDResponse, message, path=["response"])
+
+    @parametrize
+    def test_method_get_message_by_id_with_all_params(self, client: ClearStreet) -> None:
+        message = client.v1.omni_ai.messages.get_message_by_id(
+            message_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id=1,
         )
         assert_matches_type(MessageGetMessageByIDResponse, message, path=["response"])
 
@@ -32,7 +39,6 @@ class TestMessages:
     def test_raw_response_get_message_by_id(self, client: ClearStreet) -> None:
         response = client.v1.omni_ai.messages.with_raw_response.get_message_by_id(
             message_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
         )
 
         assert response.is_closed is True
@@ -44,7 +50,6 @@ class TestMessages:
     def test_streaming_response_get_message_by_id(self, client: ClearStreet) -> None:
         with client.v1.omni_ai.messages.with_streaming_response.get_message_by_id(
             message_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -59,14 +64,12 @@ class TestMessages:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `message_id` but received ''"):
             client.v1.omni_ai.messages.with_raw_response.get_message_by_id(
                 message_id="",
-                account_id=0,
             )
 
     @parametrize
     def test_method_submit_feedback(self, client: ClearStreet) -> None:
         message = client.v1.omni_ai.messages.submit_feedback(
             message_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
             score=0,
         )
         assert_matches_type(MessageSubmitFeedbackResponse, message, path=["response"])
@@ -75,8 +78,8 @@ class TestMessages:
     def test_method_submit_feedback_with_all_params(self, client: ClearStreet) -> None:
         message = client.v1.omni_ai.messages.submit_feedback(
             message_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
             score=0,
+            account_id=1,
             comment="comment",
             metadata={},
         )
@@ -86,7 +89,6 @@ class TestMessages:
     def test_raw_response_submit_feedback(self, client: ClearStreet) -> None:
         response = client.v1.omni_ai.messages.with_raw_response.submit_feedback(
             message_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
             score=0,
         )
 
@@ -99,7 +101,6 @@ class TestMessages:
     def test_streaming_response_submit_feedback(self, client: ClearStreet) -> None:
         with client.v1.omni_ai.messages.with_streaming_response.submit_feedback(
             message_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
             score=0,
         ) as response:
             assert not response.is_closed
@@ -115,7 +116,6 @@ class TestMessages:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `message_id` but received ''"):
             client.v1.omni_ai.messages.with_raw_response.submit_feedback(
                 message_id="",
-                account_id=0,
                 score=0,
             )
 
@@ -129,7 +129,14 @@ class TestAsyncMessages:
     async def test_method_get_message_by_id(self, async_client: AsyncClearStreet) -> None:
         message = await async_client.v1.omni_ai.messages.get_message_by_id(
             message_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
+        )
+        assert_matches_type(MessageGetMessageByIDResponse, message, path=["response"])
+
+    @parametrize
+    async def test_method_get_message_by_id_with_all_params(self, async_client: AsyncClearStreet) -> None:
+        message = await async_client.v1.omni_ai.messages.get_message_by_id(
+            message_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
+            account_id=1,
         )
         assert_matches_type(MessageGetMessageByIDResponse, message, path=["response"])
 
@@ -137,7 +144,6 @@ class TestAsyncMessages:
     async def test_raw_response_get_message_by_id(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.omni_ai.messages.with_raw_response.get_message_by_id(
             message_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
         )
 
         assert response.is_closed is True
@@ -149,7 +155,6 @@ class TestAsyncMessages:
     async def test_streaming_response_get_message_by_id(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.omni_ai.messages.with_streaming_response.get_message_by_id(
             message_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -164,14 +169,12 @@ class TestAsyncMessages:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `message_id` but received ''"):
             await async_client.v1.omni_ai.messages.with_raw_response.get_message_by_id(
                 message_id="",
-                account_id=0,
             )
 
     @parametrize
     async def test_method_submit_feedback(self, async_client: AsyncClearStreet) -> None:
         message = await async_client.v1.omni_ai.messages.submit_feedback(
             message_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
             score=0,
         )
         assert_matches_type(MessageSubmitFeedbackResponse, message, path=["response"])
@@ -180,8 +183,8 @@ class TestAsyncMessages:
     async def test_method_submit_feedback_with_all_params(self, async_client: AsyncClearStreet) -> None:
         message = await async_client.v1.omni_ai.messages.submit_feedback(
             message_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
             score=0,
+            account_id=1,
             comment="comment",
             metadata={},
         )
@@ -191,7 +194,6 @@ class TestAsyncMessages:
     async def test_raw_response_submit_feedback(self, async_client: AsyncClearStreet) -> None:
         response = await async_client.v1.omni_ai.messages.with_raw_response.submit_feedback(
             message_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
             score=0,
         )
 
@@ -204,7 +206,6 @@ class TestAsyncMessages:
     async def test_streaming_response_submit_feedback(self, async_client: AsyncClearStreet) -> None:
         async with async_client.v1.omni_ai.messages.with_streaming_response.submit_feedback(
             message_id="182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e",
-            account_id=0,
             score=0,
         ) as response:
             assert not response.is_closed
@@ -220,6 +221,5 @@ class TestAsyncMessages:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `message_id` but received ''"):
             await async_client.v1.omni_ai.messages.with_raw_response.submit_feedback(
                 message_id="",
-                account_id=0,
                 score=0,
             )

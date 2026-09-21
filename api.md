@@ -317,6 +317,7 @@ Types:
 
 ```python
 from clearstreet.types.v1.omni_ai import (
+    ContextItem,
     CreateMessageResponse,
     CreateThreadResponse,
     Message,
@@ -327,6 +328,7 @@ from clearstreet.types.v1.omni_ai import (
     MessageRole,
     Thread,
     ThreadList,
+    TurnContext,
     ThreadCreateMessageResponse,
     ThreadCreateThreadResponse,
     ThreadGetMessagesResponse,

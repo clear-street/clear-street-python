@@ -8,7 +8,7 @@ __all__ = ["Thread"]
 
 
 class Thread(BaseModel):
-    """Thread metadata returned by list/get thread endpoints."""
+    """Thread metadata."""
 
     id: str
 
