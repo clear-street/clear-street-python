@@ -10,12 +10,15 @@ __all__ = ["PositionInstructionRejection"]
 class PositionInstructionRejection(BaseModel):
     """Machine-readable detail for a rejected position instruction.
 
-    Present on every rejected row that carries a `rejection_reason`, across the
-    full lifecycle — submit, cancel, get, and list. Branch on `reason` for
-    programmatic handling and template your own copy from `metadata`;
-    `rejection_reason` remains the human-readable fallback. Forward-only:
-    instructions rejected before this field shipped may carry only
-    `rejection_reason`.
+    Present on every rejected row, across the full lifecycle — submit, cancel,
+    get, and list. Branch on `reason` for programmatic handling and template your
+    own copy from `metadata`, or show `description` directly.
+    """
+
+    description: str
+    """Human-readable explanation of the rejection.
+
+    Duplicates the top-level `rejection_reason`; prefer this field.
     """
 
     domain: str
