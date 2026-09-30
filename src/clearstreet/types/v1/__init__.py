@@ -59,6 +59,7 @@ from .search_filter import SearchFilter as SearchFilter
 from .time_in_force import TimeInForce as TimeInForce
 from .account_status import AccountStatus as AccountStatus
 from .analyst_rating import AnalystRating as AnalystRating
+from .economic_event import EconomicEvent as EconomicEvent
 from .execution_list import ExecutionList as ExecutionList
 from .exercise_style import ExerciseStyle as ExerciseStyle
 from .feed_item_kind import FeedItemKind as FeedItemKind
@@ -93,6 +94,8 @@ from .filter_value_param import FilterValueParam as FilterValueParam
 from .fiscal_period_type import FiscalPeriodType as FiscalPeriodType
 from .option_expiry_date import OptionExpiryDate as OptionExpiryDate
 from .request_order_type import RequestOrderType as RequestOrderType
+from .economic_event_list import EconomicEventList as EconomicEventList
+from .economic_event_unit import EconomicEventUnit as EconomicEventUnit
 from .instrument_earnings import InstrumentEarnings as InstrumentEarnings
 from .market_hours_detail import MarketHoursDetail as MarketHoursDetail
 from .market_session_type import MarketSessionType as MarketSessionType
@@ -114,6 +117,7 @@ from .trailing_offset_type import TrailingOffsetType as TrailingOffsetType
 from .watchlist_entry_list import WatchlistEntryList as WatchlistEntryList
 from .watchlist_item_entry import WatchlistItemEntry as WatchlistItemEntry
 from .all_events_event_type import AllEventsEventType as AllEventsEventType
+from .economic_event_impact import EconomicEventImpact as EconomicEventImpact
 from .options_contract_list import OptionsContractList as OptionsContractList
 from .request_time_in_force import RequestTimeInForce as RequestTimeInForce
 from .instrument_events_data import InstrumentEventsData as InstrumentEventsData
@@ -277,6 +281,9 @@ from .calendar_get_market_hours_calendar_response import (
 from .position_get_position_instructions_response import (
     PositionGetPositionInstructionsResponse as PositionGetPositionInstructionsResponse,
 )
+from .calendar_get_economic_events_calendar_params import (
+    CalendarGetEconomicEventsCalendarParams as CalendarGetEconomicEventsCalendarParams,
+)
 from .instrument_data_get_instrument_events_params import (
     InstrumentDataGetInstrumentEventsParams as InstrumentDataGetInstrumentEventsParams,
 )
@@ -285,6 +292,9 @@ from .position_submit_position_instructions_params import (
 )
 from .position_cancel_position_instruction_response import (
     PositionCancelPositionInstructionResponse as PositionCancelPositionInstructionResponse,
+)
+from .calendar_get_economic_events_calendar_response import (
+    CalendarGetEconomicEventsCalendarResponse as CalendarGetEconomicEventsCalendarResponse,
 )
 from .instrument_data_get_instrument_events_response import (
     InstrumentDataGetInstrumentEventsResponse as InstrumentDataGetInstrumentEventsResponse,

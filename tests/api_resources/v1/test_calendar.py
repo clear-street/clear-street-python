@@ -12,6 +12,7 @@ from tests.utils import assert_matches_type
 from clearstreet.types.v1 import (
     CalendarGetClockResponse,
     CalendarGetMarketHoursCalendarResponse,
+    CalendarGetEconomicEventsCalendarResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -42,6 +43,47 @@ class TestCalendar:
 
             calendar = response.parse()
             assert_matches_type(CalendarGetClockResponse, calendar, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_get_economic_events_calendar(self, client: ClearStreet) -> None:
+        calendar = client.v1.calendar.get_economic_events_calendar()
+        assert_matches_type(CalendarGetEconomicEventsCalendarResponse, calendar, path=["response"])
+
+    @parametrize
+    def test_method_get_economic_events_calendar_with_all_params(self, client: ClearStreet) -> None:
+        calendar = client.v1.calendar.get_economic_events_calendar(
+            country="country",
+            impact=["NONE"],
+            page_size=1,
+            page_token="U3RhaW5sZXNzIHJvY2tz",
+            timestamp={
+                "gt": "gt",
+                "gte": "gte",
+                "lt": "lt",
+                "lte": "lte",
+            },
+        )
+        assert_matches_type(CalendarGetEconomicEventsCalendarResponse, calendar, path=["response"])
+
+    @parametrize
+    def test_raw_response_get_economic_events_calendar(self, client: ClearStreet) -> None:
+        response = client.v1.calendar.with_raw_response.get_economic_events_calendar()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        calendar = response.parse()
+        assert_matches_type(CalendarGetEconomicEventsCalendarResponse, calendar, path=["response"])
+
+    @parametrize
+    def test_streaming_response_get_economic_events_calendar(self, client: ClearStreet) -> None:
+        with client.v1.calendar.with_streaming_response.get_economic_events_calendar() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            calendar = response.parse()
+            assert_matches_type(CalendarGetEconomicEventsCalendarResponse, calendar, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -106,6 +148,47 @@ class TestAsyncCalendar:
 
             calendar = await response.parse()
             assert_matches_type(CalendarGetClockResponse, calendar, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_get_economic_events_calendar(self, async_client: AsyncClearStreet) -> None:
+        calendar = await async_client.v1.calendar.get_economic_events_calendar()
+        assert_matches_type(CalendarGetEconomicEventsCalendarResponse, calendar, path=["response"])
+
+    @parametrize
+    async def test_method_get_economic_events_calendar_with_all_params(self, async_client: AsyncClearStreet) -> None:
+        calendar = await async_client.v1.calendar.get_economic_events_calendar(
+            country="country",
+            impact=["NONE"],
+            page_size=1,
+            page_token="U3RhaW5sZXNzIHJvY2tz",
+            timestamp={
+                "gt": "gt",
+                "gte": "gte",
+                "lt": "lt",
+                "lte": "lte",
+            },
+        )
+        assert_matches_type(CalendarGetEconomicEventsCalendarResponse, calendar, path=["response"])
+
+    @parametrize
+    async def test_raw_response_get_economic_events_calendar(self, async_client: AsyncClearStreet) -> None:
+        response = await async_client.v1.calendar.with_raw_response.get_economic_events_calendar()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        calendar = await response.parse()
+        assert_matches_type(CalendarGetEconomicEventsCalendarResponse, calendar, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_get_economic_events_calendar(self, async_client: AsyncClearStreet) -> None:
+        async with async_client.v1.calendar.with_streaming_response.get_economic_events_calendar() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            calendar = await response.parse()
+            assert_matches_type(CalendarGetEconomicEventsCalendarResponse, calendar, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
