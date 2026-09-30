@@ -20,7 +20,11 @@ class Execution(BaseModel):
     """Identifier of the order this execution belongs to."""
 
     quantity: str
-    """Filled quantity."""
+    """Filled quantity.
+
+    For a strategy-level multileg fill this is the net strategy quantity, not a
+    per-leg quantity.
+    """
 
     side: Side
     """Side of the fill."""
@@ -31,8 +35,9 @@ class Execution(BaseModel):
     instrument_id: Optional[str] = None
     """Unique instrument identifier.
 
-    `null` when this fill has no single resolvable instrument. When a null/undefined
-    value is observed, it indicates it does not apply.
+    `null` when this is a strategy-level multileg fill whose legs are reported
+    individually in `legs[]`. When a null/undefined value is observed, it indicates
+    it does not apply.
     """
 
     price: Optional[str] = None
@@ -45,8 +50,9 @@ class Execution(BaseModel):
     symbol: Optional[str] = None
     """Trading symbol.
 
-    `null` when this fill has no single resolvable instrument. When a null/undefined
-    value is observed, it indicates it does not apply.
+    `null` when this is a strategy-level multileg fill whose legs are reported
+    individually in `legs[]`. When a null/undefined value is observed, it indicates
+    it does not apply.
     """
 
     underlying_instrument_id: Optional[str] = None

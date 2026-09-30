@@ -113,15 +113,17 @@ class Order(BaseModel):
     instrument_id: Optional[str] = None
     """Instrument identifier for the traded instrument.
 
-    `null` when the order has no single resolvable instrument. When a null/undefined
-    value is observed, it indicates it does not apply.
+    `null` when the order is a multileg strategy whose legs are reported
+    individually in `legs[]`. When a null/undefined value is observed, it indicates
+    it does not apply.
     """
 
     instrument_type: Optional[SecurityType] = None
     """Type of security.
 
-    `null` when the order has no single resolvable instrument. When a null/undefined
-    value is observed, it indicates it does not apply.
+    `null` when the order is a multileg strategy whose legs are reported
+    individually in `legs[]`. When a null/undefined value is observed, it indicates
+    it does not apply.
     """
 
     limit_offset: Optional[str] = None
@@ -161,8 +163,9 @@ class Order(BaseModel):
     symbol: Optional[str] = None
     """Trading symbol.
 
-    `null` when the order has no single resolvable instrument. When a null/undefined
-    value is observed, it indicates it does not apply.
+    `null` when the order is a multileg strategy whose legs are reported
+    individually in `legs[]`. When a null/undefined value is observed, it indicates
+    it does not apply.
     """
 
     trailing_limit_px: Optional[str] = None
