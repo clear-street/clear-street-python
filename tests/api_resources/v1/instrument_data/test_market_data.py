@@ -9,6 +9,7 @@ import pytest
 
 from clearstreet import ClearStreet, AsyncClearStreet
 from tests.utils import assert_matches_type
+from clearstreet._utils import parse_date
 from clearstreet.types.v1.instrument_data import (
     MarketDataGetSnapshotsResponse,
     MarketDataGetDailySummariesResponse,
@@ -65,7 +66,9 @@ class TestMarketData:
     @parametrize
     def test_method_get_snapshots_with_all_params(self, client: ClearStreet) -> None:
         market_data = client.v1.instrument_data.market_data.get_snapshots(
+            expiry=parse_date("2019-12-27"),
             instrument_ids=["x"],
+            underlying_instrument_id="x",
         )
         assert_matches_type(MarketDataGetSnapshotsResponse, market_data, path=["response"])
 
@@ -138,7 +141,9 @@ class TestAsyncMarketData:
     @parametrize
     async def test_method_get_snapshots_with_all_params(self, async_client: AsyncClearStreet) -> None:
         market_data = await async_client.v1.instrument_data.market_data.get_snapshots(
+            expiry=parse_date("2019-12-27"),
             instrument_ids=["x"],
+            underlying_instrument_id="x",
         )
         assert_matches_type(MarketDataGetSnapshotsResponse, market_data, path=["response"])
 

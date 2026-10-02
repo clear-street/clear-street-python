@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import typing_extensions
+from typing import Union
+from datetime import date
 
 import httpx
 
@@ -102,7 +104,9 @@ class MarketDataResource(SyncAPIResource):
     def get_snapshots(
         self,
         *,
+        expiry: Union[str, date] | Omit = omit,
         instrument_ids: SequenceNotStr[InstrumentIDOrSymbol] | Omit = omit,
+        underlying_instrument_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -113,10 +117,23 @@ class MarketDataResource(SyncAPIResource):
         """
         Get market data snapshots for one or more securities.
 
+        Two targeting modes, mutually exclusive: `instrument_ids` (1-100 ids), or
+        `underlying_instrument_id` + `expiry` together, which resolves the underlier's
+        option chain for that expiry and returns a snapshot for every contract in it
+        (uncapped).
+
         Args:
+          expiry: Filter the option chain to contracts expiring on this date (YYYY-MM-DD). Must be
+              provided together with `underlying_instrument_id`.
+
           instrument_ids: Comma-separated instrument IDs (UUID) or symbols (equity tickers or OSI option
-              symbols). Required; accepts 1 to 100 IDs. Duplicate resolved ids collapse to a
-              single row.
+              symbols). Accepts 1 to 100 IDs; duplicate resolved ids collapse to a single row.
+              Required unless `underlying_instrument_id` and `expiry` are provided; mutually
+              exclusive with that pair.
+
+          underlying_instrument_id: Instrument identifier or symbol of the underlying equity/index for an option
+              chain. Must be provided together with `expiry`; mutually exclusive with
+              `instrument_ids`.
 
           extra_headers: Send extra headers
 
@@ -134,7 +151,12 @@ class MarketDataResource(SyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=maybe_transform(
-                    {"instrument_ids": instrument_ids}, market_data_get_snapshots_params.MarketDataGetSnapshotsParams
+                    {
+                        "expiry": expiry,
+                        "instrument_ids": instrument_ids,
+                        "underlying_instrument_id": underlying_instrument_id,
+                    },
+                    market_data_get_snapshots_params.MarketDataGetSnapshotsParams,
                 ),
             ),
             cast_to=MarketDataGetSnapshotsResponse,
@@ -218,7 +240,9 @@ class AsyncMarketDataResource(AsyncAPIResource):
     async def get_snapshots(
         self,
         *,
+        expiry: Union[str, date] | Omit = omit,
         instrument_ids: SequenceNotStr[InstrumentIDOrSymbol] | Omit = omit,
+        underlying_instrument_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -229,10 +253,23 @@ class AsyncMarketDataResource(AsyncAPIResource):
         """
         Get market data snapshots for one or more securities.
 
+        Two targeting modes, mutually exclusive: `instrument_ids` (1-100 ids), or
+        `underlying_instrument_id` + `expiry` together, which resolves the underlier's
+        option chain for that expiry and returns a snapshot for every contract in it
+        (uncapped).
+
         Args:
+          expiry: Filter the option chain to contracts expiring on this date (YYYY-MM-DD). Must be
+              provided together with `underlying_instrument_id`.
+
           instrument_ids: Comma-separated instrument IDs (UUID) or symbols (equity tickers or OSI option
-              symbols). Required; accepts 1 to 100 IDs. Duplicate resolved ids collapse to a
-              single row.
+              symbols). Accepts 1 to 100 IDs; duplicate resolved ids collapse to a single row.
+              Required unless `underlying_instrument_id` and `expiry` are provided; mutually
+              exclusive with that pair.
+
+          underlying_instrument_id: Instrument identifier or symbol of the underlying equity/index for an option
+              chain. Must be provided together with `expiry`; mutually exclusive with
+              `instrument_ids`.
 
           extra_headers: Send extra headers
 
@@ -250,7 +287,12 @@ class AsyncMarketDataResource(AsyncAPIResource):
                 extra_body=extra_body,
                 timeout=timeout,
                 query=await async_maybe_transform(
-                    {"instrument_ids": instrument_ids}, market_data_get_snapshots_params.MarketDataGetSnapshotsParams
+                    {
+                        "expiry": expiry,
+                        "instrument_ids": instrument_ids,
+                        "underlying_instrument_id": underlying_instrument_id,
+                    },
+                    market_data_get_snapshots_params.MarketDataGetSnapshotsParams,
                 ),
             ),
             cast_to=MarketDataGetSnapshotsResponse,
