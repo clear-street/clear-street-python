@@ -8,7 +8,7 @@ from typing_extensions import Literal, Required, Annotated, TypeAlias, TypedDict
 
 from ..._utils import PropertyInfo
 
-__all__ = ["OrderStrategyParam", "Type", "UnionMember1", "UnionMember2"]
+__all__ = ["OrderStrategyParam", "Type", "UnionMember1", "UnionMember2", "UnionMember3"]
 
 
 class Type(TypedDict, total=False):
@@ -62,4 +62,14 @@ class UnionMember2(TypedDict, total=False):
     """
 
 
-OrderStrategyParam: TypeAlias = Union[Type, UnionMember1, UnionMember2]
+class UnionMember3(TypedDict, total=False):
+    """Direct Market Access. Routes the order straight to the named venue."""
+
+    destination: Required[str]
+    """Venue code the order is routed to."""
+
+    type: Required[Literal["DMA"]]
+    """Execution strategy type."""
+
+
+OrderStrategyParam: TypeAlias = Union[Type, UnionMember1, UnionMember2, UnionMember3]

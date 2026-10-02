@@ -6,7 +6,7 @@ from typing_extensions import Literal, TypeAlias
 
 from ..._models import BaseModel
 
-__all__ = ["OrderStrategy", "Type", "UnionMember1", "UnionMember2"]
+__all__ = ["OrderStrategy", "Type", "UnionMember1", "UnionMember2", "UnionMember3"]
 
 
 class Type(BaseModel):
@@ -60,4 +60,14 @@ class UnionMember2(BaseModel):
     """
 
 
-OrderStrategy: TypeAlias = Union[Type, UnionMember1, UnionMember2]
+class UnionMember3(BaseModel):
+    """Direct Market Access. Routes the order straight to the named venue."""
+
+    destination: str
+    """Venue code the order is routed to."""
+
+    type: Literal["DMA"]
+    """Execution strategy type."""
+
+
+OrderStrategy: TypeAlias = Union[Type, UnionMember1, UnionMember2, UnionMember3]

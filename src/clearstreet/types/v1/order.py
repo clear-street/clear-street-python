@@ -2,6 +2,7 @@
 
 from typing import TYPE_CHECKING, Dict, List, Optional
 from datetime import datetime
+from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
 
@@ -20,8 +21,11 @@ __all__ = ["Order", "Strategy"]
 class Strategy(BaseModel):
     """The execution strategy the order was submitted with, if any."""
 
-    type: str
+    type: Literal["SOR", "VWAP", "TWAP", "DMA"]
     """Execution strategy type."""
+
+    destination: Optional[str] = None
+    """Venue code the order is routed to. DMA only."""
 
     end_at: Optional[datetime] = None
     """UTC timestamp (RFC 3339) at which execution ends."""
