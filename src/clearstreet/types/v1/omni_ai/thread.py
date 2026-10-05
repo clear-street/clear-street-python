@@ -17,3 +17,7 @@ class Thread(BaseModel):
     title: str
 
     updated_at: datetime
+    """
+    Time of the last activity: a new message in the thread or a change to the
+    thread.
+    """
