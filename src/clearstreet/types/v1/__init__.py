@@ -28,6 +28,7 @@ from .order_list import OrderList as OrderList
 from .order_type import OrderType as OrderType
 from .chart_point import ChartPoint as ChartPoint
 from .combination import Combination as Combination
+from .locate_rate import LocateRate as LocateRate
 from .margin_type import MarginType as MarginType
 from .market_type import MarketType as MarketType
 from .modifier_op import ModifierOp as ModifierOp
@@ -92,6 +93,7 @@ from .screener_row_list import ScreenerRowList as ScreenerRowList
 from .structured_action import StructuredAction as StructuredAction
 from .filter_value_param import FilterValueParam as FilterValueParam
 from .fiscal_period_type import FiscalPeriodType as FiscalPeriodType
+from .locate_rate_result import LocateRateResult as LocateRateResult
 from .option_expiry_date import OptionExpiryDate as OptionExpiryDate
 from .request_order_type import RequestOrderType as RequestOrderType
 from .economic_event_list import EconomicEventList as EconomicEventList
@@ -127,6 +129,7 @@ from .margin_top_contributor import MarginTopContributor as MarginTopContributor
 from .add_watchlist_item_data import AddWatchlistItemData as AddWatchlistItemData
 from .instrument_fundamentals import InstrumentFundamentals as InstrumentFundamentals
 from .instrument_id_or_symbol import InstrumentIDOrSymbol as InstrumentIDOrSymbol
+from .locate_rate_result_list import LocateRateResultList as LocateRateResultList
 from .new_order_request_param import NewOrderRequestParam as NewOrderRequestParam
 from .order_get_orders_params import OrderGetOrdersParams as OrderGetOrdersParams
 from .request_position_effect import RequestPositionEffect as RequestPositionEffect
@@ -171,6 +174,7 @@ from .content_part_thinking_payload import ContentPartThinkingPayload as Content
 from .order_get_executions_response import OrderGetExecutionsResponse as OrderGetExecutionsResponse
 from .position_get_positions_params import PositionGetPositionsParams as PositionGetPositionsParams
 from .instrument_cash_flow_statement import InstrumentCashFlowStatement as InstrumentCashFlowStatement
+from .locate_get_locate_rates_params import LocateGetLocateRatesParams as LocateGetLocateRatesParams
 from .order_get_order_by_id_response import OrderGetOrderByIDResponse as OrderGetOrderByIDResponse
 from .position_close_position_params import PositionClosePositionParams as PositionClosePositionParams
 from .position_instruction_rejection import PositionInstructionRejection as PositionInstructionRejection
@@ -186,6 +190,7 @@ from .structured_action_button_action import StructuredActionButtonAction as Str
 from .watchlist_get_watchlists_params import WatchlistGetWatchlistsParams as WatchlistGetWatchlistsParams
 from .api_version_get_version_response import APIVersionGetVersionResponse as APIVersionGetVersionResponse
 from .instrument_income_statement_list import InstrumentIncomeStatementList as InstrumentIncomeStatementList
+from .locate_get_locate_rates_response import LocateGetLocateRatesResponse as LocateGetLocateRatesResponse
 from .omni_feed_post_feed_event_params import OmniFeedPostFeedEventParams as OmniFeedPostFeedEventParams
 from .order_cancel_open_order_response import OrderCancelOpenOrderResponse as OrderCancelOpenOrderResponse
 from .position_close_position_response import PositionClosePositionResponse as PositionClosePositionResponse
@@ -222,6 +227,7 @@ from .screener_get_screener_by_id_response import ScreenerGetScreenerByIDRespons
 from .account_get_account_balances_response import (
     AccountGetAccountBalancesResponse as AccountGetAccountBalancesResponse,
 )
+from .locate_get_locate_rate_by_id_response import LocateGetLocateRateByIDResponse as LocateGetLocateRateByIDResponse
 from .order_cancel_all_open_orders_response import OrderCancelAllOpenOrdersResponse as OrderCancelAllOpenOrdersResponse
 from .private_market_get_spv_by_id_response import PrivateMarketGetSpvByIDResponse as PrivateMarketGetSpvByIDResponse
 from .watchlist_add_watchlist_item_response import (

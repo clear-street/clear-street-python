@@ -10,6 +10,14 @@ from .orders import (
     OrdersResourceWithStreamingResponse,
     AsyncOrdersResourceWithStreamingResponse,
 )
+from .locates import (
+    LocatesResource,
+    AsyncLocatesResource,
+    LocatesResourceWithRawResponse,
+    AsyncLocatesResourceWithRawResponse,
+    LocatesResourceWithStreamingResponse,
+    AsyncLocatesResourceWithStreamingResponse,
+)
 from .accounts import (
     AccountsResource,
     AsyncAccountsResource,
@@ -131,6 +139,11 @@ class V1Resource(SyncAPIResource):
         return InstrumentsResource(self._client)
 
     @cached_property
+    def locates(self) -> LocatesResource:
+        """Query locate requests, granted locates, and cached locate borrow rates."""
+        return LocatesResource(self._client)
+
+    @cached_property
     def omni_ai(self) -> OmniAIResource:
         return OmniAIResource(self._client)
 
@@ -214,6 +227,11 @@ class AsyncV1Resource(AsyncAPIResource):
     def instruments(self) -> AsyncInstrumentsResource:
         """Retrieve core details and discovery endpoints for tradable instruments."""
         return AsyncInstrumentsResource(self._client)
+
+    @cached_property
+    def locates(self) -> AsyncLocatesResource:
+        """Query locate requests, granted locates, and cached locate borrow rates."""
+        return AsyncLocatesResource(self._client)
 
     @cached_property
     def omni_ai(self) -> AsyncOmniAIResource:
@@ -304,6 +322,11 @@ class V1ResourceWithRawResponse:
         return InstrumentsResourceWithRawResponse(self._v1.instruments)
 
     @cached_property
+    def locates(self) -> LocatesResourceWithRawResponse:
+        """Query locate requests, granted locates, and cached locate borrow rates."""
+        return LocatesResourceWithRawResponse(self._v1.locates)
+
+    @cached_property
     def omni_ai(self) -> OmniAIResourceWithRawResponse:
         return OmniAIResourceWithRawResponse(self._v1.omni_ai)
 
@@ -371,6 +394,11 @@ class AsyncV1ResourceWithRawResponse:
     def instruments(self) -> AsyncInstrumentsResourceWithRawResponse:
         """Retrieve core details and discovery endpoints for tradable instruments."""
         return AsyncInstrumentsResourceWithRawResponse(self._v1.instruments)
+
+    @cached_property
+    def locates(self) -> AsyncLocatesResourceWithRawResponse:
+        """Query locate requests, granted locates, and cached locate borrow rates."""
+        return AsyncLocatesResourceWithRawResponse(self._v1.locates)
 
     @cached_property
     def omni_ai(self) -> AsyncOmniAIResourceWithRawResponse:
@@ -442,6 +470,11 @@ class V1ResourceWithStreamingResponse:
         return InstrumentsResourceWithStreamingResponse(self._v1.instruments)
 
     @cached_property
+    def locates(self) -> LocatesResourceWithStreamingResponse:
+        """Query locate requests, granted locates, and cached locate borrow rates."""
+        return LocatesResourceWithStreamingResponse(self._v1.locates)
+
+    @cached_property
     def omni_ai(self) -> OmniAIResourceWithStreamingResponse:
         return OmniAIResourceWithStreamingResponse(self._v1.omni_ai)
 
@@ -509,6 +542,11 @@ class AsyncV1ResourceWithStreamingResponse:
     def instruments(self) -> AsyncInstrumentsResourceWithStreamingResponse:
         """Retrieve core details and discovery endpoints for tradable instruments."""
         return AsyncInstrumentsResourceWithStreamingResponse(self._v1.instruments)
+
+    @cached_property
+    def locates(self) -> AsyncLocatesResourceWithStreamingResponse:
+        """Query locate requests, granted locates, and cached locate borrow rates."""
+        return AsyncLocatesResourceWithStreamingResponse(self._v1.locates)
 
     @cached_property
     def omni_ai(self) -> AsyncOmniAIResourceWithStreamingResponse:

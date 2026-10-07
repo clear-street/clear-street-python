@@ -16,6 +16,14 @@ from .orders import (
     OrdersResourceWithStreamingResponse,
     AsyncOrdersResourceWithStreamingResponse,
 )
+from .locates import (
+    LocatesResource,
+    AsyncLocatesResource,
+    LocatesResourceWithRawResponse,
+    AsyncLocatesResourceWithRawResponse,
+    LocatesResourceWithStreamingResponse,
+    AsyncLocatesResourceWithStreamingResponse,
+)
 from .omni_ai import (
     OmniAIResource,
     AsyncOmniAIResource,
@@ -136,6 +144,12 @@ __all__ = [
     "AsyncInstrumentsResourceWithRawResponse",
     "InstrumentsResourceWithStreamingResponse",
     "AsyncInstrumentsResourceWithStreamingResponse",
+    "LocatesResource",
+    "AsyncLocatesResource",
+    "LocatesResourceWithRawResponse",
+    "AsyncLocatesResourceWithRawResponse",
+    "LocatesResourceWithStreamingResponse",
+    "AsyncLocatesResourceWithStreamingResponse",
     "OmniAIResource",
     "AsyncOmniAIResource",
     "OmniAIResourceWithRawResponse",

@@ -1,7 +1,7 @@
 # Shared Types
 
 ```python
-from clearstreet.types import APIError, BaseResponse, ResponseMetadata
+from clearstreet.types import APIError, BaseResponse, ErrorDetails, ResponseMetadata
 ```
 
 # V1
@@ -216,6 +216,25 @@ Methods:
 - <code title="get /v1/instruments">client.v1.instruments.<a href="./src/clearstreet/resources/v1/instruments.py">get_instruments</a>(\*\*<a href="src/clearstreet/types/v1/instrument_get_instruments_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/instrument_get_instruments_response.py">InstrumentGetInstrumentsResponse</a></code>
 - <code title="get /v1/instruments/options/contracts">client.v1.instruments.<a href="./src/clearstreet/resources/v1/instruments.py">get_option_contracts</a>(\*\*<a href="src/clearstreet/types/v1/instrument_get_option_contracts_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/instrument_get_option_contracts_response.py">InstrumentGetOptionContractsResponse</a></code>
 - <code title="get /v1/instruments/search">client.v1.instruments.<a href="./src/clearstreet/resources/v1/instruments.py">search_instruments</a>(\*\*<a href="src/clearstreet/types/v1/instrument_search_instruments_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/instrument_search_instruments_response.py">InstrumentSearchInstrumentsResponse</a></code>
+
+## Locates
+
+Types:
+
+```python
+from clearstreet.types.v1 import (
+    LocateRate,
+    LocateRateResult,
+    LocateRateResultList,
+    LocateGetLocateRateByIDResponse,
+    LocateGetLocateRatesResponse,
+)
+```
+
+Methods:
+
+- <code title="get /v1/locates/rates/{instrument_id}">client.v1.locates.<a href="./src/clearstreet/resources/v1/locates.py">get_locate_rate_by_id</a>(instrument_id) -> <a href="./src/clearstreet/types/v1/locate_get_locate_rate_by_id_response.py">LocateGetLocateRateByIDResponse</a></code>
+- <code title="get /v1/locates/rates">client.v1.locates.<a href="./src/clearstreet/resources/v1/locates.py">get_locate_rates</a>(\*\*<a href="src/clearstreet/types/v1/locate_get_locate_rates_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/locate_get_locate_rates_response.py">LocateGetLocateRatesResponse</a></code>
 
 ## OmniAI
 
