@@ -2,5 +2,4 @@
 
 from .api_error import APIError as APIError
 from .base_response import BaseResponse as BaseResponse
-from .error_details import ErrorDetails as ErrorDetails
 from .response_metadata import ResponseMetadata as ResponseMetadata

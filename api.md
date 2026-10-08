@@ -1,7 +1,7 @@
 # Shared Types
 
 ```python
-from clearstreet.types import APIError, BaseResponse, ErrorDetails, ResponseMetadata
+from clearstreet.types import APIError, BaseResponse, ResponseMetadata
 ```
 
 # V1
