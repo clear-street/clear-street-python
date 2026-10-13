@@ -21,7 +21,11 @@ class SnapshotGreeks(BaseModel):
     """Gamma: ∂²V/∂S²."""
 
     iv: str
-    """Implied volatility, annualized (`0.20` == 20%)."""
+    """Implied volatility.
+
+    Temporarily withheld: always `0`. Do not use this value; it is not a market
+    implied volatility.
+    """
 
     rho: str
     """Rho per 1.0 rate point."""
