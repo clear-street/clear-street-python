@@ -3,7 +3,7 @@
 from typing import Optional
 from datetime import datetime
 
-from ...._models import BaseModel
+from ..._models import BaseModel
 from .company_document_type import CompanyDocumentType
 from .company_document_preview import CompanyDocumentPreview
 from .company_document_relation import CompanyDocumentRelation

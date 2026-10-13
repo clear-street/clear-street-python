@@ -3,7 +3,7 @@
 from typing import Optional
 from datetime import datetime
 
-from ...._models import BaseModel
+from ..._models import BaseModel
 from .company_profile_resource import CompanyProfileResource
 
 __all__ = ["CompanyDetail"]

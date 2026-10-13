@@ -2,7 +2,7 @@
 
 from typing import List, Optional
 
-from ...._models import BaseModel
+from ..._models import BaseModel
 from .company_person_role import CompanyPersonRole
 
 __all__ = ["CompanyPerson"]

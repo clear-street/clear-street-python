@@ -1,5 +1,13 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+from .iois import (
+    IoisResource,
+    AsyncIoisResource,
+    IoisResourceWithRawResponse,
+    AsyncIoisResourceWithRawResponse,
+    IoisResourceWithStreamingResponse,
+    AsyncIoisResourceWithStreamingResponse,
+)
 from .offerings import (
     OfferingsResource,
     AsyncOfferingsResource,
@@ -18,6 +26,12 @@ from .private_markets import (
 )
 
 __all__ = [
+    "IoisResource",
+    "AsyncIoisResource",
+    "IoisResourceWithRawResponse",
+    "AsyncIoisResourceWithRawResponse",
+    "IoisResourceWithStreamingResponse",
+    "AsyncIoisResourceWithStreamingResponse",
     "OfferingsResource",
     "AsyncOfferingsResource",
     "OfferingsResourceWithRawResponse",

@@ -3,8 +3,8 @@
 from typing import Dict, List, Optional
 from datetime import datetime
 
-from ...._models import BaseModel
-from .metric_value_type import MetricValueType
+from ..._models import BaseModel
+from .private_markets.metric_value_type import MetricValueType
 
 __all__ = ["CompanyMetricPoint"]
 

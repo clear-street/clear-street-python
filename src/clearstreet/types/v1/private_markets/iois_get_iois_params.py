@@ -4,8 +4,8 @@ from __future__ import annotations
 
 from typing_extensions import Required, TypedDict
 
-__all__ = ["PrivateMarketDeleteIoiParams"]
+__all__ = ["IoisGetIoisParams"]
 
 
-class PrivateMarketDeleteIoiParams(TypedDict, total=False):
+class IoisGetIoisParams(TypedDict, total=False):
     account_id: Required[int]

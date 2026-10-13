@@ -2,7 +2,7 @@
 
 from typing import List, Optional
 
-from ...._models import BaseModel
+from ..._models import BaseModel
 from .company_person import CompanyPerson
 from .company_category import CompanyCategory
 from .company_citation import CompanyCitation

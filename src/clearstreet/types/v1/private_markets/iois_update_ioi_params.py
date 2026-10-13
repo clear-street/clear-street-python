@@ -5,10 +5,10 @@ from __future__ import annotations
 from typing import Optional
 from typing_extensions import Required, TypedDict
 
-__all__ = ["PrivateMarketUpdateIoiParams", "NdaAcceptance"]
+__all__ = ["IoisUpdateIoiParams", "NdaAcceptance"]
 
 
-class PrivateMarketUpdateIoiParams(TypedDict, total=False):
+class IoisUpdateIoiParams(TypedDict, total=False):
     account_id: Required[int]
 
     notional_amount: Required[str]

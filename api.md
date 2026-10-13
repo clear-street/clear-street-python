@@ -473,29 +473,7 @@ Types:
 
 ```python
 from clearstreet.types.v1 import (
-    PrivateMarketCreateIoiResponse,
-    PrivateMarketGetCompanyByIDResponse,
-    PrivateMarketGetIoisResponse,
-    PrivateMarketGetSpvByIDResponse,
-    PrivateMarketUpdateIoiResponse,
-)
-```
-
-Methods:
-
-- <code title="post /v1/private-markets/iois">client.v1.private_markets.<a href="./src/clearstreet/resources/v1/private_markets/private_markets.py">create_ioi</a>(\*\*<a href="src/clearstreet/types/v1/private_market_create_ioi_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/private_market_create_ioi_response.py">PrivateMarketCreateIoiResponse</a></code>
-- <code title="delete /v1/private-markets/iois/{ioi_id}">client.v1.private_markets.<a href="./src/clearstreet/resources/v1/private_markets/private_markets.py">delete_ioi</a>(ioi_id, \*\*<a href="src/clearstreet/types/v1/private_market_delete_ioi_params.py">params</a>) -> None</code>
-- <code title="get /v1/private-markets/companies/{company_id}">client.v1.private_markets.<a href="./src/clearstreet/resources/v1/private_markets/private_markets.py">get_company_by_id</a>(company_id, \*\*<a href="src/clearstreet/types/v1/private_market_get_company_by_id_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/private_market_get_company_by_id_response.py">PrivateMarketGetCompanyByIDResponse</a></code>
-- <code title="get /v1/private-markets/iois">client.v1.private_markets.<a href="./src/clearstreet/resources/v1/private_markets/private_markets.py">get_iois</a>(\*\*<a href="src/clearstreet/types/v1/private_market_get_iois_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/private_market_get_iois_response.py">PrivateMarketGetIoisResponse</a></code>
-- <code title="get /v1/private-markets/spvs/{spv_id}">client.v1.private_markets.<a href="./src/clearstreet/resources/v1/private_markets/private_markets.py">get_spv_by_id</a>(spv_id, \*\*<a href="src/clearstreet/types/v1/private_market_get_spv_by_id_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/private_market_get_spv_by_id_response.py">PrivateMarketGetSpvByIDResponse</a></code>
-- <code title="patch /v1/private-markets/iois/{ioi_id}">client.v1.private_markets.<a href="./src/clearstreet/resources/v1/private_markets/private_markets.py">update_ioi</a>(ioi_id, \*\*<a href="src/clearstreet/types/v1/private_market_update_ioi_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/private_market_update_ioi_response.py">PrivateMarketUpdateIoiResponse</a></code>
-
-### Companies
-
-Types:
-
-```python
-from clearstreet.types.v1.private_markets import (
+    ChargedBy,
     CompanyCategory,
     CompanyCitation,
     CompanyCustomer,
@@ -514,10 +492,21 @@ from clearstreet.types.v1.private_markets import (
     CompanyProfileResource,
     CompanySocialLink,
     CompanySocialType,
+    FeeFrequency,
+    FeeType,
     MetricFrequency,
     MetricKey,
+    SpvDetail,
+    SpvFeeTermResource,
+    PrivateMarketGetCompanyByIDResponse,
+    PrivateMarketGetSpvByIDResponse,
 )
 ```
+
+Methods:
+
+- <code title="get /v1/private-markets/companies/{company_id}">client.v1.private_markets.<a href="./src/clearstreet/resources/v1/private_markets/private_markets.py">get_company_by_id</a>(company_id, \*\*<a href="src/clearstreet/types/v1/private_market_get_company_by_id_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/private_market_get_company_by_id_response.py">PrivateMarketGetCompanyByIDResponse</a></code>
+- <code title="get /v1/private-markets/spvs/{spv_id}">client.v1.private_markets.<a href="./src/clearstreet/resources/v1/private_markets/private_markets.py">get_spv_by_id</a>(spv_id, \*\*<a href="src/clearstreet/types/v1/private_market_get_spv_by_id_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/private_market_get_spv_by_id_response.py">PrivateMarketGetSpvByIDResponse</a></code>
 
 ### Iois
 
@@ -531,8 +520,18 @@ from clearstreet.types.v1.private_markets import (
     IoiOfferingResource,
     IoiResource,
     NdaAcceptanceResource,
+    IoisCreateIoiResponse,
+    IoisGetIoisResponse,
+    IoisUpdateIoiResponse,
 )
 ```
+
+Methods:
+
+- <code title="post /v1/private-markets/iois">client.v1.private_markets.iois.<a href="./src/clearstreet/resources/v1/private_markets/iois.py">create_ioi</a>(\*\*<a href="src/clearstreet/types/v1/private_markets/iois_create_ioi_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/private_markets/iois_create_ioi_response.py">IoisCreateIoiResponse</a></code>
+- <code title="delete /v1/private-markets/iois/{ioi_id}">client.v1.private_markets.iois.<a href="./src/clearstreet/resources/v1/private_markets/iois.py">delete_ioi</a>(ioi_id, \*\*<a href="src/clearstreet/types/v1/private_markets/iois_delete_ioi_params.py">params</a>) -> None</code>
+- <code title="get /v1/private-markets/iois">client.v1.private_markets.iois.<a href="./src/clearstreet/resources/v1/private_markets/iois.py">get_iois</a>(\*\*<a href="src/clearstreet/types/v1/private_markets/iois_get_iois_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/private_markets/iois_get_iois_response.py">IoisGetIoisResponse</a></code>
+- <code title="patch /v1/private-markets/iois/{ioi_id}">client.v1.private_markets.iois.<a href="./src/clearstreet/resources/v1/private_markets/iois.py">update_ioi</a>(ioi_id, \*\*<a href="src/clearstreet/types/v1/private_markets/iois_update_ioi_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/private_markets/iois_update_ioi_response.py">IoisUpdateIoiResponse</a></code>
 
 ### Offerings
 
@@ -567,20 +566,6 @@ Methods:
 
 - <code title="get /v1/private-markets/offerings/{offering_id}">client.v1.private_markets.offerings.<a href="./src/clearstreet/resources/v1/private_markets/offerings.py">get_offering_by_id</a>(offering_id, \*\*<a href="src/clearstreet/types/v1/private_markets/offering_get_offering_by_id_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/private_markets/offering_get_offering_by_id_response.py">OfferingGetOfferingByIDResponse</a></code>
 - <code title="get /v1/private-markets/offerings">client.v1.private_markets.offerings.<a href="./src/clearstreet/resources/v1/private_markets/offerings.py">get_offerings</a>(\*\*<a href="src/clearstreet/types/v1/private_markets/offering_get_offerings_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/private_markets/offering_get_offerings_response.py">OfferingGetOfferingsResponse</a></code>
-
-### Spvs
-
-Types:
-
-```python
-from clearstreet.types.v1.private_markets import (
-    ChargedBy,
-    FeeFrequency,
-    FeeType,
-    SpvDetail,
-    SpvFeeTermResource,
-)
-```
 
 ## Screener
 

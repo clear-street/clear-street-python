@@ -2,11 +2,11 @@
 
 from typing import Optional
 
-from .currency import Currency
 from .fee_type import FeeType
-from ...._models import BaseModel
+from ..._models import BaseModel
 from .charged_by import ChargedBy
 from .fee_frequency import FeeFrequency
+from .private_markets.currency import Currency
 
 __all__ = ["SpvFeeTermResource"]
 

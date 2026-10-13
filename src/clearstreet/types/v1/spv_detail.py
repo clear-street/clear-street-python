@@ -3,11 +3,11 @@
 from typing import List, Optional
 from datetime import datetime
 
-from .currency import Currency
-from ...._models import BaseModel
-from .spv_status import SpvStatus
-from .valuation_basis import ValuationBasis
+from ..._models import BaseModel
 from .spv_fee_term_resource import SpvFeeTermResource
+from .private_markets.currency import Currency
+from .private_markets.spv_status import SpvStatus
+from .private_markets.valuation_basis import ValuationBasis
 
 __all__ = ["SpvDetail"]
 

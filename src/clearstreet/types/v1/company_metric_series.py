@@ -2,11 +2,11 @@
 
 from typing import List, Optional
 
-from ...._models import BaseModel
+from ..._models import BaseModel
 from .metric_key import MetricKey
-from .metric_unit import MetricUnit
 from .metric_frequency import MetricFrequency
 from .company_metric_point import CompanyMetricPoint
+from .private_markets.metric_unit import MetricUnit
 
 __all__ = ["CompanyMetricSeries"]
 
