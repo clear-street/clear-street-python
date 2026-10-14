@@ -2,12 +2,16 @@
 
 from __future__ import annotations
 
+from typing import List, Union
+from datetime import date
+from typing_extensions import Literal
+
 import httpx
 
-from ..._types import Body, Query, Headers, NotGiven, SequenceNotStr, not_given
+from ..._types import Body, Omit, Query, Headers, NotGiven, SequenceNotStr, omit, not_given
 from ..._utils import path_template, maybe_transform, async_maybe_transform
 from ..._compat import cached_property
-from ...types.v1 import InstrumentIDOrSymbol, locate_get_locate_rates_params
+from ...types.v1 import InstrumentIDOrSymbol, locate_get_locates_params, locate_get_locate_rates_params
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
     to_raw_response_wrapper,
@@ -17,6 +21,8 @@ from ..._response import (
 )
 from ..._base_client import make_request_options
 from ...types.v1.instrument_id_or_symbol import InstrumentIDOrSymbol
+from ...types.v1.locate_get_locates_response import LocateGetLocatesResponse
+from ...types.v1.locate_get_locate_by_id_response import LocateGetLocateByIDResponse
 from ...types.v1.locate_get_locate_rates_response import LocateGetLocateRatesResponse
 from ...types.v1.locate_get_locate_rate_by_id_response import LocateGetLocateRateByIDResponse
 
@@ -44,6 +50,43 @@ class LocatesResource(SyncAPIResource):
         For more information, see https://www.github.com/clear-street/clear-street-python#with_streaming_response
         """
         return LocatesResourceWithStreamingResponse(self)
+
+    def get_locate_by_id(
+        self,
+        id: str,
+        *,
+        account_id: int,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> LocateGetLocateByIDResponse:
+        """
+        > **Beta** — this endpoint may change before general availability.
+
+        Fetch one locate by id, matched against the locate request id, locate id, and
+        client request id, across all days in force.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return self._get(
+            path_template("/v1/accounts/{account_id}/locates/{id}", account_id=account_id, id=id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=LocateGetLocateByIDResponse,
+        )
 
     def get_locate_rate_by_id(
         self,
@@ -129,6 +172,62 @@ class LocatesResource(SyncAPIResource):
             cast_to=LocateGetLocateRatesResponse,
         )
 
+    def get_locates(
+        self,
+        account_id: int,
+        *,
+        effective_date: Union[str, date] | Omit = omit,
+        instrument_ids: SequenceNotStr[InstrumentIDOrSymbol] | Omit = omit,
+        status: List[Literal["REQUESTED", "ACCEPTED", "REJECTED", "EXPIRED"]] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> LocateGetLocatesResponse:
+        """
+        > **Beta** — this endpoint may change before general availability.
+
+        List locates for the account on one effective date, which defaults to today's
+        New York calendar date. Filter by comma-separated statuses and instrument ids or
+        symbols.
+
+        Args:
+          effective_date: Effective date to list; defaults to today's New York calendar date. Explicit
+              dates are used unchanged, including weekends and holidays.
+
+          instrument_ids: Comma-separated instrument IDs (UUID) or symbols.
+
+          status: Comma-separated locate statuses to filter by
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            path_template("/v1/accounts/{account_id}/locates", account_id=account_id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "effective_date": effective_date,
+                        "instrument_ids": instrument_ids,
+                        "status": status,
+                    },
+                    locate_get_locates_params.LocateGetLocatesParams,
+                ),
+            ),
+            cast_to=LocateGetLocatesResponse,
+        )
+
 
 class AsyncLocatesResource(AsyncAPIResource):
     """Query locate requests, granted locates, and cached locate borrow rates."""
@@ -151,6 +250,43 @@ class AsyncLocatesResource(AsyncAPIResource):
         For more information, see https://www.github.com/clear-street/clear-street-python#with_streaming_response
         """
         return AsyncLocatesResourceWithStreamingResponse(self)
+
+    async def get_locate_by_id(
+        self,
+        id: str,
+        *,
+        account_id: int,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> LocateGetLocateByIDResponse:
+        """
+        > **Beta** — this endpoint may change before general availability.
+
+        Fetch one locate by id, matched against the locate request id, locate id, and
+        client request id, across all days in force.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not id:
+            raise ValueError(f"Expected a non-empty value for `id` but received {id!r}")
+        return await self._get(
+            path_template("/v1/accounts/{account_id}/locates/{id}", account_id=account_id, id=id),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=LocateGetLocateByIDResponse,
+        )
 
     async def get_locate_rate_by_id(
         self,
@@ -236,16 +372,78 @@ class AsyncLocatesResource(AsyncAPIResource):
             cast_to=LocateGetLocateRatesResponse,
         )
 
+    async def get_locates(
+        self,
+        account_id: int,
+        *,
+        effective_date: Union[str, date] | Omit = omit,
+        instrument_ids: SequenceNotStr[InstrumentIDOrSymbol] | Omit = omit,
+        status: List[Literal["REQUESTED", "ACCEPTED", "REJECTED", "EXPIRED"]] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> LocateGetLocatesResponse:
+        """
+        > **Beta** — this endpoint may change before general availability.
+
+        List locates for the account on one effective date, which defaults to today's
+        New York calendar date. Filter by comma-separated statuses and instrument ids or
+        symbols.
+
+        Args:
+          effective_date: Effective date to list; defaults to today's New York calendar date. Explicit
+              dates are used unchanged, including weekends and holidays.
+
+          instrument_ids: Comma-separated instrument IDs (UUID) or symbols.
+
+          status: Comma-separated locate statuses to filter by
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            path_template("/v1/accounts/{account_id}/locates", account_id=account_id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "effective_date": effective_date,
+                        "instrument_ids": instrument_ids,
+                        "status": status,
+                    },
+                    locate_get_locates_params.LocateGetLocatesParams,
+                ),
+            ),
+            cast_to=LocateGetLocatesResponse,
+        )
+
 
 class LocatesResourceWithRawResponse:
     def __init__(self, locates: LocatesResource) -> None:
         self._locates = locates
 
+        self.get_locate_by_id = to_raw_response_wrapper(
+            locates.get_locate_by_id,
+        )
         self.get_locate_rate_by_id = to_raw_response_wrapper(
             locates.get_locate_rate_by_id,
         )
         self.get_locate_rates = to_raw_response_wrapper(
             locates.get_locate_rates,
+        )
+        self.get_locates = to_raw_response_wrapper(
+            locates.get_locates,
         )
 
 
@@ -253,11 +451,17 @@ class AsyncLocatesResourceWithRawResponse:
     def __init__(self, locates: AsyncLocatesResource) -> None:
         self._locates = locates
 
+        self.get_locate_by_id = async_to_raw_response_wrapper(
+            locates.get_locate_by_id,
+        )
         self.get_locate_rate_by_id = async_to_raw_response_wrapper(
             locates.get_locate_rate_by_id,
         )
         self.get_locate_rates = async_to_raw_response_wrapper(
             locates.get_locate_rates,
+        )
+        self.get_locates = async_to_raw_response_wrapper(
+            locates.get_locates,
         )
 
 
@@ -265,11 +469,17 @@ class LocatesResourceWithStreamingResponse:
     def __init__(self, locates: LocatesResource) -> None:
         self._locates = locates
 
+        self.get_locate_by_id = to_streamed_response_wrapper(
+            locates.get_locate_by_id,
+        )
         self.get_locate_rate_by_id = to_streamed_response_wrapper(
             locates.get_locate_rate_by_id,
         )
         self.get_locate_rates = to_streamed_response_wrapper(
             locates.get_locate_rates,
+        )
+        self.get_locates = to_streamed_response_wrapper(
+            locates.get_locates,
         )
 
 
@@ -277,9 +487,15 @@ class AsyncLocatesResourceWithStreamingResponse:
     def __init__(self, locates: AsyncLocatesResource) -> None:
         self._locates = locates
 
+        self.get_locate_by_id = async_to_streamed_response_wrapper(
+            locates.get_locate_by_id,
+        )
         self.get_locate_rate_by_id = async_to_streamed_response_wrapper(
             locates.get_locate_rate_by_id,
         )
         self.get_locate_rates = async_to_streamed_response_wrapper(
             locates.get_locate_rates,
+        )
+        self.get_locates = async_to_streamed_response_wrapper(
+            locates.get_locates,
         )

@@ -6,6 +6,7 @@ from .side import Side as Side
 from .enums import Enums as Enums
 from .order import Order as Order
 from .rules import Rules as Rules
+from .locate import Locate as Locate
 from .account import Account as Account
 from .address import Address as Address
 from .catalog import Catalog as Catalog
@@ -32,6 +33,7 @@ from .order_type import OrderType as OrderType
 from .spv_detail import SpvDetail as SpvDetail
 from .chart_point import ChartPoint as ChartPoint
 from .combination import Combination as Combination
+from .locate_list import LocateList as LocateList
 from .locate_rate import LocateRate as LocateRate
 from .margin_type import MarginType as MarginType
 from .market_type import MarketType as MarketType
@@ -57,6 +59,7 @@ from .chart_payload import ChartPayload as ChartPayload
 from .contract_type import ContractType as ContractType
 from .fee_frequency import FeeFrequency as FeeFrequency
 from .field_columns import FieldColumns as FieldColumns
+from .locate_status import LocateStatus as LocateStatus
 from .market_status import MarketStatus as MarketStatus
 from .position_list import PositionList as PositionList
 from .position_type import PositionType as PositionType
@@ -166,6 +169,7 @@ from .instrument_dividend_event import InstrumentDividendEvent as InstrumentDivi
 from .instrument_event_envelope import InstrumentEventEnvelope as InstrumentEventEnvelope
 from .instrument_event_ipo_item import InstrumentEventIpoItem as InstrumentEventIpoItem
 from .instrument_events_by_date import InstrumentEventsByDate as InstrumentEventsByDate
+from .locate_get_locates_params import LocateGetLocatesParams as LocateGetLocatesParams
 from .omni_feed_get_feed_params import OmniFeedGetFeedParams as OmniFeedGetFeedParams
 from .order_get_orders_response import OrderGetOrdersResponse as OrderGetOrdersResponse
 from .portfolio_history_segment import PortfolioHistorySegment as PortfolioHistorySegment
@@ -183,6 +187,7 @@ from .account_get_accounts_params import AccountGetAccountsParams as AccountGetA
 from .calendar_get_clock_response import CalendarGetClockResponse as CalendarGetClockResponse
 from .content_part_custom_payload import ContentPartCustomPayload as ContentPartCustomPayload
 from .instrument_income_statement import InstrumentIncomeStatement as InstrumentIncomeStatement
+from .locate_get_locates_response import LocateGetLocatesResponse as LocateGetLocatesResponse
 from .omni_feed_get_feed_response import OmniFeedGetFeedResponse as OmniFeedGetFeedResponse
 from .order_get_executions_params import OrderGetExecutionsParams as OrderGetExecutionsParams
 from .position_instruction_status import PositionInstructionStatus as PositionInstructionStatus
@@ -214,6 +219,7 @@ from .structured_action_button_action import StructuredActionButtonAction as Str
 from .watchlist_get_watchlists_params import WatchlistGetWatchlistsParams as WatchlistGetWatchlistsParams
 from .api_version_get_version_response import APIVersionGetVersionResponse as APIVersionGetVersionResponse
 from .instrument_income_statement_list import InstrumentIncomeStatementList as InstrumentIncomeStatementList
+from .locate_get_locate_by_id_response import LocateGetLocateByIDResponse as LocateGetLocateByIDResponse
 from .locate_get_locate_rates_response import LocateGetLocateRatesResponse as LocateGetLocateRatesResponse
 from .omni_feed_post_feed_event_params import OmniFeedPostFeedEventParams as OmniFeedPostFeedEventParams
 from .order_cancel_open_order_response import OrderCancelOpenOrderResponse as OrderCancelOpenOrderResponse

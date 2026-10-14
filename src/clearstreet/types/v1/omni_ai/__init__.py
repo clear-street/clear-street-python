@@ -28,6 +28,7 @@ from .entitlement_resource_list import EntitlementResourceList as EntitlementRes
 from .thread_get_threads_params import ThreadGetThreadsParams as ThreadGetThreadsParams
 from .thread_get_messages_params import ThreadGetMessagesParams as ThreadGetMessagesParams
 from .delete_entitlement_response import DeleteEntitlementResponse as DeleteEntitlementResponse
+from .entitlement_status_resource import EntitlementStatusResource as EntitlementStatusResource
 from .thread_create_thread_params import ThreadCreateThreadParams as ThreadCreateThreadParams
 from .thread_get_threads_response import ThreadGetThreadsResponse as ThreadGetThreadsResponse
 from .thread_create_message_params import ThreadCreateMessageParams as ThreadCreateMessageParams
@@ -38,6 +39,7 @@ from .message_submit_feedback_params import MessageSubmitFeedbackParams as Messa
 from .thread_create_message_response import ThreadCreateMessageResponse as ThreadCreateMessageResponse
 from .thread_get_thread_by_id_params import ThreadGetThreadByIDParams as ThreadGetThreadByIDParams
 from .response_cancel_response_params import ResponseCancelResponseParams as ResponseCancelResponseParams
+from .entitlement_status_resource_list import EntitlementStatusResourceList as EntitlementStatusResourceList
 from .message_get_message_by_id_params import MessageGetMessageByIDParams as MessageGetMessageByIDParams
 from .message_submit_feedback_response import MessageSubmitFeedbackResponse as MessageSubmitFeedbackResponse
 from .thread_get_thread_by_id_response import ThreadGetThreadByIDResponse as ThreadGetThreadByIDResponse
@@ -58,8 +60,20 @@ from .entitlement_create_entitlements_params import (
 from .entitlement_delete_entitlement_response import (
     EntitlementDeleteEntitlementResponse as EntitlementDeleteEntitlementResponse,
 )
+from .entitlement_opt_out_entitlements_params import (
+    EntitlementOptOutEntitlementsParams as EntitlementOptOutEntitlementsParams,
+)
 from .entitlement_create_entitlements_response import (
     EntitlementCreateEntitlementsResponse as EntitlementCreateEntitlementsResponse,
+)
+from .entitlement_get_entitlement_status_params import (
+    EntitlementGetEntitlementStatusParams as EntitlementGetEntitlementStatusParams,
+)
+from .entitlement_opt_out_entitlements_response import (
+    EntitlementOptOutEntitlementsResponse as EntitlementOptOutEntitlementsResponse,
+)
+from .entitlement_get_entitlement_status_response import (
+    EntitlementGetEntitlementStatusResponse as EntitlementGetEntitlementStatusResponse,
 )
 from .entitlement_get_entitlement_agreements_response import (
     EntitlementGetEntitlementAgreementsResponse as EntitlementGetEntitlementAgreementsResponse,

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import typing_extensions
 from typing import List, Iterable
 
 import httpx
@@ -17,11 +18,18 @@ from ...._response import (
     async_to_streamed_response_wrapper,
 )
 from ...._base_client import make_request_options
-from ....types.v1.omni_ai import entitlement_get_entitlements_params, entitlement_create_entitlements_params
+from ....types.v1.omni_ai import (
+    entitlement_get_entitlements_params,
+    entitlement_create_entitlements_params,
+    entitlement_opt_out_entitlements_params,
+    entitlement_get_entitlement_status_params,
+)
 from ....types.v1.entitlement_code import EntitlementCode
 from ....types.v1.omni_ai.entitlement_get_entitlements_response import EntitlementGetEntitlementsResponse
 from ....types.v1.omni_ai.entitlement_delete_entitlement_response import EntitlementDeleteEntitlementResponse
 from ....types.v1.omni_ai.entitlement_create_entitlements_response import EntitlementCreateEntitlementsResponse
+from ....types.v1.omni_ai.entitlement_opt_out_entitlements_response import EntitlementOptOutEntitlementsResponse
+from ....types.v1.omni_ai.entitlement_get_entitlement_status_response import EntitlementGetEntitlementStatusResponse
 from ....types.v1.omni_ai.entitlement_get_entitlement_agreements_response import (
     EntitlementGetEntitlementAgreementsResponse,
 )
@@ -95,6 +103,7 @@ class EntitlementsResource(SyncAPIResource):
             cast_to=EntitlementCreateEntitlementsResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     def delete_entitlement(
         self,
         entitlement_id: str,
@@ -108,6 +117,8 @@ class EntitlementsResource(SyncAPIResource):
     ) -> EntitlementDeleteEntitlementResponse:
         """
         Revoke one entitlement grant by id.
+
+        Deprecated -- use `POST /omni-ai/entitlements/opt-out`.
 
         Args:
           extra_headers: Send extra headers
@@ -147,6 +158,48 @@ class EntitlementsResource(SyncAPIResource):
             cast_to=EntitlementGetEntitlementAgreementsResponse,
         )
 
+    def get_entitlement_status(
+        self,
+        *,
+        account_id: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> EntitlementGetEntitlementStatusResponse:
+        """Whether each entitlement is enabled, per account.
+
+        Accounts with no recorded
+        choice are enabled by default. Without `account_id`, covers every account the
+        caller can access.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/v1/omni-ai/entitlement-status",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {"account_id": account_id},
+                    entitlement_get_entitlement_status_params.EntitlementGetEntitlementStatusParams,
+                ),
+            ),
+            cast_to=EntitlementGetEntitlementStatusResponse,
+        )
+
+    @typing_extensions.deprecated("deprecated")
     def get_entitlements(
         self,
         *,
@@ -160,6 +213,9 @@ class EntitlementsResource(SyncAPIResource):
     ) -> EntitlementGetEntitlementsResponse:
         """
         List caller's active entitlement grants.
+
+        Deprecated -- use `GET /omni-ai/entitlement-status`; this lists explicit grants
+        only and omits accounts that are enabled by default.
 
         Args:
           extra_headers: Send extra headers
@@ -182,6 +238,48 @@ class EntitlementsResource(SyncAPIResource):
                 ),
             ),
             cast_to=EntitlementGetEntitlementsResponse,
+        )
+
+    def opt_out_entitlements(
+        self,
+        *,
+        account_ids: Iterable[int],
+        entitlement_codes: List[EntitlementCode],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> EntitlementOptOutEntitlementsResponse:
+        """Turn off one-or-more entitlements for the given accounts.
+
+        Idempotent: accounts
+        that are already opted out are left as they are. To turn an entitlement back on,
+        sign the agreement with `POST /omni-ai/entitlements`.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            "/v1/omni-ai/entitlements/opt-out",
+            body=maybe_transform(
+                {
+                    "account_ids": account_ids,
+                    "entitlement_codes": entitlement_codes,
+                },
+                entitlement_opt_out_entitlements_params.EntitlementOptOutEntitlementsParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=EntitlementOptOutEntitlementsResponse,
         )
 
 
@@ -251,6 +349,7 @@ class AsyncEntitlementsResource(AsyncAPIResource):
             cast_to=EntitlementCreateEntitlementsResponse,
         )
 
+    @typing_extensions.deprecated("deprecated")
     async def delete_entitlement(
         self,
         entitlement_id: str,
@@ -264,6 +363,8 @@ class AsyncEntitlementsResource(AsyncAPIResource):
     ) -> EntitlementDeleteEntitlementResponse:
         """
         Revoke one entitlement grant by id.
+
+        Deprecated -- use `POST /omni-ai/entitlements/opt-out`.
 
         Args:
           extra_headers: Send extra headers
@@ -303,6 +404,48 @@ class AsyncEntitlementsResource(AsyncAPIResource):
             cast_to=EntitlementGetEntitlementAgreementsResponse,
         )
 
+    async def get_entitlement_status(
+        self,
+        *,
+        account_id: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> EntitlementGetEntitlementStatusResponse:
+        """Whether each entitlement is enabled, per account.
+
+        Accounts with no recorded
+        choice are enabled by default. Without `account_id`, covers every account the
+        caller can access.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/v1/omni-ai/entitlement-status",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"account_id": account_id},
+                    entitlement_get_entitlement_status_params.EntitlementGetEntitlementStatusParams,
+                ),
+            ),
+            cast_to=EntitlementGetEntitlementStatusResponse,
+        )
+
+    @typing_extensions.deprecated("deprecated")
     async def get_entitlements(
         self,
         *,
@@ -316,6 +459,9 @@ class AsyncEntitlementsResource(AsyncAPIResource):
     ) -> EntitlementGetEntitlementsResponse:
         """
         List caller's active entitlement grants.
+
+        Deprecated -- use `GET /omni-ai/entitlement-status`; this lists explicit grants
+        only and omits accounts that are enabled by default.
 
         Args:
           extra_headers: Send extra headers
@@ -340,6 +486,48 @@ class AsyncEntitlementsResource(AsyncAPIResource):
             cast_to=EntitlementGetEntitlementsResponse,
         )
 
+    async def opt_out_entitlements(
+        self,
+        *,
+        account_ids: Iterable[int],
+        entitlement_codes: List[EntitlementCode],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> EntitlementOptOutEntitlementsResponse:
+        """Turn off one-or-more entitlements for the given accounts.
+
+        Idempotent: accounts
+        that are already opted out are left as they are. To turn an entitlement back on,
+        sign the agreement with `POST /omni-ai/entitlements`.
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            "/v1/omni-ai/entitlements/opt-out",
+            body=await async_maybe_transform(
+                {
+                    "account_ids": account_ids,
+                    "entitlement_codes": entitlement_codes,
+                },
+                entitlement_opt_out_entitlements_params.EntitlementOptOutEntitlementsParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=EntitlementOptOutEntitlementsResponse,
+        )
+
 
 class EntitlementsResourceWithRawResponse:
     def __init__(self, entitlements: EntitlementsResource) -> None:
@@ -348,14 +536,24 @@ class EntitlementsResourceWithRawResponse:
         self.create_entitlements = to_raw_response_wrapper(
             entitlements.create_entitlements,
         )
-        self.delete_entitlement = to_raw_response_wrapper(
-            entitlements.delete_entitlement,
+        self.delete_entitlement = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                entitlements.delete_entitlement,  # pyright: ignore[reportDeprecated],
+            )
         )
         self.get_entitlement_agreements = to_raw_response_wrapper(
             entitlements.get_entitlement_agreements,
         )
-        self.get_entitlements = to_raw_response_wrapper(
-            entitlements.get_entitlements,
+        self.get_entitlement_status = to_raw_response_wrapper(
+            entitlements.get_entitlement_status,
+        )
+        self.get_entitlements = (  # pyright: ignore[reportDeprecated]
+            to_raw_response_wrapper(
+                entitlements.get_entitlements,  # pyright: ignore[reportDeprecated],
+            )
+        )
+        self.opt_out_entitlements = to_raw_response_wrapper(
+            entitlements.opt_out_entitlements,
         )
 
 
@@ -366,14 +564,24 @@ class AsyncEntitlementsResourceWithRawResponse:
         self.create_entitlements = async_to_raw_response_wrapper(
             entitlements.create_entitlements,
         )
-        self.delete_entitlement = async_to_raw_response_wrapper(
-            entitlements.delete_entitlement,
+        self.delete_entitlement = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                entitlements.delete_entitlement,  # pyright: ignore[reportDeprecated],
+            )
         )
         self.get_entitlement_agreements = async_to_raw_response_wrapper(
             entitlements.get_entitlement_agreements,
         )
-        self.get_entitlements = async_to_raw_response_wrapper(
-            entitlements.get_entitlements,
+        self.get_entitlement_status = async_to_raw_response_wrapper(
+            entitlements.get_entitlement_status,
+        )
+        self.get_entitlements = (  # pyright: ignore[reportDeprecated]
+            async_to_raw_response_wrapper(
+                entitlements.get_entitlements,  # pyright: ignore[reportDeprecated],
+            )
+        )
+        self.opt_out_entitlements = async_to_raw_response_wrapper(
+            entitlements.opt_out_entitlements,
         )
 
 
@@ -384,14 +592,24 @@ class EntitlementsResourceWithStreamingResponse:
         self.create_entitlements = to_streamed_response_wrapper(
             entitlements.create_entitlements,
         )
-        self.delete_entitlement = to_streamed_response_wrapper(
-            entitlements.delete_entitlement,
+        self.delete_entitlement = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                entitlements.delete_entitlement,  # pyright: ignore[reportDeprecated],
+            )
         )
         self.get_entitlement_agreements = to_streamed_response_wrapper(
             entitlements.get_entitlement_agreements,
         )
-        self.get_entitlements = to_streamed_response_wrapper(
-            entitlements.get_entitlements,
+        self.get_entitlement_status = to_streamed_response_wrapper(
+            entitlements.get_entitlement_status,
+        )
+        self.get_entitlements = (  # pyright: ignore[reportDeprecated]
+            to_streamed_response_wrapper(
+                entitlements.get_entitlements,  # pyright: ignore[reportDeprecated],
+            )
+        )
+        self.opt_out_entitlements = to_streamed_response_wrapper(
+            entitlements.opt_out_entitlements,
         )
 
 
@@ -402,12 +620,22 @@ class AsyncEntitlementsResourceWithStreamingResponse:
         self.create_entitlements = async_to_streamed_response_wrapper(
             entitlements.create_entitlements,
         )
-        self.delete_entitlement = async_to_streamed_response_wrapper(
-            entitlements.delete_entitlement,
+        self.delete_entitlement = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                entitlements.delete_entitlement,  # pyright: ignore[reportDeprecated],
+            )
         )
         self.get_entitlement_agreements = async_to_streamed_response_wrapper(
             entitlements.get_entitlement_agreements,
         )
-        self.get_entitlements = async_to_streamed_response_wrapper(
-            entitlements.get_entitlements,
+        self.get_entitlement_status = async_to_streamed_response_wrapper(
+            entitlements.get_entitlement_status,
+        )
+        self.get_entitlements = (  # pyright: ignore[reportDeprecated]
+            async_to_streamed_response_wrapper(
+                entitlements.get_entitlements,  # pyright: ignore[reportDeprecated],
+            )
+        )
+        self.opt_out_entitlements = async_to_streamed_response_wrapper(
+            entitlements.opt_out_entitlements,
         )

@@ -223,18 +223,25 @@ Types:
 
 ```python
 from clearstreet.types.v1 import (
+    Locate,
+    LocateList,
     LocateRate,
     LocateRateResult,
     LocateRateResultList,
+    LocateStatus,
+    LocateGetLocateByIDResponse,
     LocateGetLocateRateByIDResponse,
     LocateGetLocateRatesResponse,
+    LocateGetLocatesResponse,
 )
 ```
 
 Methods:
 
+- <code title="get /v1/accounts/{account_id}/locates/{id}">client.v1.locates.<a href="./src/clearstreet/resources/v1/locates.py">get_locate_by_id</a>(id, \*, account_id) -> <a href="./src/clearstreet/types/v1/locate_get_locate_by_id_response.py">LocateGetLocateByIDResponse</a></code>
 - <code title="get /v1/locates/rates/{instrument_id}">client.v1.locates.<a href="./src/clearstreet/resources/v1/locates.py">get_locate_rate_by_id</a>(instrument_id) -> <a href="./src/clearstreet/types/v1/locate_get_locate_rate_by_id_response.py">LocateGetLocateRateByIDResponse</a></code>
 - <code title="get /v1/locates/rates">client.v1.locates.<a href="./src/clearstreet/resources/v1/locates.py">get_locate_rates</a>(\*\*<a href="src/clearstreet/types/v1/locate_get_locate_rates_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/locate_get_locate_rates_response.py">LocateGetLocateRatesResponse</a></code>
+- <code title="get /v1/accounts/{account_id}/locates">client.v1.locates.<a href="./src/clearstreet/resources/v1/locates.py">get_locates</a>(account_id, \*\*<a href="src/clearstreet/types/v1/locate_get_locates_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/locate_get_locates_response.py">LocateGetLocatesResponse</a></code>
 
 ## OmniAI
 
@@ -283,10 +290,14 @@ from clearstreet.types.v1.omni_ai import (
     EntitlementAgreementResourceList,
     EntitlementResource,
     EntitlementResourceList,
+    EntitlementStatusResource,
+    EntitlementStatusResourceList,
     EntitlementCreateEntitlementsResponse,
     EntitlementDeleteEntitlementResponse,
     EntitlementGetEntitlementAgreementsResponse,
+    EntitlementGetEntitlementStatusResponse,
     EntitlementGetEntitlementsResponse,
+    EntitlementOptOutEntitlementsResponse,
 )
 ```
 
@@ -295,7 +306,9 @@ Methods:
 - <code title="post /v1/omni-ai/entitlements">client.v1.omni_ai.entitlements.<a href="./src/clearstreet/resources/v1/omni_ai/entitlements.py">create_entitlements</a>(\*\*<a href="src/clearstreet/types/v1/omni_ai/entitlement_create_entitlements_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/omni_ai/entitlement_create_entitlements_response.py">EntitlementCreateEntitlementsResponse</a></code>
 - <code title="delete /v1/omni-ai/entitlements/{entitlement_id}">client.v1.omni_ai.entitlements.<a href="./src/clearstreet/resources/v1/omni_ai/entitlements.py">delete_entitlement</a>(entitlement_id) -> <a href="./src/clearstreet/types/v1/omni_ai/entitlement_delete_entitlement_response.py">EntitlementDeleteEntitlementResponse</a></code>
 - <code title="get /v1/omni-ai/entitlement-agreements">client.v1.omni_ai.entitlements.<a href="./src/clearstreet/resources/v1/omni_ai/entitlements.py">get_entitlement_agreements</a>() -> <a href="./src/clearstreet/types/v1/omni_ai/entitlement_get_entitlement_agreements_response.py">EntitlementGetEntitlementAgreementsResponse</a></code>
+- <code title="get /v1/omni-ai/entitlement-status">client.v1.omni_ai.entitlements.<a href="./src/clearstreet/resources/v1/omni_ai/entitlements.py">get_entitlement_status</a>(\*\*<a href="src/clearstreet/types/v1/omni_ai/entitlement_get_entitlement_status_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/omni_ai/entitlement_get_entitlement_status_response.py">EntitlementGetEntitlementStatusResponse</a></code>
 - <code title="get /v1/omni-ai/entitlements">client.v1.omni_ai.entitlements.<a href="./src/clearstreet/resources/v1/omni_ai/entitlements.py">get_entitlements</a>(\*\*<a href="src/clearstreet/types/v1/omni_ai/entitlement_get_entitlements_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/omni_ai/entitlement_get_entitlements_response.py">EntitlementGetEntitlementsResponse</a></code>
+- <code title="post /v1/omni-ai/entitlements/opt-out">client.v1.omni_ai.entitlements.<a href="./src/clearstreet/resources/v1/omni_ai/entitlements.py">opt_out_entitlements</a>(\*\*<a href="src/clearstreet/types/v1/omni_ai/entitlement_opt_out_entitlements_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/omni_ai/entitlement_opt_out_entitlements_response.py">EntitlementOptOutEntitlementsResponse</a></code>
 
 ### Messages
 
