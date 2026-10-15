@@ -82,7 +82,7 @@ class NewOrderRequestParam(TypedDict, total=False):
     One of `SOR`, `VWAP`, `TWAP`, or `DMA`. Defaults to `SOR`, the only strategy OTC
     common-stock orders support. `VWAP` and `TWAP` are supported only on `MARKET`
     and `LIMIT` orders, and `DMA` only on `LIMIT` orders; all three require `DAY`
-    time-in-force.
+    time-in-force. `VWAP`, `TWAP`, and `DMA` do not support `extended_hours`.
     """
 
     symbol: Optional[str]

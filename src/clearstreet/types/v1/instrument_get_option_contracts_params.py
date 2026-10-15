@@ -18,7 +18,7 @@ class InstrumentGetOptionContractsParams(TypedDict, total=False):
     """
     Comma-separated contract instrument IDs (UUID) or OSI option symbols to look up
     directly, bypassing underlier expansion. Mutually exclusive with
-    underlier/underlying_instrument_id; up to 100 values.
+    root/underlying_instrument_id; up to 100 values.
     """
 
     contract_type: Literal["CALL", "PUT"]
@@ -45,8 +45,14 @@ class InstrumentGetOptionContractsParams(TypedDict, total=False):
     Contains encoded pagination state; when provided, page_size is ignored.
     """
 
+    root: str
+    """OSI option root symbol (e.g., AAPL, SPXW).
+
+    Index roots also include their weekly series (e.g., SPX includes SPXW).
+    """
+
     underlier: str
-    """Underlier symbol (e.g., AAPL, SPX)"""
+    """Deprecated: use `root`. If both are sent, the values must match."""
 
     underlying_instrument_id: str
     """Instrument identifier or symbol of the underlying equity/index"""

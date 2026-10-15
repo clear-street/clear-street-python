@@ -202,6 +202,7 @@ class InstrumentsResource(SyncAPIResource):
         is_settle_on_open: bool | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
+        root: str | Omit = omit,
         underlier: str | Omit = omit,
         underlying_instrument_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -215,14 +216,14 @@ class InstrumentsResource(SyncAPIResource):
         List options contracts.
 
         Returns options contracts with options-specific metadata. Exactly one identifier
-        must be provided: `underlier`/`underlying_instrument_id` (list all contracts for
-        that underlier) or `contract_ids` (look up specific contracts directly).
+        must be provided: `root`/`underlying_instrument_id` (list all contracts for that
+        underlier) or `contract_ids` (look up specific contracts directly).
         `expiry`/`contract_type` apply as filters in either case.
 
         Args:
           contract_ids: Comma-separated contract instrument IDs (UUID) or OSI option symbols to look up
               directly, bypassing underlier expansion. Mutually exclusive with
-              underlier/underlying_instrument_id; up to 100 values.
+              root/underlying_instrument_id; up to 100 values.
 
           contract_type: Filter by contract type: CALL or PUT
 
@@ -237,7 +238,10 @@ class InstrumentsResource(SyncAPIResource):
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.
 
-          underlier: Underlier symbol (e.g., AAPL, SPX)
+          root: OSI option root symbol (e.g., AAPL, SPXW). Index roots also include their weekly
+              series (e.g., SPX includes SPXW).
+
+          underlier: Deprecated: use `root`. If both are sent, the values must match.
 
           underlying_instrument_id: Instrument identifier or symbol of the underlying equity/index
 
@@ -264,6 +268,7 @@ class InstrumentsResource(SyncAPIResource):
                         "is_settle_on_open": is_settle_on_open,
                         "page_size": page_size,
                         "page_token": page_token,
+                        "root": root,
                         "underlier": underlier,
                         "underlying_instrument_id": underlying_instrument_id,
                     },
@@ -517,6 +522,7 @@ class AsyncInstrumentsResource(AsyncAPIResource):
         is_settle_on_open: bool | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
+        root: str | Omit = omit,
         underlier: str | Omit = omit,
         underlying_instrument_id: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -530,14 +536,14 @@ class AsyncInstrumentsResource(AsyncAPIResource):
         List options contracts.
 
         Returns options contracts with options-specific metadata. Exactly one identifier
-        must be provided: `underlier`/`underlying_instrument_id` (list all contracts for
-        that underlier) or `contract_ids` (look up specific contracts directly).
+        must be provided: `root`/`underlying_instrument_id` (list all contracts for that
+        underlier) or `contract_ids` (look up specific contracts directly).
         `expiry`/`contract_type` apply as filters in either case.
 
         Args:
           contract_ids: Comma-separated contract instrument IDs (UUID) or OSI option symbols to look up
               directly, bypassing underlier expansion. Mutually exclusive with
-              underlier/underlying_instrument_id; up to 100 values.
+              root/underlying_instrument_id; up to 100 values.
 
           contract_type: Filter by contract type: CALL or PUT
 
@@ -552,7 +558,10 @@ class AsyncInstrumentsResource(AsyncAPIResource):
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.
 
-          underlier: Underlier symbol (e.g., AAPL, SPX)
+          root: OSI option root symbol (e.g., AAPL, SPXW). Index roots also include their weekly
+              series (e.g., SPX includes SPXW).
+
+          underlier: Deprecated: use `root`. If both are sent, the values must match.
 
           underlying_instrument_id: Instrument identifier or symbol of the underlying equity/index
 
@@ -579,6 +588,7 @@ class AsyncInstrumentsResource(AsyncAPIResource):
                         "is_settle_on_open": is_settle_on_open,
                         "page_size": page_size,
                         "page_token": page_token,
+                        "root": root,
                         "underlier": underlier,
                         "underlying_instrument_id": underlying_instrument_id,
                     },
