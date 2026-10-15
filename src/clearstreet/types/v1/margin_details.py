@@ -29,6 +29,12 @@ class MarginDetails(BaseModel):
     overnight_details: MarginSessionDetails
     """Overnight session margin calculation details."""
 
+    overnight_margin_excess: str
+    """The difference between equity and the overnight margin requirement."""
+
+    overnight_margin_requirement: str
+    """The amount of equity required to hold current positions overnight."""
+
     top_contributors: Optional[List[MarginTopContributor]] = None
     """Optional top margin contributors, returned only when explicitly requested."""
 

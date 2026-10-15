@@ -12,8 +12,8 @@ class MarginSessionDetails(BaseModel):
     """
     Maximum buying power available in the account during the session: base buying
     power plus the open order adjustment, where base buying power is maintenance
-    margin excess times the multiplier for intraday and initial margin excess times
-    the multiplier for overnight.
+    margin excess times the multiplier for intraday and overnight margin excess
+    times the multiplier for overnight.
     """
 
     multiplier: Optional[str] = None

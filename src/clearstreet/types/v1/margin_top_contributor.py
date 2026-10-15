@@ -15,5 +15,8 @@ class MarginTopContributor(BaseModel):
     market_value: str
     """Net market value attributable to this underlying."""
 
+    overnight_margin_requirement: str
+    """Overnight margin requirement attributable to this underlying."""
+
     underlying_instrument_id: str
     """UUID of the underlying security contributing to margin requirement."""

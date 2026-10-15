@@ -20,7 +20,7 @@ class AccountBalances(BaseModel):
     """
     The total buying power available in the account: base buying power plus the open
     order adjustment, where base buying power is maintenance margin excess times the
-    multiplier for intraday and initial margin excess times the multiplier for
+    multiplier for intraday and overnight margin excess times the multiplier for
     overnight.
     """
 
