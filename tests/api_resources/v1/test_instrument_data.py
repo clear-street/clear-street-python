@@ -17,6 +17,7 @@ from clearstreet.types.v1 import (
     InstrumentDataGetInstrumentAnalystConsensusResponse,
     InstrumentDataGetInstrumentIncomeStatementsResponse,
     InstrumentDataGetInstrumentCashFlowStatementsResponse,
+    InstrumentDataGetInstrumentEarningsTranscriptsResponse,
     InstrumentDataGetInstrumentBalanceSheetStatementsResponse,
 )
 
@@ -215,6 +216,64 @@ class TestInstrumentData:
     def test_path_params_get_instrument_cash_flow_statements(self, client: ClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `instrument_id` but received ''"):
             client.v1.instrument_data.with_raw_response.get_instrument_cash_flow_statements(
+                instrument_id="",
+            )
+
+    @parametrize
+    def test_method_get_instrument_earnings_transcripts(self, client: ClearStreet) -> None:
+        instrument_data = client.v1.instrument_data.get_instrument_earnings_transcripts(
+            instrument_id="x",
+        )
+        assert_matches_type(InstrumentDataGetInstrumentEarningsTranscriptsResponse, instrument_data, path=["response"])
+
+    @parametrize
+    def test_method_get_instrument_earnings_transcripts_with_all_params(self, client: ClearStreet) -> None:
+        instrument_data = client.v1.instrument_data.get_instrument_earnings_transcripts(
+            instrument_id="x",
+            date={
+                "gt": "gt",
+                "gte": "gte",
+                "lt": "lt",
+                "lte": "lte",
+            },
+            event_date=parse_date("2019-12-27"),
+            page_size=1,
+            page_token="U3RhaW5sZXNzIHJvY2tz",
+            period="Q1",
+            year=0,
+        )
+        assert_matches_type(InstrumentDataGetInstrumentEarningsTranscriptsResponse, instrument_data, path=["response"])
+
+    @parametrize
+    def test_raw_response_get_instrument_earnings_transcripts(self, client: ClearStreet) -> None:
+        response = client.v1.instrument_data.with_raw_response.get_instrument_earnings_transcripts(
+            instrument_id="x",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        instrument_data = response.parse()
+        assert_matches_type(InstrumentDataGetInstrumentEarningsTranscriptsResponse, instrument_data, path=["response"])
+
+    @parametrize
+    def test_streaming_response_get_instrument_earnings_transcripts(self, client: ClearStreet) -> None:
+        with client.v1.instrument_data.with_streaming_response.get_instrument_earnings_transcripts(
+            instrument_id="x",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            instrument_data = response.parse()
+            assert_matches_type(
+                InstrumentDataGetInstrumentEarningsTranscriptsResponse, instrument_data, path=["response"]
+            )
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_path_params_get_instrument_earnings_transcripts(self, client: ClearStreet) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `instrument_id` but received ''"):
+            client.v1.instrument_data.with_raw_response.get_instrument_earnings_transcripts(
                 instrument_id="",
             )
 
@@ -556,6 +615,66 @@ class TestAsyncInstrumentData:
     async def test_path_params_get_instrument_cash_flow_statements(self, async_client: AsyncClearStreet) -> None:
         with pytest.raises(ValueError, match=r"Expected a non-empty value for `instrument_id` but received ''"):
             await async_client.v1.instrument_data.with_raw_response.get_instrument_cash_flow_statements(
+                instrument_id="",
+            )
+
+    @parametrize
+    async def test_method_get_instrument_earnings_transcripts(self, async_client: AsyncClearStreet) -> None:
+        instrument_data = await async_client.v1.instrument_data.get_instrument_earnings_transcripts(
+            instrument_id="x",
+        )
+        assert_matches_type(InstrumentDataGetInstrumentEarningsTranscriptsResponse, instrument_data, path=["response"])
+
+    @parametrize
+    async def test_method_get_instrument_earnings_transcripts_with_all_params(
+        self, async_client: AsyncClearStreet
+    ) -> None:
+        instrument_data = await async_client.v1.instrument_data.get_instrument_earnings_transcripts(
+            instrument_id="x",
+            date={
+                "gt": "gt",
+                "gte": "gte",
+                "lt": "lt",
+                "lte": "lte",
+            },
+            event_date=parse_date("2019-12-27"),
+            page_size=1,
+            page_token="U3RhaW5sZXNzIHJvY2tz",
+            period="Q1",
+            year=0,
+        )
+        assert_matches_type(InstrumentDataGetInstrumentEarningsTranscriptsResponse, instrument_data, path=["response"])
+
+    @parametrize
+    async def test_raw_response_get_instrument_earnings_transcripts(self, async_client: AsyncClearStreet) -> None:
+        response = await async_client.v1.instrument_data.with_raw_response.get_instrument_earnings_transcripts(
+            instrument_id="x",
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        instrument_data = await response.parse()
+        assert_matches_type(InstrumentDataGetInstrumentEarningsTranscriptsResponse, instrument_data, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_get_instrument_earnings_transcripts(self, async_client: AsyncClearStreet) -> None:
+        async with async_client.v1.instrument_data.with_streaming_response.get_instrument_earnings_transcripts(
+            instrument_id="x",
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            instrument_data = await response.parse()
+            assert_matches_type(
+                InstrumentDataGetInstrumentEarningsTranscriptsResponse, instrument_data, path=["response"]
+            )
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_path_params_get_instrument_earnings_transcripts(self, async_client: AsyncClearStreet) -> None:
+        with pytest.raises(ValueError, match=r"Expected a non-empty value for `instrument_id` but received ''"):
+            await async_client.v1.instrument_data.with_raw_response.get_instrument_earnings_transcripts(
                 instrument_id="",
             )
 

@@ -15,6 +15,14 @@ class InstrumentEarnings(BaseModel):
     date: datetime.date
     """The date when the earnings report was published"""
 
+    transcript_available: bool
+    """True when an earnings call transcript exists for this event.
+
+    Fetch it with
+    `GET /v1/instruments/{instrument_id}/earnings-transcripts?event_date=<date>`,
+    where `<date>` is this event's `date`.
+    """
+
     eps_actual: Optional[str] = None
     """
     The actual earnings per share (EPS) for the period When a null/undefined value

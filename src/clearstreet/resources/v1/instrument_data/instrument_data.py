@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing import List, Union
 from datetime import date
+from typing_extensions import Literal
 
 import httpx
 
@@ -34,6 +35,7 @@ from ....types.v1 import (
     instrument_data_get_instrument_analyst_consensus_params,
     instrument_data_get_instrument_income_statements_params,
     instrument_data_get_instrument_cash_flow_statements_params,
+    instrument_data_get_instrument_earnings_transcripts_params,
     instrument_data_get_instrument_balance_sheet_statements_params,
 )
 from .market_data import (
@@ -67,6 +69,9 @@ from ....types.v1.instrument_data_get_instrument_income_statements_response impo
 )
 from ....types.v1.instrument_data_get_instrument_cash_flow_statements_response import (
     InstrumentDataGetInstrumentCashFlowStatementsResponse,
+)
+from ....types.v1.instrument_data_get_instrument_earnings_transcripts_response import (
+    InstrumentDataGetInstrumentEarningsTranscriptsResponse,
 )
 from ....types.v1.instrument_data_get_instrument_balance_sheet_statements_response import (
     InstrumentDataGetInstrumentBalanceSheetStatementsResponse,
@@ -381,6 +386,86 @@ class InstrumentDataResource(SyncAPIResource):
                 ),
             ),
             cast_to=InstrumentDataGetInstrumentCashFlowStatementsResponse,
+        )
+
+    def get_instrument_earnings_transcripts(
+        self,
+        instrument_id: str,
+        *,
+        date: instrument_data_get_instrument_earnings_transcripts_params.Date | Omit = omit,
+        event_date: Union[str, date] | Omit = omit,
+        page_size: int | Omit = omit,
+        page_token: Union[str, Base64FileInput] | Omit = omit,
+        period: Literal["Q1", "Q2", "Q3", "Q4"] | Omit = omit,
+        year: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> InstrumentDataGetInstrumentEarningsTranscriptsResponse:
+        """
+        Retrieves earnings call transcripts for a specific instrument, newest fiscal
+        period first.
+
+        Defaults: `page_size` is 1 and is capped at 5, because each transcript is large.
+        Send `event_date` with the `date` of an earnings event from the events endpoints
+        to fetch that event's transcript. The `date.gt`, `date.gte`, `date.lt`, and
+        `date.lte` filters compare the call date itself. An instrument without
+        transcripts returns an empty list.
+
+        Pagination metadata does not include `total_items` or `total_pages` for this
+        endpoint. Use `next_page_token` to detect whether more results exist. The token
+        does not carry filters: send the same filters with every page request.
+
+        Args:
+          instrument_id: Instrument identifier: either an instrument UUID or a symbol (symbol for
+              equities, OSI for options). Non-UUID inputs are resolved server-side.
+
+          event_date: Return only transcripts whose call date is within one day of this earnings event
+              date (`YYYY-MM-DD`). Use an event's `date` to fetch that event's transcript.
+
+          page_size: The number of items to return per page. Only used when page_token is not
+              provided.
+
+          page_token: Token for retrieving the next or previous page of results. Contains encoded
+              pagination state; when provided, page_size is ignored.
+
+          period: Only return the transcript for this fiscal quarter.
+
+          year: Only return the transcript for this fiscal year.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not instrument_id:
+            raise ValueError(f"Expected a non-empty value for `instrument_id` but received {instrument_id!r}")
+        return self._get(
+            path_template("/v1/instruments/{instrument_id}/earnings-transcripts", instrument_id=instrument_id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "date": date,
+                        "event_date": event_date,
+                        "page_size": page_size,
+                        "page_token": page_token,
+                        "period": period,
+                        "year": year,
+                    },
+                    instrument_data_get_instrument_earnings_transcripts_params.InstrumentDataGetInstrumentEarningsTranscriptsParams,
+                ),
+            ),
+            cast_to=InstrumentDataGetInstrumentEarningsTranscriptsResponse,
         )
 
     def get_instrument_events(
@@ -863,6 +948,86 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
             cast_to=InstrumentDataGetInstrumentCashFlowStatementsResponse,
         )
 
+    async def get_instrument_earnings_transcripts(
+        self,
+        instrument_id: str,
+        *,
+        date: instrument_data_get_instrument_earnings_transcripts_params.Date | Omit = omit,
+        event_date: Union[str, date] | Omit = omit,
+        page_size: int | Omit = omit,
+        page_token: Union[str, Base64FileInput] | Omit = omit,
+        period: Literal["Q1", "Q2", "Q3", "Q4"] | Omit = omit,
+        year: int | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> InstrumentDataGetInstrumentEarningsTranscriptsResponse:
+        """
+        Retrieves earnings call transcripts for a specific instrument, newest fiscal
+        period first.
+
+        Defaults: `page_size` is 1 and is capped at 5, because each transcript is large.
+        Send `event_date` with the `date` of an earnings event from the events endpoints
+        to fetch that event's transcript. The `date.gt`, `date.gte`, `date.lt`, and
+        `date.lte` filters compare the call date itself. An instrument without
+        transcripts returns an empty list.
+
+        Pagination metadata does not include `total_items` or `total_pages` for this
+        endpoint. Use `next_page_token` to detect whether more results exist. The token
+        does not carry filters: send the same filters with every page request.
+
+        Args:
+          instrument_id: Instrument identifier: either an instrument UUID or a symbol (symbol for
+              equities, OSI for options). Non-UUID inputs are resolved server-side.
+
+          event_date: Return only transcripts whose call date is within one day of this earnings event
+              date (`YYYY-MM-DD`). Use an event's `date` to fetch that event's transcript.
+
+          page_size: The number of items to return per page. Only used when page_token is not
+              provided.
+
+          page_token: Token for retrieving the next or previous page of results. Contains encoded
+              pagination state; when provided, page_size is ignored.
+
+          period: Only return the transcript for this fiscal quarter.
+
+          year: Only return the transcript for this fiscal year.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        if not instrument_id:
+            raise ValueError(f"Expected a non-empty value for `instrument_id` but received {instrument_id!r}")
+        return await self._get(
+            path_template("/v1/instruments/{instrument_id}/earnings-transcripts", instrument_id=instrument_id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "date": date,
+                        "event_date": event_date,
+                        "page_size": page_size,
+                        "page_token": page_token,
+                        "period": period,
+                        "year": year,
+                    },
+                    instrument_data_get_instrument_earnings_transcripts_params.InstrumentDataGetInstrumentEarningsTranscriptsParams,
+                ),
+            ),
+            cast_to=InstrumentDataGetInstrumentEarningsTranscriptsResponse,
+        )
+
     async def get_instrument_events(
         self,
         instrument_id: str,
@@ -1051,6 +1216,9 @@ class InstrumentDataResourceWithRawResponse:
         self.get_instrument_cash_flow_statements = to_raw_response_wrapper(
             instrument_data.get_instrument_cash_flow_statements,
         )
+        self.get_instrument_earnings_transcripts = to_raw_response_wrapper(
+            instrument_data.get_instrument_earnings_transcripts,
+        )
         self.get_instrument_events = to_raw_response_wrapper(
             instrument_data.get_instrument_events,
         )
@@ -1087,6 +1255,9 @@ class AsyncInstrumentDataResourceWithRawResponse:
         )
         self.get_instrument_cash_flow_statements = async_to_raw_response_wrapper(
             instrument_data.get_instrument_cash_flow_statements,
+        )
+        self.get_instrument_earnings_transcripts = async_to_raw_response_wrapper(
+            instrument_data.get_instrument_earnings_transcripts,
         )
         self.get_instrument_events = async_to_raw_response_wrapper(
             instrument_data.get_instrument_events,
@@ -1125,6 +1296,9 @@ class InstrumentDataResourceWithStreamingResponse:
         self.get_instrument_cash_flow_statements = to_streamed_response_wrapper(
             instrument_data.get_instrument_cash_flow_statements,
         )
+        self.get_instrument_earnings_transcripts = to_streamed_response_wrapper(
+            instrument_data.get_instrument_earnings_transcripts,
+        )
         self.get_instrument_events = to_streamed_response_wrapper(
             instrument_data.get_instrument_events,
         )
@@ -1161,6 +1335,9 @@ class AsyncInstrumentDataResourceWithStreamingResponse:
         )
         self.get_instrument_cash_flow_statements = async_to_streamed_response_wrapper(
             instrument_data.get_instrument_cash_flow_statements,
+        )
+        self.get_instrument_earnings_transcripts = async_to_streamed_response_wrapper(
+            instrument_data.get_instrument_earnings_transcripts,
         )
         self.get_instrument_events = async_to_streamed_response_wrapper(
             instrument_data.get_instrument_events,

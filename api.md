@@ -106,6 +106,7 @@ from clearstreet.types.v1 import (
     AnalystDistribution,
     AnalystRating,
     FiscalPeriodType,
+    FiscalQuarter,
     InstrumentAllEventsData,
     InstrumentAnalystConsensus,
     InstrumentBalanceSheetStatement,
@@ -114,6 +115,8 @@ from clearstreet.types.v1 import (
     InstrumentCashFlowStatementList,
     InstrumentDividendEvent,
     InstrumentEarnings,
+    InstrumentEarningsTranscript,
+    InstrumentEarningsTranscriptList,
     InstrumentEventEnvelope,
     InstrumentEventIpoItem,
     InstrumentEventsByDate,
@@ -129,6 +132,7 @@ from clearstreet.types.v1 import (
     InstrumentDataGetInstrumentAnalystConsensusResponse,
     InstrumentDataGetInstrumentBalanceSheetStatementsResponse,
     InstrumentDataGetInstrumentCashFlowStatementsResponse,
+    InstrumentDataGetInstrumentEarningsTranscriptsResponse,
     InstrumentDataGetInstrumentEventsResponse,
     InstrumentDataGetInstrumentFundamentalsResponse,
     InstrumentDataGetInstrumentIncomeStatementsResponse,
@@ -141,6 +145,7 @@ Methods:
 - <code title="get /v1/instruments/{instrument_id}/analyst-reporting">client.v1.instrument_data.<a href="./src/clearstreet/resources/v1/instrument_data/instrument_data.py">get_instrument_analyst_consensus</a>(instrument_id, \*\*<a href="src/clearstreet/types/v1/instrument_data_get_instrument_analyst_consensus_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/instrument_data_get_instrument_analyst_consensus_response.py">InstrumentDataGetInstrumentAnalystConsensusResponse</a></code>
 - <code title="get /v1/instruments/{instrument_id}/balance-sheets">client.v1.instrument_data.<a href="./src/clearstreet/resources/v1/instrument_data/instrument_data.py">get_instrument_balance_sheet_statements</a>(instrument_id, \*\*<a href="src/clearstreet/types/v1/instrument_data_get_instrument_balance_sheet_statements_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/instrument_data_get_instrument_balance_sheet_statements_response.py">InstrumentDataGetInstrumentBalanceSheetStatementsResponse</a></code>
 - <code title="get /v1/instruments/{instrument_id}/cash-flow-statements">client.v1.instrument_data.<a href="./src/clearstreet/resources/v1/instrument_data/instrument_data.py">get_instrument_cash_flow_statements</a>(instrument_id, \*\*<a href="src/clearstreet/types/v1/instrument_data_get_instrument_cash_flow_statements_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/instrument_data_get_instrument_cash_flow_statements_response.py">InstrumentDataGetInstrumentCashFlowStatementsResponse</a></code>
+- <code title="get /v1/instruments/{instrument_id}/earnings-transcripts">client.v1.instrument_data.<a href="./src/clearstreet/resources/v1/instrument_data/instrument_data.py">get_instrument_earnings_transcripts</a>(instrument_id, \*\*<a href="src/clearstreet/types/v1/instrument_data_get_instrument_earnings_transcripts_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/instrument_data_get_instrument_earnings_transcripts_response.py">InstrumentDataGetInstrumentEarningsTranscriptsResponse</a></code>
 - <code title="get /v1/instruments/{instrument_id}/events">client.v1.instrument_data.<a href="./src/clearstreet/resources/v1/instrument_data/instrument_data.py">get_instrument_events</a>(instrument_id, \*\*<a href="src/clearstreet/types/v1/instrument_data_get_instrument_events_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/instrument_data_get_instrument_events_response.py">InstrumentDataGetInstrumentEventsResponse</a></code>
 - <code title="get /v1/instruments/{instrument_id}/fundamentals">client.v1.instrument_data.<a href="./src/clearstreet/resources/v1/instrument_data/instrument_data.py">get_instrument_fundamentals</a>(instrument_id) -> <a href="./src/clearstreet/types/v1/instrument_data_get_instrument_fundamentals_response.py">InstrumentDataGetInstrumentFundamentalsResponse</a></code>
 - <code title="get /v1/instruments/{instrument_id}/income-statements">client.v1.instrument_data.<a href="./src/clearstreet/resources/v1/instrument_data/instrument_data.py">get_instrument_income_statements</a>(instrument_id, \*\*<a href="src/clearstreet/types/v1/instrument_data_get_instrument_income_statements_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/instrument_data_get_instrument_income_statements_response.py">InstrumentDataGetInstrumentIncomeStatementsResponse</a></code>
