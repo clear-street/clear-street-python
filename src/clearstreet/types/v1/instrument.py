@@ -7,6 +7,7 @@ from ..._models import BaseModel
 from .tick_rule import TickRule
 from ..security_type import SecurityType
 from .option_expiry_date import OptionExpiryDate
+from .shortable_attribute import ShortableAttribute
 
 __all__ = ["Instrument"]
 
@@ -126,6 +127,16 @@ class Instrument(BaseModel):
     """
     The percent of a short position's value you must post as margin When a
     null/undefined value is observed, it indicates that there is no available data.
+    """
+
+    shortable_attribute: Optional[ShortableAttribute] = None
+    """
+    How readily the instrument can be shorted: `EASY_TO_BORROW`, `HARD_TO_BORROW`,
+    or `NOT_SHORTABLE`. Easy-to-borrow instruments can be shorted without a locate.
+    A hard-to-borrow instrument is not easy to borrow but has locate inventory
+    remaining and a float at or above the minimum for short sales; anything else is
+    not shortable. Omitted for instruments that are not tradable equities. When a
+    null/undefined value is observed, it indicates it does not apply.
     """
 
     tick_rules: Optional[List[TickRule]] = None

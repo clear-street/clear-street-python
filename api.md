@@ -207,6 +207,7 @@ from clearstreet.types.v1 import (
     OptionExpiryDate,
     OptionsContract,
     OptionsContractList,
+    ShortableAttribute,
     TickRule,
     InstrumentGetInstrumentByIDResponse,
     InstrumentGetInstrumentsResponse,

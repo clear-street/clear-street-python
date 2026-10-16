@@ -122,6 +122,7 @@ from .market_session_type import MarketSessionType as MarketSessionType
 from .risk_settings_param import RiskSettingsParam as RiskSettingsParam
 from .screener_entry_list import ScreenerEntryList as ScreenerEntryList
 from .search_filter_param import SearchFilterParam as SearchFilterParam
+from .shortable_attribute import ShortableAttribute as ShortableAttribute
 from .account_balances_sod import AccountBalancesSod as AccountBalancesSod
 from .analyst_distribution import AnalystDistribution as AnalystDistribution
 from .company_headquarters import CompanyHeadquarters as CompanyHeadquarters
