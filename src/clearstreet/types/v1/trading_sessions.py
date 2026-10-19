@@ -17,6 +17,14 @@ class TradingSessions(BaseModel):
     is observed, it indicates it does not apply.
     """
 
+    maintenance: Optional[SessionSchedule] = None
+    """Scheduled maintenance window.
+
+    The market is closed inside it, even when it falls within another session. Null
+    if none is scheduled for the day. When a null/undefined value is observed, it
+    indicates it does not apply.
+    """
+
     overnight: Optional[SessionSchedule] = None
     """
     Overnight session schedule (prior evening through early morning), null if not

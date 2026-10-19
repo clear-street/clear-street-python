@@ -136,7 +136,7 @@ class CalendarResource(SyncAPIResource):
         self,
         *,
         date: str | Omit = omit,
-        market: Literal["us_equities", "us_options"] | Omit = omit,
+        market: Literal["us_equities", "us_options", "us_event_contracts"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -152,7 +152,8 @@ class CalendarResource(SyncAPIResource):
         Args:
           date: The date to query market hours for (YYYY-MM-DD). Defaults to today.
 
-          market: Market type to query (us_equities, us_options). If omitted, returns all markets.
+          market: Market type to query (us_equities, us_options, us_event_contracts). If omitted,
+              returns us_equities and us_options.
 
           extra_headers: Send extra headers
 
@@ -291,7 +292,7 @@ class AsyncCalendarResource(AsyncAPIResource):
         self,
         *,
         date: str | Omit = omit,
-        market: Literal["us_equities", "us_options"] | Omit = omit,
+        market: Literal["us_equities", "us_options", "us_event_contracts"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -307,7 +308,8 @@ class AsyncCalendarResource(AsyncAPIResource):
         Args:
           date: The date to query market hours for (YYYY-MM-DD). Defaults to today.
 
-          market: Market type to query (us_equities, us_options). If omitted, returns all markets.
+          market: Market type to query (us_equities, us_options, us_event_contracts). If omitted,
+              returns us_equities and us_options.
 
           extra_headers: Send extra headers
 

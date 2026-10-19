@@ -4,4 +4,4 @@ from typing_extensions import Literal, TypeAlias
 
 __all__ = ["MarketType"]
 
-MarketType: TypeAlias = Literal["us_equities", "us_options"]
+MarketType: TypeAlias = Literal["us_equities", "us_options", "us_event_contracts"]
