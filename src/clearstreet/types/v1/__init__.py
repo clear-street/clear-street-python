@@ -132,6 +132,7 @@ from .filter_op_spec_param import FilterOpSpecParam as FilterOpSpecParam
 from .instrument_core_list import InstrumentCoreList as InstrumentCoreList
 from .instrument_ipo_event import InstrumentIpoEvent as InstrumentIpoEvent
 from .margin_details_usage import MarginDetailsUsage as MarginDetailsUsage
+from .not_shortable_reason import NotShortableReason as NotShortableReason
 from .open_screener_action import OpenScreenerAction as OpenScreenerAction
 from .order_strategy_param import OrderStrategyParam as OrderStrategyParam
 from .position_instruction import PositionInstruction as PositionInstruction

@@ -6,6 +6,7 @@ from ..._models import BaseModel
 from .tick_rule import TickRule
 from ..security_type import SecurityType
 from .shortable_attribute import ShortableAttribute
+from .not_shortable_reason import NotShortableReason
 
 __all__ = ["InstrumentCore"]
 
@@ -88,6 +89,14 @@ class InstrumentCore(BaseModel):
     observed, it indicates that there is no available data.
     """
 
+    not_shortable_reasons: Optional[List[NotShortableReason]] = None
+    """
+    Why the instrument is `NOT_SHORTABLE`: every reason that applies, using the same
+    codes as the `type` of the equivalent order-preview errors. Omitted unless
+    `shortable_attribute` is `NOT_SHORTABLE`. When a null/undefined value is
+    observed, it indicates it does not apply.
+    """
+
     notional_adv: Optional[str] = None
     """
     Notional average daily volume (ADV multiplied by the cax-adjusted close when
@@ -112,9 +121,9 @@ class InstrumentCore(BaseModel):
     How readily the instrument can be shorted: `EASY_TO_BORROW`, `HARD_TO_BORROW`,
     or `NOT_SHORTABLE`. Easy-to-borrow instruments can be shorted without a locate.
     A hard-to-borrow instrument is not easy to borrow but has locate inventory
-    remaining and a float at or above the minimum for short sales; anything else is
-    not shortable. Omitted for instruments that are not tradable equities. When a
-    null/undefined value is observed, it indicates it does not apply.
+    remaining and supports short selling; anything else is not shortable. Omitted
+    for instruments that are not tradable equities. When a null/undefined value is
+    observed, it indicates it does not apply.
     """
 
     tick_rules: Optional[List[TickRule]] = None

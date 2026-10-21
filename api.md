@@ -204,6 +204,7 @@ from clearstreet.types.v1 import (
     InstrumentCore,
     InstrumentCoreList,
     ListingType,
+    NotShortableReason,
     OptionExpiryDate,
     OptionsContract,
     OptionsContractList,
