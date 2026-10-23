@@ -7,6 +7,7 @@ from ..._models import BaseModel
 from .tick_rule import TickRule
 from .listing_type import ListingType
 from .contract_type import ContractType
+from ..security_type import SecurityType
 from .exercise_style import ExerciseStyle
 
 __all__ = ["OptionsContract"]
@@ -83,4 +84,10 @@ class OptionsContract(BaseModel):
     """
     Instrument ID of the underlying instrument, when available When a null/undefined
     value is observed, it indicates that there is no available data.
+    """
+
+    underlying_instrument_type: Optional[SecurityType] = None
+    """
+    Type of the underlying instrument, alongside `underlying_instrument_id` When a
+    null/undefined value is observed, it indicates that there is no available data.
     """
