@@ -424,6 +424,15 @@ from clearstreet.types.v1 import (
     NewOrderRequest,
     Order,
     OrderList,
+    OrderPreview,
+    OrderPreviewAmount,
+    OrderPreviewDelta,
+    OrderPreviewEntry,
+    OrderPreviewEntryList,
+    OrderPreviewError,
+    OrderPreviewMarginDetails,
+    OrderPreviewOutcome,
+    OrderPreviewPosition,
     OrderStatus,
     OrderStrategy,
     OrderType,
@@ -440,6 +449,7 @@ from clearstreet.types.v1 import (
     OrderGetExecutionsResponse,
     OrderGetOrderByIDResponse,
     OrderGetOrdersResponse,
+    OrderPreviewOrdersResponse,
     OrderReplaceOrderResponse,
     OrderSubmitOrdersResponse,
 )
@@ -452,6 +462,7 @@ Methods:
 - <code title="get /v1/accounts/{account_id}/executions">client.v1.orders.<a href="./src/clearstreet/resources/v1/orders.py">get_executions</a>(account_id, \*\*<a href="src/clearstreet/types/v1/order_get_executions_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/order_get_executions_response.py">OrderGetExecutionsResponse</a></code>
 - <code title="get /v1/accounts/{account_id}/orders/{order_id}">client.v1.orders.<a href="./src/clearstreet/resources/v1/orders.py">get_order_by_id</a>(order_id, \*, account_id) -> <a href="./src/clearstreet/types/v1/order_get_order_by_id_response.py">OrderGetOrderByIDResponse</a></code>
 - <code title="get /v1/accounts/{account_id}/orders">client.v1.orders.<a href="./src/clearstreet/resources/v1/orders.py">get_orders</a>(account_id, \*\*<a href="src/clearstreet/types/v1/order_get_orders_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/order_get_orders_response.py">OrderGetOrdersResponse</a></code>
+- <code title="post /v1/accounts/{account_id}/orders/preview">client.v1.orders.<a href="./src/clearstreet/resources/v1/orders.py">preview_orders</a>(account_id, \*\*<a href="src/clearstreet/types/v1/order_preview_orders_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/order_preview_orders_response.py">OrderPreviewOrdersResponse</a></code>
 - <code title="patch /v1/accounts/{account_id}/orders/{order_id}">client.v1.orders.<a href="./src/clearstreet/resources/v1/orders.py">replace_order</a>(order_id, \*, account_id, \*\*<a href="src/clearstreet/types/v1/order_replace_order_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/order_replace_order_response.py">OrderReplaceOrderResponse</a></code>
 - <code title="post /v1/accounts/{account_id}/orders">client.v1.orders.<a href="./src/clearstreet/resources/v1/orders.py">submit_orders</a>(account_id, \*\*<a href="src/clearstreet/types/v1/order_submit_orders_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/order_submit_orders_response.py">OrderSubmitOrdersResponse</a></code>
 

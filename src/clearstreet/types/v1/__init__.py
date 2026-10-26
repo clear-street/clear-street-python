@@ -61,6 +61,7 @@ from .fee_frequency import FeeFrequency as FeeFrequency
 from .field_columns import FieldColumns as FieldColumns
 from .locate_status import LocateStatus as LocateStatus
 from .market_status import MarketStatus as MarketStatus
+from .order_preview import OrderPreview as OrderPreview
 from .position_list import PositionList as PositionList
 from .position_type import PositionType as PositionType
 from .risk_settings import RiskSettings as RiskSettings
@@ -119,6 +120,9 @@ from .economic_event_unit import EconomicEventUnit as EconomicEventUnit
 from .instrument_earnings import InstrumentEarnings as InstrumentEarnings
 from .market_hours_detail import MarketHoursDetail as MarketHoursDetail
 from .market_session_type import MarketSessionType as MarketSessionType
+from .order_preview_delta import OrderPreviewDelta as OrderPreviewDelta
+from .order_preview_entry import OrderPreviewEntry as OrderPreviewEntry
+from .order_preview_error import OrderPreviewError as OrderPreviewError
 from .risk_settings_param import RiskSettingsParam as RiskSettingsParam
 from .screener_entry_list import ScreenerEntryList as ScreenerEntryList
 from .search_filter_param import SearchFilterParam as SearchFilterParam
@@ -134,6 +138,7 @@ from .instrument_ipo_event import InstrumentIpoEvent as InstrumentIpoEvent
 from .margin_details_usage import MarginDetailsUsage as MarginDetailsUsage
 from .not_shortable_reason import NotShortableReason as NotShortableReason
 from .open_screener_action import OpenScreenerAction as OpenScreenerAction
+from .order_preview_amount import OrderPreviewAmount as OrderPreviewAmount
 from .order_strategy_param import OrderStrategyParam as OrderStrategyParam
 from .position_instruction import PositionInstruction as PositionInstruction
 from .prefill_order_action import PrefillOrderAction as PrefillOrderAction
@@ -152,6 +157,7 @@ from .instrument_events_data import InstrumentEventsData as InstrumentEventsData
 from .instrument_split_event import InstrumentSplitEvent as InstrumentSplitEvent
 from .margin_session_details import MarginSessionDetails as MarginSessionDetails
 from .margin_top_contributor import MarginTopContributor as MarginTopContributor
+from .order_preview_position import OrderPreviewPosition as OrderPreviewPosition
 from .add_watchlist_item_data import AddWatchlistItemData as AddWatchlistItemData
 from .instrument_fundamentals import InstrumentFundamentals as InstrumentFundamentals
 from .instrument_id_or_symbol import InstrumentIDOrSymbol as InstrumentIDOrSymbol
@@ -162,6 +168,7 @@ from .request_position_effect import RequestPositionEffect as RequestPositionEff
 from .company_document_preview import CompanyDocumentPreview as CompanyDocumentPreview
 from .company_profile_resource import CompanyProfileResource as CompanyProfileResource
 from .market_hours_detail_list import MarketHoursDetailList as MarketHoursDetailList
+from .order_preview_entry_list import OrderPreviewEntryList as OrderPreviewEntryList
 from .prefill_new_order_action import PrefillNewOrderAction as PrefillNewOrderAction
 from .company_document_relation import CompanyDocumentRelation as CompanyDocumentRelation
 from .company_document_resource import CompanyDocumentResource as CompanyDocumentResource
@@ -193,10 +200,12 @@ from .instrument_income_statement import InstrumentIncomeStatement as Instrument
 from .locate_get_locates_response import LocateGetLocatesResponse as LocateGetLocatesResponse
 from .omni_feed_get_feed_response import OmniFeedGetFeedResponse as OmniFeedGetFeedResponse
 from .order_get_executions_params import OrderGetExecutionsParams as OrderGetExecutionsParams
+from .order_preview_orders_params import OrderPreviewOrdersParams as OrderPreviewOrdersParams
 from .position_instruction_status import PositionInstructionStatus as PositionInstructionStatus
 from .prefill_cancel_order_action import PrefillCancelOrderAction as PrefillCancelOrderAction
 from .prefill_modify_order_action import PrefillModifyOrderAction as PrefillModifyOrderAction
 from .instrument_analyst_consensus import InstrumentAnalystConsensus as InstrumentAnalystConsensus
+from .order_preview_margin_details import OrderPreviewMarginDetails as OrderPreviewMarginDetails
 from .order_replace_order_response import OrderReplaceOrderResponse as OrderReplaceOrderResponse
 from .order_submit_orders_response import OrderSubmitOrdersResponse as OrderSubmitOrdersResponse
 from .prefill_cancel_order_request import PrefillCancelOrderRequest as PrefillCancelOrderRequest
@@ -205,6 +214,7 @@ from .account_get_accounts_response import AccountGetAccountsResponse as Account
 from .account_with_personal_details import AccountWithPersonalDetails as AccountWithPersonalDetails
 from .content_part_thinking_payload import ContentPartThinkingPayload as ContentPartThinkingPayload
 from .order_get_executions_response import OrderGetExecutionsResponse as OrderGetExecutionsResponse
+from .order_preview_orders_response import OrderPreviewOrdersResponse as OrderPreviewOrdersResponse
 from .position_get_positions_params import PositionGetPositionsParams as PositionGetPositionsParams
 from .instrument_cash_flow_statement import InstrumentCashFlowStatement as InstrumentCashFlowStatement
 from .instrument_earnings_transcript import InstrumentEarningsTranscript as InstrumentEarningsTranscript

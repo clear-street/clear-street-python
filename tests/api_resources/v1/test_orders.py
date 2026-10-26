@@ -16,6 +16,7 @@ from clearstreet.types.v1 import (
     OrderReplaceOrderResponse,
     OrderSubmitOrdersResponse,
     OrderGetExecutionsResponse,
+    OrderPreviewOrdersResponse,
     OrderCancelOpenOrderResponse,
     OrderCancelAllOpenOrdersResponse,
 )
@@ -248,6 +249,79 @@ class TestOrders:
 
             order = response.parse()
             assert_matches_type(OrderGetOrdersResponse, order, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_preview_orders(self, client: ClearStreet) -> None:
+        order = client.v1.orders.preview_orders(
+            account_id=0,
+            preview=[
+                {
+                    "order_type": "LIMIT",
+                    "quantity": "100",
+                    "side": "BUY",
+                    "time_in_force": "DAY",
+                },
+                {
+                    "order_type": "LIMIT",
+                    "quantity": "10",
+                    "side": "BUY",
+                    "time_in_force": "DAY",
+                },
+            ],
+        )
+        assert_matches_type(OrderPreviewOrdersResponse, order, path=["response"])
+
+    @parametrize
+    def test_raw_response_preview_orders(self, client: ClearStreet) -> None:
+        response = client.v1.orders.with_raw_response.preview_orders(
+            account_id=0,
+            preview=[
+                {
+                    "order_type": "LIMIT",
+                    "quantity": "100",
+                    "side": "BUY",
+                    "time_in_force": "DAY",
+                },
+                {
+                    "order_type": "LIMIT",
+                    "quantity": "10",
+                    "side": "BUY",
+                    "time_in_force": "DAY",
+                },
+            ],
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        order = response.parse()
+        assert_matches_type(OrderPreviewOrdersResponse, order, path=["response"])
+
+    @parametrize
+    def test_streaming_response_preview_orders(self, client: ClearStreet) -> None:
+        with client.v1.orders.with_streaming_response.preview_orders(
+            account_id=0,
+            preview=[
+                {
+                    "order_type": "LIMIT",
+                    "quantity": "100",
+                    "side": "BUY",
+                    "time_in_force": "DAY",
+                },
+                {
+                    "order_type": "LIMIT",
+                    "quantity": "10",
+                    "side": "BUY",
+                    "time_in_force": "DAY",
+                },
+            ],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            order = response.parse()
+            assert_matches_type(OrderPreviewOrdersResponse, order, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -590,6 +664,79 @@ class TestAsyncOrders:
 
             order = await response.parse()
             assert_matches_type(OrderGetOrdersResponse, order, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_preview_orders(self, async_client: AsyncClearStreet) -> None:
+        order = await async_client.v1.orders.preview_orders(
+            account_id=0,
+            preview=[
+                {
+                    "order_type": "LIMIT",
+                    "quantity": "100",
+                    "side": "BUY",
+                    "time_in_force": "DAY",
+                },
+                {
+                    "order_type": "LIMIT",
+                    "quantity": "10",
+                    "side": "BUY",
+                    "time_in_force": "DAY",
+                },
+            ],
+        )
+        assert_matches_type(OrderPreviewOrdersResponse, order, path=["response"])
+
+    @parametrize
+    async def test_raw_response_preview_orders(self, async_client: AsyncClearStreet) -> None:
+        response = await async_client.v1.orders.with_raw_response.preview_orders(
+            account_id=0,
+            preview=[
+                {
+                    "order_type": "LIMIT",
+                    "quantity": "100",
+                    "side": "BUY",
+                    "time_in_force": "DAY",
+                },
+                {
+                    "order_type": "LIMIT",
+                    "quantity": "10",
+                    "side": "BUY",
+                    "time_in_force": "DAY",
+                },
+            ],
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        order = await response.parse()
+        assert_matches_type(OrderPreviewOrdersResponse, order, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_preview_orders(self, async_client: AsyncClearStreet) -> None:
+        async with async_client.v1.orders.with_streaming_response.preview_orders(
+            account_id=0,
+            preview=[
+                {
+                    "order_type": "LIMIT",
+                    "quantity": "100",
+                    "side": "BUY",
+                    "time_in_force": "DAY",
+                },
+                {
+                    "order_type": "LIMIT",
+                    "quantity": "10",
+                    "side": "BUY",
+                    "time_in_force": "DAY",
+                },
+            ],
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            order = await response.parse()
+            assert_matches_type(OrderPreviewOrdersResponse, order, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

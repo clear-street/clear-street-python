@@ -43,6 +43,7 @@ from ...types.v1.order_get_orders_response import OrderGetOrdersResponse
 from ...types.v1.order_replace_order_response import OrderReplaceOrderResponse
 from ...types.v1.order_submit_orders_response import OrderSubmitOrdersResponse
 from ...types.v1.order_get_executions_response import OrderGetExecutionsResponse
+from ...types.v1.order_preview_orders_response import OrderPreviewOrdersResponse
 from ...types.v1.order_get_order_by_id_response import OrderGetOrderByIDResponse
 from ...types.v1.order_cancel_open_order_response import OrderCancelOpenOrderResponse
 from ...types.v1.order_cancel_all_open_orders_response import OrderCancelAllOpenOrdersResponse
@@ -384,6 +385,53 @@ class OrdersResource(SyncAPIResource):
                 ),
             ),
             cast_to=OrderGetOrdersResponse,
+        )
+
+    def preview_orders(
+        self,
+        account_id: int,
+        *,
+        preview: Iterable[NewOrderRequestParam],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> OrderPreviewOrdersResponse:
+        """Preview the impact of orders without submitting them.
+
+        For each order the engine
+        evaluates every pre-trade risk check and projects the account's balances and
+        positions as if the order were fully filled — at the limit price for limit
+        orders and at the current reference price for market orders. Orders are
+        evaluated independently: they do not see each other's projected fills. Nothing
+        is submitted and no account state changes.
+
+        The response carries one result per requested order, in request order. When the
+        request contains more than one order, every order must carry a unique `id`,
+        which is echoed on its result. An order that cannot be previewed gets an `error`
+        on its own result without affecting the rest of the batch; the response is still
+        `200 OK` — per-order outcomes live only in the rows, and non-2xx statuses are
+        reserved for request-level failures (invalid batch, authorization, engine
+        unavailable).
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._post(
+            path_template("/v1/accounts/{account_id}/orders/preview", account_id=account_id),
+            body=maybe_transform(preview, Iterable[NewOrderRequestParam]),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=OrderPreviewOrdersResponse,
         )
 
     def replace_order(
@@ -819,6 +867,53 @@ class AsyncOrdersResource(AsyncAPIResource):
             cast_to=OrderGetOrdersResponse,
         )
 
+    async def preview_orders(
+        self,
+        account_id: int,
+        *,
+        preview: Iterable[NewOrderRequestParam],
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> OrderPreviewOrdersResponse:
+        """Preview the impact of orders without submitting them.
+
+        For each order the engine
+        evaluates every pre-trade risk check and projects the account's balances and
+        positions as if the order were fully filled — at the limit price for limit
+        orders and at the current reference price for market orders. Orders are
+        evaluated independently: they do not see each other's projected fills. Nothing
+        is submitted and no account state changes.
+
+        The response carries one result per requested order, in request order. When the
+        request contains more than one order, every order must carry a unique `id`,
+        which is echoed on its result. An order that cannot be previewed gets an `error`
+        on its own result without affecting the rest of the batch; the response is still
+        `200 OK` — per-order outcomes live only in the rows, and non-2xx statuses are
+        reserved for request-level failures (invalid batch, authorization, engine
+        unavailable).
+
+        Args:
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._post(
+            path_template("/v1/accounts/{account_id}/orders/preview", account_id=account_id),
+            body=await async_maybe_transform(preview, Iterable[NewOrderRequestParam]),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=OrderPreviewOrdersResponse,
+        )
+
     async def replace_order(
         self,
         order_id: str,
@@ -935,6 +1030,9 @@ class OrdersResourceWithRawResponse:
         self.get_orders = to_raw_response_wrapper(
             orders.get_orders,
         )
+        self.preview_orders = to_raw_response_wrapper(
+            orders.preview_orders,
+        )
         self.replace_order = to_raw_response_wrapper(
             orders.replace_order,
         )
@@ -961,6 +1059,9 @@ class AsyncOrdersResourceWithRawResponse:
         )
         self.get_orders = async_to_raw_response_wrapper(
             orders.get_orders,
+        )
+        self.preview_orders = async_to_raw_response_wrapper(
+            orders.preview_orders,
         )
         self.replace_order = async_to_raw_response_wrapper(
             orders.replace_order,
@@ -989,6 +1090,9 @@ class OrdersResourceWithStreamingResponse:
         self.get_orders = to_streamed_response_wrapper(
             orders.get_orders,
         )
+        self.preview_orders = to_streamed_response_wrapper(
+            orders.preview_orders,
+        )
         self.replace_order = to_streamed_response_wrapper(
             orders.replace_order,
         )
@@ -1015,6 +1119,9 @@ class AsyncOrdersResourceWithStreamingResponse:
         )
         self.get_orders = async_to_streamed_response_wrapper(
             orders.get_orders,
+        )
+        self.preview_orders = async_to_streamed_response_wrapper(
+            orders.preview_orders,
         )
         self.replace_order = async_to_streamed_response_wrapper(
             orders.replace_order,
