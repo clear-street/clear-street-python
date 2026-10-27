@@ -24,6 +24,6 @@ class TickRule(BaseModel):
     end_price: Optional[str] = None
     """Upper bound of the band, exclusive.
 
-    Absent on the last band, which runs to infinity. When a null/undefined value is
-    observed, it indicates it does not apply.
+    Absent when the band runs to infinity. When a null/undefined value is observed,
+    it indicates it does not apply.
     """

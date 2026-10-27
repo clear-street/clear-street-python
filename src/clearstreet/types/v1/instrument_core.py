@@ -129,6 +129,7 @@ class InstrumentCore(BaseModel):
     tick_rules: Optional[List[TickRule]] = None
     """Price bands this instrument quotes on, ascending.
 
-    Absent when we have no schedule for it, which includes an option whose
-    penny-program status our reference data never supplied.
+    A price outside every band is not valid. Absent when we have no schedule for it,
+    which includes an option whose penny-program status our reference data never
+    supplied.
     """
