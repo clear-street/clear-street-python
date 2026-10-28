@@ -9,7 +9,6 @@ from pydantic import Field as FieldInfo
 from .side import Side
 from ..._models import BaseModel
 from .order_type import OrderType
-from .queue_state import QueueState
 from .order_status import OrderStatus
 from .time_in_force import TimeInForce
 from ..security_type import SecurityType
@@ -140,13 +139,6 @@ class Order(BaseModel):
     """
     Limit price (for LIMIT and STOP_LIMIT orders) When a null/undefined value is
     observed, it indicates it does not apply.
-    """
-
-    queue_state: Optional[QueueState] = None
-    """
-    Parent order queue state, present when the order is awaiting release or
-    released. When a null/undefined value is observed, it indicates it does not
-    apply.
     """
 
     releases_at: Optional[datetime] = None

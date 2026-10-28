@@ -436,7 +436,6 @@ from clearstreet.types.v1 import (
     OrderStatus,
     OrderStrategy,
     OrderType,
-    QueueState,
     ReplaceOrderRequest,
     RequestOrderType,
     RequestPositionEffect,
