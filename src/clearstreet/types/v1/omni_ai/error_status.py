@@ -11,6 +11,10 @@ class ErrorStatus(BaseModel):
     """Shared sanitized error payload."""
 
     code: str
+    """
+    `FAILED`, or `execution_interrupted` when Omni lost the worker running the
+    response; partial content is kept; send the message again.
+    """
 
     message: str
 

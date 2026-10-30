@@ -4,4 +4,4 @@ from typing_extensions import Literal, TypeAlias
 
 __all__ = ["MessageOutcome"]
 
-MessageOutcome: TypeAlias = Literal["completed", "errored", "canceled"]
+MessageOutcome: TypeAlias = Literal["completed", "errored", "canceled", "steered", "merged"]

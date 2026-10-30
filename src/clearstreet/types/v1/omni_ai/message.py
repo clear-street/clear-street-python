@@ -24,7 +24,12 @@ class Message(BaseModel):
     created_at: datetime
 
     outcome: MessageOutcome
-    """Immutable terminal outcome for a finalized assistant message."""
+    """Immutable terminal outcome for a finalized assistant message.
+
+    `steered`: the message is complete as written; the user sent a newer message
+    before it finished. `merged`: the message has no content, and a later answer
+    covers its turn. Hide `merged` messages.
+    """
 
     role: MessageRole
     """Finalized message role in the public contract."""
