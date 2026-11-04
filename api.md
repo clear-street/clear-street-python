@@ -20,6 +20,7 @@ Types:
 from clearstreet.types.v1 import (
     Account,
     AccountBalances,
+    AccountBalancesSma,
     AccountBalancesSod,
     AccountHolderEntityKind,
     AccountList,

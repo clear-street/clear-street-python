@@ -5,6 +5,7 @@ from typing import Optional
 from ..._models import BaseModel
 from .margin_type import MarginType
 from .margin_details import MarginDetails
+from .account_balances_sma import AccountBalancesSma
 from .account_balances_sod import AccountBalancesSod
 
 __all__ = ["AccountBalances"]
@@ -96,4 +97,12 @@ class AccountBalances(BaseModel):
     """
     The total market value of all short positions. When null/undefined, the value
     should be assumed to be zero. The field is omitted to simplify the response.
+    """
+
+    sma: Optional[AccountBalancesSma] = None
+    """
+    The intraday special memorandum account (SMA) of the account holder. Omitted
+    when no SMA is available for the current trade date, or when the account holder
+    has more than one open account. When a null/undefined value is observed, it
+    indicates that there is no available data.
     """
