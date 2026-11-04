@@ -33,11 +33,28 @@ class Response(BaseModel):
     data.
     """
 
+    continued_in_response_id: Optional[str] = None
+    """The response that continues the work of this response.
+
+    Present only when `status` is `steered` or `merged`. Follow it to keep showing
+    the answer. To stop that work, cancel it, or cancel this response: the server
+    follows the link. When a null/undefined value is observed, it indicates it does
+    not apply.
+    """
+
     error: Optional[ErrorStatus] = None
     """When a null/undefined value is observed, it indicates it does not apply."""
 
     output_message_id: Optional[str] = None
     """When a null/undefined value is observed, it indicates it does not apply."""
+
+    output_message_seq: Optional[int] = None
+    """The `seq` the output message has in the thread's message list.
+
+    Present once the output message exists. Omitted while the response is `queued`.
+    Use it to place a response that is still in progress among the listed messages.
+    When a null/undefined value is observed, it indicates it does not apply.
+    """
 
     user_message_id: Optional[str] = None
     """The user message this response answers.

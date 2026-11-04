@@ -67,8 +67,8 @@ class ResponsesResource(SyncAPIResource):
         response and other queued responses continue. Cancellation is idempotent after
         the response becomes terminal. Each canceled response still produces a finalized
         assistant message with outcome `canceled` in the thread history. Canceling a
-        response that ended `steered` or `merged` stops the response that continues its
-        work, with the same effect as Stop.
+        response that ended `steered` or `merged` follows its `continued_in_response_id`
+        and stops the response that continues its work, with the same effect as Stop.
 
         Authorization uses the linked account before any cancellation.
 
@@ -118,8 +118,8 @@ class ResponsesResource(SyncAPIResource):
         While its status is `queued` or `running`, content may be partial and include
         thinking parts. Continue polling until it becomes `succeeded`, `failed`,
         `canceled`, `steered`, or `merged`. Treat an unknown status as terminal. On
-        `steered` or `merged`, poll `GET /omni-ai/threads/{thread_id}/response` at once
-        for the response that continues the work.
+        `steered` or `merged`, poll the response in `continued_in_response_id` at once:
+        it continues the work.
 
         Once terminal, the finalized message is available through
         `GET /omni-ai/threads/{thread_id}/messages`; refresh messages when a response
@@ -201,8 +201,8 @@ class AsyncResponsesResource(AsyncAPIResource):
         response and other queued responses continue. Cancellation is idempotent after
         the response becomes terminal. Each canceled response still produces a finalized
         assistant message with outcome `canceled` in the thread history. Canceling a
-        response that ended `steered` or `merged` stops the response that continues its
-        work, with the same effect as Stop.
+        response that ended `steered` or `merged` follows its `continued_in_response_id`
+        and stops the response that continues its work, with the same effect as Stop.
 
         Authorization uses the linked account before any cancellation.
 
@@ -252,8 +252,8 @@ class AsyncResponsesResource(AsyncAPIResource):
         While its status is `queued` or `running`, content may be partial and include
         thinking parts. Continue polling until it becomes `succeeded`, `failed`,
         `canceled`, `steered`, or `merged`. Treat an unknown status as terminal. On
-        `steered` or `merged`, poll `GET /omni-ai/threads/{thread_id}/response` at once
-        for the response that continues the work.
+        `steered` or `merged`, poll the response in `continued_in_response_id` at once:
+        it continues the work.
 
         Once terminal, the finalized message is available through
         `GET /omni-ai/threads/{thread_id}/messages`; refresh messages when a response
