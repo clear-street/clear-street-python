@@ -263,6 +263,7 @@ class PositionsResource(SyncAPIResource):
         account_id: int,
         *,
         instrument_ids: SequenceNotStr[str] | Omit = omit,
+        instrument_type: Literal["COMMON_STOCK", "INDEX", "OPTION", "CASH"] | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         sort_by: Literal[
@@ -289,6 +290,8 @@ class PositionsResource(SyncAPIResource):
 
         Args:
           instrument_ids: Comma-separated instrument identifiers
+
+          instrument_type: Instrument type filter (e.g., COMMON_STOCK, OPTION)
 
           page_size: The number of items to return per page. Only used when page_token is not
               provided.
@@ -318,6 +321,7 @@ class PositionsResource(SyncAPIResource):
                 query=maybe_transform(
                     {
                         "instrument_ids": instrument_ids,
+                        "instrument_type": instrument_type,
                         "page_size": page_size,
                         "page_token": page_token,
                         "sort_by": sort_by,
@@ -593,6 +597,7 @@ class AsyncPositionsResource(AsyncAPIResource):
         account_id: int,
         *,
         instrument_ids: SequenceNotStr[str] | Omit = omit,
+        instrument_type: Literal["COMMON_STOCK", "INDEX", "OPTION", "CASH"] | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         sort_by: Literal[
@@ -619,6 +624,8 @@ class AsyncPositionsResource(AsyncAPIResource):
 
         Args:
           instrument_ids: Comma-separated instrument identifiers
+
+          instrument_type: Instrument type filter (e.g., COMMON_STOCK, OPTION)
 
           page_size: The number of items to return per page. Only used when page_token is not
               provided.
@@ -648,6 +655,7 @@ class AsyncPositionsResource(AsyncAPIResource):
                 query=await async_maybe_transform(
                     {
                         "instrument_ids": instrument_ids,
+                        "instrument_type": instrument_type,
                         "page_size": page_size,
                         "page_token": page_token,
                         "sort_by": sort_by,

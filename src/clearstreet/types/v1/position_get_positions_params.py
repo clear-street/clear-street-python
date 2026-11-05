@@ -15,6 +15,9 @@ class PositionGetPositionsParams(TypedDict, total=False):
     instrument_ids: SequenceNotStr[str]
     """Comma-separated instrument identifiers"""
 
+    instrument_type: Literal["COMMON_STOCK", "INDEX", "OPTION", "CASH"]
+    """Instrument type filter (e.g., COMMON_STOCK, OPTION)"""
+
     page_size: int
     """The number of items to return per page.
 
