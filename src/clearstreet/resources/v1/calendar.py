@@ -152,8 +152,7 @@ class CalendarResource(SyncAPIResource):
         Args:
           date: The date to query market hours for (YYYY-MM-DD). Defaults to today.
 
-          market: Market type to query (us_equities, us_options, us_event_contracts). If omitted,
-              returns us_equities and us_options.
+          market: Market type to query. If omitted, returns us_equities and us_options.
 
           extra_headers: Send extra headers
 
@@ -308,8 +307,7 @@ class AsyncCalendarResource(AsyncAPIResource):
         Args:
           date: The date to query market hours for (YYYY-MM-DD). Defaults to today.
 
-          market: Market type to query (us_equities, us_options, us_event_contracts). If omitted,
-              returns us_equities and us_options.
+          market: Market type to query. If omitted, returns us_equities and us_options.
 
           extra_headers: Send extra headers
 

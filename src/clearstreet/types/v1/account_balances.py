@@ -7,6 +7,7 @@ from .margin_type import MarginType
 from .margin_details import MarginDetails
 from .account_balances_sma import AccountBalancesSma
 from .account_balances_sod import AccountBalancesSod
+from .prediction_market_balances import PredictionMarketBalances
 
 __all__ = ["AccountBalances"]
 
@@ -92,6 +93,9 @@ class AccountBalances(BaseModel):
     after-hours) and 2 during the overnight session. When a null/undefined value is
     observed, it indicates it does not apply.
     """
+
+    prediction_market: Optional[PredictionMarketBalances] = None
+    """Prediction-market buying power in the same currency as the account balances."""
 
     short_market_value: Optional[str] = None
     """

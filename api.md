@@ -37,6 +37,7 @@ from clearstreet.types.v1 import (
     MarginType,
     PortfolioHistoryResponse,
     PortfolioHistorySegment,
+    PredictionMarketBalances,
     RiskSettings,
     AccountGetAccountBalancesResponse,
     AccountGetAccountByIDResponse,
@@ -209,11 +210,25 @@ from clearstreet.types.v1 import (
     OptionExpiryDate,
     OptionsContract,
     OptionsContractList,
+    PredictionCategories,
+    PredictionEvent,
+    PredictionEvents,
+    PredictionMarket,
+    PredictionMarketOutcome,
+    PredictionMarketStatus,
+    PredictionMarketSummary,
+    PredictionMarkets,
+    PredictionSeries,
+    PredictionSeriesList,
     ShortableAttribute,
     TickRule,
     InstrumentGetInstrumentByIDResponse,
     InstrumentGetInstrumentsResponse,
     InstrumentGetOptionContractsResponse,
+    InstrumentGetPredictionCategoriesResponse,
+    InstrumentGetPredictionEventsResponse,
+    InstrumentGetPredictionMarketsResponse,
+    InstrumentGetPredictionSeriesResponse,
     InstrumentSearchInstrumentsResponse,
 )
 ```
@@ -223,6 +238,10 @@ Methods:
 - <code title="get /v1/instruments/{instrument_id}">client.v1.instruments.<a href="./src/clearstreet/resources/v1/instruments.py">get_instrument_by_id</a>(instrument_id, \*\*<a href="src/clearstreet/types/v1/instrument_get_instrument_by_id_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/instrument_get_instrument_by_id_response.py">InstrumentGetInstrumentByIDResponse</a></code>
 - <code title="get /v1/instruments">client.v1.instruments.<a href="./src/clearstreet/resources/v1/instruments.py">get_instruments</a>(\*\*<a href="src/clearstreet/types/v1/instrument_get_instruments_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/instrument_get_instruments_response.py">InstrumentGetInstrumentsResponse</a></code>
 - <code title="get /v1/instruments/options/contracts">client.v1.instruments.<a href="./src/clearstreet/resources/v1/instruments.py">get_option_contracts</a>(\*\*<a href="src/clearstreet/types/v1/instrument_get_option_contracts_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/instrument_get_option_contracts_response.py">InstrumentGetOptionContractsResponse</a></code>
+- <code title="get /v1/instruments/predictions/categories">client.v1.instruments.<a href="./src/clearstreet/resources/v1/instruments.py">get_prediction_categories</a>() -> <a href="./src/clearstreet/types/v1/instrument_get_prediction_categories_response.py">InstrumentGetPredictionCategoriesResponse</a></code>
+- <code title="get /v1/instruments/predictions/events">client.v1.instruments.<a href="./src/clearstreet/resources/v1/instruments.py">get_prediction_events</a>(\*\*<a href="src/clearstreet/types/v1/instrument_get_prediction_events_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/instrument_get_prediction_events_response.py">InstrumentGetPredictionEventsResponse</a></code>
+- <code title="get /v1/instruments/predictions/markets">client.v1.instruments.<a href="./src/clearstreet/resources/v1/instruments.py">get_prediction_markets</a>(\*\*<a href="src/clearstreet/types/v1/instrument_get_prediction_markets_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/instrument_get_prediction_markets_response.py">InstrumentGetPredictionMarketsResponse</a></code>
+- <code title="get /v1/instruments/predictions/series">client.v1.instruments.<a href="./src/clearstreet/resources/v1/instruments.py">get_prediction_series</a>(\*\*<a href="src/clearstreet/types/v1/instrument_get_prediction_series_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/instrument_get_prediction_series_response.py">InstrumentGetPredictionSeriesResponse</a></code>
 - <code title="get /v1/instruments/search">client.v1.instruments.<a href="./src/clearstreet/resources/v1/instruments.py">search_instruments</a>(\*\*<a href="src/clearstreet/types/v1/instrument_search_instruments_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/instrument_search_instruments_response.py">InstrumentSearchInstrumentsResponse</a></code>
 
 ## Locates

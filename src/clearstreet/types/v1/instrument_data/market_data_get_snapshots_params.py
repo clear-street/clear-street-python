@@ -14,6 +14,17 @@ __all__ = ["MarketDataGetSnapshotsParams"]
 
 
 class MarketDataGetSnapshotsParams(TypedDict, total=False):
+    event_codes: SequenceNotStr[str]
+    """
+    > **Alpha** — this parameter is experimental and may change or be removed at any
+    > time.
+
+    Comma-separated event tickers. Returns a snapshot for every market in those
+    events, in any status, with no cap on the number of markets. Accepts 1 to 100
+    codes; unknown codes are ignored. Mutually exclusive with `instrument_ids` and
+    with `underlying_instrument_id` and `expiry`.
+    """
+
     expiry: Annotated[Union[str, date], PropertyInfo(format="iso8601")]
     """Filter the option chain to contracts expiring on this date (YYYY-MM-DD).
 

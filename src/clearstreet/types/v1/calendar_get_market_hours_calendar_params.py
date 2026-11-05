@@ -12,7 +12,4 @@ class CalendarGetMarketHoursCalendarParams(TypedDict, total=False):
     """The date to query market hours for (YYYY-MM-DD). Defaults to today."""
 
     market: Literal["us_equities", "us_options", "us_event_contracts"]
-    """Market type to query (us_equities, us_options, us_event_contracts).
-
-    If omitted, returns us_equities and us_options.
-    """
+    """Market type to query. If omitted, returns us_equities and us_options."""

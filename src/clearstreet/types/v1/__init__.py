@@ -100,16 +100,21 @@ from .feed_item_metric import FeedItemMetric as FeedItemMetric
 from .feed_metric_type import FeedMetricType as FeedMetricType
 from .metric_frequency import MetricFrequency as MetricFrequency
 from .options_contract import OptionsContract as OptionsContract
+from .prediction_event import PredictionEvent as PredictionEvent
 from .session_schedule import SessionSchedule as SessionSchedule
 from .trading_sessions import TradingSessions as TradingSessions
 from .watchlist_detail import WatchlistDetail as WatchlistDetail
 from .open_chart_action import OpenChartAction as OpenChartAction
+from .prediction_events import PredictionEvents as PredictionEvents
+from .prediction_market import PredictionMarket as PredictionMarket
+from .prediction_series import PredictionSeries as PredictionSeries
 from .screener_row_list import ScreenerRowList as ScreenerRowList
 from .structured_action import StructuredAction as StructuredAction
 from .filter_value_param import FilterValueParam as FilterValueParam
 from .fiscal_period_type import FiscalPeriodType as FiscalPeriodType
 from .locate_rate_result import LocateRateResult as LocateRateResult
 from .option_expiry_date import OptionExpiryDate as OptionExpiryDate
+from .prediction_markets import PredictionMarkets as PredictionMarkets
 from .request_order_type import RequestOrderType as RequestOrderType
 from .company_person_role import CompanyPersonRole as CompanyPersonRole
 from .company_social_link import CompanySocialLink as CompanySocialLink
@@ -151,6 +156,7 @@ from .company_document_type import CompanyDocumentType as CompanyDocumentType
 from .company_metric_series import CompanyMetricSeries as CompanyMetricSeries
 from .economic_event_impact import EconomicEventImpact as EconomicEventImpact
 from .options_contract_list import OptionsContractList as OptionsContractList
+from .prediction_categories import PredictionCategories as PredictionCategories
 from .request_time_in_force import RequestTimeInForce as RequestTimeInForce
 from .spv_fee_term_resource import SpvFeeTermResource as SpvFeeTermResource
 from .instrument_events_data import InstrumentEventsData as InstrumentEventsData
@@ -158,6 +164,7 @@ from .instrument_split_event import InstrumentSplitEvent as InstrumentSplitEvent
 from .margin_session_details import MarginSessionDetails as MarginSessionDetails
 from .margin_top_contributor import MarginTopContributor as MarginTopContributor
 from .order_preview_position import OrderPreviewPosition as OrderPreviewPosition
+from .prediction_series_list import PredictionSeriesList as PredictionSeriesList
 from .add_watchlist_item_data import AddWatchlistItemData as AddWatchlistItemData
 from .instrument_fundamentals import InstrumentFundamentals as InstrumentFundamentals
 from .instrument_id_or_symbol import InstrumentIDOrSymbol as InstrumentIDOrSymbol
@@ -169,6 +176,7 @@ from .company_document_preview import CompanyDocumentPreview as CompanyDocumentP
 from .company_profile_resource import CompanyProfileResource as CompanyProfileResource
 from .market_hours_detail_list import MarketHoursDetailList as MarketHoursDetailList
 from .order_preview_entry_list import OrderPreviewEntryList as OrderPreviewEntryList
+from .prediction_market_status import PredictionMarketStatus as PredictionMarketStatus
 from .prefill_new_order_action import PrefillNewOrderAction as PrefillNewOrderAction
 from .company_document_relation import CompanyDocumentRelation as CompanyDocumentRelation
 from .company_document_resource import CompanyDocumentResource as CompanyDocumentResource
@@ -185,6 +193,8 @@ from .order_get_orders_response import OrderGetOrdersResponse as OrderGetOrdersR
 from .portfolio_history_segment import PortfolioHistorySegment as PortfolioHistorySegment
 from .position_instruction_list import PositionInstructionList as PositionInstructionList
 from .position_instruction_type import PositionInstructionType as PositionInstructionType
+from .prediction_market_outcome import PredictionMarketOutcome as PredictionMarketOutcome
+from .prediction_market_summary import PredictionMarketSummary as PredictionMarketSummary
 from .prefill_new_order_request import PrefillNewOrderRequest as PrefillNewOrderRequest
 from .suggested_actions_payload import SuggestedActionsPayload as SuggestedActionsPayload
 from .account_holder_entity_kind import AccountHolderEntityKind as AccountHolderEntityKind
@@ -193,6 +203,7 @@ from .instrument_all_events_data import InstrumentAllEventsData as InstrumentAll
 from .order_replace_order_params import OrderReplaceOrderParams as OrderReplaceOrderParams
 from .order_submit_orders_params import OrderSubmitOrdersParams as OrderSubmitOrdersParams
 from .portfolio_history_response import PortfolioHistoryResponse as PortfolioHistoryResponse
+from .prediction_market_balances import PredictionMarketBalances as PredictionMarketBalances
 from .account_get_accounts_params import AccountGetAccountsParams as AccountGetAccountsParams
 from .calendar_get_clock_response import CalendarGetClockResponse as CalendarGetClockResponse
 from .content_part_custom_payload import ContentPartCustomPayload as ContentPartCustomPayload
@@ -299,6 +310,12 @@ from .watchlist_get_watchlist_by_id_response import (
 from .instrument_balance_sheet_statement_list import (
     InstrumentBalanceSheetStatementList as InstrumentBalanceSheetStatementList,
 )
+from .instrument_get_prediction_events_params import (
+    InstrumentGetPredictionEventsParams as InstrumentGetPredictionEventsParams,
+)
+from .instrument_get_prediction_series_params import (
+    InstrumentGetPredictionSeriesParams as InstrumentGetPredictionSeriesParams,
+)
 from .private_market_get_company_by_id_params import (
     PrivateMarketGetCompanyByIDParams as PrivateMarketGetCompanyByIDParams,
 )
@@ -308,17 +325,29 @@ from .instrument_get_instrument_by_id_response import (
 from .instrument_get_option_contracts_response import (
     InstrumentGetOptionContractsResponse as InstrumentGetOptionContractsResponse,
 )
+from .instrument_get_prediction_markets_params import (
+    InstrumentGetPredictionMarketsParams as InstrumentGetPredictionMarketsParams,
+)
 from .watchlist_delete_watchlist_item_response import (
     WatchlistDeleteWatchlistItemResponse as WatchlistDeleteWatchlistItemResponse,
 )
 from .calendar_get_market_hours_calendar_params import (
     CalendarGetMarketHoursCalendarParams as CalendarGetMarketHoursCalendarParams,
 )
+from .instrument_get_prediction_events_response import (
+    InstrumentGetPredictionEventsResponse as InstrumentGetPredictionEventsResponse,
+)
+from .instrument_get_prediction_series_response import (
+    InstrumentGetPredictionSeriesResponse as InstrumentGetPredictionSeriesResponse,
+)
 from .position_get_position_instructions_params import (
     PositionGetPositionInstructionsParams as PositionGetPositionInstructionsParams,
 )
 from .private_market_get_company_by_id_response import (
     PrivateMarketGetCompanyByIDResponse as PrivateMarketGetCompanyByIDResponse,
+)
+from .instrument_get_prediction_markets_response import (
+    InstrumentGetPredictionMarketsResponse as InstrumentGetPredictionMarketsResponse,
 )
 from .calendar_get_market_hours_calendar_response import (
     CalendarGetMarketHoursCalendarResponse as CalendarGetMarketHoursCalendarResponse,
@@ -334,6 +363,9 @@ from .instrument_data_get_instrument_events_params import (
 )
 from .position_submit_position_instructions_params import (
     PositionSubmitPositionInstructionsParams as PositionSubmitPositionInstructionsParams,
+)
+from .instrument_get_prediction_categories_response import (
+    InstrumentGetPredictionCategoriesResponse as InstrumentGetPredictionCategoriesResponse,
 )
 from .position_cancel_position_instruction_response import (
     PositionCancelPositionInstructionResponse as PositionCancelPositionInstructionResponse,

@@ -263,7 +263,7 @@ class PositionsResource(SyncAPIResource):
         account_id: int,
         *,
         instrument_ids: SequenceNotStr[str] | Omit = omit,
-        instrument_type: Literal["COMMON_STOCK", "INDEX", "OPTION", "CASH"] | Omit = omit,
+        instrument_type: Literal["COMMON_STOCK", "INDEX", "OPTION", "CASH", "EVENT_CONTRACT"] | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         sort_by: Literal[
@@ -597,7 +597,7 @@ class AsyncPositionsResource(AsyncAPIResource):
         account_id: int,
         *,
         instrument_ids: SequenceNotStr[str] | Omit = omit,
-        instrument_type: Literal["COMMON_STOCK", "INDEX", "OPTION", "CASH"] | Omit = omit,
+        instrument_type: Literal["COMMON_STOCK", "INDEX", "OPTION", "CASH", "EVENT_CONTRACT"] | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
         sort_by: Literal[

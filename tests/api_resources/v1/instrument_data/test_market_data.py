@@ -66,6 +66,7 @@ class TestMarketData:
     @parametrize
     def test_method_get_snapshots_with_all_params(self, client: ClearStreet) -> None:
         market_data = client.v1.instrument_data.market_data.get_snapshots(
+            event_codes=["string"],
             expiry=parse_date("2019-12-27"),
             instrument_ids=["x"],
             underlying_instrument_id="x",
@@ -141,6 +142,7 @@ class TestAsyncMarketData:
     @parametrize
     async def test_method_get_snapshots_with_all_params(self, async_client: AsyncClearStreet) -> None:
         market_data = await async_client.v1.instrument_data.market_data.get_snapshots(
+            event_codes=["string"],
             expiry=parse_date("2019-12-27"),
             instrument_ids=["x"],
             underlying_instrument_id="x",

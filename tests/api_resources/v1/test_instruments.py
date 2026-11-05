@@ -15,6 +15,10 @@ from clearstreet.types.v1 import (
     InstrumentGetInstrumentByIDResponse,
     InstrumentSearchInstrumentsResponse,
     InstrumentGetOptionContractsResponse,
+    InstrumentGetPredictionEventsResponse,
+    InstrumentGetPredictionSeriesResponse,
+    InstrumentGetPredictionMarketsResponse,
+    InstrumentGetPredictionCategoriesResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -147,6 +151,154 @@ class TestInstruments:
 
             instrument = response.parse()
             assert_matches_type(InstrumentGetOptionContractsResponse, instrument, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_get_prediction_categories(self, client: ClearStreet) -> None:
+        instrument = client.v1.instruments.get_prediction_categories()
+        assert_matches_type(InstrumentGetPredictionCategoriesResponse, instrument, path=["response"])
+
+    @parametrize
+    def test_raw_response_get_prediction_categories(self, client: ClearStreet) -> None:
+        response = client.v1.instruments.with_raw_response.get_prediction_categories()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        instrument = response.parse()
+        assert_matches_type(InstrumentGetPredictionCategoriesResponse, instrument, path=["response"])
+
+    @parametrize
+    def test_streaming_response_get_prediction_categories(self, client: ClearStreet) -> None:
+        with client.v1.instruments.with_streaming_response.get_prediction_categories() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            instrument = response.parse()
+            assert_matches_type(InstrumentGetPredictionCategoriesResponse, instrument, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_get_prediction_events(self, client: ClearStreet) -> None:
+        instrument = client.v1.instruments.get_prediction_events()
+        assert_matches_type(InstrumentGetPredictionEventsResponse, instrument, path=["response"])
+
+    @parametrize
+    def test_method_get_prediction_events_with_all_params(self, client: ClearStreet) -> None:
+        instrument = client.v1.instruments.get_prediction_events(
+            categories="categories",
+            close_at={
+                "gt": "gt",
+                "gte": "gte",
+                "lt": "lt",
+                "lte": "lte",
+            },
+            include_markets=True,
+            include_settled=True,
+            market_ids="market_ids",
+            open_at={
+                "gt": "gt",
+                "gte": "gte",
+                "lt": "lt",
+                "lte": "lte",
+            },
+            page_size=1,
+            page_token="U3RhaW5sZXNzIHJvY2tz",
+            search="search",
+            series_codes="series_codes",
+            sort_by="OPEN_AT",
+            sort_direction="ASC",
+        )
+        assert_matches_type(InstrumentGetPredictionEventsResponse, instrument, path=["response"])
+
+    @parametrize
+    def test_raw_response_get_prediction_events(self, client: ClearStreet) -> None:
+        response = client.v1.instruments.with_raw_response.get_prediction_events()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        instrument = response.parse()
+        assert_matches_type(InstrumentGetPredictionEventsResponse, instrument, path=["response"])
+
+    @parametrize
+    def test_streaming_response_get_prediction_events(self, client: ClearStreet) -> None:
+        with client.v1.instruments.with_streaming_response.get_prediction_events() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            instrument = response.parse()
+            assert_matches_type(InstrumentGetPredictionEventsResponse, instrument, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_get_prediction_markets(self, client: ClearStreet) -> None:
+        instrument = client.v1.instruments.get_prediction_markets()
+        assert_matches_type(InstrumentGetPredictionMarketsResponse, instrument, path=["response"])
+
+    @parametrize
+    def test_method_get_prediction_markets_with_all_params(self, client: ClearStreet) -> None:
+        instrument = client.v1.instruments.get_prediction_markets(
+            event_code="event_code",
+            market_ids="market_ids",
+            page_size=1,
+            page_token="U3RhaW5sZXNzIHJvY2tz",
+            statuses="statuses",
+        )
+        assert_matches_type(InstrumentGetPredictionMarketsResponse, instrument, path=["response"])
+
+    @parametrize
+    def test_raw_response_get_prediction_markets(self, client: ClearStreet) -> None:
+        response = client.v1.instruments.with_raw_response.get_prediction_markets()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        instrument = response.parse()
+        assert_matches_type(InstrumentGetPredictionMarketsResponse, instrument, path=["response"])
+
+    @parametrize
+    def test_streaming_response_get_prediction_markets(self, client: ClearStreet) -> None:
+        with client.v1.instruments.with_streaming_response.get_prediction_markets() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            instrument = response.parse()
+            assert_matches_type(InstrumentGetPredictionMarketsResponse, instrument, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_get_prediction_series(self, client: ClearStreet) -> None:
+        instrument = client.v1.instruments.get_prediction_series()
+        assert_matches_type(InstrumentGetPredictionSeriesResponse, instrument, path=["response"])
+
+    @parametrize
+    def test_method_get_prediction_series_with_all_params(self, client: ClearStreet) -> None:
+        instrument = client.v1.instruments.get_prediction_series(
+            categories="categories",
+            page_size=1,
+            page_token="U3RhaW5sZXNzIHJvY2tz",
+        )
+        assert_matches_type(InstrumentGetPredictionSeriesResponse, instrument, path=["response"])
+
+    @parametrize
+    def test_raw_response_get_prediction_series(self, client: ClearStreet) -> None:
+        response = client.v1.instruments.with_raw_response.get_prediction_series()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        instrument = response.parse()
+        assert_matches_type(InstrumentGetPredictionSeriesResponse, instrument, path=["response"])
+
+    @parametrize
+    def test_streaming_response_get_prediction_series(self, client: ClearStreet) -> None:
+        with client.v1.instruments.with_streaming_response.get_prediction_series() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            instrument = response.parse()
+            assert_matches_type(InstrumentGetPredictionSeriesResponse, instrument, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -325,6 +477,154 @@ class TestAsyncInstruments:
 
             instrument = await response.parse()
             assert_matches_type(InstrumentGetOptionContractsResponse, instrument, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_get_prediction_categories(self, async_client: AsyncClearStreet) -> None:
+        instrument = await async_client.v1.instruments.get_prediction_categories()
+        assert_matches_type(InstrumentGetPredictionCategoriesResponse, instrument, path=["response"])
+
+    @parametrize
+    async def test_raw_response_get_prediction_categories(self, async_client: AsyncClearStreet) -> None:
+        response = await async_client.v1.instruments.with_raw_response.get_prediction_categories()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        instrument = await response.parse()
+        assert_matches_type(InstrumentGetPredictionCategoriesResponse, instrument, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_get_prediction_categories(self, async_client: AsyncClearStreet) -> None:
+        async with async_client.v1.instruments.with_streaming_response.get_prediction_categories() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            instrument = await response.parse()
+            assert_matches_type(InstrumentGetPredictionCategoriesResponse, instrument, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_get_prediction_events(self, async_client: AsyncClearStreet) -> None:
+        instrument = await async_client.v1.instruments.get_prediction_events()
+        assert_matches_type(InstrumentGetPredictionEventsResponse, instrument, path=["response"])
+
+    @parametrize
+    async def test_method_get_prediction_events_with_all_params(self, async_client: AsyncClearStreet) -> None:
+        instrument = await async_client.v1.instruments.get_prediction_events(
+            categories="categories",
+            close_at={
+                "gt": "gt",
+                "gte": "gte",
+                "lt": "lt",
+                "lte": "lte",
+            },
+            include_markets=True,
+            include_settled=True,
+            market_ids="market_ids",
+            open_at={
+                "gt": "gt",
+                "gte": "gte",
+                "lt": "lt",
+                "lte": "lte",
+            },
+            page_size=1,
+            page_token="U3RhaW5sZXNzIHJvY2tz",
+            search="search",
+            series_codes="series_codes",
+            sort_by="OPEN_AT",
+            sort_direction="ASC",
+        )
+        assert_matches_type(InstrumentGetPredictionEventsResponse, instrument, path=["response"])
+
+    @parametrize
+    async def test_raw_response_get_prediction_events(self, async_client: AsyncClearStreet) -> None:
+        response = await async_client.v1.instruments.with_raw_response.get_prediction_events()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        instrument = await response.parse()
+        assert_matches_type(InstrumentGetPredictionEventsResponse, instrument, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_get_prediction_events(self, async_client: AsyncClearStreet) -> None:
+        async with async_client.v1.instruments.with_streaming_response.get_prediction_events() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            instrument = await response.parse()
+            assert_matches_type(InstrumentGetPredictionEventsResponse, instrument, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_get_prediction_markets(self, async_client: AsyncClearStreet) -> None:
+        instrument = await async_client.v1.instruments.get_prediction_markets()
+        assert_matches_type(InstrumentGetPredictionMarketsResponse, instrument, path=["response"])
+
+    @parametrize
+    async def test_method_get_prediction_markets_with_all_params(self, async_client: AsyncClearStreet) -> None:
+        instrument = await async_client.v1.instruments.get_prediction_markets(
+            event_code="event_code",
+            market_ids="market_ids",
+            page_size=1,
+            page_token="U3RhaW5sZXNzIHJvY2tz",
+            statuses="statuses",
+        )
+        assert_matches_type(InstrumentGetPredictionMarketsResponse, instrument, path=["response"])
+
+    @parametrize
+    async def test_raw_response_get_prediction_markets(self, async_client: AsyncClearStreet) -> None:
+        response = await async_client.v1.instruments.with_raw_response.get_prediction_markets()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        instrument = await response.parse()
+        assert_matches_type(InstrumentGetPredictionMarketsResponse, instrument, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_get_prediction_markets(self, async_client: AsyncClearStreet) -> None:
+        async with async_client.v1.instruments.with_streaming_response.get_prediction_markets() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            instrument = await response.parse()
+            assert_matches_type(InstrumentGetPredictionMarketsResponse, instrument, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_get_prediction_series(self, async_client: AsyncClearStreet) -> None:
+        instrument = await async_client.v1.instruments.get_prediction_series()
+        assert_matches_type(InstrumentGetPredictionSeriesResponse, instrument, path=["response"])
+
+    @parametrize
+    async def test_method_get_prediction_series_with_all_params(self, async_client: AsyncClearStreet) -> None:
+        instrument = await async_client.v1.instruments.get_prediction_series(
+            categories="categories",
+            page_size=1,
+            page_token="U3RhaW5sZXNzIHJvY2tz",
+        )
+        assert_matches_type(InstrumentGetPredictionSeriesResponse, instrument, path=["response"])
+
+    @parametrize
+    async def test_raw_response_get_prediction_series(self, async_client: AsyncClearStreet) -> None:
+        response = await async_client.v1.instruments.with_raw_response.get_prediction_series()
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        instrument = await response.parse()
+        assert_matches_type(InstrumentGetPredictionSeriesResponse, instrument, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_get_prediction_series(self, async_client: AsyncClearStreet) -> None:
+        async with async_client.v1.instruments.with_streaming_response.get_prediction_series() as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            instrument = await response.parse()
+            assert_matches_type(InstrumentGetPredictionSeriesResponse, instrument, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

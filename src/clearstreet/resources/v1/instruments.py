@@ -26,6 +26,9 @@ from ...types.v1 import (
     instrument_search_instruments_params,
     instrument_get_instrument_by_id_params,
     instrument_get_option_contracts_params,
+    instrument_get_prediction_events_params,
+    instrument_get_prediction_series_params,
+    instrument_get_prediction_markets_params,
 )
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -40,6 +43,10 @@ from ...types.v1.instrument_get_instruments_response import InstrumentGetInstrum
 from ...types.v1.instrument_search_instruments_response import InstrumentSearchInstrumentsResponse
 from ...types.v1.instrument_get_instrument_by_id_response import InstrumentGetInstrumentByIDResponse
 from ...types.v1.instrument_get_option_contracts_response import InstrumentGetOptionContractsResponse
+from ...types.v1.instrument_get_prediction_events_response import InstrumentGetPredictionEventsResponse
+from ...types.v1.instrument_get_prediction_series_response import InstrumentGetPredictionSeriesResponse
+from ...types.v1.instrument_get_prediction_markets_response import InstrumentGetPredictionMarketsResponse
+from ...types.v1.instrument_get_prediction_categories_response import InstrumentGetPredictionCategoriesResponse
 
 __all__ = ["InstrumentsResource", "AsyncInstrumentsResource"]
 
@@ -117,7 +124,7 @@ class InstrumentsResource(SyncAPIResource):
         *,
         easy_to_borrow: bool | Omit = omit,
         instrument_ids: SequenceNotStr[str] | Omit = omit,
-        instrument_type: Literal["COMMON_STOCK", "INDEX", "OPTION", "CASH"] | Omit = omit,
+        instrument_type: Literal["COMMON_STOCK", "INDEX", "OPTION", "CASH", "EVENT_CONTRACT"] | Omit = omit,
         is_liquidation_only: bool | Omit = omit,
         is_marginable: bool | Omit = omit,
         is_ptp: bool | Omit = omit,
@@ -276,6 +283,313 @@ class InstrumentsResource(SyncAPIResource):
                 ),
             ),
             cast_to=InstrumentGetOptionContractsResponse,
+        )
+
+    def get_prediction_categories(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> InstrumentGetPredictionCategoriesResponse:
+        """
+        > **Alpha** — this endpoint is experimental and may change or be removed at any
+        > time.
+
+        Lists the distinct categories, sorted alphabetically, of every prediction market
+        contract that can currently be listed: contracts that are initialized or active
+        and have not yet closed.
+
+        The list refreshes every 15 minutes. Returns `503` until the categories first
+        load after a restart.
+        """
+        return self._get(
+            "/v1/instruments/predictions/categories",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=InstrumentGetPredictionCategoriesResponse,
+        )
+
+    def get_prediction_events(
+        self,
+        *,
+        categories: str | Omit = omit,
+        close_at: instrument_get_prediction_events_params.CloseAt | Omit = omit,
+        include_markets: bool | Omit = omit,
+        include_settled: bool | Omit = omit,
+        market_ids: str | Omit = omit,
+        open_at: instrument_get_prediction_events_params.OpenAt | Omit = omit,
+        page_size: int | Omit = omit,
+        page_token: Union[str, Base64FileInput] | Omit = omit,
+        search: str | Omit = omit,
+        series_codes: str | Omit = omit,
+        sort_by: Literal["OPEN_AT", "CLOSE_AT"] | Omit = omit,
+        sort_direction: Literal["ASC", "DESC"] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> InstrumentGetPredictionEventsResponse:
+        """
+        > **Alpha** — this endpoint is experimental and may change or be removed at any
+        > time.
+
+        Lists the prediction market events that have at least one market that can
+        currently be listed: initialized or active and not yet closed. A market that is
+        paused does not count, so an event whose markets are all paused is not listed.
+
+        Events are ordered by code unless `sort_by` names another key or `search` is
+        set; ties break on code ascending. `series_codes` and `categories` keep events
+        of those series or with a listable market in those categories, ignoring case.
+
+        `search` keeps events whose code, series code, or a market's question or title
+        contains every word of the text. Words match by prefix and English stem,
+        ignoring case and punctuation; text with no searchable word, such as `the`,
+        matches nothing. A word of four or more letters that matches nothing is replaced
+        by up to three close spellings. Without `sort_by`, the best match comes first,
+        closest spellings first. Search covers listable events unless
+        `include_settled=true`.
+
+        With `include_settled=true`, settled and expired events are listed too: every
+        market counts as listable for `categories`, `title`, `open_at.*`, `close_at.*`,
+        `search`, and `sort_by`. Such a request that takes longer than 30 seconds fails
+        with `504`; narrow `search` or the filters and try again.
+
+        `open_at.*` and `close_at.*` bound an event's open and close time, which are the
+        earliest across its listable markets, and `sort_by` uses the same times.
+
+        An event's `title` is the question of its first listable market by symbol, and
+        its `categories` are those of its listable markets.
+
+        With `include_markets=true`, each event carries `markets`: a summary of every
+        market of the event, ordered by symbol, in any status. This includes paused
+        markets of a listed event and settled markets. Pages carry no totals: follow
+        `next_page_token` until it is absent.
+
+        `market_ids` (1-100 market ids or tickers, in any status) keeps the events those
+        markets belong to, each once, and the other filters still apply. Ids that match
+        no market are reported: `207` with the events found and the missing ids in
+        `error.details`, or `404` when none matched.
+
+        Args:
+          categories: Comma-separated categories. Keeps events with a listable market in any of them,
+              ignoring case.
+
+          include_markets: Embed a summary of every market of each event, in any status. Default false.
+
+          include_settled: Also list settled and expired events, not only events with a listable market.
+              Every market then counts as listable for the other filters, `title`,
+              `categories`, and the open and close times. Default false. A request that takes
+              longer than 30 seconds fails with `504`; narrow `search` or the filters and try
+              again.
+
+          market_ids: Comma-separated market ids (UUID) or tickers, 1-100. Keeps events of those
+              markets, in any status; the other filters still apply. Ids that match no market
+              are reported: `207`, or `404` when none match.
+
+          page_size: The number of items to return per page. Only used when page_token is not
+              provided.
+
+          page_token: Token for retrieving the next or previous page of results. Contains encoded
+              pagination state; when provided, page_size is ignored.
+
+          search: Keeps events whose code, series code, or a market's question or title contains
+              every word, matched by prefix and English stem, ignoring case. Searches listable
+              events, or every event with `include_settled`. A word of four or more letters
+              that matches nothing is replaced by up to three close spellings. Without
+              `sort_by`, orders by relevance, closest spellings first.
+
+          series_codes: Comma-separated series codes. Keeps events of those series, ignoring case.
+
+          sort_by: Sort key. Defaults to relevance when `search` is set, else the event code. Ties
+              break on event code ascending.
+
+          sort_direction: Sort direction. Defaults to ascending. Ignored when sorting by relevance.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/v1/instruments/predictions/events",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "categories": categories,
+                        "close_at": close_at,
+                        "include_markets": include_markets,
+                        "include_settled": include_settled,
+                        "market_ids": market_ids,
+                        "open_at": open_at,
+                        "page_size": page_size,
+                        "page_token": page_token,
+                        "search": search,
+                        "series_codes": series_codes,
+                        "sort_by": sort_by,
+                        "sort_direction": sort_direction,
+                    },
+                    instrument_get_prediction_events_params.InstrumentGetPredictionEventsParams,
+                ),
+            ),
+            cast_to=InstrumentGetPredictionEventsResponse,
+        )
+
+    def get_prediction_markets(
+        self,
+        *,
+        event_code: str | Omit = omit,
+        market_ids: str | Omit = omit,
+        page_size: int | Omit = omit,
+        page_token: Union[str, Base64FileInput] | Omit = omit,
+        statuses: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> InstrumentGetPredictionMarketsResponse:
+        """
+        > **Alpha** — this endpoint is experimental and may change or be removed at any
+        > time.
+
+        Looks up prediction markets in any status, by `market_ids` (1-100 market ids or
+        tickers) or by `event_code`. Exactly one of the two is required. Markets are
+        ordered by symbol.
+
+        `statuses` keeps markets in any listed status. It defaults to `OPEN` with
+        `event_code` and to every status with `market_ids`.
+
+        With `event_code`, pages carry no totals: follow `next_page_token` until it is
+        absent. `market_ids` lookups are not paginated and ignore page parameters.
+
+        With `market_ids`, ids that match no market are reported: `207` with the markets
+        found and the missing ids in `error.details`, or `404` when none matched. A
+        market removed only by `statuses` is not reported as missing.
+
+        Each market trades one YES-denominated instrument; there is no NO instrument.
+        Prices, including those from `/market-data/snapshot`, are YES prices in dollars,
+        and `no_price = 1 - yes_price`. A negative position quantity is NO exposure.
+
+        Args:
+          event_code: Event code; returns the markets of the event. Mutually exclusive with
+              `market_ids`.
+
+          market_ids: Comma-separated market ids (UUID) or tickers, 1-100, in any status. Mutually
+              exclusive with `event_code`.
+
+          page_size: The number of items to return per page. Only used when page_token is not
+              provided.
+
+          page_token: Token for retrieving the next or previous page of results. Contains encoded
+              pagination state; when provided, page_size is ignored.
+
+          statuses: Comma-separated statuses to keep: `OPEN`, `UNOPENED`, `PAUSED`, `CLOSED`,
+              `SETTLED`. Defaults to `OPEN` with `event_code` and to every status with
+              `market_ids`. Unrecognized values are ignored.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/v1/instruments/predictions/markets",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "event_code": event_code,
+                        "market_ids": market_ids,
+                        "page_size": page_size,
+                        "page_token": page_token,
+                        "statuses": statuses,
+                    },
+                    instrument_get_prediction_markets_params.InstrumentGetPredictionMarketsParams,
+                ),
+            ),
+            cast_to=InstrumentGetPredictionMarketsResponse,
+        )
+
+    def get_prediction_series(
+        self,
+        *,
+        categories: str | Omit = omit,
+        page_size: int | Omit = omit,
+        page_token: Union[str, Base64FileInput] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> InstrumentGetPredictionSeriesResponse:
+        """
+        > **Alpha** — this endpoint is experimental and may change or be removed at any
+        > time.
+
+        Lists the distinct series codes of prediction markets that can currently be
+        listed: markets that are initialized or active and have not yet closed. Series
+        are ordered by code.
+
+        `categories` keeps series with a market in any listed category, ignoring case.
+        Pages carry no totals: follow `next_page_token` until it is absent.
+
+        Args:
+          categories: Comma-separated categories. Keeps series with a market in any of them, ignoring
+              case.
+
+          page_size: The number of items to return per page. Only used when page_token is not
+              provided.
+
+          page_token: Token for retrieving the next or previous page of results. Contains encoded
+              pagination state; when provided, page_size is ignored.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            "/v1/instruments/predictions/series",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "categories": categories,
+                        "page_size": page_size,
+                        "page_token": page_token,
+                    },
+                    instrument_get_prediction_series_params.InstrumentGetPredictionSeriesParams,
+                ),
+            ),
+            cast_to=InstrumentGetPredictionSeriesResponse,
         )
 
     def search_instruments(
@@ -437,7 +751,7 @@ class AsyncInstrumentsResource(AsyncAPIResource):
         *,
         easy_to_borrow: bool | Omit = omit,
         instrument_ids: SequenceNotStr[str] | Omit = omit,
-        instrument_type: Literal["COMMON_STOCK", "INDEX", "OPTION", "CASH"] | Omit = omit,
+        instrument_type: Literal["COMMON_STOCK", "INDEX", "OPTION", "CASH", "EVENT_CONTRACT"] | Omit = omit,
         is_liquidation_only: bool | Omit = omit,
         is_marginable: bool | Omit = omit,
         is_ptp: bool | Omit = omit,
@@ -598,6 +912,313 @@ class AsyncInstrumentsResource(AsyncAPIResource):
             cast_to=InstrumentGetOptionContractsResponse,
         )
 
+    async def get_prediction_categories(
+        self,
+        *,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> InstrumentGetPredictionCategoriesResponse:
+        """
+        > **Alpha** — this endpoint is experimental and may change or be removed at any
+        > time.
+
+        Lists the distinct categories, sorted alphabetically, of every prediction market
+        contract that can currently be listed: contracts that are initialized or active
+        and have not yet closed.
+
+        The list refreshes every 15 minutes. Returns `503` until the categories first
+        load after a restart.
+        """
+        return await self._get(
+            "/v1/instruments/predictions/categories",
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
+            cast_to=InstrumentGetPredictionCategoriesResponse,
+        )
+
+    async def get_prediction_events(
+        self,
+        *,
+        categories: str | Omit = omit,
+        close_at: instrument_get_prediction_events_params.CloseAt | Omit = omit,
+        include_markets: bool | Omit = omit,
+        include_settled: bool | Omit = omit,
+        market_ids: str | Omit = omit,
+        open_at: instrument_get_prediction_events_params.OpenAt | Omit = omit,
+        page_size: int | Omit = omit,
+        page_token: Union[str, Base64FileInput] | Omit = omit,
+        search: str | Omit = omit,
+        series_codes: str | Omit = omit,
+        sort_by: Literal["OPEN_AT", "CLOSE_AT"] | Omit = omit,
+        sort_direction: Literal["ASC", "DESC"] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> InstrumentGetPredictionEventsResponse:
+        """
+        > **Alpha** — this endpoint is experimental and may change or be removed at any
+        > time.
+
+        Lists the prediction market events that have at least one market that can
+        currently be listed: initialized or active and not yet closed. A market that is
+        paused does not count, so an event whose markets are all paused is not listed.
+
+        Events are ordered by code unless `sort_by` names another key or `search` is
+        set; ties break on code ascending. `series_codes` and `categories` keep events
+        of those series or with a listable market in those categories, ignoring case.
+
+        `search` keeps events whose code, series code, or a market's question or title
+        contains every word of the text. Words match by prefix and English stem,
+        ignoring case and punctuation; text with no searchable word, such as `the`,
+        matches nothing. A word of four or more letters that matches nothing is replaced
+        by up to three close spellings. Without `sort_by`, the best match comes first,
+        closest spellings first. Search covers listable events unless
+        `include_settled=true`.
+
+        With `include_settled=true`, settled and expired events are listed too: every
+        market counts as listable for `categories`, `title`, `open_at.*`, `close_at.*`,
+        `search`, and `sort_by`. Such a request that takes longer than 30 seconds fails
+        with `504`; narrow `search` or the filters and try again.
+
+        `open_at.*` and `close_at.*` bound an event's open and close time, which are the
+        earliest across its listable markets, and `sort_by` uses the same times.
+
+        An event's `title` is the question of its first listable market by symbol, and
+        its `categories` are those of its listable markets.
+
+        With `include_markets=true`, each event carries `markets`: a summary of every
+        market of the event, ordered by symbol, in any status. This includes paused
+        markets of a listed event and settled markets. Pages carry no totals: follow
+        `next_page_token` until it is absent.
+
+        `market_ids` (1-100 market ids or tickers, in any status) keeps the events those
+        markets belong to, each once, and the other filters still apply. Ids that match
+        no market are reported: `207` with the events found and the missing ids in
+        `error.details`, or `404` when none matched.
+
+        Args:
+          categories: Comma-separated categories. Keeps events with a listable market in any of them,
+              ignoring case.
+
+          include_markets: Embed a summary of every market of each event, in any status. Default false.
+
+          include_settled: Also list settled and expired events, not only events with a listable market.
+              Every market then counts as listable for the other filters, `title`,
+              `categories`, and the open and close times. Default false. A request that takes
+              longer than 30 seconds fails with `504`; narrow `search` or the filters and try
+              again.
+
+          market_ids: Comma-separated market ids (UUID) or tickers, 1-100. Keeps events of those
+              markets, in any status; the other filters still apply. Ids that match no market
+              are reported: `207`, or `404` when none match.
+
+          page_size: The number of items to return per page. Only used when page_token is not
+              provided.
+
+          page_token: Token for retrieving the next or previous page of results. Contains encoded
+              pagination state; when provided, page_size is ignored.
+
+          search: Keeps events whose code, series code, or a market's question or title contains
+              every word, matched by prefix and English stem, ignoring case. Searches listable
+              events, or every event with `include_settled`. A word of four or more letters
+              that matches nothing is replaced by up to three close spellings. Without
+              `sort_by`, orders by relevance, closest spellings first.
+
+          series_codes: Comma-separated series codes. Keeps events of those series, ignoring case.
+
+          sort_by: Sort key. Defaults to relevance when `search` is set, else the event code. Ties
+              break on event code ascending.
+
+          sort_direction: Sort direction. Defaults to ascending. Ignored when sorting by relevance.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/v1/instruments/predictions/events",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "categories": categories,
+                        "close_at": close_at,
+                        "include_markets": include_markets,
+                        "include_settled": include_settled,
+                        "market_ids": market_ids,
+                        "open_at": open_at,
+                        "page_size": page_size,
+                        "page_token": page_token,
+                        "search": search,
+                        "series_codes": series_codes,
+                        "sort_by": sort_by,
+                        "sort_direction": sort_direction,
+                    },
+                    instrument_get_prediction_events_params.InstrumentGetPredictionEventsParams,
+                ),
+            ),
+            cast_to=InstrumentGetPredictionEventsResponse,
+        )
+
+    async def get_prediction_markets(
+        self,
+        *,
+        event_code: str | Omit = omit,
+        market_ids: str | Omit = omit,
+        page_size: int | Omit = omit,
+        page_token: Union[str, Base64FileInput] | Omit = omit,
+        statuses: str | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> InstrumentGetPredictionMarketsResponse:
+        """
+        > **Alpha** — this endpoint is experimental and may change or be removed at any
+        > time.
+
+        Looks up prediction markets in any status, by `market_ids` (1-100 market ids or
+        tickers) or by `event_code`. Exactly one of the two is required. Markets are
+        ordered by symbol.
+
+        `statuses` keeps markets in any listed status. It defaults to `OPEN` with
+        `event_code` and to every status with `market_ids`.
+
+        With `event_code`, pages carry no totals: follow `next_page_token` until it is
+        absent. `market_ids` lookups are not paginated and ignore page parameters.
+
+        With `market_ids`, ids that match no market are reported: `207` with the markets
+        found and the missing ids in `error.details`, or `404` when none matched. A
+        market removed only by `statuses` is not reported as missing.
+
+        Each market trades one YES-denominated instrument; there is no NO instrument.
+        Prices, including those from `/market-data/snapshot`, are YES prices in dollars,
+        and `no_price = 1 - yes_price`. A negative position quantity is NO exposure.
+
+        Args:
+          event_code: Event code; returns the markets of the event. Mutually exclusive with
+              `market_ids`.
+
+          market_ids: Comma-separated market ids (UUID) or tickers, 1-100, in any status. Mutually
+              exclusive with `event_code`.
+
+          page_size: The number of items to return per page. Only used when page_token is not
+              provided.
+
+          page_token: Token for retrieving the next or previous page of results. Contains encoded
+              pagination state; when provided, page_size is ignored.
+
+          statuses: Comma-separated statuses to keep: `OPEN`, `UNOPENED`, `PAUSED`, `CLOSED`,
+              `SETTLED`. Defaults to `OPEN` with `event_code` and to every status with
+              `market_ids`. Unrecognized values are ignored.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/v1/instruments/predictions/markets",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "event_code": event_code,
+                        "market_ids": market_ids,
+                        "page_size": page_size,
+                        "page_token": page_token,
+                        "statuses": statuses,
+                    },
+                    instrument_get_prediction_markets_params.InstrumentGetPredictionMarketsParams,
+                ),
+            ),
+            cast_to=InstrumentGetPredictionMarketsResponse,
+        )
+
+    async def get_prediction_series(
+        self,
+        *,
+        categories: str | Omit = omit,
+        page_size: int | Omit = omit,
+        page_token: Union[str, Base64FileInput] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> InstrumentGetPredictionSeriesResponse:
+        """
+        > **Alpha** — this endpoint is experimental and may change or be removed at any
+        > time.
+
+        Lists the distinct series codes of prediction markets that can currently be
+        listed: markets that are initialized or active and have not yet closed. Series
+        are ordered by code.
+
+        `categories` keeps series with a market in any listed category, ignoring case.
+        Pages carry no totals: follow `next_page_token` until it is absent.
+
+        Args:
+          categories: Comma-separated categories. Keeps series with a market in any of them, ignoring
+              case.
+
+          page_size: The number of items to return per page. Only used when page_token is not
+              provided.
+
+          page_token: Token for retrieving the next or previous page of results. Contains encoded
+              pagination state; when provided, page_size is ignored.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            "/v1/instruments/predictions/series",
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "categories": categories,
+                        "page_size": page_size,
+                        "page_token": page_token,
+                    },
+                    instrument_get_prediction_series_params.InstrumentGetPredictionSeriesParams,
+                ),
+            ),
+            cast_to=InstrumentGetPredictionSeriesResponse,
+        )
+
     async def search_instruments(
         self,
         *,
@@ -697,6 +1318,18 @@ class InstrumentsResourceWithRawResponse:
         self.get_option_contracts = to_raw_response_wrapper(
             instruments.get_option_contracts,
         )
+        self.get_prediction_categories = to_raw_response_wrapper(
+            instruments.get_prediction_categories,
+        )
+        self.get_prediction_events = to_raw_response_wrapper(
+            instruments.get_prediction_events,
+        )
+        self.get_prediction_markets = to_raw_response_wrapper(
+            instruments.get_prediction_markets,
+        )
+        self.get_prediction_series = to_raw_response_wrapper(
+            instruments.get_prediction_series,
+        )
         self.search_instruments = to_raw_response_wrapper(
             instruments.search_instruments,
         )
@@ -714,6 +1347,18 @@ class AsyncInstrumentsResourceWithRawResponse:
         )
         self.get_option_contracts = async_to_raw_response_wrapper(
             instruments.get_option_contracts,
+        )
+        self.get_prediction_categories = async_to_raw_response_wrapper(
+            instruments.get_prediction_categories,
+        )
+        self.get_prediction_events = async_to_raw_response_wrapper(
+            instruments.get_prediction_events,
+        )
+        self.get_prediction_markets = async_to_raw_response_wrapper(
+            instruments.get_prediction_markets,
+        )
+        self.get_prediction_series = async_to_raw_response_wrapper(
+            instruments.get_prediction_series,
         )
         self.search_instruments = async_to_raw_response_wrapper(
             instruments.search_instruments,
@@ -733,6 +1378,18 @@ class InstrumentsResourceWithStreamingResponse:
         self.get_option_contracts = to_streamed_response_wrapper(
             instruments.get_option_contracts,
         )
+        self.get_prediction_categories = to_streamed_response_wrapper(
+            instruments.get_prediction_categories,
+        )
+        self.get_prediction_events = to_streamed_response_wrapper(
+            instruments.get_prediction_events,
+        )
+        self.get_prediction_markets = to_streamed_response_wrapper(
+            instruments.get_prediction_markets,
+        )
+        self.get_prediction_series = to_streamed_response_wrapper(
+            instruments.get_prediction_series,
+        )
         self.search_instruments = to_streamed_response_wrapper(
             instruments.search_instruments,
         )
@@ -750,6 +1407,18 @@ class AsyncInstrumentsResourceWithStreamingResponse:
         )
         self.get_option_contracts = async_to_streamed_response_wrapper(
             instruments.get_option_contracts,
+        )
+        self.get_prediction_categories = async_to_streamed_response_wrapper(
+            instruments.get_prediction_categories,
+        )
+        self.get_prediction_events = async_to_streamed_response_wrapper(
+            instruments.get_prediction_events,
+        )
+        self.get_prediction_markets = async_to_streamed_response_wrapper(
+            instruments.get_prediction_markets,
+        )
+        self.get_prediction_series = async_to_streamed_response_wrapper(
+            instruments.get_prediction_series,
         )
         self.search_instruments = async_to_streamed_response_wrapper(
             instruments.search_instruments,

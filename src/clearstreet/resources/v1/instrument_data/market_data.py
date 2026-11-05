@@ -104,6 +104,7 @@ class MarketDataResource(SyncAPIResource):
     def get_snapshots(
         self,
         *,
+        event_codes: SequenceNotStr[str] | Omit = omit,
         expiry: Union[str, date] | Omit = omit,
         instrument_ids: SequenceNotStr[InstrumentIDOrSymbol] | Omit = omit,
         underlying_instrument_id: str | Omit = omit,
@@ -117,14 +118,20 @@ class MarketDataResource(SyncAPIResource):
         """
         Get market data snapshots for one or more securities.
 
-        Three targeting modes, mutually exclusive: `instrument_ids` (1-100 ids),
+        Targeting modes are mutually exclusive: `instrument_ids` (1-100 ids), or
         `underlying_instrument_id` + `expiry` together, which resolves the underlier's
         option chain for that expiry and returns a snapshot for every contract in it
-        (uncapped), or `event_codes` (1-100 event tickers), which returns a snapshot for
-        every market in those events in any status (uncapped). Unknown event codes are
-        ignored.
+        (uncapped).
 
         Args:
+          event_codes: > **Alpha** — this parameter is experimental and may change or be removed at any
+              > time.
+
+              Comma-separated event tickers. Returns a snapshot for every market in those
+              events, in any status, with no cap on the number of markets. Accepts 1 to 100
+              codes; unknown codes are ignored. Mutually exclusive with `instrument_ids` and
+              with `underlying_instrument_id` and `expiry`.
+
           expiry: Filter the option chain to contracts expiring on this date (YYYY-MM-DD). Must be
               provided together with `underlying_instrument_id`.
 
@@ -154,6 +161,7 @@ class MarketDataResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "event_codes": event_codes,
                         "expiry": expiry,
                         "instrument_ids": instrument_ids,
                         "underlying_instrument_id": underlying_instrument_id,
@@ -242,6 +250,7 @@ class AsyncMarketDataResource(AsyncAPIResource):
     async def get_snapshots(
         self,
         *,
+        event_codes: SequenceNotStr[str] | Omit = omit,
         expiry: Union[str, date] | Omit = omit,
         instrument_ids: SequenceNotStr[InstrumentIDOrSymbol] | Omit = omit,
         underlying_instrument_id: str | Omit = omit,
@@ -255,14 +264,20 @@ class AsyncMarketDataResource(AsyncAPIResource):
         """
         Get market data snapshots for one or more securities.
 
-        Three targeting modes, mutually exclusive: `instrument_ids` (1-100 ids),
+        Targeting modes are mutually exclusive: `instrument_ids` (1-100 ids), or
         `underlying_instrument_id` + `expiry` together, which resolves the underlier's
         option chain for that expiry and returns a snapshot for every contract in it
-        (uncapped), or `event_codes` (1-100 event tickers), which returns a snapshot for
-        every market in those events in any status (uncapped). Unknown event codes are
-        ignored.
+        (uncapped).
 
         Args:
+          event_codes: > **Alpha** — this parameter is experimental and may change or be removed at any
+              > time.
+
+              Comma-separated event tickers. Returns a snapshot for every market in those
+              events, in any status, with no cap on the number of markets. Accepts 1 to 100
+              codes; unknown codes are ignored. Mutually exclusive with `instrument_ids` and
+              with `underlying_instrument_id` and `expiry`.
+
           expiry: Filter the option chain to contracts expiring on this date (YYYY-MM-DD). Must be
               provided together with `underlying_instrument_id`.
 
@@ -292,6 +307,7 @@ class AsyncMarketDataResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
+                        "event_codes": event_codes,
                         "expiry": expiry,
                         "instrument_ids": instrument_ids,
                         "underlying_instrument_id": underlying_instrument_id,

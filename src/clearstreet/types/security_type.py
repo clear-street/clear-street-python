@@ -4,4 +4,4 @@ from typing_extensions import Literal, TypeAlias
 
 __all__ = ["SecurityType"]
 
-SecurityType: TypeAlias = Literal["COMMON_STOCK", "INDEX", "OPTION", "CASH"]
+SecurityType: TypeAlias = Literal["COMMON_STOCK", "INDEX", "OPTION", "CASH", "EVENT_CONTRACT"]
