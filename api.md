@@ -34,6 +34,7 @@ from clearstreet.types.v1 import (
     Address,
     MarginDetails,
     MarginDetailsUsage,
+    MarginSession,
     MarginSessionDetails,
     MarginTopContributor,
     MarginType,

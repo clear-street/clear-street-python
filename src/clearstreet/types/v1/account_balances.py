@@ -5,6 +5,7 @@ from typing import Optional
 from ..._models import BaseModel
 from .margin_type import MarginType
 from .margin_details import MarginDetails
+from .margin_session import MarginSession
 from .account_balances_sma import AccountBalancesSma
 from .account_balances_sod import AccountBalancesSod
 from .prediction_market_balances import PredictionMarketBalances
@@ -28,6 +29,13 @@ class AccountBalances(BaseModel):
 
     currency: str
     """Currency identifier for all monetary values."""
+
+    current_session: MarginSession
+    """
+    The session whose values the engine is applying to these balances.
+    `buying_power`, `multiplier`, and `margin_details.usage` reflect this session. A
+    closed market reports `overnight`.
+    """
 
     daily_change: str
     """Difference between current equity and start-of-day equity."""

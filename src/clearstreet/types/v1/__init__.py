@@ -80,6 +80,7 @@ from .field_lookback import FieldLookback as FieldLookback
 from .filter_op_spec import FilterOpSpec as FilterOpSpec
 from .fiscal_quarter import FiscalQuarter as FiscalQuarter
 from .margin_details import MarginDetails as MarginDetails
+from .margin_session import MarginSession as MarginSession
 from .modifier_param import ModifierParam as ModifierParam
 from .order_strategy import OrderStrategy as OrderStrategy
 from .screener_entry import ScreenerEntry as ScreenerEntry
