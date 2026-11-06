@@ -64,3 +64,11 @@ class Response(BaseModel):
     thread without a preceding request. When a null/undefined value is observed, it
     indicates it does not apply.
     """
+
+    user_message_seq: Optional[int] = None
+    """The `seq` the user message has in the thread's message list.
+
+    Present exactly when `user_message_id` is present. Use it to place the sent
+    prompt among the listed messages before a list refresh includes it. When a
+    null/undefined value is observed, it indicates it does not apply.
+    """
