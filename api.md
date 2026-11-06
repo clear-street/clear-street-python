@@ -29,12 +29,16 @@ from clearstreet.types.v1 import (
     AccountSubtype,
     AccountType,
     AccountWithPersonalDetails,
+    ActivityState,
+    ActivityType,
     Address,
     MarginDetails,
     MarginDetailsUsage,
     MarginSessionDetails,
     MarginTopContributor,
     MarginType,
+    NonTradeActivity,
+    NonTradeActivityList,
     PortfolioHistoryResponse,
     PortfolioHistorySegment,
     PredictionMarketBalances,
@@ -42,6 +46,7 @@ from clearstreet.types.v1 import (
     AccountGetAccountBalancesResponse,
     AccountGetAccountByIDResponse,
     AccountGetAccountsResponse,
+    AccountGetNonTradeActivitiesResponse,
     AccountGetPortfolioHistoryResponse,
     AccountPatchAccountByIDResponse,
 )
@@ -52,6 +57,7 @@ Methods:
 - <code title="get /v1/accounts/{account_id}/balances">client.v1.accounts.<a href="./src/clearstreet/resources/v1/accounts.py">get_account_balances</a>(account_id, \*\*<a href="src/clearstreet/types/v1/account_get_account_balances_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/account_get_account_balances_response.py">AccountGetAccountBalancesResponse</a></code>
 - <code title="get /v1/accounts/{account_id}">client.v1.accounts.<a href="./src/clearstreet/resources/v1/accounts.py">get_account_by_id</a>(account_id) -> <a href="./src/clearstreet/types/v1/account_get_account_by_id_response.py">AccountGetAccountByIDResponse</a></code>
 - <code title="get /v1/accounts">client.v1.accounts.<a href="./src/clearstreet/resources/v1/accounts.py">get_accounts</a>(\*\*<a href="src/clearstreet/types/v1/account_get_accounts_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/account_get_accounts_response.py">AccountGetAccountsResponse</a></code>
+- <code title="get /v1/accounts/{account_id}/non-trade-activities">client.v1.accounts.<a href="./src/clearstreet/resources/v1/accounts.py">get_non_trade_activities</a>(account_id, \*\*<a href="src/clearstreet/types/v1/account_get_non_trade_activities_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/account_get_non_trade_activities_response.py">AccountGetNonTradeActivitiesResponse</a></code>
 - <code title="get /v1/accounts/{account_id}/portfolio-history">client.v1.accounts.<a href="./src/clearstreet/resources/v1/accounts.py">get_portfolio_history</a>(account_id, \*\*<a href="src/clearstreet/types/v1/account_get_portfolio_history_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/account_get_portfolio_history_response.py">AccountGetPortfolioHistoryResponse</a></code>
 - <code title="patch /v1/accounts/{account_id}">client.v1.accounts.<a href="./src/clearstreet/resources/v1/accounts.py">patch_account_by_id</a>(account_id, \*\*<a href="src/clearstreet/types/v1/account_patch_account_by_id_params.py">params</a>) -> <a href="./src/clearstreet/types/v1/account_patch_account_by_id_response.py">AccountPatchAccountByIDResponse</a></code>
 

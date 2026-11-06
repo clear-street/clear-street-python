@@ -16,6 +16,7 @@ from clearstreet.types.v1 import (
     AccountPatchAccountByIDResponse,
     AccountGetAccountBalancesResponse,
     AccountGetPortfolioHistoryResponse,
+    AccountGetNonTradeActivitiesResponse,
 )
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
@@ -126,6 +127,46 @@ class TestAccounts:
 
             account = response.parse()
             assert_matches_type(AccountGetAccountsResponse, account, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    def test_method_get_non_trade_activities(self, client: ClearStreet) -> None:
+        account = client.v1.accounts.get_non_trade_activities(
+            account_id=0,
+        )
+        assert_matches_type(AccountGetNonTradeActivitiesResponse, account, path=["response"])
+
+    @parametrize
+    def test_method_get_non_trade_activities_with_all_params(self, client: ClearStreet) -> None:
+        account = client.v1.accounts.get_non_trade_activities(
+            account_id=0,
+            page_size=1,
+            page_token="U3RhaW5sZXNzIHJvY2tz",
+        )
+        assert_matches_type(AccountGetNonTradeActivitiesResponse, account, path=["response"])
+
+    @parametrize
+    def test_raw_response_get_non_trade_activities(self, client: ClearStreet) -> None:
+        response = client.v1.accounts.with_raw_response.get_non_trade_activities(
+            account_id=0,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        account = response.parse()
+        assert_matches_type(AccountGetNonTradeActivitiesResponse, account, path=["response"])
+
+    @parametrize
+    def test_streaming_response_get_non_trade_activities(self, client: ClearStreet) -> None:
+        with client.v1.accounts.with_streaming_response.get_non_trade_activities(
+            account_id=0,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account = response.parse()
+            assert_matches_type(AccountGetNonTradeActivitiesResponse, account, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -319,6 +360,46 @@ class TestAsyncAccounts:
 
             account = await response.parse()
             assert_matches_type(AccountGetAccountsResponse, account, path=["response"])
+
+        assert cast(Any, response.is_closed) is True
+
+    @parametrize
+    async def test_method_get_non_trade_activities(self, async_client: AsyncClearStreet) -> None:
+        account = await async_client.v1.accounts.get_non_trade_activities(
+            account_id=0,
+        )
+        assert_matches_type(AccountGetNonTradeActivitiesResponse, account, path=["response"])
+
+    @parametrize
+    async def test_method_get_non_trade_activities_with_all_params(self, async_client: AsyncClearStreet) -> None:
+        account = await async_client.v1.accounts.get_non_trade_activities(
+            account_id=0,
+            page_size=1,
+            page_token="U3RhaW5sZXNzIHJvY2tz",
+        )
+        assert_matches_type(AccountGetNonTradeActivitiesResponse, account, path=["response"])
+
+    @parametrize
+    async def test_raw_response_get_non_trade_activities(self, async_client: AsyncClearStreet) -> None:
+        response = await async_client.v1.accounts.with_raw_response.get_non_trade_activities(
+            account_id=0,
+        )
+
+        assert response.is_closed is True
+        assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+        account = await response.parse()
+        assert_matches_type(AccountGetNonTradeActivitiesResponse, account, path=["response"])
+
+    @parametrize
+    async def test_streaming_response_get_non_trade_activities(self, async_client: AsyncClearStreet) -> None:
+        async with async_client.v1.accounts.with_streaming_response.get_non_trade_activities(
+            account_id=0,
+        ) as response:
+            assert not response.is_closed
+            assert response.http_request.headers.get("X-Stainless-Lang") == "python"
+
+            account = await response.parse()
+            assert_matches_type(AccountGetNonTradeActivitiesResponse, account, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

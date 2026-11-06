@@ -54,6 +54,7 @@ from .price_target import PriceTarget as PriceTarget
 from .screener_row import ScreenerRow as ScreenerRow
 from .variable_def import VariableDef as VariableDef
 from .action_button import ActionButton as ActionButton
+from .activity_type import ActivityType as ActivityType
 from .chart_payload import ChartPayload as ChartPayload
 from .contract_type import ContractType as ContractType
 from .fee_frequency import FeeFrequency as FeeFrequency
@@ -67,6 +68,7 @@ from .risk_settings import RiskSettings as RiskSettings
 from .search_filter import SearchFilter as SearchFilter
 from .time_in_force import TimeInForce as TimeInForce
 from .account_status import AccountStatus as AccountStatus
+from .activity_state import ActivityState as ActivityState
 from .analyst_rating import AnalystRating as AnalystRating
 from .company_detail import CompanyDetail as CompanyDetail
 from .company_person import CompanyPerson as CompanyPerson
@@ -113,6 +115,7 @@ from .structured_action import StructuredAction as StructuredAction
 from .filter_value_param import FilterValueParam as FilterValueParam
 from .fiscal_period_type import FiscalPeriodType as FiscalPeriodType
 from .locate_rate_result import LocateRateResult as LocateRateResult
+from .non_trade_activity import NonTradeActivity as NonTradeActivity
 from .option_expiry_date import OptionExpiryDate as OptionExpiryDate
 from .prediction_markets import PredictionMarkets as PredictionMarkets
 from .request_order_type import RequestOrderType as RequestOrderType
@@ -170,6 +173,7 @@ from .instrument_fundamentals import InstrumentFundamentals as InstrumentFundame
 from .instrument_id_or_symbol import InstrumentIDOrSymbol as InstrumentIDOrSymbol
 from .locate_rate_result_list import LocateRateResultList as LocateRateResultList
 from .new_order_request_param import NewOrderRequestParam as NewOrderRequestParam
+from .non_trade_activity_list import NonTradeActivityList as NonTradeActivityList
 from .order_get_orders_params import OrderGetOrdersParams as OrderGetOrdersParams
 from .request_position_effect import RequestPositionEffect as RequestPositionEffect
 from .company_document_preview import CompanyDocumentPreview as CompanyDocumentPreview
@@ -307,6 +311,9 @@ from .screener_get_screener_catalog_response import (
 from .watchlist_get_watchlist_by_id_response import (
     WatchlistGetWatchlistByIDResponse as WatchlistGetWatchlistByIDResponse,
 )
+from .account_get_non_trade_activities_params import (
+    AccountGetNonTradeActivitiesParams as AccountGetNonTradeActivitiesParams,
+)
 from .instrument_balance_sheet_statement_list import (
     InstrumentBalanceSheetStatementList as InstrumentBalanceSheetStatementList,
 )
@@ -330,6 +337,9 @@ from .instrument_get_prediction_markets_params import (
 )
 from .watchlist_delete_watchlist_item_response import (
     WatchlistDeleteWatchlistItemResponse as WatchlistDeleteWatchlistItemResponse,
+)
+from .account_get_non_trade_activities_response import (
+    AccountGetNonTradeActivitiesResponse as AccountGetNonTradeActivitiesResponse,
 )
 from .calendar_get_market_hours_calendar_params import (
     CalendarGetMarketHoursCalendarParams as CalendarGetMarketHoursCalendarParams,

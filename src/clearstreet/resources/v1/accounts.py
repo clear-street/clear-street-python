@@ -15,6 +15,7 @@ from ...types.v1 import (
     account_patch_account_by_id_params,
     account_get_account_balances_params,
     account_get_portfolio_history_params,
+    account_get_non_trade_activities_params,
 )
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -30,6 +31,7 @@ from ...types.v1.account_get_account_by_id_response import AccountGetAccountByID
 from ...types.v1.account_patch_account_by_id_response import AccountPatchAccountByIDResponse
 from ...types.v1.account_get_account_balances_response import AccountGetAccountBalancesResponse
 from ...types.v1.account_get_portfolio_history_response import AccountGetPortfolioHistoryResponse
+from ...types.v1.account_get_non_trade_activities_response import AccountGetNonTradeActivitiesResponse
 
 __all__ = ["AccountsResource", "AsyncAccountsResource"]
 
@@ -191,6 +193,55 @@ class AccountsResource(SyncAPIResource):
                 ),
             ),
             cast_to=AccountGetAccountsResponse,
+        )
+
+    def get_non_trade_activities(
+        self,
+        account_id: int,
+        *,
+        page_size: int | Omit = omit,
+        page_token: Union[str, Base64FileInput] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AccountGetNonTradeActivitiesResponse:
+        """
+        Results are paginated.
+
+        Args:
+          page_size: The number of items to return per page. Only used when page_token is not
+              provided.
+
+          page_token: Token for retrieving the next or previous page of results. Contains encoded
+              pagination state; when provided, page_size is ignored.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return self._get(
+            path_template("/v1/accounts/{account_id}/non-trade-activities", account_id=account_id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {
+                        "page_size": page_size,
+                        "page_token": page_token,
+                    },
+                    account_get_non_trade_activities_params.AccountGetNonTradeActivitiesParams,
+                ),
+            ),
+            cast_to=AccountGetNonTradeActivitiesResponse,
         )
 
     def get_portfolio_history(
@@ -435,6 +486,55 @@ class AsyncAccountsResource(AsyncAPIResource):
             cast_to=AccountGetAccountsResponse,
         )
 
+    async def get_non_trade_activities(
+        self,
+        account_id: int,
+        *,
+        page_size: int | Omit = omit,
+        page_token: Union[str, Base64FileInput] | Omit = omit,
+        # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
+        # The extra values given here take precedence over values defined on the client or passed to this method.
+        extra_headers: Headers | None = None,
+        extra_query: Query | None = None,
+        extra_body: Body | None = None,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
+    ) -> AccountGetNonTradeActivitiesResponse:
+        """
+        Results are paginated.
+
+        Args:
+          page_size: The number of items to return per page. Only used when page_token is not
+              provided.
+
+          page_token: Token for retrieving the next or previous page of results. Contains encoded
+              pagination state; when provided, page_size is ignored.
+
+          extra_headers: Send extra headers
+
+          extra_query: Add additional query parameters to the request
+
+          extra_body: Add additional JSON properties to the request
+
+          timeout: Override the client-level default timeout for this request, in seconds
+        """
+        return await self._get(
+            path_template("/v1/accounts/{account_id}/non-trade-activities", account_id=account_id),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {
+                        "page_size": page_size,
+                        "page_token": page_token,
+                    },
+                    account_get_non_trade_activities_params.AccountGetNonTradeActivitiesParams,
+                ),
+            ),
+            cast_to=AccountGetNonTradeActivitiesResponse,
+        )
+
     async def get_portfolio_history(
         self,
         account_id: int,
@@ -533,6 +633,9 @@ class AccountsResourceWithRawResponse:
         self.get_accounts = to_raw_response_wrapper(
             accounts.get_accounts,
         )
+        self.get_non_trade_activities = to_raw_response_wrapper(
+            accounts.get_non_trade_activities,
+        )
         self.get_portfolio_history = to_raw_response_wrapper(
             accounts.get_portfolio_history,
         )
@@ -553,6 +656,9 @@ class AsyncAccountsResourceWithRawResponse:
         )
         self.get_accounts = async_to_raw_response_wrapper(
             accounts.get_accounts,
+        )
+        self.get_non_trade_activities = async_to_raw_response_wrapper(
+            accounts.get_non_trade_activities,
         )
         self.get_portfolio_history = async_to_raw_response_wrapper(
             accounts.get_portfolio_history,
@@ -575,6 +681,9 @@ class AccountsResourceWithStreamingResponse:
         self.get_accounts = to_streamed_response_wrapper(
             accounts.get_accounts,
         )
+        self.get_non_trade_activities = to_streamed_response_wrapper(
+            accounts.get_non_trade_activities,
+        )
         self.get_portfolio_history = to_streamed_response_wrapper(
             accounts.get_portfolio_history,
         )
@@ -595,6 +704,9 @@ class AsyncAccountsResourceWithStreamingResponse:
         )
         self.get_accounts = async_to_streamed_response_wrapper(
             accounts.get_accounts,
+        )
+        self.get_non_trade_activities = async_to_streamed_response_wrapper(
+            accounts.get_non_trade_activities,
         )
         self.get_portfolio_history = async_to_streamed_response_wrapper(
             accounts.get_portfolio_history,
