@@ -13,6 +13,7 @@ class RiskSettings(BaseModel):
     max_notional: Optional[str] = None
     """The maximum notional value available to the account.
 
-    On update, a value must be 0 or greater, and `null` clears the limit. When a
-    null/undefined value is observed, it indicates that there is no available data.
+    On update, a value must be 0 or greater, `null` clears the limit, and omitting
+    the field leaves the limit unchanged. When a null/undefined value is observed,
+    it indicates that there is no available data.
     """
