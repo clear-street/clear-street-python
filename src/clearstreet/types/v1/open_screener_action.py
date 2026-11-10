@@ -3,21 +3,29 @@
 from typing import List, Optional
 
 from ..._models import BaseModel
-from .screener_filter import ScreenerFilter
+from .field_ref import FieldRef
+from .sort_spec import SortSpec
+from .search_filter import SearchFilter
 
 __all__ = ["OpenScreenerAction"]
 
 
 class OpenScreenerAction(BaseModel):
-    """Action to open a stock screener with filters."""
+    """Action to open a stock screener with filters.
 
-    filters: List[ScreenerFilter]
-    """Filter criteria for the screener"""
-
-    columns: Optional[List[str]] = None
+    `filters`, `sorts` and `columns` use the same shapes as the
+    `POST /saved-screeners` request body, so a client can save the screener
+    the user is looking at by forwarding them unchanged.
     """
-    Optional field/column selection for screener results. When a null/undefined
-    value is observed, it indicates it does not apply.
+
+    filters: List[SearchFilter]
+    """Filter criteria for the screener."""
+
+    columns: Optional[List[FieldRef]] = None
+    """Optional field/column selection for screener results.
+
+    Absent means the default column set. When a null/undefined value is observed, it
+    indicates it does not apply.
     """
 
     item_id: Optional[str] = None
@@ -33,14 +41,9 @@ class OpenScreenerAction(BaseModel):
     does not apply.
     """
 
-    sort_by: Optional[str] = None
-    """
-    Optional sort field for screener rows. When a null/undefined value is observed,
-    it indicates it does not apply.
-    """
+    sorts: Optional[List[SortSpec]] = None
+    """Optional sort specification.
 
-    sort_direction: Optional[str] = None
-    """
-    Optional sort direction (`ASC` or `DESC`). When a null/undefined value is
+    Absent means the screener's default order. When a null/undefined value is
     observed, it indicates it does not apply.
     """

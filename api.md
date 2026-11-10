@@ -651,7 +651,6 @@ from clearstreet.types.v1 import (
     ScreenerColumn,
     ScreenerEntry,
     ScreenerEntryList,
-    ScreenerFilter,
     ScreenerRow,
     ScreenerRowList,
     SearchFilter,

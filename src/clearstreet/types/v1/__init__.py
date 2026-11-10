@@ -90,7 +90,6 @@ from .field_ref_param import FieldRefParam as FieldRefParam
 from .filter_operator import FilterOperator as FilterOperator
 from .instrument_core import InstrumentCore as InstrumentCore
 from .screener_column import ScreenerColumn as ScreenerColumn
-from .screener_filter import ScreenerFilter as ScreenerFilter
 from .sort_spec_param import SortSpecParam as SortSpecParam
 from .watchlist_entry import WatchlistEntry as WatchlistEntry
 from .account_balances import AccountBalances as AccountBalances
