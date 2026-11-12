@@ -61,18 +61,20 @@ class SnapshotSession(BaseModel):
     """
 
     ohlv_date: Optional[date] = None
-    """Session date the open/high/low values represent, US/Eastern.
+    """Session date of the newest of the open, high and low values, US/Eastern.
 
-    May trail the current session until the upstream feed rolls. When a
+    Before the session's first trade, it is the prior session's date. When a
     null/undefined value is observed, it indicates that there is no available data.
     """
 
     open: Optional[str] = None
-    """Session opening price, from the day's OHLC bar.
+    """Session opening price.
 
-    Absent when `ohlv_applicable` is `false`, or when the bar has not loaded yet.
-    When a null/undefined value is observed, it indicates that there is no available
-    data.
+    For US equities, this is the listing exchange's official opening print. It is
+    absent after the session's first trade until that print arrives. Before the
+    session's first trade, it is the prior session's open. Absent when
+    `ohlv_applicable` is `false`, or when the bar has not loaded yet. When a
+    null/undefined value is observed, it indicates that there is no available data.
     """
 
     previous_close: Optional[str] = None
