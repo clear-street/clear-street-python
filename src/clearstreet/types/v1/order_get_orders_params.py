@@ -26,6 +26,15 @@ class OrderGetOrdersParams(TypedDict, total=False):
     instrument_type: Literal["COMMON_STOCK", "INDEX", "OPTION", "CASH", "EVENT_CONTRACT"]
     """Instrument type filter (e.g., COMMON_STOCK, OPTION)"""
 
+    is_multi_leg: bool
+    """
+    > **Alpha** — this parameter is experimental and may change or be removed at any
+    > time.
+
+    Filter by whether the order is a multileg strategy. Omitted returns all orders;
+    true returns only multileg orders; false excludes them.
+    """
+
     order_ids: SequenceNotStr[str]
     """Comma-separated list of order identifiers.
 

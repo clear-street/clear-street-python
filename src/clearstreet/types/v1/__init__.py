@@ -20,6 +20,7 @@ from .execution import Execution as Execution
 from .feed_item import FeedItem as FeedItem
 from .feed_page import FeedPage as FeedPage
 from .field_ref import FieldRef as FieldRef
+from .order_leg import OrderLeg as OrderLeg
 from .sort_spec import SortSpec as SortSpec
 from .tick_rule import TickRule as TickRule
 from .charged_by import ChargedBy as ChargedBy
@@ -57,6 +58,7 @@ from .action_button import ActionButton as ActionButton
 from .activity_type import ActivityType as ActivityType
 from .chart_payload import ChartPayload as ChartPayload
 from .contract_type import ContractType as ContractType
+from .execution_leg import ExecutionLeg as ExecutionLeg
 from .fee_frequency import FeeFrequency as FeeFrequency
 from .field_columns import FieldColumns as FieldColumns
 from .locate_status import LocateStatus as LocateStatus

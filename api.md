@@ -446,10 +446,12 @@ Types:
 ```python
 from clearstreet.types.v1 import (
     Execution,
+    ExecutionLeg,
     ExecutionList,
     InstrumentIDOrSymbol,
     NewOrderRequest,
     Order,
+    OrderLeg,
     OrderList,
     OrderPreview,
     OrderPreviewAmount,

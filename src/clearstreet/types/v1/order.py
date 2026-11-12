@@ -8,6 +8,7 @@ from pydantic import Field as FieldInfo
 
 from .side import Side
 from ..._models import BaseModel
+from .order_leg import OrderLeg
 from .order_type import OrderType
 from .order_status import OrderStatus
 from .time_in_force import TimeInForce
@@ -127,6 +128,14 @@ class Order(BaseModel):
     `null` when the order is a multileg strategy whose legs are reported
     individually in `legs[]`. When a null/undefined value is observed, it indicates
     it does not apply.
+    """
+
+    legs: Optional[List[OrderLeg]] = None
+    """
+    > **Alpha** — this field is experimental and may change or be removed at any
+    > time.
+
+    Individual legs of a multileg strategy order. Omitted for single-leg orders.
     """
 
     limit_offset: Optional[str] = None

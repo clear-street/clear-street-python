@@ -25,7 +25,9 @@ from ...types.v1 import (
     TrailingOffsetType,
     order_get_orders_params,
     order_replace_order_params,
+    order_submit_orders_params,
     order_get_executions_params,
+    order_preview_orders_params,
     order_cancel_all_open_orders_params,
 )
 from ..._resource import SyncAPIResource, AsyncAPIResource
@@ -38,7 +40,6 @@ from ..._response import (
 from ..._base_client import make_request_options
 from ...types.v1.trailing_offset_type import TrailingOffsetType
 from ...types.v1.instrument_id_or_symbol import InstrumentIDOrSymbol
-from ...types.v1.new_order_request_param import NewOrderRequestParam
 from ...types.v1.order_get_orders_response import OrderGetOrdersResponse
 from ...types.v1.order_replace_order_response import OrderReplaceOrderResponse
 from ...types.v1.order_submit_orders_response import OrderSubmitOrdersResponse
@@ -285,6 +286,7 @@ class OrdersResource(SyncAPIResource):
         from_: Union[str, datetime] | Omit = omit,
         instrument_ids: SequenceNotStr[InstrumentIDOrSymbol] | Omit = omit,
         instrument_type: Literal["COMMON_STOCK", "INDEX", "OPTION", "CASH", "EVENT_CONTRACT"] | Omit = omit,
+        is_multi_leg: bool | Omit = omit,
         order_ids: SequenceNotStr[str] | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
@@ -332,6 +334,12 @@ class OrdersResource(SyncAPIResource):
 
           instrument_type: Instrument type filter (e.g., COMMON_STOCK, OPTION)
 
+          is_multi_leg: > **Alpha** — this parameter is experimental and may change or be removed at any
+              > time.
+
+              Filter by whether the order is a multileg strategy. Omitted returns all orders;
+              true returns only multileg orders; false excludes them.
+
           order_ids: Comma-separated list of order identifiers. Each value may be an order's `id` or
               its `client_order_id`; only orders matching one of the given identifiers are
               returned.
@@ -372,6 +380,7 @@ class OrdersResource(SyncAPIResource):
                         "from_": from_,
                         "instrument_ids": instrument_ids,
                         "instrument_type": instrument_type,
+                        "is_multi_leg": is_multi_leg,
                         "order_ids": order_ids,
                         "page_size": page_size,
                         "page_token": page_token,
@@ -391,7 +400,7 @@ class OrdersResource(SyncAPIResource):
         self,
         account_id: int,
         *,
-        preview: Iterable[NewOrderRequestParam],
+        preview: Iterable[order_preview_orders_params.Preview],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -427,7 +436,7 @@ class OrdersResource(SyncAPIResource):
         """
         return self._post(
             path_template("/v1/accounts/{account_id}/orders/preview", account_id=account_id),
-            body=maybe_transform(preview, Iterable[NewOrderRequestParam]),
+            body=maybe_transform(preview, Iterable[order_preview_orders_params.Preview]),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -501,7 +510,7 @@ class OrdersResource(SyncAPIResource):
         self,
         account_id: int,
         *,
-        orders: Iterable[NewOrderRequestParam],
+        orders: Iterable[order_submit_orders_params.Order],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -523,7 +532,7 @@ class OrdersResource(SyncAPIResource):
         """
         return self._post(
             path_template("/v1/accounts/{account_id}/orders", account_id=account_id),
-            body=maybe_transform(orders, Iterable[NewOrderRequestParam]),
+            body=maybe_transform(orders, Iterable[order_submit_orders_params.Order]),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -765,6 +774,7 @@ class AsyncOrdersResource(AsyncAPIResource):
         from_: Union[str, datetime] | Omit = omit,
         instrument_ids: SequenceNotStr[InstrumentIDOrSymbol] | Omit = omit,
         instrument_type: Literal["COMMON_STOCK", "INDEX", "OPTION", "CASH", "EVENT_CONTRACT"] | Omit = omit,
+        is_multi_leg: bool | Omit = omit,
         order_ids: SequenceNotStr[str] | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
@@ -812,6 +822,12 @@ class AsyncOrdersResource(AsyncAPIResource):
 
           instrument_type: Instrument type filter (e.g., COMMON_STOCK, OPTION)
 
+          is_multi_leg: > **Alpha** — this parameter is experimental and may change or be removed at any
+              > time.
+
+              Filter by whether the order is a multileg strategy. Omitted returns all orders;
+              true returns only multileg orders; false excludes them.
+
           order_ids: Comma-separated list of order identifiers. Each value may be an order's `id` or
               its `client_order_id`; only orders matching one of the given identifiers are
               returned.
@@ -852,6 +868,7 @@ class AsyncOrdersResource(AsyncAPIResource):
                         "from_": from_,
                         "instrument_ids": instrument_ids,
                         "instrument_type": instrument_type,
+                        "is_multi_leg": is_multi_leg,
                         "order_ids": order_ids,
                         "page_size": page_size,
                         "page_token": page_token,
@@ -871,7 +888,7 @@ class AsyncOrdersResource(AsyncAPIResource):
         self,
         account_id: int,
         *,
-        preview: Iterable[NewOrderRequestParam],
+        preview: Iterable[order_preview_orders_params.Preview],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -907,7 +924,7 @@ class AsyncOrdersResource(AsyncAPIResource):
         """
         return await self._post(
             path_template("/v1/accounts/{account_id}/orders/preview", account_id=account_id),
-            body=await async_maybe_transform(preview, Iterable[NewOrderRequestParam]),
+            body=await async_maybe_transform(preview, Iterable[order_preview_orders_params.Preview]),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
@@ -981,7 +998,7 @@ class AsyncOrdersResource(AsyncAPIResource):
         self,
         account_id: int,
         *,
-        orders: Iterable[NewOrderRequestParam],
+        orders: Iterable[order_submit_orders_params.Order],
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -1003,7 +1020,7 @@ class AsyncOrdersResource(AsyncAPIResource):
         """
         return await self._post(
             path_template("/v1/accounts/{account_id}/orders", account_id=account_id),
-            body=await async_maybe_transform(orders, Iterable[NewOrderRequestParam]),
+            body=await async_maybe_transform(orders, Iterable[order_submit_orders_params.Order]),
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),

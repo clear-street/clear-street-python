@@ -1,10 +1,11 @@
 # File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-from typing import Optional
+from typing import List, Optional
 from datetime import datetime
 
 from .side import Side
 from ..._models import BaseModel
+from .execution_leg import ExecutionLeg
 from ..security_type import SecurityType
 
 __all__ = ["Execution"]
@@ -38,6 +39,15 @@ class Execution(BaseModel):
     `null` when this is a strategy-level multileg fill whose legs are reported
     individually in `legs[]`. When a null/undefined value is observed, it indicates
     it does not apply.
+    """
+
+    legs: Optional[List[ExecutionLeg]] = None
+    """
+    > **Alpha** — this field is experimental and may change or be removed at any
+    > time.
+
+    Individual legs of a strategy-level multileg fill. Omitted for single-security
+    and individual-leg fills.
     """
 
     price: Optional[str] = None
