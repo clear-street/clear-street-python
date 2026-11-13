@@ -6,6 +6,7 @@ from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
 
+from .fees import Fees
 from .side import Side
 from ..._models import BaseModel
 from .order_leg import OrderLeg
@@ -113,6 +114,16 @@ class Order(BaseModel):
 
     extended_hours: Optional[bool] = None
     """Whether the order is eligible for extended-hours trading."""
+
+    fees: Optional[Fees] = None
+    """Fees charged to the account, broken out by kind.
+
+    Amounts are in the instrument's currency, at the full precision the venue
+    reports. Statements round each fill's fee to the cent, so they can differ by a
+    fraction of a cent. A positive amount is charged to the account; a negative
+    amount is a rebate. New kinds of fee are added as new optional fields, and
+    `total` always includes them.
+    """
 
     instrument_id: Optional[str] = None
     """Instrument identifier for the traded instrument.

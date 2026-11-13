@@ -3,6 +3,7 @@
 from typing import List, Optional
 from datetime import datetime
 
+from .fees import Fees
 from .side import Side
 from ..._models import BaseModel
 from .execution_leg import ExecutionLeg
@@ -32,6 +33,16 @@ class Execution(BaseModel):
 
     transaction_time: datetime
     """Transaction timestamp in nanosecond precision (UTC)."""
+
+    fees: Optional[Fees] = None
+    """Fees charged to the account, broken out by kind.
+
+    Amounts are in the instrument's currency, at the full precision the venue
+    reports. Statements round each fill's fee to the cent, so they can differ by a
+    fraction of a cent. A positive amount is charged to the account; a negative
+    amount is a rebate. New kinds of fee are added as new optional fields, and
+    `total` always includes them.
+    """
 
     instrument_id: Optional[str] = None
     """Unique instrument identifier.

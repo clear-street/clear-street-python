@@ -448,6 +448,7 @@ from clearstreet.types.v1 import (
     Execution,
     ExecutionLeg,
     ExecutionList,
+    Fees,
     InstrumentIDOrSymbol,
     NewOrderRequest,
     Order,

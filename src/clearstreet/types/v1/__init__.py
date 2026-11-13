@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from .fees import Fees as Fees
 from .side import Side as Side
 from .enums import Enums as Enums
 from .order import Order as Order
