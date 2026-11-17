@@ -62,6 +62,14 @@ class MarketDataSnapshot(BaseModel):
     data.
     """
 
+    indicative_price: Optional[str] = None
+    """Indicative price for a new issue, in USD.
+
+    Present only while the instrument is a new issue with no quote, trade or
+    previous close. When a null/undefined value is observed, it indicates that there
+    is no available data.
+    """
+
     last_quote: Optional[SnapshotQuote] = None
     """
     Most recent quote if available. When a null/undefined value is observed, it

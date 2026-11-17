@@ -33,6 +33,13 @@ class InstrumentCore(BaseModel):
     is_marginable: bool
     """Indicates if the instrument is marginable"""
 
+    is_new_issue: bool
+    """Indicates if the instrument is a new issue (e.g.
+
+    an IPO) that may not yet have a quote, trade or previous close. See
+    `indicative_price` on the market data snapshot.
+    """
+
     is_ptp: bool
     """
     Indicates if the instrument is a publicly traded partnership (PTP). PTP sales
