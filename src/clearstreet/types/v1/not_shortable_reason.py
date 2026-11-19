@@ -4,4 +4,6 @@ from typing_extensions import Literal, TypeAlias
 
 __all__ = ["NotShortableReason"]
 
-NotShortableReason: TypeAlias = Literal["INSUFFICIENT_LOCATE_INVENTORY", "UNSUPPORTED_SECURITY"]
+NotShortableReason: TypeAlias = Literal[
+    "INSUFFICIENT_LOCATE_INVENTORY", "UNSUPPORTED_SECURITY", "INSTRUMENT_NOT_SHORTABLE"
+]
