@@ -97,6 +97,31 @@ Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typ
 - Serializing back into JSON, `model.to_json()`
 - Converting to a dictionary, `model.to_dict()`
 
+Request and response types are in `clearstreet.types.v1` and its subpackages, such as `clearstreet.types.v1.omni_ai`. For example:
+
+```python
+from clearstreet import ClearStreet
+from clearstreet.types.v1 import NewOrderRequestParam
+
+client = ClearStreet()
+
+order: NewOrderRequestParam = {
+    "symbol": "AAPL",
+    "side": "BUY",
+    "order_type": "LIMIT",
+    "quantity": "10",
+    "limit_price": "150.00",
+    "time_in_force": "DAY",
+}
+client.v1.orders.submit_orders(account_id=0, orders=[order])
+```
+
+Nested request types that only one method uses, such as the multileg order types that `submit_orders()` accepts, aren't exported from `clearstreet.types.v1`. Import them from that method's params module:
+
+```python
+from clearstreet.types.v1.order_submit_orders_params import OrderNewOrderMultilegRequest
+```
+
 Typed requests and responses provide autocomplete and documentation within your editor. If you would like to see type errors in VS Code to help catch bugs earlier, set `python.analysis.typeCheckingMode` to `basic`.
 
 ## Nested params
