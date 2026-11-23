@@ -156,6 +156,39 @@ Error codes are as follows:
 | >=500       | `InternalServerError`      |
 | N/A         | `APIConnectionError`       |
 
+`APIStatusError` also has an `error` property: the response body's `error` object as a model, or `None` if the body doesn't have one. Its `details` list holds structured information about the failure, such as each check that rejected an order:
+
+```python
+import clearstreet
+from clearstreet import ClearStreet
+
+client = ClearStreet()
+
+try:
+    client.v1.orders.submit_orders(
+        account_id=0,
+        orders=[
+            {
+                "symbol": "AAPL",
+                "side": "BUY",
+                "order_type": "MARKET",
+                "quantity": "10",
+                "time_in_force": "DAY",
+            }
+        ],
+    )
+except clearstreet.APIStatusError as e:
+    if e.error is not None:
+        print(e.error.message)  # e.g. "Risk check failed"
+        for detail in e.error.details or []:
+            if detail.type is not None:  # a check that failed, e.g. "BUYING_POWER"
+                print(detail.type, detail.description)
+```
+
+Each entry sets only the fields for its kind of detail, and the rest are `None`: `type`, `subject` and `description` for a check that failed; `reason`, `domain` and `metadata` for context, such as the amounts a risk check compared; and `instrument_id` for an instrument that wasn't found. For type hints, `e.error` is an `ErrorObject` and each entry is an `ErrorDetail`, both from `clearstreet.lib.errors`.
+
+`e.body` still holds the decoded JSON body, or the text if the body isn't JSON. Errors in successful responses, such as `response.error` when only part of a request succeeded, still hold their `details` as dicts.
+
 ### Retries
 
 Certain errors are automatically retried 2 times by default, with a short exponential backoff.
