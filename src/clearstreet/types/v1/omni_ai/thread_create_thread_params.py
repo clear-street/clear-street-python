@@ -21,7 +21,7 @@ class ThreadCreateThreadParams(TypedDict, total=False):
     authoritative even when another account is selected.
     """
 
-    capabilities: List[Literal["PREFILL_ORDER", "OPEN_CHART", "OPEN_SCREENER", "OPEN_ENTITLEMENT_CONSENT"]]
+    capabilities: List[Literal["PREFILL_ORDER", "OPEN_CHART", "OPEN_SCREENER", "OPEN_ENTITLEMENT_CONSENT", "RENDER_UI"]]
 
     context: Optional[TurnContextParam]
     """Snapshots for the first instant-chat message. Omit to attach no new context."""

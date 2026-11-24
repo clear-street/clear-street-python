@@ -68,7 +68,9 @@ class ThreadsResource(SyncAPIResource):
         *,
         text: str,
         account_id: Optional[int] | Omit = omit,
-        capabilities: List[Literal["PREFILL_ORDER", "OPEN_CHART", "OPEN_SCREENER", "OPEN_ENTITLEMENT_CONSENT"]]
+        capabilities: List[
+            Literal["PREFILL_ORDER", "OPEN_CHART", "OPEN_SCREENER", "OPEN_ENTITLEMENT_CONSENT", "RENDER_UI"]
+        ]
         | Omit = omit,
         context: Optional[TurnContextParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -135,7 +137,9 @@ class ThreadsResource(SyncAPIResource):
         *,
         type: Literal["instant", "deep_insights"],
         account_id: Optional[int] | Omit = omit,
-        capabilities: List[Literal["PREFILL_ORDER", "OPEN_CHART", "OPEN_SCREENER", "OPEN_ENTITLEMENT_CONSENT"]]
+        capabilities: List[
+            Literal["PREFILL_ORDER", "OPEN_CHART", "OPEN_SCREENER", "OPEN_ENTITLEMENT_CONSENT", "RENDER_UI"]
+        ]
         | Omit = omit,
         context: Optional[TurnContextParam] | Omit = omit,
         target: Optional[thread_create_thread_params.Target] | Omit = omit,
@@ -459,7 +463,9 @@ class AsyncThreadsResource(AsyncAPIResource):
         *,
         text: str,
         account_id: Optional[int] | Omit = omit,
-        capabilities: List[Literal["PREFILL_ORDER", "OPEN_CHART", "OPEN_SCREENER", "OPEN_ENTITLEMENT_CONSENT"]]
+        capabilities: List[
+            Literal["PREFILL_ORDER", "OPEN_CHART", "OPEN_SCREENER", "OPEN_ENTITLEMENT_CONSENT", "RENDER_UI"]
+        ]
         | Omit = omit,
         context: Optional[TurnContextParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -526,7 +532,9 @@ class AsyncThreadsResource(AsyncAPIResource):
         *,
         type: Literal["instant", "deep_insights"],
         account_id: Optional[int] | Omit = omit,
-        capabilities: List[Literal["PREFILL_ORDER", "OPEN_CHART", "OPEN_SCREENER", "OPEN_ENTITLEMENT_CONSENT"]]
+        capabilities: List[
+            Literal["PREFILL_ORDER", "OPEN_CHART", "OPEN_SCREENER", "OPEN_ENTITLEMENT_CONSENT", "RENDER_UI"]
+        ]
         | Omit = omit,
         context: Optional[TurnContextParam] | Omit = omit,
         target: Optional[thread_create_thread_params.Target] | Omit = omit,

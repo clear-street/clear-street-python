@@ -3,6 +3,7 @@
 from typing import Union
 from typing_extensions import Literal, TypeAlias
 
+from ..content_part_ui_payload import ContentPartUiPayload
 from ..content_part_text_payload import ContentPartTextPayload
 from ..content_part_chart_payload import ContentPartChartPayload
 from ..content_part_custom_payload import ContentPartCustomPayload
@@ -16,6 +17,7 @@ __all__ = [
     "ContentPartThinking",
     "ContentPartStructuredAction",
     "ContentPartChart",
+    "ContentPartUi",
     "ContentPartSuggestedActions",
     "ContentPartCustom",
 ]
@@ -45,6 +47,14 @@ class ContentPartChart(ContentPartChartPayload):
     type: Literal["chart"]
 
 
+class ContentPartUi(ContentPartUiPayload):
+    """
+    > **Alpha** — this variant is experimental and may change or be removed at any time.
+    """
+
+    type: Literal["ui"]
+
+
 class ContentPartSuggestedActions(ContentPartSuggestedActionsPayload):
     """Suggested actions payload content part."""
 
@@ -62,6 +72,7 @@ ResponseContentPart: TypeAlias = Union[
     ContentPartThinking,
     ContentPartStructuredAction,
     ContentPartChart,
+    ContentPartUi,
     ContentPartSuggestedActions,
     ContentPartCustom,
 ]

@@ -293,6 +293,7 @@ from clearstreet.types.v1 import (
     ContentPartSuggestedActionsPayload,
     ContentPartTextPayload,
     ContentPartThinkingPayload,
+    ContentPartUiPayload,
     DataChart,
     EntitlementAgreementKey,
     EntitlementCode,
@@ -310,6 +311,8 @@ from clearstreet.types.v1 import (
     StructuredAction,
     StructuredActionButtonAction,
     SuggestedActionsPayload,
+    UiNode,
+    UiPayload,
 )
 ```
 
