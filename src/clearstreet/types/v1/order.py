@@ -14,6 +14,7 @@ from .order_type import OrderType
 from .order_status import OrderStatus
 from .time_in_force import TimeInForce
 from ..security_type import SecurityType
+from .event_contract_order import EventContractOrder
 from .trailing_offset_type import TrailingOffsetType
 
 __all__ = ["Order", "Strategy"]
@@ -104,6 +105,12 @@ class Order(BaseModel):
 
     details: Optional[List[str]] = None
     """Contains execution, rejection or cancellation details, if any"""
+
+    event_contract: Optional[EventContractOrder] = None
+    """
+    Effective action from the recorded order classification, with NO-relative
+    prices. Existing top-level side and prices retain their YES-based meaning.
+    """
 
     expires_at: Optional[datetime] = None
     """Timestamp when the order will expire (UTC).

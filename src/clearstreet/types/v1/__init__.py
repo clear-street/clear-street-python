@@ -129,6 +129,7 @@ from .company_social_link import CompanySocialLink as CompanySocialLink
 from .company_social_type import CompanySocialType as CompanySocialType
 from .economic_event_list import EconomicEventList as EconomicEventList
 from .economic_event_unit import EconomicEventUnit as EconomicEventUnit
+from .event_contract_side import EventContractSide as EventContractSide
 from .instrument_earnings import InstrumentEarnings as InstrumentEarnings
 from .market_hours_detail import MarketHoursDetail as MarketHoursDetail
 from .market_session_type import MarketSessionType as MarketSessionType
@@ -145,6 +146,7 @@ from .analyst_distribution import AnalystDistribution as AnalystDistribution
 from .company_headquarters import CompanyHeadquarters as CompanyHeadquarters
 from .company_legal_entity import CompanyLegalEntity as CompanyLegalEntity
 from .company_metric_point import CompanyMetricPoint as CompanyMetricPoint
+from .event_contract_order import EventContractOrder as EventContractOrder
 from .filter_op_spec_param import FilterOpSpecParam as FilterOpSpecParam
 from .instrument_core_list import InstrumentCoreList as InstrumentCoreList
 from .instrument_ipo_event import InstrumentIpoEvent as InstrumentIpoEvent
@@ -184,6 +186,7 @@ from .order_get_orders_params import OrderGetOrdersParams as OrderGetOrdersParam
 from .request_position_effect import RequestPositionEffect as RequestPositionEffect
 from .company_document_preview import CompanyDocumentPreview as CompanyDocumentPreview
 from .company_profile_resource import CompanyProfileResource as CompanyProfileResource
+from .event_contract_execution import EventContractExecution as EventContractExecution
 from .market_hours_detail_list import MarketHoursDetailList as MarketHoursDetailList
 from .order_preview_entry_list import OrderPreviewEntryList as OrderPreviewEntryList
 from .prediction_market_status import PredictionMarketStatus as PredictionMarketStatus

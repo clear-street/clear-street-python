@@ -448,6 +448,9 @@ Types:
 
 ```python
 from clearstreet.types.v1 import (
+    EventContractExecution,
+    EventContractOrder,
+    EventContractSide,
     Execution,
     ExecutionLeg,
     ExecutionList,

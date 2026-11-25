@@ -8,6 +8,7 @@ from .side import Side
 from ..._models import BaseModel
 from .execution_leg import ExecutionLeg
 from ..security_type import SecurityType
+from .event_contract_execution import EventContractExecution
 
 __all__ = ["Execution"]
 
@@ -33,6 +34,13 @@ class Execution(BaseModel):
 
     transaction_time: datetime
     """Transaction timestamp in nanosecond precision (UTC)."""
+
+    event_contract: Optional[EventContractExecution] = None
+    """
+    Effective action inherited from the parent order, with a NO-relative fill price.
+    This is the order's classification, not a per-fill open/close accounting
+    attribution.
+    """
 
     fees: Optional[Fees] = None
     """Fees charged to the account, broken out by kind.
