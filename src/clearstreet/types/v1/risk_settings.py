@@ -3,12 +3,19 @@
 from typing import Optional
 
 from ..._models import BaseModel
+from .margin_multiplier import MarginMultiplier
 
 __all__ = ["RiskSettings"]
 
 
 class RiskSettings(BaseModel):
     """Risk settings for an account"""
+
+    margin_multiplier: Optional[MarginMultiplier] = None
+    """
+    When a null/undefined value is observed, it indicates that there is no available
+    data.
+    """
 
     max_notional: Optional[str] = None
     """The maximum notional value available to the account.

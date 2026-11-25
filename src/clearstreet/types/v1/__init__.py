@@ -111,6 +111,7 @@ from .prediction_event import PredictionEvent as PredictionEvent
 from .session_schedule import SessionSchedule as SessionSchedule
 from .trading_sessions import TradingSessions as TradingSessions
 from .watchlist_detail import WatchlistDetail as WatchlistDetail
+from .margin_multiplier import MarginMultiplier as MarginMultiplier
 from .open_chart_action import OpenChartAction as OpenChartAction
 from .prediction_events import PredictionEvents as PredictionEvents
 from .prediction_market import PredictionMarket as PredictionMarket
@@ -136,7 +137,6 @@ from .market_session_type import MarketSessionType as MarketSessionType
 from .order_preview_delta import OrderPreviewDelta as OrderPreviewDelta
 from .order_preview_entry import OrderPreviewEntry as OrderPreviewEntry
 from .order_preview_error import OrderPreviewError as OrderPreviewError
-from .risk_settings_param import RiskSettingsParam as RiskSettingsParam
 from .screener_entry_list import ScreenerEntryList as ScreenerEntryList
 from .search_filter_param import SearchFilterParam as SearchFilterParam
 from .shortable_attribute import ShortableAttribute as ShortableAttribute

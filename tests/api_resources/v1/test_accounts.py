@@ -227,7 +227,10 @@ class TestAccounts:
     def test_method_patch_account_by_id_with_all_params(self, client: ClearStreet) -> None:
         account = client.v1.accounts.patch_account_by_id(
             account_id=0,
-            risk={"max_notional": "5000000.00"},
+            risk={
+                "margin_multiplier": "1",
+                "max_notional": "5000000.00",
+            },
         )
         assert_matches_type(AccountPatchAccountByIDResponse, account, path=["response"])
 
@@ -463,7 +466,10 @@ class TestAsyncAccounts:
     async def test_method_patch_account_by_id_with_all_params(self, async_client: AsyncClearStreet) -> None:
         account = await async_client.v1.accounts.patch_account_by_id(
             account_id=0,
-            risk={"max_notional": "5000000.00"},
+            risk={
+                "margin_multiplier": "1",
+                "max_notional": "5000000.00",
+            },
         )
         assert_matches_type(AccountPatchAccountByIDResponse, account, path=["response"])
 

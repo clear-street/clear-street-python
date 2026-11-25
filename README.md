@@ -110,7 +110,10 @@ client = ClearStreet()
 
 response = client.v1.accounts.patch_account_by_id(
     account_id=0,
-    risk={"max_notional": "5000000.00"},
+    risk={
+        "margin_multiplier": "1",
+        "max_notional": "5000000.00",
+    },
 )
 print(response.risk)
 ```
