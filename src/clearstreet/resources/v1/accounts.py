@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 
-from typing import Union, Optional
-from datetime import date
+from typing import List, Union, Optional
+from datetime import date, datetime
+from typing_extensions import Literal
 
 import httpx
 
@@ -199,8 +200,25 @@ class AccountsResource(SyncAPIResource):
         self,
         account_id: int,
         *,
+        activity_type: List[
+            Literal[
+                "money_movement",
+                "interest",
+                "fee",
+                "dividend",
+                "option_event",
+                "transfer",
+                "corporate_action",
+                "tax_withholding",
+                "adjustment",
+                "other",
+            ]
+        ]
+        | Omit = omit,
+        from_: Union[str, datetime] | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
+        to: Union[str, datetime] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -208,15 +226,24 @@ class AccountsResource(SyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountGetNonTradeActivitiesResponse:
-        """
-        Results are paginated.
+        """Results are paginated.
 
         Args:
+          activity_type:
+              Filter by activity type(s).
+
+        Comma-delimited list. Example:
+              `activity_type=dividend,fee`.
+
+          from_: The start date and time for the query range, inclusive (ISO 8601 format)
+
           page_size: The number of items to return per page. Only used when page_token is not
               provided.
 
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.
+
+          to: The end date and time for the query range, inclusive (ISO 8601 format)
 
           extra_headers: Send extra headers
 
@@ -235,8 +262,11 @@ class AccountsResource(SyncAPIResource):
                 timeout=timeout,
                 query=maybe_transform(
                     {
+                        "activity_type": activity_type,
+                        "from_": from_,
                         "page_size": page_size,
                         "page_token": page_token,
+                        "to": to,
                     },
                     account_get_non_trade_activities_params.AccountGetNonTradeActivitiesParams,
                 ),
@@ -490,8 +520,25 @@ class AsyncAccountsResource(AsyncAPIResource):
         self,
         account_id: int,
         *,
+        activity_type: List[
+            Literal[
+                "money_movement",
+                "interest",
+                "fee",
+                "dividend",
+                "option_event",
+                "transfer",
+                "corporate_action",
+                "tax_withholding",
+                "adjustment",
+                "other",
+            ]
+        ]
+        | Omit = omit,
+        from_: Union[str, datetime] | Omit = omit,
         page_size: int | Omit = omit,
         page_token: Union[str, Base64FileInput] | Omit = omit,
+        to: Union[str, datetime] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -499,15 +546,24 @@ class AsyncAccountsResource(AsyncAPIResource):
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> AccountGetNonTradeActivitiesResponse:
-        """
-        Results are paginated.
+        """Results are paginated.
 
         Args:
+          activity_type:
+              Filter by activity type(s).
+
+        Comma-delimited list. Example:
+              `activity_type=dividend,fee`.
+
+          from_: The start date and time for the query range, inclusive (ISO 8601 format)
+
           page_size: The number of items to return per page. Only used when page_token is not
               provided.
 
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.
+
+          to: The end date and time for the query range, inclusive (ISO 8601 format)
 
           extra_headers: Send extra headers
 
@@ -526,8 +582,11 @@ class AsyncAccountsResource(AsyncAPIResource):
                 timeout=timeout,
                 query=await async_maybe_transform(
                     {
+                        "activity_type": activity_type,
+                        "from_": from_,
                         "page_size": page_size,
                         "page_token": page_token,
+                        "to": to,
                     },
                     account_get_non_trade_activities_params.AccountGetNonTradeActivitiesParams,
                 ),

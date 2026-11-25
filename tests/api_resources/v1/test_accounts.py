@@ -9,7 +9,7 @@ import pytest
 
 from clearstreet import ClearStreet, AsyncClearStreet
 from tests.utils import assert_matches_type
-from clearstreet._utils import parse_date
+from clearstreet._utils import parse_date, parse_datetime
 from clearstreet.types.v1 import (
     AccountGetAccountsResponse,
     AccountGetAccountByIDResponse,
@@ -141,8 +141,11 @@ class TestAccounts:
     def test_method_get_non_trade_activities_with_all_params(self, client: ClearStreet) -> None:
         account = client.v1.accounts.get_non_trade_activities(
             account_id=0,
+            activity_type=["money_movement"],
+            from_=parse_datetime("2019-12-27T18:11:19.117Z"),
             page_size=1,
             page_token="U3RhaW5sZXNzIHJvY2tz",
+            to=parse_datetime("2019-12-27T18:11:19.117Z"),
         )
         assert_matches_type(AccountGetNonTradeActivitiesResponse, account, path=["response"])
 
@@ -374,8 +377,11 @@ class TestAsyncAccounts:
     async def test_method_get_non_trade_activities_with_all_params(self, async_client: AsyncClearStreet) -> None:
         account = await async_client.v1.accounts.get_non_trade_activities(
             account_id=0,
+            activity_type=["money_movement"],
+            from_=parse_datetime("2019-12-27T18:11:19.117Z"),
             page_size=1,
             page_token="U3RhaW5sZXNzIHJvY2tz",
+            to=parse_datetime("2019-12-27T18:11:19.117Z"),
         )
         assert_matches_type(AccountGetNonTradeActivitiesResponse, account, path=["response"])
 
