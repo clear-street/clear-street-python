@@ -163,7 +163,8 @@ class AccountsResource(SyncAPIResource):
               substring match).
 
           page_size: The number of items to return per page. Only used when page_token is not
-              provided.
+              provided. A value of 0 is rejected; a value above the maximum is treated as the
+              maximum.
 
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.
@@ -238,7 +239,8 @@ class AccountsResource(SyncAPIResource):
           from_: The start date and time for the query range, inclusive (ISO 8601 format)
 
           page_size: The number of items to return per page. Only used when page_token is not
-              provided.
+              provided. A value of 0 is rejected; a value above the maximum is treated as the
+              maximum.
 
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.
@@ -483,7 +485,8 @@ class AsyncAccountsResource(AsyncAPIResource):
               substring match).
 
           page_size: The number of items to return per page. Only used when page_token is not
-              provided.
+              provided. A value of 0 is rejected; a value above the maximum is treated as the
+              maximum.
 
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.
@@ -558,7 +561,8 @@ class AsyncAccountsResource(AsyncAPIResource):
           from_: The start date and time for the query range, inclusive (ISO 8601 format)
 
           page_size: The number of items to return per page. Only used when page_token is not
-              provided.
+              provided. A value of 0 is rejected; a value above the maximum is treated as the
+              maximum.
 
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.

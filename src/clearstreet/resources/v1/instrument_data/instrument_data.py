@@ -157,7 +157,8 @@ class InstrumentDataResource(SyncAPIResource):
               `instrument_ids=550e8400-e29b-41d4-a716-446655440000,AAPL`.
 
           page_size: The number of items to return per page. Only used when page_token is not
-              provided.
+              provided. A value of 0 is rejected; a value above the maximum is treated as the
+              maximum.
 
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.
@@ -282,7 +283,8 @@ class InstrumentDataResource(SyncAPIResource):
           from_date: The start date for the query range, inclusive (YYYY-MM-DD).
 
           page_size: The number of items to return per page. Only used when page_token is not
-              provided.
+              provided. A value of 0 is rejected; a value above the maximum is treated as the
+              maximum.
 
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.
@@ -351,7 +353,8 @@ class InstrumentDataResource(SyncAPIResource):
           from_date: The start date for the query range, inclusive (YYYY-MM-DD).
 
           page_size: The number of items to return per page. Only used when page_token is not
-              provided.
+              provided. A value of 0 is rejected; a value above the maximum is treated as the
+              maximum.
 
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.
@@ -427,7 +430,8 @@ class InstrumentDataResource(SyncAPIResource):
               date (`YYYY-MM-DD`). Use an event's `date` to fetch that event's transcript.
 
           page_size: The number of items to return per page. Only used when page_token is not
-              provided.
+              provided. A value of 0 is rejected; a value above the maximum is treated as the
+              maximum.
 
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.
@@ -602,7 +606,8 @@ class InstrumentDataResource(SyncAPIResource):
           from_date: The start date for the query range, inclusive (YYYY-MM-DD).
 
           page_size: The number of items to return per page. Only used when page_token is not
-              provided.
+              provided. A value of 0 is rejected; a value above the maximum is treated as the
+              maximum.
 
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.
@@ -717,7 +722,8 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
               `instrument_ids=550e8400-e29b-41d4-a716-446655440000,AAPL`.
 
           page_size: The number of items to return per page. Only used when page_token is not
-              provided.
+              provided. A value of 0 is rejected; a value above the maximum is treated as the
+              maximum.
 
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.
@@ -842,7 +848,8 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
           from_date: The start date for the query range, inclusive (YYYY-MM-DD).
 
           page_size: The number of items to return per page. Only used when page_token is not
-              provided.
+              provided. A value of 0 is rejected; a value above the maximum is treated as the
+              maximum.
 
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.
@@ -911,7 +918,8 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
           from_date: The start date for the query range, inclusive (YYYY-MM-DD).
 
           page_size: The number of items to return per page. Only used when page_token is not
-              provided.
+              provided. A value of 0 is rejected; a value above the maximum is treated as the
+              maximum.
 
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.
@@ -987,7 +995,8 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
               date (`YYYY-MM-DD`). Use an event's `date` to fetch that event's transcript.
 
           page_size: The number of items to return per page. Only used when page_token is not
-              provided.
+              provided. A value of 0 is rejected; a value above the maximum is treated as the
+              maximum.
 
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.
@@ -1162,7 +1171,8 @@ class AsyncInstrumentDataResource(AsyncAPIResource):
           from_date: The start date for the query range, inclusive (YYYY-MM-DD).
 
           page_size: The number of items to return per page. Only used when page_token is not
-              provided.
+              provided. A value of 0 is rejected; a value above the maximum is treated as the
+              maximum.
 
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.

@@ -239,7 +239,8 @@ class ThreadsResource(SyncAPIResource):
               account is selected; empty values and the string null are invalid.
 
           page_size: The number of items to return per page. Only used when page_token is not
-              provided.
+              provided. A value of 0 is rejected; a value above the maximum is treated as the
+              maximum.
 
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.
@@ -399,7 +400,8 @@ class ThreadsResource(SyncAPIResource):
               account is selected; empty values and the string null are invalid.
 
           page_size: The number of items to return per page. Only used when page_token is not
-              provided.
+              provided. A value of 0 is rejected; a value above the maximum is treated as the
+              maximum.
 
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.
@@ -634,7 +636,8 @@ class AsyncThreadsResource(AsyncAPIResource):
               account is selected; empty values and the string null are invalid.
 
           page_size: The number of items to return per page. Only used when page_token is not
-              provided.
+              provided. A value of 0 is rejected; a value above the maximum is treated as the
+              maximum.
 
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.
@@ -794,7 +797,8 @@ class AsyncThreadsResource(AsyncAPIResource):
               account is selected; empty values and the string null are invalid.
 
           page_size: The number of items to return per page. Only used when page_token is not
-              provided.
+              provided. A value of 0 is rejected; a value above the maximum is treated as the
+              maximum.
 
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.

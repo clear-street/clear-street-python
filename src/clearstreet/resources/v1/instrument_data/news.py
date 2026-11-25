@@ -112,7 +112,8 @@ class NewsResource(SyncAPIResource):
           news_type: Filter by news type.
 
           page_size: The number of items to return per page. Only used when page_token is not
-              provided.
+              provided. A value of 0 is rejected; a value above the maximum is treated as the
+              maximum.
 
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.
@@ -236,7 +237,8 @@ class AsyncNewsResource(AsyncAPIResource):
           news_type: Filter by news type.
 
           page_size: The number of items to return per page. Only used when page_token is not
-              provided.
+              provided. A value of 0 is rejected; a value above the maximum is treated as the
+              maximum.
 
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.

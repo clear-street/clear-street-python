@@ -161,7 +161,8 @@ class InstrumentsResource(SyncAPIResource):
           is_threshold_security: Filter by threshold security status
 
           page_size: The number of items to return per page. Only used when page_token is not
-              provided.
+              provided. A value of 0 is rejected; a value above the maximum is treated as the
+              maximum.
 
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.
@@ -240,7 +241,8 @@ class InstrumentsResource(SyncAPIResource):
               contracts, false for normal (PM) contracts. Omit to return both.
 
           page_size: The number of items to return per page. Only used when page_token is not
-              provided.
+              provided. A value of 0 is rejected; a value above the maximum is treated as the
+              maximum.
 
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.
@@ -394,7 +396,8 @@ class InstrumentsResource(SyncAPIResource):
               are reported: `207`, or `404` when none match.
 
           page_size: The number of items to return per page. Only used when page_token is not
-              provided.
+              provided. A value of 0 is rejected; a value above the maximum is treated as the
+              maximum.
 
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.
@@ -493,7 +496,8 @@ class InstrumentsResource(SyncAPIResource):
               exclusive with `event_code`.
 
           page_size: The number of items to return per page. Only used when page_token is not
-              provided.
+              provided. A value of 0 is rejected; a value above the maximum is treated as the
+              maximum.
 
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.
@@ -560,7 +564,8 @@ class InstrumentsResource(SyncAPIResource):
               case.
 
           page_size: The number of items to return per page. Only used when page_token is not
-              provided.
+              provided. A value of 0 is rejected; a value above the maximum is treated as the
+              maximum.
 
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.
@@ -640,7 +645,7 @@ class InstrumentsResource(SyncAPIResource):
               in ranking).
 
           page_size: The number of items to return per page. Only used when page_token is not
-              provided.
+              provided. A value of 0 or above the maximum is rejected.
 
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.
@@ -788,7 +793,8 @@ class AsyncInstrumentsResource(AsyncAPIResource):
           is_threshold_security: Filter by threshold security status
 
           page_size: The number of items to return per page. Only used when page_token is not
-              provided.
+              provided. A value of 0 is rejected; a value above the maximum is treated as the
+              maximum.
 
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.
@@ -867,7 +873,8 @@ class AsyncInstrumentsResource(AsyncAPIResource):
               contracts, false for normal (PM) contracts. Omit to return both.
 
           page_size: The number of items to return per page. Only used when page_token is not
-              provided.
+              provided. A value of 0 is rejected; a value above the maximum is treated as the
+              maximum.
 
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.
@@ -1021,7 +1028,8 @@ class AsyncInstrumentsResource(AsyncAPIResource):
               are reported: `207`, or `404` when none match.
 
           page_size: The number of items to return per page. Only used when page_token is not
-              provided.
+              provided. A value of 0 is rejected; a value above the maximum is treated as the
+              maximum.
 
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.
@@ -1120,7 +1128,8 @@ class AsyncInstrumentsResource(AsyncAPIResource):
               exclusive with `event_code`.
 
           page_size: The number of items to return per page. Only used when page_token is not
-              provided.
+              provided. A value of 0 is rejected; a value above the maximum is treated as the
+              maximum.
 
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.
@@ -1187,7 +1196,8 @@ class AsyncInstrumentsResource(AsyncAPIResource):
               case.
 
           page_size: The number of items to return per page. Only used when page_token is not
-              provided.
+              provided. A value of 0 is rejected; a value above the maximum is treated as the
+              maximum.
 
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.
@@ -1267,7 +1277,7 @@ class AsyncInstrumentsResource(AsyncAPIResource):
               in ranking).
 
           page_size: The number of items to return per page. Only used when page_token is not
-              provided.
+              provided. A value of 0 or above the maximum is rejected.
 
           page_token: Token for retrieving the next or previous page of results. Contains encoded
               pagination state; when provided, page_size is ignored.
