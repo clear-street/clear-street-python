@@ -331,6 +331,7 @@ class InstrumentsResource(SyncAPIResource):
         series_codes: str | Omit = omit,
         sort_by: Literal["OPEN_AT", "CLOSE_AT"] | Omit = omit,
         sort_direction: Literal["ASC", "DESC"] | Omit = omit,
+        statuses: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -362,6 +363,16 @@ class InstrumentsResource(SyncAPIResource):
         market counts as listable for `categories`, `title`, `open_at.*`, `close_at.*`,
         `search`, and `sort_by`. Such a request that takes longer than 30 seconds fails
         with `504`; narrow `search` or the filters and try again.
+
+        `statuses` keeps events in any listed lifecycle state, judged over all of an
+        event's markets, not only listable ones: `ACTIVE` events have an open market,
+        `UPCOMING` events have only markets that open in the future, and `SETTLED`
+        events have only settled markets. Events in none of those states, such as events
+        awaiting settlement, match no value. Unrecognized values are ignored; a list
+        with none recognized returns no events. Listing `UPCOMING` or `SETTLED` reads
+        every market, as `include_settled=true` does: `title`, `categories`, the open
+        and close times, and the other filters then count paused and settled markets
+        too. A request listing `SETTLED` also has the 30 second limit.
 
         `open_at.*` and `close_at.*` bound an event's open and close time, which are the
         earliest across its listable markets, and `sort_by` uses the same times.
@@ -415,6 +426,13 @@ class InstrumentsResource(SyncAPIResource):
 
           sort_direction: Sort direction. Defaults to ascending. Ignored when sorting by relevance.
 
+          statuses: Comma-separated lifecycle statuses to keep: `ACTIVE` (a market is open),
+              `UPCOMING` (every market opens in the future), `SETTLED` (every market is
+              settled). Keeps events matching any listed status, judged over all of an event's
+              markets. Listing `UPCOMING` or `SETTLED` counts every market of an event, as
+              `include_settled` does. A request listing `SETTLED` that takes longer than 30
+              seconds fails with `504`. Unrecognized values are ignored.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -444,6 +462,7 @@ class InstrumentsResource(SyncAPIResource):
                         "series_codes": series_codes,
                         "sort_by": sort_by,
                         "sort_direction": sort_direction,
+                        "statuses": statuses,
                     },
                     instrument_get_prediction_events_params.InstrumentGetPredictionEventsParams,
                 ),
@@ -963,6 +982,7 @@ class AsyncInstrumentsResource(AsyncAPIResource):
         series_codes: str | Omit = omit,
         sort_by: Literal["OPEN_AT", "CLOSE_AT"] | Omit = omit,
         sort_direction: Literal["ASC", "DESC"] | Omit = omit,
+        statuses: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -994,6 +1014,16 @@ class AsyncInstrumentsResource(AsyncAPIResource):
         market counts as listable for `categories`, `title`, `open_at.*`, `close_at.*`,
         `search`, and `sort_by`. Such a request that takes longer than 30 seconds fails
         with `504`; narrow `search` or the filters and try again.
+
+        `statuses` keeps events in any listed lifecycle state, judged over all of an
+        event's markets, not only listable ones: `ACTIVE` events have an open market,
+        `UPCOMING` events have only markets that open in the future, and `SETTLED`
+        events have only settled markets. Events in none of those states, such as events
+        awaiting settlement, match no value. Unrecognized values are ignored; a list
+        with none recognized returns no events. Listing `UPCOMING` or `SETTLED` reads
+        every market, as `include_settled=true` does: `title`, `categories`, the open
+        and close times, and the other filters then count paused and settled markets
+        too. A request listing `SETTLED` also has the 30 second limit.
 
         `open_at.*` and `close_at.*` bound an event's open and close time, which are the
         earliest across its listable markets, and `sort_by` uses the same times.
@@ -1047,6 +1077,13 @@ class AsyncInstrumentsResource(AsyncAPIResource):
 
           sort_direction: Sort direction. Defaults to ascending. Ignored when sorting by relevance.
 
+          statuses: Comma-separated lifecycle statuses to keep: `ACTIVE` (a market is open),
+              `UPCOMING` (every market opens in the future), `SETTLED` (every market is
+              settled). Keeps events matching any listed status, judged over all of an event's
+              markets. Listing `UPCOMING` or `SETTLED` counts every market of an event, as
+              `include_settled` does. A request listing `SETTLED` that takes longer than 30
+              seconds fails with `504`. Unrecognized values are ignored.
+
           extra_headers: Send extra headers
 
           extra_query: Add additional query parameters to the request
@@ -1076,6 +1113,7 @@ class AsyncInstrumentsResource(AsyncAPIResource):
                         "series_codes": series_codes,
                         "sort_by": sort_by,
                         "sort_direction": sort_direction,
+                        "statuses": statuses,
                     },
                     instrument_get_prediction_events_params.InstrumentGetPredictionEventsParams,
                 ),

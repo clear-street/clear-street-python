@@ -76,6 +76,16 @@ class InstrumentGetPredictionEventsParams(TypedDict, total=False):
     sort_direction: Literal["ASC", "DESC"]
     """Sort direction. Defaults to ascending. Ignored when sorting by relevance."""
 
+    statuses: str
+    """
+    Comma-separated lifecycle statuses to keep: `ACTIVE` (a market is open),
+    `UPCOMING` (every market opens in the future), `SETTLED` (every market is
+    settled). Keeps events matching any listed status, judged over all of an event's
+    markets. Listing `UPCOMING` or `SETTLED` counts every market of an event, as
+    `include_settled` does. A request listing `SETTLED` that takes longer than 30
+    seconds fails with `504`. Unrecognized values are ignored.
+    """
+
 
 class CloseAt(TypedDict, total=False):
     gt: str

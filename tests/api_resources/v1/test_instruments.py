@@ -209,6 +209,7 @@ class TestInstruments:
             series_codes="series_codes",
             sort_by="OPEN_AT",
             sort_direction="ASC",
+            statuses="statuses",
         )
         assert_matches_type(InstrumentGetPredictionEventsResponse, instrument, path=["response"])
 
@@ -535,6 +536,7 @@ class TestAsyncInstruments:
             series_codes="series_codes",
             sort_by="OPEN_AT",
             sort_direction="ASC",
+            statuses="statuses",
         )
         assert_matches_type(InstrumentGetPredictionEventsResponse, instrument, path=["response"])
 
