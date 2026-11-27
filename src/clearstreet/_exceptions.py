@@ -6,6 +6,8 @@ from typing_extensions import Literal
 
 import httpx
 
+from .lib.errors import ErrorObject, _parse_error
+
 __all__ = [
     "BadRequestError",
     "AuthenticationError",
@@ -60,10 +62,14 @@ class APIStatusError(APIError):
     response: httpx.Response
     status_code: int
 
+    error: ErrorObject | None
+    """The `error` object from the response body as a model, or `None` if the body doesn't have one."""
+
     def __init__(self, message: str, *, response: httpx.Response, body: object | None) -> None:
         super().__init__(message, response.request, body=body)
         self.response = response
         self.status_code = response.status_code
+        self.error = _parse_error(body)
 
 
 class APIConnectionError(APIError):
