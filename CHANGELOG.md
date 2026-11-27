@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.14.0](https://github.com/clear-street/clear-street-python/compare/v0.13.0...v0.14.0) (2026-11-27)
+
+
+### Features
+
+* **api:** api update ([4198920](https://github.com/clear-street/clear-street-python/commit/4198920755a0863aa79a477867da2dc551a7e8d5))
+* **api:** api update ([16132a0](https://github.com/clear-street/clear-street-python/commit/16132a0dde52c071795b002a899b685aa54f35cf))
+* **api:** api update ([5c55994](https://github.com/clear-street/clear-street-python/commit/5c5599433d9cb39391c3484c585ff0c4a8b9ffe2))
+* **api:** api update ([7caf6e7](https://github.com/clear-street/clear-street-python/commit/7caf6e7122a3e0c72da10b9882243b373724779d))
+* **api:** api update ([a6296d2](https://github.com/clear-street/clear-street-python/commit/a6296d21edd34f3d8bd15fe91dec9b7e6587ea59))
+* **api:** api update ([57a070c](https://github.com/clear-street/clear-street-python/commit/57a070cb387c11f1902c8647e4bdf709f67af43a))
+* **api:** api update ([17dcd77](https://github.com/clear-street/clear-street-python/commit/17dcd771638ee16b49d9d9320e0c04a0709381a8))
+* **api:** api update ([92f271f](https://github.com/clear-street/clear-street-python/commit/92f271f135d8d85d9e231de7deac602d268035d6))
+* **api:** api update ([210070c](https://github.com/clear-street/clear-street-python/commit/210070cd3a26843c23f05e8e048fd1e8762af4f5))
+* **api:** api update ([6ee4400](https://github.com/clear-street/clear-street-python/commit/6ee44007981cce923dda6744f17eea300ca2c53d))
+
+
+### Bug Fixes
+
+* **api:** codegen update ([cc82c8b](https://github.com/clear-street/clear-street-python/commit/cc82c8badc47610da089ecd55efeb24508f1e8d8))
+
 ## [0.13.0](https://github.com/clear-street/clear-street-python/compare/v0.12.0...v0.13.0) (2026-11-17)
 
 
