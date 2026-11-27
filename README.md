@@ -99,6 +99,57 @@ Nested request parameters are [TypedDicts](https://docs.python.org/3/library/typ
 
 Typed requests and responses provide autocomplete and documentation within your editor. If you would like to see type errors in VS Code to help catch bugs earlier, set `python.analysis.typeCheckingMode` to `basic`.
 
+## Pagination
+
+List methods return one page per request: the items are in `data`, and `metadata.next_page_token` is the token for the next page. To iterate over every item instead, pass the method and its arguments to `paginate()`:
+
+```python
+from clearstreet import ClearStreet
+from clearstreet.lib.pagination import paginate
+
+client = ClearStreet()
+
+# Automatically fetches more pages as needed.
+for instrument in paginate(client.v1.instruments.get_instruments, instrument_type="COMMON_STOCK"):
+    print(instrument.symbol)
+```
+
+Or, asynchronously:
+
+```python
+import asyncio
+from clearstreet import AsyncClearStreet
+from clearstreet.lib.pagination import async_paginate
+
+client = AsyncClearStreet()
+
+
+async def main() -> None:
+    async for instrument in async_paginate(client.v1.instruments.get_instruments, page_size=1000):
+        print(instrument.symbol)
+
+
+asyncio.run(main())
+```
+
+Pages are requested as you iterate, until a page has no `next_page_token`. The arguments are type-checked against the method and sent with every request, so filters and sorting apply to every page. The exception is `page_size`, which is only sent with the first request: the token carries the page size, and the API ignores `page_size` once `page_token` is set. Each new iteration starts again from the first page and requests every page again. To resume from a token you saved earlier, pass it as `page_token`.
+
+Use `.iter_pages()` to work with whole pages, for example to read `metadata` or `error`. It is also how you read the methods whose `data` is an object that wraps the list: `get_all_instrument_events()`, `get_prediction_events()`, `get_prediction_markets()` and `get_prediction_series()`.
+
+```python
+for page in paginate(client.v1.instruments.get_prediction_events).iter_pages():
+    if page.error is not None:  # e.g. an HTTP 207 response for a lookup by ids
+        print(page.error.message)
+    for event in page.data.events:
+        print(event.code)
+```
+
+Keep in mind:
+
+- Each page is a separate request, so results that change while you page through them can repeat or be skipped (for example, screener rows can shuffle between calls).
+- If the API returns a `next_page_token` that was already sent, iteration raises `RuntimeError` instead of requesting the same page again.
+- `client.v1.omni_feed.get_feed()` pages with `cursor` instead and isn't supported: `paginate()` stops after its first page, as it does for methods that aren't paginated.
+
 ## Nested params
 
 Nested parameters are dictionaries, typed using `TypedDict`, for example:
