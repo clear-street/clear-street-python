@@ -28,7 +28,11 @@ class NewsGetNewsParams(TypedDict, total=False):
     """
 
     instrument_ids: SequenceNotStr[str]
-    """Comma-delimited instrument identifiers to filter by."""
+    """Comma-delimited instrument identifiers to filter by.
+
+    Matches include news tagged to the other share classes and cross-listings of the
+    same issuer.
+    """
 
     news_type: Literal["NEWS", "PRESS_RELEASE"]
     """Filter by news type."""

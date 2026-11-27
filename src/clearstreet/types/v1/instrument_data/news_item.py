@@ -14,7 +14,11 @@ class NewsItem(BaseModel):
     """A single news item and its associated instruments."""
 
     instruments: List[NewsInstrument]
-    """Instruments associated with this news item."""
+    """Instruments associated with this news item.
+
+    The requested instrument is listed too when the item matched it through another
+    share class or cross-listing of the same issuer.
+    """
 
     news_type: NewsType
     """Classification of the item."""

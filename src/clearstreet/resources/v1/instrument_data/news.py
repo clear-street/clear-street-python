@@ -107,7 +107,8 @@ class NewsResource(SyncAPIResource):
           include_publishers: Comma-separated list of publishers to include (mutually exclusive with
               exclude_publishers).
 
-          instrument_ids: Comma-delimited instrument identifiers to filter by.
+          instrument_ids: Comma-delimited instrument identifiers to filter by. Matches include news tagged
+              to the other share classes and cross-listings of the same issuer.
 
           news_type: Filter by news type.
 
@@ -232,7 +233,8 @@ class AsyncNewsResource(AsyncAPIResource):
           include_publishers: Comma-separated list of publishers to include (mutually exclusive with
               exclude_publishers).
 
-          instrument_ids: Comma-delimited instrument identifiers to filter by.
+          instrument_ids: Comma-delimited instrument identifiers to filter by. Matches include news tagged
+              to the other share classes and cross-listings of the same issuer.
 
           news_type: Filter by news type.
 
