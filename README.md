@@ -118,6 +118,34 @@ response = client.v1.accounts.patch_account_by_id(
 print(response.risk)
 ```
 
+### Screener filters
+
+In a screener filter, `op` is an object with the operator's `name` and an optional list of `args`, not a plain string:
+
+```python
+from clearstreet import ClearStreet
+from clearstreet.types.v1 import SearchFilterParam
+
+client = ClearStreet()
+
+price_under_5: SearchFilterParam = {
+    "left": {"name": "price"},
+    "op": {"name": "LESS_THAN"},  # not "op": "LESS_THAN"
+    "right": [{"value": 5}],
+}
+
+response = client.v1.screener.search_screener(filters=[price_under_5])
+```
+
+If `op` is a string, the API rejects the request and the library raises an `UnprocessableEntityError` (422) with a message such as `invalid type: string "LESS_THAN", expected struct FilterOpSpec`. A type checker reports the mistake before the request is sent (see [Using types](#using-types)). If you build filters ahead of time, annotate them as `SearchFilterParam`, as above. Without the annotation, a type checker infers a plain `dict` and reports an error even for a correct filter.
+
+`FilterOpSpecParam` describes `op`, [`FilterOperator`](https://github.com/clear-street/clear-street-python/tree/main/src/clearstreet/types/v1/filter_operator.py) lists the operator names and [`OperatorArg`](https://github.com/clear-street/clear-street-python/tree/main/src/clearstreet/types/v1/operator_arg.py) lists the `args`; all three are in `clearstreet.types.v1`. `create_screener()` and `patch_screener()` take filters in the same shape.
+
+To see which operators a field supports, call `client.v1.screener.get_screener_catalog()`:
+
+- `data.operators_by_value_type` lists the operators for each value type. A field's value type is `data.kinds[data.fields.kind[i]].value_type`, where `i` is the field's position in `data.fields.name`.
+- `data.rules.operators` says how many `right` values each operator takes (for example, two for `BETWEEN`).
+
 ## Handling errors
 
 When the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `clearstreet.APIConnectionError` is raised.
