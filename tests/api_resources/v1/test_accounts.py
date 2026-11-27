@@ -141,7 +141,7 @@ class TestAccounts:
     def test_method_get_non_trade_activities_with_all_params(self, client: ClearStreet) -> None:
         account = client.v1.accounts.get_non_trade_activities(
             account_id=0,
-            activity_type=["money_movement"],
+            activity_type=["MONEY_MOVEMENT"],
             from_=parse_datetime("2019-12-27T18:11:19.117Z"),
             page_size=1,
             page_token="U3RhaW5sZXNzIHJvY2tz",
@@ -380,7 +380,7 @@ class TestAsyncAccounts:
     async def test_method_get_non_trade_activities_with_all_params(self, async_client: AsyncClearStreet) -> None:
         account = await async_client.v1.accounts.get_non_trade_activities(
             account_id=0,
-            activity_type=["money_movement"],
+            activity_type=["MONEY_MOVEMENT"],
             from_=parse_datetime("2019-12-27T18:11:19.117Z"),
             page_size=1,
             page_token="U3RhaW5sZXNzIHJvY2tz",

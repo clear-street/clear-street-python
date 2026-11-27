@@ -4,4 +4,4 @@ from typing_extensions import Literal, TypeAlias
 
 __all__ = ["ActivityState"]
 
-ActivityState: TypeAlias = Literal["settled", "cancelled"]
+ActivityState: TypeAlias = Literal["SETTLED", "CANCELLED"]

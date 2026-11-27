@@ -202,16 +202,16 @@ class AccountsResource(SyncAPIResource):
         *,
         activity_type: List[
             Literal[
-                "money_movement",
-                "interest",
-                "fee",
-                "dividend",
-                "option_event",
-                "transfer",
-                "corporate_action",
-                "tax_withholding",
-                "adjustment",
-                "other",
+                "MONEY_MOVEMENT",
+                "INTEREST",
+                "FEE",
+                "DIVIDEND",
+                "OPTION_EVENT",
+                "TRANSFER",
+                "CORPORATE_ACTION",
+                "TAX_WITHHOLDING",
+                "ADJUSTMENT",
+                "OTHER",
             ]
         ]
         | Omit = omit,
@@ -524,16 +524,16 @@ class AsyncAccountsResource(AsyncAPIResource):
         *,
         activity_type: List[
             Literal[
-                "money_movement",
-                "interest",
-                "fee",
-                "dividend",
-                "option_event",
-                "transfer",
-                "corporate_action",
-                "tax_withholding",
-                "adjustment",
-                "other",
+                "MONEY_MOVEMENT",
+                "INTEREST",
+                "FEE",
+                "DIVIDEND",
+                "OPTION_EVENT",
+                "TRANSFER",
+                "CORPORATE_ACTION",
+                "TAX_WITHHOLDING",
+                "ADJUSTMENT",
+                "OTHER",
             ]
         ]
         | Omit = omit,

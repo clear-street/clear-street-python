@@ -5,14 +5,14 @@ from typing_extensions import Literal, TypeAlias
 __all__ = ["ActivityType"]
 
 ActivityType: TypeAlias = Literal[
-    "money_movement",
-    "interest",
-    "fee",
-    "dividend",
-    "option_event",
-    "transfer",
-    "corporate_action",
-    "tax_withholding",
-    "adjustment",
-    "other",
+    "MONEY_MOVEMENT",
+    "INTEREST",
+    "FEE",
+    "DIVIDEND",
+    "OPTION_EVENT",
+    "TRANSFER",
+    "CORPORATE_ACTION",
+    "TAX_WITHHOLDING",
+    "ADJUSTMENT",
+    "OTHER",
 ]
